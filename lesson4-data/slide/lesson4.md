@@ -1,191 +1,394 @@
-# Data Management
+# Lesson 4: Working with Data in React 📊
 
-## Lesson 4 - API Integration & State Management
+## What Will You Learn? 🎯
 
----
+In this lesson, you'll learn how to:
 
-### Learning Objectives
+1. Get data from the internet (APIs)
+2. Show loading states while waiting
+3. Handle errors when things go wrong
+4. Save and update data in your app
 
-By the end of this lesson, you will be able to:
+## Why Do We Need This? 🤔
 
-- Integrate with REST APIs
-- Handle errors effectively
-- Manage application state
-- Implement real-time updates
+Think of a social media app:
 
----
+- Get posts from server
+- Show "Loading..." while waiting
+- Show error if something fails
+- Update likes when clicked
 
-### API Client Setup
+Real World Example:
 
-```typescript
-import axios from "axios";
+```
+📱 Instagram Post
+┌──────────────────┐
+│ Loading...       │ ← Loading State
+└──────────────────┘
 
-const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-  timeout: 10000,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+┌──────────────────┐
+│ ❌ Error!        │ ← Error State
+│ Try again...     │
+└──────────────────┘
 
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+┌──────────────────┐
+│ 🖼️ Post Image    │ ← Success State
+│ ❤️ 100 Likes     │
+└──────────────────┘
 ```
 
 ---
 
-### Custom API Hook
+## Getting Data from the Internet 🌐
 
-```typescript
-function useApi<T>(url: string) {
-  const [data, setData] = useState<T | null>(null);
+### Basic Data Fetching
+
+```jsx
+function ProductList() {
+  // Store our data, loading and error states
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState(null);
 
+  // Get data when component loads
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.get<T>(url);
-        setData(response.data);
-      } catch (err) {
-        setError(err as Error);
-      } finally {
+    // Start loading
+    setLoading(true);
+
+    // Get data from API
+    fetch("https://api.example.com/products")
+      .then((response) => response.json())
+      .then((data) => {
+        // Save data
+        setProducts(data);
         setLoading(false);
-      }
-    };
+      })
+      .catch((error) => {
+        // Save error
+        setError("Could not load products");
+        setLoading(false);
+      });
+  }, []); // Empty array means run once when component loads
 
-    fetchData();
-  }, [url]);
-
-  return { data, loading, error };
-}
-```
-
----
-
-### Error Handling
-
-```typescript
-class ApiError extends Error {
-  constructor(message: string, public status: number, public data?: any) {
-    super(message);
-    this.name = "ApiError";
+  // Show loading message
+  if (loading) {
+    return <div>Loading products...</div>;
   }
-}
 
-function ErrorBoundary({ children }: PropsWithChildren) {
-  const [error, setError] = useState<Error | null>(null);
-
+  // Show error message
   if (error) {
-    return <ErrorDisplay error={error} />;
+    return <div>Error: {error}</div>;
   }
 
-  return children;
-}
-```
-
----
-
-### State Management
-
-1. Local State (useState)
-2. Context API
-3. Custom Hooks
-4. External Libraries
-
----
-
-### Real-time Updates
-
-```typescript
-function useWebSocket<T>(url: string) {
-  const [data, setData] = useState<T | null>(null);
-  const [status, setStatus] = useState<"connecting" | "connected" | "closed">(
-    "connecting"
+  // Show products
+  return (
+    <div className="products">
+      {products.map((product) => (
+        <div key={product.id} className="product-card">
+          <img src={product.image} alt={product.name} />
+          <h3>{product.name}</h3>
+          <p>${product.price}</p>
+        </div>
+      ))}
+    </div>
   );
+}
+```
 
-  useEffect(() => {
-    const ws = new WebSocket(url);
+### Making it Look Nice
 
-    ws.onopen = () => setStatus("connected");
-    ws.onclose = () => setStatus("closed");
-    ws.onmessage = (event) => {
-      setData(JSON.parse(event.data));
-    };
+```css
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
 
-    return () => ws.close();
-  }, [url]);
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+}
 
-  return { data, status };
+.product-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.loading {
+  animation: pulse 1.5s infinite;
+  background: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
 }
 ```
 
 ---
 
-### Best Practices
+## Handling Forms and User Input 📝
 
-1. API Integration
+### Contact Form Example
 
-   - Error Handling
-   - Loading States
-   - Data Caching
-   - Request Cancellation
+```jsx
+function ContactForm() {
+  // Store form data
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
-2. State Management
-   - Single Source of Truth
-   - Immutable Updates
-   - Optimistic Updates
-   - State Normalization
+  // Store submission status
+  const [status, setStatus] = useState("idle"); // idle/submitting/success/error
 
----
+  // Update form data when user types
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-### Common Pitfalls
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-1. API Issues
+    // Start submitting
+    setStatus("submitting");
 
-   - Missing Error Handling
-   - Race Conditions
-   - Memory Leaks
+    try {
+      // Send data to server
+      const response = await fetch("https://api.example.com/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-2. State Issues
-   - State Duplication
-   - Unnecessary Updates
-   - Complex State Logic
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
 
----
-
-### Practical Exercise
-
-Create a Data Table with API:
-
-```typescript
-function UserTable() {
-  const { data, loading, error } = useApi<User[]>("/users");
-
-  if (loading) return <Loading />;
-  if (error) return <Error error={error} />;
+      // Success!
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      // Handle error
+      setStatus("error");
+    }
+  };
 
   return (
-    <DataTable
-      data={data || []}
-      columns={[
-        { key: "name", header: "Name" },
-        { key: "email", header: "Email" },
-      ]}
-    />
+    <form onSubmit={handleSubmit} className="contact-form">
+      <div className="form-group">
+        <label>Name:</label>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Message:</label>
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <button type="submit" disabled={status === "submitting"}>
+        {status === "submitting" ? "Sending..." : "Send Message"}
+      </button>
+
+      {status === "success" && (
+        <p className="success">Message sent successfully!</p>
+      )}
+
+      {status === "error" && (
+        <p className="error">Failed to send message. Please try again.</p>
+      )}
+    </form>
   );
 }
 ```
 
 ---
 
-### Additional Resources
+## Common Mistakes to Avoid ⚠️
 
-- [Axios Documentation](https://axios-http.com)
-- [React Query](https://tanstack.com/query/latest)
-- [WebSocket API](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
+### 1. Forgetting Loading States
+
+```jsx
+// ❌ Bad - No loading state
+function ProductList() {
+  const [products, setProducts] = useState([]);
+
+  // User sees nothing while loading!
+  return (
+    <div>
+      {products.map((product) => (
+        <div>{product.name}</div>
+      ))}
+    </div>
+  );
+}
+
+// ✅ Good - With loading state
+function ProductList() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  if (loading) {
+    return <div>Loading products...</div>;
+  }
+
+  return (
+    <div>
+      {products.map((product) => (
+        <div>{product.name}</div>
+      ))}
+    </div>
+  );
+}
+```
+
+### 2. Not Handling Errors
+
+```jsx
+// ❌ Bad - No error handling
+fetch("/api/data").then((res) => {
+  // What if this fails?
+  setData(res.data);
+});
+
+// ✅ Good - With error handling
+fetch("/api/data")
+  .then((res) => {
+    if (!res.ok) {
+      throw new Error("Failed to load");
+    }
+    return res.json();
+  })
+  .then((data) => {
+    setData(data);
+  })
+  .catch((error) => {
+    setError(error.message);
+  });
+```
+
+## Practice Time! 💪
+
+### Exercise: Todo List with API
+
+Create a todo list that:
+
+1. Loads todos from API
+2. Shows loading state
+3. Handles errors
+4. Can add/delete todos
+
+```jsx
+function TodoList() {
+  const [todos, setTodos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [newTodo, setNewTodo] = useState("");
+
+  // Load todos when component mounts
+  useEffect(() => {
+    loadTodos();
+  }, []);
+
+  async function loadTodos() {
+    try {
+      const response = await fetch("/api/todos");
+      const data = await response.json();
+      setTodos(data);
+    } catch (err) {
+      setError("Failed to load todos");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Rest of the component...
+}
+```
+
+## Need Help? 🆘
+
+### Common Problems:
+
+1. Data not loading?
+
+   - Check API URL
+   - Verify fetch code
+   - Look for console errors
+
+2. Form not submitting?
+   - Check preventDefault()
+   - Verify form data
+   - Check API response
+
+### Useful Resources:
+
+- [Fetch API Guide](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+- [React Forms Guide](https://react.dev/reference/react-dom/components/form)
+- Ask your teacher!
+
+## Homework 📝
+
+### Create a Blog App
+
+Build a simple blog with:
+
+1. List of posts (from API)
+2. Add new post form
+3. Delete post button
+4. Loading states
+5. Error handling
+
+Tips:
+
+- Start with displaying posts
+- Add loading states
+- Handle errors
+- Then add forms
+- Test everything thoroughly!

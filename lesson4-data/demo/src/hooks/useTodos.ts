@@ -6,9 +6,12 @@ interface Todo {
   completed: boolean;
 }
 
+// MockAPI configuration
+const API_BASE = "https://66e9e0a587e417609448d33c.mockapi.io/api/v1";
+
 // API functions
 const fetchTodos = async (): Promise<Todo[]> => {
-  const response = await fetch("https://api.example.com/todos");
+  const response = await fetch(`${API_BASE}/todos`);
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
@@ -16,12 +19,16 @@ const fetchTodos = async (): Promise<Todo[]> => {
 };
 
 const createTodo = async (title: string): Promise<Todo> => {
-  const response = await fetch("https://api.example.com/todos", {
+  const response = await fetch(`${API_BASE}/todos`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ title, completed: false }),
+    body: JSON.stringify({
+      title,
+      completed: false,
+      createdAt: new Date().toISOString(),
+    }),
   });
   if (!response.ok) {
     throw new Error("Failed to create todo");
@@ -30,7 +37,7 @@ const createTodo = async (title: string): Promise<Todo> => {
 };
 
 const updateTodo = async (todo: Todo): Promise<Todo> => {
-  const response = await fetch(`https://api.example.com/todos/${todo.id}`, {
+  const response = await fetch(`${API_BASE}/todos/${todo.id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -44,7 +51,7 @@ const updateTodo = async (todo: Todo): Promise<Todo> => {
 };
 
 const deleteTodo = async (id: number): Promise<void> => {
-  const response = await fetch(`https://api.example.com/todos/${id}`, {
+  const response = await fetch(`${API_BASE}/todos/${id}`, {
     method: "DELETE",
   });
   if (!response.ok) {

@@ -11,7 +11,7 @@ By the end of this lesson, you will be able to:
 - Set up a modern React development environment
 - Understand key React 18+ features
 - Create and structure React projects
-- Write basic TypeScript in React
+- Write modern JavaScript with React
 
 ---
 
@@ -32,7 +32,7 @@ By the end of this lesson, you will be able to:
 - Essential Extensions
   - ESLint
   - Prettier
-  - TypeScript support
+  - ES7+ React/Redux/React-Native snippets
 
 ---
 
@@ -41,13 +41,13 @@ By the end of this lesson, you will be able to:
 #### Create React App (CRA)
 
 ```bash
-npx create-react-app my-app --template typescript
+npx create-react-app my-app
 ```
 
 #### Vite (Recommended)
 
 ```bash
-npm create vite@latest my-app -- --template react-ts
+npm create vite@latest my-app -- --template react
 ```
 
 ---
@@ -61,7 +61,7 @@ src/
 ├── hooks/        # Custom hooks
 ├── services/     # API/external services
 ├── utils/        # Helper functions
-└── types/        # TypeScript types
+└── styles/       # CSS files
 ```
 
 ---
@@ -76,23 +76,34 @@ src/
 
 ---
 
-### TypeScript Integration
+### Modern JavaScript with React
 
-```typescript
-// Function Component
-interface Props {
-  name: string;
-  age?: number;
-}
-
-const Greeting = ({ name, age }: Props) => {
+```javascript
+// Function Component with Props
+function Greeting({ name, age }) {
   return (
     <div>
       <h1>Hello, {name}!</h1>
       {age && <p>Age: {age}</p>}
     </div>
   );
-};
+}
+
+// Using modern JavaScript features
+const users = [
+  { id: 1, name: "John", age: 25 },
+  { id: 2, name: "Jane", age: 30 },
+];
+
+function UserList() {
+  return (
+    <div>
+      {users.map((user) => (
+        <Greeting key={user.id} name={user.name} age={user.age} />
+      ))}
+    </div>
+  );
+}
 ```
 
 ---
@@ -109,21 +120,21 @@ const Greeting = ({ name, age }: Props) => {
 
 ### Best Practices
 
-1. Use TypeScript
+1. Use Modern JavaScript (ES6+)
 2. Follow Project Structure
 3. Implement ESLint/Prettier
-4. Write Documentation
-5. Use Modern Features
+4. Write Clean, Readable Code
+5. Use React 18+ Features
 
 ---
 
 ### Common Pitfalls
 
-- Mixing JavaScript and TypeScript
-- Ignoring TypeScript Errors
-- Poor Project Structure
-- Skipping Documentation
-- Using Deprecated Features
+- Not using modern JavaScript features
+- Poor component organization
+- Ignoring ESLint warnings
+- Inconsistent code formatting
+- Using outdated React patterns
 
 ---
 
@@ -131,15 +142,8 @@ const Greeting = ({ name, age }: Props) => {
 
 Create a Profile Card Component:
 
-```typescript
-interface Profile {
-  name: string;
-  role: string;
-  bio: string;
-  avatar: string;
-}
-
-const ProfileCard = ({ name, role, bio, avatar }: Profile) => {
+```javascript
+function ProfileCard({ name, role, bio, avatar }) {
   return (
     <div className="card">
       <img src={avatar} alt={name} />
@@ -148,7 +152,19 @@ const ProfileCard = ({ name, role, bio, avatar }: Profile) => {
       <p>{bio}</p>
     </div>
   );
-};
+}
+
+// Usage
+function App() {
+  return (
+    <ProfileCard
+      name="John Doe"
+      role="React Developer"
+      bio="Passionate about building user interfaces"
+      avatar="/john-avatar.jpg"
+    />
+  );
+}
 ```
 
 ---
@@ -156,6 +172,6 @@ const ProfileCard = ({ name, role, bio, avatar }: Profile) => {
 ### Additional Resources
 
 - [React Documentation](https://react.dev)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs)
+- [Modern JavaScript Guide](https://javascript.info)
 - [Vite Guide](https://vitejs.dev/guide)
 - [ESLint Documentation](https://eslint.org)

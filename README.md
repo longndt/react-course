@@ -15,12 +15,14 @@ This course teaches modern React development through practical, hands-on example
 
 By the end of this course, you will be able to:
 
-- Build React applications from scratch
+- Build React applications from scratch using both JavaScript and TypeScript
 - Create reusable components and custom hooks
 - Implement user authentication and routing
 - Work with APIs and manage application data
+- Use React Query for efficient data fetching
 - Optimize React applications for performance
 - Deploy applications to production
+- Apply modern React patterns and best practices
 
 ## Course Structure
 
@@ -28,8 +30,8 @@ By the end of this course, you will be able to:
 
 - Understanding React basics
 - Setting up development environment
-- Creating your first React app
-- Building basic components
+- Creating your first React app with modern JavaScript
+- Building basic components with JSX
 - [Go to Lesson 1](./lesson1-setup)
 
 ### Lesson 2: Components & State
@@ -52,7 +54,8 @@ By the end of this course, you will be able to:
 
 - Fetching data from APIs
 - Managing loading and error states
-- Using React Query
+- Using React Query for efficient data fetching
+- Working with MockAPI for rapid prototyping
 - Building a complete CRUD interface
 - [Go to Lesson 4](./lesson4-data)
 
@@ -64,25 +67,21 @@ By the end of this course, you will be able to:
 - Deploying to production
 - [Go to Lesson 5](./lesson5-optimization)
 
-## Projects
+## Additional Guides
 
-### 1. Task Manager Application
+### Advanced Topics
 
-A beginner-friendly project covering:
+- [Testing React Components](./testing-guide.md) - Comprehensive testing strategies and best practices
+- [Advanced State Management](./state-management-guide.md) - Context API, Zustand, Redux Toolkit patterns
+- [Modern React Stack 2025](./modern-stack-2025.md) - Latest tools and technologies
+- [Performance Optimization](./lesson5-optimization) - Code splitting, lazy loading, and optimization techniques
+- [Development Environment Setup](./environment-setup/environment-setup.md) - Complete development setup guide
 
-- Basic CRUD operations
-- Component organization
-- Local state management
-- Form handling
+### Project Templates
 
-### 2. E-commerce Store
-
-A more complex project including:
-
-- Product catalog
-- Shopping cart
-- User authentication
-- Order management
+- **Beginner**: [Todo Application](./project-templates.md#project-1-todo-application-beginner) - Component basics and local state
+- **Intermediate**: [E-commerce Store](./project-templates.md#project-2-e-commerce-store-intermediate) - Routing, authentication, and API integration
+- **Advanced**: [Social Media Dashboard](./project-templates.md#project-3-social-media-dashboard-advanced) - Real-time features and advanced patterns
 
 ## Getting Started
 
