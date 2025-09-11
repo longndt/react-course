@@ -1,6 +1,8 @@
 # Development Environment Setup Guide
 
-This guide provides comprehensive instructions for setting up your React development environment. We'll focus on using Visual Studio Code as our primary IDE.
+> 📋 **Purpose**: This comprehensive guide provides detailed instructions for setting up your complete React development environment. Complete this setup **before** starting Lesson 1, as the lessons focus on React concepts rather than tool installation.
+
+This guide provides comprehensive instructions for setting up your React development environment. We'll focus on using Visual Studio Code as our primary IDE and establish a complete professional workflow.
 
 ## Required Software
 
@@ -168,16 +170,29 @@ This guide provides comprehensive instructions for setting up your React develop
 
 ### Database Tools
 
-1. **MongoDB**
+1. **MongoDB (Required for this course)**
 
-   - Install MongoDB Compass
-   - Or Studio 3T
-   - MongoDB Shell
+   - **Local Installation**:
 
-2. **MySQL/PostgreSQL**
-   - DBeaver Community
-   - MySQL Workbench
-   - pgAdmin
+     - Download MongoDB Community Server from [mongodb.com](https://www.mongodb.com/try/download/community)
+     - Install MongoDB Compass (GUI) for database management
+     - Or use MongoDB Shell (mongosh) for command-line access
+
+   - **Cloud Alternative - MongoDB Atlas**:
+
+     - Create free account at [mongodb.com/atlas](https://www.mongodb.com/atlas)
+     - Create a free cluster (512MB)
+     - Get connection string for your applications
+
+   - **Verification**:
+     ```bash
+     mongod --version  # For local installation
+     mongosh --version # For MongoDB Shell
+     ```
+
+2. **Optional Database Tools**
+   - Studio 3T (MongoDB GUI with more features)
+   - Robo 3T (Lightweight MongoDB GUI)
 
 ### API Testing Tools
 

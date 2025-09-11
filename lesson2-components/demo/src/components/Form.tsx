@@ -1,19 +1,24 @@
-import React from "react";
+import {
+  ReactNode,
+  InputHTMLAttributes,
+  SelectHTMLAttributes,
+  FormEvent,
+} from "react";
 import "./Form.css";
 
 interface FormFieldProps {
   label: string;
   error?: string;
   required?: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export const FormField: React.FC<FormFieldProps> = ({
+export const FormField = ({
   label,
   error,
   required,
   children,
-}) => {
+}: FormFieldProps) => {
   return (
     <div className="form-field">
       <label className="form-label">
@@ -26,11 +31,11 @@ export const FormField: React.FC<FormFieldProps> = ({
   );
 };
 
-interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
-export const TextInput: React.FC<TextInputProps> = ({ error, ...props }) => {
+export const TextInput = ({ error, ...props }: TextInputProps) => {
   return (
     <input
       {...props}
@@ -41,12 +46,12 @@ export const TextInput: React.FC<TextInputProps> = ({ error, ...props }) => {
   );
 };
 
-interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options: Array<{ value: string; label: string }>;
   error?: string;
 }
 
-export const Select: React.FC<SelectProps> = ({ options, error, ...props }) => {
+export const Select = ({ options, error, ...props }: SelectProps) => {
   return (
     <select
       {...props}
@@ -63,12 +68,12 @@ export const Select: React.FC<SelectProps> = ({ options, error, ...props }) => {
   );
 };
 
-interface Form {
-  onSubmit: (e: React.FormEvent) => void;
-  children: React.ReactNode;
+interface FormProps {
+  onSubmit: (e: FormEvent) => void;
+  children: ReactNode;
 }
 
-export const Form: React.FC<Form> = ({ onSubmit, children }) => {
+export const Form = ({ onSubmit, children }: FormProps) => {
   return (
     <form onSubmit={onSubmit} className="form">
       {children}

@@ -1,6 +1,6 @@
 # Quick Start Guide - Lesson 1
 
-## Setup Your First React App (5 minutes)
+## Setup Your First React App
 
 ### 1. Prerequisites Check
 

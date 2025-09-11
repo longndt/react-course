@@ -1,22 +1,21 @@
 # Lab 2: Advanced React Components and Composition
 
 ## Overview
-In this lab, you'll dive deeper into React components, focusing on composition patterns, prop types, and component architecture.
+
+In this lab, you'll apply component composition patterns and architecture concepts covered in the lesson. Focus on hands-on implementation of reusable component systems.
+
+_For learning objectives and prerequisites, see [../README.md](../README.md)_
 
 ## Exercises
 
-### Exercise 1: Component Composition (45 minutes)
+### Exercise 1: Component Composition
 
 Create a Card component system using composition:
 
 ```jsx
 // src/components/Card/Card.jsx
-function Card({ children, className = '' }) {
-  return (
-    <div className={`card ${className}`}>
-      {children}
-    </div>
-  );
+function Card({ children, className = "" }) {
+  return <div className={`card ${className}`}>{children}</div>;
 }
 
 // Card subcomponents
@@ -36,6 +35,7 @@ export default Card;
 ```
 
 Usage example:
+
 ```jsx
 <Card className="product-card">
   <Card.Header>
@@ -51,9 +51,10 @@ Usage example:
 </Card>
 ```
 
-### Exercise 2: Higher-Order Components (45 minutes)
+### Exercise 2: Higher-Order Components
 
 1. Create a withLoading HOC:
+
 ```jsx
 // src/hoc/withLoading.jsx
 function withLoading(WrappedComponent) {
@@ -73,6 +74,7 @@ export default withLoading;
 ```
 
 2. Create a LoadingSpinner component:
+
 ```jsx
 // src/components/LoadingSpinner/LoadingSpinner.jsx
 function LoadingSpinner() {
@@ -87,6 +89,7 @@ export default LoadingSpinner;
 ```
 
 3. Apply the HOC:
+
 ```jsx
 // src/components/ProductList/ProductList.jsx
 const ProductListWithLoading = withLoading(ProductList);
@@ -99,25 +102,21 @@ function ProductListContainer() {
     // Simulate API call
     setTimeout(() => {
       setProducts([
-        { id: 1, name: 'Product 1' },
-        { id: 2, name: 'Product 2' },
+        { id: 1, name: "Product 1" },
+        { id: 2, name: "Product 2" },
       ]);
       setIsLoading(false);
     }, 1500);
   }, []);
 
-  return (
-    <ProductListWithLoading 
-      isLoading={isLoading} 
-      products={products} 
-    />
-  );
+  return <ProductListWithLoading isLoading={isLoading} products={products} />;
 }
 ```
 
-### Exercise 3: Custom Hooks (45 minutes)
+### Exercise 3: Custom Hooks
 
 1. Create a useForm hook:
+
 ```jsx
 // src/hooks/useForm.js
 function useForm(initialValues = {}) {
@@ -126,9 +125,9 @@ function useForm(initialValues = {}) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setValues(prev => ({
+    setValues((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -154,7 +153,7 @@ function useForm(initialValues = {}) {
     values,
     errors,
     handleChange,
-    handleSubmit
+    handleSubmit,
   };
 }
 
@@ -162,22 +161,18 @@ export default useForm;
 ```
 
 2. Create a Form component using the hook:
+
 ```jsx
 // src/components/Form/Form.jsx
 function RegistrationForm() {
-  const {
-    values,
-    errors,
-    handleChange,
-    handleSubmit
-  } = useForm({
-    username: '',
-    email: '',
-    password: ''
+  const { values, errors, handleChange, handleSubmit } = useForm({
+    username: "",
+    email: "",
+    password: "",
   });
 
   const onSubmit = (formData) => {
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
   };
 
   return (
@@ -190,9 +185,7 @@ function RegistrationForm() {
           onChange={handleChange}
           placeholder="Username"
         />
-        {errors.username && (
-          <span className="error">{errors.username}</span>
-        )}
+        {errors.username && <span className="error">{errors.username}</span>}
       </div>
 
       <div className="form-group">
@@ -203,9 +196,7 @@ function RegistrationForm() {
           onChange={handleChange}
           placeholder="Email"
         />
-        {errors.email && (
-          <span className="error">{errors.email}</span>
-        )}
+        {errors.email && <span className="error">{errors.email}</span>}
       </div>
 
       <div className="form-group">
@@ -216,9 +207,7 @@ function RegistrationForm() {
           onChange={handleChange}
           placeholder="Password"
         />
-        {errors.password && (
-          <span className="error">{errors.password}</span>
-        )}
+        {errors.password && <span className="error">{errors.password}</span>}
       </div>
 
       <button type="submit">Register</button>
@@ -227,18 +216,19 @@ function RegistrationForm() {
 }
 ```
 
-### Exercise 4: Context API (45 minutes)
+### Exercise 4: Context API
 
 1. Create a Theme Context:
+
 ```jsx
 // src/context/ThemeContext.jsx
 const ThemeContext = createContext();
 
 function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState("light");
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
   return (
@@ -252,7 +242,7 @@ function ThemeProvider({ children }) {
 function useTheme() {
   const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error('useTheme must be used within ThemeProvider');
+    throw new Error("useTheme must be used within ThemeProvider");
   }
   return context;
 }
@@ -261,16 +251,13 @@ export { ThemeProvider, useTheme };
 ```
 
 2. Implement theme-aware components:
+
 ```jsx
 // src/components/ThemedButton/ThemedButton.jsx
 function ThemedButton({ children }) {
   const { theme } = useTheme();
-  
-  return (
-    <button className={`button ${theme}`}>
-      {children}
-    </button>
-  );
+
+  return <button className={`button ${theme}`}>{children}</button>;
 }
 
 // src/App.jsx
@@ -289,7 +276,9 @@ function App() {
 ## Bonus Tasks
 
 ### 1. Implement Error Boundaries
+
 Create an ErrorBoundary component to handle component errors gracefully:
+
 ```jsx
 class ErrorBoundary extends React.Component {
   state = { hasError: false };
@@ -299,8 +288,8 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('Error:', error);
-    console.error('Error Info:', errorInfo);
+    console.error("Error:", error);
+    console.error("Error Info:", errorInfo);
   }
 
   render() {
@@ -313,10 +302,12 @@ class ErrorBoundary extends React.Component {
 ```
 
 ### 2. Create a Portal Modal
+
 Implement a modal component using React Portals:
+
 ```jsx
 // src/components/Modal/Modal.jsx
-import { createPortal } from 'react-dom';
+import { createPortal } from "react-dom";
 
 function Modal({ isOpen, onClose, children }) {
   if (!isOpen) return null;
@@ -338,6 +329,7 @@ function Modal({ isOpen, onClose, children }) {
 ## Submission Requirements
 
 1. GitHub repository containing:
+
    - Complete source code
    - README.md with setup instructions
    - Component documentation

@@ -1,4 +1,23 @@
-# Lesson 2: Component Architecture & Advanced State Management �️
+# Lesson 2: Component## Why Component Architecture Matters? 🤔
+
+**Think Beyond Simple Components:**
+
+Modern React applications need:
+
+- **Reusable Components** → Consistent UI across pages
+- **Scalable Architecture** → Easy to maintain and extend
+- **Professional Patterns** → Industry-standard approaches
+
+**Visual Example - E-commerce Dashboard:**
+
+```
+E-commerce Dashboard 🏪e & Advanced State Management 🛡️
+
+## Quick Reference 📋
+
+*For detailed learning objectives and prerequisites, see [README.md](../README.md)*
+
+---mponent Architecture & Advanced State Management �️
 
 ## What Will You Learn? 🎯
 
@@ -24,19 +43,21 @@ Your final year project needs:
 
 **Real-World Example - E-commerce Admin Panel:**
 ```
+
 E-commerce Dashboard �
 ├── Sidebar Navigation (Reusable)
-│   ├── Navigation Item (Atomic)
-│   └── User Profile (Compound)
+│ ├── Navigation Item (Atomic)
+│ └── User Profile (Compound)
 ├── Main Content Area
-│   ├── Stats Cards (Reusable Grid)
-│   ├── Data Table (Complex Component)
-│   │   ├── Table Header (Sortable)
-│   │   ├── Table Row (Actions)
-│   │   └── Pagination (Stateful)
-│   └── Modal Forms (Overlay)
+│ ├── Stats Cards (Reusable Grid)
+│ ├── Data Table (Complex Component)
+│ │ ├── Table Header (Sortable)
+│ │ ├── Table Row (Actions)
+│ │ └── Pagination (Stateful)
+│ └── Modal Forms (Overlay)
 └── Footer (Static)
-```
+
+````
 
 **Building Blocks Approach:**
 - **Atomic Components**: Button, Input, Icon
@@ -105,7 +126,7 @@ function StudentRegistrationForm() {
     </form>
   );
 }
-```
+````
 
 ### 2. useReducer for Complex State Logic
 
@@ -121,38 +142,42 @@ interface CartState {
 }
 
 type CartAction =
-  | { type: 'ADD_ITEM'; payload: CartItem }
-  | { type: 'REMOVE_ITEM'; payload: string }
-  | { type: 'UPDATE_QUANTITY'; payload: { id: string; quantity: number } }
-  | { type: 'APPLY_DISCOUNT'; payload: Discount }
-  | { type: 'SET_LOADING'; payload: boolean };
+  | { type: "ADD_ITEM"; payload: CartItem }
+  | { type: "REMOVE_ITEM"; payload: string }
+  | { type: "UPDATE_QUANTITY"; payload: { id: string; quantity: number } }
+  | { type: "APPLY_DISCOUNT"; payload: Discount }
+  | { type: "SET_LOADING"; payload: boolean };
 
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
-    case 'ADD_ITEM':
-      const existingItem = state.items.find(item => item.id === action.payload.id);
+    case "ADD_ITEM":
+      const existingItem = state.items.find(
+        (item) => item.id === action.payload.id
+      );
       if (existingItem) {
         return {
           ...state,
-          items: state.items.map(item =>
+          items: state.items.map((item) =>
             item.id === action.payload.id
               ? { ...item, quantity: item.quantity + 1 }
               : item
           ),
-          total: calculateTotal(state.items)
+          total: calculateTotal(state.items),
         };
       }
       return {
         ...state,
         items: [...state.items, action.payload],
-        total: calculateTotal([...state.items, action.payload])
+        total: calculateTotal([...state.items, action.payload]),
       };
 
-    case 'REMOVE_ITEM':
+    case "REMOVE_ITEM":
       return {
         ...state,
-        items: state.items.filter(item => item.id !== action.payload),
-        total: calculateTotal(state.items.filter(item => item.id !== action.payload))
+        items: state.items.filter((item) => item.id !== action.payload),
+        total: calculateTotal(
+          state.items.filter((item) => item.id !== action.payload)
+        ),
       };
 
     default:
@@ -166,26 +191,22 @@ function ShoppingCart() {
     items: [],
     total: 0,
     discounts: [],
-    isLoading: false
+    isLoading: false,
   });
 
   const addToCart = (product: Product) => {
     dispatch({
-      type: 'ADD_ITEM',
+      type: "ADD_ITEM",
       payload: {
         id: product.id,
         name: product.name,
         price: product.price,
-        quantity: 1
-      }
+        quantity: 1,
+      },
     });
   };
 
-  return (
-    <div>
-      {/* Cart UI */}
-    </div>
-  );
+  return <div>{/* Cart UI */}</div>;
 }
 ```
 
