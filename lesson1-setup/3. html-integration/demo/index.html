@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>React Direct Integration Demo</title>
+
+   <!-- React and ReactDOM CDN -->
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+   <!-- Babel for JSX -->
+   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+   <style>
+      .app {
+         max-width: 800px;
+         margin: 0 auto;
+         padding: 20px;
+         font-family: Arial, sans-serif;
+      }
+
+      .task-list {
+         list-style: none;
+         padding: 0;
+      }
+
+      .task-item {
+         display: flex;
+         align-items: center;
+         padding: 10px;
+         margin: 5px 0;
+         background-color: #f5f5f5;
+         border-radius: 4px;
+      }
+
+      .task-item button {
+         margin-left: auto;
+         padding: 5px 10px;
+         background-color: #ff4444;
+         color: white;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="root"></div>
+
+   <script type="text/babel">
+      // Task component
+      function Task({ task, onDelete }) {
+         return (
+            <li className="task-item">
+               <span>{task.text}</span>
+               <button onClick={() => onDelete(task.id)}>Delete</button>
+            </li>
+         );
+      }
+
+      // Main App component
+      function App() {
+         const [tasks, setTasks] = React.useState([
+            { id: 1, text: 'Learn React Basics' },
+            { id: 2, text: 'Practice Components' },
+            { id: 3, text: 'Build Projects' }
+         ]);
+         const [newTask, setNewTask] = React.useState('');
+
+         const handleSubmit = (e) => {
+            e.preventDefault();
+            if (!newTask.trim()) return;
+
+            setTasks([
+               ...tasks,
+               { id: Date.now(), text: newTask }
+            ]);
+            setNewTask('');
+         };
+
+         const deleteTask = (taskId) => {
+            setTasks(tasks.filter(task => task.id !== taskId));
+         };
+
+         return (
+            <div className="app">
+               <h1>React Task Manager</h1>
+
+               <form onSubmit={handleSubmit}>
+                  <input
+                     type="text"
+                     value={newTask}
+                     onChange={(e) => setNewTask(e.target.value)}
+                     placeholder="Add a new task"
+                  />
+                  <button type="submit">Add Task</button>
+               </form>
+
+               <ul className="task-list">
+                  {tasks.map(task => (
+                     <Task
+                        key={task.id}
+                        task={task}
+                        onDelete={deleteTask}
+                     />
+                  ))}
+               </ul>
+            </div>
+         );
+      }
+
+      // Render the App
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+   </script>
+</body>
+
+</html>
