@@ -1,4 +1,4 @@
-# Advanced React Development Course
+React Web Development Course
 
 ## Course Overview
 
@@ -93,25 +93,3 @@ npm install
 - TypeScript + Babel JavaScript
 - Jest Runner
 - GitLens
-
-## Assessment Methods
-
-1. Continuous assessment through lab work
-2. Final project combining all concepts
-3. Code review sessions
-4. Performance optimization challenges
-
-## Additional Resources
-
-- [React Documentation](https://reactjs.org)
-- [TypeScript Documentation](https://www.typescriptlang.org)
-- [React Query Documentation](https://tanstack.com/query/latest)
-- [React Router Documentation](https://reactrouter.com)
-
-## Contributing
-
-If you find any issues or have suggestions for improvement, please create an issue or submit a pull request.
-
-## License
-
-MIT License - feel free to use this material for your own learning or teaching.
