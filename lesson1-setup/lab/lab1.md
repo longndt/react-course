@@ -1,52 +1,90 @@
-# Lab 1: Building Your First React Application
+# Lab 1: Building Your First Professional React Application
 
 ## Overview
-In this lab session, you'll create your first React application using different methods and learn the fundamental concepts through hands-on practice.
+In this lab session, you'll create a Student Dashboard application using TypeScript and React. This project simulates the kind of interface you might build for your final year project - a management system with multiple views and data handling.
 
-## Exercises
+**Time Allocation:**
+- Exercise 1: Project Setup (30 minutes)
+- Exercise 2: TypeScript Components (45 minutes)
+- Exercise 3: Interactive Dashboard (60 minutes)
+- Exercise 4: Advanced Features (45 minutes)
 
-### Exercise 1: Setting Up a React Project (30 minutes)
+## Pre-Lab Checklist
+- [ ] Node.js v18+ installed
+- [ ] VS Code with React extensions installed
+- [ ] Basic understanding of JavaScript ES6+
+- [ ] Familiarity with HTML/CSS
 
-#### Using Vite (Recommended Method)
-1. Create a new project:
-   ```bash
-   # Create new project
-   npm create vite@latest my-first-app -- --template react
-   
-   # Navigate to project folder
-   cd my-first-app
-   
-   # Install dependencies
-   npm install
-   
-   # Start development server
-   npm run dev
-   ```
+---
 
-2. Explore the project structure:
-   ```
-   my-first-app/
-   ├── node_modules/    # Dependencies
-   ├── public/          # Static files
-   ├── src/            
-   │   ├── App.jsx     # Main component
-   │   ├── main.jsx    # Entry point
-   │   └── index.css   # Global styles
-   ├── index.html      # HTML template
-   └── package.json    # Project config
-   ```
+## Exercise 1: Professional Project Setup (30 minutes)
 
-3. Make your first changes:
-   ```jsx
-   // src/App.jsx
-   function App() {
-     return (
-       <div className="app">
-         <h1>Welcome to React!</h1>
-         <p>This is my first React application.</p>
-       </div>
-     );
-   }
+### Step 1: Create TypeScript React Project
+
+```bash
+# Create new project with TypeScript template
+npm create vite@latest student-dashboard -- --template react-ts
+
+# Navigate to project
+cd student-dashboard
+
+# Install dependencies
+npm install
+
+# Install additional useful libraries
+npm install lucide-react  # For icons
+npm install clsx          # For conditional classes
+
+# Start development server
+npm run dev
+```
+
+### Step 2: Understand Project Structure
+
+```
+student-dashboard/
+├── src/
+│   ├── App.tsx          # Main application component
+│   ├── main.tsx         # Application entry point
+│   ├── index.css        # Global styles
+│   └── vite-env.d.ts    # TypeScript definitions
+├── public/              # Static assets
+├── package.json         # Project configuration
+├── tsconfig.json        # TypeScript configuration
+└── vite.config.ts       # Vite build configuration
+```
+
+### Step 3: Configure Development Environment
+
+Add this to your `tsconfig.json` for better development experience:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    }
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+```
 
    export default App;
    ```
@@ -77,7 +115,7 @@ In this lab session, you'll create your first React application using different 
    // src/components/Button.jsx
    function Button({ text, onClick }) {
      return (
-       <button 
+       <button
          className="button"
          onClick={onClick}
        >
@@ -126,13 +164,13 @@ In this lab session, you'll create your first React application using different 
      return (
        <div className="counter">
          <h2>Counter: {count}</h2>
-         <Button 
-           text="Increment" 
-           onClick={() => setCount(count + 1)} 
+         <Button
+           text="Increment"
+           onClick={() => setCount(count + 1)}
          />
-         <Button 
-           text="Decrement" 
-           onClick={() => setCount(count - 1)} 
+         <Button
+           text="Decrement"
+           onClick={() => setCount(count - 1)}
          />
        </div>
      );
@@ -147,10 +185,10 @@ In this lab session, you'll create your first React application using different 
    function UserProfile({ name, role, imageUrl }) {
      return (
        <div className="profile">
-         <img 
-           src={imageUrl} 
-           alt={name} 
-           className="profile-image" 
+         <img
+           src={imageUrl}
+           alt={name}
+           className="profile-image"
          />
          <h2>{name}</h2>
          <p>{role}</p>
@@ -174,7 +212,7 @@ In this lab session, you'll create your first React application using different 
          <Header />
          <main>
            <Counter />
-           <UserProfile 
+           <UserProfile
              name="John Doe"
              role="React Developer"
              imageUrl="https://example.com/avatar.jpg"
@@ -252,7 +290,7 @@ function ThemeSwitcher() {
   }
 
   return (
-    <Button 
+    <Button
       text={isDark ? "Light Mode" : "Dark Mode"}
       onClick={toggleTheme}
     />
@@ -276,7 +314,7 @@ function TodoList() {
 
   return (
     <div className="todo-list">
-      <input 
+      <input
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Add todo"
