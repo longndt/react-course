@@ -1,71 +1,48 @@
-import React from "react";
+import { type ChangeEvent } from "react";
+import { useDataTableSort, useDataTableFilter } from "../hooks/useDataTable";
+import type { DataTableProps } from "../types/DataTable.types";
 import "./DataTable.css";
 
-interface Column<T> {
-  key: keyof T;
-  header: string;
-  sortable?: boolean;
-  render?: (value: any) => React.ReactNode;
-}
-
-interface DataTableProps<T> {
-  data: T[];
-  columns: Column<T>[];
-  sortable?: boolean;
-  filterable?: boolean;
-}
-
+/**
+ * A reusable data table component with sorting and filtering capabilities.
+ * Supports:
+ * - Sortable columns
+ * - Global text filtering
+ * - Custom cell rendering
+ * - TypeScript integration
+ *
+ * @example
+ * ```tsx
+ * <DataTable
+ *   data={users}
+ *   columns={[
+ *     { key: 'name', header: 'Name' },
+ *     { key: 'email', header: 'Email' },
+ *     {
+ *       key: 'status',
+ *       header: 'Status',
+ *       render: (value) => <StatusBadge status={value} />
+ *     }
+ *   ]}
+ * />
+ * ```
+ */
 export function DataTable<T extends Record<string, any>>({
   data,
   columns,
   sortable = true,
   filterable = true,
 }: DataTableProps<T>) {
-  const [sortConfig, setSortConfig] = React.useState<{
-    key: keyof T;
-    direction: "asc" | "desc";
-  } | null>(null);
+  // Use custom hooks for sorting and filtering
+  const { sortConfig, requestSort, sortedData } = useDataTableSort(
+    data,
+    sortable
+  );
+  const { filterText, setFilterText, filteredData } =
+    useDataTableFilter(sortedData);
 
-  const [filterText, setFilterText] = React.useState("");
-
-  // Sorting logic
-  const sortedData = React.useMemo(() => {
-    if (!sortConfig) return data;
-
-    return [...data].sort((a, b) => {
-      if (a[sortConfig.key] < b[sortConfig.key]) {
-        return sortConfig.direction === "asc" ? -1 : 1;
-      }
-      if (a[sortConfig.key] > b[sortConfig.key]) {
-        return sortConfig.direction === "asc" ? 1 : -1;
-      }
-      return 0;
-    });
-  }, [data, sortConfig]);
-
-  // Filtering logic
-  const filteredData = React.useMemo(() => {
-    if (!filterText) return sortedData;
-
-    return sortedData.filter((item) =>
-      Object.values(item).some((value) =>
-        String(value).toLowerCase().includes(filterText.toLowerCase())
-      )
-    );
-  }, [sortedData, filterText]);
-
-  const requestSort = (key: keyof T) => {
-    if (!sortable) return;
-
-    setSortConfig((current) => {
-      if (!current || current.key !== key) {
-        return { key, direction: "asc" };
-      }
-      if (current.direction === "asc") {
-        return { key, direction: "desc" };
-      }
-      return null;
-    });
+  const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFilterText(e.target.value);
   };
 
   return (
@@ -75,9 +52,10 @@ export function DataTable<T extends Record<string, any>>({
           <input
             type="text"
             value={filterText}
-            onChange={(e) => setFilterText(e.target.value)}
+            onChange={handleFilterChange}
             placeholder="Filter items..."
             className="filter-input"
+            aria-label="Filter table"
           />
         </div>
       )}
@@ -88,12 +66,26 @@ export function DataTable<T extends Record<string, any>>({
             {columns.map((column) => (
               <th
                 key={String(column.key)}
-                onClick={() => requestSort(column.key)}
-                className={sortable ? "sortable" : ""}
+                onClick={() =>
+                  column.sortable !== false && requestSort(column.key)
+                }
+                className={
+                  sortable && column.sortable !== false ? "sortable" : ""
+                }
+                role={
+                  sortable && column.sortable !== false ? "button" : undefined
+                }
+                aria-sort={
+                  sortConfig?.key === column.key
+                    ? sortConfig.direction === "asc"
+                      ? "ascending"
+                      : "descending"
+                    : undefined
+                }
               >
                 {column.header}
                 {sortConfig?.key === column.key && (
-                  <span className="sort-indicator">
+                  <span className="sort-indicator" aria-hidden="true">
                     {sortConfig.direction === "asc" ? " ↑" : " ↓"}
                   </span>
                 )}
@@ -102,17 +94,25 @@ export function DataTable<T extends Record<string, any>>({
           </tr>
         </thead>
         <tbody>
-          {filteredData.map((item, index) => (
-            <tr key={index}>
-              {columns.map((column) => (
-                <td key={String(column.key)}>
-                  {column.render
-                    ? column.render(item[column.key])
-                    : String(item[column.key])}
-                </td>
-              ))}
+          {filteredData.length === 0 ? (
+            <tr>
+              <td colSpan={columns.length} className="no-data">
+                No data available
+              </td>
             </tr>
-          ))}
+          ) : (
+            filteredData.map((item, index) => (
+              <tr key={index}>
+                {columns.map((column) => (
+                  <td key={String(column.key)}>
+                    {column.render
+                      ? column.render(item[column.key])
+                      : String(item[column.key])}
+                  </td>
+                ))}
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>

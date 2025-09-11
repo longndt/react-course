@@ -1,66 +1,145 @@
-# Lesson 4: Advanced Data Handling & API Integration
+# Lesson 4: Working with Data and APIs
 
 ## Overview
 
-This lesson covers modern approaches to data fetching, caching, and real-time updates in React applications.
+This lesson covers how to integrate external APIs and manage data in React applications, using MockAPI for practical, hands-on examples.
 
 ## Prerequisites
 
 - Completion of Lessons 1-3
-- Understanding of REST APIs
-- Basic knowledge of WebSocket
-- Familiarity with GraphQL concepts
+- Basic understanding of HTTP and REST APIs
+- Familiarity with async/await and Promises
 
-## Theory (45 minutes)
+## Core Concepts
 
-### 1. React Query Fundamentals
+### 1. Understanding APIs (Application Programming Interfaces)
 
-- Query basics
-- Mutations
-- Query invalidation
-- Infinite queries
-- Optimistic updates
+#### What is an API?
+Think of an API like a restaurant service:
+- You (frontend) are the customer
+- The kitchen (backend) prepares the data
+- The API is the waiter who takes your requests and brings back data
 
-### 2. Real-time Data
+#### What is a REST API?
+- REST = REpresentational State Transfer
+- Most common way to organize APIs
+- Example endpoints:
+  ```
+  # Get list of products
+  GET https://api.shop.com/products
 
-- WebSocket integration
-- Server-Sent Events
-- Real-time updates
-- Data synchronization
+  # Get product details with id = 1
+  GET https://api.shop.com/products/1
 
-### 3. Error Handling
+  # Add new product
+  POST https://api.shop.com/products
 
-- Error boundaries
-- Network errors
-- Retry mechanisms
-- Fallback UI
+  # Update product with id = 1
+  PUT https://api.shop.com/products/1
 
-### 4. Data Caching
+  # Delete product with id = 1
+  DELETE https://api.shop.com/products/1
+  ```
 
-- Browser cache
-- Local storage
-- IndexedDB
-- Service workers
+#### HTTP Methods
+- GET: Retrieve data (like viewing a menu)
+- POST: Create new data (like placing an order)
+- PUT/PATCH: Update data (like modifying an order)
+- DELETE: Remove data (like canceling an order)
 
-## Demo (45 minutes)
+#### Status Codes
+- 200 OK: Request successful
+- 201 Created: Resource created successfully
+- 400 Bad Request: Invalid request
+- 401 Unauthorized: Authentication required
+- 403 Forbidden: No permission
+- 404 Not Found: Resource not found
+- 500 Internal Server Error: Server error
 
-### 1. React Query Setup
+### 2. Working with APIs in React
 
-```tsx
-// QueryClient setup
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+#### Basic Data Fetching with Fetch API
+```jsx
+// Get list of products
+fetch('https://api.shop.com/products')
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.error(err))
+
+// Add new product
+fetch('https://api.shop.com/products', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: 'Classic T-Shirt',
+    price: 29.99
+  })
+})
+```
+
+#### Handling Loading and Error States
+```jsx
+function ProductList() {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    fetch('https://api.shop.com/products')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch data')
+        }
+        return res.json()
+      })
+      .then(data => {
+        setData(data)
+        setLoading(false)
+      })
+      .catch(err => {
+        setError(err.message)
+        setLoading(false)
+      })
+  }, [])
+
+  if (loading) return <div>Loading products...</div>
+  if (error) return <div>Error: {error}</div>
+
+  return (
+    <div className="products">
+      {data.map(product => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  )
+}
+```
+
+### 3. React Query - Modern Data Fetching Library
+
+#### Why Use React Query?
+1. Cleaner, more readable code
+2. Automatic loading and error states
+3. Built-in data caching
+4. Automatic background updates
+5. Zero-configuration optimizations
+
+#### Example Implementation:
+```jsx
+// Setting up React Query
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000,
-      cacheTime: 10 * 60 * 1000,
-      retry: 3,
-    },
-  },
-});
+      staleTime: 5 * 60 * 1000,  // Data considered fresh for 5 minutes
+      retry: 3,                   // Retry failed requests 3 times
+    }
+  }
+})
 
-// App.tsx
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -68,147 +147,193 @@ function App() {
         <AppRoutes />
       </Router>
     </QueryClientProvider>
-  );
-}
-```
-
-### 2. Data Fetching Hooks
-
-```tsx
-// useProducts.ts
-interface Product {
-  id: string;
-  name: string;
-  price: number;
+  )
 }
 
-export const useProducts = () => {
-  return useQuery<Product[]>({
-    queryKey: ["products"],
+// Custom hook for products
+function useProducts() {
+  return useQuery({
+    queryKey: ['products'],
     queryFn: async () => {
-      const response = await fetch("/api/products");
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      const res = await fetch('https://api.shop.com/products')
+      if (!res.ok) {
+        throw new Error('Failed to fetch products')
       }
-      return response.json();
-    },
-  });
-};
+      return res.json()
+    }
+  })
+}
 
-// Using optimistic updates
-export const useUpdateProduct = () => {
-  const queryClient = useQueryClient();
+// Using the hook
+function ProductList() {
+  const {
+    data: products,
+    isLoading,
+    error,
+    refetch
+  } = useProducts()
 
-  return useMutation({
-    mutationFn: async (product: Product) => {
-      const response = await fetch(`/api/products/${product.id}`, {
-        method: "PUT",
-        body: JSON.stringify(product),
-      });
-      return response.json();
-    },
-    onMutate: async (newProduct) => {
-      await queryClient.cancelQueries({ queryKey: ["products"] });
-      const previousProducts = queryClient.getQueryData(["products"]);
+  if (isLoading) return <div>Loading products...</div>
+  if (error) return (
+    <div>
+      <p>Error: {error.message}</p>
+      <button onClick={refetch}>Try Again</button>
+    </div>
+  )
 
-      queryClient.setQueryData(["products"], (old: Product[]) =>
-        old.map((p) => (p.id === newProduct.id ? newProduct : p))
-      );
-
-      return { previousProducts };
-    },
-    onError: (err, newProduct, context) => {
-      queryClient.setQueryData(["products"], context.previousProducts);
-    },
-  });
-};
+  return (
+    <div className="products">
+      {products.map(product => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  )
+}
 ```
 
-### 3. WebSocket Integration
+### 4. MockAPI Setup
 
-```tsx
-// useWebSocket.ts
-export const useWebSocket = (url: string) => {
-  const [messages, setMessages] = useState<any[]>([]);
-  const ws = useRef<WebSocket | null>(null);
-
-  useEffect(() => {
-    ws.current = new WebSocket(url);
-
-    ws.current.onmessage = (event) => {
-      const message = JSON.parse(event.data);
-      setMessages((prev) => [...prev, message]);
-    };
-
-    return () => {
-      ws.current?.close();
-    };
-  }, [url]);
-
-  const sendMessage = useCallback((message: any) => {
-    ws.current?.send(JSON.stringify(message));
-  }, []);
-
-  return { messages, sendMessage };
-};
+#### Creating Resources
+1. Products
+```json
+{
+  "id": "1",
+  "name": "Classic T-Shirt",
+  "price": 29.99,
+  "description": "Comfortable cotton t-shirt",
+  "imageUrl": "https://example.com/tshirt.jpg",
+  "category": "clothing"
+}
 ```
 
-## Lab Exercises (90 minutes)
+2. Cart
+```json
+{
+  "id": "1",
+  "userId": "1",
+  "productId": "1",
+  "quantity": 1,
+  "addedAt": "2023-09-10T08:30:00Z"
+}
+```
 
-### Exercise 1: React Query Implementation (30 mins)
+3. Orders
+```json
+{
+  "id": "1",
+  "userId": "1",
+  "products": [
+    {
+      "id": "1",
+      "quantity": 2,
+      "price": 29.99
+    }
+  ],
+  "total": 59.98,
+  "status": "pending",
+  "createdAt": "2023-09-10T09:00:00Z"
+}
+```
 
-1. Set up React Query in your application
-2. Create queries for:
-   - Product list
-   - User profile
-   - Order history
-3. Implement mutations
-4. Add optimistic updates
+#### API Structure
+```
+# Products
+GET    /products      - Get all products
+GET    /products/1    - Get product details
+POST   /products      - Add new product
+PUT    /products/1    - Update product
+DELETE /products/1    - Delete product
 
-### Exercise 2: Real-time Features (30 mins)
+# Similar endpoints for Cart and Orders
+```
 
-1. Implement WebSocket connection
-2. Create real-time chat
-3. Add live notifications
-4. Handle connection errors
+## Lab Exercises
 
-### Exercise 3: Error Handling & Caching (30 mins)
+### Exercise 1: Setting up MockAPI (30 minutes)
+1. Create a MockAPI account
+2. Create a new project
+3. Set up the following resources:
+   - Products
+   - Cart
+   - Orders
+4. Add sample data to each resource
+5. Test the API endpoints using Postman or browser
 
-1. Implement error boundaries
-2. Add retry logic
-3. Create fallback UI
-4. Set up data persistence
+### Exercise 2: Product Catalog (45 minutes)
+1. Create a new React project
+2. Install and set up React Query
+3. Create components:
+   - ProductList
+   - ProductCard
+   - Loading spinner
+   - Error message
+4. Implement:
+   - Product fetching
+   - Loading states
+   - Error handling
+   - Basic styling
+
+### Exercise 3: Shopping Cart (45 minutes)
+1. Implement cart functionality:
+   - Add to cart
+   - Remove from cart
+   - Update quantities
+   - Calculate total
+2. Add error handling
+3. Use React Query mutations
+4. Add loading states
+
+### Exercise 4: Checkout Process (60 minutes)
+1. Create checkout form
+2. Implement order creation
+3. Add order confirmation
+4. Handle success/error states
+5. Show order history
 
 ## Project Structure
-
 ```
 src/
-├── queries/
-│   ├── useProducts.ts
-│   ├── useOrders.ts
-│   └── useProfile.ts
-├── realtime/
-│   ├── useWebSocket.ts
-│   └── NotificationSystem.tsx
-├── errors/
-│   ├── ErrorBoundary.tsx
-│   └── FallbackUI.tsx
-└── cache/
-    ├── localStorage.ts
-    └── indexedDB.ts
+├── api/
+│   ├── client.js        # API configuration
+│   ├── products.js      # Product endpoints
+│   ├── cart.js          # Cart endpoints
+│   └── orders.js        # Order endpoints
+├── components/
+│   ├── ProductList.jsx
+│   ├── ProductCard.jsx
+│   ├── Cart.jsx
+│   └── OrderHistory.jsx
+├── hooks/
+│   ├── useProducts.js
+│   ├── useCart.js
+│   └── useOrders.js
+└── pages/
+    ├── Products.jsx
+    ├── Cart.jsx
+    └── Orders.jsx
 ```
 
 ## Additional Resources
+- [React Query Documentation](https://tanstack.com/query/latest)
+- [MockAPI Documentation](https://mockapi.io/docs)
+- [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+- [REST API Best Practices](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design)
 
-- [TanStack Query Documentation](https://tanstack.com/query/latest)
-- [WebSocket API](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
-- [Error Boundary Pattern](https://reactjs.org/docs/error-boundaries.html)
-- [Browser Storage Guide](https://developer.mozilla.org/en-US/docs/Web/API/Storage_API)
+## Practice Projects
+1. E-commerce Store
+   - Product listing
+   - Shopping cart
+   - Checkout process
+   - Order history
 
-## Homework
+2. Task Manager
+   - Task list
+   - Task creation
+   - Status updates
+   - Task filtering
 
-1. Build a real-time dashboard
-2. Implement infinite scrolling
-3. Add offline support
-4. Create a caching strategy
-5. Write tests for queries
+3. Blog Platform
+   - Post list
+   - Post creation
+   - Comments
+   - User profiles

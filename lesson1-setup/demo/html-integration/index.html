@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>React Direct Integration</title>
+   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+   <style>
+      body {
+         font-family: Arial, sans-serif;
+         max-width: 800px;
+         margin: 0 auto;
+         padding: 2rem;
+      }
+
+      .counter {
+         text-align: center;
+         padding: 2rem;
+         border: 1px solid #ccc;
+         border-radius: 8px;
+         margin: 2rem 0;
+      }
+
+      button {
+         padding: 0.5rem 1rem;
+         margin: 0 0.5rem;
+         border: none;
+         border-radius: 4px;
+         background-color: #0066cc;
+         color: white;
+         cursor: pointer;
+      }
+
+      button:hover {
+         background-color: #0052a3;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="root"></div>
+
+   <script type="text/babel">
+      function Counter() {
+         const [count, setCount] = React.useState(0);
+
+         return (
+            <div className="counter">
+               <h2>Simple Counter</h2>
+               <p>Count: {count}</p>
+               <div>
+                  <button onClick={() => setCount(c => c - 1)}>-</button>
+                  <button onClick={() => setCount(0)}>Reset</button>
+                  <button onClick={() => setCount(c => c + 1)}>+</button>
+               </div>
+            </div>
+         );
+      }
+
+      function App() {
+         return (
+            <div>
+               <h1>React Direct HTML Integration</h1>
+               <Counter />
+               <div>
+                  <h3>Features Demonstrated:</h3>
+                  <ul>
+                     <li>Direct React integration in HTML</li>
+                     <li>No build tools required</li>
+                     <li>State management with hooks</li>
+                     <li>Component composition</li>
+                  </ul>
+               </div>
+            </div>
+         );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(
+         <React.StrictMode>
+            <App />
+         </React.StrictMode>
+      );
+   </script>
+</body>
+
+</html>

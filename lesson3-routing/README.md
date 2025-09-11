@@ -1,198 +1,277 @@
-# Lesson 3: React Router & Authentication
+# Lesson 3: Routing & Authentication in React
 
 ## Overview
+In this lesson, you'll learn how to create multi-page React applications using React Router and implement user authentication. We'll build a complete authentication system with protected routes.
 
-This lesson covers modern routing in React applications, authentication patterns, and securing routes.
+## Learning Objectives
+After this lesson, you will be able to:
+- Set up routing in React applications
+- Create protected routes
+- Implement user authentication
+- Manage user sessions
+- Handle navigation guards
 
-## Prerequisites
+## 1. Understanding React Router
 
-- Completion of Lessons 1 & 2
-- Understanding of React hooks
-- Basic knowledge of JWT
-- Familiarity with REST APIs
-
-## Theory (45 minutes)
-
-### 1. React Router 6
-
-- New features and changes
-- Route configuration
-- Navigation and history
-- Route parameters
-- Nested routes
-- Outlet component
-
-### 2. Authentication Patterns
-
-- JWT authentication
-- OAuth 2.0 flows
-- Social login integration
-- Token management
-- Refresh token patterns
-
-### 3. Protected Routes
-
-- Route guards
-- Role-based access
-- Permission management
-- Authentication state
-
-## Demo (45 minutes)
-
-### 1. Router Setup
-
-```tsx
-// App.tsx
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+### Basic Routing
+```jsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route
-            path="dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="login" element={<Login />} />
-          <Route path="*" element={<NotFound />} />
+        {/* Basic route */}
+        <Route path="/" element={<Home />} />
+
+        {/* Route with parameter */}
+        <Route path="/product/:id" element={<Product />} />
+
+        {/* Nested routes */}
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="profile" element={<Profile />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
+
+        {/* Catch-all route for 404 */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
 }
 ```
 
-### 2. Authentication Implementation
+### Navigation Components
+```jsx
+import { Link, NavLink } from 'react-router-dom';
 
-```tsx
-// useAuth.ts
-interface AuthState {
-  user: User | null;
-  token: string | null;
+function Navigation() {
+  return (
+    <nav>
+      {/* Basic link */}
+      <Link to="/">Home</Link>
+
+      {/* Link with active state */}
+      <NavLink
+        to="/dashboard"
+        className={({ isActive }) =>
+          isActive ? 'active' : ''
+        }
+      >
+        Dashboard
+      </NavLink>
+    </nav>
+  );
 }
+```
 
-const useAuth = () => {
-  const [auth, setAuth] = useState<AuthState>({
-    user: null,
-    token: localStorage.getItem("token"),
-  });
+### Using Route Parameters
+```jsx
+import { useParams, useNavigate } from 'react-router-dom';
 
-  const login = async (credentials: Credentials) => {
-    const response = await fetch("/api/login", {
-      method: "POST",
-      body: JSON.stringify(credentials),
-    });
-    const data = await response.json();
-    setAuth(data);
-    localStorage.setItem("token", data.token);
+function ProductPage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  return (
+    <div>
+      <h1>Product {id}</h1>
+      <button onClick={() => navigate('/')}>
+        Back to Home
+      </button>
+    </div>
+  );
+}
+```
+
+## 2. Implementing Authentication
+
+### 1. Authentication Context
+```jsx
+import { createContext, useContext, useState } from 'react';
+
+// Create context
+const AuthContext = createContext(null);
+
+// Create provider
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+
+  const login = async (email, password) => {
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        body: JSON.stringify({ email, password })
+      });
+
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+
+      const data = await response.json();
+      setUser(data.user);
+      localStorage.setItem('token', data.token);
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
   };
 
   const logout = () => {
-    setAuth({ user: null, token: null });
-    localStorage.removeItem("token");
+    setUser(null);
+    localStorage.removeItem('token');
   };
 
-  return { ...auth, login, logout };
-};
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+// Custom hook for using auth
+export function useAuth() {
+  return useContext(AuthContext);
+}
+```
+
+### 2. Login Form
+```jsx
+function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await login(email, password);
+      navigate('/dashboard');
+    } catch (error) {
+      alert('Login failed: ' + error.message);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        placeholder="Email"
+        required
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        placeholder="Password"
+        required
+      />
+      <button type="submit">Log In</button>
+    </form>
+  );
+}
 ```
 
 ### 3. Protected Route Component
-
-```tsx
-// ProtectedRoute.tsx
-interface ProtectedRouteProps {
-  children: React.ReactNode;
-  requiredRole?: string;
-}
-
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
-  children,
-  requiredRole,
-}) => {
-  const { user, token } = useAuth();
+```jsx
+function ProtectedRoute({ children }) {
+  const { user } = useAuth();
   const location = useLocation();
 
-  if (!token) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+  if (!user) {
+    // Redirect to login page if not authenticated
+    return <Navigate
+      to="/login"
+      state={{ from: location }}
+      replace
+    />;
   }
 
-  if (requiredRole && user?.role !== requiredRole) {
-    return <Navigate to="/unauthorized" replace />;
-  }
+  return children;
+}
 
-  return <>{children}</>;
-};
+// Usage in App.jsx
+function App() {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
+  );
+}
 ```
 
-## Lab Exercises (90 minutes)
+## Lab Exercises
 
-### Exercise 1: Router Setup (30 mins)
+### Exercise 1: Basic Routing (30 minutes)
+Create a multi-page application with:
+1. Home page
+2. About page
+3. Contact page
+4. Navigation menu
+5. 404 page
 
-1. Create a multi-page application with:
-   - Home page
-   - Dashboard
-   - Profile page
-   - Settings
-2. Implement nested routes
-3. Add navigation guards
+### Exercise 2: User Authentication (45 minutes)
+Implement a complete authentication system:
+1. Login form
+2. Registration form
+3. Password reset
+4. Remember me functionality
+5. Error handling
 
-### Exercise 2: Authentication System (30 mins)
-
-1. Implement JWT authentication
-2. Create login/register forms
-3. Handle token storage
-4. Implement refresh token logic
-
-### Exercise 3: Protected Routes (30 mins)
-
-1. Create protected route component
-2. Implement role-based access
-3. Add permission checks
-4. Handle unauthorized access
+### Exercise 3: Protected Dashboard (45 minutes)
+Build a protected dashboard area:
+1. Protected routes
+2. User profile page
+3. Settings page
+4. Admin section
+5. Role-based access
 
 ## Project Structure
-
 ```
 src/
-├── auth/
-│   ├── useAuth.ts
-│   ├── AuthContext.tsx
-│   └── ProtectedRoute.tsx
+├── components/
+│   ├── Navigation.jsx
+│   ├── ProtectedRoute.jsx
+│   └── Layout.jsx
 ├── pages/
-│   ├── Home.tsx
-│   ├── Dashboard.tsx
-│   ├── Profile.tsx
-│   └── Login.tsx
-└── components/
-    ├── Navigation.tsx
-    └── Layout.tsx
+│   ├── Home.jsx
+│   ├── Login.jsx
+│   ├── Register.jsx
+│   └── Dashboard/
+│       ├── index.jsx
+│       ├── Profile.jsx
+│       └── Settings.jsx
+├── context/
+│   └── AuthContext.jsx
+└── services/
+    └── auth.js
 ```
 
 ## Additional Resources
-
-- [React Router Documentation](https://reactrouter.com)
-- [JWT.io](https://jwt.io)
-- [OAuth 2.0 Simplified](https://www.oauth.com)
-- [Auth0 React SDK](https://auth0.com/docs/quickstart/spa/react)
+- [React Router Documentation](https://reactrouter.com/)
+- [JWT Authentication Guide](https://jwt.io/introduction)
+- [Protected Routes Tutorial](https://reactrouter.com/docs/en/v6/examples/auth)
+- [Authentication Best Practices](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/04-Authentication_Testing)
 
 ## Homework
-
-1. Add social login (Google, GitHub)
-2. Implement remember me functionality
-3. Add password reset flow
-4. Create role-based dashboard
-5. Add session management
+Create a complete authentication system with:
+1. Social login integration (Google/GitHub)
+2. Email verification
+3. Password reset flow
+4. Session management
+5. Remember me functionality

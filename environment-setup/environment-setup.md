@@ -1,65 +1,52 @@
 # Development Environment Setup Guide
 
-This guide provides comprehensive instructions for setting up your development environment for React development on Windows and macOS.
+This guide provides comprehensive instructions for setting up your React development environment. We'll focus on using Visual Studio Code as our primary IDE.
 
-## Table of Contents
+## Required Software
 
-- [Git and GitHub Setup](#1-git-and-github-setup)
-- [Visual Studio Code Setup](#2-option-a-visual-studio-code-setup)
-- [WebStorm Setup](#2-option-b-webstorm-setup)
-- [Additional Tools](#3-additional-development-tools)
-- [Troubleshooting](#troubleshooting)
+### 1. Node.js Setup (Required)
 
-## 1. Git and GitHub Setup
+1. **Download and Install Node.js**
 
-### Windows
-
-1. **Install Git**
-
-   - Download Git from [https://git-scm.com/download/win](https://git-scm.com/download/win)
-   - Run the installer
-   - Choose default options during installation
-   - During installation, choose:
-     - Use Git from Git Bash only
-     - Use OpenSSL library
-     - Checkout Windows-style, commit Unix-style line endings
-     - Use MinTTY
+   - Visit [nodejs.org](https://nodejs.org)
+   - Download the LTS (Long Term Support) version
+   - Follow the installation wizard
+   - ⚠️ Make sure to check the option to install necessary tools and chocolatey (Windows)
 
 2. **Verify Installation**
+
    ```bash
-   git --version
+   # Open terminal and run:
+   node --version  # Should show v18.x or higher
+   npm --version   # Should show v9.x or higher
    ```
 
-### macOS
+3. **Install Essential Global Packages**
+
+   ```bash
+   # Install Yarn (alternative to npm)
+   npm install -g yarn
+
+   # Install Vite (for project creation)
+   npm install -g vite
+   ```
+
+### 2. Git Setup (Required)
 
 1. **Install Git**
 
-   - If you have Homebrew:
+   - **Windows**: Download from [git-scm.com](https://git-scm.com/download/win)
+   - **macOS**:
+
      ```bash
+     # Install Homebrew first if you haven't
+     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+     # Then install Git
      brew install git
      ```
-   - Without Homebrew:
-     - Download Git from [https://git-scm.com/download/mac](https://git-scm.com/download/mac)
-     - Or install Xcode Command Line Tools:
-       ```bash
-       xcode-select --install
-       ```
 
-2. **Verify Installation**
-   ```bash
-   git --version
-   ```
-
-### GitHub Account Setup
-
-1. **Create GitHub Account**
-
-   - Go to [GitHub.com](https://github.com)
-   - Click "Sign up"
-   - Choose a username, email, and password
-   - Verify your email address
-
-2. **Configure Git with GitHub**
+2. **Configure Git**
 
    ```bash
    git config --global user.name "Your Name"
@@ -89,9 +76,7 @@ This guide provides comprehensive instructions for setting up your development e
    - Click "New SSH key"
    - Paste your public key
 
-## 2. Option A: Visual Studio Code Setup
-
-### Windows & macOS
+## 2. Visual Studio Code Setup
 
 1. **Install VS Code**
 
@@ -130,48 +115,6 @@ This guide provides comprehensive instructions for setting up your development e
      "git.autofetch": true
    }
    ```
-
-## 2. Option B: WebStorm Setup
-
-### Windows & macOS
-
-1. **Install WebStorm**
-
-   - Download from [JetBrains website](https://www.jetbrains.com/webstorm/download)
-   - Run the installer
-   - For students: Get free license with university email
-
-2. **Initial Setup**
-
-   - Choose UI theme
-   - Install recommended plugins:
-     - Git Flow Integration
-     - Rainbow Brackets
-     - Prettier
-     - ESLint
-
-3. **Configure Git**
-
-   - Go to Settings/Preferences → Version Control → Git
-   - WebStorm should auto-detect Git path
-   - Test connection
-
-4. **Recommended Settings**
-
-   - Enable Auto-Import
-   - Enable Format on Save
-   - Configure JavaScript/TypeScript linting
-
-   ```
-   Settings → Languages & Frameworks → JavaScript
-   - Set language version to React JSX
-   - Enable ESLint
-   ```
-
-5. **Key Shortcuts to Remember**
-   - Double Shift: Search Everywhere
-   - Ctrl+Shift+A (Cmd+Shift+A): Find Action
-   - Alt+Enter (Option+Enter): Show Intention Actions
 
 ## 3. Additional Development Tools
 
@@ -497,19 +440,6 @@ git push origin feature/test
    - Reset Git settings
    - Clear VS Code cache
 
-#### WebStorm Issues
-
-1. **Performance Issues**
-
-   - Increase memory allocation
-   - Exclude large directories
-   - Clear caches
-
-2. **Indexing Never Ends**
-   - Invalid cache
-   - Too many files
-   - Solution: File → Invalidate Caches
-
 ### Environment Verification Checklist
 
 ```bash
@@ -534,56 +464,6 @@ ssh -T git@github.com
 npm list -g --depth=0
 ```
 
-### Online Resources
-
-1. **Documentation**
-
-   - [Git Documentation](https://git-scm.com/doc)
-   - [VS Code Docs](https://code.visualstudio.com/docs)
-   - [WebStorm Guide](https://www.jetbrains.com/webstorm/guide/)
-   - [React Documentation](https://reactjs.org/docs/getting-started.html)
-
-2. **Community Support**
-
-   - [Stack Overflow](https://stackoverflow.com)
-   - [GitHub Community](https://github.community)
-   - [React Discord](https://discord.gg/react)
-
-3. **Video Tutorials**
-   - [Git & GitHub Crash Course](https://www.youtube.com/watch?v=RGOj5yH7evk)
-   - [VS Code Tutorials](https://code.visualstudio.com/docs/getstarted/introvideos)
-   - [WebStorm Essentials](https://www.jetbrains.com/webstorm/learn/)
-
-### Regular Maintenance
-
-1. **Weekly Updates**
-
-   ```bash
-   # Update npm & global packages
-   npm update -g
-
-   # Update VS Code extensions
-   code --list-extensions | xargs -L 1 code --install-extension
-
-   # Update Git
-   git update-git-for-windows  # Windows
-   brew upgrade git  # macOS
-   ```
-
-2. **Monthly Cleanup**
-
-   ```bash
-   # Clear npm cache
-   npm cache clean --force
-
-   # Clear Git maintenance
-   git maintenance run --auto
-
-   # Update all tools
-   winget upgrade --all  # Windows
-   brew upgrade  # macOS
-   ```
-
 ### Common Issues
 
 1. **Git not found**
@@ -597,13 +477,7 @@ npm list -g --depth=0
    - Check GitHub SSH key settings
    - Test connection: `ssh -T git@github.com`
 
-3. **IDE Git integration not working**
+3. **VS Code Git integration not working**
    - Verify Git installation path
-   - Check IDE Git settings
-   - Restart IDE
-
-For additional help:
-
-- [Git Documentation](https://git-scm.com/doc)
-- [VS Code Documentation](https://code.visualstudio.com/docs)
-- [WebStorm Documentation](https://www.jetbrains.com/webstorm/learn/)
+   - Check VS Code Git settings
+   - Restart VS Code
