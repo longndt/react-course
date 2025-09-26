@@ -1,10 +1,10 @@
-# Modern React Development Course
+# React Development Course
 
 ## Course Overview
 
-This comprehensive React course teaches modern React development with industry-standard practices through hands-on examples.
+This course teaches React app development with industry-standard practices through hands-on examples.
 
-**Target Audience**: IT students and developers looking to master React
+**Audience**: IT students and developers looking to master React
 **Format**: Theory, hands-on practice, and project-based learning
 
 ## Prerequisites
