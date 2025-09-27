@@ -1,4 +1,14 @@
-# Lesson 2: Component## Why Component Architecture Matters? 🤔
+# Th## Theory 2: Advanced Component Patterns & State Management
+
+_For detailed learning objectives and prerequisites, see [readme.md](../readme.md)_ory 2: Component Architecture & Advanced State Management 🛡️
+
+## Quick Reference 📋
+
+*For detailed learning objectives and prerequisites, see [README.md](../README.md)*
+
+---
+
+## Why Component Architecture Matters? 🤔
 
 **Think Beyond Simple Components:**
 
@@ -9,15 +19,6 @@ Modern React applications need:
 - **Professional Patterns** → Industry-standard approaches
 
 **Visual Example - E-commerce Dashboard:**
-
-```
-E-commerce Dashboard 🏪e & Advanced State Management 🛡️
-
-## Quick Reference 📋
-
-*For detailed learning objectives and prerequisites, see [README.md](../README.md)*
-
----mponent Architecture & Advanced State Management �️
 
 ## What Will You Learn? 🎯
 

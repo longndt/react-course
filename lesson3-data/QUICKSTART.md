@@ -336,7 +336,7 @@ You now have:
 
 ## Next Steps
 
-1. Read the full [Lesson 3 README](./README.md)
+1. Read the full [Lesson 3 README](./readme.md)
 2. Replace mock data with MongoDB
 3. Add error handling and loading states
 4. Complete the lab exercises

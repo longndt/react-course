@@ -4,7 +4,7 @@
 
 In this lab, you'll apply component composition patterns and architecture concepts covered in the lesson. Focus on hands-on implementation of reusable component systems.
 
-_For learning objectives and prerequisites, see [../README.md](../README.md)_
+_For learning objectives and prerequisites, see [../readme.md](../readme.md)_
 
 ## Pre-Lab Checklist
 
@@ -346,12 +346,148 @@ function Modal({ isOpen, onClose, children }) {
 }
 ```
 
+## Modern CSS Styling Guidelines
+
+### Enhanced Visual Design
+
+This lab features modern CSS with the following improvements:
+
+1. **Gradient Backgrounds**: Beautiful gradient backgrounds for headers and cards
+2. **Glass Morphism Effects**: Semi-transparent backgrounds with backdrop filters
+3. **Enhanced Shadows**: Multi-layered shadows for depth and dimension
+4. **Smooth Animations**: Cubic-bezier transitions for professional feel
+5. **Improved Typography**: Better font sizing and spacing for readability
+
+### Key CSS Features
+
+```css
+/* Modern gradient header */
+.app-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Glass morphism cards */
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Demo sections with backdrop blur */
+.demo-section {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+```
+
+### Responsive Design
+
+The layout is optimized for desktop computers with:
+- Larger max-width (1400px)
+- Enhanced spacing and padding
+- Improved grid layouts
+- Better hover effects
+- Professional color schemes
+
+## Final Project Structure 📁
+
+After completing all exercises in Lab 2, your project should have the following structure:
+
+```
+advanced-components/
+├── public/
+│   ├── favicon.ico
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── Card/
+│   │   │   ├── Card.tsx
+│   │   │   └── Card.css
+│   │   ├── ErrorBoundary/
+│   │   │   ├── ErrorBoundary.tsx
+│   │   │   └── ErrorBoundary.css
+│   │   ├── Form/
+│   │   │   ├── RegistrationForm.tsx
+│   │   │   └── RegistrationForm.css
+│   │   ├── Modal/
+│   │   │   ├── Modal.tsx
+│   │   │   └── Modal.css
+│   │   ├── ThemedComponents/
+│   │   │   ├── ThemedButton.tsx
+│   │   │   ├── ThemeToggle.tsx
+│   │   │   └── ThemedComponents.css
+│   │   └── ProductList/
+│   │       ├── ProductList.tsx
+│   │       ├── ProductItem.tsx
+│   │       └── ProductList.css
+│   ├── context/
+│   │   └── ThemeContext.tsx
+│   ├── hoc/
+│   │   └── withLoading.tsx
+│   ├── hooks/
+│   │   ├── useForm.ts
+│   │   ├── useLocalStorage.ts
+│   │   └── useToggle.ts
+│   ├── types/
+│   │   └── index.ts
+│   ├── App.tsx
+│   ├── App.css
+│   ├── index.css
+│   └── main.tsx
+├── package.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── vite.config.ts
+└── readme.md
+```
+
+### Key Features Implemented:
+
+#### **Component Composition Patterns:**
+- ✅ **Card System**: Compound components (Card.Header, Card.Body, Card.Footer)
+- ✅ **Modal Portal**: Using React Portals for overlay rendering
+- ✅ **Flexible Layout**: Composable components with children props
+
+#### **Advanced State Management:**
+- ✅ **Context API**: Theme management with ThemeProvider and useTheme hook
+- ✅ **Custom Hooks**: Reusable logic for forms, localStorage, and toggles
+- ✅ **Higher-Order Components**: withLoading HOC for loading states
+
+#### **Professional Patterns:**
+- ✅ **Error Boundaries**: Graceful error handling and recovery
+- ✅ **Type Safety**: Comprehensive TypeScript interfaces
+- ✅ **Modern CSS**: Glass morphism effects, gradients, and animations
+
+#### **Interactive Features:**
+- ✅ **Theme Switching**: Light/dark mode with context persistence
+- ✅ **Form Validation**: Custom useForm hook with error handling
+- ✅ **Modal Management**: Portal-based modals with backdrop click handling
+- ✅ **Loading States**: HOC pattern for async operations
+
+### Expected Functionality:
+1. **Component Showcase**: Interactive demos of all component patterns
+2. **Theme System**: Seamless light/dark mode switching
+3. **Form Handling**: Registration form with validation and error states
+4. **Modal Interactions**: Product details modal with smooth animations
+5. **Error Recovery**: Error boundaries with retry functionality
+6. **Professional UI**: Modern design with glass morphism and smooth transitions
+
 ## Submission Requirements
 
 1. GitHub repository containing:
 
    - Complete source code
-   - README.md with setup instructions
+   - readme.md with setup instructions
    - Component documentation
    - Screenshots/GIFs of components in action
 

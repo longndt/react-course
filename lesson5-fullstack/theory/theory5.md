@@ -1,8 +1,8 @@
-# Lesson 5: Full-Stack Integration & Production Deployment
+# Theory 5: Full-Stack Integration & Production Deployment
 
 ## Quick Reference 📋
 
-_For detailed learning objectives and deployment concepts, see [README.md](../README.md)_
+_For detailed learning objectives and deployment concepts, see [readme.md](../readme.md)_
 
 ---
 

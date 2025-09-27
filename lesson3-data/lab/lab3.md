@@ -4,7 +4,7 @@
 
 In this focused lab exercise, you'll build essential API integration features by connecting a React frontend to a Node.js/Express/MongoDB backend. This demonstrates core full-stack patterns used in modern web development.
 
-_For detailed learning objectives and concepts, see [../README.md](../README.md)_
+_For detailed learning objectives and concepts, see [../readme.md](../readme.md)_
 
 ## Exercises
 
@@ -311,6 +311,141 @@ export default TaskManager;
 - **CORS errors**: Verify backend allows frontend origin
 - **Network errors**: Ensure both servers are running on correct ports
 - **Data not updating**: Check React Query cache invalidation
+
+## Modern CSS Design Features
+
+### Enhanced Visual Experience
+
+This lab includes modernized CSS with professional styling:
+
+1. **Glass Morphism Design**: Semi-transparent backgrounds with blur effects
+2. **Gradient Headers**: Beautiful color gradients for visual appeal
+3. **Enhanced Cards**: Improved shadows and hover animations
+4. **Better Layout**: Optimized spacing for desktop viewing
+5. **Professional Forms**: Modern input styling with focus states
+
+### CSS Highlights
+
+```css
+/* Enhanced gradient header */
+.app-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+/* Glass morphism task form */
+.task-form {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.95) 100%);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+/* Enhanced task items */
+.task-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+```
+
+### Responsive Design
+
+- Desktop-optimized layout (1200px max-width)
+- Enhanced spacing and typography
+- Professional color scheme
+- Smooth micro-interactions
+- Improved accessibility
+
+## Final Project Structure 📁
+
+After completing all exercises in Lab 3, your project should have the following structure:
+
+```
+api-integration/
+├── server/
+│   ├── models/
+│   │   └── Task.js
+│   ├── routes/
+│   │   └── tasks.js
+│   ├── middleware/
+│   │   ├── cors.js
+│   │   └── errorHandler.js
+│   ├── config/
+│   │   └── database.js
+│   ├── index.js
+│   └── package.json
+├── src/
+│   ├── components/
+│   │   ├── TaskManager.jsx
+│   │   └── TaskManager.css
+│   ├── hooks/
+│   │   ├── useTasks.js
+│   │   └── useTaskMutations.js
+│   ├── services/
+│   │   └── api.js
+│   ├── utils/
+│   │   ├── queryClient.js
+│   │   └── constants.js
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.css
+│   └── main.jsx
+├── package.json
+├── vite.config.js
+└── readme.md
+```
+
+### Backend Architecture (Node.js + Express + MongoDB):
+
+#### **API Endpoints Implemented:**
+- ✅ **GET /api/tasks**: Fetch all tasks with optional filtering
+- ✅ **POST /api/tasks**: Create new task with validation
+- ✅ **PUT /api/tasks/:id**: Update task (title, priority, completion status)
+- ✅ **DELETE /api/tasks/:id**: Remove task from database
+- ✅ **GET /api/tasks/stats**: Get task statistics (total, completed, pending)
+
+#### **Database Schema:**
+```javascript
+const TaskSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  completed: { type: Boolean, default: false },
+  priority: { type: String, enum: ['low', 'medium', 'high'], default: 'medium' },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now }
+});
+```
+
+### Frontend Architecture (React + React Query):
+
+#### **Key Features Implemented:**
+- ✅ **Real-time CRUD Operations**: Create, read, update, delete tasks
+- ✅ **React Query Integration**: Caching, optimistic updates, background refetching
+- ✅ **Advanced State Management**: Server state vs client state separation
+- ✅ **Error Handling**: Comprehensive error boundaries and user feedback
+- ✅ **Loading States**: Skeleton loaders and loading indicators
+
+#### **Component Architecture:**
+- ✅ **TaskManager**: Main container component with all CRUD operations
+- ✅ **Task Statistics**: Real-time statistics dashboard
+- ✅ **Task Form**: Add new tasks with priority selection
+- ✅ **Task List**: Filterable and searchable task display
+- ✅ **Task Item**: Individual task with inline editing and actions
+
+#### **Advanced Features:**
+- ✅ **Optimistic Updates**: Immediate UI feedback before server confirmation
+- ✅ **Background Sync**: Automatic data synchronization
+- ✅ **Error Recovery**: Automatic retry mechanisms and manual retry options
+- ✅ **Cache Invalidation**: Smart cache management for consistent data
+- ✅ **Filter & Search**: Real-time filtering by completion status and priority
+
+### Professional Features:
+1. **Full-Stack Integration**: Seamless frontend-backend communication
+2. **Modern API Design**: RESTful endpoints with proper HTTP status codes
+3. **Database Integration**: MongoDB with Mongoose ODM
+4. **Advanced React Patterns**: Custom hooks, compound components
+5. **Performance Optimization**: React Query caching and optimization
+6. **Professional UI**: Glass morphism design with smooth animations
+7. **Error Handling**: Comprehensive error boundaries and user feedback
 
 ## Next Steps
 

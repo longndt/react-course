@@ -4,7 +4,7 @@
 
 In this focused lab exercise, you'll implement advanced React performance optimization techniques and patterns. This demonstrates essential optimization strategies used in modern React applications.
 
-_For detailed learning objectives and performance concepts, see [../README.md](../README.md)_
+_For detailed learning objectives and performance concepts, see [../readme.md](../readme.md)_
 
 ## Exercises
 
@@ -491,9 +491,137 @@ function useWebWorker(workerPath) {
 - Performance Monitoring (20%)
 - Code Quality (20%)
 
+## Advanced CSS & Performance Design
+
+### High-Performance UI Design
+
+This lab showcases performance-optimized CSS design:
+
+1. **GPU-Accelerated Animations**: Using transform and opacity for smooth animations
+2. **Glass Morphism Cards**: Semi-transparent designs with backdrop filters
+3. **Optimized Gradients**: Efficient gradient implementations
+4. **Enhanced Navigation**: Professional navbar with blur effects
+5. **Smooth Interactions**: 60fps animations and transitions
+
+### Performance-Focused CSS
+
+```css
+/* GPU-accelerated card hover */
+.card:hover {
+  transform: translateY(-4px); /* Uses GPU */
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+/* Efficient glass morphism */
+nav {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+  backdrop-filter: blur(12px); /* Hardware accelerated */
+}
+
+/* Optimized transitions */
+* {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Performance-friendly gradients */
+body {
+  background: linear-gradient(135deg, #f9fafb 0%, #e2e8f0 100%);
+}
+```
+
+### Performance Considerations
+
+- Hardware acceleration for animations
+- Efficient CSS selectors
+- Minimal reflows and repaints
+- Optimized backdrop filters
+- Smooth 60fps interactions
+
+### Visual Enhancements
+
+- Professional color schemes
+- Enhanced typography (16px base font)
+- Improved spacing and layout
+- Modern glass morphism effects
+- Desktop-optimized design
+
 ## Additional Resources
 
 - [React Performance](https://react.dev/learn/managing-state)
 - [Code Splitting Guide](https://react.dev/reference/react/lazy)
 - [Profiler API](https://react.dev/reference/react/Profiler)
 - [Web Workers Guide](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)
+
+## Final Project Structure
+
+After completing all exercises in this lab, your performance-optimized project structure should look like:
+
+```
+lab5-performance-optimization/
+├── index.html
+├── package.json
+├── readme.md
+├── vite.config.js
+├── src/
+│   ├── App.jsx                    # Main app with lazy loading
+│   ├── index.css                 # Optimized global styles
+│   ├── main.jsx                  # App entry point
+│   ├── components/
+│   │   ├── LoadingSpinner/
+│   │   │   ├── LoadingSpinner.jsx  # Loading component
+│   │   │   └── LoadingSpinner.css  # Spinner styles
+│   │   ├── VirtualList/
+│   │   │   ├── VirtualList.jsx     # Virtualized list component
+│   │   │   └── VirtualList.css     # List optimization styles
+│   │   ├── UserList/
+│   │   │   ├── UserList.jsx        # Memoized user list
+│   │   │   ├── UserItem.jsx        # Individual user item
+│   │   │   └── UserList.css        # User list styles
+│   │   └── PerformanceMonitor/
+│   │       ├── PerformanceMonitor.jsx  # Performance profiling
+│   │       └── PerformanceMonitor.css  # Monitor styles
+│   ├── hooks/
+│   │   ├── useDebounce.js         # Debounce optimization hook
+│   │   ├── useVirtualList.js      # Virtual list logic
+│   │   ├── usePerformance.js      # Performance monitoring
+│   │   └── useWorker.js           # Web worker integration
+│   └── pages/
+│       ├── Home.jsx               # Lazy-loaded home page
+│       ├── About.jsx              # Lazy-loaded about page
+│       ├── Dashboard.jsx          # Performance dashboard
+│       └── UserManagement.jsx     # Large data management
+```
+
+### Key Optimizations Implemented
+
+1. **Code Splitting & Lazy Loading**
+   - React.lazy() for route-based splitting
+   - Suspense boundaries with loading states
+   - Dynamic imports for components
+   - Bundle size optimization
+
+2. **Memoization Techniques**
+   - React.memo for component memoization
+   - useMemo for expensive calculations
+   - useCallback for event handler optimization
+   - Shallow comparison strategies
+
+3. **Virtual Lists & Large Data**
+   - Virtualized scrolling for large datasets
+   - Efficient rendering of thousands of items
+   - Memory usage optimization
+   - Smooth scrolling performance
+
+4. **Performance Monitoring**
+   - React Profiler integration
+   - Custom performance hooks
+   - Bundle analysis tools
+   - Runtime performance tracking
+
+5. **Advanced Patterns**
+   - Web Workers for heavy computations
+   - Debounced search inputs
+   - Efficient state updates
+   - Component lifecycle optimization
+
+This structure demonstrates production-ready React performance optimization techniques essential for scalable applications handling large datasets and complex user interactions.

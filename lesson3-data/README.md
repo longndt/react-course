@@ -163,7 +163,7 @@ If you completed the assessment above and feel comfortable with API integration,
 - Experimenting with different error handling approaches
 - Adding advanced features like search and pagination
 - Practicing with real APIs (not just mock data)
-- **Theory**: [lesson3.md](./theory/lesson3.md) - Theory and concepts presentation
+- **Theory**: [theory3.md](./theory/theory3.md) - Theory and concepts presentation
 - **Demo Code**: Available in the demo folder
 - **API Documentation**: Links to external APIs used in exercises
 

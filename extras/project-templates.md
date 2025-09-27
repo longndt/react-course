@@ -1277,7 +1277,7 @@ npm run dev
 Each project should include:
 
 1. **Complete source code** with proper file organization
-2. **README.md** with setup instructions and feature list
+2. **readme.md** with setup instructions and feature list
 3. **Live demo** deployed to Netlify/Vercel
 4. **Test coverage** for critical components
 5. **Documentation** of key decisions and challenges

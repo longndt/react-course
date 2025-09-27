@@ -1,8 +1,8 @@
-# Lesson 3: API Integration & Data Management 🌐
+# Theory 3: API Integration & Data Management 🌐
 
 ## Quick Reference 📋
 
-_For detailed learning objectives, prerequisites, and concepts, see [README.md](../README.md)_
+_For detailed learning objectives, prerequisites, and concepts, see [readme.md](../readme.md)_
 
 ---
 

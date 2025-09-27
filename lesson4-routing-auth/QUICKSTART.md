@@ -511,7 +511,7 @@ You now have:
 
 ## Next Steps
 
-1. Read the full [Lesson 4 README](./README.md)
+1. Read the full [Lesson 4 README](./readme.md)
 2. Add real JWT authentication
 3. Implement more advanced routing patterns
 4. Complete the lab exercises

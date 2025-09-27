@@ -1,8 +1,8 @@
-# Lesson 4: Navigation, Authentication & Advanced Patterns 🧭
+# Theory 4: Navigation, Authentication & Advanced Patterns 🧭
 
 ## Quick Reference 📋
 
-_For detailed learning objectives and concepts, see [README.md](../README.md)_
+_For detailed learning objectives and concepts, see [readme.md](../readme.md)_
 
 ---
 

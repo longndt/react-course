@@ -113,16 +113,16 @@ cd react-course
 **🎯 Follow this exact order for the best learning experience:**
 
 #### 1️⃣ **Start with Prerequisites** (If needed)
-👉 **[Lesson 0: Essential JavaScript ES6+ Knowledge](./lesson0-prerequisites/README.md)**
+👉 **[Lesson 0: Essential JavaScript ES6+ Knowledge](./lesson0-prerequisites/readme.md)**
 - Review modern JavaScript features
 - Master concepts that will be used in React
 
 #### 2️⃣ **Learn Lessons 1-5** (In sequence)
-- 👉 **[Lesson 1: React Fundamentals & TypeScript Setup](./lesson1-setup/README.md)**
-- 👉 **[Lesson 2: Component Architecture & Advanced State](./lesson2-components/README.md)**
-- 👉 **[Lesson 3: API Integration & Data Management](./lesson3-data/README.md)**
-- 👉 **[Lesson 4: Routing, Authentication & Advanced Patterns](./lesson4-routing-auth/README.md)**
-- 👉 **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack/README.md)**
+- 👉 **[Lesson 1: React Fundamentals & TypeScript Setup](./lesson1-setup/readme.md)**
+- 👉 **[Lesson 2: Component Architecture & Advanced State](./lesson2-components/readme.md)**
+- 👉 **[Lesson 3: API Integration & Data Management](./lesson3-data/readme.md)**
+- 👉 **[Lesson 4: Routing, Authentication & Advanced Patterns](./lesson4-routing-auth/readme.md)**
+- 👉 **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack/readme.md)**
 
 #### 3️⃣ **Advanced Materials** (After completing core lessons)
 📚 **The `extras/` folder contains advanced documentation:**
@@ -147,7 +147,7 @@ npm run dev
 
 ### 💡 Learning Tips
 
-- **Read the README.md** of each lesson carefully before starting
+- **Read the readme.md** of each lesson carefully before starting
 - **Complete all labs** to solidify your understanding
 - **Use Markdown Preview Enhanced** for better documentation reading experience
 - **Refer to the extras section** when you want to dive deeper

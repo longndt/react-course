@@ -343,7 +343,7 @@ You now have:
 
 ## Next Steps
 
-1. Read the full [Lesson 2 README](./README.md)
+1. Read the full [Lesson 2 README](./readme.md)
 2. Complete the lab exercises
 3. Try building more complex forms
 

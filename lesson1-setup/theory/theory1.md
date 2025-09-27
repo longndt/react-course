@@ -1,12 +1,12 @@
 # React Fundamentals & TypeScript Setup
 
-## Lesson 1 - Building Modern React Applications
+## Theory 1 - Building Modern React Applications
 
 ---
 
 ### Learning Objectives
 
-By the end of this lesson, you will be able to:
+By the end of this theory session, you will be able to:
 
 - Understand React's role in modern full-stack development
 - Set up a professional TypeScript-based React development environment

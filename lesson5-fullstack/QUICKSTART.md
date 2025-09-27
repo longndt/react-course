@@ -265,7 +265,7 @@ Your app should now be live at:
 
 ## Next Steps
 
-1. Read the full [Lesson 5 README](./README.md)
+1. Read the full [Lesson 5 README](./readme.md)
 2. Set up error monitoring (Sentry)
 3. Add more PWA features
 4. Configure CDN and caching
