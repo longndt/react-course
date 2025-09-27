@@ -469,7 +469,7 @@ Complete this self-assessment to check your routing and authentication skills:
 
 ### **Self-Reflection Questions**
 
-1. How would you handle user authentication in your capstone project?
+1. How would you handle user authentication in a large application?
 2. What are the security risks of storing tokens in localStorage?
 3. When would you choose Context API over Zustand for state management?
 

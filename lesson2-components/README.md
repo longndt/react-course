@@ -346,7 +346,7 @@ Complete this self-assessment to check your readiness for lesson 3:
 
 1. Which component pattern felt most natural to you?
 2. What's the biggest difference between props and state?
-3. How would you design components for your capstone project?
+3. How would you design components for a large application?
 
 ---
 

@@ -82,7 +82,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, onEdit }) => {
 
 Before diving into React concepts, ensure your development environment is properly set up:
 
-> 📋 **Important**: Complete the [Comprehensive Environment Setup Guide](../environment-setup/environment-setup.md) first if you haven't already. It provides detailed instructions for installing Node.js, VS Code, Git, and all necessary development tools.
+> 📋 **Important**: Complete the [Comprehensive Environment Setup Guide](../setup/environment-setup.md) first if you haven't already. It provides detailed instructions for installing Node.js, VS Code, Git, and all necessary development tools.
 
 **Quick Verification:**
 
@@ -409,7 +409,7 @@ Complete this self-assessment to check your understanding:
 
 1. What was the most challenging concept to understand?
 2. Which part felt most similar to previous programming experience?
-3. What would you like to build with React for your capstone project?
+3. What would you like to build with React in future projects?
 
 ---
 

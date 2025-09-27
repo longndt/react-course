@@ -24,7 +24,7 @@ After this lesson, you will be able to:
 - Basic knowledge of HTTP and web APIs
 - Familiarity with async/await and Promises
 
-_For detailed development environment setup, see [Complete Environment Setup Guide](../environment-setup/environment-setup.md)_
+_For detailed development environment setup, see [Complete Environment Setup Guide](../setup/environment-setup.md)_
 
 ## What You'll Build
 
@@ -149,7 +149,7 @@ Complete this self-assessment to check your API integration skills:
 
 1. What's the most challenging part of API integration?
 2. How would you handle slow internet connections in your app?
-3. What kind of data will your capstone project need to manage?
+3. What kind of data will your applications need to manage?
 
 ---
 

@@ -24,7 +24,7 @@ E-commerce Dashboard 🏪e & Advanced State Management 🛡️
 After this lesson, you will:
 
 - Master advanced component patterns used in production applications
-- Build complex state management systems for your final year projects
+- Build complex state management systems for modern applications
 - Create reusable component libraries
 - Implement forms and validation like industry standards
 - Design scalable component architectures
@@ -36,7 +36,7 @@ After this lesson, you will:
 
 **Think Beyond Simple Components:**
 
-Your final year project needs:
+Professional applications need:
 - **Admin Dashboards** → Reusable data tables, forms, modals
 - **User Interfaces** → Consistent buttons, inputs, navigation
 - **Complex Features** → Multi-step forms, data visualization, file uploads

@@ -810,8 +810,8 @@ Complete this self-assessment to validate your full-stack development skills:
 ### **Self-Reflection Questions**
 
 1. What's the most complex part of full-stack development for you?
-2. How would you deploy your capstone project to production?
-3. What monitoring and error tracking would be essential for your project?
+2. How would you deploy a production application?
+3. What monitoring and error tracking would be essential for your application?
 
 ---
 
@@ -825,11 +825,11 @@ Complete this self-assessment to validate your full-stack development skills:
 - Deploy production-ready applications
 - Follow industry best practices and patterns
 
-**Ready for your Capstone Project?** You have all the tools needed to build impressive, scalable applications that will stand out in your academic portfolio.
+**Ready for Professional Development?** You have all the tools needed to build impressive, scalable applications that will stand out in your portfolio.
 
 **What's Next?**
 
-- Apply these skills to your capstone project
+- Apply these skills to your own projects
 - Contribute to open source React projects
 - Build and deploy your own full-stack applications
 - Stay updated with the React ecosystem

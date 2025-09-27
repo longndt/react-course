@@ -18,7 +18,7 @@ _For detailed learning objectives and concepts, see [../README.md](../README.md)
 
 ### Quick Reference
 
-_For detailed development environment setup, see [Complete Environment Setup Guide](../../environment-setup/environment-setup.md)_
+_For detailed development environment setup, see [Complete Environment Setup Guide](../../setup/environment-setup.md)_
 
 ### Required Software (Quick Check)
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this lab session, you'll create a Student Dashboard application using TypeScript and React. This project simulates the kind of interface you might build for your final year project - a management system with multiple views and data handling.
+In this lab session, you'll create a Student Dashboard application using TypeScript and React. This project demonstrates building a professional management system with multiple views and data handling.
 
 ## Exercises
 
@@ -818,7 +818,7 @@ After completing this lab, you should be able to:
 - [ ] Apply responsive design principles
 - [ ] Handle user interactions gracefully
 
-**✅ Preparation for Final Year Project:**
+**✅ Professional Development Skills:**
 
 - [ ] Understand how to build admin dashboards
 - [ ] Know how to manage lists of data (students, products, users)

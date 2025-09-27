@@ -650,7 +650,7 @@ Select based on your current skill level and final year project requirements.
 
 ### Step 2: Set Up Development Environment
 
-Follow the [Comprehensive Environment Setup Guide](../environment-setup/environment-setup.md) and install all necessary development tools, including Node.js, VS Code, Git, and MongoDB.
+Follow the [Comprehensive Environment Setup Guide](../setup/environment-setup.md) and install all necessary development tools, including Node.js, VS Code, Git, and MongoDB.
 
 ### Step 3: Plan Your Implementation
 

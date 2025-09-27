@@ -104,7 +104,7 @@ Make sure you have installed:
 ### Step 3: Clone Repository
 
 ```bash
-git clone https://github.com/longndt/react-course.git
+git clone https://github.com/yourusername/react-course.git
 cd react-course
 ```
 

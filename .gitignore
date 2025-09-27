@@ -35,3 +35,9 @@ build/
 
 # Coverage reports
 coverage/
+
+# Lab source codes
+labs/
+
+# demo codes
+demo/
