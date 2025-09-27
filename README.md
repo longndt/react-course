@@ -5,6 +5,7 @@
 This course teaches React app development with industry-standard practices through hands-on examples.
 
 **Audience**: IT students and developers looking to master React
+
 **Format**: Theory, hands-on practice, and project-based learning
 
 ## Prerequisites
