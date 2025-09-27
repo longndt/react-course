@@ -6,28 +6,48 @@ In this lab, you'll apply component composition patterns and architecture concep
 
 _For learning objectives and prerequisites, see [../README.md](../README.md)_
 
+## Pre-Lab Checklist
+
+- [ ] Lab 1 completed successfully
+- [ ] Node.js v18+ and npm installed
+- [ ] VS Code with React extensions
+- [ ] Basic TypeScript understanding
+- [ ] React hooks knowledge from previous lessons
+
 ## Exercises
 
 ### Exercise 1: Component Composition
 
+**💡 Architecture Note:** We'll use TypeScript for better development experience and type safety, consistent with Lab 1.
+
 Create a Card component system using composition:
 
-```jsx
-// src/components/Card/Card.jsx
-function Card({ children, className = "" }) {
+```tsx
+// src/components/Card/Card.tsx
+import { ReactNode } from "react";
+
+interface CardProps {
+  children: ReactNode;
+  className?: string;
+}
+
+interface CardSubComponentProps {
+  children: ReactNode;
+}
+function Card({ children, className = "" }: CardProps) {
   return <div className={`card ${className}`}>{children}</div>;
 }
 
-// Card subcomponents
-Card.Header = function CardHeader({ children }) {
+// Card subcomponents with TypeScript
+Card.Header = function CardHeader({ children }: CardSubComponentProps) {
   return <div className="card-header">{children}</div>;
 };
 
-Card.Body = function CardBody({ children }) {
+Card.Body = function CardBody({ children }: CardSubComponentProps) {
   return <div className="card-body">{children}</div>;
 };
 
-Card.Footer = function CardFooter({ children }) {
+Card.Footer = function CardFooter({ children }: CardSubComponentProps) {
   return <div className="card-footer">{children}</div>;
 };
 

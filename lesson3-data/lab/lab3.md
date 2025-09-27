@@ -141,7 +141,30 @@ Install React Query and Axios:
 npm install @tanstack/react-query axios
 ```
 
-Create a simple task management component:
+First, setup React Query provider in your App.jsx:
+
+```jsx
+// src/App.jsx
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import TaskManager from "./components/TaskManager";
+
+const queryClient = new QueryClient();
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <div className="app">
+        <h1>Task Management App</h1>
+        <TaskManager />
+      </div>
+    </QueryClientProvider>
+  );
+}
+
+export default App;
+```
+
+Now create the TaskManager component:
 
 ```jsx
 // src/components/TaskManager.jsx

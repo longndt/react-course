@@ -164,6 +164,8 @@ function ProductDetail() {
 
 ```jsx
 // src/context/AuthContext.jsx
+import { createContext, useContext, useState } from "react";
+
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {

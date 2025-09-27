@@ -1,16 +1,16 @@
-# Lab 5: Full-Stack Deployment & Production Setup
+# Lab 5: React Performance Optimization & Advanced Patterns
 
 ## Overview
 
-In this focused lab exercise, you'll deploy a complete full-stack React application to production with CI/CD pipeline setup. This demonstrates essential deployment patterns used in modern web development.
+In this focused lab exercise, you'll implement advanced React performance optimization techniques and patterns. This demonstrates essential optimization strategies used in modern React applications.
 
-_For detailed learning objectives and deployment concepts, see [../README.md](../README.md)_
+_For detailed learning objectives and performance concepts, see [../README.md](../README.md)_
 
 ## Exercises
 
-- Production Build Setup
-- Deployment Configuration
-- CI/CD Pipeline Basics
+- Code Splitting & Lazy Loading
+- Component Memoization
+- Virtual Lists & Performance Monitoring
 
 ## Exercises
 
