@@ -90,13 +90,13 @@ This guide provides comprehensive instructions for setting up your React develop
 
    - Git Graph
    - GitLens
-   - GitHub Pull Requests and Issues
-   - React/Redux/React-Native snippets
+   - GitHub Pull Requests 
+   - ES7+ React/Redux/React-Native snippets
    - ESLint
    - Prettier
    - Auto Rename Tag
    - Path Intellisense
-   - Thunder Client (API testing)
+   - Thunder Client 
 
 3. **Configure Git in VS Code**
 
@@ -155,19 +155,6 @@ This guide provides comprehensive instructions for setting up your React develop
    npm install -g yarn
    ```
 
-### Docker Setup (Optional)
-
-1. **Install Docker Desktop**
-
-   - [Download for Windows](https://www.docker.com/products/docker-desktop)
-   - [Download for Mac](https://www.docker.com/products/docker-desktop)
-
-2. **Verify Installation**
-   ```bash
-   docker --version
-   docker-compose --version
-   ```
-
 ### Database Tools
 
 1. **MongoDB (Required for this course)**
@@ -193,17 +180,6 @@ This guide provides comprehensive instructions for setting up your React develop
 2. **Optional Database Tools**
    - Studio 3T (MongoDB GUI with more features)
    - Robo 3T (Lightweight MongoDB GUI)
-
-### API Testing Tools
-
-1. **Postman**
-
-   - Download from [postman.com](https://www.postman.com/downloads/)
-   - Create account for sync
-
-2. **VS Code Alternative**
-   - Thunder Client extension
-   - REST Client extension
 
 ### Browser Development Tools
 
