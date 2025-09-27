@@ -89,6 +89,34 @@ Update your `tsconfig.json` for better development experience:
 }
 ```
 
+**Important:** If you encounter TypeScript errors about project references, update your `tsconfig.node.json` to enable proper project composition:
+
+```json
+{
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "types": [],
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["vite.config.ts"]
+}
+```
+
 ---
 
 ## Exercise 2: Building TypeScript Components
@@ -801,6 +829,14 @@ In the next lesson, you'll learn how to:
 - Make sure all interfaces are properly imported
 - Check that all required props are passed to components
 - Verify that event handler types match expected signatures
+
+**TypeScript Configuration Issues:**
+
+- If you see errors like "Referenced project must have setting 'composite': true":
+  - Add `"composite": true` to your `tsconfig.node.json` compilerOptions
+  - Change `"noEmit": true` to `"noEmit": false` in `tsconfig.node.json`
+- These errors occur when using project references in TypeScript configurations
+- The fix ensures proper project composition and allows referenced projects to emit files when needed
 
 **Styling Issues:**
 
