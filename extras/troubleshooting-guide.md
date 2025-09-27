@@ -9,6 +9,7 @@ This guide addresses the most common problems students encounter when learning R
 ### Problem: "npm command not found"
 
 **Cause:** Node.js is not installed or not in PATH
+
 **Solution:**
 
 1. Download and install Node.js from [nodejs.org](https://nodejs.org/)
@@ -31,6 +32,7 @@ sudo chown -R $(whoami) ~/.npm
 ### Problem: Project won't start - "Port 3000 already in use"
 
 **Cause:** Another application is using the same port
+
 **Solution:**
 
 ```bash
@@ -46,6 +48,7 @@ npm run dev -- --port 3001
 ### Problem: "Component is not defined" error
 
 **Cause:** Forgot to import the component
+
 **Solution:**
 
 ```jsx
@@ -65,6 +68,7 @@ function App() {
 ### Problem: "Cannot read property of undefined"
 
 **Cause:** Trying to access props that don't exist
+
 **Solution:**
 
 ```jsx
@@ -89,6 +93,7 @@ function UserProfile({ user }) {
 ### Problem: Components not re-rendering when data changes
 
 **Cause:** Mutating state directly instead of creating new state
+
 **Solution:**
 
 ```jsx
@@ -111,6 +116,7 @@ const addItem = (newItem) => {
 ### Problem: CSS classes not applying
 
 **Cause:** Using `class` instead of `className` or incorrect CSS import
+
 **Solution:**
 
 ```jsx
@@ -133,6 +139,7 @@ function MyComponent() {
 ### Problem: Styles not loading
 
 **Cause:** CSS file not imported or incorrect path
+
 **Solution:**
 
 ```jsx
@@ -150,6 +157,7 @@ import "./index.css";
 ### Problem: App is slow when typing in forms
 
 **Cause:** Re-rendering entire component tree on every keystroke
+
 **Solution:**
 
 ```jsx
@@ -182,6 +190,7 @@ function SearchForm() {
 ### Problem: "Type 'X' is not assignable to type 'Y'"
 
 **Cause:** TypeScript type mismatch
+
 **Solution:**
 
 ```tsx
@@ -202,6 +211,7 @@ interface Props {
 ### Problem: "Property does not exist on type"
 
 **Cause:** Missing or incorrect interface definition
+
 **Solution:**
 
 ```tsx
@@ -226,6 +236,7 @@ interface User {
 ### Problem: "CORS error" when calling APIs
 
 **Cause:** Browser blocking cross-origin requests
+
 **Solutions:**
 
 ```javascript
@@ -252,6 +263,7 @@ app.use(
 ### Problem: Data not showing up from API
 
 **Cause:** Not handling async operations properly
+
 **Solution:**
 
 ```jsx
@@ -307,6 +319,7 @@ function UserList() {
 ### Problem: Components are getting too large and complex
 
 **Cause:** Trying to do too much in one component
+
 **Solution:**
 
 ```jsx
@@ -336,6 +349,7 @@ function StudentDashboard() {
 ### Problem: Hard to manage data between components
 
 **Cause:** Passing props through too many levels
+
 **Solution:**
 
 ```jsx

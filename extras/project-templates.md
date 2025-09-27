@@ -19,7 +19,7 @@ These project templates are specifically designed for final-year IT students acr
 
 ---
 
-## Project 1: Task Management System (Beginner)
+## Project 1: Student Management System (Beginner)
 
 ### 🎯 Learning Goals
 

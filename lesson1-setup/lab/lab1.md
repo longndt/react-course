@@ -50,7 +50,6 @@ student-dashboard/
 │   ├── App.tsx          # Main application component
 │   ├── main.tsx         # Application entry point
 │   ├── index.css        # Global styles
-│   └── vite-env.d.ts    # TypeScript definitions
 ├── public/              # Static assets
 ├── package.json         # Project configuration
 ├── tsconfig.json        # TypeScript configuration
