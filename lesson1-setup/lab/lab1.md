@@ -59,6 +59,8 @@ student-dashboard/
 
 ### Step 3: Configure Development Environment
 
+**📚 Learning Note:** TypeScript configuration can seem complex, but these settings enable better development experience with stricter type checking and path aliases.
+
 Update your `tsconfig.json` for better development experience:
 
 ```json
@@ -155,6 +157,8 @@ export interface DashboardStats {
 
 ### Step 2: Create Student Card Component
 
+**💡 Architecture Note:** Notice that we define component-specific interfaces (like `StudentCardProps`) inside the component file, while domain types (`Student`, `Course`) are in separate files. This separates UI concerns from business logic.
+
 Create `src/components/StudentCard.tsx`:
 
 ```typescript
@@ -233,7 +237,7 @@ interface StatsCardProps {
   title: string;
   value: string | number;
   icon: ReactNode;
-  trend?: {
+  trend?: {  // The ? makes this property optional
     value: number;
     isPositive: boolean;
   };
@@ -249,6 +253,7 @@ export function StatsCard({ title, value, icon, trend }: StatsCardProps) {
           <p className="stats-value">{value}</p>
         </div>
       </div>
+      {/* Only show trend if it exists (conditional rendering) */}
       {trend && (
         <div
           className={`stats-trend ${
@@ -269,7 +274,14 @@ export function StatsCard({ title, value, icon, trend }: StatsCardProps) {
 
 ### Step 1: Create Sample Data
 
-Create `src/data/mockData.ts`:
+First, create the data directory and file:
+
+```bash
+# Create the data directory
+mkdir src/data
+```
+
+Then create `src/data/mockData.ts`:
 
 ```typescript
 import { Student, Course, DashboardStats } from "../types/Student";
