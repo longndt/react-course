@@ -217,10 +217,6 @@ Use state when something needs to change:
 - Lists that change
 - User preferences
 
-````
-
----
-
 ## Working with Forms 📝
 
 ### Simple Form Example:
@@ -368,7 +364,7 @@ setCount((prev) => prev + 1);
 
 ### 3. Complex State Updates
 
-````jsx
+```jsx
 // ❌ Wrong - too complex
 const [user, setUser] = useState({
   name: 'John',
@@ -380,8 +376,7 @@ const [user, setUser] = useState({
 const [name, setName] = useState('John');
 const [scores, setScores] = useState([1, 2, 3]);
 const [theme, setTheme] = useState('dark');
-
----
+```
 
 ## Practice Time! 💪
 
