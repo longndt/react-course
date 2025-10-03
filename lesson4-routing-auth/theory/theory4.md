@@ -1,4 +1,4 @@
-# Theory 4: Navigation, Authentication & Advanced Patterns 🧭
+# Theory 4: Navigation, Authentication & Advanced Patterns
 
 ---
 

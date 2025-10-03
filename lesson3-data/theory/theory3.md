@@ -1,4 +1,4 @@
-# Theory 3: API Integration & Data Management 🌐
+# Theory 3: API Integration & Data Management
 
 ---
 
