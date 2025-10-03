@@ -1,10 +1,4 @@
-# Th## Theory 2: Advanced Component Patterns & State Management
-
-_For detailed learning objectives and prerequisites, see [readme.md](../readme.md)_ory 2: Component Architecture & Advanced State Management 🛡️
-
-## Quick Reference 📋
-
-*For detailed learning objectives and prerequisites, see [README.md](../README.md)*
+# Theory 2: Advanced Component Patterns & State Management
 
 ---
 
@@ -17,8 +11,6 @@ Modern React applications need:
 - **Reusable Components** → Consistent UI across pages
 - **Scalable Architecture** → Easy to maintain and extend
 - **Professional Patterns** → Industry-standard approaches
-
-**Visual Example - E-commerce Dashboard:**
 
 ## What Will You Learn? 🎯
 

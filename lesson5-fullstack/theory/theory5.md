@@ -1,12 +1,8 @@
 # Theory 5: Full-Stack Integration & Production Deployment
 
-## Quick Reference 📋
-
-_For detailed learning objectives and deployment concepts, see [readme.md](../readme.md)_
-
 ---
 
-### Full-Stack Architecture
+## Full-Stack Architecture
 
 1. System Design Patterns
 
@@ -21,7 +17,7 @@ _For detailed learning objectives and deployment concepts, see [readme.md](../re
 
 ---
 
-### Real-Time Features
+## Real-Time Features
 
 1. WebSocket Integration
 
@@ -36,7 +32,7 @@ _For detailed learning objectives and deployment concepts, see [readme.md](../re
 
 ---
 
-### Code Splitting
+## Code Splitting
 
 ```typescript
 import { Suspense, lazy } from "react";
@@ -58,7 +54,7 @@ function App() {
 
 ---
 
-### Memoization
+## Memoization
 
 ```typescript
 import { memo, useMemo, useCallback } from 'react';
@@ -85,7 +81,7 @@ const MemoizedComponent = memo(({ data, onAction }: Props) => {
 
 ---
 
-### Build Configuration
+## Build Configuration
 
 ```typescript
 // vite.config.ts
@@ -111,7 +107,7 @@ export default defineConfig({
 
 ---
 
-### Deployment Checklist
+## Deployment Checklist
 
 1. Build Optimization
 
@@ -132,7 +128,7 @@ export default defineConfig({
 
 ---
 
-### Performance Monitoring
+## Performance Monitoring
 
 ```typescript
 import { useEffect } from "react";
@@ -157,7 +153,7 @@ function usePerformanceMonitoring() {
 
 ---
 
-### Best Practices
+## Best Practices
 
 1. Performance
 
@@ -174,7 +170,7 @@ function usePerformanceMonitoring() {
 
 ---
 
-### Common Pitfalls
+## Common Pitfalls
 
 1. Performance Issues
 
@@ -189,7 +185,7 @@ function usePerformanceMonitoring() {
 
 ---
 
-### Practical Exercise
+## Practical Exercise
 
 Implement Code Splitting:
 
@@ -224,7 +220,7 @@ function App() {
 
 ---
 
-### Additional Resources
+## Additional Resources
 
 - [React Performance](https://react.dev/learn/reference/react/memo)
 - [Web Vitals](https://web.dev/vitals/)

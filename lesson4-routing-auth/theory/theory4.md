@@ -1,9 +1,5 @@
 # Theory 4: Navigation, Authentication & Advanced Patterns 🧭
 
-## Quick Reference 📋
-
-_For detailed learning objectives and concepts, see [readme.md](../readme.md)_
-
 ---
 
 ## Why Do We Need Navigation? 🤔

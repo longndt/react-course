@@ -1,9 +1,5 @@
 # Theory 3: API Integration & Data Management 🌐
 
-## Quick Reference 📋
-
-_For detailed learning objectives, prerequisites, and concepts, see [readme.md](../readme.md)_
-
 ---
 
 ## Why API Integration Matters? 🤔

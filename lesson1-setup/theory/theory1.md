@@ -1,22 +1,8 @@
-# React Fundamentals & TypeScript Setup
-
-## Theory 1 - Building Modern React Applications
+# Theory 1 - Building Modern React Applications
 
 ---
 
-### Learning Objectives
-
-By the end of this theory session, you will be able to:
-
-- Understand React's role in modern full-stack development
-- Set up a professional TypeScript-based React development environment
-- Create well-structured, type-safe React components
-- Apply React concepts to build modern web applications
-- Integrate modern JavaScript features with React and TypeScript
-
----
-
-### Why React for Modern Development? 🎯
+## Why React for Modern Development? 🎯
 
 **Building on Your Academic Foundation:**
 
@@ -35,7 +21,7 @@ By the end of this theory session, you will be able to:
 
 ---
 
-### React vs Traditional Web Development
+## React vs Traditional Web Development
 
 | Traditional Web Apps   | Modern React Apps      |
 | ---------------------- | ---------------------- |
@@ -53,7 +39,7 @@ By the end of this theory session, you will be able to:
 
 ---
 
-### TypeScript: Why It Matters for Your Projects
+## TypeScript: Why It Matters for Your Projects
 
 **Think of TypeScript as:**
 
@@ -84,7 +70,7 @@ function createStudent(name: string, age: number, email: string): Student {
 
 ---
 
-### Setting Up Your Professional Environment
+## Setting Up Your Environment
 
 **Required Tools (Install in Order):**
 
@@ -108,7 +94,7 @@ function createStudent(name: string, age: number, email: string): Student {
 
 ---
 
-### Essential VS Code Extensions for React
+## Essential VS Code Extensions for React
 
 **Must-Have Extensions:**
 
@@ -130,7 +116,7 @@ function createStudent(name: string, age: number, email: string): Student {
 
 ---
 
-### Project Creation: Vite vs Create React App
+## Project Creation: Vite vs Create React App
 
 **Recommended: Vite (Faster, Modern)**
 
@@ -165,7 +151,7 @@ npm start
 
 ---
 
-### Project Structure Best Practices
+## Project Structure Best Practices
 
 ```
 src/
@@ -179,7 +165,7 @@ src/
 
 ---
 
-### React 18 Key Features
+## React 18 Key Features
 
 - Automatic Batching
 - Transitions
@@ -189,7 +175,7 @@ src/
 
 ---
 
-### Modern JavaScript with React
+## Modern JavaScript with React
 
 ```javascript
 // Function Component with Props
@@ -221,7 +207,7 @@ function UserList() {
 
 ---
 
-### Common Patterns
+## Common Patterns
 
 - Functional Components
 - Hooks
@@ -231,7 +217,7 @@ function UserList() {
 
 ---
 
-### Best Practices
+## Best Practices
 
 1. Use Modern JavaScript (ES6+)
 2. Follow Project Structure
@@ -241,7 +227,7 @@ function UserList() {
 
 ---
 
-### Common Pitfalls
+## Common Pitfalls
 
 - Not using modern JavaScript features
 - Poor component organization
@@ -251,7 +237,7 @@ function UserList() {
 
 ---
 
-### Practical Exercise
+## Practical Exercise
 
 Create a Profile Card Component:
 
@@ -282,7 +268,7 @@ function App() {
 
 ---
 
-### Additional Resources
+## Additional Resources
 
 - [React Documentation](https://react.dev)
 - [Modern JavaScript Guide](https://javascript.info)
