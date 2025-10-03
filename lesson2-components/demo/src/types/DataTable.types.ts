@@ -3,13 +3,13 @@
  */
 export interface Column<T> {
   /** The key in the data object that this column represents */
-  key: keyof T;
+  key: keyof T | 'actions';
   /** The header text to display for this column */
   header: string;
   /** Whether this column can be sorted */
   sortable?: boolean;
   /** Optional function to customize the rendering of cell values */
-  render?: (value: T[keyof T]) => JSX.Element | null;
+  render?: (value: any, row?: T) => JSX.Element | null;
 }
 
 /**

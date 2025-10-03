@@ -2,6 +2,7 @@ import { useState } from "react";
 import { DataTable } from "./components/DataTable";
 import { Form } from "./components/Form";
 import { Modal } from "./components/Modal";
+import { ConfirmDialog } from "./components/ConfirmDialog";
 import "./App.css";
 
 interface User {
@@ -39,6 +40,8 @@ const mockUsers: User[] = [
 export function App() {
   const [users, setUsers] = useState<User[]>(mockUsers);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<number | null>(null);
 
   interface NewUserForm {
     name: string;
@@ -57,6 +60,18 @@ export function App() {
 
     setUsers((prev) => [...prev, newUser]);
     setIsModalOpen(false);
+  };
+
+  const handleDeleteUser = (userId: number) => {
+    setUserToDelete(userId);
+    setIsConfirmOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (userToDelete !== null) {
+      setUsers((prev) => prev.filter((user) => user.id !== userToDelete));
+      setUserToDelete(null);
+    }
   };
 
   return (
@@ -80,6 +95,20 @@ export function App() {
               <span className={`status ${value}`}>{value}</span>
             ),
           },
+          {
+            key: "actions",
+            header: "Actions",
+            sortable: false,
+            render: (_, user) => (
+              <button
+                onClick={() => handleDeleteUser(user!.id)}
+                className="delete-button"
+                title="Delete user"
+              >
+                Delete
+              </button>
+            ),
+          },
         ]}
       />
 
@@ -89,39 +118,60 @@ export function App() {
         title="Add New User"
       >
         <Form
-          fields={[
-            {
-              name: "name",
-              label: "Name",
-              required: true,
-            },
-            {
-              name: "email",
-              label: "Email",
-              type: "email",
-              required: true,
-              validate: (value: string) => {
-                if (!value.includes("@")) {
-                  return "Please enter a valid email address";
-                }
-                return undefined;
-              },
-            },
-            {
-              name: "role",
-              label: "Role",
-              required: true,
-            },
-          ]}
-          initialValues={{
-            name: "",
-            email: "",
-            role: "User",
+          onSubmit={(e) => {
+            e.preventDefault();
+            const form = e.target as HTMLFormElement;
+            const name = (form.elements.namedItem("name") as HTMLInputElement)
+              .value;
+            const email = (form.elements.namedItem("email") as HTMLInputElement)
+              .value;
+            const role = (form.elements.namedItem("role") as HTMLInputElement)
+              .value;
+            handleAddUser({ name, email, role });
           }}
-          onSubmit={handleAddUser}
-          submitText="Add User"
-        />
+        >
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input name="name" id="name" required className="text-input" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              name="email"
+              id="email"
+              type="email"
+              required
+              className="text-input"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="role">Role</label>
+            <select
+              name="role"
+              id="role"
+              required
+              className="select-input"
+            >
+              <option value="Admin">Admin</option>
+              <option value="User">User</option>
+            </select>
+          </div>
+          <button type="submit" className="button">
+            Add User
+          </button>
+        </Form>
       </Modal>
+
+      <ConfirmDialog
+        isOpen={isConfirmOpen}
+        onClose={() => setIsConfirmOpen(false)}
+        onConfirm={confirmDelete}
+        title="Delete User"
+        message="Are you sure you want to delete this user? This action cannot be undone."
+        confirmText="Delete"
+        cancelText="Cancel"
+        type="danger"
+      />
     </div>
   );
 }

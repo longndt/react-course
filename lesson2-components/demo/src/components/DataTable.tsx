@@ -53,7 +53,7 @@ export function DataTable<T extends Record<string, any>>({
             type="text"
             value={filterText}
             onChange={handleFilterChange}
-            placeholder="Filter items..."
+            placeholder="Filter users..."
             className="filter-input"
             aria-label="Filter table"
           />
@@ -106,8 +106,8 @@ export function DataTable<T extends Record<string, any>>({
                 {columns.map((column) => (
                   <td key={String(column.key)}>
                     {column.render
-                      ? column.render(item[column.key])
-                      : String(item[column.key])}
+                      ? column.render(item[column.key as keyof typeof item], item)
+                      : String(item[column.key as keyof typeof item] ?? '')}
                   </td>
                 ))}
               </tr>
