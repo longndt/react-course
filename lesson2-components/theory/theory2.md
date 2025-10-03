@@ -26,7 +26,7 @@ Professional applications need:
 **Real-World Example - E-commerce Admin Panel:**
 ```
 
-E-commerce Dashboard �
+E-commerce Dashboard
 ├── Sidebar Navigation (Reusable)
 │ ├── Navigation Item (Atomic)
 │ └── User Profile (Compound)
@@ -488,22 +488,3 @@ function App() {
 
 - [React Documentation](https://react.dev/)
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/reactjs)
-- Ask your teacher!
-
-## Homework 📝
-
-### Create a Mini Shopping Cart
-
-Build a simple shopping cart with:
-
-1. Product list
-2. Add to cart button
-3. Cart total
-4. Remove from cart
-
-Tips:
-
-- Start small
-- Test each feature
-- Style it nicely
-- Ask for help when stuck!
