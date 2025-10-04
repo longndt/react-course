@@ -1,4 +1,4 @@
-# Lab 2: Advanced React Components and Composition
+# Lab: Advanced React Components and Composition
 
 ## Overview
 
@@ -569,9 +569,9 @@ advanced-components/
 │   ├── App.css
 │   ├── index.css
 │   └── main.tsx
-├── package\.tson
-├── tsconfig\.tson
-├── tsconfig.node\.tson
+├── package.json
+├── tsconfig.json
+├── tsconfig.node.json
 ├── vite.config.js
 └── readme.md
 ```
@@ -651,8 +651,8 @@ import { useTheme } from "../context/ThemeContext";     // ❌ Wrong
 **Problem**: TypeScript or Vite errors on startup
 **Solution**: Ensure you have all required config files:
 - `vite.config.js` - Vite configuration with React plugin
-- `tsconfig\.tson` - TypeScript compiler options
-- `tsconfig.node\.tson` - TypeScript config for Node environment
+- `tsconfig.json` - TypeScript compiler options
+- `tsconfig.node.json` - TypeScript config for Node environment
 
 ### Issue 5: Dark Mode CSS Not Working
 **Problem**: Custom buttons (btn-primary, btn-secondary) don't change in dark mode

@@ -1,4 +1,4 @@
-# Theory 2: React Components & Hooks
+# Theory: React Components & Hooks
 
 ---
 
@@ -31,7 +31,7 @@ E-commerce Dashboard
 - **Organism Components**: Header, ProductList, DataTable
 - **Page Components**: Dashboard, ProductManagement, UserProfile
 
-> 💡 **Note:** For practical component examples and hands-on practice, refer to [quickstart.md](../quickstart.md) and [demo/](../demo/) folder.
+> 💡 **Note:** For practical component examples and hands-on practice, refer to [reference/](../reference/) and [examples/](../examples/) folder.
 
 ---
 
@@ -606,6 +606,8 @@ const [state, setState] = useState(initialValue);
 
 **Basic Example:**
 ```tsx
+import { useState } from 'react';
+
 function Counter() {
   const [count, setCount] = useState(0);
 
@@ -622,14 +624,22 @@ function Counter() {
 
 **Advanced Example - Managing Complex State:**
 ```tsx
+import { useState } from 'react';
+
+interface User {
+  name: string;
+  email: string;
+  age: number;
+}
+
 function UserProfile() {
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<User>({
     name: '',
     email: '',
     age: 0
   });
 
-  const updateField = (field, value) => {
+  const updateField = (field: keyof User, value: string | number) => {
     setUser(prevUser => ({
       ...prevUser,
       [field]: value
@@ -682,6 +692,8 @@ useEffect(() => {
 
 **Example 1: Timer**
 ```tsx
+import { useState, useEffect } from 'react';
+
 function Timer() {
   const [seconds, setSeconds] = useState(0);
 
@@ -700,6 +712,8 @@ function Timer() {
 
 **Example 2: Fetching Data**
 ```tsx
+import { useState, useEffect } from 'react';
+
 interface User {
    id: number;
    name: string;
@@ -763,11 +777,13 @@ function UserList() {
 
 **Example 1: Focus Management**
 ```tsx
+import { useRef } from 'react';
+
 function FocusInput() {
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFocus = () => {
-    inputRef.current.focus();
+    inputRef.current?.focus();
   };
 
   return (
@@ -781,9 +797,11 @@ function FocusInput() {
 
 **Example 2: Storing Previous Value**
 ```tsx
+import { useState, useEffect, useRef } from 'react';
+
 function Counter() {
   const [count, setCount] = useState(0);
-  const prevCountRef = useRef();
+  const prevCountRef = useRef<number>();
 
   useEffect(() => {
     prevCountRef.current = count;
@@ -945,8 +963,15 @@ function TodoApp() {
 
 **Example 1: Window Dimensions**
 ```tsx
-function useWindowSize() {
-  const [size, setSize] = useState({
+import { useState, useEffect } from 'react';
+
+interface WindowSize {
+  width: number;
+  height: number;
+}
+
+function useWindowSize(): WindowSize {
+  const [size, setSize] = useState<WindowSize>({
     width: window.innerWidth,
     height: window.innerHeight
   });
@@ -980,8 +1005,11 @@ function ResponsiveComponent() {
 
 **Example 2: Local Storage**
 ```tsx
-function useLocalStorage(key, initialValue) {
-  const [value, setValue] = useState(() => {
+import { useState, useEffect } from 'react';
+import { ChangeEvent } from 'react';
+
+function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
+  const [value, setValue] = useState<T>(() => {
     const stored = localStorage.getItem(key);
     return stored ? JSON.parse(stored) : initialValue;
   });
@@ -995,11 +1023,11 @@ function useLocalStorage(key, initialValue) {
 
 // Usage
 function Settings() {
-  const [theme, setTheme] = useLocalStorage('theme', 'light');
+  const [theme, setTheme] = useLocalStorage<string>('theme', 'light');
 
   return (
     <div>
-      <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+      <select value={theme} onChange={(e: ChangeEvent<HTMLSelectElement>) => setTheme(e.target.value)}>
         <option value="light">Light</option>
         <option value="dark">Dark</option>
       </select>
@@ -1010,10 +1038,18 @@ function Settings() {
 
 **Example 3: Fetch Hook**
 ```tsx
-function useFetch(url) {
-  const [data, setData] = useState(null);
+import { useState, useEffect } from 'react';
+
+interface UseFetchResult<T> {
+  data: T | null;
+  loading: boolean;
+  error: string | null;
+}
+
+function useFetch<T>(url: string): UseFetchResult<T> {
+  const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {

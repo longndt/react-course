@@ -2,7 +2,19 @@
 
 ## Overview
 
-This lesson introduces React fundamentals with modern development practices. You'll set up a professional development environment, understand React's core concepts, and build components with TypeScript fr🔬
+This lesson introduces React fundamentals with modern development practices. You'll set up a professional development environment### Component Naming
+❌ `function button()` - lowercase
+✅ `function Button()` - uppercase (PascalCase)
+
+### TSX Attributes
+❌ `<div class="container">` - HTML attribute
+✅ `<div className="container">` - TSX attribute
+
+### Self-Closing Tagsttributes
+❌ `<div class="container">` - HTML attribute
+✅ `<div className="container">` - TSX attribute
+
+### Self-Closing Tagserstand React's core concepts, and build components with TypeScript fr🔬
 
 **Ready for practice?** → Begin [lab1.md](./lab/lab1.md) exercises
 
@@ -14,8 +26,8 @@ By the end of this lesson, you will be able to:
 
 - ✅ Understand what React is and why it's useful
 - ✅ Set up a modern React development environment with Vite and TypeScript
-- ✅ Understand JSX/TSX syntax basics
-- ✅ Create your first simple functional component
+- ✅ Understand TSX syntax basics (TypeScript + JSX)
+- ✅ Create your first simple functional component with TypeScript
 - ✅ Run and view a React application in the browser
 
 ## Prerequisites
@@ -38,7 +50,7 @@ By the end of this lesson, you will be able to:
 - Component-based architecture
 - Virtual DOM and reconciliation
 - Declarative vs imperative programming
-- JSX/TSX syntax
+- TSX syntax (TypeScript + JSX)
 
 ### 2. Development Setup
 
@@ -54,7 +66,7 @@ By the end of this lesson, you will be able to:
 **Component Basics:**
 - What is a component?
 - Creating a simple functional component
-- JSX/TSX syntax basics
+- TSX syntax basics (TypeScript + JSX)
 - Rendering your first component
 - Basic styling with CSS
 
@@ -68,13 +80,13 @@ By the end of this lesson, you will be able to:
 - **[theory1.md](./theory/theory1.md)** - Comprehensive React fundamentals and concepts
 
 ### 💻 Demo
-- **[demo/](./demo/)** - Live code examples and project setups
+- **[examples/](./examples/)** - Live code examples and project setups
 
 ### 🔬 Lab
 - **[lab1.md](./lab/lab1.md)** - Hands-on exercises and projects
 
 ### ⚡ Quick Start
-- **[quickstart.md](./quickstart.md)** - Fast setup guide and code snippets
+- **[reference/](./reference/)** - Fast setup guide and code snippets
 
 ---
 
@@ -106,7 +118,7 @@ function Welcome() {
 }
 ```
 
-> 💡 **Want to start coding immediately?** Jump to [quickstart.md](./quickstart.md) for step-by-step setup instructions.
+> 💡 **Want to start coding immediately?** Jump to [reference/](./reference/) for step-by-step setup instructions.
 >
 > 📚 **Note:** Component props, interfaces, and advanced patterns are covered in [Lesson 2: Components & Hooks](../lesson2-component-hook/)
 
@@ -129,7 +141,7 @@ npm --version     # v9.0.0+
 git --version     # Any version
 ```
 
-> 📋 **Detailed setup guide:** See [../setup/environment-setup.md](../setup/environment-setup.md)
+> 📋 **Detailed setup guide:** See [../extras/environment-setup.md](../extras/environment-setup.md)
 
 ---
 
@@ -171,7 +183,7 @@ git --version     # Any version
 - Create a simple "Hello World" component
 - Modify the default App component
 
-### Level 2: Basic JSX Practice
+### Level 2: Basic TSX Practice
 - Create a Welcome component with text
 - Add some basic HTML elements (h1, p, div)
 - Apply simple inline styles
@@ -204,8 +216,8 @@ Create a basic landing page with:
 ✅ `<img src="photo.jpg" />` - properly closed
 
 ### Return Statement
-❌ Multi-line JSX without parentheses
-✅ Wrap multi-line JSX in parentheses
+❌ Multi-line TSX without parentheses
+✅ Wrap multi-line TSX in parentheses
 
 ---
 
@@ -244,7 +256,7 @@ Before moving to Lesson 2, ensure you can:
 ### React Basics (Must Know)
 - [ ] Explain what React is in simple terms
 - [ ] Understand what a component is
-- [ ] Write basic JSX/TSX syntax
+- [ ] Write basic TSX syntax with TypeScript
 - [ ] Create a simple functional component
 - [ ] Apply basic CSS styling
 
@@ -265,7 +277,7 @@ Before moving to Lesson 2, ensure you can:
 
 📚 **Need detailed explanations?** → Study [theory1.md](./theory/theory1.md)
 
-💻 **Want to start coding now?** → Follow [quickstart.md](./quickstart.md)
+💻 **Want to start coding now?** → Follow [reference/](./reference/)
 
 🔬 **Ready for practice?** → Begin [lab1.md](./lab/lab1.md) exercises
 

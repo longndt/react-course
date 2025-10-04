@@ -107,13 +107,13 @@ After this lesson, you will be able to:
 ### 📚 [Theory Guide](./theory/theory4.md)
 Comprehensive explanations of React Router concepts, authentication flows, JWT tokens, advanced React patterns (HOCs, Render Props, Compound Components), and state management strategies.
 
-### 💻 [Demo Application](./demo/)
+### 💻 [Example Application](./examples/)
 Live authentication system with React Router integration, featuring login/register flows, protected routes, role-based access control, and advanced pattern implementations.
 
 ### 🔬 [Lab Exercise](./lab/lab4.md)
 Build a complete multi-page application with authentication, protected routes, user dashboard, admin panel, and role-based access control.
 
-### ⚡ [Quick Start Guide](./quickstart.md)
+### ⚡ [Reference Guide](./reference/)
 Copy-paste ready code for React Router setup, authentication implementation, protected routes, custom hooks, and advanced component patterns.
 
 ---
@@ -127,9 +127,9 @@ Copy-paste ready code for React Router setup, authentication implementation, pro
 - Basic knowledge of JWT tokens and HTTP security
 
 **Learning Path:**
-1. Start with **[Quick Start Guide](./quickstart.md)** to implement basic routing and auth
+1. Start with **[Reference Guide](./reference/)** to implement basic routing and auth
 2. Read **[Theory Guide](./theory/theory4.md)** for deep understanding of patterns
-3. Explore **[Demo Application](./demo/)** to see production-ready implementations
+3. Explore **[Example Application](./examples/)** to see production-ready implementations
 4. Complete **[Lab Exercise](./lab/lab4.md)** to build your own authenticated app
 
 ---
@@ -269,9 +269,9 @@ After mastering routing and authentication, you'll learn:
 
 **Continue Learning:**
 - 📖 Read the [Theory Guide](./theory/theory4.md) for in-depth concepts
-- 💻 Study the [Demo Application](./demo/) for real-world examples
+- 💻 Study the [Example Application](./examples/) for real-world examples
 - 🔬 Complete the [Lab Exercise](./lab/lab4.md) to build hands-on skills
-- ⚡ Bookmark the [Quick Start Guide](./quickstart.md) for quick reference
+- ⚡ Bookmark the [Reference Guide](./reference/) for quick reference
 
 ---
 

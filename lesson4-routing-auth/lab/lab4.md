@@ -1,4 +1,4 @@
-# Lab 4: Authentication & Protected Routes
+# Lab: Authentication & Protected Routes
 
 ## Overview
 
@@ -14,7 +14,7 @@ _For detailed learning objectives and concepts, see [../readme.md](../readme.md)
 
 ## Pre-Lab Setup
 
-_For detailed development environment setup, see [Complete Environment Setup Guide](../../setup/environment-setup.md)_
+_For detailed development environment setup, see [Complete Environment Setup Guide](../../extras/environment-setup.md)_
 
 ## Exercises
 

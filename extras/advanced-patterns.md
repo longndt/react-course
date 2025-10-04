@@ -1,7 +1,5 @@
 # Advanced React Patterns & Architecture
 
-## 🎯 For Final-Year IT Students Ready to Master Professional React
-
 This guide covers advanced React patterns, architectural decisions, and enterprise-level practices that will set your capstone project apart and prepare you for senior developer roles.
 
 **Prerequisites:** Complete Lessons 1-5 and feel confident with React fundamentals.
@@ -46,7 +44,7 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
 Modal.Header = function ModalHeader({ children }: { children: React.ReactNode }) {
   const context = useContext(ModalContext);
   if (!context) throw new Error('Modal.Header must be used within Modal');
-  
+
   return (
     <div className="modal-header">
       {children}
@@ -66,7 +64,7 @@ Modal.Footer = function ModalFooter({ children }: { children: React.ReactNode })
 // Usage - Clean and Intuitive
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   return (
     <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <Modal.Header>
@@ -108,7 +106,7 @@ function DataFetcher<T>({ url, children }: DataFetcherProps<T>) {
   const fetchData = useCallback(async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
       const response = await fetch(url);
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -136,7 +134,7 @@ function UserProfile({ userId }: { userId: string }) {
         if (loading) return <UserSkeleton />;
         if (error) return <ErrorMessage error={error} onRetry={refetch} />;
         if (!user) return <NotFound />;
-        
+
         return (
           <div className="user-profile">
             <img src={user.avatar} alt={user.name} />
@@ -161,10 +159,10 @@ function withAuth<P extends object>(
 ) {
   return function AuthenticatedComponent(props: P) {
     const { user, isLoading } = useAuth();
-    
+
     if (isLoading) return <LoadingSpinner />;
     if (!user) return <LoginPrompt />;
-    
+
     return <WrappedComponent {...props} />;
   };
 }
@@ -238,15 +236,15 @@ interface UserService {
 // API Implementation
 class ApiUserService implements UserService {
   constructor(private apiClient: ApiClient) {}
-  
+
   async getUser(id: string): Promise<User> {
     return this.apiClient.get(`/users/${id}`);
   }
-  
+
   async updateUser(id: string, data: Partial<User>): Promise<User> {
     return this.apiClient.put(`/users/${id}`, data);
   }
-  
+
   async deleteUser(id: string): Promise<void> {
     await this.apiClient.delete(`/users/${id}`);
   }
@@ -261,7 +259,7 @@ function ServiceProvider({ children }: { children: React.ReactNode }) {
   const services = {
     userService: new ApiUserService(new ApiClient())
   };
-  
+
   return (
     <ServiceContext.Provider value={services}>
       {children}
@@ -280,11 +278,11 @@ function useServices() {
 function UserProfile({ userId }: { userId: string }) {
   const { userService } = useServices();
   const [user, setUser] = useState<User | null>(null);
-  
+
   useEffect(() => {
     userService.getUser(userId).then(setUser);
   }, [userId, userService]);
-  
+
   return user ? <UserCard user={user} /> : <Loading />;
 }
 ```
@@ -310,7 +308,7 @@ type UserCommand = CreateUserCommand | UpdateUserCommand;
 // Command Handlers
 class UserCommandHandler {
   constructor(private apiClient: ApiClient) {}
-  
+
   async handle(command: UserCommand): Promise<void> {
     switch (command.type) {
       case 'CREATE_USER':
@@ -339,7 +337,7 @@ type UserQuery = GetUserQuery | GetUsersQuery;
 // Query Handlers
 class UserQueryHandler {
   constructor(private apiClient: ApiClient) {}
-  
+
   async handle(query: UserQuery): Promise<any> {
     switch (query.type) {
       case 'GET_USER':
@@ -354,7 +352,7 @@ class UserQueryHandler {
 function UserManagement() {
   const commandHandler = useCommandHandler();
   const queryHandler = useQueryHandler();
-  
+
   const createUser = async (userData: CreateUserData) => {
     await commandHandler.handle({
       type: 'CREATE_USER',
@@ -362,7 +360,7 @@ function UserManagement() {
     });
     // Trigger refetch of user list
   };
-  
+
   return (
     <div>
       <CreateUserForm onSubmit={createUser} />
@@ -388,18 +386,18 @@ function ExpensiveComponent({ items, filters }: Props) {
       .sort((a, b) => a.priority - b.priority)
       .map(item => ({ ...item, computedValue: expensiveCalculation(item) }));
   }, [items, filters]);
-  
+
   // Memoize callback to prevent child re-renders
   const handleItemClick = useCallback((itemId: string) => {
     // Handle click logic
   }, []);
-  
+
   return (
     <div>
       {processedItems.map(item => (
-        <MemoizedItemCard 
-          key={item.id} 
-          item={item} 
+        <MemoizedItemCard
+          key={item.id}
+          item={item}
           onClick={handleItemClick}
         />
       ))}
@@ -434,18 +432,18 @@ function useVirtualScrolling<T>({
   overscan?: number;
 }) {
   const [scrollTop, setScrollTop] = useState(0);
-  
+
   const visibleStart = Math.floor(scrollTop / itemHeight);
   const visibleEnd = Math.min(
     visibleStart + Math.ceil(containerHeight / itemHeight),
     items.length - 1
   );
-  
+
   const startIndex = Math.max(0, visibleStart - overscan);
   const endIndex = Math.min(items.length - 1, visibleEnd + overscan);
-  
+
   const visibleItems = items.slice(startIndex, endIndex + 1);
-  
+
   return {
     visibleItems,
     startIndex,
@@ -459,7 +457,7 @@ function useVirtualScrolling<T>({
 function VirtualList<T>({ items, renderItem, itemHeight = 50 }: VirtualListProps<T>) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerHeight, setContainerHeight] = useState(400);
-  
+
   const {
     visibleItems,
     startIndex,
@@ -471,11 +469,11 @@ function VirtualList<T>({ items, renderItem, itemHeight = 50 }: VirtualListProps
     itemHeight,
     containerHeight
   });
-  
+
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     setScrollTop(e.currentTarget.scrollTop);
   };
-  
+
   return (
     <div
       ref={containerRef}
@@ -565,7 +563,7 @@ function useUserMachine(userId: string) {
   const [state, send] = useMachine(userMachine, {
     services: {
       fetchUserService: () => fetch(`/api/users/${userId}`).then(r => r.json()),
-      saveUserService: (context) => 
+      saveUserService: (context) =>
         fetch(`/api/users/${userId}`, {
           method: 'PUT',
           body: JSON.stringify(context.user)
@@ -580,7 +578,7 @@ function useUserMachine(userId: string) {
       }
     }
   });
-  
+
   return [state, send];
 }
 ```
@@ -606,12 +604,12 @@ interface ProjectSlice {
 const createUserSlice: StateCreator<AppState, [], [], UserSlice> = (set, get) => ({
   users: [],
   selectedUser: null,
-  
+
   fetchUsers: async () => {
     const users = await api.getUsers();
     set(state => ({ ...state, users }));
   },
-  
+
   selectUser: (id: string) => {
     const user = get().users.find(u => u.id === id);
     set(state => ({ ...state, selectedUser: user || null }));
@@ -622,11 +620,11 @@ const createUserSlice: StateCreator<AppState, [], [], UserSlice> = (set, get) =>
 const createProjectSlice: StateCreator<AppState, [], [], ProjectSlice> = (set) => ({
   projects: [],
   activeProject: null,
-  
+
   createProject: async (data) => {
     const project = await api.createProject(data);
-    set(state => ({ 
-      ...state, 
+    set(state => ({
+      ...state,
       projects: [...state.projects, project],
       activeProject: project
     }));
@@ -680,31 +678,31 @@ describe('UserProfile Integration', () => {
       getUser: jest.fn().mockResolvedValue(mockUser),
       updateUser: jest.fn().mockResolvedValue({ ...mockUser, name: 'Updated Name' })
     };
-    
+
     const wrapper = createTestWrapper({
       services: { userService: mockUserService }
     });
-    
+
     render(<UserProfile userId="123" />, { wrapper });
-    
+
     // Wait for data to load
     expect(await screen.findByText('John Doe')).toBeInTheDocument();
-    
+
     // Test user interaction
     const editButton = screen.getByRole('button', { name: /edit/i });
     fireEvent.click(editButton);
-    
+
     const nameInput = screen.getByLabelText(/name/i);
     fireEvent.change(nameInput, { target: { value: 'Updated Name' } });
-    
+
     const saveButton = screen.getByRole('button', { name: /save/i });
     fireEvent.click(saveButton);
-    
+
     // Verify service was called
     expect(mockUserService.updateUser).toHaveBeenCalledWith('123', {
       name: 'Updated Name'
     });
-    
+
     // Verify UI updates
     expect(await screen.findByText('Updated Name')).toBeInTheDocument();
   });
@@ -764,7 +762,7 @@ const HeavyChart = lazy(() => import('../components/HeavyChart'));
 
 function Dashboard() {
   const [showChart, setShowChart] = useState(false);
-  
+
   return (
     <div>
       <h1>Dashboard</h1>
@@ -778,7 +776,7 @@ function Dashboard() {
 }
 
 // Feature-based Code Splitting
-const AdminPanel = lazy(() => 
+const AdminPanel = lazy(() =>
   import('../features/admin').then(module => ({ default: module.AdminPanel }))
 );
 ```
@@ -795,7 +793,7 @@ import DOMPurify from 'dompurify';
 
 function SafeHTML({ html }: { html: string }) {
   const cleanHTML = DOMPurify.sanitize(html);
-  
+
   return (
     <div dangerouslySetInnerHTML={{ __html: cleanHTML }} />
   );
@@ -808,7 +806,7 @@ function useCSP() {
     meta.httpEquiv = 'Content-Security-Policy';
     meta.content = "default-src 'self'; script-src 'self' 'unsafe-inline'";
     document.head.appendChild(meta);
-    
+
     return () => document.head.removeChild(meta);
   }, []);
 }
@@ -826,15 +824,15 @@ interface RBACProps {
 
 function RBAC({ roles, children, fallback }: RBACProps) {
   const { user } = useAuth();
-  
-  const hasRequiredRole = roles.some(role => 
+
+  const hasRequiredRole = roles.some(role =>
     user?.roles?.includes(role)
   );
-  
+
   if (!hasRequiredRole) {
     return fallback || <AccessDenied />;
   }
-  
+
   return <>{children}</>;
 }
 
@@ -874,7 +872,7 @@ function AdminPanel() {
 
 These patterns demonstrate:
 - **Senior-level thinking**
-- **Scalability awareness**  
+- **Scalability awareness**
 - **Performance optimization**
 - **Maintainable code architecture**
 - **Enterprise development experience**

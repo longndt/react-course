@@ -104,8 +104,8 @@ After this lesson, you will be able to:
 | Resource | Description |
 |----------|-------------|
 | **📚 [Theory](./theory/theory5.md)** | Comprehensive guide to full-stack architecture, real-time features, deployment strategies, and production best practices |
-| **⚡ [Quick Start](./quickstart.md)** | Copy-paste code library with complete examples for backend integration, file uploads, WebSockets, performance optimization, and deployment configurations |
-| **💻 [Demo](./demo/)** | Working full-stack application with Express backend, real-time features, and production-ready deployment setup |
+| **⚡ [Reference Guide](./reference/)** | Copy-paste code library with complete examples for backend integration, file uploads, WebSockets, performance optimization, and deployment configurations |
+| **💻 [Examples](./examples/)** | Working full-stack application with Express backend, real-time features, and production-ready deployment setup |
 | **🔬 [Lab](./lab/lab5.md)** | Hands-on project: Build and deploy a complete full-stack application with real-time features |
 
 ---
@@ -122,8 +122,8 @@ Before starting this lesson, you should be comfortable with:
 
 ### Learning Path
 1. **Read** the [theory guide](./theory/theory5.md) to understand full-stack architecture and deployment concepts
-2. **Explore** the [demo application](./demo/) to see real-world implementation
-3. **Reference** the [quickstart guide](./quickstart.md) while coding
+2. **Explore** the [example application](./examples/) to see real-world implementation
+3. **Reference** the [reference guide](./reference/) while coding
 4. **Build** the [lab project](./lab/lab5.md) to practice deployment skills
 
 ---

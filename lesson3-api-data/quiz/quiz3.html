@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>API & Data Handling - Quiz</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .header {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        color: #667eea;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #666;
+        font-size: 14px;
+      }
+
+      .progress-bar {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin-bottom: 30px;
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #666;
+      }
+
+      .progress-track {
+        width: 100%;
+        height: 10px;
+        background: #e0e0e0;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        transition: width 0.3s ease;
+      }
+
+      .quiz-card {
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin-bottom: 30px;
+      }
+
+      .question-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .question-number {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .question-text {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 30px;
+        line-height: 1.6;
+      }
+
+      .options {
+        margin-bottom: 30px;
+      }
+
+      .option {
+        background: #f8f9fa;
+        padding: 15px 20px;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: 2px solid transparent;
+      }
+
+      .option:hover {
+        background: #e9ecef;
+        transform: translateX(5px);
+      }
+
+      .option.selected {
+        background: #e7e5ff;
+        border-color: #667eea;
+      }
+
+      .option label {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      .option input[type="radio"] {
+        margin-right: 15px;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+      }
+
+      /* Code styling in questions */
+      .question-text code,
+      .option code {
+        background: #f1f5f9;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-size: 16px;
+        color: #e11d48;
+        font-weight: 600;
+        border: 1px solid #e2e8f0;
+      }
+
+
+
+      .short-answer-container {
+        margin-bottom: 40px;
+      }
+
+      .short-answer-input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 16px;
+        font-family: inherit;
+        transition: border-color 0.3s ease;
+      }
+
+      .short-answer-input:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: space-between;
+      }
+
+      .btn {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-secondary {
+        background: white;
+        color: #667eea;
+        border: 2px solid #667eea;
+      }
+
+      .btn-secondary:hover {
+        background: #f8f9fa;
+      }
+
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .results-card {
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      .score-circle {
+        width: 200px;
+        height: 200px;
+        margin: 30px auto;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+
+      .score-number {
+        font-size: 60px;
+        font-weight: bold;
+      }
+
+      .score-label {
+        font-size: 16px;
+        margin-top: 10px;
+      }
+
+      .score-details {
+        margin: 30px 0;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+      }
+
+      .score-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .score-row:last-child {
+        border-bottom: none;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .short-answer-input.correct {
+        border-color: #10b981;
+        background: #d1fae5;
+      }
+
+      .short-answer-input.incorrect {
+        border-color: #ef4444;
+        background: #fee2e2;
+      }
+
+      .option.correct {
+        background: #d1fae5;
+        border-color: #10b981;
+      }
+
+      .option.incorrect {
+        background: #fee2e2;
+        border-color: #ef4444;
+      }
+
+      .feedback-icon {
+        margin-left: auto;
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      .answer-feedback {
+        margin-top: 15px;
+        padding: 14px 18px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        display: none;
+      }
+
+      .answer-feedback.show {
+        display: block;
+      }
+
+      .answer-feedback.correct {
+        background: #d1fae5;
+        color: #065f46;
+        border-left: 4px solid #10b981;
+      }
+
+      .answer-feedback.incorrect {
+        background: #fee2e2;
+        color: #991b1b;
+        border-left: 4px solid #ef4444;
+      }
+
+      .buttons {
+        margin-top: 30px;
+      }
+
+
+      .feedback {
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        font-size: 18px;
+      }
+
+      .feedback.excellent {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .feedback.good {
+        background: #d1ecf1;
+        color: #0c5460;
+      }
+
+      .feedback.average {
+        background: #fff3cd;
+        color: #856404;
+      }
+
+      .feedback.needs-improvement {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      @media (max-width: 600px) {
+        .quiz-card,
+        .results-card {
+          padding: 20px;
+        }
+
+        .question-text {
+          font-size: 18px;
+        }
+
+        .buttons {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <h1>🎯 API & Data Handling Quiz</h1>
+        <p>
+          Test your understanding of fetch API, async/await, REST principles, and data management
+        </p>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-info">
+          <span id="progressText">Question 1 of 30</span>
+          <span id="answeredText">Answered: 0/30</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- Quiz Card -->
+      <div class="quiz-card" id="quizCard">
+        <div class="question-header">
+          <span class="question-number" id="questionNumber">Question 1</span>
+        </div>
+
+        <div class="question-text" id="questionText"></div>
+
+        <!-- Multiple Choice Options -->
+        <div class="options" id="optionsContainer"></div>
+
+        <!-- Short Answer Input -->
+        <div class="short-answer-container hidden" id="shortAnswerContainer">
+          <input
+            type="text"
+            class="short-answer-input"
+            id="shortAnswerInput"
+            placeholder="Type your answer here..."
+          />
+          <div class="answer-feedback" id="shortAnswerFeedback"></div>
+        </div>
+
+        <div class="buttons">
+          <button class="btn btn-secondary" id="skipBtn">
+            Skip Question
+          </button>
+          <div style="display: flex; gap: 15px">
+            <button class="btn btn-secondary" id="prevBtn" disabled>
+              ← Previous
+            </button>
+            <button class="btn btn-primary" id="nextBtn">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Card -->
+      <div class="results-card hidden" id="resultsCard">
+        <h2 style="color: #667eea; margin-bottom: 20px">
+          🎉 Quiz Completed!
+        </h2>
+
+        <div class="score-circle">
+          <div class="score-number" id="scoreNumber">0%</div>
+          <div class="score-label">Your Score</div>
+        </div>
+
+        <div class="score-details">
+          <div class="score-row">
+            <span><strong>Total Questions:</strong></span>
+            <span id="totalQuestions">30</span>
+          </div>
+          <div class="score-row">
+            <span><strong>Answered:</strong></span>
+            <span id="answeredCount">0</span>
+          </div>
+          <div class="score-row">
+            <span><strong>Correct:</strong></span>
+            <span id="correctCount">0</span>
+          </div>
+          <div class="score-row">
+            <span><strong>Skipped:</strong></span>
+            <span id="skippedCount">0</span>
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <button
+          class="btn btn-primary"
+          style="margin-top: 30px"
+          onclick="location.reload()"
+        >
+          🔄 Retake Quiz
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Quiz Data - API & Data Handling
+      const quizData = [
+        // Multiple Choice Questions (1-20)
+        {
+          type: "multiple",
+          question: "What JavaScript function is commonly used to make HTTP requests?",
+          options: ["fetch()", "http()", "request()", "ajax()"],
+          correct: 0,
+        },
+        {
+          type: "multiple",
+          question: "What does API stand for?",
+          options: [
+            "Application Programming Interface",
+            "Advanced Program Integration",
+            "Automated Process Interface",
+            "Application Process Integration",
+          ],
+          correct: 0,
+        },
+        {
+          type: "multiple",
+          question: "What is REST?",
+          options: [
+            "A JavaScript framework",
+            "An architectural style for APIs",
+            "A database type",
+            "A testing library",
+          ],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "Which HTTP method is used to retrieve data?",
+          options: ["POST", "PUT", "GET", "DELETE"],
+          correct: 2,
+        },
+        {
+          type: "multiple",
+          question: "Which HTTP method is used to create new data?",
+          options: ["GET", "POST", "PUT", "PATCH"],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What does async/await help with?",
+          options: [
+            "Styling components",
+            "Handling asynchronous operations",
+            "Type checking",
+            "State management",
+          ],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What keyword makes a function asynchronous?",
+          options: ["await", "async", "promise", "fetch"],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What does fetch() return?",
+          options: [
+            "JSON data",
+            "A Promise",
+            "An array",
+            "A string",
+          ],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "How do you parse JSON response from fetch?",
+          options: [
+            "response.json()",
+            "JSON.parse(response)",
+            "response.parse()",
+            "response.toJSON()",
+          ],
+          correct: 0,
+        },
+        {
+          type: "multiple",
+          question: "Where should you fetch data in a React component?",
+          options: [
+            "In the render function",
+            "In useEffect hook",
+            "In useState",
+            "In the component body",
+          ],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What is CORS?",
+          options: [
+            "A JavaScript library",
+            "Cross-Origin Resource Sharing policy",
+            "A CSS framework",
+            "A database system",
+          ],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What status code indicates a successful API request?",
+          options: ["404", "500", "200", "302"],
+          correct: 2,
+        },
+        {
+          type: "multiple",
+          question: "What status code indicates a resource was not found?",
+          options: ["200", "403", "500", "404"],
+          correct: 3,
+        },
+        {
+          type: "multiple",
+          question: "How do you handle fetch errors?",
+          options: [
+            "Use try/catch or .catch()",
+            "Use if/else",
+            "Errors auto-handle",
+            "Use switch statement",
+          ],
+          correct: 0,
+        },
+        {
+          type: "multiple",
+          question: "What is the correct way to send JSON data with POST?",
+          options: [
+            "Include JSON in URL",
+            "Set body to JSON.stringify(data) and headers",
+            "Just pass the object",
+            "Use form data only",
+          ],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What header tells the server you're sending JSON?",
+          options: [
+            "Content-Type: application/json",
+            "Type: json",
+            "Accept: json",
+            "Data-Type: json",
+          ],
+          correct: 0,
+        },
+        {
+          type: "multiple",
+          question: "What should you display while data is loading?",
+          options: [
+            "Nothing",
+            "A loading indicator",
+            "An error",
+            "Empty array",
+          ],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What is pagination?",
+          options: [
+            "Styling pages",
+            "Dividing data into pages",
+            "Routing between pages",
+            "Data validation",
+          ],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What is the purpose of query parameters in APIs?",
+          options: [
+            "To style responses",
+            "To filter or modify API responses",
+            "To authenticate users",
+            "To encrypt data",
+          ],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What library is commonly used for HTTP requests (alternative to fetch)?",
+          options: ["Redux", "Axios", "React Query", "Express"],
+          correct: 1,
+        },
+
+        // Short Answer Questions (21-30)
+        {
+          type: "short",
+          question: "What keyword is used before a function to make it asynchronous?",
+          answer: "async",
+        },
+        {
+          type: "short",
+          question: "What keyword pauses execution until a Promise resolves?",
+          answer: "await",
+        },
+        {
+          type: "short",
+          question: "What method converts a Response to JSON?",
+          answer: "json",
+        },
+        {
+          type: "short",
+          question: "What HTTP method retrieves data from a server?",
+          answer: "GET",
+        },
+        {
+          type: "short",
+          question: "What HTTP method creates new data on a server?",
+          answer: "POST",
+        },
+        {
+          type: "short",
+          question: "What HTTP status code means 'Not Found'?",
+          answer: "404",
+        },
+        {
+          type: "short",
+          question: "What HTTP status code means 'OK/Success'?",
+          answer: "200",
+        },
+        {
+          type: "short",
+          question: "What is the security policy that restricts cross-origin requests? (acronym)",
+          answer: "CORS",
+        },
+        {
+          type: "short",
+          question: "What data format is commonly used in APIs? (acronym)",
+          answer: "JSON",
+        },
+        {
+          type: "short",
+          question: "What React hook is best for fetching data on component mount?",
+          answer: "useEffect",
+        },
+      ];
+
+      // State
+      let currentQuestion = 0;
+      let userAnswers = new Array(quizData.length).fill(null);
+      let answerChecked = new Array(quizData.length).fill(false);
+
+      // DOM Elements
+      const progressText = document.getElementById("progressText");
+      const answeredText = document.getElementById("answeredText");
+      const progressFill = document.getElementById("progressFill");
+      const questionNumber = document.getElementById("questionNumber");
+      const questionText = document.getElementById("questionText");
+      const optionsContainer = document.getElementById("optionsContainer");
+      const shortAnswerContainer = document.getElementById(
+        "shortAnswerContainer"
+      );
+      const shortAnswerInput = document.getElementById("shortAnswerInput");
+      const shortAnswerFeedback = document.getElementById("shortAnswerFeedback");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const skipBtn = document.getElementById("skipBtn");
+      const quizCard = document.getElementById("quizCard");
+      const resultsCard = document.getElementById("resultsCard");
+
+      // Initialize Quiz
+      function init() {
+        showQuestion(currentQuestion);
+      }
+
+
+      // Check multiple choice answer
+      function checkAnswer(index, selectedOption) {
+        const question = quizData[index];
+        answerChecked[index] = true;
+
+        const options = document.querySelectorAll(".option");
+        options.forEach((opt, i) => {
+          const input = opt.querySelector("input");
+          input.disabled = true;
+          opt.style.cursor = "default";
+
+          if (i === question.correct) {
+            opt.classList.add("correct");
+            opt.classList.remove("selected");
+          } else if (i === selectedOption) {
+            opt.classList.add("incorrect");
+            opt.classList.remove("selected");
+          }
+        });
+
+        // Re-render the question to show feedback icons
+        showQuestion(index);
+      }
+
+      // Check short answer
+      function checkShortAnswer(index, answer) {
+        const question = quizData[index];
+        answerChecked[index] = true;
+
+        const isCorrect = answer.toLowerCase().trim() === question.answer.toLowerCase().trim();
+
+        shortAnswerInput.disabled = true;
+        shortAnswerInput.classList.add(isCorrect ? "correct" : "incorrect");
+
+        shortAnswerFeedback.classList.add("show", isCorrect ? "correct" : "incorrect");
+        shortAnswerFeedback.textContent = isCorrect
+          ? `✓ Correct! The answer is "${question.answer}"`
+          : `✗ Incorrect. The correct answer is "${question.answer}"`;
+      }
+
+      // Show Question
+      function showQuestion(index) {
+        const question = quizData[index];
+
+        // Update header
+        questionNumber.textContent = `Question ${index + 1}`;
+        questionText.textContent = question.question;
+
+        // Update progress
+        progressText.textContent = `Question ${index + 1} of ${
+          quizData.length
+        }`;
+        const answered = userAnswers.filter((a) => a !== null).length;
+        answeredText.textContent = `Answered: ${answered}/${quizData.length}`;
+        progressFill.style.width = `${((index + 1) / quizData.length) * 100}%`;
+
+        // Clear previous
+        optionsContainer.innerHTML = "";
+        shortAnswerInput.value = "";
+        shortAnswerFeedback.classList.remove('show', 'correct', 'incorrect');
+        shortAnswerFeedback.textContent = "";
+
+        if (question.type === "multiple") {
+          // Show multiple choice
+          optionsContainer.classList.remove("hidden");
+          shortAnswerContainer.classList.add("hidden");
+
+          question.options.forEach((option, i) => {
+            const div = document.createElement("div");
+            div.className = "option";
+
+            // Check if answer was already checked
+            if (answerChecked[index]) {
+              if (i === question.correct) {
+                div.classList.add("correct");
+              } else if (userAnswers[index] === i && i !== question.correct) {
+                div.classList.add("incorrect");
+              }
+            } else if (userAnswers[index] === i) {
+              div.classList.add("selected");
+            }
+
+            div.innerHTML = `
+              <label>
+                <input type="radio" name="answer" value="${i}" ${
+              userAnswers[index] === i ? "checked" : ""
+            } ${answerChecked[index] ? "disabled" : ""}>
+                <span>${option}</span>
+                ${answerChecked[index] && i === question.correct ? '<span class="feedback-icon">✓</span>' : ''}
+                ${answerChecked[index] && userAnswers[index] === i && i !== question.correct ? '<span class="feedback-icon">✗</span>' : ''}
+              </label>
+            `;
+
+            if (!answerChecked[index]) {
+              div.addEventListener("click", () => {
+              document
+                .querySelectorAll(".option")
+                .forEach((o) => o.classList.remove("selected"));
+              div.classList.add("selected");
+              div.querySelector("input").checked = true;
+              userAnswers[index] = i;
+              updateProgress();
+
+                // Immediate feedback
+                checkAnswer(index, i);
+            });
+            }
+
+            optionsContainer.appendChild(div);
+          });
+        } else {
+          // Show short answer
+          optionsContainer.classList.add("hidden");
+          shortAnswerContainer.classList.remove("hidden");
+
+          if (userAnswers[index]) {
+            shortAnswerInput.value = userAnswers[index];
+
+            // Show feedback if already checked
+            if (answerChecked[index]) {
+              checkShortAnswer(index, userAnswers[index]);
+            }
+          }
+
+
+          shortAnswerInput.disabled = answerChecked[index];
+
+          shortAnswerInput.oninput = () => {
+            userAnswers[index] = shortAnswerInput.value.trim();
+            updateProgress();
+          };
+
+          shortAnswerInput.onblur = () => {
+            if (userAnswers[index]) {
+              checkShortAnswer(index, userAnswers[index]);
+            }
+          };
+
+          // Enter key to check answer
+          shortAnswerInput.onkeypress = (e) => {
+            if (e.key === 'Enter' && userAnswers[index]) {
+              checkShortAnswer(index, userAnswers[index]);
+              shortAnswerInput.blur();
+            }
+          };
+        }
+
+        // Update buttons
+        prevBtn.disabled = index === 0;
+        nextBtn.textContent =
+          index === quizData.length - 1 ? "Submit Quiz" : "Next →";
+      }
+
+      // Update Progress
+      function updateProgress() {
+        const answered = userAnswers.filter((a) => a !== null && a !== "")
+          .length;
+        answeredText.textContent = `Answered: ${answered}/${quizData.length}`;
+      }
+
+      // Next Question
+      nextBtn.addEventListener("click", () => {
+        if (currentQuestion < quizData.length - 1) {
+          currentQuestion++;
+          showQuestion(currentQuestion);
+        } else {
+          showResults();
+        }
+      });
+
+      // Previous Question
+      prevBtn.addEventListener("click", () => {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+          showQuestion(currentQuestion);
+        }
+      });
+
+      // Skip Question
+      skipBtn.addEventListener("click", () => {
+        userAnswers[currentQuestion] = null;
+        answerChecked[currentQuestion] = false;
+        if (currentQuestion < quizData.length - 1) {
+          currentQuestion++;
+          showQuestion(currentQuestion);
+        } else {
+          showResults();
+        }
+      });
+
+      // Show Results
+      function showResults() {
+        let correct = 0;
+        let answered = 0;
+
+        quizData.forEach((question, index) => {
+          const userAnswer = userAnswers[index];
+
+          if (userAnswer !== null && userAnswer !== "") {
+            answered++;
+
+            if (question.type === "multiple") {
+              if (userAnswer === question.correct) {
+                correct++;
+              }
+            } else {
+              // Short answer - case insensitive comparison
+              if (
+                userAnswer.toLowerCase().trim() ===
+                question.answer.toLowerCase().trim()
+              ) {
+                correct++;
+              }
+            }
+          }
+        });
+
+        const skipped = quizData.length - answered;
+        const percentage = answered > 0 ? (correct / answered) * 100 : 0;
+
+        // Update results
+        document.getElementById("scoreNumber").textContent =
+          Math.round(percentage) + "%";
+        document.getElementById("totalQuestions").textContent = quizData.length;
+        document.getElementById("answeredCount").textContent = answered;
+        document.getElementById("correctCount").textContent = correct;
+        document.getElementById("skippedCount").textContent = skipped;
+
+        // Feedback
+        const feedback = document.getElementById("feedback");
+        if (percentage >= 90) {
+          feedback.className = "feedback excellent";
+          feedback.textContent =
+            "🌟 Excellent! You have a strong grasp of TypeScript fundamentals!";
+        } else if (percentage >= 70) {
+          feedback.className = "feedback good";
+          feedback.textContent =
+            "👍 Good job! You understand most TypeScript concepts well!";
+        } else if (percentage >= 50) {
+          feedback.className = "feedback average";
+          feedback.textContent =
+            "📚 Not bad! Review the materials to improve your understanding.";
+        } else {
+          feedback.className = "feedback needs-improvement";
+          feedback.textContent =
+            "💪 Keep studying! Practice more to master TypeScript fundamentals.";
+        }
+
+        // Show results
+        quizCard.classList.add("hidden");
+        document.getElementById("progressBar").classList.add("hidden");
+        resultsCard.classList.remove("hidden");
+      }
+
+      // Start quiz
+      init();
+    </script>
+  </body>
+</html>

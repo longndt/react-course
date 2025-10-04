@@ -247,9 +247,15 @@ function App() {
 
 ### 3. Modern Hooks
 
-```jsx
+```tsx
+import { useId, useDeferredValue, useMemo } from 'react';
+
 // useId for accessibility
-function FormField({ label }) {
+interface FormFieldProps {
+  label: string;
+}
+
+function FormField({ label }: FormFieldProps) {
   const id = useId();
   return (
     <>
@@ -260,7 +266,11 @@ function FormField({ label }) {
 }
 
 // useDeferredValue for performance
-function SearchResults({ query }) {
+interface SearchResultsProps {
+  query: string;
+}
+
+function SearchResults({ query }: SearchResultsProps) {
   const deferredQuery = useDeferredValue(query);
   const results = useMemo(() => searchData(deferredQuery), [deferredQuery]);
 

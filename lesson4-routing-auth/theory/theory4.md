@@ -1,4 +1,4 @@
-# Theory 4: Navigation, Authentication & Advanced Patterns
+# Theory: Navigation, Authentication & Advanced Patterns
 
 ---
 
@@ -97,12 +97,19 @@ const styles = `
 
 ### 1. User State Management
 ```tsx
+import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+interface User {
+  username: string;
+}
+
 function App() {
   // Store user info
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
 
   // Login function
-  const login = (username, password) => {
+  const login = (username: string, password: string) => {
     // In real app, check with server
     if (username === "test" && password === "test") {
       setUser({ username });

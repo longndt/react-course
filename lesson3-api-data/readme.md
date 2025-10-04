@@ -133,13 +133,13 @@ After this lesson, you will be able to:
 ### 📚 [Theory Guide](./theory/theory3.md)
 Comprehensive explanations of REST APIs, data fetching patterns, React Query, state management strategies, and error handling best practices.
 
-### 💻 [Demo Application](./demo/)
+### 💻 [Example Application](./examples/)
 Live task management application demonstrating full CRUD operations with Node.js backend, MongoDB integration, and React Query implementation.
 
 ### 🔬 [Lab Exercise](./lab/lab3.md)
 Build a complete student management system with API integration, featuring CRUD operations, search, filtering, and pagination.
 
-### ⚡ [Quick Start Guide](./quickstart.md)
+### ⚡ [Reference Guide](./reference/)
 Copy-paste ready code examples for Express backend, React Query setup, API client patterns, and common data fetching scenarios.
 
 ---
@@ -153,9 +153,9 @@ Copy-paste ready code examples for Express backend, React Query setup, API clien
 - Familiarity with HTTP concepts
 
 **Learning Path:**
-1. Start with **[Quick Start Guide](./quickstart.md)** to set up a working API connection
+1. Start with **[Reference Guide](./reference/)** to set up a working API connection
 2. Read **[Theory Guide](./theory/theory3.md)** for in-depth understanding
-3. Explore **[Demo Application](./demo/)** to see patterns in action
+3. Explore **[Example Application](./examples/)** to see patterns in action
 4. Complete **[Lab Exercise](./lab/lab3.md)** to build your own application
 
 ---
@@ -286,9 +286,9 @@ After mastering API integration, you'll learn:
 
 **Continue Learning:**
 - 📖 Read the [Theory Guide](./theory/theory3.md) for deep understanding
-- 💻 Study the [Demo Application](./demo/) for real-world patterns
+- 💻 Study the [Example Application](./examples/) for real-world patterns
 - 🔬 Complete the [Lab Exercise](./lab/lab3.md) to build your own app
-- ⚡ Bookmark the [Quick Start Guide](./quickstart.md) for future reference
+- ⚡ Bookmark the [Reference Guide](./reference/) for future reference
 
 ---
 

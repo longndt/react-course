@@ -64,13 +64,13 @@ Learn to create custom hooks for:
 - **[theory2.md](./theory/theory2.md)** - Comprehensive guide to React Hooks and component patterns
 
 ### 💻 Demo
-- **[demo/](./demo/)** - Live code examples demonstrating hooks and components
+- **[examples/](./examples/)** - Live code examples demonstrating hooks and components
 
 ### 🔬 Lab
 - **[lab2.md](./lab/lab2.md)** - Hands-on exercises to build component libraries
 
 ### ⚡ Quick Start
-- **[quickstart.md](./quickstart.md)** - Quick reference and code snippets
+- **[reference/](./reference/)** - Quick reference and code snippets
 
 ---
 
@@ -97,7 +97,7 @@ function Counter() {
 }
 ```
 
-> 💡 **Want more examples?** Check [quickstart.md](./quickstart.md) for ready-to-use code and [theory2.md](./theory/theory2.md) for detailed explanations.
+> 💡 **Want more examples?** Check [reference/](./reference/) for ready-to-use code and [theory2.md](./theory/theory2.md) for detailed explanations.
 
 ---
 
@@ -222,7 +222,7 @@ Before moving to Lesson 3, ensure you can:
 
 📚 **Need detailed explanations?** → Study [theory2.md](./theory/theory2.md)
 
-💻 **Want code examples?** → Check [quickstart.md](./quickstart.md) and [demo/](./demo/)
+💻 **Want code examples?** → Check [reference/](./reference/) and [examples/](./examples/)
 
 🔬 **Ready to practice?** → Start [lab2.md](./lab/lab2.md) exercises
 

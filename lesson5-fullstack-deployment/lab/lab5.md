@@ -1,4 +1,4 @@
-# Lab 5: React Performance Optimization & Advanced Patterns
+# Lab: React Performance Optimization & Advanced Patterns
 
 ## Overview
 
@@ -609,13 +609,13 @@ After completing all exercises in this lab, your performance-optimized project s
 ```
 lab5-performance-optimization/
 ├── index.html
-├── package\.tson
+├── package.json
 ├── readme.md
-├── vite.config\.ts
+├── vite.config.ts
 ├── src/
-│   ├── App\.tsx                    # Main app with lazy loading
+│   ├── App.tsx                    # Main app with lazy loading
 │   ├── index.css                 # Optimized global styles
-│   ├── main\.tsx                  # App entry point
+│   ├── main.tsx                  # App entry point
 │   ├── components/
 │   │   ├── LoadingSpinner/
 │   │   │   ├── LoadingSpinner\.tsx  # Loading component

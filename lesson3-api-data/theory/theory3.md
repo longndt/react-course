@@ -1,4 +1,4 @@
-# Theory 3: API Integration & Data Management
+# Theory: API Integration & Data Management
 
 ---
 
@@ -228,11 +228,21 @@ function StudentsList() {
 ### Search and Filtering
 
 ```tsx
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { ChangeEvent } from 'react';
+
+interface Student {
+  id: number;
+  name: string;
+  major: string;
+}
+
 function StudentSearch() {
   const [searchTerm, setSearchTerm] = useState("");
   const [major, setMajor] = useState("");
 
-  const { data: students = [], isLoading } = useQuery({
+  const { data: students = [], isLoading } = useQuery<Student[]>({
     queryKey: ["students", { search: searchTerm, major }],
     queryFn: async () => {
       const params = new URLSearchParams();
@@ -251,10 +261,10 @@ function StudentSearch() {
     <div>
       <input
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
         placeholder="Search students..."
       />
-      <select value={major} onChange={(e) => setMajor(e.target.value)}>
+      <select value={major} onChange={(e: ChangeEvent<HTMLSelectElement>) => setMajor(e.target.value)}>
         <option value="">All Majors</option>
         <option value="Computer Science">Computer Science</option>
         <option value="Information Technology">Information Technology</option>

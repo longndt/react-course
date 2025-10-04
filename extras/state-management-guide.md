@@ -505,7 +505,17 @@ export const useCartStore = create(
 );
 
 // Usage
-function ProductCard({ product }) {
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+}
+
+interface ProductCardProps {
+  product: Product;
+}
+
+function ProductCard({ product }: ProductCardProps) {
   const addItem = useCartStore((state) => state.addItem);
 
   return (

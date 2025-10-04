@@ -1,4 +1,4 @@
-# Lab 1: Building Your First React Application
+# Lab: Building Your First React Application
 
 ## Overview
 
@@ -481,8 +481,8 @@ function Welcome() {
 - Used `export default` and `import`
 - Organized components in separate files
 
-✅ **JSX Syntax:**
-- Embedded JavaScript in JSX with `{}`
+✅ **TSX Syntax:**
+- Embedded JavaScript in TSX with `{}`
 - Used `.map()` to render lists
 - Applied `className` for styling
 
