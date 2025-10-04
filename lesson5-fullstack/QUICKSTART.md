@@ -140,7 +140,7 @@ jobs:
 
 Update your `vite.config.js`:
 
-```javascript
+```typescript
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 
@@ -216,7 +216,7 @@ npm install @vercel/analytics
 
 Update `src/main.jsx`:
 
-```javascript
+```typescript
 import ReactDOM from "react-dom/client";
 import { Analytics } from "@vercel/analytics/react";
 import App from "./App.jsx";
@@ -284,3 +284,5 @@ Your app should now be live at:
 - **Firebase Hosting**: Google's hosting solution
 - **GitHub Pages**: Free hosting for public repos
 - **AWS S3 + CloudFront**: More control, requires setup
+
+

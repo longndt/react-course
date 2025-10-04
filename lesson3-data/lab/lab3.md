@@ -48,7 +48,7 @@ mongod --version # If using local MongoDB
 
 Create a simple Express server with MongoDB connection:
 
-```javascript
+```typescript
 // server/index.js
 import express from "express";
 import mongoose from "mongoose";
@@ -143,7 +143,7 @@ npm install @tanstack/react-query axios
 
 First, setup React Query provider in your App.jsx:
 
-```jsx
+```tsx
 // src/App.jsx
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import TaskManager from "./components/TaskManager";
@@ -166,7 +166,7 @@ export default App;
 
 Now create the TaskManager component:
 
-```jsx
+```tsx
 // src/components/TaskManager.jsx
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -405,7 +405,7 @@ api-integration/
 - ✅ **GET /api/tasks/stats**: Get task statistics (total, completed, pending)
 
 #### **Database Schema:**
-```javascript
+```typescript
 const TaskSchema = new mongoose.Schema({
   title: { type: String, required: true },
   completed: { type: Boolean, default: false },
@@ -455,3 +455,4 @@ const TaskSchema = new mongoose.Schema({
 - Deploy to production
 
 ---
+

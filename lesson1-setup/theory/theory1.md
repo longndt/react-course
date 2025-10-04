@@ -177,9 +177,14 @@ src/
 
 ## Modern JavaScript with React
 
-```javascript
-// Function Component with Props
-function Greeting({ name, age }) {
+```typescript
+// Function Component with Props (TypeScript)
+interface GreetingProps {
+  name: string;
+  age?: number;
+}
+
+function Greeting({ name, age }: GreetingProps) {
   return (
     <div>
       <h1>Hello, {name}!</h1>
@@ -188,8 +193,14 @@ function Greeting({ name, age }) {
   );
 }
 
-// Using modern JavaScript features
-const users = [
+// Using modern JavaScript features with TypeScript
+interface User {
+  id: number;
+  name: string;
+  age: number;
+}
+
+const users: User[] = [
   { id: 1, name: "John", age: 25 },
   { id: 2, name: "Jane", age: 30 },
 ];
@@ -241,8 +252,15 @@ function UserList() {
 
 Create a Profile Card Component:
 
-```javascript
-function ProfileCard({ name, role, bio, avatar }) {
+```typescript
+interface ProfileCardProps {
+  name: string;
+  role: string;
+  bio: string;
+  avatar: string;
+}
+
+function ProfileCard({ name, role, bio, avatar }: ProfileCardProps) {
   return (
     <div className="card">
       <img src={avatar} alt={name} />
@@ -274,3 +292,4 @@ function App() {
 - [Modern JavaScript Guide](https://javascript.info)
 - [Vite Guide](https://vitejs.dev/guide)
 - [ESLint Documentation](https://eslint.org)
+

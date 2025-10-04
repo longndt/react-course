@@ -63,3 +63,4 @@ This demo shows how to deploy React applications to production with modern CI/CD
 - Lazy loading for routes and components
 - Image optimization and compression
 - Caching strategies for API requests
+

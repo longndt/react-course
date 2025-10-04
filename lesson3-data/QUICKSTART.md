@@ -19,7 +19,7 @@ npm install express mongoose cors dotenv
 
 Create `server.js`:
 
-```javascript
+```typescript
 const express = require("express");
 const cors = require("cors");
 
@@ -98,7 +98,7 @@ npm run dev
 
 Create `src/services/api.js`:
 
-```javascript
+```typescript
 import axios from "axios";
 
 const API_BASE = "http://localhost:5000/api";
@@ -125,7 +125,7 @@ export const api = {
 
 Update `src/main.jsx`:
 
-```javascript
+```typescript
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import App from "./App.jsx";
@@ -152,7 +152,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 Create `src/components/TaskManager.jsx`:
 
-```javascript
+```typescript
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../services/api";
@@ -300,7 +300,7 @@ export default TaskManager;
 
 Update `src/App.jsx`:
 
-```javascript
+```typescript
 import TaskManager from "./components/TaskManager";
 import "./App.css";
 
@@ -346,3 +346,4 @@ You now have:
 - Make sure both servers are running (React on 5173, API on 5000)
 - Check browser network tab for API calls
 - Verify CORS is working (no console errors)
+

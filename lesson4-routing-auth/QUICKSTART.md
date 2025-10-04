@@ -16,7 +16,7 @@ npm run dev
 
 Create `src/contexts/AuthContext.jsx`:
 
-```javascript
+```typescript
 import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
@@ -29,9 +29,13 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     // Check for stored auth data
@@ -47,7 +51,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = (email, password) => {
+  const login = (email: string, password: string) => {
     // Mock login - in real app, this would call your API
     if (email && password) {
       const userData = {
@@ -83,13 +87,19 @@ export const AuthProvider = ({ children }) => {
 
 ### 3. Create Protected Route Component
 
-Create `src/components/ProtectedRoute.jsx`:
+Create `src/components/ProtectedRoute.tsx`:
 
-```javascript
+```typescript
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { ReactNode } from "react";
 
-function ProtectedRoute({ children, adminOnly = false }) {
+interface ProtectedRouteProps {
+  children: ReactNode;
+  adminOnly?: boolean;
+}
+
+function ProtectedRoute({ children, adminOnly = false }: ProtectedRouteProps) {
   const { user, loading } = useAuth();
   const location = useLocation();
 
@@ -115,7 +125,7 @@ export default ProtectedRoute;
 
 Create `src/pages/Login.jsx`:
 
-```javascript
+```typescript
 import { useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -233,7 +243,7 @@ export default Login;
 
 Create `src/pages/Dashboard.jsx`:
 
-```javascript
+```typescript
 import { useAuth } from "../contexts/AuthContext";
 
 function Dashboard() {
@@ -334,7 +344,7 @@ export default Dashboard;
 
 Create `src/pages/AdminPanel.jsx`:
 
-```javascript
+```typescript
 import { useAuth } from "../contexts/AuthContext";
 
 function AdminPanel() {
@@ -390,7 +400,7 @@ export default AdminPanel;
 
 Update `src/main.jsx`:
 
-```javascript
+```typescript
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
@@ -417,7 +427,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 Update `src/App.jsx`:
 
-```javascript
+```typescript
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -521,3 +531,5 @@ You now have:
 - Check browser console for any routing errors
 - Make sure all imports are correct
 - Try different user roles to test access control
+
+

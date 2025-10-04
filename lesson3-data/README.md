@@ -2,176 +2,426 @@
 
 ## Overview
 
-In this lesson, you'll learn how to integrate React applications with backend APIs and manage data effectively. We'll cover REST API integration, data fetching patterns, error handling, and state management for complex data workflows.
+This lesson covers integrating React applications with backend APIs and managing data effectively. You'll learn REST API integration, data fetching patterns, error handling, and state management for complex data workflows with React Query.
 
 ## Learning Objectives
 
 After this lesson, you will be able to:
 
-- Understand REST API concepts and HTTP methods
-- Integrate React with Node.js/Express backends and MongoDB
-- Implement proper data fetching patterns with React Query
-- Handle loading states, errors, and edge cases professionally
-- Build CRUD operations with optimistic updates
-- Manage complex application state with data synchronization
-- Implement search, filtering, and pagination
-- Handle file uploads and media management
+- ✅ Understand REST API concepts and HTTP methods (GET, POST, PUT, DELETE)
+- ✅ Integrate React with Node.js/Express backends and MongoDB
+- ✅ Implement data fetching patterns with fetch API and React Query
+- ✅ Handle loading states, errors, and edge cases professionally
+- ✅ Build complete CRUD operations with optimistic updates
+- ✅ Manage complex application state with data synchronization
+- ✅ Implement search, filtering, sorting, and pagination
+- ✅ Handle file uploads and media management
 
-## Prerequisites
+---
 
-- Completion of Lessons 1-2
-- Understanding of JavaScript ES6+ features
-- Basic knowledge of HTTP and web APIs
-- Familiarity with async/await and Promises
-
-_For detailed development environment setup, see [Complete Environment Setup Guide](../setup/environment-setup.md)_
-
-## What You'll Build
-
-In this lesson, you'll create a comprehensive task management application that demonstrates:
-
-- **API Integration**: Connect to a REST API for data operations
-- **CRUD Operations**: Create, read, update, and delete tasks
-- **Advanced Features**: Search, filtering, sorting, and pagination
-- **Error Handling**: Professional error states and retry mechanisms
-- **Loading States**: Skeleton screens and progress indicators
-- **Real-time Updates**: Live data synchronization
-
-## Key Concepts Covered
+## What You'll Learn
 
 ### 1. REST API Fundamentals
 
-- HTTP methods (GET, POST, PUT, DELETE)
-- Status codes and error handling
-- Request/response patterns
-- API authentication
+**HTTP Methods:**
+- **GET** - Retrieve data from server
+- **POST** - Create new resources
+- **PUT** - Update existing resources
+- **DELETE** - Remove resources
 
-## 🔍 **Knowledge Checkpoint 1**
+**Key Concepts:**
+- Status codes (200, 201, 400, 404, 500)
+- Request headers and body
+- Response handling
+- Error codes and messages
 
-Before diving into code, make sure you understand:
+**API Design:**
+- RESTful endpoints (`/api/users`, `/api/users/:id`)
+- Query parameters for filtering/sorting
+- Pagination strategies
+- API authentication (JWT tokens)
 
-1. **What does REST stand for and why is it important?**
-2. **What's the difference between GET and POST requests?**
-3. **What HTTP status code indicates a successful request?**
-4. **Why do we need error handling in API calls?**
+### 2. Data Fetching Patterns
 
-_💡 Think of APIs as restaurants - you make requests (orders) and get responses (food)!_
+**Native Fetch API:**
+- Making HTTP requests
+- Handling JSON responses
+- Error handling with try/catch
+- Async/await patterns
 
----
+**React Query (TanStack Query):**
+- Automatic caching and background updates
+- Loading and error states management
+- Optimistic updates
+- Query invalidation and refetching
 
-### 2. Data Fetching Strategies
+**Best Practices:**
+- Separate API logic from components
+- Create reusable API client
+- Handle network errors gracefully
+- Implement retry mechanisms
 
-- Native fetch vs axios
-- React Query for advanced data management
-- Caching and background updates
+### 3. State Management for Data
+
+**Local Component State:**
+- useState for simple data
+- useReducer for complex state
+- Derived state patterns
+- State normalization
+
+**Global State with Context:**
+- When to use global vs local state
+- AuthContext for user data
+- DataContext for shared resources
+- Performance considerations
+
+**React Query State:**
+- Server state vs client state
+- Cache management
+- Background synchronization
+- Stale-while-revalidate pattern
+
+### 4. CRUD Operations
+
+**Create:**
+- Form handling and validation
+- POST requests with data
+- Success/error feedback
+- Optimistic UI updates
+
+**Read:**
+- GET requests with parameters
+- List and detail views
+- Loading skeletons
+- Empty states
+
+**Update:**
+- PUT/PATCH requests
+- Inline editing patterns
+- Conflict resolution
 - Optimistic updates
 
-### 3. State Management Patterns
+**Delete:**
+- DELETE requests
+- Confirmation dialogs
+- Undo functionality
+- Cascade deletes
 
-- Local vs global state for data
-- Loading and error states
-- Data synchronization
-- Cache invalidation
+### 5. Advanced Features
 
-### 4. Professional UX Patterns
+**Search & Filtering:**
+- Client-side vs server-side filtering
+- Debounced search input
+- Filter combinations
+- Clear filters functionality
 
-- Skeleton screens
-- Error boundaries
-- Retry mechanisms
-- Offline handling
+**Pagination:**
+- Page-based pagination
+- Cursor-based pagination
+- Infinite scroll
+- Load more pattern
 
-## Lab Exercises
-
-The lesson includes 4 progressive exercises:
-
-1. **Basic API Integration**
-
-   - Set up API client
-   - Implement basic CRUD operations
-   - Handle loading and error states
-
-2. **Advanced Data Management**
-
-   - Implement React Query
-   - Add search and filtering
-   - Create pagination
-
-3. **User Experience Enhancements**
-
-   - Add optimistic updates
-   - Implement retry mechanisms
-   - Create skeleton screens
-
-4. **Real-time Features**
-   - WebSocket integration
-   - Live data updates
-   - Conflict resolution
-
-## Resources
-
-- **Lab Guide**: [lab3.md](./lab/lab3.md) - Step-by-step implementation guide
-
-## 📊 **Final Knowledge Assessment**
-
-Complete this self-assessment to check your API integration skills:
-
-### **API Integration (Must Know)**
-
-- [ ] I can make GET requests to fetch data from APIs
-- [ ] I understand how to send POST requests with JSON data
-- [ ] I can handle API errors gracefully with try/catch
-- [ ] I know how to display loading states during API calls
-
-### **Data Management (Must Know)**
-
-- [ ] I can manage API response data in React state
-- [ ] I understand when to re-fetch data (useEffect dependencies)
-- [ ] I can implement basic CRUD operations
-- [ ] I know how to handle form submissions to APIs
-
-### **User Experience (Good to Know)**
-
-- [ ] I can implement search and filtering functionality
-- [ ] I understand how to show meaningful error messages
-- [ ] I can create loading skeletons for better UX
-- [ ] I know how to implement pagination for large datasets
-
-### **Professional Patterns (Good to Know)**
-
-- [ ] I understand React Query for advanced data management
-- [ ] I can implement optimistic updates
-- [ ] I know how to handle network errors and retries
-- [ ] I understand caching strategies
-
-**🎯 Goal: Check at least 10/16 items before moving to Lesson 4**
-
-### **Self-Reflection Questions**
-
-1. What's the most challenging part of API integration?
-2. How would you handle slow internet connections in your app?
-3. What kind of data will your applications need to manage?
+**Sorting:**
+- Single and multi-column sort
+- Ascending/descending order
+- Server-side vs client-side sorting
 
 ---
 
-## 🎓 **Ready for Lesson 4?**
+## Lesson Structure
 
-If you completed the assessment above and feel comfortable with API integration, you're ready to move on to [Lesson 4: Routing & Authentication](../lesson4-routing-auth/).
+### 📚 Theory
+- **[theory3.md](./theory/theory3.md)** - Comprehensive guide to API integration and data management
 
-**Still need practice?** Consider:
+### 💻 Demo
+- **[demo/](./demo/)** - Live task management application with full CRUD
 
-- Building more complex API integrations
-- Experimenting with different error handling approaches
-- Adding advanced features like search and pagination
-- Practicing with real APIs (not just mock data)
-- **Theory**: [theory3.md](./theory/theory3.md) - Theory and concepts presentation
-- **Demo Code**: Available in the demo folder
-- **API Documentation**: Links to external APIs used in exercises
+### 🔬 Lab
+- **[lab3.md](./lab/lab3.md)** - Build a complete API-integrated application
 
-## Next Steps
+### ⚡ Quick Start
+- **[quickstart.md](./quickstart.md)** - Quick reference for API patterns
 
-After completing this lesson, you'll be ready for:
+---
 
-- **Lesson 4**: Routing, Authentication & Advanced Patterns
-- **Lesson 5**: Full-Stack Integration & Production Deployment
+## Quick Examples
 
-The data management skills learned here form the foundation for building complex, production-ready React applications.
+### Basic GET Request
+```typescript
+async function fetchUsers() {
+  try {
+    const response = await fetch('https://api.example.com/users');
+    if (!response.ok) throw new Error('Failed to fetch');
+    const users = await response.json();
+    return users;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}
+```
+
+### POST Request with Data
+```typescript
+async function createUser(userData) {
+  const response = await fetch('https://api.example.com/users', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userData),
+  });
+  return response.json();
+}
+```
+
+### React Component with Fetch
+```typescript
+function UserList() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchUsers()
+      .then(setUsers)
+      .catch(setError)
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return (
+    <ul>
+      {users.map(user => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### React Query Example
+```typescript
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+
+function Users() {
+  const queryClient = useQueryClient();
+
+  // Fetch users
+  const { data: users, isLoading, error } = useQuery({
+    queryKey: ['users'],
+    queryFn: fetchUsers,
+  });
+
+  // Create user mutation
+  const createMutation = useMutation({
+    mutationFn: createUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['users']);
+    },
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return (
+    <div>
+      <button onClick={() => createMutation.mutate({ name: 'John' })}>
+        Add User
+      </button>
+      <ul>
+        {users.map(user => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+### API Client Pattern
+```typescript
+class ApiClient {
+  constructor(baseURL) {
+    this.baseURL = baseURL;
+  }
+
+  async request(endpoint, options = {}) {
+    const url = `${this.baseURL}${endpoint}`;
+    const response = await fetch(url, {
+      headers: { 'Content-Type': 'application/json' },
+      ...options,
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    return response.json();
+  }
+
+  get(endpoint) {
+    return this.request(endpoint);
+  }
+
+  post(endpoint, data) {
+    return this.request(endpoint, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  put(endpoint, data) {
+    return this.request(endpoint, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  delete(endpoint) {
+    return this.request(endpoint, { method: 'DELETE' });
+  }
+}
+
+const api = new ApiClient('https://api.example.com');
+```
+
+---
+
+## Best Practices
+
+### 🎯 API Integration
+- **Use API client class**: Centralize all API calls
+- **Handle errors properly**: User-friendly error messages
+- **Show loading states**: Skeleton screens or spinners
+- **Validate data**: Both client and server-side
+
+### ⚡ Performance
+- **Cache API responses**: Use React Query or manual caching
+- **Debounce search inputs**: Reduce API calls
+- **Implement pagination**: Don't load all data at once
+- **Optimize re-renders**: Memoize components when needed
+
+### 🏗️ Code Organization
+- **Separate concerns**: API logic separate from UI
+- **Use custom hooks**: Encapsulate data fetching logic
+- **Type your data**: Use TypeScript or PropTypes
+- **Error boundaries**: Catch and handle errors gracefully
+
+### 🔒 Security
+- **Never expose API keys**: Use environment variables
+- **Validate inputs**: Sanitize user data
+- **Use HTTPS**: Always in production
+- **Implement CORS**: Configure properly on backend
+
+---
+
+## Common Pitfalls
+
+### ❌ API Mistakes
+- **Forgetting error handling**: Always use try/catch
+- **Not checking response.ok**: Check before parsing JSON
+- **Missing loading states**: Users need feedback
+- **Infinite loops**: useEffect dependency errors
+
+### ❌ State Management Issues
+- **Over-fetching data**: Request only what you need
+- **Stale data**: Implement proper cache invalidation
+- **Race conditions**: Cancel previous requests
+- **Memory leaks**: Clean up in useEffect return
+
+### ❌ UX Problems
+- **No empty states**: Show message when no data
+- **Poor error messages**: Be specific and helpful
+- **Missing confirmation**: Confirm destructive actions
+- **No offline handling**: Detect and handle network issues
+
+---
+
+## Knowledge Checkpoint
+
+Before proceeding, ensure you understand:
+
+### REST API Basics
+- [ ] HTTP methods (GET, POST, PUT, DELETE) and when to use each
+- [ ] Status codes (200, 201, 400, 404, 500) and their meanings
+- [ ] Request headers and how to send data in body
+- [ ] Error handling and retry strategies
+
+### Data Fetching
+- [ ] Using fetch API with async/await
+- [ ] Handling loading and error states
+- [ ] React Query basics (useQuery, useMutation)
+- [ ] Cache invalidation and refetching
+
+### CRUD Operations
+- [ ] Creating resources with POST requests
+- [ ] Reading data with GET requests
+- [ ] Updating with PUT/PATCH requests
+- [ ] Deleting with DELETE requests
+
+### Advanced Features
+- [ ] Implementing search and filtering
+- [ ] Adding pagination to lists
+- [ ] Optimistic UI updates
+- [ ] File upload handling
+
+**🎯 Goal: Understand all concepts before starting the lab**
+
+---
+
+## Self-Assessment
+
+Rate your confidence (1-5) in these areas:
+
+**REST API Integration** ⭐⭐⭐⭐⭐
+- [ ] Making GET requests to fetch data
+- [ ] Sending POST requests with data
+- [ ] Handling errors with try/catch
+- [ ] Understanding status codes
+
+**Data Management** ⭐⭐⭐⭐⭐
+- [ ] Managing API data in React state
+- [ ] Using useEffect for data fetching
+- [ ] Implementing CRUD operations
+- [ ] Form submission to APIs
+
+**React Query** ⭐⭐⭐⭐⭐
+- [ ] Setting up React Query
+- [ ] Using useQuery for fetching
+- [ ] Using useMutation for updates
+- [ ] Cache invalidation
+
+**Advanced Features** ⭐⭐⭐⭐⭐
+- [ ] Search and filtering
+- [ ] Pagination implementation
+- [ ] Optimistic updates
+- [ ] Error recovery
+
+**Target Score: 16/20 (4+ average) to build production-ready apps**
+
+---
+
+## What's Next?
+
+After completing this lesson, you'll be able to:
+
+1. **Connect to APIs**: Fetch and send data to backend services
+2. **Manage Complex Data**: Handle loading, errors, and caching
+3. **Build CRUD Apps**: Create full-featured data-driven applications
+4. **Optimize UX**: Implement search, pagination, and smooth updates
+
+**🎓 You're now ready for Lesson 4: Routing & Authentication!**
+
+---
+
+## Additional Resources
+
+- 📖 [API Integration Guide](./theory/theory3.md)
+- 💻 [Demo Application](./demo/)
+- 🔬 [Lab Exercises](./lab/lab3.md)
+- ⚡ [Quick Reference](./quickstart.md)
+- 📚 [React Query Docs](https://tanstack.com/query/latest)
+- 🌐 [REST API Tutorial](https://restfulapi.net/)
+- 🔧 [Fetch API MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+

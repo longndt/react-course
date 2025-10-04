@@ -60,3 +60,4 @@ This demo shows how to implement client-side routing and JWT authentication in R
 - `/dashboard` - User dashboard (protected)
 - `/profile` - User profile (protected)
 - `/admin` - Admin panel (admin only)
+

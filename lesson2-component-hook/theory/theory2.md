@@ -60,12 +60,12 @@ E-commerce Dashboard
 **Purpose:** Add state variables to function components
 
 **Syntax:**
-```jsx
+```tsx
 const [state, setState] = useState(initialValue);
 ```
 
 **Basic Example:**
-```jsx
+```tsx
 function Counter() {
   const [count, setCount] = useState(0);
 
@@ -81,7 +81,7 @@ function Counter() {
 ```
 
 **Advanced Example - Managing Complex State:**
-```jsx
+```tsx
 function UserProfile() {
   const [user, setUser] = useState({
     name: '',
@@ -131,7 +131,7 @@ function UserProfile() {
 **Purpose:** Perform side effects (data fetching, subscriptions, manual DOM manipulation, timers)
 
 **Syntax:**
-```jsx
+```tsx
 useEffect(() => {
   // Effect logic
   return () => {
@@ -141,7 +141,7 @@ useEffect(() => {
 ```
 
 **Example 1: Timer**
-```jsx
+```tsx
 function Timer() {
   const [seconds, setSeconds] = useState(0);
 
@@ -159,7 +159,7 @@ function Timer() {
 ```
 
 **Example 2: Fetching Data**
-```jsx
+```tsx
 function UserList() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -210,7 +210,7 @@ function UserList() {
 - Persist values across renders
 
 **Example 1: Focus Management**
-```jsx
+```tsx
 function FocusInput() {
   const inputRef = useRef(null);
 
@@ -228,7 +228,7 @@ function FocusInput() {
 ```
 
 **Example 2: Storing Previous Value**
-```jsx
+```tsx
 function Counter() {
   const [count, setCount] = useState(0);
   const prevCountRef = useRef();
@@ -258,7 +258,7 @@ function Counter() {
 **Purpose:** Access context values without prop drilling
 
 **Example: Theme Context**
-```jsx
+```tsx
 // 1. Create Context
 const ThemeContext = React.createContext('light');
 
@@ -300,12 +300,12 @@ function Toolbar() {
 - Want to optimize performance by passing dispatch down instead of callbacks
 
 **Syntax:**
-```jsx
+```tsx
 const [state, dispatch] = useReducer(reducer, initialState);
 ```
 
 **Example: Todo List**
-```jsx
+```tsx
 const initialState = { todos: [], filter: 'all' };
 
 function todoReducer(state, action) {
@@ -392,7 +392,7 @@ function TodoApp() {
 **Naming Convention:** Always start with "use" (e.g., `useWindowWidth`, `useLocalStorage`)
 
 **Example 1: Window Dimensions**
-```jsx
+```tsx
 function useWindowSize() {
   const [size, setSize] = useState({
     width: window.innerWidth,
@@ -427,7 +427,7 @@ function ResponsiveComponent() {
 ```
 
 **Example 2: Local Storage**
-```jsx
+```tsx
 function useLocalStorage(key, initialValue) {
   const [value, setValue] = useState(() => {
     const stored = localStorage.getItem(key);
@@ -457,7 +457,7 @@ function Settings() {
 ```
 
 **Example 3: Fetch Hook**
-```jsx
+```tsx
 function useFetch(url) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -487,8 +487,17 @@ function useFetch(url) {
 }
 
 // Usage
-function UserProfile({ userId }) {
-  const { data: user, loading, error } = useFetch(`/api/users/${userId}`);
+interface UserProfileProps {
+  userId: number;
+}
+
+interface User {
+  id: number;
+  name: string;
+}
+
+function UserProfile({ userId }: UserProfileProps) {
+  const { data: user, loading, error } = useFetch<User>(`/api/users/${userId}`);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -504,7 +513,7 @@ function UserProfile({ userId }) {
 **Rules of Hooks:**
 
 1. **Only Call Hooks at the Top Level**
-   ```jsx
+   ```tsx
    // ❌ Wrong - inside condition
    if (condition) {
      const [value, setValue] = useState(0);
@@ -518,7 +527,7 @@ function UserProfile({ userId }) {
    ```
 
 2. **Only Call Hooks from React Functions**
-   ```jsx
+   ```tsx
    // ❌ Wrong - regular function
    function calculateTotal() {
      const [total, setTotal] = useState(0);
@@ -533,7 +542,7 @@ function UserProfile({ userId }) {
 **Best Practices:**
 
 1. **Name custom Hooks starting with "use"**
-   ```jsx
+   ```tsx
    // ✅ Good
    function useFormValidation() { }
    function useAuth() { }
@@ -544,7 +553,7 @@ function UserProfile({ userId }) {
    ```
 
 2. **Keep useEffect dependencies accurate**
-   ```jsx
+   ```tsx
    // ❌ Missing dependency
    useEffect(() => {
      console.log(count);
@@ -557,7 +566,7 @@ function UserProfile({ userId }) {
    ```
 
 3. **Split unrelated logic into multiple useEffect**
-   ```jsx
+   ```tsx
    // ❌ Mixing concerns
    useEffect(() => {
      fetchUserData();
@@ -579,7 +588,7 @@ function UserProfile({ userId }) {
 ### 5. Common Mistakes & Solutions
 
 **Mistake 1: Stale Closures**
-```jsx
+```tsx
 // ❌ Problem
 function Counter() {
   const [count, setCount] = useState(0);
@@ -610,7 +619,7 @@ function Counter() {
 ```
 
 **Mistake 2: Infinite Loops**
-```jsx
+```tsx
 // ❌ Infinite loop - missing dependency array
 useEffect(() => {
   setCount(count + 1);
@@ -623,7 +632,7 @@ useEffect(() => {
 ```
 
 **Mistake 3: Not Cleaning Up**
-```jsx
+```tsx
 // ❌ Memory leak
 useEffect(() => {
   const interval = setInterval(() => {
@@ -661,7 +670,7 @@ useEffect(() => {
 
 **Migration Example:**
 
-```jsx
+```tsx
 // Class Component
 class Counter extends React.Component {
   constructor(props) {
@@ -735,3 +744,4 @@ function Counter() {
 - [React Discord](https://discord.gg/react) - Official React community
 - [Reactiflux](https://www.reactiflux.com/) - React developers chat
 - [r/reactjs](https://www.reddit.com/r/reactjs/) - Reddit community
+

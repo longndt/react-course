@@ -77,10 +77,16 @@ Usage example:
 
 1. Create a withLoading HOC:
 
-```jsx
-// src/hoc/withLoading.jsx
-function withLoading(WrappedComponent) {
-  return function WithLoadingComponent({ isLoading, ...props }) {
+```tsx
+// src/hoc/withLoading.tsx
+import React from 'react';
+
+interface WithLoadingProps {
+  isLoading: boolean;
+}
+
+function withLoading<P extends object>(WrappedComponent: React.ComponentType<P>) {
+  return function WithLoadingComponent({ isLoading, ...props }: WithLoadingProps & P) {
     if (isLoading) {
       return (
         <div className="loading-container">
@@ -88,7 +94,7 @@ function withLoading(WrappedComponent) {
         </div>
       );
     }
-    return <WrappedComponent {...props} />;
+    return <WrappedComponent {...props as P} />;
   };
 }
 
@@ -97,7 +103,7 @@ export default withLoading;
 
 2. Create a LoadingSpinner component:
 
-```jsx
+```tsx
 // src/components/LoadingSpinner/LoadingSpinner.jsx
 function LoadingSpinner() {
   return (
@@ -112,7 +118,7 @@ export default LoadingSpinner;
 
 3. Apply the HOC:
 
-```jsx
+```tsx
 // src/components/ProductList/ProductList.jsx
 const ProductListWithLoading = withLoading(ProductList);
 
@@ -139,7 +145,7 @@ function ProductListContainer() {
 
 1. Create a useForm hook:
 
-```jsx
+```tsx
 // src/hooks/useForm.js
 function useForm(initialValues = {}) {
   const [values, setValues] = useState(initialValues);
@@ -281,12 +287,23 @@ function ProductList() {
 
 1. Create a Theme Context:
 
-```jsx
-// src/context/ThemeContext.jsx
-const ThemeContext = createContext();
+```tsx
+// src/context/ThemeContext.tsx
+import { createContext, useState, ReactNode } from 'react';
 
-function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState("light");
+interface ThemeContextType {
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
+}
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+interface ThemeProviderProps {
+  children: ReactNode;
+}
+
+function ThemeProvider({ children }: ThemeProviderProps) {
+  const [theme, setTheme] = useState<'light' | 'dark'>("light");
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
@@ -368,7 +385,7 @@ function App() {
 
 Create an ErrorBoundary component to handle component errors gracefully:
 
-```jsx
+```tsx
 class ErrorBoundary extends React.Component {
   state = { hasError: false };
 
@@ -394,11 +411,18 @@ class ErrorBoundary extends React.Component {
 
 Implement a modal component using React Portals:
 
-```jsx
-// src/components/Modal/Modal.jsx
+```tsx
+// src/components/Modal/Modal.tsx
 import { createPortal } from "react-dom";
+import { ReactNode } from "react";
 
-function Modal({ isOpen, onClose, children }) {
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: ReactNode;
+}
+
+function Modal({ isOpen, onClose, children }: ModalProps) {
   if (!isOpen) return null;
 
   return createPortal(
@@ -659,3 +683,4 @@ import { useTheme } from "../context/ThemeContext";     // ❌ Wrong
 - [React Hooks Guide](https://react.dev/reference/react)
 - [Context API Reference](https://react.dev/learn/passing-data-deeply-with-context)
 - [Error Boundaries](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary)
+

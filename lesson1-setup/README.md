@@ -37,7 +37,7 @@ React is a declarative, component-based library for building user interfaces. Un
 
 ### React vs Other Approaches
 
-```javascript
+```typescript
 // Traditional DOM manipulation
 const button = document.getElementById("myButton");
 button.addEventListener("click", function () {
@@ -170,7 +170,7 @@ _💡 Tip: If you're unsure about any answer, review the section above before co
 
 ### 1. Simple Welcome Component
 
-```jsx
+```tsx
 // src/components/Welcome.jsx
 function Welcome() {
   return (
@@ -186,9 +186,14 @@ export default Welcome; // Makes component available to other files
 
 ### 2. Button Component with Props
 
-```jsx
-// src/components/Button.jsx
-function Button({ text, color }) {
+```tsx
+// src/components/Button.tsx
+interface ButtonProps {
+  text: string;
+  color: string;
+}
+
+function Button({ text, color }: ButtonProps) {
   return (
     <button className={`button ${color}`}>
       {text}
@@ -205,9 +210,15 @@ export default Button;
 
 ### 3. Profile Card Component
 
-```jsx
-// src/components/ProfileCard.jsx
-function ProfileCard({ name, image, role }) {
+```tsx
+// src/components/ProfileCard.tsx
+interface ProfileCardProps {
+  name: string;
+  image: string;
+  role: string;
+}
+
+function ProfileCard({ name, image, role }: ProfileCardProps) {
   return (
     <div className="profile-card">
       <img src={image} alt={name} className="profile-image" />
@@ -290,7 +301,7 @@ Create these basic components:
 
 Example:
 
-```jsx
+```tsx
 function Header() {
   return (
     <header>
@@ -319,7 +330,7 @@ Bonus:
 
 ### 1. Component Names
 
-```jsx
+```tsx
 // ❌ Wrong - starts with lowercase
 function button() {}
 
@@ -329,7 +340,7 @@ function Button() {}
 
 ### 2. HTML Class vs className
 
-```jsx
+```tsx
 // ❌ Wrong - 'class' is not used in React
 <div class="container">
 
@@ -339,7 +350,7 @@ function Button() {}
 
 ### 3. Closing Tags
 
-```jsx
+```tsx
 // ❌ Wrong - tag not closed
 <img src="photo.jpg">
 
@@ -415,7 +426,7 @@ Complete this self-assessment to check your understanding:
 
 ## 🎓 **Ready for Lesson 2?**
 
-If you completed the assessment above and feel comfortable with React basics, you're ready to move on to [Lesson 2: Component Architecture & Advanced State](../lesson2-components/).
+If you completed the assessment above and feel comfortable with React basics, you're ready to move on to [Lesson 2: Component Architecture & Advanced State](../lesson2-component-hook/).
 
 **Still need practice?** That's totally normal! Consider:
 
@@ -435,3 +446,4 @@ If you completed the assessment above and feel comfortable with React basics, yo
 3. What's the difference between props and regular variables?
 4. How do you create a new React project?
 5. What's the purpose of the public folder?
+

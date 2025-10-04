@@ -16,7 +16,7 @@ npm run dev
 
 Create `src/components/Button.jsx`:
 
-```javascript
+```typescript
 import { useState } from "react";
 import "./Button.css";
 
@@ -117,23 +117,38 @@ Create `src/components/Button.css`:
 
 ### 4. Create a Form Component
 
-Create `src/components/UserForm.jsx`:
+Create `src/components/UserForm.tsx`:
 
-```javascript
+```typescript
 import { useState } from "react";
 import Button from "./Button";
 
-function UserForm({ onSubmit }) {
-  const [formData, setFormData] = useState({
+interface FormData {
+  name: string;
+  email: string;
+  role: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+}
+
+interface UserFormProps {
+  onSubmit: (data: FormData) => void;
+}
+
+function UserForm({ onSubmit }: UserFormProps) {
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     role: "developer",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
 
-  const validateForm = () => {
-    const newErrors = {};
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
 
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
@@ -258,7 +273,7 @@ export default UserForm;
 
 Update `src/App.jsx`:
 
-```javascript
+```typescript
 import { useState } from "react";
 import Button from "./components/Button";
 import UserForm from "./components/UserForm";
@@ -352,3 +367,4 @@ You now have:
 - Check the demo code in `./demo/` folder
 - Review component patterns in the README
 - Experiment with different component props!
+

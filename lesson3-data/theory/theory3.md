@@ -29,7 +29,7 @@ Your Modern Stack:
 
 ### From Database to API Response
 
-```javascript
+```typescript
 // Node.js/Express backend endpoint
 app.get("/api/students", async (req, res) => {
   try {
@@ -46,7 +46,7 @@ app.get("/api/students", async (req, res) => {
 
 ### React Frontend Consumption
 
-```jsx
+```tsx
 // React component using the API
 function StudentsList() {
   const [students, setStudents] = useState([]);
@@ -76,7 +76,7 @@ function StudentsList() {
 
 **Your Node.js API Structure:**
 
-```javascript
+```typescript
 // server/routes/students.js - Your backend API
 const express = require("express");
 const Student = require("../models/Student");
@@ -98,7 +98,7 @@ router.post("/", async (req, res) => {
 
 **React Frontend Implementation:**
 
-```jsx
+```tsx
 // React frontend calling your Node.js API
 function useStudents() {
   const [students, setStudents] = useState([]);
@@ -139,7 +139,7 @@ function useStudents() {
 
 ### Basic Setup
 
-```jsx
+```tsx
 // main.jsx - Configure React Query
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -162,7 +162,7 @@ ReactDOM.render(
 
 ### Query Implementation
 
-```jsx
+```tsx
 // components/StudentsList.jsx - Using React Query
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -227,7 +227,7 @@ function StudentsList() {
 
 ### Search and Filtering
 
-```jsx
+```tsx
 function StudentSearch() {
   const [searchTerm, setSearchTerm] = useState("");
   const [major, setMajor] = useState("");
@@ -267,12 +267,28 @@ function StudentSearch() {
 
 ### Update Operations
 
-```jsx
-function EditStudent({ studentId }) {
+```tsx
+interface Student {
+  _id: string;
+  name: string;
+  email: string;
+  major: string;
+}
+
+interface EditStudentProps {
+  studentId: string;
+}
+
+interface UpdateData {
+  id: string;
+  data: Partial<Student>;
+}
+
+function EditStudent({ studentId }: EditStudentProps) {
   const queryClient = useQueryClient();
 
   const updateMutation = useMutation({
-    mutationFn: async ({ id, data }) => {
+    mutationFn: async ({ id, data }: UpdateData) => {
       const response = await fetch(`http://localhost:5000/api/students/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -313,8 +329,12 @@ function EditStudent({ studentId }) {
 
 ### Delete Operations
 
-```jsx
-function DeleteStudent({ student }) {
+```tsx
+interface DeleteStudentProps {
+  student: Student;
+}
+
+function DeleteStudent({ student }: DeleteStudentProps) {
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
@@ -354,7 +374,7 @@ function DeleteStudent({ student }) {
 
 ### Error Boundaries for API Failures
 
-```jsx
+```tsx
 // components/ErrorBoundary.jsx
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -388,7 +408,7 @@ class ErrorBoundary extends React.Component {
 
 ### Advanced Loading States
 
-```jsx
+```tsx
 function StudentDashboard() {
   const {
     data: students,
@@ -439,7 +459,7 @@ function StudentDashboard() {
 
 ### 1. Environment Configuration
 
-```javascript
+```typescript
 // config/api.js
 const API_BASE_URL =
   process.env.NODE_ENV === "production"
@@ -459,7 +479,7 @@ export const apiClient = {
 
 ### 2. Optimistic Updates
 
-```jsx
+```tsx
 function useOptimisticStudents() {
   const queryClient = useQueryClient();
 
@@ -496,7 +516,7 @@ function useOptimisticStudents() {
 
 ### 3. Request Caching and Deduplication
 
-```jsx
+```tsx
 // Custom hook with intelligent caching
 function useStudent(id) {
   return useQuery({
@@ -550,3 +570,4 @@ Ready to put theory into practice? Let's build a real application that connects 
 - Build API endpoints with Express/MongoDB
 - Implement React Query for data management
 - Add professional error handling and loading states
+

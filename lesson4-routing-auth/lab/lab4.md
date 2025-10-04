@@ -29,7 +29,7 @@ npm install react-router-dom
 
 1. Set up basic routing:
 
-```jsx
+```tsx
 // src/App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -55,7 +55,7 @@ function App() {
 
 3. Create a navigation component:
 
-```jsx
+```tsx
 // src/components/Navbar.jsx
 import { Link, NavLink } from "react-router-dom";
 
@@ -100,7 +100,7 @@ function Navbar() {
 
 1. Create a products list and detail view:
 
-```jsx
+```tsx
 // src/pages/Products.jsx
 function Products() {
   const products = [
@@ -131,7 +131,7 @@ function Products() {
 
 2. Create a product detail component:
 
-```jsx
+```tsx
 // src/pages/ProductDetail.jsx
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -162,16 +162,36 @@ function ProductDetail() {
 
 1. Create an auth context:
 
-```jsx
-// src/context/AuthContext.jsx
-import { createContext, useContext, useState } from "react";
+```tsx
+// src/context/AuthContext.tsx
+import { createContext, useContext, useState, ReactNode } from "react";
 
-const AuthContext = createContext();
+interface User {
+  id: number;
+  username: string;
+}
 
-function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+interface Credentials {
+  username: string;
+  password: string;
+}
 
-  const login = (credentials) => {
+interface AuthContextType {
+  user: User | null;
+  login: (credentials: Credentials) => Promise<void>;
+  logout: () => void;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+function AuthProvider({ children }: AuthProviderProps) {
+  const [user, setUser] = useState<User | null>(null);
+
+  const login = (credentials: Credentials): Promise<void> => {
     // Simulate authentication
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -196,7 +216,9 @@ function AuthProvider({ children }) {
 }
 
 function useAuth() {
-  return useContext(AuthContext);
+  const context = useContext(AuthContext);
+  if (!context) throw new Error('useAuth must be used within AuthProvider');
+  return context;
 }
 
 export { AuthProvider, useAuth };
@@ -204,12 +226,17 @@ export { AuthProvider, useAuth };
 
 2. Create a protected route component:
 
-```jsx
-// src/components/ProtectedRoute.jsx
+```tsx
+// src/components/ProtectedRoute.tsx
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { ReactNode } from "react";
 
-function ProtectedRoute({ children }) {
+interface ProtectedRouteProps {
+  children: ReactNode;
+}
+
+function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user } = useAuth();
   const location = useLocation();
 
@@ -225,7 +252,7 @@ export default ProtectedRoute;
 
 3. Implement login page:
 
-```jsx
+```tsx
 // src/pages/Login.jsx
 import { useAuth } from "../context/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -268,7 +295,7 @@ function Login() {
 
 Create a dashboard with nested routes:
 
-```jsx
+```tsx
 // src/pages/Dashboard/index.jsx
 import { Outlet, NavLink } from "react-router-dom";
 
@@ -310,7 +337,7 @@ function Dashboard() {
 
 Create a filtered products list:
 
-```jsx
+```tsx
 function ProductList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get("filter") || "";
@@ -334,7 +361,7 @@ function ProductList() {
 
 Implement loading states for route transitions:
 
-```jsx
+```tsx
 import { Suspense } from "react";
 
 function App() {
@@ -486,3 +513,5 @@ lab4-routing-auth/
    - Route protection logic
 
 This structure provides a solid foundation for authentication-based React applications with proper routing and state management patterns.
+
+

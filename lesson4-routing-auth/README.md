@@ -2,44 +2,135 @@
 
 ## Overview
 
-In this lesson, you'll learn how to create multi-page React applications using React Router and implement comprehensive authentication systems. We'll build complete authentication workflows with protected routes and explore advanced React patterns used in enterprise applications.
+This lesson covers creating multi-page React applications using React Router and implementing comprehensive authentication systems. You'll learn to build complete authentication workflows with protected routes and explore advanced React patterns used in enterprise applications.
 
 ## Learning Objectives
 
 After this lesson, you will be able to:
 
-- Set up complex routing architectures with React Router
-- Create protected routes with authentication guards
-- Implement JWT-based authentication systems
-- Manage user sessions and role-based access control
-- Apply advanced React patterns (HOCs, Render Props, Compound Components)
-- Implement global state management with Context API and Zustand
-- Build scalable authentication workflows
+- ✅ Set up complex routing architectures with React Router
+- ✅ Create protected routes with authentication guards
+- ✅ Implement JWT-based authentication systems
+- ✅ Manage user sessions and role-based access control (RBAC)
+- ✅ Apply advanced React patterns (HOCs, Render Props, Compound Components)
+- ✅ Implement global state management with Context API and Zustand
+- ✅ Build scalable authentication workflows
 
-## 1. Understanding React Router
+---
 
-### Basic Routing
+## What You'll Learn
 
-```jsx
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+### 1. React Router Fundamentals
+
+**Core Concepts:**
+- Client-side routing vs server-side routing
+- BrowserRouter vs HashRouter
+- Routes, Route, and path matching
+- Nested routes and layouts
+
+**Navigation:**
+- Link and NavLink components
+- Programmatic navigation with useNavigate
+- URL parameters and query strings
+- Route parameters with useParams
+
+**Advanced Routing:**
+- Protected routes and route guards
+- Lazy loading routes for performance
+- 404 pages and error boundaries
+- Outlet for nested routes
+
+### 2. Authentication System
+
+**Authentication Flow:**
+- User registration and login
+- JWT token management
+- Persistent authentication (localStorage/cookies)
+- Logout and session expiration
+
+**Authorization:**
+- Protected routes (auth required)
+- Role-based access control (RBAC)
+- Permission checking
+- Redirect after login
+
+**Security Best Practices:**
+- Secure token storage
+- HTTPS requirements
+- CORS configuration
+- XSS and CSRF protection
+
+### 3. Advanced React Patterns
+
+**Higher-Order Components (HOCs):**
+- Reusable component logic
+- withAuth, withLogger HOCs
+- Props manipulation
+- Component composition
+
+**Render Props:**
+- Function as children pattern
+- Sharing stateful logic
+- Flexible component APIs
+- Mouse tracker example
+
+**Compound Components:**
+- Parent-child communication
+- Implicit state sharing
+- Flexible component APIs
+- Tabs, Accordion examples
+
+**Custom Hooks:**
+- Extracting reusable logic
+- useAuth, useLocalStorage
+- useForm validation
+- Composition over inheritance
+
+### 4. State Management
+
+**Context API:**
+- Global state without props drilling
+- AuthContext, ThemeContext
+- Provider pattern
+- Performance considerations
+
+**Zustand (Lightweight State Management):**
+- Simple global state
+- No boilerplate
+- TypeScript support
+- DevTools integration
+
+---
+
+## Lesson Structure
+
+### 📚 Theory
+- **[theory4.md](./theory/theory4.md)** - Comprehensive guide to routing, authentication, and advanced patterns
+
+### 💻 Demo
+- **[demo/](./demo/)** - Live authentication and routing examples
+
+### 🔬 Lab
+- **[lab4.md](./lab/lab4.md)** - Build a complete authenticated application with routing
+
+### ⚡ Quick Start
+- **[quickstart.md](./quickstart.md)** - Quick reference for routing and auth setup
+
+---
+
+## Quick Examples
+
+### Basic Routing Setup
+```tsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Basic route */}
         <Route path="/" element={<Home />} />
-
-        {/* Route with parameter */}
+        <Route path="/about" element={<About />} />
         <Route path="/product/:id" element={<Product />} />
-
-        {/* Nested routes */}
-        <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="profile" element={<Profile />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
-
-        {/* Catch-all route for 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
@@ -47,34 +138,17 @@ function App() {
 }
 ```
 
-## 🔍 **Knowledge Checkpoint 1**
+### Navigation Links
+```tsx
+import { Link, NavLink } from 'react-router-dom';
 
-Before building complex routing, ensure you understand:
-
-1. **What's the difference between client-side and server-side routing?**
-2. **When would you use nested routes vs separate routes?**
-3. **How do you access URL parameters in a React component?**
-4. **Why do we need a "catch-all" route?**
-
-_💡 Single Page Applications (SPAs) handle navigation differently than traditional websites!_
-
----
-
-### Navigation Components
-
-```jsx
-import { Link, NavLink } from "react-router-dom";
-
-function Navigation() {
+function Nav() {
   return (
     <nav>
-      {/* Basic link */}
       <Link to="/">Home</Link>
-
-      {/* Link with active state */}
-      <NavLink
-        to="/dashboard"
-        className={({ isActive }) => (isActive ? "active" : "")}
+      <NavLink 
+        to="/dashboard" 
+        className={({ isActive }) => isActive ? 'active' : ''}
       >
         Dashboard
       </NavLink>
@@ -83,63 +157,64 @@ function Navigation() {
 }
 ```
 
-### Using Route Parameters
-
-```jsx
-import { useParams, useNavigate } from "react-router-dom";
+### URL Parameters
+```tsx
+import { useParams, useNavigate } from 'react-router-dom';
 
 function ProductPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  
   return (
     <div>
       <h1>Product {id}</h1>
-      <button onClick={() => navigate("/")}>Back to Home</button>
+      <button onClick={() => navigate('/')}>Back</button>
     </div>
   );
 }
 ```
 
-## 2. Implementing Authentication
+### Authentication Context
+```tsx
+import { createContext, useState, ReactNode, useContext } from 'react';
 
-### 1. Authentication Context
+interface User {
+  id: string;
+  email: string;
+  name: string;
+}
 
-```jsx
-import { createContext, useContext, useState } from "react";
+interface AuthResponse {
+  user: User;
+  token: string;
+}
 
-// Create context
-const AuthContext = createContext(null);
+interface AuthContextType {
+  user: User | null;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
+}
 
-// Create provider
-export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-  const login = async (email, password) => {
-    try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-      });
+interface AuthProviderProps {
+  children: ReactNode;
+}
 
-      if (!response.ok) {
-        throw new Error("Login failed");
-      }
-
-      const data = await response.json();
-      setUser(data.user);
-      localStorage.setItem("token", data.token);
-    } catch (error) {
-      console.error("Login error:", error);
-      throw error;
-    }
+export function AuthProvider({ children }: AuthProviderProps) {
+  const [user, setUser] = useState<User | null>(null);
+  
+  const login = async (email: string, password: string): Promise<void> => {
+    const response: AuthResponse = await api.post('/auth/login', { email, password });
+    setUser(response.user);
+    localStorage.setItem('token', response.token);
   };
-
+  
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
   };
-
+  
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       {children}
@@ -147,351 +222,216 @@ export function AuthProvider({ children }) {
   );
 }
 
-// Custom hook for using auth
-export function useAuth() {
-  return useContext(AuthContext);
-}
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) throw new Error('useAuth must be used within AuthProvider');
+  return context;
+};
 ```
 
-### 2. Login Form
+### Protected Route
+```tsx
+import { Navigate, useLocation } from 'react-router-dom';
+import { ReactNode } from 'react';
 
-```jsx
-function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { login } = useAuth();
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await login(email, password);
-      navigate("/dashboard");
-    } catch (error) {
-      alert("Login failed: " + error.message);
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        required
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        required
-      />
-      <button type="submit">Log In</button>
-    </form>
-  );
+interface ProtectedRouteProps {
+  children: ReactNode;
 }
-```
 
-### 3. Protected Route Component
-
-```jsx
-function ProtectedRoute({ children }) {
-  const { user } = useAuth();
+function ProtectedRoute({ children }: ProtectedRouteProps) {
+  const { user, loading } = useAuth();
   const location = useLocation();
-
+  
+  if (loading) return <LoadingSpinner />;
+  
   if (!user) {
-    // Redirect to login page if not authenticated
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-
-  return children;
+  
+  return <>{children}</>;
 }
 
-// Usage in App.jsx
-function App() {
-  return (
-    <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </AuthProvider>
-    </BrowserRouter>
-  );
+// Usage
+<Route 
+  path="/dashboard" 
+  element={
+    <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
+  } 
+/>
+```
+
+### Role-Based Access Control
+```tsx
+interface AdminRouteProps {
+  children: ReactNode;
+}
+
+function AdminRoute({ children }: AdminRouteProps) {
+  const { user } = useAuth();
+  
+  if (!user) return <Navigate to="/login" />;
+  if (user.role !== 'admin') return <Navigate to="/unauthorized" />;
+  
+  return <>{children}</>;
 }
 ```
 
-## Lab Exercises
+### Higher-Order Component (HOC)
+```tsx
+import React from 'react';
 
-### Exercise 1: Basic Routing
-
-Create a multi-page application with:
-
-1. Home page
-2. About page
-3. Contact page
-4. Navigation menu
-5. 404 page
-
-### Exercise 2: User Authentication
-
-Implement a complete authentication system:
-
-1. Login form with JWT integration
-2. Registration form with validation
-3. Password reset functionality
-4. Remember me functionality
-5. Comprehensive error handling
-
-### Exercise 3: Protected Dashboard
-
-Build a protected dashboard area:
-
-1. Protected routes with authentication guards
-2. User profile page
-3. Settings page
-4. Admin section with role-based access
-5. Session management
-
-### Exercise 4: Advanced React Patterns
-
-Implement advanced patterns:
-
-1. Higher-Order Components (HOCs) for authentication
-2. Render Props pattern for data sharing
-3. Compound Components for reusable UI
-4. Custom hooks for authentication logic
-5. Context API for global state management
-
-## 4. Advanced React Patterns
-
-### Higher-Order Components (HOCs)
-
-```jsx
-// HOC for authentication
-function withAuth(WrappedComponent) {
-  return function AuthenticatedComponent(props) {
-    const { user, loading } = useAuth();
-
-    if (loading) {
-      return <LoadingSpinner />;
-    }
-
-    if (!user) {
-      return <Navigate to="/login" replace />;
-    }
-
-    return <WrappedComponent {...props} />;
+function withAuth<P extends object>(Component: React.ComponentType<P>) {
+  return function AuthenticatedComponent(props: P) {
+    const { user } = useAuth();
+    
+    if (!user) return <Navigate to="/login" />;
+    
+    return <Component {...props} user={user} />;
   };
 }
 
 // Usage
-const ProtectedProfile = withAuth(ProfilePage);
+const ProtectedDashboard = withAuth(Dashboard);
 ```
-
-### Render Props Pattern
-
-```jsx
-// Authentication render prop component
-function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  return (
-    <AuthContext.Provider value={{ user, loading, setUser }}>
-      {typeof children === "function" ? children({ user, loading }) : children}
-    </AuthContext.Provider>
-  );
-}
-
-// Usage
-function App() {
-  return (
-    <AuthProvider>
-      {({ user, loading }) =>
-        loading ? <LoadingSpinner /> : user ? <Dashboard /> : <LoginPage />
-      }
-    </AuthProvider>
-  );
-}
-```
-
-### Compound Components
-
-```jsx
-// Modal compound component
-const Modal = ({ children, isOpen, onClose }) => {
-  if (!isOpen) return null;
-
-  return (
-    <div className="modal-backdrop">
-      <div className="modal-content">{children}</div>
-    </div>
-  );
-};
-
-Modal.Header = ({ children }) => <div className="modal-header">{children}</div>;
-
-Modal.Body = ({ children }) => <div className="modal-body">{children}</div>;
-
-Modal.Footer = ({ children }) => <div className="modal-footer">{children}</div>;
-
-// Usage
-function LoginModal({ isOpen, onClose }) {
-  return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <Modal.Header>
-        <h2>Login Required</h2>
-      </Modal.Header>
-      <Modal.Body>
-        <LoginForm />
-      </Modal.Body>
-      <Modal.Footer>
-        <button onClick={onClose}>Cancel</button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
-```
-
-### State Management with Zustand
-
-```jsx
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-
-// Auth store
-const useAuthStore = create(
-  persist(
-    (set, get) => ({
-      user: null,
-      token: null,
-      isAuthenticated: false,
-
-      login: async (credentials) => {
-        try {
-          const response = await authAPI.login(credentials);
-          set({
-            user: response.user,
-            token: response.token,
-            isAuthenticated: true,
-          });
-        } catch (error) {
-          throw error;
-        }
-      },
-
-      logout: () => {
-        set({
-          user: null,
-          token: null,
-          isAuthenticated: false,
-        });
-      },
-
-      updateProfile: (updates) => {
-        set((state) => ({
-          user: { ...state.user, ...updates },
-        }));
-      },
-    }),
-    {
-      name: "auth-storage",
-      getStorage: () => localStorage,
-    }
-  )
-);
-
-// Usage in components
-function useAuth() {
-  const { user, isAuthenticated, login, logout } = useAuthStore();
-
-  return {
-    user,
-    isAuthenticated,
-    login,
-    logout,
-    isLoading: user === null && isAuthenticated,
-  };
-}
-```
-
-## Additional Resources
-
-- [React Router Documentation](https://reactrouter.com/)
-- [JWT Authentication Guide](https://jwt.io/introduction)
-- [Protected Routes Tutorial](https://reactrouter.com/docs/en/v6/examples/auth)
-- [Authentication Best Practices](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/04-Authentication_Testing)
-
-## 📊 **Final Knowledge Assessment**
-
-Complete this self-assessment to check your routing and authentication skills:
-
-### **React Router Basics (Must Know)**
-
-- [ ] I can set up basic routes with React Router
-- [ ] I understand how to use Link and NavLink components
-- [ ] I can access URL parameters with useParams
-- [ ] I know how to implement nested routes
-
-### **Authentication Implementation (Must Know)**
-
-- [ ] I understand JWT tokens and how they work
-- [ ] I can implement login and logout functionality
-- [ ] I know how to store and retrieve user sessions
-- [ ] I can create protected routes that require authentication
-
-### **Advanced Patterns (Good to Know)**
-
-- [ ] I can implement role-based access control
-- [ ] I understand React Context for global state management
-- [ ] I know how to use Zustand for complex state management
-- [ ] I can create custom hooks for authentication logic
-
-### **Security Considerations (Important to Know)**
-
-- [ ] I understand token storage best practices
-- [ ] I know how to handle token expiration
-- [ ] I can implement automatic logout on token expiry
-- [ ] I understand basic security principles for SPAs
-
-**🎯 Goal: Check at least 12/16 items before moving to Lesson 5**
-
-### **Self-Reflection Questions**
-
-1. How would you handle user authentication in a large application?
-2. What are the security risks of storing tokens in localStorage?
-3. When would you choose Context API over Zustand for state management?
 
 ---
 
-## 🎓 **Ready for Lesson 5?**
+## Best Practices
 
-If you completed the assessment above and feel comfortable with routing and authentication, you're ready to move on to [Lesson 5: Full-Stack Integration & Production Deployment](../lesson5-fullstack/).
+### 🎯 Routing
+- **Use meaningful paths**: `/users/:id` not `/u/:i`
+- **Implement 404 pages**: Always have a catch-all route
+- **Lazy load routes**: Improve initial load performance
+- **Organize routes**: Group related routes together
 
-**Still need practice?** Consider:
+### 🔒 Authentication
+- **Validate on backend**: Never trust frontend-only checks
+- **Use HTTPS**: Always encrypt data in transit
+- **Store tokens securely**: HttpOnly cookies or secure localStorage
+- **Implement token refresh**: Don't force re-login frequently
 
-- Building more complex routing scenarios
-- Implementing additional authentication providers
-- Experimenting with different state management patterns
-- Adding role-based access control to your applications
+### ⚡ Performance
+- **Lazy load protected routes**: Load auth pages only when needed
+- **Memoize auth context**: Prevent unnecessary re-renders
+- **Debounce form inputs**: Reduce validation API calls
+- **Cache user data**: Don't refetch on every route change
 
-## Homework
+### 🏗️ Architecture
+- **Separate concerns**: Keep auth logic in context/hooks
+- **Use custom hooks**: Extract reusable logic
+- **Type everything**: Use TypeScript for auth types
+- **Handle edge cases**: Loading, errors, network failures
 
-Create a complete authentication system with:
+---
 
-1. Social login integration (Google/GitHub)
-2. Email verification
-3. Password reset flow
-4. Session management
-5. Remember me functionality
+## Common Pitfalls
+
+### ❌ Routing Mistakes
+- **Forgetting BrowserRouter**: Routes won't work without it
+- **Wrong route order**: Specific routes before generic ones
+- **Using \<a\> instead of \<Link\>**: Causes full page reload
+- **Not handling 404**: Missing catch-all route
+
+### ❌ Authentication Issues
+- **Storing sensitive data in localStorage**: Use HttpOnly cookies for tokens
+- **No token expiration**: Implement refresh token logic
+- **Frontend-only validation**: Always validate on backend
+- **Exposing credentials**: Never commit tokens to Git
+
+### ❌ State Management Problems
+- **Too much in Context**: Only global state belongs there
+- **Creating too many contexts**: One per concern is enough
+- **Not memoizing context values**: Causes excessive re-renders
+- **Forgetting loading states**: Handle async operations properly
+
+---
+
+## Knowledge Checkpoint
+
+Before proceeding, ensure you understand:
+
+### React Router
+- [ ] Difference between client-side and server-side routing
+- [ ] How to set up nested routes
+- [ ] Using Link vs NavLink vs useNavigate
+- [ ] Accessing URL parameters and query strings
+
+### Authentication
+- [ ] JWT token lifecycle (login, storage, refresh, logout)
+- [ ] Protected route implementation
+- [ ] Role-based access control (RBAC)
+- [ ] Redirect after login pattern
+
+### Advanced Patterns
+- [ ] When to use HOCs vs Render Props vs Hooks
+- [ ] Compound components pattern
+- [ ] Context API performance implications
+- [ ] Custom hook best practices
+
+### State Management
+- [ ] When to use Context vs external library
+- [ ] Context provider patterns
+- [ ] Avoiding Context re-render issues
+- [ ] Zustand basics (if using)
+
+**🎯 Goal: Understand all concepts before building the lab application**
+
+---
+
+## Self-Assessment
+
+Rate your confidence (1-5) in these areas:
+
+**React Router** ⭐⭐⭐⭐⭐
+- [ ] Setting up routes and navigation
+- [ ] Working with route parameters
+- [ ] Implementing nested routes
+- [ ] Creating 404 and error pages
+
+**Authentication System** ⭐⭐⭐⭐⭐
+- [ ] Building login/register forms
+- [ ] Managing JWT tokens
+- [ ] Implementing protected routes
+- [ ] Role-based access control
+
+**Advanced Patterns** ⭐⭐⭐⭐⭐
+- [ ] Creating Higher-Order Components
+- [ ] Using Render Props pattern
+- [ ] Building Compound Components
+- [ ] Extracting custom hooks
+
+**State Management** ⭐⭐⭐⭐⭐
+- [ ] Using Context API effectively
+- [ ] Setting up global auth state
+- [ ] Managing loading/error states
+- [ ] Using Zustand (optional)
+
+**Target Score: 16/20 (4+ average) to build production-ready apps**
+
+---
+
+## What's Next?
+
+After completing this lesson, you'll be able to:
+
+1. **Build Multi-Page Apps**: Create complex SPAs with seamless navigation
+2. **Secure Your Applications**: Implement professional authentication systems
+3. **Apply Advanced Patterns**: Use HOCs, Render Props, and Compound Components
+4. **Manage Global State**: Use Context API and Zustand effectively
+
+**🎓 You're now ready for full-stack integration in Lesson 5!**
+
+---
+
+## Additional Resources
+
+- 📖 [React Router Documentation](https://reactrouter.com/)
+- 📖 [JWT.io - Learn about JSON Web Tokens](https://jwt.io/)
+- 📖 [React Patterns](https://reactpatterns.com/)
+- 💻 [Auth0 Blog - Authentication Best Practices](https://auth0.com/blog/)
+- 📚 [Context API Deep Dive](./theory/theory4.md#context-api)
+- 🔒 [OWASP Security Guidelines](https://owasp.org/)
+
+

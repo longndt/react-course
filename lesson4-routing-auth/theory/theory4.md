@@ -33,7 +33,7 @@ npm install react-router-dom
 
 ### 2. Basic Setup
 
-```jsx
+```tsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -57,7 +57,7 @@ function App() {
 
 ### 3. Creating Navigation Links
 
-```jsx
+```tsx
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -96,7 +96,7 @@ const styles = `
 ## User Login System 🔐
 
 ### 1. User State Management
-```jsx
+```tsx
 function App() {
   // Store user info
   const [user, setUser] = useState(null);
@@ -130,12 +130,18 @@ function App() {
 
 ### 2. Login Form
 
-````jsx
-function LoginPage({ onLogin }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+````tsx
+import { useState, FormEvent } from 'react';
 
-  const handleSubmit = (e) => {
+interface LoginPageProps {
+  onLogin: (username: string, password: string) => void;
+}
+
+function LoginPage({ onLogin }: LoginPageProps) {
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onLogin(username, password);
   };
@@ -172,8 +178,21 @@ function LoginPage({ onLogin }) {
 ## Protecting Private Pages 🔒
 
 ### Protected Route Component
-```jsx
-function PrivateRoute({ children }) {
+```tsx
+import { Navigate } from 'react-router-dom';
+import { ReactNode } from 'react';
+
+interface User {
+  id: string;
+  username: string;
+  role?: string;
+}
+
+interface PrivateRouteProps {
+  children: ReactNode;
+}
+
+function PrivateRoute({ children }: PrivateRouteProps) {
   const user = useUser(); // Get user from context/state
 
   // If not logged in, go to login page
@@ -182,7 +201,7 @@ function PrivateRoute({ children }) {
   }
 
   // If logged in, show the page
-  return children;
+  return <>{children}</>;
 }
 
 // Using Protected Route
@@ -216,7 +235,7 @@ function App() {
 
 ### 1. Forgetting to Use BrowserRouter
 
-````jsx
+````tsx
 // ❌ Wrong - No BrowserRouter
 function App() {
   return (
@@ -248,7 +267,7 @@ Create a simple blog with:
 3. Admin page (protected)
 4. Login page
 
-```jsx
+```tsx
 // Example Structure
 function BlogApp() {
   const [user, setUser] = useState(null);
@@ -322,3 +341,5 @@ Tips:
 - Add navigation
 - Then add protected pages
 - Finally add login system
+
+

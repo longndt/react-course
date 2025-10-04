@@ -77,8 +77,14 @@ Learn to create custom hooks for:
 ## Quick Examples
 
 ### Component with Props
-```jsx
-function Button({ children, variant = 'primary', onClick }) {
+```tsx
+interface ButtonProps {
+  children: React.ReactNode;
+  variant?: 'primary' | 'secondary' | 'danger';
+  onClick: () => void;
+}
+
+function Button({ children, variant = 'primary', onClick }: ButtonProps) {
   return (
     <button className={`btn btn-${variant}`} onClick={onClick}>
       {children}
@@ -93,17 +99,30 @@ function Button({ children, variant = 'primary', onClick }) {
 ```
 
 ### useState - Managing State
-```jsx
+```tsx
+import { useState } from 'react';
+
 function Counter() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState<number>(0);
   return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
 }
 ```
 
 ### useEffect - Side Effects
-```jsx
-function UserProfile({ userId }) {
-  const [user, setUser] = useState(null);
+```tsx
+import { useState, useEffect } from 'react';
+
+interface User {
+  id: number;
+  name: string;
+}
+
+interface UserProfileProps {
+  userId: number;
+}
+
+function UserProfile({ userId }: UserProfileProps) {
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     fetch(`/api/users/${userId}`)
@@ -116,7 +135,7 @@ function UserProfile({ userId }) {
 ```
 
 ### Custom Hook - useLocalStorage
-```jsx
+```tsx
 function useLocalStorage(key, initialValue) {
   const [value, setValue] = useState(() => {
     const stored = localStorage.getItem(key);
@@ -275,7 +294,7 @@ Create a **Personal Dashboard** with:
 
 **Migration Example:**
 
-```jsx
+```tsx
 // Class Component
 class Counter extends React.Component {
   constructor(props) {
@@ -336,7 +355,7 @@ function Counter() {
 
 ### Example: Button Component
 
-```jsx
+```tsx
 function Button({
   children,
   variant = "primary",
@@ -466,3 +485,4 @@ Create a mini design system including:
    - Usage examples
    - Props documentation
    - Theme customization guide
+

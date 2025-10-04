@@ -26,7 +26,7 @@ Before starting the React course, you should be comfortable with these concepts:
 
 React uses arrow functions extensively for event handlers and functional components:
 
-```javascript
+```typescript
 // Traditional function
 function handleClick() {
   console.log("Button clicked");
@@ -50,7 +50,7 @@ const greetUser = (name) => `Hello, ${name}!`;
 
 Essential for working with React props and state:
 
-```javascript
+```typescript
 // Object destructuring
 const student = {
   name: "Alice",
@@ -77,7 +77,7 @@ const displayStudent = ({ name, age }) => {
 
 For dynamic strings in React components:
 
-```javascript
+```typescript
 const name = "Sarah";
 const grade = "A";
 
@@ -100,7 +100,7 @@ const htmlTemplate = `
 
 Critical for rendering lists in React:
 
-```javascript
+```typescript
 const students = [
   { id: 1, name: "Alice", grade: 85 },
   { id: 2, name: "Bob", grade: 92 },
@@ -127,7 +127,7 @@ const averageGrade =
 
 For copying and merging objects/arrays:
 
-```javascript
+```typescript
 // Array spreading
 const fruits = ["apple", "banana"];
 const moreFruits = ["orange", "grape"];
@@ -148,7 +148,7 @@ const max = Math.max(...numbers); // same as Math.max(1, 2, 3)
 
 For API calls in React:
 
-```javascript
+```typescript
 // Promise-based API call
 fetch("/api/students")
   .then((response) => response.json())
@@ -175,7 +175,7 @@ const fetchStudents = async () => {
 
 How React components are organized:
 
-```javascript
+```typescript
 // math-utils.js - Export functions
 export const add = (a, b) => a + b;
 export const multiply = (a, b) => a * b;
@@ -199,7 +199,7 @@ import { add as addition } from "./math-utils.js"; // renamed import
 
 Given this student data:
 
-```javascript
+```typescript
 const students = [
   { id: 1, name: "Alice Johnson", subjects: ["Math", "Physics"], gpa: 3.8 },
   { id: 2, name: "Bob Smith", subjects: ["Chemistry", "Biology"], gpa: 3.2 },
@@ -220,7 +220,7 @@ const students = [
 
 ### Exercise 2: Object Manipulation
 
-```javascript
+```typescript
 const course = {
   id: "CS101",
   title: "Introduction to Programming",
@@ -245,7 +245,7 @@ Write an async function that:
 
 **Practice Template:**
 
-```javascript
+```typescript
 const fetchCourseData = async (courseId) => {
   // Your implementation here
   try {
@@ -262,7 +262,7 @@ const fetchCourseData = async (courseId) => {
 
 ### 1. `this` in Arrow Functions
 
-```javascript
+```typescript
 // Traditional function - `this` changes
 const obj = {
   name: "Alice",
@@ -282,7 +282,7 @@ const obj2 = {
 
 ### 2. Array Methods Return New Arrays
 
-```javascript
+```typescript
 const numbers = [1, 2, 3];
 
 // ❌ Wrong - doesn't modify original array
@@ -296,7 +296,7 @@ console.log(doubled); // [2, 4, 6]
 
 ### 3. Async/Await Error Handling
 
-```javascript
+```typescript
 // ❌ Unhandled errors will crash your app
 const fetchData = async () => {
   const response = await fetch("/api/data");
@@ -330,3 +330,4 @@ If you're comfortable with all these concepts, you're ready to start Lesson 1! T
 - [MDN JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
 - [JavaScript.info - Modern JavaScript Tutorial](https://javascript.info/)
 - [ES6 Features Overview](https://github.com/lukehoban/es6features)
+

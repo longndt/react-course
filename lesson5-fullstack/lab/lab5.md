@@ -18,7 +18,7 @@ _For detailed learning objectives and performance concepts, see [../readme.md](.
 
 1. Implement React.lazy for route components:
 
-```jsx
+```tsx
 // src/App.jsx
 import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -45,7 +45,7 @@ function App() {
 
 2. Create a LoadingSpinner component:
 
-```jsx
+```tsx
 // src/components/LoadingSpinner/LoadingSpinner.jsx
 import './LoadingSpinner.css';
 
@@ -82,7 +82,7 @@ function LoadingSpinner() {
 
 3. Create an ErrorBoundary for lazy-loaded components:
 
-```jsx
+```tsx
 // src/components/ErrorBoundary.jsx
 import { Component } from "react";
 
@@ -130,11 +130,22 @@ function App() {
 
 1. Create a memoized list component:
 
-```jsx
-// src/components/MemoizedList.jsx
+```tsx
+// src/components/MemoizedList.tsx
 import { memo, useState, useMemo } from "react";
 
-const ListItem = memo(function ListItem({ item, onSelect }) {
+interface Item {
+  id: number;
+  title: string;
+  description: string;
+}
+
+interface ListItemProps {
+  item: Item;
+  onSelect: (item: Item) => void;
+}
+
+const ListItem = memo(function ListItem({ item, onSelect }: ListItemProps) {
   console.log(`Rendering ListItem: ${item.id}`);
   return (
     <div className="list-item" onClick={() => onSelect(item)}>
@@ -144,15 +155,19 @@ const ListItem = memo(function ListItem({ item, onSelect }) {
   );
 });
 
-function MemoizedList({ items }) {
-  const [selectedId, setSelectedId] = useState(null);
+interface MemoizedListProps {
+  items: Item[];
+}
+
+function MemoizedList({ items }: MemoizedListProps) {
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const sortedItems = useMemo(() => {
     console.log("Sorting items...");
     return [...items].sort((a, b) => a.title.localeCompare(b.title));
   }, [items]);
 
-  const handleSelect = (item) => {
+  const handleSelect = (item: Item) => {
     setSelectedId(item.id);
   };
 
@@ -175,11 +190,23 @@ export default memo(MemoizedList);
 
 2. Implement a performance-optimized form:
 
-```jsx
-// src/components/OptimizedForm.jsx
-import { memo, useCallback, useState } from "react";
+```tsx
+// src/components/OptimizedForm.tsx
+import { memo, useCallback, useState, FormEvent } from "react";
 
-const Input = memo(function Input({ label, value, onChange }) {
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+interface InputProps {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+}
+
+const Input = memo(function Input({ label, value, onChange }: InputProps) {
   console.log(`Rendering Input: ${label}`);
   return (
     <div className="form-group">
@@ -189,14 +216,18 @@ const Input = memo(function Input({ label, value, onChange }) {
   );
 });
 
-function OptimizedForm({ onSubmit }) {
-  const [formData, setFormData] = useState({
+interface OptimizedFormProps {
+  onSubmit: (data: FormData) => void;
+}
+
+function OptimizedForm({ onSubmit }: OptimizedFormProps) {
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     message: "",
   });
 
-  const handleNameChange = useCallback((value) => {
+  const handleNameChange = useCallback((value: string) => {
     setFormData((prev) => ({ ...prev, name: value }));
   }, []);
 
@@ -238,13 +269,20 @@ export default memo(OptimizedForm);
 
 Create a virtualized list component:
 
-```jsx
-// src/components/VirtualList.jsx
-import { useState, useEffect, useRef } from "react";
+```tsx
+// src/components/VirtualList.tsx
+import { useState, useEffect, useRef, ReactNode } from "react";
 
-function VirtualList({ items, itemHeight, windowHeight, renderItem }) {
-  const [scrollTop, setScrollTop] = useState(0);
-  const containerRef = useRef();
+interface VirtualListProps<T> {
+  items: T[];
+  itemHeight: number;
+  windowHeight: number;
+  renderItem: (item: T, index: number) => ReactNode;
+}
+
+function VirtualList<T>({ items, itemHeight, windowHeight, renderItem }: VirtualListProps<T>) {
+  const [scrollTop, setScrollTop] = useState<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const totalHeight = items.length * itemHeight;
   const startIndex = Math.floor(scrollTop / itemHeight);
@@ -317,14 +355,19 @@ function VirtualizedList() {
 
 1. Create a performance monitoring component:
 
-```jsx
-// src/components/PerformanceMonitor.jsx
-import { Profiler } from "react";
+```tsx
+// src/components/PerformanceMonitor.tsx
+import { Profiler, ReactNode } from "react";
 
-function PerformanceMonitor({ id, children }) {
+interface PerformanceMonitorProps {
+  id: string;
+  children: ReactNode;
+}
+
+function PerformanceMonitor({ id, children }: PerformanceMonitorProps) {
   const handleRender = (
-    id,
-    phase,
+    id: string,
+    phase: "mount" | "update",
     actualDuration,
     baseDuration,
     startTime,
@@ -359,7 +402,7 @@ function App() {
 
 2. Implement a custom performance hook:
 
-```jsx
+```tsx
 // src/hooks/usePerformance.js
 function usePerformance(label) {
   useEffect(() => {
@@ -388,11 +431,18 @@ function ExpensiveComponent() {
 
 Create a component that lazy loads images:
 
-```jsx
-// src/components/LazyImage.jsx
-function LazyImage({ src, alt }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const imgRef = useRef();
+```tsx
+// src/components/LazyImage.tsx
+import { useState, useEffect, useRef } from "react";
+
+interface LazyImageProps {
+  src: string;
+  alt: string;
+}
+
+function LazyImage({ src, alt }: LazyImageProps) {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -428,7 +478,7 @@ function LazyImage({ src, alt }) {
 
 Implement a web worker for heavy computations:
 
-```jsx
+```tsx
 // src/workers/compute.worker.js
 self.addEventListener("message", (e) => {
   const { data } = e;
@@ -625,3 +675,5 @@ lab5-performance-optimization/
    - Component lifecycle optimization
 
 This structure demonstrates production-ready React performance optimization techniques essential for scalable applications handling large datasets and complex user interactions.
+
+
