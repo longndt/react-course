@@ -9,7 +9,7 @@ _For learning objectives and prerequisites, see [../readme.md](../readme.md)_
 ## Pre-Lab Checklist
 
 - [ ] Lab 1 completed successfully
-- [ ] Node\.ts v18+ and npm installed
+- [ ] Node.js v18+ and npm installed
 - [ ] VS Code with React extensions
 - [ ] Basic TypeScript understanding
 - [ ] React hooks knowledge from previous lessons

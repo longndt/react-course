@@ -9,7 +9,7 @@
 ```
 Your Modern Stack:
 ┌─────────────┐    ┌──────────┐    ┌─────────────┐    ┌─────────┐
-│   React     │    │   HTTP   │    │ Node\.ts     │    │ MongoDB │
+│   React     │    │   HTTP   │    │ Node.js     │    │ MongoDB │
 │ (Frontend)  │◄──►│   API    │◄──►│ Express     │◄──►│         │
 │             │    │          │    │ (Backend)   │    │         │
 └─────────────┘    └──────────┘    └─────────────┘    └─────────┘
@@ -25,12 +25,12 @@ Your Modern Stack:
 
 ---
 
-## Understanding REST APIs with Node\.ts/MongoDB 📡
+## Understanding REST APIs with Node.js/MongoDB 📡
 
 ### From Database to API Response
 
 ```typescript
-// Node\.ts/Express backend endpoint
+// Node.js/Express backend endpoint
 app.get("/api/students", async (req, res) => {
   try {
     // 1. Query MongoDB database
@@ -52,7 +52,7 @@ function StudentsList() {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    // 1. Send HTTP request to your Node\.ts backend
+    // 1. Send HTTP request to your Node.js backend
     const response = await fetch('http://localhost:5000/api/students');
     const data = await response.json();
 
@@ -72,9 +72,9 @@ function StudentsList() {
 
 ---
 
-## Mapping Node\.ts Endpoints to React Functions
+## Mapping Node.js Endpoints to React Functions
 
-**Your Node\.ts API Structure:**
+**Your Node.js API Structure:**
 
 ```typescript
 // server/routes/students\.ts - Your backend API
@@ -99,7 +99,7 @@ router.post("/", async (req, res) => {
 **React Frontend Implementation:**
 
 ```tsx
-// React frontend calling your Node\.ts API
+// React frontend calling your Node.js API
 function useStudents() {
   const [students, setStudents] = useState([]);
 
@@ -540,7 +540,7 @@ function useStudent(id) {
 
 **What You'll Build:**
 
-1. **Node\.ts/Express API**
+1. **Node.js/Express API**
 
    - MongoDB connection with Mongoose
    - CRUD endpoints for tasks
@@ -562,7 +562,7 @@ function useStudent(id) {
 
 ## Next: Hands-On Practice 👨‍💻
 
-Ready to put theory into practice? Let's build a real application that connects React to a Node\.ts/MongoDB backend!
+Ready to put theory into practice? Let's build a real application that connects React to a Node.js/MongoDB backend!
 
 **In the next session:**
 

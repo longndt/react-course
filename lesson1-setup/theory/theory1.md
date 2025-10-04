@@ -74,7 +74,7 @@ function createStudent(name: string, age: number, email: string): Student {
 
 **Required Tools (Install in Order):**
 
-1. **Node\.ts (v18+)**
+1. **Node.js (v18+)**
 
    ```bash
    # Download from nodejs.org

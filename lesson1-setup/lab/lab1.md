@@ -13,7 +13,7 @@ In this lab session, you'll create a Student Dashboard application using TypeScr
 
 ## Pre-Lab Checklist
 
-- [ ] Node\.ts v18+ installed
+- [ ] Node.js v18+ installed
 - [ ] VS Code with React extensions installed
 - [ ] Basic understanding of JavaScript ES6+
 - [ ] Familiarity with HTML/CSS
@@ -1215,7 +1215,7 @@ In the next lesson, you'll learn how to:
 - Create more complex component hierarchies
 - Manage state across multiple components
 - Handle forms and user input validation
-- Connect your React frontend to real APIs (like your Node\.ts backends)
+- Connect your React frontend to real APIs (like your Node.js backends)
 
 ## Troubleshooting Common Issues
 
