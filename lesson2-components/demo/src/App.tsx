@@ -2,7 +2,6 @@ import { useState } from "react";
 import { DataTable } from "./components/DataTable";
 import { Form } from "./components/Form";
 import { Modal } from "./components/Modal";
-import { ConfirmDialog } from "./components/ConfirmDialog";
 import "./App.css";
 
 interface User {
@@ -39,9 +38,9 @@ const mockUsers: User[] = [
 
 export function App() {
   const [users, setUsers] = useState<User[]>(mockUsers);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  const [userToDelete, setUserToDelete] = useState<number | null>(null);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState<User | null>(null);
 
   interface NewUserForm {
     name: string;
@@ -59,18 +58,31 @@ export function App() {
     };
 
     setUsers((prev) => [...prev, newUser]);
-    setIsModalOpen(false);
+    setIsAddModalOpen(false);
+  };
+
+  const handleEditUser = (user: User) => {
+    setEditingUser(user);
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdateUser = (values: NewUserForm) => {
+    if (editingUser) {
+      setUsers((prev) =>
+        prev.map((user) =>
+          user.id === editingUser.id
+            ? { ...user, name: values.name, email: values.email, role: values.role }
+            : user
+        )
+      );
+      setIsEditModalOpen(false);
+      setEditingUser(null);
+    }
   };
 
   const handleDeleteUser = (userId: number) => {
-    setUserToDelete(userId);
-    setIsConfirmOpen(true);
-  };
-
-  const confirmDelete = () => {
-    if (userToDelete !== null) {
-      setUsers((prev) => prev.filter((user) => user.id !== userToDelete));
-      setUserToDelete(null);
+    if (confirm("Are you sure you want to delete this user?")) {
+      setUsers((prev) => prev.filter((user) => user.id !== userId));
     }
   };
 
@@ -78,7 +90,7 @@ export function App() {
     <div className="container">
       <h1>User Management</h1>
 
-      <button onClick={() => setIsModalOpen(true)} className="button">
+      <button onClick={() => setIsAddModalOpen(true)} className="button">
         Add User
       </button>
 
@@ -100,21 +112,32 @@ export function App() {
             header: "Actions",
             sortable: false,
             render: (_, user) => (
-              <button
-                onClick={() => handleDeleteUser(user!.id)}
-                className="delete-button"
-                title="Delete user"
-              >
-                Delete
-              </button>
+              <div style={{ display: "flex", gap: "8px" }}>
+                <button
+                  onClick={() => handleEditUser(user!)}
+                  className="button"
+                  style={{ padding: "4px 12px", fontSize: "13px" }}
+                  title="Update user"
+                >
+                  Update
+                </button>
+                <button
+                  onClick={() => handleDeleteUser(user!.id)}
+                  className="delete-button"
+                  title="Delete user"
+                >
+                  Delete
+                </button>
+              </div>
             ),
           },
         ]}
       />
 
+      {/* Add User Modal */}
       <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
         title="Add New User"
       >
         <Form
@@ -156,22 +179,95 @@ export function App() {
               <option value="User">User</option>
             </select>
           </div>
-          <button type="submit" className="button">
-            Add User
-          </button>
+          <div style={{ textAlign: "center", marginTop: "1rem" }}>
+            <button
+              type="submit"
+              className="button"
+              style={{
+                padding: "8px 24px",
+                fontSize: "14px",
+                display: "inline-block",
+                width: "auto"
+              }}
+            >
+              Add
+            </button>
+          </div>
         </Form>
       </Modal>
 
-      <ConfirmDialog
-        isOpen={isConfirmOpen}
-        onClose={() => setIsConfirmOpen(false)}
-        onConfirm={confirmDelete}
-        title="Delete User"
-        message="Are you sure you want to delete this user? This action cannot be undone."
-        confirmText="Delete"
-        cancelText="Cancel"
-        type="danger"
-      />
+      {/* Edit User Modal */}
+      <Modal
+        isOpen={isEditModalOpen}
+        onClose={() => {
+          setIsEditModalOpen(false);
+          setEditingUser(null);
+        }}
+        title="Update User"
+      >
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            const form = e.target as HTMLFormElement;
+            const name = (form.elements.namedItem("edit-name") as HTMLInputElement)
+              .value;
+            const email = (form.elements.namedItem("edit-email") as HTMLInputElement)
+              .value;
+            const role = (form.elements.namedItem("edit-role") as HTMLInputElement)
+              .value;
+            handleUpdateUser({ name, email, role });
+          }}
+        >
+          <div className="form-group">
+            <label htmlFor="edit-name">Name</label>
+            <input
+              name="edit-name"
+              id="edit-name"
+              required
+              className="text-input"
+              defaultValue={editingUser?.name || ""}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="edit-email">Email</label>
+            <input
+              name="edit-email"
+              id="edit-email"
+              type="email"
+              required
+              className="text-input"
+              defaultValue={editingUser?.email || ""}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="edit-role">Role</label>
+            <select
+              name="edit-role"
+              id="edit-role"
+              required
+              className="select-input"
+              defaultValue={editingUser?.role || "User"}
+            >
+              <option value="Admin">Admin</option>
+              <option value="User">User</option>
+            </select>
+          </div>
+          <div style={{ textAlign: "center", marginTop: "1rem" }}>
+            <button
+              type="submit"
+              className="button"
+              style={{
+                padding: "8px 24px",
+                fontSize: "14px",
+                display: "inline-block",
+                width: "auto"
+              }}
+            >
+              Update
+            </button>
+          </div>
+        </Form>
+      </Modal>
     </div>
   );
 }
