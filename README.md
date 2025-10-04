@@ -1,4 +1,4 @@
-# React Development Course
+# React Course - LongNDT
 
 ## Course Overview
 
