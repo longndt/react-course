@@ -2,15 +2,18 @@
 
 ## Course Overview
 
-This course teaches React app development with industry-standard practices through hands-on examples.
+This course teaches **React with TypeScript** development using industry-standard practices through hands-on examples.
 
-**Audience**: IT students and developers looking to master React
+**Audience**: IT students and developers looking to master React with TypeScript
 
 **Format**: Theory, hands-on practice, and project-based learning
 
+**Language**: All examples and exercises use **TypeScript** (.tsx files)
+
 ## Prerequisites
 
-- HTML, CSS, and JavaScript fundamentals
+- HTML and CSS fundamentals
+- TypeScript basics (types, interfaces, generics)
 - Basic programming concepts (variables, functions, loops, objects)
 - Command line operations
 - Experience with at least one backend technology
@@ -18,35 +21,71 @@ This course teaches React app development with industry-standard practices throu
 
 ## What You'll Learn
 
-- Build modern React applications with functional components and hooks
-- Create reusable component architectures
-- Manage application state with multiple patterns
+- Build modern React applications with **TypeScript** and functional components
+- Understand React fundamentals and component-based architecture
+- Create strongly-typed, reusable component libraries with props and interfaces
+- Manage application state with multiple patterns (useState, Context API, etc.)
 - Implement client-side routing with authentication
-- Handle forms, validation, and user interactions
-- Integrate React frontends with REST APIs
+- Handle forms, validation, and user interactions with type safety
+- Integrate React frontends with REST APIs using typed interfaces
 - Implement JWT-based authentication
 - Build real-time features with WebSockets
-- Use modern development tools (Git, ESLint, TypeScript)
+- Use modern development tools (Git, ESLint, Vite, TypeScript)
 - Write tests for React components
 - Deploy applications to production
 
 ## Course Structure
 
-### Lesson 0: Prerequisites & JavaScript ES6+ Refresher (Optional)
-- Modern JavaScript features essential for React
-- [Go to Prerequisites Review](./lesson0-prerequisites)
+### 📚 Learning Progression
 
-### Lesson 1: React Fundamentals & TypeScript Setup
-- Setting up development environment
-- Component-based architecture and JSX
-- **Lab Project**: Create a component library with TypeScript
-- [Go to Lesson 1](./lesson1-setup)
+**Each lesson builds upon the previous one. Follow in order:**
 
-### Lesson 2: Component Architecture & Advanced State
-- Advanced component patterns and composition
-- State management (useState, useReducer, Context API)
-- Custom hooks and form handling
+```
+Lesson 0 (Optional)     →  Lesson 1           →  Lesson 2              →  Lesson 3
+TypeScript Basics          React Fundamentals     Components & State       API Integration
+                           Setup & First         Props, Hooks,             REST APIs
+                           Components            State Management          Data Fetching
+
+                                ↓
+
+                           Lesson 4              →  Lesson 5
+                           Routing & Auth           Full-Stack & Deploy
+                           Protected Routes         Production Ready
+                           Authentication           Deployment
+```
+
+**Key Concept Progression:**
+
+- **Lesson 1**: What is React? → Setup → First Component → Basic JSX
+- **Lesson 2**: Props → State → Hooks → Component Patterns
+- **Lesson 3**: API Calls → Data Management → Error Handling
+- **Lesson 4**: Routing → Authentication → Protected Routes
+- **Lesson 5**: Full-Stack Integration → WebSockets → Deployment
+
+---
+
+### Lesson 0: TypeScript Prerequisites (Optional)
+- TypeScript essentials for React development
+- Interfaces, generics, and utility types
+- [Go to Prerequisites Review](./lesson0-typescript)
+
+### Lesson 1: React Fundamentals & Setup
+- Setting up development environment with Vite
+- Understanding React basics and JSX syntax
+- Creating your first functional components
+- Basic styling and project structure
+- **Lab Project**: Build a simple welcome page with components
+- **Scope**: Fundamentals ONLY - no props, state, or hooks yet
+- [Go to Lesson 1](./lesson1-fundamentals-setup)
+
+### Lesson 2: Component Architecture & State Management
+- Component composition and props with TypeScript
+- State management with TypeScript (useState, useReducer, Context API)
+- Custom hooks with proper typing
+- Form handling with type safety
+- Building reusable component libraries
 - **Lab Project**: Build a data management interface with CRUD operations
+- **Scope**: This is where you learn props, state, hooks, and component patterns
 - [Go to Lesson 2](./lesson2-component-hook)
 
 ### Lesson 3: API Integration & Data Management
@@ -65,7 +104,7 @@ This course teaches React app development with industry-standard practices throu
 - Full-stack architecture with MERN stack
 - File uploads, WebSockets, and deployment
 - **Lab Project**: Complete application deployment
-- [Go to Lesson 5](./lesson5-fullstack)
+- [Go to Lesson 5](./lesson5-fullstack-deployment)
 
 ## Additional Resources
 
@@ -113,16 +152,16 @@ cd react-course
 **🎯 Follow this exact order for the best learning experience:**
 
 #### 1️⃣ **Start with Prerequisites** (If needed)
-👉 **[Lesson 0: Essential JavaScript ES6+ Knowledge](./lesson0-prerequisites/readme.md)**
-- Review modern JavaScript features
-- Master concepts that will be used in React
+👉 **[Lesson 0: TypeScript Prerequisites](./lesson0-typescript/readme.md)**
+- Review TypeScript fundamentals
+- Master types, interfaces, and generics used in React
 
 #### 2️⃣ **Learn Lessons 1-5** (In sequence)
-- 👉 **[Lesson 1: React Fundamentals & TypeScript Setup](./lesson1-setup/readme.md)**
-- 👉 **[Lesson 2: Component Architecture & Advanced State](./lesson2-component-hook/readme.md)**
+- 👉 **[Lesson 1: React Fundamentals & TypeScript Setup](./lesson1-fundamentals-setup/readme.md)**
+- 👉 **[Lesson 2: Component Architecture & State Management](./lesson2-component-hook/readme.md)**
 - 👉 **[Lesson 3: API Integration & Data Management](./lesson3-api-data/readme.md)**
 - 👉 **[Lesson 4: Routing, Authentication & Advanced Patterns](./lesson4-routing-auth/readme.md)**
-- 👉 **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack/readme.md)**
+- 👉 **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack-deployment/readme.md)**
 
 #### 3️⃣ **Advanced Materials** (After completing core lessons)
 📚 **The `extras/` folder contains advanced documentation:**
@@ -137,10 +176,10 @@ cd react-course
 
 ```bash
 # Start with Lesson 0 (if you need to review fundamentals)
-cd lesson0-prerequisites
+cd lesson0-typescript
 
 # Or start directly with Lesson 1
-cd lesson1-setup
+cd lesson1-fundamentals-setup
 npm install
 npm run dev
 ```
@@ -188,10 +227,13 @@ code quickstart.md
 
 **What to do:**
 - ✅ **Type every line of code yourself** (don't copy-paste!)
-- ✅ Run the code after each section
+- ✅ Run the code after each section to see it work
 - ✅ Experiment: change values, break things, fix them
 - ✅ Compare your code with the `demo/` folder if stuck
 - ✅ Make notes of confusing parts
+- ✅ Focus on understanding the fundamentals first
+
+**Note for Lesson 1:** The quickstart focuses on basic setup and simple components without props or state. Advanced patterns are introduced in Lesson 2.
 
 **Result:** You've built something working and understand the basics.
 
@@ -320,6 +362,50 @@ readme.md → theory.md → quickstart.md → Lab → demo/ → Repeat
 
 6. ❌ **Moving to next lesson with incomplete understanding**
    - ✅ Do: Complete lab successfully before advancing
+
+---
+
+## ❓ Frequently Asked Questions
+
+### Q: Why doesn't Lesson 1 teach props and state?
+**A:** We follow a progressive learning approach:
+- **Lesson 1**: Focus on understanding WHAT React is and how to create basic components
+- **Lesson 2**: Once you're comfortable with components, then learn how to make them interactive with props and state
+
+This prevents overwhelming beginners with too many concepts at once.
+
+### Q: I already know React basics. Can I skip Lesson 1?
+**A:** Yes! If you're comfortable with:
+- Setting up a React project with Vite
+- Creating functional components
+- Basic JSX syntax
+
+Then start with **Lesson 2** which covers props, state, and hooks.
+
+### Q: What's the difference between Lesson 1 and Lesson 2?
+**A:**
+- **Lesson 1**: Static components (no data flow, no interactivity)
+  - Example: A welcome page with hardcoded text
+- **Lesson 2**: Dynamic components (props, state, user interactions)
+  - Example: A todo list where you can add/remove items
+
+### Q: Do I need to complete the labs?
+**A:** **YES!** Labs are not optional. They are where you:
+- Apply what you learned
+- Build real projects
+- Discover gaps in your understanding
+- Build your portfolio
+
+Watching tutorials ≠ Being able to code. Labs bridge that gap.
+
+### Q: How long does each lesson take?
+**A:**
+- **Quick path**: 2-3 hours per lesson (readme + quickstart + lab)
+- **Thorough path**: 4-6 hours per lesson (all materials + experiments)
+- **Total course**: 15-25 hours for all 5 lessons
+
+### Q: Can I use JavaScript instead of TypeScript?
+**A:** This course is designed for **TypeScript only**. All examples, labs, and demos use `.tsx` files. However, the concepts apply to JavaScript as well - just remove the type annotations.
 
 ---
 

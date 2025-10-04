@@ -294,7 +294,4 @@ After mastering routing and authentication, you'll learn:
 
 ---
 
-**🎓 Happy Learning! Build secure and scalable React applications!**
-
-
 

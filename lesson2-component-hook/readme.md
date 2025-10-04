@@ -228,6 +228,4 @@ Before moving to Lesson 3, ensure you can:
 
 ---
 
-**Good luck with your component building journey! 🚀**
-
 

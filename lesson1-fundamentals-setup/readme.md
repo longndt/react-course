@@ -2,31 +2,30 @@
 
 ## Overview
 
-This lesson introduces React fundamentals with modern development practices. You'll set up a professional development environment, understand React's core concepts, and build components with TypeScript fr🔬 **Ready for practice?** → Begin [lab1.md](./lab/lab1.md) exercises
+This lesson introduces React fundamentals with modern development practices. You'll set up a professional development environment, understand React's core concepts, and build components with TypeScript fr🔬
+
+**Ready for practice?** → Begin [lab1.md](./lab/lab1.md) exercises
 
 ---
-
-**Welcome to React development! 🚀 Let's build amazing user interfaces together!**one.
 
 ## Learning Objectives
 
 By the end of this lesson, you will be able to:
 
-- ✅ Understand React's component-based architecture and virtual DOM
-- ✅ Set up a modern React development environment with TypeScript
-- ✅ Create functional components using JSX/TSX
-- ✅ Manage component props and basic styling
-- ✅ Build reusable component patterns
-- ✅ Apply modern JavaScript/TypeScript features in React
+- ✅ Understand what React is and why it's useful
+- ✅ Set up a modern React development environment with Vite and TypeScript
+- ✅ Understand JSX/TSX syntax basics
+- ✅ Create your first simple functional component
+- ✅ Run and view a React application in the browser
 
 ## Prerequisites
 
-- Solid understanding of HTML, CSS, and JavaScript (ES6+)
-- Experience with modern JavaScript features (destructuring, modules, arrow functions)
+- Solid understanding of HTML, CSS, and TypeScript basics
+- Experience with TypeScript features (types, interfaces, generics)
 - Basic familiarity with command line operations
 - Understanding of programming fundamentals
 
-**📚 Need a refresher?** Complete [Lesson 0: JavaScript ES6+ Review](../lesson0-prerequisites/) first.
+**📚 Need a refresher?** Complete [Lesson 0: TypeScript Review](../lesson0-typescript/) first.
 
 ---
 
@@ -50,14 +49,16 @@ By the end of this lesson, you will be able to:
 - VS Code setup and extensions
 - Project structure understanding
 
-### 3. Building Components
+### 3. Your First Component
 
 **Component Basics:**
-- Creating functional components
-- Props and interfaces
-- JSX/TSX syntax rules
-- Component composition
+- What is a component?
+- Creating a simple functional component
+- JSX/TSX syntax basics
+- Rendering your first component
 - Basic styling with CSS
+
+> 💡 **Note:** Advanced topics like props, composition, and reusable patterns will be covered in Lesson 2.
 
 ---
 
@@ -82,39 +83,32 @@ By the end of this lesson, you will be able to:
 ### React vs Traditional JavaScript
 
 ```tsx
-// Traditional DOM manipulation
+// Traditional DOM manipulation (Vanilla JS)
 const button = document.getElementById("myButton");
-button.addEventListener("click", function () {
-  const counter = document.getElementById("counter");
-  counter.textContent = parseInt(counter.textContent) + 1;
-});
+button.textContent = "Hello World";
 
-// React approach - declarative
-function Counter() {
-  const [count, setCount] = useState(0);
-  return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
+// React with TypeScript - declarative approach
+function HelloWorld() {
+  return <button>Hello World</button>;
 }
 ```
 
-### Simple Component with Props
+### Your First Simple Component
 
 ```tsx
-interface UserCardProps {
-  name: string;
-  email: string;
-}
-
-function UserCard({ name, email }: UserCardProps) {
+function Welcome() {
   return (
-    <div className="user-card">
-      <h3>{name}</h3>
-      <p>{email}</p>
+    <div>
+      <h1>Welcome to React!</h1>
+      <p>This is your first component.</p>
     </div>
   );
 }
 ```
 
 > 💡 **Want to start coding immediately?** Jump to [quickstart.md](./quickstart.md) for step-by-step setup instructions.
+>
+> 📚 **Note:** Component props, interfaces, and advanced patterns are covered in [Lesson 2: Components & Hooks](../lesson2-component-hook/)
 
 ---
 
@@ -149,9 +143,9 @@ git --version     # Any version
 - Easier to understand and debug
 
 **Component-Based:**
-- UI split into independent, reusable pieces
-- Each component manages its own logic
-- Compose complex UIs from simple components
+- UI built from independent pieces called components
+- Each component is like a JavaScript function
+- Components can be reused (details in Lesson 2)
 
 **Virtual DOM:**
 - React creates an in-memory representation of the DOM
@@ -162,33 +156,36 @@ git --version     # Any version
 
 ✅ **Type Safety:** Catch errors before runtime
 ✅ **Better Autocomplete:** IDE helps you write code
-✅ **Self-Documentation:** Interfaces describe component contracts
-✅ **Refactoring Confidence:** Change code safely
+✅ **Self-Documentation:** Code is easier to understand
+
+> 📚 **Advanced TypeScript patterns** for React components are covered in Lesson 2.
 
 ---
 
 ## Practice Exercises
 
 ### Level 1: Setup & First Component
-- Install required tools
+- Install required tools (Node.js, npm, VS Code)
 - Create new React project with Vite
 - Run development server
 - Create a simple "Hello World" component
+- Modify the default App component
 
-### Level 2: Props & Styling
-- Build Button component with variants
-- Create ProfileCard with props
-- Style components with CSS
-- Use multiple components together
+### Level 2: Basic JSX Practice
+- Create a Welcome component with text
+- Add some basic HTML elements (h1, p, div)
+- Apply simple inline styles
+- Add a className for CSS styling
 
-### Level 3: Mini Project
-Create a personal portfolio page with:
-- Header component
-- About Me section
-- Skills list component
-- Contact information card
+### Level 3: Simple Page
+Create a basic landing page with:
+- Header with your name
+- Introduction paragraph
+- Simple footer
 
 > 🔬 **Detailed exercises:** See [lab1.md](./lab/lab1.md)
+>
+> 💡 **Note:** Advanced exercises with props, state, and multiple components are in Lesson 2's lab.
 
 ---
 
@@ -240,29 +237,25 @@ Before moving to Lesson 2, ensure you can:
 
 ### Setup & Tools (Must Know)
 - [ ] Create new React project with Vite
-- [ ] Start development server
-- [ ] Understand project folder structure
-- [ ] Install and manage npm packages
+- [ ] Start development server (`npm run dev`)
+- [ ] Understand basic project folder structure
+- [ ] Know where to write component code
 
 ### React Basics (Must Know)
-- [ ] Explain what React is and why it's useful
-- [ ] Create functional components
-- [ ] Use JSX/TSX syntax correctly
-- [ ] Pass props to components
-- [ ] Apply CSS styling to components
+- [ ] Explain what React is in simple terms
+- [ ] Understand what a component is
+- [ ] Write basic JSX/TSX syntax
+- [ ] Create a simple functional component
+- [ ] Apply basic CSS styling
 
-### TypeScript (Must Know)
-- [ ] Define interfaces for props
-- [ ] Type component props correctly
-- [ ] Understand basic TypeScript errors
+### Understanding (Must Know)
+- [ ] Know why React is useful
+- [ ] Understand declarative vs imperative programming
+- [ ] Know what the Virtual DOM is (basic concept)
 
-### Practical Skills (Must Demonstrate)
-- [ ] Built and ran a React application
-- [ ] Created multiple reusable components
-- [ ] Composed components together
-- [ ] Debugged basic React errors
+**🎯 Goal: Check at least 8/10 items before Lesson 2**
 
-**🎯 Goal: Check at least 10/12 items before Lesson 2**
+> 💡 **Ready for more?** Lesson 2 covers props, state, hooks, and building reusable component libraries!
 
 ---
 
@@ -277,9 +270,5 @@ Before moving to Lesson 2, ensure you can:
 🔬 **Ready for practice?** → Begin [lab1.md](./lab/lab1.md) exercises
 
 ---
-
-**Welcome to React development! 🚀 Let's build amazing user interfaces together!**
-
-**Welcome to React development! � Let's build amazing user interfaces together!**
 
 

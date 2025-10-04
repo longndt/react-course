@@ -178,53 +178,49 @@ src/
 ## Modern JavaScript with React
 
 ```typescript
-// Function Component with Props (TypeScript)
-interface GreetingProps {
-  name: string;
-  age?: number;
-}
+// Simple Function Component (TypeScript)
+function Greeting() {
+  const name = "Student";
+  const message = "Welcome to React!";
 
-function Greeting({ name, age }: GreetingProps) {
   return (
     <div>
       <h1>Hello, {name}!</h1>
-      {age && <p>Age: {age}</p>}
+      <p>{message}</p>
     </div>
   );
 }
 
 // Using modern JavaScript features with TypeScript
-interface User {
-  id: number;
-  name: string;
-  age: number;
-}
-
-const users: User[] = [
-  { id: 1, name: "John", age: 25 },
-  { id: 2, name: "Jane", age: 30 },
-];
+const users: string[] = ["John", "Jane", "Bob"];
 
 function UserList() {
   return (
     <div>
-      {users.map((user) => (
-        <Greeting key={user.id} name={user.name} age={user.age} />
-      ))}
+      <h2>User List</h2>
+      <ul>
+        {users.map((user, index) => (
+          <li key={index}>{user}</li>
+        ))}
+      </ul>
     </div>
   );
 }
 ```
 
+> 💡 **Note:** Props, interfaces for props, and advanced patterns are covered in Lesson 2
+
 ---
 
-## Common Patterns
+## Common Patterns in Lesson 1
 
-- Functional Components
-- Hooks
-- Props & State
-- Event Handling
-- Component Composition
+- Functional Components (basics)
+- JSX Syntax
+- Embedding JavaScript in JSX
+- Basic Event Handling (alerts only)
+- Simple Styling (CSS files or inline)
+
+> 💡 **Advanced Patterns (Lesson 2):** Hooks, Props & State, Component Composition, Reusable Patterns
 
 ---
 
@@ -250,39 +246,38 @@ function UserList() {
 
 ## Practical Exercise
 
-Create a Profile Card Component:
+Create a Simple Welcome Component:
 
 ```typescript
-interface ProfileCardProps {
-  name: string;
-  role: string;
-  bio: string;
-  avatar: string;
-}
+// src/components/Welcome.tsx
+function Welcome() {
+  const appName = "My React App";
+  const year = new Date().getFullYear();
 
-function ProfileCard({ name, role, bio, avatar }: ProfileCardProps) {
   return (
-    <div className="card">
-      <img src={avatar} alt={name} />
-      <h2>{name}</h2>
-      <h3>{role}</h3>
-      <p>{bio}</p>
+    <div className="welcome">
+      <h1>Welcome to {appName}!</h1>
+      <p>Built with React + TypeScript + Vite</p>
+      <footer>© {year}</footer>
     </div>
   );
 }
 
-// Usage
+export default Welcome;
+
+// Usage in App.tsx
+import Welcome from './components/Welcome';
+
 function App() {
   return (
-    <ProfileCard
-      name="John Doe"
-      role="React Developer"
-      bio="Passionate about building user interfaces"
-      avatar="/john-avatar.jpg"
-    />
+    <div className="App">
+      <Welcome />
+    </div>
   );
 }
 ```
+
+> 💡 **Ready for more advanced exercises with props?** Continue to [Lesson 2: Components & Hooks](../../lesson2-component-hook/)
 
 ---
 
