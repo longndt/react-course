@@ -96,6 +96,7 @@ function UserProfile({ userId }) {
 
   useEffect(() => {
     // Fetch user data when userId changes
+    // Mock API for testing: https://dummyjson.com/users/${userId}
     fetch(`/api/users/${userId}`)
       .then((res) => res.json())
       .then((data) => {
