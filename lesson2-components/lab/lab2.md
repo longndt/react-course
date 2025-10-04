@@ -56,7 +56,7 @@ export default Card;
 
 Usage example:
 
-```jsx
+```tsx
 <Card className="product-card">
   <Card.Header>
     <h2>Product Title</h2>
@@ -66,7 +66,9 @@ Usage example:
     <span className="price">$99.99</span>
   </Card.Body>
   <Card.Footer>
-    <Button text="Add to Cart" />
+    <ThemedButton onClick={() => alert("Add to Cart clicked!")}>
+      Add to Cart
+    </ThemedButton>
   </Card.Footer>
 </Card>
 ```
@@ -182,8 +184,11 @@ export default useForm;
 
 2. Create a Form component using the hook:
 
-```jsx
-// src/components/Form/Form.jsx
+```tsx
+// src/components/Form/Form.tsx
+import useForm from "../../hooks/useForm";
+import { ThemedButton } from "../ThemedComponents/ThemedComponents";
+
 function RegistrationForm() {
   const { values, errors, handleChange, handleSubmit } = useForm({
     username: "",
@@ -191,8 +196,9 @@ function RegistrationForm() {
     password: "",
   });
 
-  const onSubmit = (formData) => {
+  const onSubmit = (formData: Record<string, string>) => {
     console.log("Form submitted:", formData);
+    alert("Registration successful!");
   };
 
   return (
@@ -230,8 +236,43 @@ function RegistrationForm() {
         {errors.password && <span className="error">{errors.password}</span>}
       </div>
 
-      <button type="submit">Register</button>
+      <ThemedButton onClick={handleSubmit(onSubmit)}>
+        Register
+      </ThemedButton>
     </form>
+  );
+}
+
+// Example ProductList with ThemedButton
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+}
+
+function ProductList() {
+  const products: Product[] = [
+    { id: 1, name: "Product 1", price: 99.99 },
+    { id: 2, name: "Product 2", price: 149.99 },
+  ];
+
+  const handleAddToCart = (product: Product) => {
+    console.log("Adding to cart:", product);
+    alert(`Added ${product.name} to cart!`);
+  };
+
+  return (
+    <div className="product-list">
+      {products.map((product) => (
+        <div key={product.id} className="product-item">
+          <h3>{product.name}</h3>
+          <p>${product.price}</p>
+          <ThemedButton onClick={() => handleAddToCart(product)}>
+            Add to Cart
+          </ThemedButton>
+        </div>
+      ))}
+    </div>
   );
 }
 ```
@@ -272,21 +313,49 @@ export { ThemeProvider, useTheme };
 
 2. Implement theme-aware components:
 
-```jsx
-// src/components/ThemedButton/ThemedButton.jsx
-function ThemedButton({ children }) {
-  const { theme } = useTheme();
+```tsx
+// src/components/ThemedComponents/ThemedComponents.tsx
+import { ReactNode } from "react";
+import { useTheme } from "../../context/ThemeContext";
 
-  return <button className={`button ${theme}`}>{children}</button>;
+interface ThemedButtonProps {
+  children: ReactNode;
+  onClick?: () => void;
 }
 
-// src/App.jsx
+export function ThemedButton({ children, onClick }: ThemedButtonProps) {
+  const { theme } = useTheme();
+
+  return (
+    <button
+      type="button"
+      className={`theme-button ${theme}`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+}
+
+export function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <button className="theme-toggle" onClick={toggleTheme}>
+      {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+    </button>
+  );
+}
+
+// src/App.tsx
 function App() {
   return (
     <ThemeProvider>
       <div className="app">
         <ThemeToggle />
-        <ThemedButton>Click me</ThemedButton>
+        <ThemedButton onClick={() => alert("Button clicked!")}>
+          Click me
+        </ThemedButton>
       </div>
     </ThemeProvider>
   );
@@ -357,6 +426,7 @@ This lab features modern CSS with the following improvements:
 3. **Enhanced Shadows**: Multi-layered shadows for depth and dimension
 4. **Smooth Animations**: Cubic-bezier transitions for professional feel
 5. **Improved Typography**: Better font sizing and spacing for readability
+6. **Dark Mode Support**: Complete theme switching with consistent styling across all components
 
 ### Key CSS Features
 
@@ -387,6 +457,37 @@ This lab features modern CSS with the following improvements:
   border-radius: 16px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Theme-aware buttons */
+.theme-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-button.light {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.theme-button.dark {
+  background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+  color: #e2e8f0;
+}
+
+/* Dark mode support for custom buttons */
+.theme-dark .btn-primary {
+  background: #4299e1;
+  color: white;
+}
+
+.theme-dark .btn-secondary {
+  background: #4a5568;
+  color: #e2e8f0;
 }
 ```
 
@@ -469,34 +570,80 @@ advanced-components/
 - ✅ **Modern CSS**: Glass morphism effects, gradients, and animations
 
 #### **Interactive Features:**
-- ✅ **Theme Switching**: Light/dark mode with context persistence
+- ✅ **Theme Switching**: Light/dark mode with context persistence and complete UI consistency
 - ✅ **Form Validation**: Custom useForm hook with error handling
 - ✅ **Modal Management**: Portal-based modals with backdrop click handling
 - ✅ **Loading States**: HOC pattern for async operations
+- ✅ **Clickable Buttons**: All buttons fully functional with onClick handlers
+- ✅ **Product Interactions**: Add to Cart functionality with alerts and console logging
 
 ### Expected Functionality:
 1. **Component Showcase**: Interactive demos of all component patterns
-2. **Theme System**: Seamless light/dark mode switching
+2. **Theme System**: Seamless light/dark mode switching across ALL components (including buttons)
 3. **Form Handling**: Registration form with validation and error states
 4. **Modal Interactions**: Product details modal with smooth animations
 5. **Error Recovery**: Error boundaries with retry functionality
 6. **Professional UI**: Modern design with glass morphism and smooth transitions
+7. **Button Interactivity**: All buttons respond to clicks with appropriate actions
 
-## Submission Requirements
+## Common Issues and Solutions 🔧
 
-1. GitHub repository containing:
+### Issue 1: Buttons Not Clickable
+**Problem**: Buttons don't respond to clicks
+**Solution**: Ensure all button components have `onClick` props properly defined
+```tsx
+// ❌ Wrong
+<ThemedButton>Click me</ThemedButton>
 
-   - Complete source code
-   - readme.md with setup instructions
-   - Component documentation
-   - Screenshots/GIFs of components in action
+// ✅ Correct
+<ThemedButton onClick={() => alert("Clicked!")}>Click me</ThemedButton>
+```
 
-2. Your implementation should demonstrate:
-   - Proper component composition
-   - Effective use of hooks
-   - Context API implementation
-   - Error handling
-   - Responsive design
+### Issue 2: Theme Not Applying to All Components
+**Problem**: Some buttons don't change color when switching themes
+**Solution**: Use `ThemedButton` component instead of plain buttons with className
+```tsx
+// ❌ Wrong - won't switch themes automatically
+<button className="btn-primary">Add to Cart</button>
+
+// ✅ Correct - theme-aware component
+<ThemedButton onClick={handleClick}>Add to Cart</ThemedButton>
+```
+
+### Issue 3: Import Path Errors
+**Problem**: Module not found errors for hooks or context
+**Solution**: Use correct relative paths based on file structure
+```tsx
+// From: src/components/Form/Form.tsx
+import useForm from "../../hooks/useForm";  // ✅ Correct
+import useForm from "../hooks/useForm";     // ❌ Wrong
+
+// From: src/components/ThemedComponents/ThemedComponents.tsx
+import { useTheme } from "../../context/ThemeContext";  // ✅ Correct
+import { useTheme } from "../context/ThemeContext";     // ❌ Wrong
+```
+
+### Issue 4: Missing Configuration Files
+**Problem**: TypeScript or Vite errors on startup
+**Solution**: Ensure you have all required config files:
+- `vite.config.ts` - Vite configuration with React plugin
+- `tsconfig.json` - TypeScript compiler options
+- `tsconfig.node.json` - TypeScript config for Node environment
+
+### Issue 5: Dark Mode CSS Not Working
+**Problem**: Custom buttons (btn-primary, btn-secondary) don't change in dark mode
+**Solution**: Add dark mode CSS rules
+```css
+.theme-dark .btn-primary {
+  background: #4299e1;
+  color: white;
+}
+
+.theme-dark .btn-secondary {
+  background: #4a5568;
+  color: #e2e8f0;
+}
+```
 
 ## Grading Criteria
 
