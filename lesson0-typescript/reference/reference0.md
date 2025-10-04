@@ -1,10 +1,10 @@
-# Reference - TypeScript Fundamentals
+# Reference - TypeScript Prerequisites
 
 > **Quick reference guide for TypeScript essentials**
 
 ---
 
-## Part 1: Setup TypeScript (2 minutes)
+## Part 1: Setup TypeScript
 
 ### Install TypeScript Globally
 
@@ -37,7 +37,7 @@ npx tsc --init
 
 ---
 
-## Part 2: Write Your First TypeScript Code (1 minute)
+## Part 2: Write Your First TypeScript Code
 
 ### Create `hello.ts`
 
@@ -71,7 +71,7 @@ Hello, TypeScript!
 
 ---
 
-## Part 3: Basic Types (2 minutes)
+## Part 3: Basic Types
 
 ### Primitive Types
 

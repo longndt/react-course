@@ -1,4 +1,4 @@
-# Lab: API Integration & CRUD Operations
+# Lab - API Integration & Data Management
 
 ## Overview
 

@@ -1,610 +1,154 @@
-# Theory: React Components & Hooks
+# Theory - Component Architecture & React Hook
 
 ---
 
-## Why Component Architecture Matters? 🤔
+## 1. Core Concepts
 
-Professional applications need:
-- **Admin Dashboards** → Reusable data tables, forms, modals
-- **User Interfaces** → Consistent buttons, inputs, navigation
-- **Complex Features** → Multi-step forms, data visualization, file uploads
+### Why Component Architecture?
 
-**Real-World Example - E-commerce Admin Panel:**
+Modern applications require modular, reusable UI building blocks. Components enable:
+- **Reusability** - Write once, use everywhere
+- **Maintainability** - Isolated, testable code units
+- **Scalability** - Compose complex UIs from simple pieces
+- **Collaboration** - Teams work on independent components
+
+**Component Hierarchy Example:**
 ```
-E-commerce Dashboard
-├── Sidebar Navigation (Reusable)
-│   ├── Navigation Item (Atomic)
-│   └── User Profile (Compound)
-├── Main Content Area
-│   ├── Stats Cards (Reusable Grid)
-│   ├── Data Table (Complex Component)
-│   │   ├── Table Header (Sortable)
-│   │   ├── Table Row (Actions)
-│   │   └── Pagination (Stateful)
-│   └── Modal Forms (Overlay)
-└── Footer (Static)
+E-commerce App
+├── Header
+│   ├── Logo
+│   ├── SearchBar
+│   └── UserMenu
+├── ProductList
+│   └── ProductCard (× many)
+│       ├── Image
+│       ├── Title
+│       ├── Price
+│       └── AddToCartButton
+└── Footer
 ```
 
-**Building Blocks Approach:**
-- **Atomic Components**: Button, Input, Icon
-- **Molecule Components**: SearchBox, Card, FormField
-- **Organism Components**: Header, ProductList, DataTable
-- **Page Components**: Dashboard, ProductManagement, UserProfile
-
-> 💡 **Note:** For practical component examples and hands-on practice, refer to [reference/](../reference/) and [examples/](../examples/) folder.
+**Atomic Design Pattern:**
+- **Atoms**: Button, Input, Icon (smallest units)
+- **Molecules**: SearchBox, FormField (simple groups)
+- **Organisms**: Header, ProductGrid (complex sections)
+- **Templates**: PageLayout (structure)
+- **Pages**: Homepage, ProductPage (final)
 
 ---
 
-## Component Fundamentals 🧩
+## 2. Function Components
 
-### 1. What is a Component?
+### Basic Structure
 
-A **component** is a reusable, self-contained piece of UI that combines structure (HTML), behavior (JavaScript), and styling (CSS). Think of components as LEGO blocks that you can combine to build complex applications.
-
-**Key Characteristics:**
-- **Reusable** - Write once, use everywhere
-- **Independent** - Has its own logic and state
-- **Composable** - Can be nested inside other components
-- **Encapsulated** - Internal logic is hidden from outside
-
-**Simple Analogy:**
-```
-Website = LEGO Castle
-Components = Individual LEGO Blocks
-  ├── Header (Roof block)
-  ├── Navigation (Wall blocks)
-  ├── Content (Room blocks)
-  └── Footer (Foundation block)
-```
-
----
-
-### 2. Function Components (Modern Way ⭐ Recommended)
-
-**Function components** are JavaScript functions that return JSX. This is the **modern and preferred** way to write React components.
-
-#### Basic Example - Greeting Component
+Function components are JavaScript functions that return JSX:
 
 ```tsx
-function Greeting() {
-  return <h1>Hello, Welcome to React!</h1>;
+function Welcome() {
+  return <h1>Hello, React!</h1>;
 }
-
-// Usage
-<Greeting />
 ```
 
-#### With Props - Making it Dynamic
+### Props (Properties)
+
+Props pass data from parent to child components:
 
 ```tsx
-interface GreetingProps {
-  name: string;
-  age?: number; // Optional prop
-}
-
-function Greeting({ name, age }: GreetingProps) {
-  return (
-    <div>
-      <h1>Hello, {name}!</h1>
-      {age && <p>You are {age} years old.</p>}
-    </div>
-  );
-}
-
-// Usage
-<Greeting name="Alice" age={25} />
-<Greeting name="Bob" />
-```
-
-#### Real-World Example - Product Card
-
-```tsx
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  inStock: boolean;
-}
-
-interface ProductCardProps {
-  product: Product;
-  onAddToCart: (id: number) => void;
-}
-
-function ProductCard({ product, onAddToCart }: ProductCardProps) {
-  return (
-    <div className="product-card">
-      <img src={product.image} alt={product.name} />
-      <h3>{product.name}</h3>
-      <p className="price">${product.price.toFixed(2)}</p>
-
-      {product.inStock ? (
-        <button onClick={() => onAddToCart(product.id)}>
-          Add to Cart
-        </button>
-      ) : (
-        <p className="out-of-stock">Out of Stock</p>
-      )}
-    </div>
-  );
-}
-
-// Usage
-const handleAddToCart = (productId: number) => {
-  console.log(`Added product ${productId} to cart`);
-};
-
-<ProductCard
-  product={{
-    id: 1,
-    name: "Wireless Mouse",
-    price: 29.99,
-    image: "/images/mouse.jpg",
-    inStock: true
-  }}
-  onAddToCart={handleAddToCart}
-/>
-```
-
-**✅ Advantages of Function Components:**
-- Simple and concise syntax
-- Easier to read and understand
-- Better performance
-- Can use Hooks for state and side effects
-- No `this` keyword confusion
-- Better TypeScript support
-
-**When to Use Function Components:**
-- **Always!** This is the modern standard (2019+)
-- For new projects and components
-- When using React Hooks
-
----
-
-### 3. Class Components (Legacy Way 📜 Older Approach)
-
-**Class components** are ES6 classes that extend `React.Component`. They were the standard before React 16.8 (2019) introduced Hooks.
-
-#### Basic Example - Greeting Component
-
-```tsx
-import React from 'react';
-
-class Greeting extends React.Component {
-  render() {
-    return <h1>Hello, Welcome to React!</h1>;
-  }
-}
-
-// Usage
-<Greeting />
-```
-
-#### With Props
-
-```tsx
-interface GreetingProps {
+interface WelcomeProps {
   name: string;
   age?: number;
 }
 
-class Greeting extends React.Component<GreetingProps> {
-  render() {
-    const { name, age } = this.props;
-
-    return (
-      <div>
-        <h1>Hello, {name}!</h1>
-        {age && <p>You are {age} years old.</p>}
-      </div>
-    );
-  }
-}
-
-// Usage
-<Greeting name="Alice" age={25} />
-```
-
-#### With State - Counter Example
-
-```tsx
-interface CounterState {
-  count: number;
-}
-
-class Counter extends React.Component<{}, CounterState> {
-  // Constructor to initialize state
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      count: 0
-    };
-
-    // Bind methods (required for event handlers)
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
-  }
-
-  increment() {
-    this.setState({ count: this.state.count + 1 });
-  }
-
-  decrement() {
-    this.setState({ count: this.state.count - 1 });
-  }
-
-  render() {
-    return (
-      <div>
-        <h2>Count: {this.state.count}</h2>
-        <button onClick={this.increment}>+</button>
-        <button onClick={this.decrement}>-</button>
-      </div>
-    );
-  }
-}
-```
-
-#### Real-World Example - User Profile with Lifecycle
-
-```tsx
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-interface UserProfileProps {
-  userId: number;
-}
-
-interface UserProfileState {
-  user: User | null;
-  loading: boolean;
-  error: string | null;
-}
-
-class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
-  constructor(props: UserProfileProps) {
-    super(props);
-    this.state = {
-      user: null,
-      loading: true,
-      error: null
-    };
-  }
-
-  // Runs after component is mounted to DOM
-  componentDidMount() {
-    this.fetchUser();
-  }
-
-  // Runs when props change
-  componentDidUpdate(prevProps: UserProfileProps) {
-    if (prevProps.userId !== this.props.userId) {
-      this.fetchUser();
-    }
-  }
-
-  // Cleanup before component unmounts
-  componentWillUnmount() {
-    // Cancel any pending requests, clear timers, etc.
-    console.log('Component unmounting...');
-  }
-
-  async fetchUser() {
-    try {
-      this.setState({ loading: true, error: null });
-
-      const response = await fetch(
-        `https://api.example.com/users/${this.props.userId}`
-      );
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch user');
-      }
-
-      const user = await response.json();
-      this.setState({ user, loading: false });
-
-    } catch (error) {
-      this.setState({
-        error: error instanceof Error ? error.message : 'Unknown error',
-        loading: false
-      });
-    }
-  }
-
-  render() {
-    const { user, loading, error } = this.state;
-
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
-    if (!user) return <div>No user found</div>;
-
-    return (
-      <div className="user-profile">
-        <h2>{user.name}</h2>
-        <p>Email: {user.email}</p>
-      </div>
-    );
-  }
-}
-
-// Usage
-<UserProfile userId={123} />
-```
-
-**❌ Disadvantages of Class Components:**
-- More boilerplate code
-- Need to bind `this` for event handlers
-- Confusing `this` keyword
-- Harder to share stateful logic (need HOCs or Render Props)
-- More complex lifecycle methods
-- Larger bundle size
-
-**When to Use Class Components:**
-- Legacy codebases (pre-2019)
-- Maintaining old projects
-- When working with older libraries that don't support Hooks
-- **Not recommended for new development**
-
----
-
-### 4. Function vs Class Components - Detailed Comparison
-
-| Aspect | Function Component | Class Component |
-|--------|-------------------|-----------------|
-| **Syntax** | Simple function | ES6 class with `render()` |
-| **State Management** | `useState()` Hook | `this.state` and `this.setState()` |
-| **Lifecycle** | `useEffect()` Hook | `componentDidMount`, `componentDidUpdate`, etc. |
-| **Props Access** | Direct parameter | `this.props` |
-| **Performance** | Slightly faster | Slightly slower |
-| **Learning Curve** | Easier | Steeper (need to understand `this`) |
-| **Code Size** | Smaller | More boilerplate |
-| **Reusability** | Custom Hooks | HOCs, Render Props |
-| **React Recommendation** | ✅ **Recommended** | ⚠️ Legacy |
-| **First Introduced** | React 0.14 (2015), Hooks in 16.8 (2019) | React 0.13 (2015) |
-
-#### Side-by-Side Comparison - Same Component
-
-```tsx
-// ✅ MODERN: Function Component with Hooks
-function Timer() {
-  const [seconds, setSeconds] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds(s => s + 1);
-    }, 1000);
-
-    return () => clearInterval(interval); // Cleanup
-  }, []);
-
-  return <div>Seconds: {seconds}</div>;
-}
-
-// ❌ LEGACY: Class Component
-class Timer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { seconds: 0 };
-  }
-
-  componentDidMount() {
-    this.interval = setInterval(() => {
-      this.setState({ seconds: this.state.seconds + 1 });
-    }, 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  render() {
-    return <div>Seconds: {this.state.seconds}</div>;
-  }
-}
-```
-
-**Result:** Function component is **7 lines**, class component is **18 lines** for the same functionality!
-
----
-
-### 5. Props & Component Composition
-
-**Props** (short for "properties") are how you pass data from parent to child components. Think of props as function arguments.
-
-#### Basic Props Example
-
-```tsx
-// Child Component
-interface ButtonProps {
-  text: string;
-  color: string;
-  onClick: () => void;
-}
-
-function Button({ text, color, onClick }: ButtonProps) {
-  return (
-    <button
-      style={{ backgroundColor: color }}
-      onClick={onClick}
-    >
-      {text}
-    </button>
-  );
-}
-
-// Parent Component
-function App() {
-  const handleClick = () => alert('Button clicked!');
-
+function Welcome({ name, age }: WelcomeProps) {
   return (
     <div>
-      <Button text="Save" color="green" onClick={handleClick} />
-      <Button text="Delete" color="red" onClick={handleClick} />
-      <Button text="Cancel" color="gray" onClick={handleClick} />
+      <h1>Welcome, {name}!</h1>
+      {age && <p>Age: {age}</p>}
     </div>
   );
 }
+
+// Usage
+<Welcome name="Alice" age={25} />
 ```
 
-#### Composition - Children Prop
+### Destructuring Props
 
 ```tsx
-// Reusable Card Component
-interface CardProps {
-  children: React.ReactNode;
-  title?: string;
+// ❌ Without destructuring
+function Card(props) {
+  return <div>{props.title} - {props.description}</div>;
 }
 
-function Card({ children, title }: CardProps) {
+// ✅ With destructuring (cleaner)
+function Card({ title, description }) {
+  return <div>{title} - {description}</div>;
+}
+
+// ✅ With default values
+function Card({ title, description = 'No description' }) {
+  return <div>{title} - {description}</div>;
+}
+```
+
+### Children Prop
+
+```tsx
+interface CardProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+function Card({ title, children }: CardProps) {
   return (
     <div className="card">
-      {title && <h3>{title}</h3>}
-      <div className="card-content">
-        {children}
-      </div>
+      <h2>{title}</h2>
+      <div className="card-body">{children}</div>
     </div>
   );
-}
-
-// Usage - Composing Multiple Cards
-function Dashboard() {
-  return (
-    <div>
-      <Card title="User Stats">
-        <p>Total Users: 1,234</p>
-        <p>Active Today: 456</p>
-      </Card>
-
-      <Card title="Revenue">
-        <p>This Month: $12,345</p>
-        <p>Growth: +23%</p>
-      </Card>
-
-      <Card>
-        <h4>Custom Content</h4>
-        <p>Any JSX can go here!</p>
-      </Card>
-    </div>
-  );
-}
-```
-
-#### Advanced Composition - Layout Pattern
-
-```tsx
-// Layout Components
-interface PageLayoutProps {
-  children: React.ReactNode;
-}
-
-function PageLayout({ children }: PageLayoutProps) {
-  return (
-    <div className="page-layout">
-      <Header />
-      <main>{children}</main>
-      <Footer />
-    </div>
-  );
-}
-
-function Header() {
-  return (
-    <header>
-      <h1>My App</h1>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-      </nav>
-    </header>
-  );
-}
-
-function Footer() {
-  return <footer>&copy; 2025 My Company</footer>;
 }
 
 // Usage
-function HomePage() {
-  return (
-    <PageLayout>
-      <h2>Welcome to Home Page</h2>
-      <p>This is the main content</p>
-    </PageLayout>
-  );
-}
-
-function AboutPage() {
-  return (
-    <PageLayout>
-      <h2>About Us</h2>
-      <p>This is the about page content</p>
-    </PageLayout>
-  );
-}
+<Card title="User Profile">
+  <p>Name: John Doe</p>
+  <p>Email: john@example.com</p>
+</Card>
 ```
 
-**Key Principles:**
-- Props flow **one way** - from parent to child (unidirectional data flow)
-- Props are **read-only** - child cannot modify them
-- Use **composition** to build complex UIs from simple components
-- Keep components **small and focused** on a single responsibility
+### Component Composition
 
----
-
-### 6. Best Practices Summary
-
-**✅ DO:**
-- Use **Function Components** for all new code
-- Break UI into small, reusable components
-- Use TypeScript interfaces for props
-- Use descriptive component names (`UserProfile`, not `Component1`)
-- Keep components focused on one responsibility
-- Extract repeated logic into custom hooks
-
-**❌ DON'T:**
-- Don't use Class Components for new projects
-- Don't create overly large components (>300 lines)
-- Don't modify props inside components
-- Don't forget to add key props in lists
-- Don't mix business logic with UI rendering too much
-
----
-
-## React Hooks – Deep Dive 🎣
-
-### 1. What are Hooks?
-
-**Hooks** are special functions in React that let you "hook into" React features like state, lifecycle, context, and more directly from function components.
-
-**Why Hooks Matter:**
-- Write cleaner, more concise code
-- Separate logic from UI, making testing easier
-- No need for classes, avoiding `this` binding issues
-- Reuse stateful logic across components
-
-**The Two Golden Rules of Hooks:**
-1. Only call Hooks at the top level (not inside loops, conditions, or nested functions)
-2. Only call Hooks from React function components or custom Hooks
-
----
-
-### 2. Essential Built-in Hooks
-
-#### a. useState – Managing Local Component State
-
-**Purpose:** Add state variables to function components
-
-**Syntax:**
 ```tsx
-const [state, setState] = useState(initialValue);
+function Avatar({ src, alt }) {
+  return <img src={src} alt={alt} className="avatar" />;
+}
+
+function UserInfo({ user }) {
+  return (
+    <div>
+      <Avatar src={user.avatar} alt={user.name} />
+      <h3>{user.name}</h3>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+
+function UserCard({ user }) {
+  return (
+    <div className="card">
+      <UserInfo user={user} />
+      <button>View Profile</button>
+    </div>
+  );
+}
 ```
 
-**Basic Example:**
+---
+
+## 3. React Hooks
+
+### useState - State Management
+
+**Basic Usage:**
 ```tsx
 import { useState } from 'react';
 
@@ -622,75 +166,116 @@ function Counter() {
 }
 ```
 
-**Advanced Example - Managing Complex State:**
+**Multiple State Variables:**
 ```tsx
-import { useState } from 'react';
+function Form() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [agreed, setAgreed] = useState(false);
 
-interface User {
-  name: string;
-  email: string;
-  age: number;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log({ name, email, agreed });
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Name"
+      />
+      <input
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
+      <label>
+        <input
+          type="checkbox"
+          checked={agreed}
+          onChange={(e) => setAgreed(e.target.checked)}
+        />
+        I agree to terms
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  );
 }
+```
 
+**Object State:**
+```tsx
 function UserProfile() {
-  const [user, setUser] = useState<User>({
+  const [user, setUser] = useState({
     name: '',
     email: '',
     age: 0
   });
 
-  const updateField = (field: keyof User, value: string | number) => {
-    setUser(prevUser => ({
-      ...prevUser,
-      [field]: value
-    }));
+  const updateName = (name: string) => {
+    setUser({ ...user, name }); // Spread operator preserves other fields
+  };
+
+  const updateEmail = (email: string) => {
+    setUser(prev => ({ ...prev, email })); // Functional update
   };
 
   return (
     <div>
       <input
         value={user.name}
-        onChange={(e) => updateField('name', e.target.value)}
-        placeholder="Name"
+        onChange={(e) => updateName(e.target.value)}
       />
       <input
         value={user.email}
-        onChange={(e) => updateField('email', e.target.value)}
-        placeholder="Email"
-      />
-      <input
-        type="number"
-        value={user.age}
-        onChange={(e) => updateField('age', parseInt(e.target.value))}
-        placeholder="Age"
+        onChange={(e) => updateEmail(e.target.value)}
       />
     </div>
   );
 }
 ```
 
-**Key Points:**
-- State updates are asynchronous
-- Use functional updates when new state depends on previous state: `setState(prev => prev + 1)`
-- Don't mutate state directly, always create new objects/arrays
+**Array State:**
+```tsx
+function TodoList() {
+  const [todos, setTodos] = useState<string[]>([]);
+  const [input, setInput] = useState('');
+
+  const addTodo = () => {
+    setTodos([...todos, input]);
+    setInput('');
+  };
+
+  const removeTodo = (index: number) => {
+    setTodos(todos.filter((_, i) => i !== index));
+  };
+
+  return (
+    <div>
+      <input
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button onClick={addTodo}>Add</button>
+      <ul>
+        {todos.map((todo, i) => (
+          <li key={i}>
+            {todo}
+            <button onClick={() => removeTodo(i)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
 
 ---
 
-#### b. useEffect – Handling Side Effects
+### useEffect - Side Effects
 
-**Purpose:** Perform side effects (data fetching, subscriptions, manual DOM manipulation, timers)
-
-**Syntax:**
-```tsx
-useEffect(() => {
-  // Effect logic
-  return () => {
-    // Cleanup logic (optional)
-  };
-}, [dependencies]);
-```
-
-**Example 1: Timer**
+**Basic Usage:**
 ```tsx
 import { useState, useEffect } from 'react';
 
@@ -702,80 +287,84 @@ function Timer() {
       setSeconds(s => s + 1);
     }, 1000);
 
-    // Cleanup function - runs when component unmounts
+    // Cleanup function
     return () => clearInterval(interval);
   }, []); // Empty array = run once on mount
 
-  return <div>Time elapsed: {seconds}s</div>;
+  return <div>Seconds: {seconds}</div>;
 }
 ```
 
-**Example 2: Fetching Data**
+**Dependency Array:**
 ```tsx
-import { useState, useEffect } from 'react';
-
-interface User {
-   id: number;
-   name: string;
-}
-
-function UserList() {
-  const [users, setUsers] = useState<User[]>([]);
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
- const [error, setError] = useState<string | null>(null);
 
- useEffect(() => {
-   async function fetchUsers() {
-     try {
-       setLoading(true);
-       const response = await fetch(
-         "https://67e57e8618194932a5864d8b.mockapi.io/users"  //Mock API
-       );
+  useEffect(() => {
+    setLoading(true);
 
-       if (!response.ok) {
-         throw new Error(`HTTP error! status: ${response.status}`);
-       }
-
-       const data = await response.json();
-       setUsers(data);
-     } catch (err) {
-       setError(err instanceof Error ? err.message : "An error occurred");
-     } finally {
-       setLoading(false);
-     }
-   }
-
-   fetchUsers();
- }, []);
+    fetch(`https://api.example.com/users/${userId}`)
+      .then(res => res.json())
+      .then(data => {
+        setUser(data);
+        setLoading(false);
+      });
+  }, [userId]); // Re-run when userId changes
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (!user) return <div>User not found</div>;
 
   return (
-    <ul>
-      {users.map(user => (
-         <li key={user.id}>{user.id} - {user.name}</li>
-      ))}
-    </ul>
+    <div>
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+    </div>
   );
 }
 ```
 
-**Dependency Array Patterns:**
-- `[]` - Run once on mount
-- `[dep1, dep2]` - Run when dep1 or dep2 changes
-- No array - Run after every render (usually avoid this)
+**Multiple Effects:**
+```tsx
+function Dashboard() {
+  const [data, setData] = useState(null);
+  const [online, setOnline] = useState(navigator.onLine);
+
+  // Effect 1: Fetch data
+  useEffect(() => {
+    fetch('/api/dashboard')
+      .then(res => res.json())
+      .then(setData);
+  }, []);
+
+  // Effect 2: Network status
+  useEffect(() => {
+    const handleOnline = () => setOnline(true);
+    const handleOffline = () => setOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  return (
+    <div>
+      <p>Status: {online ? 'Online' : 'Offline'}</p>
+      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+    </div>
+  );
+}
+```
 
 ---
 
-#### c. useRef – Persisting Values Without Re-renders
+### useRef - DOM References
 
-**Purpose:**
-- Access DOM elements directly
-- Store mutable values that don't trigger re-renders
-- Persist values across renders
-
-**Example 1: Focus Management**
+**Accessing DOM Elements:**
 ```tsx
 import { useRef } from 'react';
 
@@ -795,157 +384,173 @@ function FocusInput() {
 }
 ```
 
-**Example 2: Storing Previous Value**
+**Storing Mutable Values:**
 ```tsx
-import { useState, useEffect, useRef } from 'react';
-
-function Counter() {
-  const [count, setCount] = useState(0);
-  const prevCountRef = useRef<number>();
+function PreviousValue({ value }) {
+  const prevValueRef = useRef<number>();
 
   useEffect(() => {
-    prevCountRef.current = count;
-  }, [count]);
+    prevValueRef.current = value;
+  }, [value]);
 
   return (
     <div>
-      <p>Current: {count}</p>
-      <p>Previous: {prevCountRef.current}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <p>Current: {value}</p>
+      <p>Previous: {prevValueRef.current}</p>
     </div>
   );
 }
 ```
 
-**Key Difference: useRef vs useState**
-- `useState`: Triggers re-render when updated
-- `useRef`: Does NOT trigger re-render when `.current` changes
-
 ---
 
-#### d. useContext – Consuming Context
+### useContext - Global State
 
-**Purpose:** Access context values without prop drilling
-
-**Example: Theme Context**
+**Creating Context:**
 ```tsx
-// 1. Create Context
-const ThemeContext = React.createContext('light');
+import { createContext, useContext, useState } from 'react';
 
-// 2. Provider Component
-function App() {
-  const [theme, setTheme] = useState('light');
+interface Theme {
+  color: string;
+  background: string;
+}
+
+const ThemeContext = createContext<{
+  theme: Theme;
+  toggleTheme: () => void;
+} | undefined>(undefined);
+
+function ThemeProvider({ children }) {
+  const [isDark, setIsDark] = useState(false);
+
+  const theme: Theme = isDark
+    ? { color: '#fff', background: '#333' }
+    : { color: '#000', background: '#fff' };
+
+  const toggleTheme = () => setIsDark(!isDark);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      <Toolbar />
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
     </ThemeContext.Provider>
   );
 }
 
-// 3. Consumer Component
-function Toolbar() {
-  const { theme, setTheme } = useContext(ThemeContext);
+function useTheme() {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within ThemeProvider');
+  }
+  return context;
+}
+
+// Usage
+function ThemedButton() {
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <div style={{ background: theme === 'dark' ? '#333' : '#fff' }}>
-      <p>Current theme: {theme}</p>
-      <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-        Toggle Theme
-      </button>
-    </div>
+    <button
+      style={{ color: theme.color, background: theme.background }}
+      onClick={toggleTheme}
+    >
+      Toggle Theme
+    </button>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <ThemedButton />
+    </ThemeProvider>
   );
 }
 ```
 
 ---
 
-#### e. useReducer – Managing Complex State Logic
+### useReducer - Complex State Logic
 
-**Purpose:** Alternative to useState for complex state logic with multiple sub-values or state transitions
-
-**When to use useReducer:**
-- Complex state logic with multiple sub-values
-- Next state depends on previous state
-- Want to optimize performance by passing dispatch down instead of callbacks
-
-**Syntax:**
 ```tsx
-const [state, dispatch] = useReducer(reducer, initialState);
-```
+import { useReducer } from 'react';
 
-**Example: Todo List**
-```tsx
-const initialState = { todos: [], filter: 'all' };
+interface State {
+  count: number;
+  step: number;
+}
 
-function todoReducer(state, action) {
+type Action =
+  | { type: 'increment' }
+  | { type: 'decrement' }
+  | { type: 'reset' }
+  | { type: 'setStep'; payload: number };
+
+function reducer(state: State, action: Action): State {
   switch (action.type) {
-    case 'ADD_TODO':
-      return {
-        ...state,
-        todos: [...state.todos, {
-          id: Date.now(),
-          text: action.payload,
-          completed: false
-        }]
-      };
-
-    case 'TOGGLE_TODO':
-      return {
-        ...state,
-        todos: state.todos.map(todo =>
-          todo.id === action.payload
-            ? { ...todo, completed: !todo.completed }
-            : todo
-        )
-      };
-
-    case 'DELETE_TODO':
-      return {
-        ...state,
-        todos: state.todos.filter(todo => todo.id !== action.payload)
-      };
-
+    case 'increment':
+      return { ...state, count: state.count + state.step };
+    case 'decrement':
+      return { ...state, count: state.count - state.step };
+    case 'reset':
+      return { ...state, count: 0 };
+    case 'setStep':
+      return { ...state, step: action.payload };
     default:
       return state;
   }
 }
 
-function TodoApp() {
-  const [state, dispatch] = useReducer(todoReducer, initialState);
-  const [inputValue, setInputValue] = useState('');
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, { count: 0, step: 1 });
 
-  const addTodo = () => {
-    if (inputValue.trim()) {
-      dispatch({ type: 'ADD_TODO', payload: inputValue });
-      setInputValue('');
-    }
-  };
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <p>Step: {state.step}</p>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+      <button onClick={() => dispatch({ type: 'reset' })}>Reset</button>
+      <input
+        type="number"
+        value={state.step}
+        onChange={(e) => dispatch({
+          type: 'setStep',
+          payload: Number(e.target.value)
+        })}
+      />
+    </div>
+  );
+}
+```
+
+---
+
+### useMemo - Performance Optimization
+
+```tsx
+import { useState, useMemo } from 'react';
+
+function ExpensiveList({ items }) {
+  const [filter, setFilter] = useState('');
+
+  // Memoize expensive calculation
+  const filteredItems = useMemo(() => {
+    console.log('Filtering items...');
+    return items.filter(item =>
+      item.toLowerCase().includes(filter.toLowerCase())
+    );
+  }, [items, filter]); // Only recalculate when items or filter changes
 
   return (
     <div>
       <input
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onKeyPress={(e) => e.key === 'Enter' && addTodo()}
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+        placeholder="Filter..."
       />
-      <button onClick={addTodo}>Add</button>
-
       <ul>
-        {state.todos.map(todo => (
-          <li key={todo.id}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => dispatch({ type: 'TOGGLE_TODO', payload: todo.id })}
-            />
-            <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
-              {todo.text}
-            </span>
-            <button onClick={() => dispatch({ type: 'DELETE_TODO', payload: todo.id })}>
-              Delete
-            </button>
-          </li>
+        {filteredItems.map((item, i) => (
+          <li key={i}>{item}</li>
         ))}
       </ul>
     </div>
@@ -955,60 +560,48 @@ function TodoApp() {
 
 ---
 
-### 3. Custom Hooks – Reusable Logic
+### useCallback - Memoize Functions
 
-**Purpose:** Extract and reuse component logic
-
-**Naming Convention:** Always start with "use" (e.g., `useWindowWidth`, `useLocalStorage`)
-
-**Example 1: Window Dimensions**
 ```tsx
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 
-interface WindowSize {
-  width: number;
-  height: number;
-}
+function Parent() {
+  const [count, setCount] = useState(0);
+  const [otherState, setOtherState] = useState(0);
 
-function useWindowSize(): WindowSize {
-  const [size, setSize] = useState<WindowSize>({
-    width: window.innerWidth,
-    height: window.innerHeight
-  });
-
-  useEffect(() => {
-    const handleResize = () => {
-      setSize({
-        width: window.innerWidth,
-        height: window.innerHeight
-      });
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  return size;
-}
-
-// Usage
-function ResponsiveComponent() {
-  const { width, height } = useWindowSize();
+  // Memoize callback
+  const handleClick = useCallback(() => {
+    console.log('Button clicked');
+    setCount(c => c + 1);
+  }, []); // Function never changes
 
   return (
     <div>
-      Window size: {width} x {height}
+      <p>Count: {count}</p>
+      <Child onClick={handleClick} />
+      <button onClick={() => setOtherState(s => s + 1)}>
+        Other State: {otherState}
+      </button>
     </div>
   );
 }
+
+// Child won't re-render unnecessarily
+const Child = React.memo(({ onClick }) => {
+  console.log('Child rendered');
+  return <button onClick={onClick}>Increment Parent</button>;
+});
 ```
 
-**Example 2: Local Storage**
-```tsx
-import { useState, useEffect } from 'react';
-import { ChangeEvent } from 'react';
+---
 
-function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
+## 4. Custom Hooks
+
+### Creating Custom Hooks
+
+```tsx
+// useLocalStorage hook
+function useLocalStorage<T>(key: string, initialValue: T) {
   const [value, setValue] = useState<T>(() => {
     const stored = localStorage.getItem(key);
     return stored ? JSON.parse(stored) : initialValue;
@@ -1018,166 +611,184 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => voi
     localStorage.setItem(key, JSON.stringify(value));
   }, [key, value]);
 
-  return [value, setValue];
+  return [value, setValue] as const;
 }
 
 // Usage
-function Settings() {
-  const [theme, setTheme] = useLocalStorage<string>('theme', 'light');
+function App() {
+  const [name, setName] = useLocalStorage('username', '');
 
   return (
-    <div>
-      <select value={theme} onChange={(e: ChangeEvent<HTMLSelectElement>) => setTheme(e.target.value)}>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
-    </div>
+    <input
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+    />
   );
 }
 ```
 
-**Example 3: Fetch Hook**
+**useFetch Hook:**
 ```tsx
-import { useState, useEffect } from 'react';
-
-interface UseFetchResult<T> {
-  data: T | null;
-  loading: boolean;
-  error: string | null;
-}
-
-function useFetch<T>(url: string): UseFetchResult<T> {
+function useFetch<T>(url: string) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Network response was not ok');
-        const json = await response.json();
-        setData(json);
-        setError(null);
-      } catch (err) {
-        setError(err.message);
-        setData(null);
-      } finally {
-        setLoading(false);
-      }
-    }
+    setLoading(true);
+    setError(null);
 
-    fetchData();
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        setData(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setLoading(false);
+      });
   }, [url]);
 
   return { data, loading, error };
 }
 
 // Usage
-interface UserProfileProps {
-  userId: number;
-}
-
-interface User {
-  id: number;
-  name: string;
-}
-
-function UserProfile({ userId }: UserProfileProps) {
-  const { data: user, loading, error } = useFetch<User>(`/api/users/${userId}`);
+function UserList() {
+  const { data, loading, error } = useFetch<User[]>('/api/users');
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  return <div>Hello, {user.name}!</div>;
+  return (
+    <ul>
+      {data?.map(user => <li key={user.id}>{user.name}</li>)}
+    </ul>
+  );
 }
 ```
 
 ---
 
-### 4. Hook Rules & Best Practices
+## 5. Best Practices
 
-**Rules of Hooks:**
+### Component Organization
 
-1. **Only Call Hooks at the Top Level**
-   ```tsx
-   // ❌ Wrong - inside condition
-   if (condition) {
-     const [value, setValue] = useState(0);
-   }
+```tsx
+// ✅ Good: One component per file
+// Button.tsx
+export function Button({ children, onClick }) {
+  return <button onClick={onClick}>{children}</button>;
+}
 
-   // ✅ Correct
-   const [value, setValue] = useState(0);
-   if (condition) {
-     setValue(10);
-   }
-   ```
+// ❌ Bad: Multiple unrelated components in one file
+function Button() { ... }
+function Input() { ... }
+function Form() { ... }
+```
 
-2. **Only Call Hooks from React Functions**
-   ```tsx
-   // ❌ Wrong - regular function
-   function calculateTotal() {
-     const [total, setTotal] = useState(0);
-   }
+### Props Validation with TypeScript
 
-   // ✅ Correct - React component
-   function Calculator() {
-     const [total, setTotal] = useState(0);
-   }
-   ```
+```tsx
+interface ButtonProps {
+  variant: 'primary' | 'secondary' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}
 
-**Best Practices:**
+function Button({
+  variant,
+  size = 'md',
+  disabled = false,
+  onClick,
+  children
+}: ButtonProps) {
+  return (
+    <button
+      className={`btn btn-${variant} btn-${size}`}
+      disabled={disabled}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+}
+```
 
-1. **Name custom Hooks starting with "use"**
-   ```tsx
-   // ✅ Good
-   function useFormValidation() { }
-   function useAuth() { }
+### Conditional Rendering
 
-   // ❌ Bad
-   function formValidation() { }
-   function getAuth() { }
-   ```
+```tsx
+// ✅ Good: Ternary for simple conditions
+function Status({ isOnline }) {
+  return (
+    <div>
+      {isOnline ? 'Online' : 'Offline'}
+    </div>
+  );
+}
 
-2. **Keep useEffect dependencies accurate**
-   ```tsx
-   // ❌ Missing dependency
-   useEffect(() => {
-     console.log(count);
-   }, []); // count is missing!
+// ✅ Good: && for rendering or nothing
+function Notification({ message }) {
+  return (
+    <div>
+      {message && <div className="alert">{message}</div>}
+    </div>
+  );
+}
 
-   // ✅ Correct
-   useEffect(() => {
-     console.log(count);
-   }, [count]);
-   ```
+// ✅ Good: Early return for complex conditions
+function UserProfile({ user }) {
+  if (!user) return <div>Loading...</div>;
+  if (user.banned) return <div>Account suspended</div>;
 
-3. **Split unrelated logic into multiple useEffect**
-   ```tsx
-   // ❌ Mixing concerns
-   useEffect(() => {
-     fetchUserData();
-     subscribeToNotifications();
-   }, []);
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+```
 
-   // ✅ Separate effects
-   useEffect(() => {
-     fetchUserData();
-   }, []);
+### State Management Rules
 
-   useEffect(() => {
-     subscribeToNotifications();
-   }, []);
-   ```
+```tsx
+// ✅ Good: Lift state up to common parent
+function Parent() {
+  const [sharedData, setSharedData] = useState('');
+
+  return (
+    <div>
+      <ChildA data={sharedData} onChange={setSharedData} />
+      <ChildB data={sharedData} />
+    </div>
+  );
+}
+
+// ❌ Bad: Prop drilling too deep
+function GrandParent() {
+  const [data, setData] = useState('');
+  return <Parent data={data} setData={setData} />;
+}
+function Parent({ data, setData }) {
+  return <Child data={data} setData={setData} />;
+}
+function Child({ data, setData }) {
+  return <GrandChild data={data} setData={setData} />;
+}
+// Use Context instead for deep props
+```
 
 ---
 
-### 5. Common Mistakes & Solutions
+## 6. Common Pitfalls
 
-**Mistake 1: Stale Closures**
+### Problem 1: Stale Closure
+
 ```tsx
-// ❌ Problem
+// ❌ Wrong
 function Counter() {
   const [count, setCount] = useState(0);
 
@@ -1186,18 +797,18 @@ function Counter() {
       setCount(count + 1); // Always uses initial count (0)
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, []); // Empty deps = count is stale
 
   return <div>{count}</div>;
 }
 
-// ✅ Solution: Use functional update
+// ✅ Correct
 function Counter() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCount(c => c + 1); // Uses current count
+      setCount(c => c + 1); // Functional update
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -1206,131 +817,101 @@ function Counter() {
 }
 ```
 
-**Mistake 2: Infinite Loops**
-```tsx
-// ❌ Infinite loop - missing dependency array
-useEffect(() => {
-  setCount(count + 1);
-}); // Runs after every render!
-
-// ✅ Solution
-useEffect(() => {
-  setCount(1);
-}, []); // Run once
-```
-
-**Mistake 3: Not Cleaning Up**
-```tsx
-// ❌ Memory leak
-useEffect(() => {
-  const interval = setInterval(() => {
-    console.log('Tick');
-  }, 1000);
-  // No cleanup!
-}, []);
-
-// ✅ Proper cleanup
-useEffect(() => {
-  const interval = setInterval(() => {
-    console.log('Tick');
-  }, 1000);
-
-  return () => clearInterval(interval);
-}, []);
-```
-
----
-
-### 6. Hooks vs Class Components
-
-| Feature | Class Component | Function Component + Hooks |
-|---------|----------------|---------------------------|
-| State | `this.state`, `this.setState()` | `useState()` |
-| Lifecycle (mount) | `componentDidMount()` | `useEffect(() => {}, [])` |
-| Lifecycle (update) | `componentDidUpdate()` | `useEffect(() => {})` |
-| Lifecycle (unmount) | `componentWillUnmount()` | `useEffect(() => { return cleanup })` |
-| Context | `static contextType` or Consumer | `useContext()` |
-| Refs | `React.createRef()` | `useRef()` |
-| Complex State | `this.setState()` | `useReducer()` |
-| Code Reuse | HOCs, Render Props | Custom Hooks |
-| Boilerplate | More verbose | Concise |
-| `this` binding | Required | Not needed |
-
-**Migration Example:**
+### Problem 2: Infinite Loop
 
 ```tsx
-// Class Component
-class Counter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { count: 0 };
-  }
-
-  componentDidMount() {
-    document.title = `Count: ${this.state.count}`;
-  }
-
-  componentDidUpdate() {
-    document.title = `Count: ${this.state.count}`;
-  }
-
-  render() {
-    return (
-      <div>
-        <p>{this.state.count}</p>
-        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
-          Increment
-        </button>
-      </div>
-    );
-  }
-}
-
-// Function Component with Hooks (Much simpler!)
-function Counter() {
-  const [count, setCount] = useState(0);
+// ❌ Wrong: Infinite loop
+function BadComponent() {
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    document.title = `Count: ${count}`;
-  }, [count]);
+    fetch('/api/data')
+      .then(res => res.json())
+      .then(setData); // Updates state → triggers effect → infinite loop
+  }); // No dependency array!
 
-  return (
-    <div>
-      <p>{count}</p>
-      <button onClick={() => setCount(count + 1)}>
-        Increment
-      </button>
-    </div>
-  );
+  return <div>{data.length}</div>;
+}
+
+// ✅ Correct
+function GoodComponent() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/data')
+      .then(res => res.json())
+      .then(setData);
+  }, []); // Runs once on mount
+
+  return <div>{data.length}</div>;
+}
+```
+
+### Problem 3: Direct State Mutation
+
+```tsx
+// ❌ Wrong: Mutating state directly
+function TodoList() {
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = (todo) => {
+    todos.push(todo); // Mutation!
+    setTodos(todos); // React won't detect change
+  };
+
+  return <div>...</div>;
+}
+
+// ✅ Correct: Create new array
+function TodoList() {
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = (todo) => {
+    setTodos([...todos, todo]); // New array
+  };
+
+  return <div>...</div>;
 }
 ```
 
 ---
 
-## Additional Resources 📚
+## Summary
 
-### Official Documentation
-- [React Hooks Documentation](https://react.dev/reference/react) - Official React Hooks reference
-- [Rules of Hooks](https://react.dev/warnings/invalid-hook-call-warning) - Understanding Hook rules
-- [Hooks FAQ](https://react.dev/learn#using-hooks) - Common questions answered
+**Component Fundamentals:**
+- Components are reusable, self-contained UI building blocks
+- Function components are the modern standard (use these)
+- Props pass data from parent to child (immutable)
+- Children prop allows flexible component composition
+- TypeScript interfaces define clear component contracts
 
-### Video Tutorials
-- [React Hooks Crash Course](https://www.youtube.com/watch?v=TNhaISOUy6Q) - Traversy Media
-- [React Hooks Tutorial](https://www.youtube.com/watch?v=f687hBjwFcM) - Codevolution
+**Essential Hooks:**
+- `useState` - Manage component state
+- `useEffect` - Handle side effects (API calls, subscriptions, timers)
+- `useRef` - Access DOM elements and store mutable values
+- `useContext` - Share data across component tree
+- `useReducer` - Complex state logic with actions
+- `useMemo` - Memoize expensive calculations
+- `useCallback` - Memoize callback functions
 
-### Interactive Learning
-- [React Hooks Playground](https://codesandbox.io/s/react-hooks-playground) - Try hooks in the browser
-- [useHooks.com](https://usehooks.com/) - Collection of custom hook recipes
-- [React Hooks Cheatsheet](https://react-hooks-cheatsheet.com/) - Quick reference
+**Custom Hooks:**
+- Reusable stateful logic across components
+- Must start with "use" prefix
+- Can use other hooks inside
+- Common patterns: useFetch, useLocalStorage, useDebounce
 
-### Hook Libraries
-- [react-use](https://github.com/streamich/react-use) - Collection of essential hooks
-- [ahooks](https://ahooks\.ts.org/) - High-quality & reliable React hooks library
-- [react-query](https://tanstack.com/query) - Powerful data fetching hooks
+**Best Practices:**
+- One component per file for maintainability
+- TypeScript for type safety and better DX
+- Lift state to common parent when sharing
+- Use Context for deep prop drilling
+- Functional updates for state based on previous value
+- Always include cleanup in useEffect
+- Memoize expensive operations with useMemo/useCallback
 
-### Communities
-- [React Discord](https://discord.gg/react) - Official React community
-- [Reactiflux](https://www.reactiflux.com/) - React developers chat
-- [r/reactjs](https://www.reddit.com/r/reactjs/) - Reddit community
-
-
+**Common Mistakes to Avoid:**
+- Mutating state directly (always create new objects/arrays)
+- Missing dependency arrays in useEffect (causes bugs or infinite loops)
+- Stale closures (use functional updates)
+- Over-optimization with useMemo/useCallback
+- Prop drilling too many levels (use Context)

@@ -1,4 +1,4 @@
-# Lab: Advanced React Components and Composition
+# Lab - Component Architecture & React Hook
 
 ## Overview
 

@@ -1,4 +1,4 @@
-# Lab: Building Your First React Application
+# Lab - React Fundamentals & Project Setup
 
 ## Overview
 
@@ -22,7 +22,7 @@ In this lab session, you'll create a simple Welcome Page application using TypeS
 
 ---
 
-## Exercise 1: Project Setup (15 minutes)
+## Exercise 1: Project Setup
 
 ### Step 1: Create TypeScript React Project
 
@@ -114,7 +114,7 @@ p {
 
 ---
 
-## Exercise 2: Create Your First Component (20 minutes)
+## Exercise 2: Create Your First Component
 
 ### Step 1: Create Components Folder
 
@@ -176,7 +176,7 @@ export default App;
 
 ---
 
-## Exercise 3: Add Styling (15 minutes)
+## Exercise 3: Add Styling
 
 ### Step 1: Create Component CSS File
 
@@ -239,7 +239,7 @@ export default Welcome;
 
 ---
 
-## Exercise 4: Build a Simple Landing Page (30 minutes)
+## Exercise 4: Build a Simple Landing Page
 
 ### Step 1: Create Feature Component
 
@@ -500,8 +500,6 @@ function Welcome() {
 
 ## Next Steps
 
-🎉 **Congratulations!** You've built your first React application!
-
 **Ready for more advanced topics?** Continue to [Lab 2](../../lesson2-component-hook/lab/lab2.md) to learn:
 - **Props:** Passing data between components
 - **State:** Managing interactive UI with `useState`
@@ -538,5 +536,3 @@ npm install
 - Restart VS Code if errors persist
 
 ---
-
-**Happy Coding! 🚀**

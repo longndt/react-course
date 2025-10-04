@@ -2,75 +2,114 @@
 
 ## Overview
 
+**Time Required**: 4-6 hours
+**Difficulty**: Intermediate
+**Prerequisites**: Lesson 1 completed, TypeScript basics
+
 This lesson covers React component architecture and hooks - the foundation of modern React development. You'll learn to build reusable components, manage state effectively, and create custom hooks for shared logic.
+
+---
 
 ## Learning Objectives
 
-After this lesson, you will be able to:
+After completing this lesson, you will be able to:
 
-- ✅ Build reusable component libraries
-- ✅ Understand component composition and props
+- ✅ Build reusable component libraries with TypeScript
+- ✅ Master component composition and props patterns
 - ✅ Apply essential React Hooks (useState, useEffect, useRef, useContext, useReducer)
 - ✅ Create custom hooks for reusable business logic
 - ✅ Handle side effects and lifecycle events properly
 - ✅ Avoid common Hook mistakes and anti-patterns
+- ✅ Debug components with React DevTools
+- ✅ Optimize component performance
+
+---
+
+## Prerequisites
+
+Before starting this lesson, make sure you have:
+
+### Required Knowledge
+- ✅ React fundamentals (JSX, component basics)
+- ✅ TypeScript basics (types, interfaces, generics)
+- ✅ JavaScript ES6+ features (arrow functions, destructuring)
+- ✅ Completed Lesson 1 setup
+
+### Environment Setup
+- ✅ Node.js and npm installed
+- ✅ VS Code with React extensions
+- ✅ React project created (Vite recommended)
+
+### Verification
+```bash
+# Check your setup
+node --version  # Should be 18+
+npm --version   # Should be 9+
+```
+
+> 💡 **Not ready?** → Review [Lesson 1](../lesson1-fundamentals-setup/) first
 
 ---
 
 ## What You'll Learn
 
-### 1. Component Architecture
+### 1. Component Architecture (1.5 hours)
 
 **Component Patterns:**
-- Function vs Class components
-- Props and composition
-- Reusable component design
-- Component hierarchy
+- Function vs Class components (modern vs legacy)
+- Props and composition principles
+- Reusable component design patterns
+- Component hierarchy and organization
 
 **Building Blocks:**
-- Atomic components (Button, Input, Icon)
-- Molecule components (SearchBox, Card, FormField)
-- Organism components (Header, DataTable, Modal)
-- Page components (Dashboard, Profile)
+- **Atomic components** - Button, Input, Icon, Badge
+- **Molecule components** - SearchBox, Card, FormField
+- **Organism components** - Header, DataTable, Modal, Sidebar
+- **Page components** - Dashboard, Profile, Settings
+
+**Key Skills:**
+- Designing component APIs with TypeScript
+- Props validation and default values
+- Component composition vs inheritance
+- When to split components
 
 ### 2. React Hooks Essentials
 
 **Core Hooks:**
-- **useState** - Manage component state
+- **useState** - Manage component state and updates
 - **useEffect** - Handle side effects (API calls, subscriptions, timers)
 - **useRef** - Access DOM elements and persist values without re-renders
-- **useContext** - Share data without prop drilling
-- **useReducer** - Manage complex state logic
+- **useContext** - Share data across components without prop drilling
+- **useReducer** - Manage complex state logic (Redux pattern)
 
-**Key Concepts:**
-- Hook rules and best practices
+**Advanced Concepts:**
+- Hook rules and the "Rules of Hooks"
 - Dependency arrays in useEffect
-- Avoiding infinite loops and memory leaks
-- When to use each hook
+- Cleanup functions and memory leak prevention
+- Avoiding infinite render loops
+- When to use each hook (decision tree)
 
-### 3. Custom Hooks
+### 3. Custom Hooks (1.5 hours)
 
-Learn to create custom hooks for:
-- Form handling (`useForm`)
-- Local storage (`useLocalStorage`)
-- Data fetching (`useFetch`)
-- Window dimensions (`useWindowSize`)
+**Why Custom Hooks:**
+- Extract reusable stateful logic
+- Simplify components
+- Share logic across components
+- Better separation of concerns
 
----
+**Common Custom Hooks:**
+- `useForm` - Form handling and validation
+- `useLocalStorage` - Persist state to localStorage
+- `useFetch` - Data fetching with loading/error states
+- `useWindowSize` - Responsive window dimensions
+- `useDebounce` - Debounce user input
+- `useToggle` - Boolean state toggling
 
-## Lesson Structure
-
-### 📚 Theory
-- **[theory2.md](./theory/theory2.md)** - Comprehensive guide to React Hooks and component patterns
-
-### 💻 Demo
-- **[examples/](./examples/)** - Live code examples demonstrating hooks and components
-
-### 🔬 Lab
-- **[lab2.md](./lab/lab2.md)** - Hands-on exercises to build component libraries
-
-### ⚡ Quick Start
-- **[reference/](./reference/)** - Quick reference and code snippets
+**Best Practices:**
+- Naming convention (always start with `use`)
+- Hook composition (combine multiple hooks)
+- Testing custom hooks
+- TypeScript generics for type safety
 
 ---
 
@@ -80,152 +119,413 @@ Learn to create custom hooks for:
 ```tsx
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
   onClick: () => void;
+  disabled?: boolean;
 }
 
-function Button({ children, variant = 'primary', onClick }: ButtonProps) {
-  return <button className={`btn-${variant}`} onClick={onClick}>{children}</button>;
+function Button({
+  children,
+  variant = 'primary',
+  size = 'md',
+  onClick,
+  disabled = false
+}: ButtonProps) {
+  return (
+    <button
+      className={`btn btn-${variant} btn-${size}`}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {children}
+    </button>
+  );
 }
+
+// Usage
+<Button variant="primary" size="lg" onClick={() => console.log('Clicked!')}>
+  Click Me
+</Button>
 ```
 
-### Hook Example - useState
+### useState Hook
 ```tsx
 function Counter() {
   const [count, setCount] = useState(0);
-  return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
+
+  // Functional update (preferred for updates based on previous state)
+  const increment = () => setCount(prev => prev + 1);
+  const decrement = () => setCount(prev => prev - 1);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+    </div>
+  );
 }
 ```
 
-> 💡 **Want more examples?** Check [reference/](./reference/) for ready-to-use code and [theory2.md](./theory/theory2.md) for detailed explanations.
+### useEffect Hook
+```tsx
+function UserProfile({ userId }: { userId: string }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchUser() {
+      setLoading(true);
+      try {
+        const response = await fetch(`/api/users/${userId}`);
+        const data = await response.json();
+        if (!cancelled) setUser(data);
+      } catch (error) {
+        if (!cancelled) console.error(error);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+
+    fetchUser();
+
+    // Cleanup function
+    return () => { cancelled = true; };
+  }, [userId]); // Re-run when userId changes
+
+  if (loading) return <div>Loading...</div>;
+  return <div>{user?.name}</div>;
+}
+```
+
+### Custom Hook Example
+```tsx
+function useLocalStorage<T>(key: string, initialValue: T) {
+  const [value, setValue] = useState<T>(() => {
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : initialValue;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+
+  return [value, setValue] as const;
+}
+
+// Usage
+function App() {
+  const [theme, setTheme] = useLocalStorage('theme', 'light');
+  return <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+    Current theme: {theme}
+  </button>;
+}
+```
+
+> 💡 **Want more examples?** Check [reference/](./reference/) for ready-to-use code snippets
 
 ---
 
-## Key Concepts Summary
+## Getting Started
 
-### Components Best Practices
+Follow this 4-step learning path:
 
-✅ **DO:**
-- Keep components small and focused (single responsibility)
-- Use TypeScript interfaces for props
-- Extract reusable logic into custom hooks
-- Use meaningful component and prop names
+### Step 1: Study the Theory
+📖 Read [theory2.md](./theory/theory2.md) - Detailed explanations of:
+- Component lifecycle and rendering
+- How hooks work internally
+- Common patterns and anti-patterns
+- Performance optimization techniques
 
-⚠️ **DON'T:**
-- Modify props (they're read-only)
-- Forget `key` prop in lists
-- Create too many nesting levels (>5)
-- Mix too much business logic with UI
+**Time**: 45-60 minutes
 
-### Hooks Best Practices
+### Step 2: Explore Code Examples
+💻 Browse [reference/](./reference/) - Working code for:
+- Component patterns (composition, render props, HOC)
+- All essential hooks with examples
+- Custom hook implementations
+- Real-world use cases
 
-✅ **DO:**
-- Call hooks at the top level of components
-- Include all dependencies in useEffect arrays
-- Use functional updates for state: `setState(prev => prev + 1)`
-- Clean up side effects (intervals, subscriptions)
+**Time**: 30-45 minutes
 
-⚠️ **DON'T:**
-- Call hooks inside loops, conditions, or nested functions
-- Mutate state directly: `state.value = 1` ❌
-- Forget dependency arrays in useEffect
-- Create infinite loops with useEffect
+### Step 3: Build Examples
+🔨 Follow [examples/](./examples/) - Build:
+- Reusable component library
+- Todo app with hooks
+- Data fetching with custom hooks
+- Form handling with validation
 
-> 📚 **Detailed explanations** → See [theory2.md](./theory/theory2.md)
+**Time**: 90-120 minutes
 
----
+### Step 4: Complete Lab Exercises
+🧪 Practice in [lab2.md](./lab/lab2.md) - Hands-on exercises:
+- Level 1: Build UI component library
+- Level 2: Create custom hooks
+- Level 3: Complete Todo application with persistence
 
-## Practice Exercises
+**Time**: 120-180 minutes
 
-### Level 1: Component Library
-Build reusable UI components:
-- Button (variants: primary, secondary, danger)
-- Input (with validation feedback)
-- Card (with header/footer slots)
-- Alert (types: success, warning, error)
-
-### Level 2: Custom Hooks
-Create reusable logic hooks:
-- `useForm` - Form state management
-- `useFetch` - API data fetching with loading/error states
-- `useToggle` - Boolean state toggling
-- `useLocalStorage` - Persist state to localStorage
-
-### Level 3: Complete Application
-Build a **Todo App** featuring:
-- Component composition
-- State management with useState
-- Persistence with useEffect + localStorage
-- Custom hooks for reusable logic
-
-> 🔬 **Start practicing** → Go to [lab2.md](./lab/lab2.md)
+> 🎯 **Pro tip**: Complete examples before attempting lab exercises
 
 ---
 
-## Learning Resources
+## Key Takeaways
 
-### Official Documentation
-- [React Hooks Reference](https://react.dev/reference/react) - Official API docs
-- [Rules of Hooks](https://react.dev/warnings/invalid-hook-call-warning) - Important rules
-- [React Dev Tools](https://react.dev/learn/react-developer-tools) - Debugging tools
+### 🎯 Core Concepts to Remember
 
-### Custom Hook Libraries
-- [useHooks.com](https://usehooks.com/) - Custom hook recipes
-- [react-use](https://github.com/streamich/react-use) - Essential hooks collection
-- [ahooks](https://ahooks.js.org/) - High-quality hooks library
+1. **Components are functions** that return JSX
+2. **Props flow down** (one-way data flow)
+3. **State is local** to each component
+4. **Hooks enable state** in function components
+5. **useEffect runs after render** (not during)
+6. **Dependency arrays control** when effects run
+7. **Custom hooks share logic** without sharing state
+8. **Always clean up** side effects (intervals, subscriptions)
 
-### Video Tutorials
-- [React Hooks Crash Course](https://www.youtube.com/watch?v=TNhaISOUy6Q) - Traversy Media
-- [React Hooks Full Course](https://www.youtube.com/watch?v=f687hBjwFcM) - Codevolution
+### 🔑 Most Important Skills
 
-### Communities
-- [React Discord](https://discord.gg/react) - Official community
-- [Reactiflux](https://www.reactiflux.com/) - React developers chat
-- [r/reactjs](https://www.reddit.com/r/reactjs/) - Reddit community
+- Creating reusable components with TypeScript props
+- Managing state with useState
+- Handling side effects with useEffect
+- Building custom hooks for shared logic
+- Avoiding infinite render loops
+- Cleaning up resources properly
+
+### 💡 Common Realizations
+
+- "Components are just JavaScript functions!"
+- "Hooks are composable building blocks"
+- "Custom hooks make code so much cleaner"
+- "Dependency arrays are crucial for performance"
 
 ---
 
-## Self-Assessment Checklist
+## Best Practices Summary
 
-Before moving to Lesson 3, ensure you can:
+### ✅ Component Best Practices
+
+**DO:**
+- ✅ Keep components small and focused (single responsibility)
+- ✅ Use TypeScript interfaces for all props
+- ✅ Extract reusable logic into custom hooks
+- ✅ Use meaningful component and prop names
+- ✅ Provide default prop values when optional
+- ✅ Use children prop for composition
+- ✅ Add key prop for list items
+
+**DON'T:**
+- ❌ Modify props (they're read-only)
+- ❌ Forget `key` prop in lists
+- ❌ Create too many nesting levels (max 5)
+- ❌ Mix business logic with UI rendering
+- ❌ Use index as key in dynamic lists
+- ❌ Create giant "god components"
+
+### ✅ Hooks Best Practices
+
+**DO:**
+- ✅ Call hooks at the top level (not in loops/conditions)
+- ✅ Include all dependencies in useEffect arrays
+- ✅ Use functional updates: `setState(prev => prev + 1)`
+- ✅ Clean up side effects (intervals, subscriptions, listeners)
+- ✅ Use multiple useEffect for different concerns
+- ✅ Create custom hooks for reusable logic
+- ✅ Name custom hooks starting with "use"
+
+**DON'T:**
+- ❌ Call hooks inside loops, conditions, or nested functions
+- ❌ Mutate state directly: `state.value = 1` ❌
+- ❌ Forget dependency arrays (causes bugs)
+- ❌ Create infinite loops with useEffect
+- ❌ Ignore ESLint exhaustive-deps warnings
+- ❌ Overuse useEffect (prefer derived state)
+
+### ✅ Performance Tips
+
+- Use React.memo for expensive components
+- Memoize callbacks with useCallback
+- Memoize expensive calculations with useMemo
+- Split state to avoid unnecessary re-renders
+- Lazy load heavy components with React.lazy
+
+> 📚 **Detailed patterns** → See [theory2.md](./theory/theory2.md)
+
+---
+
+## Common Challenges & Solutions
+
+### Challenge 1: Infinite Re-render Loop
+**Problem:** Component keeps re-rendering forever
+```tsx
+// ❌ Wrong - creates new array reference every render
+useEffect(() => {
+  doSomething();
+}, [someArray]);
+
+// ✅ Correct - stable reference
+useEffect(() => {
+  doSomething();
+}, [someArray.join(',')]);
+```
+
+**Solution:** Check dependency arrays, use functional updates, avoid object/array literals
+
+### Challenge 2: Stale Closure in useEffect
+**Problem:** Effect uses old state values
+```tsx
+// ❌ Wrong - count is stale
+useEffect(() => {
+  setInterval(() => console.log(count), 1000);
+}, []);
+
+// ✅ Correct - include dependency
+useEffect(() => {
+  const id = setInterval(() => console.log(count), 1000);
+  return () => clearInterval(id);
+}, [count]);
+```
+
+**Solution:** Include all used variables in dependency array
+
+### Challenge 3: Memory Leaks
+**Problem:** Subscriptions/timers not cleaned up
+```tsx
+// ❌ Wrong - interval never cleared
+useEffect(() => {
+  setInterval(() => console.log('tick'), 1000);
+}, []);
+
+// ✅ Correct - cleanup function
+useEffect(() => {
+  const id = setInterval(() => console.log('tick'), 1000);
+  return () => clearInterval(id);
+}, []);
+```
+
+**Solution:** Always return cleanup function from useEffect
+
+### Challenge 4: Props Not Updating
+**Problem:** Component doesn't re-render when props change
+```tsx
+// ❌ Wrong - only runs on mount
+const [data, setData] = useState(props.initialData);
+
+// ✅ Correct - syncs with props
+useEffect(() => {
+  setData(props.initialData);
+}, [props.initialData]);
+```
+
+**Solution:** Use useEffect to sync with prop changes, or use props directly
+
+### Challenge 5: Too Many Re-renders
+**Problem:** setState called during render phase
+```tsx
+// ❌ Wrong - setState during render
+function Component() {
+  const [count, setCount] = useState(0);
+  setCount(count + 1); // ❌ Causes infinite loop
+  return <div>{count}</div>;
+}
+
+// ✅ Correct - setState in event handler or useEffect
+function Component() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    setCount(count + 1);
+  }, []);
+  return <div>{count}</div>;
+}
+```
+
+**Solution:** Only call setState in event handlers or useEffect
+
+> 🔧 **More solutions** → See [Troubleshooting Guide](../extras/troubleshooting-guide.md)
+
+---
+
+## Progress Checklist
 
 ### Components (Must Know)
 - [ ] Create reusable components with TypeScript props
 - [ ] Use component composition and children prop
 - [ ] Pass functions as props for event handling
 - [ ] Understand when to break UI into smaller components
+- [ ] Apply proper prop validation with TypeScript
 
 ### Hooks (Must Know)
 - [ ] Use useState for component state management
 - [ ] Use useEffect for side effects (API calls, timers)
 - [ ] Understand dependency arrays and cleanup functions
 - [ ] Avoid infinite re-render loops
+- [ ] Use useRef for DOM access and persistent values
 
 ### Custom Hooks (Should Know)
 - [ ] Create custom hooks to extract reusable logic
 - [ ] Use custom hooks across multiple components
 - [ ] Follow hooks naming convention (use*)
+- [ ] Combine multiple hooks in custom hooks
 
 ### Advanced (Good to Know)
 - [ ] Use useReducer for complex state logic
 - [ ] Use useContext for sharing state
 - [ ] Optimize with React.memo and useMemo
 - [ ] Debug components with React DevTools
+- [ ] Handle async operations in useEffect properly
 
-**🎯 Goal: Check at least 10/14 items before Lesson 3**
+**🎯 Goal: Check at least 12/14 items before Lesson 3**
 
 ---
 
 ## Next Steps
 
+### Ready to Continue?
 ✅ **Completed this lesson?** → Proceed to [Lesson 3: API Integration & Data Management](../lesson3-api-data/)
 
-📚 **Need detailed explanations?** → Study [theory2.md](./theory/theory2.md)
+### Need More Practice?
+📚 **Study theory** → [theory2.md](./theory/theory2.md) - Deep dive into concepts
+💻 **View examples** → [reference/](./reference/) - Ready-to-use code snippets
+🔨 **Build projects** → [examples/](./examples/) - Follow-along tutorials
+🧪 **Practice exercises** → [lab2.md](./lab/lab2.md) - Hands-on challenges
 
-💻 **Want code examples?** → Check [reference/](./reference/) and [examples/](./examples/)
-
-🔬 **Ready to practice?** → Start [lab2.md](./lab/lab2.md) exercises
+### Additional Resources
+🎓 **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
+❓ **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting-guide.md)
+🏗️ **Advanced patterns** → [Advanced Patterns](../extras/advanced-patterns.md)
 
 ---
 
+## Resources & References
 
+### Official Documentation
+- [React Hooks Reference](https://react.dev/reference/react) - Official API docs
+- [Rules of Hooks](https://react.dev/warnings/invalid-hook-call-warning) - Important rules
+- [React Dev Tools](https://react.dev/learn/react-developer-tools) - Debugging tools
+- [Thinking in React](https://react.dev/learn/thinking-in-react) - Component design
+
+### Custom Hook Libraries
+- [useHooks.com](https://usehooks.com/) - Custom hook recipes
+- [react-use](https://github.com/streamich/react-use) - Essential hooks collection
+- [ahooks](https://ahooks.js.org/) - High-quality hooks library
+- [usehooks-ts](https://usehooks-ts.com/) - TypeScript hooks
+
+### Video Tutorials
+- [React Hooks Crash Course](https://www.youtube.com/watch?v=TNhaISOUy6Q) - Traversy Media
+- [React Hooks Full Course](https://www.youtube.com/watch?v=f687hBjwFcM) - Codevolution
+- [Custom Hooks Explained](https://www.youtube.com/watch?v=6ThXsUwLWvc) - Web Dev Simplified
+
+### Articles & Guides
+- [A Complete Guide to useEffect](https://overreacted.io/a-complete-guide-to-useeffect/) - Dan Abramov
+- [When to useMemo and useCallback](https://kentcdodds.com/blog/usememo-and-usecallback) - Kent C. Dodds
+- [React Hooks Cheat Sheet](https://react-hooks-cheatsheet.com/) - Quick reference
+
+### Communities
+- [React Discord](https://discord.gg/react) - Official community
+- [Reactiflux](https://www.reactiflux.com/) - React developers chat
+- [r/reactjs](https://www.reddit.com/r/reactjs/) - Reddit community
+- [Stack Overflow - reactjs](https://stackoverflow.com/questions/tagged/reactjs) - Q&A
+
+---

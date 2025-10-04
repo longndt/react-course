@@ -1,4 +1,4 @@
-# Reference - Full-Stack Integration & Deployment
+# Reference - Full-Stack Integration & Production Deployment
 
 ## Table of Contents
 1. [Express Backend Setup](#1-express-backend-setup)

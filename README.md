@@ -1,4 +1,4 @@
-# React Course
+# React Course - LongNDT
 
 ## Course Overview
 
@@ -35,7 +35,7 @@ This course teaches **React with TypeScript** development using industry-standar
 
 ## Course Structure
 
-### Lesson 0: TypeScript Prerequisites (Optional)
+### Lesson 0: TypeScript Prerequisites
 - TypeScript essentials for React development
 - Interfaces, generics, and utility types
 - **Lab Project**: TypeScript practical exercises
@@ -77,7 +77,7 @@ This course teaches **React with TypeScript** development using industry-standar
 Each lesson follows a standardized structure designed for effective learning:
 
 ```
-lessonX-topic-name/
+lessonX-topic/
 ├── 📖 reference/          # Quick reference guidep
 ├── 💻 examples/           # Working code examples
 ├── 📚 theory/             # Comprehensive documentation
@@ -92,7 +92,7 @@ lessonX-topic-name/
 
 ---
 
-## 🎯 How to Study Each Lesson Effectively
+## 🎯 How to Study Effectively ?
 
 ### **Step 1: Start with Reference Guide**
 
@@ -159,14 +159,6 @@ lessonX-topic-name/
 - Create a personal cheat sheet
 
 ---
-
-## Extra Resources
-
-- **Advanced State Management Guide**  - Context API, Zustand, Redux patterns
-- **Testing Guide** - Unit, integration, and e2e testing
-- **Modern React Stack 2025** - Latest tools and technologies
-- **Troubleshooting Guide** - Common issues and solutions
-- **Advanced React Patterns** - Enterprise-level patterns
 
 ## 🚀 Getting Started
 

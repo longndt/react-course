@@ -1,4 +1,4 @@
-# Lab: TypeScript Fundamentals Practice
+# Lab - TypeScript Prerequisites
 
 ## Overview
 
@@ -23,7 +23,7 @@ In this lab session, you'll practice TypeScript fundamentals through hands-on ex
 
 ---
 
-## Exercise 1: Basic Types and Type Annotations (20 minutes)
+## Exercise 1: Basic Types and Type Annotations
 
 ### Step 1: Project Setup
 
@@ -182,7 +182,7 @@ node dist/ex1-tuples-enums.js
 
 ---
 
-## Exercise 2: Interfaces and Type Aliases (25 minutes)
+## Exercise 2: Interfaces and Type Aliases
 
 ### Task 2.1: Define User Interface
 
@@ -340,7 +340,7 @@ npx ts-node src/ex2-type-aliases.ts
 
 ---
 
-## Exercise 3: Functions and Generics (30 minutes)
+## Exercise 3: Functions and Generics
 
 ### Task 3.1: Typed Functions
 
@@ -474,7 +474,7 @@ npx ts-node src/ex3-generics.ts
 
 ---
 
-## Exercise 4: Utility Types and Type Guards (25 minutes)
+## Exercise 4: Utility Types and Type Guards
 
 ### Task 4.1: Utility Types
 
@@ -701,7 +701,7 @@ npx ts-node src/ex4-type-guards.ts
 
 ---
 
-## Exercise 5: Build a Type-Safe Data Manager (40 minutes)
+## Exercise 5: Build a Type-Safe Data Manager
 
 ### Final Project: Student Management System
 
@@ -933,5 +933,3 @@ Implement advanced search:
 4. ✅ Move to **Lesson 1** - React with TypeScript
 
 ---
-
-**Great job completing the lab!** You're now ready for React with TypeScript! 🚀

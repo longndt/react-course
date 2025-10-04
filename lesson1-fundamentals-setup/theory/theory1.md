@@ -1,4 +1,4 @@
-# Theory - React Fundamentals & Setup
+# Theory - React Fundamentals & Project Setup
 
 > **Prerequisites**: Make sure you've completed the [Environment Setup Guide](../../extras/environment-setup.md) before starting this lesson.
 
@@ -864,32 +864,47 @@ export default StudentProfile;
 
 ---
 
-## Additional Resources
-
-- [React Official Documentation](https://react.dev) - Official React docs
-- [Vite Documentation](https://vitejs.dev) - Vite build tool guide
-- [TypeScript Handbook](https://www.typescriptlang.org/docs) - TypeScript reference
-- [MDN Web Docs](https://developer.mozilla.org) - JavaScript reference
-
----
-
 ## Summary
 
-In this lesson, you learned:
+**Core React Fundamentals:**
+- React is a component-based library for building dynamic user interfaces
+- Components are reusable, self-contained pieces of UI
+- TSX provides type safety for React components
+- Vite is the modern, fast build tool for React projects
 
-1. ✅ What React is and its benefits
-2. ✅ React vs traditional web development
-3. ✅ Creating React projects with Vite
-4. ✅ Basic TSX syntax and rules
-5. ✅ Creating and organizing components
-6. ✅ Embedding JavaScript in TSX
-7. ✅ Basic styling approaches
-8. ✅ Simple event handling with alerts
+**Key Concepts Covered:**
+- Creating React projects with Vite
+- Basic TSX syntax and JSX rules
+- Component structure and organization
+- Embedding JavaScript expressions in TSX
+- Styling approaches (inline, CSS modules, external)
+- Basic event handling with onClick
 
-**Next Step**: Complete the [Lab 1 exercises](../lab/lab1.md) to practice these concepts!
+**TypeScript with React:**
+- Use `.tsx` extension for React component files
+- Define interfaces for component props
+- Leverage type safety for better developer experience
+- Catch errors at compile time, not runtime
+
+**Project Structure:**
+- `/src` - All source code
+- `/src/components` - Reusable components
+- `/src/pages` - Page-level components
+- `/public` - Static assets
+- `index.html` - Entry HTML file
+- `main.tsx` - React app entry point
 
 ---
 
-> 📌 **Remember**: This lesson covers fundamentals only. Props, state, hooks, and advanced patterns are taught in Lesson 2!
+## Additional Resources
+
+**Official Documentation:**
+- [React Documentation](https://react.dev) - Official React docs
+- [Vite Documentation](https://vitejs.dev) - Vite build tool guide
+- [TypeScript Handbook](https://www.typescriptlang.org/docs) - TypeScript reference
+
+**Learning Resources:**
+- [MDN Web Docs](https://developer.mozilla.org) - JavaScript and web API reference
+- [React Tutorial](https://react.dev/learn) - Interactive React tutorial
 
 

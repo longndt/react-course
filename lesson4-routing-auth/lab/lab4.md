@@ -1,4 +1,4 @@
-# Lab: Authentication & Protected Routes
+# Lab - Routing & Authentication
 
 ## Overview
 

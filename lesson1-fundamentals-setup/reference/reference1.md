@@ -1,10 +1,10 @@
-# Reference - React Setup & First Component
+# Reference - React Fundamentals & Project Setup
 
 > **Quick reference guide for React fundamentals**
 
 ---
 
-## Part 1: Project Setup (2 minutes)
+## Part 1: Project Setup
 
 ### Create New React + TypeScript Project
 
@@ -58,7 +58,7 @@ my-first-react-app/
 
 ---
 
-## Part 3: Your First Component (3 minutes)
+## Part 3: Your First Component
 
 ### Understanding the Default App
 
@@ -396,5 +396,3 @@ npm install
 - Event handling patterns
 
 ---
-
-**Happy coding! 🎉**

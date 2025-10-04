@@ -1,4 +1,4 @@
-# Lab: React Performance Optimization & Advanced Patterns
+# Lab - Full-Stack Integration & Production Deployment
 
 ## Overview
 
