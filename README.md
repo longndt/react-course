@@ -53,7 +53,7 @@ This course teaches React app development with industry-standard practices throu
 - Connecting React to Node.js/Express/MongoDB backends
 - RESTful API consumption and error handling
 - **Lab Project**: CRUD application with API integration
-- [Go to Lesson 3](./lesson3-data)
+- [Go to Lesson 3](./lesson3-api-data)
 
 ### Lesson 4: Routing, Authentication & Advanced Patterns
 - React Router and JWT authentication
@@ -120,7 +120,7 @@ cd react-course
 #### 2️⃣ **Learn Lessons 1-5** (In sequence)
 - 👉 **[Lesson 1: React Fundamentals & TypeScript Setup](./lesson1-setup/readme.md)**
 - 👉 **[Lesson 2: Component Architecture & Advanced State](./lesson2-component-hook/readme.md)**
-- 👉 **[Lesson 3: API Integration & Data Management](./lesson3-data/readme.md)**
+- 👉 **[Lesson 3: API Integration & Data Management](./lesson3-api-data/readme.md)**
 - 👉 **[Lesson 4: Routing, Authentication & Advanced Patterns](./lesson4-routing-auth/readme.md)**
 - 👉 **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack/readme.md)**
 

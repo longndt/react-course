@@ -14,7 +14,7 @@ npm run dev
 
 ### 2. Create Authentication Context
 
-Create `src/contexts/AuthContext.jsx`:
+Create `src/contexts/AuthContext\.tsx`:
 
 ```typescript
 import { createContext, useContext, useState, useEffect } from "react";
@@ -123,7 +123,7 @@ export default ProtectedRoute;
 
 ### 4. Create Login Page
 
-Create `src/pages/Login.jsx`:
+Create `src/pages/Login\.tsx`:
 
 ```typescript
 import { useState } from "react";
@@ -241,7 +241,7 @@ export default Login;
 
 ### 5. Create Dashboard and Admin Pages
 
-Create `src/pages/Dashboard.jsx`:
+Create `src/pages/Dashboard\.tsx`:
 
 ```typescript
 import { useAuth } from "../contexts/AuthContext";
@@ -342,7 +342,7 @@ function Dashboard() {
 export default Dashboard;
 ```
 
-Create `src/pages/AdminPanel.jsx`:
+Create `src/pages/AdminPanel\.tsx`:
 
 ```typescript
 import { useAuth } from "../contexts/AuthContext";
@@ -398,14 +398,14 @@ export default AdminPanel;
 
 ### 6. Setup Routing in App
 
-Update `src/main.jsx`:
+Update `src/main\.tsx`:
 
 ```typescript
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
-import App from "./App.jsx";
+import App from "./App\.tsx";
 import "./index.css";
 
 const queryClient = new QueryClient();
@@ -425,7 +425,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 ### 7. Update App with Routes
 
-Update `src/App.jsx`:
+Update `src/App\.tsx`:
 
 ```typescript
 import { Routes, Route, Link, Navigate } from "react-router-dom";
@@ -531,5 +531,6 @@ You now have:
 - Check browser console for any routing errors
 - Make sure all imports are correct
 - Try different user roles to test access control
+
 
 

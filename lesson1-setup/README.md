@@ -82,7 +82,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, onEdit }) => {
 
 Before diving into React concepts, ensure your development environment is properly set up:
 
-> 📋 **Important**: Complete the [Comprehensive Environment Setup Guide](../setup/environment-setup.md) first if you haven't already. It provides detailed instructions for installing Node.js, VS Code, Git, and all necessary development tools.
+> 📋 **Important**: Complete the [Comprehensive Environment Setup Guide](../setup/environment-setup.md) first if you haven't already. It provides detailed instructions for installing Node\.ts, VS Code, Git, and all necessary development tools.
 
 **Quick Verification:**
 
@@ -141,8 +141,8 @@ You'll see a link (like http://localhost:5173) - hold Ctrl (Windows) or Cmd (Mac
 ```
 my-first-app/
 ├── src/           👈 Your code goes here!
-│   ├── App.jsx    👈 Main page
-│   ├── main.jsx   👈 Starting point
+│   ├── App\.tsx    👈 Main page
+│   ├── main\.tsx   👈 Starting point
 │   └── index.css  👈 Main styles
 ├── public/        👈 Images go here
 └── index.html     👈 Main HTML file
@@ -160,7 +160,7 @@ Before moving on, make sure you can answer:
 
 1. **What is the difference between `src` and `public` folders?**
 2. **What does the `export default` statement do?**
-3. **Why do we use `.jsx` file extensions?**
+3. **Why do we use `\.tsx` file extensions?**
 
 _💡 Tip: If you're unsure about any answer, review the section above before continuing._
 
@@ -171,7 +171,7 @@ _💡 Tip: If you're unsure about any answer, review the section above before co
 ### 1. Simple Welcome Component
 
 ```tsx
-// src/components/Welcome.jsx
+// src/components/Welcome\.tsx
 function Welcome() {
   return (
     <div className="welcome">
@@ -446,4 +446,5 @@ If you completed the assessment above and feel comfortable with React basics, yo
 3. What's the difference between props and regular variables?
 4. How do you create a new React project?
 5. What's the purpose of the public folder?
+
 

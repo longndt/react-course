@@ -146,8 +146,8 @@ function Nav() {
   return (
     <nav>
       <Link to="/">Home</Link>
-      <NavLink 
-        to="/dashboard" 
+      <NavLink
+        to="/dashboard"
         className={({ isActive }) => isActive ? 'active' : ''}
       >
         Dashboard
@@ -164,7 +164,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 function ProductPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  
+
   return (
     <div>
       <h1>Product {id}</h1>
@@ -203,18 +203,18 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
-  
+
   const login = async (email: string, password: string): Promise<void> => {
     const response: AuthResponse = await api.post('/auth/login', { email, password });
     setUser(response.user);
     localStorage.setItem('token', response.token);
   };
-  
+
   const logout = () => {
     setUser(null);
     localStorage.removeItem('token');
   };
-  
+
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       {children}
@@ -241,24 +241,24 @@ interface ProtectedRouteProps {
 function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, loading } = useAuth();
   const location = useLocation();
-  
+
   if (loading) return <LoadingSpinner />;
-  
+
   if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  
+
   return <>{children}</>;
 }
 
 // Usage
-<Route 
-  path="/dashboard" 
+<Route
+  path="/dashboard"
   element={
     <ProtectedRoute>
       <Dashboard />
     </ProtectedRoute>
-  } 
+  }
 />
 ```
 
@@ -270,10 +270,10 @@ interface AdminRouteProps {
 
 function AdminRoute({ children }: AdminRouteProps) {
   const { user } = useAuth();
-  
+
   if (!user) return <Navigate to="/login" />;
   if (user.role !== 'admin') return <Navigate to="/unauthorized" />;
-  
+
   return <>{children}</>;
 }
 ```
@@ -285,9 +285,9 @@ import React from 'react';
 function withAuth<P extends object>(Component: React.ComponentType<P>) {
   return function AuthenticatedComponent(props: P) {
     const { user } = useAuth();
-    
+
     if (!user) return <Navigate to="/login" />;
-    
+
     return <Component {...props} user={user} />;
   };
 }
@@ -433,5 +433,6 @@ After completing this lesson, you'll be able to:
 - 💻 [Auth0 Blog - Authentication Best Practices](https://auth0.com/blog/)
 - 📚 [Context API Deep Dive](./theory/theory4.md#context-api)
 - 🔒 [OWASP Security Guidelines](https://owasp.org/)
+
 
 

@@ -14,7 +14,7 @@ npm run dev
 
 ### 2. Create a Button Component
 
-Create `src/components/Button.jsx`:
+Create `src/components/Button\.tsx`:
 
 ```typescript
 import { useState } from "react";
@@ -271,7 +271,7 @@ export default UserForm;
 
 ### 5. Use Components in App
 
-Update `src/App.jsx`:
+Update `src/App\.tsx`:
 
 ```typescript
 import { useState } from "react";
@@ -367,4 +367,5 @@ You now have:
 - Check the demo code in `./demo/` folder
 - Review component patterns in the README
 - Experiment with different component props!
+
 

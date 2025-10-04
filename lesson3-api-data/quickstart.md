@@ -1,6 +1,6 @@
 # Quick Start Guide - Lesson 3
 
-## Connect React to Node.js API
+## Connect React to Node\.ts API
 
 ### 1. Setup Backend API
 
@@ -14,10 +14,10 @@ mkdir lesson3-api && cd lesson3-api
 npm init -y
 npm install express mongoose cors dotenv
 
-# Create server.js
+# Create server\.ts
 ```
 
-Create `server.js`:
+Create `server\.ts`:
 
 ```typescript
 const express = require("express");
@@ -28,7 +28,7 @@ const PORT = 5000;
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express\.tson());
 
 // Mock data (we'll use MongoDB later)
 let tasks = [
@@ -39,7 +39,7 @@ let tasks = [
 
 // Routes
 app.get("/api/tasks", (req, res) => {
-  res.json(tasks);
+  res\.tson(tasks);
 });
 
 app.post("/api/tasks", (req, res) => {
@@ -49,7 +49,7 @@ app.post("/api/tasks", (req, res) => {
     completed: false,
   };
   tasks.push(newTask);
-  res.json(newTask);
+  res\.tson(newTask);
 });
 
 app.put("/api/tasks/:id", (req, res) => {
@@ -57,16 +57,16 @@ app.put("/api/tasks/:id", (req, res) => {
   const task = tasks.find((t) => t.id === id);
   if (task) {
     task.completed = req.body.completed;
-    res.json(task);
+    res\.tson(task);
   } else {
-    res.status(404).json({ error: "Task not found" });
+    res.status(404)\.tson({ error: "Task not found" });
   }
 });
 
 app.delete("/api/tasks/:id", (req, res) => {
   const id = parseInt(req.params.id);
   tasks = tasks.filter((t) => t.id !== id);
-  res.json({ message: "Task deleted" });
+  res\.tson({ message: "Task deleted" });
 });
 
 app.listen(PORT, () => {
@@ -78,7 +78,7 @@ app.listen(PORT, () => {
 
 ```bash
 # Start the API server
-node server.js
+node server\.ts
 # Should show: Server running on port 5000
 ```
 
@@ -96,7 +96,7 @@ npm run dev
 
 ### 4. Create API Service
 
-Create `src/services/api.js`:
+Create `src/services/api\.ts`:
 
 ```typescript
 import axios from "axios";
@@ -123,12 +123,12 @@ export const api = {
 
 ### 5. Setup React Query Provider
 
-Update `src/main.jsx`:
+Update `src/main\.tsx`:
 
 ```typescript
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import App from "./App.jsx";
+import App from "./App\.tsx";
 import "./index.css";
 
 const queryClient = new QueryClient({
@@ -150,7 +150,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 ### 6. Create Task Component
 
-Create `src/components/TaskManager.jsx`:
+Create `src/components/TaskManager\.tsx`:
 
 ```typescript
 import { useState } from "react";
@@ -298,7 +298,7 @@ export default TaskManager;
 
 ### 7. Use TaskManager in App
 
-Update `src/App.jsx`:
+Update `src/App\.tsx`:
 
 ```typescript
 import TaskManager from "./components/TaskManager";
@@ -307,7 +307,7 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <h1>React + Node.js Integration</h1>
+      <h1>React + Node\.ts Integration</h1>
       <TaskManager />
     </div>
   );
@@ -320,7 +320,7 @@ export default App;
 
 You now have:
 
-- ✅ A working Node.js Express API
+- ✅ A working Node\.ts Express API
 - ✅ React frontend consuming the API
 - ✅ React Query for professional data management
 - ✅ Full CRUD operations working
@@ -346,4 +346,5 @@ You now have:
 - Make sure both servers are running (React on 5173, API on 5000)
 - Check browser network tab for API calls
 - Verify CORS is working (no console errors)
+
 

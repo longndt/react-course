@@ -240,3 +240,4 @@ You've successfully:
 - ✅ Used external icon libraries
 
 **Ready for Lesson 2?** You'll learn about component composition, props, and building reusable component libraries.
+

@@ -19,7 +19,7 @@ _For detailed learning objectives and performance concepts, see [../readme.md](.
 1. Implement React.lazy for route components:
 
 ```tsx
-// src/App.jsx
+// src/App\.tsx
 import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingSpinner from "./components/LoadingSpinner";
@@ -46,7 +46,7 @@ function App() {
 2. Create a LoadingSpinner component:
 
 ```tsx
-// src/components/LoadingSpinner/LoadingSpinner.jsx
+// src/components/LoadingSpinner/LoadingSpinner\.tsx
 import './LoadingSpinner.css';
 
 function LoadingSpinner() {
@@ -83,7 +83,7 @@ function LoadingSpinner() {
 3. Create an ErrorBoundary for lazy-loaded components:
 
 ```tsx
-// src/components/ErrorBoundary.jsx
+// src/components/ErrorBoundary\.tsx
 import { Component } from "react";
 
 class ErrorBoundary extends Component {
@@ -112,7 +112,7 @@ class ErrorBoundary extends Component {
   }
 }
 
-// Update App.jsx
+// Update App\.tsx
 function App() {
   return (
     <BrowserRouter>
@@ -403,7 +403,7 @@ function App() {
 2. Implement a custom performance hook:
 
 ```tsx
-// src/hooks/usePerformance.js
+// src/hooks/usePerformance\.ts
 function usePerformance(label) {
   useEffect(() => {
     const startTime = performance.now();
@@ -479,7 +479,7 @@ function LazyImage({ src, alt }: LazyImageProps) {
 Implement a web worker for heavy computations:
 
 ```tsx
-// src/workers/compute.worker.js
+// src/workers/compute.worker\.ts
 self.addEventListener("message", (e) => {
   const { data } = e;
 
@@ -489,7 +489,7 @@ self.addEventListener("message", (e) => {
   self.postMessage(result);
 });
 
-// src/hooks/useWebWorker.js
+// src/hooks/useWebWorker\.ts
 function useWebWorker(workerPath) {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
@@ -609,37 +609,37 @@ After completing all exercises in this lab, your performance-optimized project s
 ```
 lab5-performance-optimization/
 ├── index.html
-├── package.json
+├── package\.tson
 ├── readme.md
-├── vite.config.js
+├── vite.config\.ts
 ├── src/
-│   ├── App.jsx                    # Main app with lazy loading
+│   ├── App\.tsx                    # Main app with lazy loading
 │   ├── index.css                 # Optimized global styles
-│   ├── main.jsx                  # App entry point
+│   ├── main\.tsx                  # App entry point
 │   ├── components/
 │   │   ├── LoadingSpinner/
-│   │   │   ├── LoadingSpinner.jsx  # Loading component
+│   │   │   ├── LoadingSpinner\.tsx  # Loading component
 │   │   │   └── LoadingSpinner.css  # Spinner styles
 │   │   ├── VirtualList/
-│   │   │   ├── VirtualList.jsx     # Virtualized list component
+│   │   │   ├── VirtualList\.tsx     # Virtualized list component
 │   │   │   └── VirtualList.css     # List optimization styles
 │   │   ├── UserList/
-│   │   │   ├── UserList.jsx        # Memoized user list
-│   │   │   ├── UserItem.jsx        # Individual user item
+│   │   │   ├── UserList\.tsx        # Memoized user list
+│   │   │   ├── UserItem\.tsx        # Individual user item
 │   │   │   └── UserList.css        # User list styles
 │   │   └── PerformanceMonitor/
-│   │       ├── PerformanceMonitor.jsx  # Performance profiling
+│   │       ├── PerformanceMonitor\.tsx  # Performance profiling
 │   │       └── PerformanceMonitor.css  # Monitor styles
 │   ├── hooks/
-│   │   ├── useDebounce.js         # Debounce optimization hook
-│   │   ├── useVirtualList.js      # Virtual list logic
-│   │   ├── usePerformance.js      # Performance monitoring
-│   │   └── useWorker.js           # Web worker integration
+│   │   ├── useDebounce\.ts         # Debounce optimization hook
+│   │   ├── useVirtualList\.ts      # Virtual list logic
+│   │   ├── usePerformance\.ts      # Performance monitoring
+│   │   └── useWorker\.ts           # Web worker integration
 │   └── pages/
-│       ├── Home.jsx               # Lazy-loaded home page
-│       ├── About.jsx              # Lazy-loaded about page
-│       ├── Dashboard.jsx          # Performance dashboard
-│       └── UserManagement.jsx     # Large data management
+│       ├── Home\.tsx               # Lazy-loaded home page
+│       ├── About\.tsx              # Lazy-loaded about page
+│       ├── Dashboard\.tsx          # Performance dashboard
+│       └── UserManagement\.tsx     # Large data management
 ```
 
 ### Key Optimizations Implemented
@@ -675,5 +675,6 @@ lab5-performance-optimization/
    - Component lifecycle optimization
 
 This structure demonstrates production-ready React performance optimization techniques essential for scalable applications handling large datasets and complex user interactions.
+
 
 

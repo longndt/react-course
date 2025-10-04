@@ -28,7 +28,7 @@ Complete guide to building, optimizing, and deploying production-ready full-stac
 ├─────────────────────────────────┤
 │   React Frontend                │
 ├─────────────────────────────────┤
-│   Node.js/Express Backend       │
+│   Node\.ts/Express Backend       │
 ├─────────────────────────────────┤
 │   MongoDB Database              │
 └─────────────────────────────────┘
@@ -131,11 +131,11 @@ class ApiClient {
       const response = await fetch(url, config);
 
       if (!response.ok) {
-        const error = await response.json();
+        const error = await response\.tson();
         throw new Error(error.message || `HTTP ${response.status}`);
       }
 
-      return await response.json();
+      return await response\.tson();
     } catch (error) {
       console.error('API request failed:', error);
       throw error;
@@ -887,7 +887,7 @@ function TodoList() {
 ### 5.3 Bundle Size Optimization
 
 ```typescript
-// vite.config.ts
+// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
@@ -1001,7 +1001,7 @@ export const config = {
 ### 6.2 Build Scripts
 
 ```json
-// package.json
+// package\.tson
 {
   "scripts": {
     "dev": "vite",
@@ -1028,7 +1028,7 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 
 # Copy package files
-COPY package.json package-lock.json ./
+COPY package\.tson package-lock\.tson ./
 
 # Install dependencies
 RUN npm ci --only=production
@@ -1104,7 +1104,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Setup Node\.ts
         uses: actions/setup-node@v3
         with:
           node-version: '18'
@@ -1267,4 +1267,5 @@ export function reportWebVitals() {
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [Sentry Documentation](https://docs.sentry.io/)
 - [Vercel Deployment](https://vercel.com/docs)
+
 

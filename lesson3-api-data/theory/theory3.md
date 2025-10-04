@@ -9,7 +9,7 @@
 ```
 Your Modern Stack:
 ┌─────────────┐    ┌──────────┐    ┌─────────────┐    ┌─────────┐
-│   React     │    │   HTTP   │    │ Node.js     │    │ MongoDB │
+│   React     │    │   HTTP   │    │ Node\.ts     │    │ MongoDB │
 │ (Frontend)  │◄──►│   API    │◄──►│ Express     │◄──►│         │
 │             │    │          │    │ (Backend)   │    │         │
 └─────────────┘    └──────────┘    └─────────────┘    └─────────┘
@@ -25,21 +25,21 @@ Your Modern Stack:
 
 ---
 
-## Understanding REST APIs with Node.js/MongoDB 📡
+## Understanding REST APIs with Node\.ts/MongoDB 📡
 
 ### From Database to API Response
 
 ```typescript
-// Node.js/Express backend endpoint
+// Node\.ts/Express backend endpoint
 app.get("/api/students", async (req, res) => {
   try {
     // 1. Query MongoDB database
     const students = await Student.find();
 
     // 2. Send JSON response to React
-    res.json(students);
+    res\.tson(students);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500)\.tson({ error: error.message });
   }
 });
 ```
@@ -52,9 +52,9 @@ function StudentsList() {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    // 1. Send HTTP request to your Node.js backend
+    // 1. Send HTTP request to your Node\.ts backend
     const response = await fetch('http://localhost:5000/api/students');
-    const data = await response.json();
+    const data = await response\.tson();
 
     // 2. Update React state with database data
     setStudents(data);
@@ -72,12 +72,12 @@ function StudentsList() {
 
 ---
 
-## Mapping Node.js Endpoints to React Functions
+## Mapping Node\.ts Endpoints to React Functions
 
-**Your Node.js API Structure:**
+**Your Node\.ts API Structure:**
 
 ```typescript
-// server/routes/students.js - Your backend API
+// server/routes/students\.ts - Your backend API
 const express = require("express");
 const Student = require("../models/Student");
 const router = express.Router();
@@ -85,28 +85,28 @@ const router = express.Router();
 // GET /api/students - List all students
 router.get("/", async (req, res) => {
   const students = await Student.find();
-  res.json(students);
+  res\.tson(students);
 });
 
 // POST /api/students - Create student
 router.post("/", async (req, res) => {
   const student = new Student(req.body);
   await student.save();
-  res.json(student);
+  res\.tson(student);
 });
 ```
 
 **React Frontend Implementation:**
 
 ```tsx
-// React frontend calling your Node.js API
+// React frontend calling your Node\.ts API
 function useStudents() {
   const [students, setStudents] = useState([]);
 
   const fetchStudents = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/students");
-      const data = await response.json();
+      const data = await response\.tson();
       setStudents(data);
     } catch (error) {
       console.error("Error fetching students:", error);
@@ -122,7 +122,7 @@ function useStudents() {
         },
         body: JSON.stringify(studentData),
       });
-      const newStudent = await response.json();
+      const newStudent = await response\.tson();
       setStudents((prev) => [...prev, newStudent]);
     } catch (error) {
       console.error("Error adding student:", error);
@@ -140,7 +140,7 @@ function useStudents() {
 ### Basic Setup
 
 ```tsx
-// main.jsx - Configure React Query
+// main\.tsx - Configure React Query
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient({
@@ -163,7 +163,7 @@ ReactDOM.render(
 ### Query Implementation
 
 ```tsx
-// components/StudentsList.jsx - Using React Query
+// components/StudentsList\.tsx - Using React Query
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 function StudentsList() {
@@ -179,7 +179,7 @@ function StudentsList() {
     queryFn: async () => {
       const response = await fetch("http://localhost:5000/api/students");
       if (!response.ok) throw new Error("Failed to fetch students");
-      return response.json();
+      return response\.tson();
     },
   });
 
@@ -191,7 +191,7 @@ function StudentsList() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(studentData),
       });
-      return response.json();
+      return response\.tson();
     },
     onSuccess: () => {
       // Automatically refetch students list
@@ -242,7 +242,7 @@ function StudentSearch() {
       const response = await fetch(
         `http://localhost:5000/api/students?${params}`
       );
-      return response.json();
+      return response\.tson();
     },
     enabled: searchTerm.length >= 2 || major !== "", // Only search when criteria met
   });
@@ -294,7 +294,7 @@ function EditStudent({ studentId }: EditStudentProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      return response.json();
+      return response\.tson();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["students"] });
@@ -343,7 +343,7 @@ function DeleteStudent({ student }: DeleteStudentProps) {
         method: "DELETE",
       });
       if (!response.ok) throw new Error("Failed to delete student");
-      return response.json();
+      return response\.tson();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["students"] });
@@ -375,7 +375,7 @@ function DeleteStudent({ student }: DeleteStudentProps) {
 ### Error Boundaries for API Failures
 
 ```tsx
-// components/ErrorBoundary.jsx
+// components/ErrorBoundary\.tsx
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -460,7 +460,7 @@ function StudentDashboard() {
 ### 1. Environment Configuration
 
 ```typescript
-// config/api.js
+// config/api\.ts
 const API_BASE_URL =
   process.env.NODE_ENV === "production"
     ? "https://your-api.com/api"
@@ -540,7 +540,7 @@ function useStudent(id) {
 
 **What You'll Build:**
 
-1. **Node.js/Express API**
+1. **Node\.ts/Express API**
 
    - MongoDB connection with Mongoose
    - CRUD endpoints for tasks
@@ -562,7 +562,7 @@ function useStudent(id) {
 
 ## Next: Hands-On Practice 👨‍💻
 
-Ready to put theory into practice? Let's build a real application that connects React to a Node.js/MongoDB backend!
+Ready to put theory into practice? Let's build a real application that connects React to a Node\.ts/MongoDB backend!
 
 **In the next session:**
 
@@ -570,4 +570,5 @@ Ready to put theory into practice? Let's build a real application that connects 
 - Build API endpoints with Express/MongoDB
 - Implement React Query for data management
 - Add professional error handling and loading states
+
 

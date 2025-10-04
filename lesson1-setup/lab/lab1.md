@@ -13,7 +13,7 @@ In this lab session, you'll create a Student Dashboard application using TypeScr
 
 ## Pre-Lab Checklist
 
-- [ ] Node.js v18+ installed
+- [ ] Node\.ts v18+ installed
 - [ ] VS Code with React extensions installed
 - [ ] Basic understanding of JavaScript ES6+
 - [ ] Familiarity with HTML/CSS
@@ -51,16 +51,16 @@ student-dashboard/
 │   ├── main.tsx         # Application entry point
 │   ├── index.css        # Global styles
 ├── public/              # Static assets
-├── package.json         # Project configuration
-├── tsconfig.json        # TypeScript configuration
-└── vite.config.ts       # Vite build configuration
+├── package\.tson         # Project configuration
+├── tsconfig\.tson        # TypeScript configuration
+└── vite.config.js       # Vite build configuration
 ```
 
 ### Step 3: Configure Development Environment
 
 **📚 Learning Note:** TypeScript configuration can seem complex, but these settings enable better development experience with stricter type checking and path aliases.
 
-Update your `tsconfig.json` for better development experience:
+Update your `tsconfig\.tson` for better development experience:
 
 ```json
 {
@@ -86,11 +86,11 @@ Update your `tsconfig.json` for better development experience:
     }
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node\.tson" }]
 }
 ```
 
-**Important:** If you encounter TypeScript errors about project references, update your `tsconfig.node.json` to enable proper project composition:
+**Important:** If you encounter TypeScript errors about project references, update your `tsconfig.node\.tson` to enable proper project composition:
 
 ```json
 {
@@ -114,7 +114,7 @@ Update your `tsconfig.json` for better development experience:
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["vite.config.ts"]
+  "include": ["vite.config.js"]
 }
 ```
 
@@ -1185,10 +1185,10 @@ student-dashboard/
 │   ├── App.css
 │   ├── index.css
 │   └── main.tsx
-├── package.json
-├── tsconfig.json
-├── tsconfig.node.json
-├── vite.config.ts
+├── package\.tson
+├── tsconfig\.tson
+├── tsconfig.node\.tson
+├── vite.config.js
 └── readme.md
 ```
 
@@ -1215,7 +1215,7 @@ In the next lesson, you'll learn how to:
 - Create more complex component hierarchies
 - Manage state across multiple components
 - Handle forms and user input validation
-- Connect your React frontend to real APIs (like your Node.js backends)
+- Connect your React frontend to real APIs (like your Node\.ts backends)
 
 ## Troubleshooting Common Issues
 
@@ -1228,8 +1228,8 @@ In the next lesson, you'll learn how to:
 **TypeScript Configuration Issues:**
 
 - If you see errors like "Referenced project must have setting 'composite': true":
-  - Add `"composite": true` to your `tsconfig.node.json` compilerOptions
-  - Change `"noEmit": true` to `"noEmit": false` in `tsconfig.node.json`
+  - Add `"composite": true` to your `tsconfig.node\.tson` compilerOptions
+  - Change `"noEmit": true` to `"noEmit": false` in `tsconfig.node\.tson`
 - These errors occur when using project references in TypeScript configurations
 - The fix ensures proper project composition and allows referenced projects to emit files when needed
 
@@ -1244,4 +1244,5 @@ In the next lesson, you'll learn how to:
 - Clear node_modules and reinstall if dependencies seem corrupted
 - Check that all imports have correct file extensions
 - Ensure TypeScript configuration matches project structure
+
 

@@ -9,7 +9,7 @@ This lesson covers building complete full-stack applications by integrating Reac
 After this lesson, you will be able to:
 
 - ✅ Design full-stack application architectures (Monolithic vs Microservices)
-- ✅ Integrate React with Node.js/Express/MongoDB backends
+- ✅ Integrate React with Node\.ts/Express/MongoDB backends
 - ✅ Implement file upload and media management systems
 - ✅ Build real-time features with WebSockets and Server-Sent Events
 - ✅ Optimize React applications for production performance
@@ -31,7 +31,7 @@ After this lesson, you will be able to:
 
 **Backend Integration:**
 - RESTful API design and implementation
-- Node.js/Express server setup
+- Node\.ts/Express server setup
 - MongoDB database operations
 - Authentication and authorization flows
 
@@ -128,7 +128,7 @@ class ApiClient {
       ...options,
     });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return response.json();
+    return response\.tson();
   }
 
   async get(endpoint: string) {
@@ -282,7 +282,7 @@ const MemoizedList = memo(({ items }: { items: Item[] }) => {
 
 ### ❌ Deployment Problems
 - **Environment confusion**: Use proper env variables
-- **Missing dependencies**: Lock versions in package.json
+- **Missing dependencies**: Lock versions in package\.tson
 - **No rollback plan**: Always have a way to revert
 - **Insufficient monitoring**: Know when things break
 
@@ -325,7 +325,7 @@ Before proceeding, ensure you understand:
 Rate your confidence (1-5) in these areas:
 
 **Full-Stack Integration** ⭐⭐⭐⭐⭐
-- [ ] Setting up Node.js/Express backend
+- [ ] Setting up Node\.ts/Express backend
 - [ ] Creating RESTful API endpoints
 - [ ] Connecting React to backend APIs
 - [ ] Handling authentication flows
@@ -362,7 +362,7 @@ Rate your confidence (1-5) in these areas:
 
 After completing this lesson, you'll be able to:
 
-1. **Build Full-Stack Apps**: Create complete applications with React frontend and Node.js backend
+1. **Build Full-Stack Apps**: Create complete applications with React frontend and Node\.ts backend
 2. **Deploy to Production**: Use modern deployment platforms and CI/CD pipelines
 3. **Optimize Performance**: Make your apps fast and efficient
 4. **Monitor & Maintain**: Track errors and performance in production
@@ -381,4 +381,5 @@ After completing this lesson, you'll be able to:
 - 🚀 [Vercel Deployment Guide](https://vercel.com/docs)
 - 📊 [Web Vitals](https://web.dev/vitals/)
 - 🔍 [Sentry Error Tracking](https://docs.sentry.io/)
+
 

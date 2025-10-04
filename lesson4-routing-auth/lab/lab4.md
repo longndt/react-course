@@ -30,7 +30,7 @@ npm install react-router-dom
 1. Set up basic routing:
 
 ```tsx
-// src/App.jsx
+// src/App\.tsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -56,7 +56,7 @@ function App() {
 3. Create a navigation component:
 
 ```tsx
-// src/components/Navbar.jsx
+// src/components/Navbar\.tsx
 import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
@@ -101,7 +101,7 @@ function Navbar() {
 1. Create a products list and detail view:
 
 ```tsx
-// src/pages/Products.jsx
+// src/pages/Products\.tsx
 function Products() {
   const products = [
     { id: 1, name: "Product 1", price: 99.99 },
@@ -132,7 +132,7 @@ function Products() {
 2. Create a product detail component:
 
 ```tsx
-// src/pages/ProductDetail.jsx
+// src/pages/ProductDetail\.tsx
 import { useParams, useNavigate } from "react-router-dom";
 
 function ProductDetail() {
@@ -253,7 +253,7 @@ export default ProtectedRoute;
 3. Implement login page:
 
 ```tsx
-// src/pages/Login.jsx
+// src/pages/Login\.tsx
 import { useAuth } from "../context/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -296,7 +296,7 @@ function Login() {
 Create a dashboard with nested routes:
 
 ```tsx
-// src/pages/Dashboard/index.jsx
+// src/pages/Dashboard/index\.tsx
 import { Outlet, NavLink } from "react-router-dom";
 
 function Dashboard() {
@@ -316,7 +316,7 @@ function Dashboard() {
   );
 }
 
-// Update App.jsx routes
+// Update App\.tsx routes
 <Route
   path="/dashboard"
   element={
@@ -461,29 +461,29 @@ After completing all exercises in this lab, your project structure should look l
 ```
 lab4-routing-auth/
 ├── index.html
-├── package.json
+├── package\.tson
 ├── readme.md
-├── vite.config.js
+├── vite.config\.ts
 ├── src/
-│   ├── App.jsx                    # Main app with routing setup
+│   ├── App\.tsx                    # Main app with routing setup
 │   ├── App.css                   # Global styles with auth UI
 │   ├── index.css                 # Base styles
-│   ├── main.jsx                  # App entry point
+│   ├── main\.tsx                  # App entry point
 │   ├── components/
-│   │   ├── Navbar.jsx           # Navigation with auth state
+│   │   ├── Navbar\.tsx           # Navigation with auth state
 │   │   ├── Navbar.css           # Navigation styling
-│   │   ├── ProtectedRoute.jsx   # Route protection wrapper
-│   │   ├── LoginForm.jsx        # User login form
-│   │   └── UserProfile.jsx      # User profile display
+│   │   ├── ProtectedRoute\.tsx   # Route protection wrapper
+│   │   ├── LoginForm\.tsx        # User login form
+│   │   └── UserProfile\.tsx      # User profile display
 │   ├── context/
-│   │   └── AuthContext.jsx      # Authentication state management
+│   │   └── AuthContext\.tsx      # Authentication state management
 │   └── pages/
-│       ├── Home.jsx             # Public home page
-│       ├── About.jsx            # Public about page
-│       ├── Contact.jsx          # Public contact page
-│       ├── Dashboard.jsx        # Protected dashboard page
-│       ├── Profile.jsx          # Protected user profile page
-│       └── Settings.jsx         # Protected settings page
+│       ├── Home\.tsx             # Public home page
+│       ├── About\.tsx            # Public about page
+│       ├── Contact\.tsx          # Public contact page
+│       ├── Dashboard\.tsx        # Protected dashboard page
+│       ├── Profile\.tsx          # Protected user profile page
+│       └── Settings\.tsx         # Protected settings page
 ```
 
 ### Key Features Implemented
@@ -513,5 +513,6 @@ lab4-routing-auth/
    - Route protection logic
 
 This structure provides a solid foundation for authentication-based React applications with proper routing and state management patterns.
+
 
 

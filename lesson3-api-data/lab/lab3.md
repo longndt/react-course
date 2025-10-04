@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this focused lab exercise, you'll build essential API integration features by connecting a React frontend to a Node.js/Express/MongoDB backend. This demonstrates core full-stack patterns used in modern web development.
+In this focused lab exercise, you'll build essential API integration features by connecting a React frontend to a Node\.ts/Express/MongoDB backend. This demonstrates core full-stack patterns used in modern web development.
 
 _For detailed learning objectives and concepts, see [../readme.md](../readme.md)_
 
@@ -22,7 +22,7 @@ _For detailed development environment setup, see [Complete Environment Setup Gui
 
 ### Required Software (Quick Check)
 
-- [ ] Node.js (v18+) installed
+- [ ] Node\.ts (v18+) installed
 - [ ] MongoDB (local or Atlas account)
 - [ ] VS Code with recommended extensions
 - [ ] Thunder Client or Postman for API testing
@@ -49,7 +49,7 @@ mongod --version # If using local MongoDB
 Create a simple Express server with MongoDB connection:
 
 ```typescript
-// server/index.js
+// server/index\.ts
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -59,7 +59,7 @@ const PORT = 5000;
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express\.tson());
 
 // MongoDB connection
 mongoose
@@ -83,9 +83,9 @@ const Task = mongoose.model("Task", TaskSchema);
 app.get("/api/tasks", async (req, res) => {
 try {
  const tasks = await Task.find();
- res.json(tasks);
+ res\.tson(tasks);
 } catch (error) {
- res.status(500).json({ error: error.message });
+ res.status(500)\.tson({ error: error.message });
 }
 });
 
@@ -93,9 +93,9 @@ app.post("/api/tasks", async (req, res) => {
 try {
  const task = new Task(req.body);
  const savedTask = await task.save();
- res.status(201).json(savedTask);
+ res.status(201)\.tson(savedTask);
 } catch (error) {
- res.status(400).json({ error: error.message });
+ res.status(400)\.tson({ error: error.message });
 }
 });
 
@@ -104,18 +104,18 @@ try {
  const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
    new: true,
  });
- res.json(task);
+ res\.tson(task);
 } catch (error) {
- res.status(400).json({ error: error.message });
+ res.status(400)\.tson({ error: error.message });
 }
 });
 
 app.delete("/api/tasks/:id", async (req, res) => {
 try {
  await Task.findByIdAndDelete(req.params.id);
- res.json({ message: "Task deleted" });
+ res\.tson({ message: "Task deleted" });
 } catch (error) {
- res.status(500).json({ error: error.message });
+ res.status(500)\.tson({ error: error.message });
 }
 });
 
@@ -129,8 +129,8 @@ console.log(`Server running on port ${PORT}`);
 ```bash
 npm init -y
 npm install express mongoose cors
-# Create server/index.js with code above
-node server/index.js
+# Create server/index\.ts with code above
+node server/index\.ts
 ```
 
 ### Step 2: React Integration
@@ -141,10 +141,10 @@ Install React Query and Axios:
 npm install @tanstack/react-query axios
 ```
 
-First, setup React Query provider in your App.jsx:
+First, setup React Query provider in your App\.tsx:
 
 ```tsx
-// src/App.jsx
+// src/App\.tsx
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import TaskManager from "./components/TaskManager";
 
@@ -167,7 +167,7 @@ export default App;
 Now create the TaskManager component:
 
 ```tsx
-// src/components/TaskManager.jsx
+// src/components/TaskManager\.tsx
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
@@ -277,7 +277,7 @@ export default TaskManager;
 
    ```bash
    # Terminal 1: Backend
-   node server/index.js
+   node server/index\.ts
 
    # Terminal 2: Frontend
    npm run dev
@@ -299,7 +299,7 @@ export default TaskManager;
 
 ## Key Concepts Demonstrated
 
-✅ **Node.js/Express Backend**: RESTful API with proper error handling
+✅ **Node\.ts/Express Backend**: RESTful API with proper error handling
 ✅ **MongoDB Integration**: Mongoose schemas and CRUD operations
 ✅ **React Query**: Data fetching, caching, and mutations
 ✅ **Error Handling**: Loading states and error boundaries
@@ -364,38 +364,38 @@ After completing all exercises in Lab 3, your project should have the following 
 api-integration/
 ├── server/
 │   ├── models/
-│   │   └── Task.js
+│   │   └── Task\.ts
 │   ├── routes/
-│   │   └── tasks.js
+│   │   └── tasks\.ts
 │   ├── middleware/
-│   │   ├── cors.js
-│   │   └── errorHandler.js
+│   │   ├── cors\.ts
+│   │   └── errorHandler\.ts
 │   ├── config/
-│   │   └── database.js
-│   ├── index.js
-│   └── package.json
+│   │   └── database\.ts
+│   ├── index\.ts
+│   └── package\.tson
 ├── src/
 │   ├── components/
-│   │   ├── TaskManager.jsx
+│   │   ├── TaskManager\.tsx
 │   │   └── TaskManager.css
 │   ├── hooks/
-│   │   ├── useTasks.js
-│   │   └── useTaskMutations.js
+│   │   ├── useTasks\.ts
+│   │   └── useTaskMutations\.ts
 │   ├── services/
-│   │   └── api.js
+│   │   └── api\.ts
 │   ├── utils/
-│   │   ├── queryClient.js
-│   │   └── constants.js
-│   ├── App.jsx
+│   │   ├── queryClient\.ts
+│   │   └── constants\.ts
+│   ├── App\.tsx
 │   ├── App.css
 │   ├── index.css
-│   └── main.jsx
-├── package.json
-├── vite.config.js
+│   └── main\.tsx
+├── package\.tson
+├── vite.config\.ts
 └── readme.md
 ```
 
-### Backend Architecture (Node.js + Express + MongoDB):
+### Backend Architecture (Node\.ts + Express + MongoDB):
 
 #### **API Endpoints Implemented:**
 - ✅ **GET /api/tasks**: Fetch all tasks with optional filtering
@@ -455,4 +455,5 @@ const TaskSchema = new mongoose.Schema({
 - Deploy to production
 
 ---
+
 

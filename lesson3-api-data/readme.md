@@ -9,7 +9,7 @@ This lesson covers integrating React applications with backend APIs and managing
 After this lesson, you will be able to:
 
 - ✅ Understand REST API concepts and HTTP methods (GET, POST, PUT, DELETE)
-- ✅ Integrate React with Node.js/Express backends and MongoDB
+- ✅ Integrate React with Node\.ts/Express backends and MongoDB
 - ✅ Implement data fetching patterns with fetch API and React Query
 - ✅ Handle loading states, errors, and edge cases professionally
 - ✅ Build complete CRUD operations with optimistic updates
@@ -152,7 +152,7 @@ async function fetchUsers() {
   try {
     const response = await fetch('https://api.example.com/users');
     if (!response.ok) throw new Error('Failed to fetch');
-    const users = await response.json();
+    const users = await response\.tson();
     return users;
   } catch (error) {
     console.error('Error:', error);
@@ -169,7 +169,7 @@ async function createUser(userData) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData),
   });
-  return response.json();
+  return response\.tson();
 }
 ```
 
@@ -257,7 +257,7 @@ class ApiClient {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
     
-    return response.json();
+    return response\.tson();
   }
 
   get(endpoint) {
@@ -424,4 +424,5 @@ After completing this lesson, you'll be able to:
 - 📚 [React Query Docs](https://tanstack.com/query/latest)
 - 🌐 [REST API Tutorial](https://restfulapi.net/)
 - 🔧 [Fetch API MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+
 

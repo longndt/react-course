@@ -112,7 +112,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Setup Node\.ts
         uses: actions/setup-node@v3
         with:
           node-version: "18"
@@ -138,7 +138,7 @@ jobs:
 
 ### 7. Add Performance Optimizations
 
-Update your `vite.config.js`:
+Update your `vite.config\.ts`:
 
 ```typescript
 import { defineConfig } from "vite";
@@ -176,7 +176,7 @@ export default defineConfig({
 
 ### 8. Add Progressive Web App Features
 
-Create `public/manifest.json`:
+Create `public/manifest\.tson`:
 
 ```json
 {
@@ -200,7 +200,7 @@ Create `public/manifest.json`:
 Add to your `index.html`:
 
 ```html
-<link rel="manifest" href="/manifest.json" />
+<link rel="manifest" href="/manifest\.tson" />
 <meta name="theme-color" content="#000000" />
 ```
 
@@ -211,15 +211,15 @@ Add basic analytics with Vercel Analytics:
 ```bash
 npm install @vercel/analytics
 
-# Add to your main.jsx:
+# Add to your main\.tsx:
 ```
 
-Update `src/main.jsx`:
+Update `src/main\.tsx`:
 
 ```typescript
 import ReactDOM from "react-dom/client";
 import { Analytics } from "@vercel/analytics/react";
-import App from "./App.jsx";
+import App from "./App\.tsx";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -284,5 +284,6 @@ Your app should now be live at:
 - **Firebase Hosting**: Google's hosting solution
 - **GitHub Pages**: Free hosting for public repos
 - **AWS S3 + CloudFront**: More control, requires setup
+
 
 

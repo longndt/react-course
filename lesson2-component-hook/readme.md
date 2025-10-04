@@ -126,7 +126,7 @@ function UserProfile({ userId }: UserProfileProps) {
 
   useEffect(() => {
     fetch(`/api/users/${userId}`)
-      .then(res => res.json())
+      .then(res => res\.tson())
       .then(data => setUser(data));
   }, [userId]);
 
@@ -284,7 +284,7 @@ Create a **Personal Dashboard** with:
 
 ## Next Steps
 
-✅ **Completed Lesson 2?** → Move to [Lesson 3: API Integration & Data Management](../lesson3-data/)
+✅ **Completed Lesson 2?** → Move to [Lesson 3: API Integration & Data Management](../lesson3-api-data/)
 
 📚 **Need More Practice?** → Review [theory2.md](./theory/theory2.md) for detailed explanations
 
@@ -400,7 +400,7 @@ function Button({
 
 ### Hook Libraries
 - [react-use](https://github.com/streamich/react-use) - Collection of essential hooks
-- [ahooks](https://ahooks.js.org/) - High-quality & reliable React hooks library
+- [ahooks](https://ahooks\.ts.org/) - High-quality & reliable React hooks library
 - [react-query](https://tanstack.com/query) - Powerful data fetching hooks
 
 ### Communities
@@ -454,7 +454,7 @@ Complete this self-assessment to check your readiness for lesson 3:
 
 ## 🎓 **Ready for Lesson 3?**
 
-If you completed the assessment above and feel comfortable with component architecture, you're ready to move on to [Lesson 3: API Integration & Data Management](../lesson3-data/).
+If you completed the assessment above and feel comfortable with component architecture, you're ready to move on to [Lesson 3: API Integration & Data Management](../lesson3-api-data/).
 
 **Still need practice?** Consider:
 
@@ -485,4 +485,5 @@ Create a mini design system including:
    - Usage examples
    - Props documentation
    - Theme customization guide
+
 

@@ -151,7 +151,7 @@ For API calls in React:
 ```typescript
 // Promise-based API call
 fetch("/api/students")
-  .then((response) => response.json())
+  .then((response) => response\.tson())
   .then((students) => {
     console.log(students);
   })
@@ -163,7 +163,7 @@ fetch("/api/students")
 const fetchStudents = async () => {
   try {
     const response = await fetch("/api/students");
-    const students = await response.json();
+    const students = await response\.tson();
     console.log(students);
   } catch (error) {
     console.error("Error:", error);
@@ -176,7 +176,7 @@ const fetchStudents = async () => {
 How React components are organized:
 
 ```typescript
-// math-utils.js - Export functions
+// math-utils\.ts - Export functions
 export const add = (a, b) => a + b;
 export const multiply = (a, b) => a * b;
 
@@ -188,9 +188,9 @@ const Calculator = {
 
 export default Calculator;
 
-// main.js - Import functions
-import Calculator, { add, multiply } from "./math-utils.js";
-import { add as addition } from "./math-utils.js"; // renamed import
+// main\.ts - Import functions
+import Calculator, { add, multiply } from "./math-utils\.ts";
+import { add as addition } from "./math-utils\.ts"; // renamed import
 ```
 
 ## Practice Exercises
@@ -300,14 +300,14 @@ console.log(doubled); // [2, 4, 6]
 // ❌ Unhandled errors will crash your app
 const fetchData = async () => {
   const response = await fetch("/api/data");
-  return response.json();
+  return response\.tson();
 };
 
 // ✅ Always use try/catch
 const fetchData = async () => {
   try {
     const response = await fetch("/api/data");
-    return response.json();
+    return response\.tson();
   } catch (error) {
     console.error("Failed to fetch data:", error);
     return null; // or throw error
@@ -330,4 +330,5 @@ If you're comfortable with all these concepts, you're ready to start Lesson 1! T
 - [MDN JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
 - [JavaScript.info - Modern JavaScript Tutorial](https://javascript.info/)
 - [ES6 Features Overview](https://github.com/lukehoban/es6features)
+
 

@@ -9,7 +9,7 @@ _For learning objectives and prerequisites, see [../readme.md](../readme.md)_
 ## Pre-Lab Checklist
 
 - [ ] Lab 1 completed successfully
-- [ ] Node.js v18+ and npm installed
+- [ ] Node\.ts v18+ and npm installed
 - [ ] VS Code with React extensions
 - [ ] Basic TypeScript understanding
 - [ ] React hooks knowledge from previous lessons
@@ -104,7 +104,7 @@ export default withLoading;
 2. Create a LoadingSpinner component:
 
 ```tsx
-// src/components/LoadingSpinner/LoadingSpinner.jsx
+// src/components/LoadingSpinner/LoadingSpinner\.tsx
 function LoadingSpinner() {
   return (
     <div className="spinner">
@@ -119,7 +119,7 @@ export default LoadingSpinner;
 3. Apply the HOC:
 
 ```tsx
-// src/components/ProductList/ProductList.jsx
+// src/components/ProductList/ProductList\.tsx
 const ProductListWithLoading = withLoading(ProductList);
 
 function ProductListContainer() {
@@ -146,7 +146,7 @@ function ProductListContainer() {
 1. Create a useForm hook:
 
 ```tsx
-// src/hooks/useForm.js
+// src/hooks/useForm\.ts
 function useForm(initialValues = {}) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
@@ -569,10 +569,10 @@ advanced-components/
 │   ├── App.css
 │   ├── index.css
 │   └── main.tsx
-├── package.json
-├── tsconfig.json
-├── tsconfig.node.json
-├── vite.config.ts
+├── package\.tson
+├── tsconfig\.tson
+├── tsconfig.node\.tson
+├── vite.config.js
 └── readme.md
 ```
 
@@ -650,9 +650,9 @@ import { useTheme } from "../context/ThemeContext";     // ❌ Wrong
 ### Issue 4: Missing Configuration Files
 **Problem**: TypeScript or Vite errors on startup
 **Solution**: Ensure you have all required config files:
-- `vite.config.ts` - Vite configuration with React plugin
-- `tsconfig.json` - TypeScript compiler options
-- `tsconfig.node.json` - TypeScript config for Node environment
+- `vite.config.js` - Vite configuration with React plugin
+- `tsconfig\.tson` - TypeScript compiler options
+- `tsconfig.node\.tson` - TypeScript config for Node environment
 
 ### Issue 5: Dark Mode CSS Not Working
 **Problem**: Custom buttons (btn-primary, btn-secondary) don't change in dark mode
@@ -683,4 +683,5 @@ import { useTheme } from "../context/ThemeContext";     // ❌ Wrong
 - [React Hooks Guide](https://react.dev/reference/react)
 - [Context API Reference](https://react.dev/learn/passing-data-deeply-with-context)
 - [Error Boundaries](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary)
+
 

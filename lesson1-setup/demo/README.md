@@ -19,9 +19,9 @@ Direct React integration in HTML without build tools - perfect for learning and 
 
 ```html
 <!-- Include React, ReactDOM, and Babel via CDN -->
-<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/react@18/umd/react.development\.ts"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development\.ts"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min\.ts"></script>
 ```
 
 ### Running the Demo
@@ -293,7 +293,7 @@ After exploring these demos, you should understand:
 
 #### Vite
 - **Import errors**: Ensure you're using ES module syntax
-- **TypeScript errors**: Check `tsconfig.json` configuration
+- **TypeScript errors**: Check `tsconfig\.tson` configuration
 - **Build failures**: Verify all dependencies are properly installed
 
 ## Additional Resources
@@ -313,4 +313,5 @@ After exploring these demos, you should understand:
 - [React Community](https://react.dev/community) - Official community resources
 - [Vite Awesome](https://github.com/vitejs/awesome-vite) - Curated Vite resources
 - [Create React App Alternatives](https://github.com/facebook/create-react-app#alternatives) - Other setup options
+
 

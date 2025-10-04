@@ -6,7 +6,7 @@ This demo shows how to implement client-side routing and JWT authentication in R
 
 ### Prerequisites
 
-- Node.js (v18+)
+- Node\.ts (v18+)
 - Previous lessons completed
 - VS Code with React extensions
 
@@ -60,4 +60,5 @@ This demo shows how to implement client-side routing and JWT authentication in R
 - `/dashboard` - User dashboard (protected)
 - `/profile` - User profile (protected)
 - `/admin` - Admin panel (admin only)
+
 

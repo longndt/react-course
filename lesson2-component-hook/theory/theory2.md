@@ -170,7 +170,7 @@ function UserList() {
       try {
         setLoading(true);
         const response = await fetch('https://api.example.com/users');
-        const data = await response.json();
+        const data = await response\.tson();
         setUsers(data);
       } catch (err) {
         setError(err.message);
@@ -469,7 +469,7 @@ function useFetch(url) {
         setLoading(true);
         const response = await fetch(url);
         if (!response.ok) throw new Error('Network response was not ok');
-        const json = await response.json();
+        const json = await response\.tson();
         setData(json);
         setError(null);
       } catch (err) {
@@ -737,11 +737,12 @@ function Counter() {
 
 ### Hook Libraries
 - [react-use](https://github.com/streamich/react-use) - Collection of essential hooks
-- [ahooks](https://ahooks.js.org/) - High-quality & reliable React hooks library
+- [ahooks](https://ahooks\.ts.org/) - High-quality & reliable React hooks library
 - [react-query](https://tanstack.com/query) - Powerful data fetching hooks
 
 ### Communities
 - [React Discord](https://discord.gg/react) - Official React community
 - [Reactiflux](https://www.reactiflux.com/) - React developers chat
 - [r/reactjs](https://www.reddit.com/r/reactjs/) - Reddit community
+
 
