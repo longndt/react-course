@@ -8,7 +8,7 @@ In this lesson, you'll master React component patterns, advanced state managemen
 
 After this lesson, you will be able to:
 
-- Design scalable component architectures[text](..)
+- Design scalable component architectures
 - Master advanced state management patterns (useState, useReducer, Context)
 - Create custom hooks for reusable business logic
 - Build complex forms with validation
