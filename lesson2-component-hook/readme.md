@@ -74,156 +74,113 @@ Learn to create custom hooks for:
 
 ---
 
-## Quick Examples
+## Quick Concept Preview
 
 ### Component with Props
 ```tsx
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'danger';
+  variant?: 'primary' | 'secondary';
   onClick: () => void;
 }
 
 function Button({ children, variant = 'primary', onClick }: ButtonProps) {
-  return (
-    <button className={`btn btn-${variant}`} onClick={onClick}>
-      {children}
-    </button>
-  );
+  return <button className={`btn-${variant}`} onClick={onClick}>{children}</button>;
 }
-
-// Usage
-<Button variant="secondary" onClick={() => alert('Clicked!')}>
-  Click Me
-</Button>
 ```
 
-### useState - Managing State
+### Hook Example - useState
 ```tsx
-import { useState } from 'react';
-
 function Counter() {
-  const [count, setCount] = useState<number>(0);
+  const [count, setCount] = useState(0);
   return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
 }
 ```
 
-### useEffect - Side Effects
-```tsx
-import { useState, useEffect } from 'react';
-
-interface User {
-  id: number;
-  name: string;
-}
-
-interface UserProfileProps {
-  userId: number;
-}
-
-function UserProfile({ userId }: UserProfileProps) {
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    fetch(`/api/users/${userId}`)
-      .then(res => res\.tson())
-      .then(data => setUser(data));
-  }, [userId]);
-
-  return <div>{user?.name}</div>;
-}
-```
-
-### Custom Hook - useLocalStorage
-```tsx
-function useLocalStorage(key, initialValue) {
-  const [value, setValue] = useState(() => {
-    const stored = localStorage.getItem(key);
-    return stored ? JSON.parse(stored) : initialValue;
-  });
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
-
-  return [value, setValue];
-}
-
-// Usage
-function App() {
-  const [theme, setTheme] = useLocalStorage('theme', 'light');
-  return <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-    Toggle Theme
-  </button>;
-}
-```
+> 💡 **Want more examples?** Check [quickstart.md](./quickstart.md) for ready-to-use code and [theory2.md](./theory/theory2.md) for detailed explanations.
 
 ---
 
-## Common Pitfalls to Avoid
+## Key Concepts Summary
 
-**Components:**
-⚠️ **Don't:**
-- Modify props (they're read-only)
-- Forget to use `key` prop in lists
-- Create too many levels of nesting
+### Components Best Practices
 
-✅ **Do:**
-- Keep components small and focused
-- Use meaningful prop names
+✅ **DO:**
+- Keep components small and focused (single responsibility)
+- Use TypeScript interfaces for props
 - Extract reusable logic into custom hooks
+- Use meaningful component and prop names
 
-**Hooks:**
-⚠️ **Don't:**
+⚠️ **DON'T:**
+- Modify props (they're read-only)
+- Forget `key` prop in lists
+- Create too many nesting levels (>5)
+- Mix too much business logic with UI
+
+### Hooks Best Practices
+
+✅ **DO:**
+- Call hooks at the top level of components
+- Include all dependencies in useEffect arrays
+- Use functional updates for state: `setState(prev => prev + 1)`
+- Clean up side effects (intervals, subscriptions)
+
+⚠️ **DON'T:**
 - Call hooks inside loops, conditions, or nested functions
-- Mutate state directly (`state.value = 1`)
+- Mutate state directly: `state.value = 1` ❌
 - Forget dependency arrays in useEffect
 - Create infinite loops with useEffect
 
-✅ **Do:**
-- Call hooks at the top level of components
-- Use functional updates for state (`setState(prev => prev + 1)`)
-- Include all dependencies in useEffect arrays
-- Clean up side effects (intervals, subscriptions)
+> 📚 **Detailed explanations** → See [theory2.md](./theory/theory2.md)
 
 ---
 
-## Lab Exercises
+## Practice Exercises
 
-### Exercise 1: Component Library
-Build reusable components:
-- Button (multiple variants)
-- Input (with validation)
-- Card (with header/footer)
-- Alert (success/warning/error)
+### Level 1: Component Library
+Build reusable UI components:
+- Button (variants: primary, secondary, danger)
+- Input (with validation feedback)
+- Card (with header/footer slots)
+- Alert (types: success, warning, error)
 
-### Exercise 2: Custom Hooks
-Create custom hooks:
+### Level 2: Custom Hooks
+Create reusable logic hooks:
 - `useForm` - Form state management
-- `useFetch` - API data fetching
+- `useFetch` - API data fetching with loading/error states
 - `useToggle` - Boolean state toggling
+- `useLocalStorage` - Persist state to localStorage
 
-### Exercise 3: Todo App
-Build a complete todo application using:
-- useState for state management
-- useEffect for localStorage persistence
+### Level 3: Complete Application
+Build a **Todo App** featuring:
+- Component composition
+- State management with useState
+- Persistence with useEffect + localStorage
 - Custom hooks for reusable logic
 
+> 🔬 **Start practicing** → Go to [lab2.md](./lab/lab2.md)
+
 ---
 
-## Resources
+## Learning Resources
 
 ### Official Documentation
-- [React Hooks Reference](https://react.dev/reference/react) - Official docs
+- [React Hooks Reference](https://react.dev/reference/react) - Official API docs
 - [Rules of Hooks](https://react.dev/warnings/invalid-hook-call-warning) - Important rules
-- [Hooks FAQ](https://react.dev/learn#using-hooks) - Common questions
+- [React Dev Tools](https://react.dev/learn/react-developer-tools) - Debugging tools
 
-### Learning Resources
+### Custom Hook Libraries
 - [useHooks.com](https://usehooks.com/) - Custom hook recipes
-- [React Hooks Cheatsheet](https://react-hooks-cheatsheet.com/) - Quick reference
+- [react-use](https://github.com/streamich/react-use) - Essential hooks collection
+- [ahooks](https://ahooks.js.org/) - High-quality hooks library
+
+### Video Tutorials
+- [React Hooks Crash Course](https://www.youtube.com/watch?v=TNhaISOUy6Q) - Traversy Media
+- [React Hooks Full Course](https://www.youtube.com/watch?v=f687hBjwFcM) - Codevolution
 
 ### Communities
 - [React Discord](https://discord.gg/react) - Official community
+- [Reactiflux](https://www.reactiflux.com/) - React developers chat
 - [r/reactjs](https://www.reddit.com/r/reactjs/) - Reddit community
 
 ---
@@ -232,258 +189,74 @@ Build a complete todo application using:
 
 Before moving to Lesson 3, ensure you can:
 
-**Components (Must Know):**
-- [ ] Create reusable components with props
-- [ ] Use component composition
-- [ ] Pass functions as props
-- [ ] Handle events properly
-- [ ] Use `key` prop in lists
+### Components (Must Know)
+- [ ] Create reusable components with TypeScript props
+- [ ] Use component composition and children prop
+- [ ] Pass functions as props for event handling
+- [ ] Understand when to break UI into smaller components
 
-**Hooks (Must Know):**
-- [ ] Use useState for component state
-- [ ] Use useEffect for side effects
-- [ ] Understand dependency arrays
-- [ ] Create custom hooks
+### Hooks (Must Know)
+- [ ] Use useState for component state management
+- [ ] Use useEffect for side effects (API calls, timers)
+- [ ] Understand dependency arrays and cleanup functions
 - [ ] Avoid infinite re-render loops
 
-**Advanced (Good to Know):**
-- [ ] Use useReducer for complex state
-- [ ] Use useContext for global state
-- [ ] Optimize with useMemo/useCallback
-- [ ] Implement compound components
+### Custom Hooks (Should Know)
+- [ ] Create custom hooks to extract reusable logic
+- [ ] Use custom hooks across multiple components
+- [ ] Follow hooks naming convention (use*)
 
-**🎯 Target: Check at least 9/14 items before Lesson 3**
+### Advanced (Good to Know)
+- [ ] Use useReducer for complex state logic
+- [ ] Use useContext for sharing state
+- [ ] Optimize with React.memo and useMemo
+- [ ] Debug components with React DevTools
+
+**🎯 Goal: Check at least 10/14 items before Lesson 3**
 
 ---
 
 ## Homework Assignment
 
-Create a **Personal Dashboard** with:
+**Project: Personal Dashboard Application**
 
-1. **Component Library**
-   - Reusable Button, Input, Card components
-   - Multiple variants and sizes
+**Requirements:**
+1. **Component Library** (reusable UI components)
+   - Button (3+ variants, 3+ sizes)
+   - Input/TextArea with validation
+   - Card with customizable header/footer
+   - Alert/Notification component
 
-2. **Custom Hooks**
-   - `useLocalStorage` for persistence
-   - `useFetch` for API calls
-   - `useTheme` for dark/light mode
+2. **Custom Hooks** (extract reusable logic)
+   - `useLocalStorage` - Persist data
+   - `useTheme` - Dark/light mode toggle
+   - `useFetch` - API data fetching
 
-3. **Features**
-   - Theme switcher (light/dark)
-   - Todo list with persistence
+3. **Features** (apply what you learned)
+   - Theme switcher (persisted to localStorage)
+   - Todo list with CRUD operations
    - Weather widget (API integration)
    - User profile card
 
 **Deliverables:**
-- Source code on GitHub
-- Live demo (deploy to Netlify/Vercel)
-- README with setup instructions
+- Source code on GitHub repository
+- Live demo deployed (Netlify/Vercel)
+- README with setup instructions and screenshots
 
 ---
 
 ## Next Steps
 
-✅ **Completed Lesson 2?** → Move to [Lesson 3: API Integration & Data Management](../lesson3-api-data/)
+✅ **Completed this lesson?** → Proceed to [Lesson 3: API Integration & Data Management](../lesson3-api-data/)
 
-📚 **Need More Practice?** → Review [theory2.md](./theory/theory2.md) for detailed explanations
+📚 **Need detailed explanations?** → Study [theory2.md](./theory/theory2.md)
 
-💻 **Want Examples?** → Check [demo/](./demo/) folder for working code
+💻 **Want code examples?** → Check [quickstart.md](./quickstart.md) and [demo/](./demo/)
 
-🔬 **Ready to Code?** → Start [lab2.md](./lab/lab2.md) exercises
-
-**Migration Example:**
-
-```tsx
-// Class Component
-class Counter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { count: 0 };
-  }
-
-  componentDidMount() {
-    document.title = `Count: ${this.state.count}`;
-  }
-
-  componentDidUpdate() {
-    document.title = `Count: ${this.state.count}`;
-  }
-
-  render() {
-    return (
-      <div>
-        <p>{this.state.count}</p>
-        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
-          Increment
-        </button>
-      </div>
-    );
-  }
-}
-
-// Function Component with Hooks (Much simpler!)
-function Counter() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    document.title = `Count: ${count}`;
-  }, [count]);
-
-  return (
-    <div>
-      <p>{count}</p>
-      <button onClick={() => setCount(count + 1)}>
-        Increment
-      </button>
-    </div>
-  );
-}
-```
+🔬 **Ready to practice?** → Start [lab2.md](./lab/lab2.md) exercises
 
 ---
 
-## Building Reusable Components
-
-### Component Library Best Practices
-
-1. **Keep components small and focused**
-2. **Use TypeScript for type safety**
-3. **Provide sensible defaults**
-4. **Make components composable**
-5. **Document usage examples**
-
-### Example: Button Component
-
-```tsx
-function Button({
-  children,
-  variant = "primary",
-  size = "md",
-  disabled = false,
-  onClick
-}) {
-  return (
-    <button
-      className={`button button-${variant} button-${size}`}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      {children}
-    </button>
-  );
-}
-
-// Usage
-<Button variant="secondary" size="lg" onClick={() => alert("Clicked!")}>
-  Click Me
-</Button>
-```
-
----
-
-## Additional Resources 📚
-
-### Official Documentation
-- [React Hooks Documentation](https://react.dev/reference/react) - Official React Hooks reference
-- [Rules of Hooks](https://react.dev/warnings/invalid-hook-call-warning) - Understanding Hook rules
-- [Hooks FAQ](https://react.dev/learn#using-hooks) - Common questions answered
-
-### Video Tutorials
-- [React Hooks Crash Course](https://www.youtube.com/watch?v=TNhaISOUy6Q) - Traversy Media
-- [React Hooks Tutorial](https://www.youtube.com/watch?v=f687hBjwFcM) - Codevolution
-
-### Interactive Learning
-- [React Hooks Playground](https://codesandbox.io/s/react-hooks-playground) - Try hooks in the browser
-- [useHooks.com](https://usehooks.com/) - Collection of custom hook recipes
-- [React Hooks Cheatsheet](https://react-hooks-cheatsheet.com/) - Quick reference
-
-### Hook Libraries
-- [react-use](https://github.com/streamich/react-use) - Collection of essential hooks
-- [ahooks](https://ahooks\.ts.org/) - High-quality & reliable React hooks library
-- [react-query](https://tanstack.com/query) - Powerful data fetching hooks
-
-### Communities
-- [React Discord](https://discord.gg/react) - Official React community
-- [Reactiflux](https://www.reactiflux.com/) - React developers chat
-- [r/reactjs](https://www.reddit.com/r/reactjs/) - Reddit community
-
----
-
-## 📊 **Final Knowledge Assessment**
-
-Complete this self-assessment to check your readiness for lesson 3:
-
-### **Component Architecture (Must Know)**
-
-- [ ] I can create reusable components with props
-- [ ] I understand when to break UI into smaller components
-- [ ] I can pass functions as props for event handling
-- [ ] I know how to use children prop for composition
-
-### **State Management (Must Know)**
-
-- [ ] I can use useState for component state
-- [ ] I understand when and why to use useEffect
-- [ ] I know how to prevent infinite re-render loops
-- [ ] I can manage form state effectively
-
-### **Advanced Patterns (Good to Know)**
-
-- [ ] I can create and use custom hooks
-- [ ] I understand React Context for sharing state
-- [ ] I know how to optimize components with React.memo
-- [ ] I can implement compound component patterns
-
-### **Practical Skills (Must Demonstrate)**
-
-- [ ] I built a component library with multiple variants
-- [ ] I created custom hooks for reusable logic
-- [ ] I implemented form handling with validation
-- [ ] I can debug React applications using dev tools
-
-**🎯 Goal: Check at least 12/16 items before moving to Lesson 3**
-
-### **Self-Reflection Questions**
-
-1. Which component pattern felt most natural to you?
-2. What's the biggest difference between props and state?
-3. How would you design components for a large application?
-
----
-
-## 🎓 **Ready for Lesson 3?**
-
-If you completed the assessment above and feel comfortable with component architecture, you're ready to move on to [Lesson 3: API Integration & Data Management](../lesson3-api-data/).
-
-**Still need practice?** Consider:
-
-- Building more complex component hierarchies
-- Experimenting with different state management approaches
-- Creating your own custom hooks
-- Reviewing the patterns that felt challenging
-
-## Homework
-
-Create a mini design system including:
-
-1. Component library
-
-   - Typography components
-   - Layout components
-   - Form components
-   - Interactive components
-
-2. Theme system
-
-   - Light/dark modes
-   - Color variables
-   - Spacing system
-   - Typography scale
-
-3. Documentation
-   - Usage examples
-   - Props documentation
-   - Theme customization guide
+**Good luck with your component building journey! 🚀**
 
 
