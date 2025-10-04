@@ -28,7 +28,7 @@ const PORT = 5000;
 
 // Middleware
 app.use(cors());
-app.use(express\.tson());
+app.use(express.json());
 
 // Mock data (we'll use MongoDB later)
 let tasks = [
@@ -39,7 +39,7 @@ let tasks = [
 
 // Routes
 app.get("/api/tasks", (req, res) => {
-  res\.tson(tasks);
+  res.json(tasks);
 });
 
 app.post("/api/tasks", (req, res) => {
@@ -49,7 +49,7 @@ app.post("/api/tasks", (req, res) => {
     completed: false,
   };
   tasks.push(newTask);
-  res\.tson(newTask);
+  res.json(newTask);
 });
 
 app.put("/api/tasks/:id", (req, res) => {
@@ -57,16 +57,16 @@ app.put("/api/tasks/:id", (req, res) => {
   const task = tasks.find((t) => t.id === id);
   if (task) {
     task.completed = req.body.completed;
-    res\.tson(task);
+    res.json(task);
   } else {
-    res.status(404)\.tson({ error: "Task not found" });
+    res.status(404).json({ error: "Task not found" });
   }
 });
 
 app.delete("/api/tasks/:id", (req, res) => {
   const id = parseInt(req.params.id);
   tasks = tasks.filter((t) => t.id !== id);
-  res\.tson({ message: "Task deleted" });
+  res.json({ message: "Task deleted" });
 });
 
 app.listen(PORT, () => {

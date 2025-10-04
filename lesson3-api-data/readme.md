@@ -152,7 +152,7 @@ async function fetchUsers() {
   try {
     const response = await fetch('https://api.example.com/users');
     if (!response.ok) throw new Error('Failed to fetch');
-    const users = await response\.tson();
+    const users = await response.json();
     return users;
   } catch (error) {
     console.error('Error:', error);
@@ -169,7 +169,7 @@ async function createUser(userData) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData),
   });
-  return response\.tson();
+  return response.json();
 }
 ```
 
@@ -252,12 +252,12 @@ class ApiClient {
       headers: { 'Content-Type': 'application/json' },
       ...options,
     });
-    
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
-    
-    return response\.tson();
+
+    return response.json();
   }
 
   get(endpoint) {

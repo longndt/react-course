@@ -216,35 +216,6 @@ Before moving to Lesson 3, ensure you can:
 
 ---
 
-## Homework Assignment
-
-**Project: Personal Dashboard Application**
-
-**Requirements:**
-1. **Component Library** (reusable UI components)
-   - Button (3+ variants, 3+ sizes)
-   - Input/TextArea with validation
-   - Card with customizable header/footer
-   - Alert/Notification component
-
-2. **Custom Hooks** (extract reusable logic)
-   - `useLocalStorage` - Persist data
-   - `useTheme` - Dark/light mode toggle
-   - `useFetch` - API data fetching
-
-3. **Features** (apply what you learned)
-   - Theme switcher (persisted to localStorage)
-   - Todo list with CRUD operations
-   - Weather widget (API integration)
-   - User profile card
-
-**Deliverables:**
-- Source code on GitHub repository
-- Live demo deployed (Netlify/Vercel)
-- README with setup instructions and screenshots
-
----
-
 ## Next Steps
 
 ✅ **Completed this lesson?** → Proceed to [Lesson 3: API Integration & Data Management](../lesson3-api-data/)

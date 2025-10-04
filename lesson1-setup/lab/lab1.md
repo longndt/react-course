@@ -51,8 +51,8 @@ student-dashboard/
 │   ├── main.tsx         # Application entry point
 │   ├── index.css        # Global styles
 ├── public/              # Static assets
-├── package\.tson         # Project configuration
-├── tsconfig\.tson        # TypeScript configuration
+├── package.json         # Project configuration
+├── tsconfig.json        # TypeScript configuration
 └── vite.config.js       # Vite build configuration
 ```
 
@@ -60,7 +60,7 @@ student-dashboard/
 
 **📚 Learning Note:** TypeScript configuration can seem complex, but these settings enable better development experience with stricter type checking and path aliases.
 
-Update your `tsconfig\.tson` for better development experience:
+Update your `tsconfig.json` for better development experience:
 
 ```json
 {
@@ -86,11 +86,11 @@ Update your `tsconfig\.tson` for better development experience:
     }
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node\.tson" }]
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
 ```
 
-**Important:** If you encounter TypeScript errors about project references, update your `tsconfig.node\.tson` to enable proper project composition:
+**Important:** If you encounter TypeScript errors about project references, update your `tsconfig.node.json` to enable proper project composition:
 
 ```json
 {
@@ -1185,9 +1185,9 @@ student-dashboard/
 │   ├── App.css
 │   ├── index.css
 │   └── main.tsx
-├── package\.tson
-├── tsconfig\.tson
-├── tsconfig.node\.tson
+├── package.json
+├── tsconfig.json
+├── tsconfig.node.json
 ├── vite.config.js
 └── readme.md
 ```
@@ -1228,8 +1228,8 @@ In the next lesson, you'll learn how to:
 **TypeScript Configuration Issues:**
 
 - If you see errors like "Referenced project must have setting 'composite': true":
-  - Add `"composite": true` to your `tsconfig.node\.tson` compilerOptions
-  - Change `"noEmit": true` to `"noEmit": false` in `tsconfig.node\.tson`
+  - Add `"composite": true` to your `tsconfig.node.json` compilerOptions
+  - Change `"noEmit": true` to `"noEmit": false` in `tsconfig.node.json`
 - These errors occur when using project references in TypeScript configurations
 - The fix ensures proper project composition and allows referenced projects to emit files when needed
 

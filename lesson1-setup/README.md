@@ -2,7 +2,11 @@
 
 ## Overview
 
-This lesson introduces React fundamentals with modern development practices. You'll set up a professional development environment, understand React's core concepts, and build components with TypeScript from day one.
+This lesson introduces React fundamentals with modern development practices. You'll set up a professional development environment, understand React's core concepts, and build components with TypeScript fr🔬 **Ready for practice?** → Begin [lab1.md](./lab/lab1.md) exercises
+
+---
+
+**Welcome to React development! 🚀 Let's build amazing user interfaces together!**one.
 
 ## Learning Objectives
 
@@ -156,9 +160,9 @@ git --version     # Any version
 
 ### TypeScript Benefits
 
-✅ **Type Safety:** Catch errors before runtime  
-✅ **Better Autocomplete:** IDE helps you write code  
-✅ **Self-Documentation:** Interfaces describe component contracts  
+✅ **Type Safety:** Catch errors before runtime
+✅ **Better Autocomplete:** IDE helps you write code
+✅ **Self-Documentation:** Interfaces describe component contracts
 ✅ **Refactoring Confidence:** Change code safely
 
 ---
@@ -191,19 +195,19 @@ Create a personal portfolio page with:
 ## Common Pitfalls to Avoid
 
 ### Component Naming
-❌ `function button()` - lowercase  
+❌ `function button()` - lowercase
 ✅ `function Button()` - uppercase (PascalCase)
 
 ### JSX Attributes
-❌ `<div class="container">` - HTML attribute  
+❌ `<div class="container">` - HTML attribute
 ✅ `<div className="container">` - JSX attribute
 
 ### Self-Closing Tags
-❌ `<img src="photo.jpg">` - not closed  
+❌ `<img src="photo.jpg">` - not closed
 ✅ `<img src="photo.jpg" />` - properly closed
 
 ### Return Statement
-❌ Multi-line JSX without parentheses  
+❌ Multi-line JSX without parentheses
 ✅ Wrap multi-line JSX in parentheses
 
 ---
@@ -259,36 +263,6 @@ Before moving to Lesson 2, ensure you can:
 - [ ] Debugged basic React errors
 
 **🎯 Goal: Check at least 10/12 items before Lesson 2**
-
----
-
-## Homework Assignment
-
-**Project: Personal Portfolio Website**
-
-**Requirements:**
-1. Create a new React project
-2. Build at least 5 components:
-   - Header with navigation
-   - Hero section with intro
-   - Skills list component
-   - Project showcase cards
-   - Contact section/footer
-
-3. Apply CSS styling:
-   - Use external CSS file
-   - Responsive design (mobile-friendly)
-   - Consistent color scheme
-
-**Bonus:**
-- Add smooth animations
-- Include social media links
-- Deploy to Netlify or Vercel
-
-**Deliverables:**
-- Source code on GitHub
-- Screenshot of running application
-- Brief README with setup instructions
 
 ---
 

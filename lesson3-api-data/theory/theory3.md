@@ -37,9 +37,9 @@ app.get("/api/students", async (req, res) => {
     const students = await Student.find();
 
     // 2. Send JSON response to React
-    res\.tson(students);
+    res.json(students);
   } catch (error) {
-    res.status(500)\.tson({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 });
 ```
@@ -54,7 +54,7 @@ function StudentsList() {
   useEffect(() => {
     // 1. Send HTTP request to your Node\.ts backend
     const response = await fetch('http://localhost:5000/api/students');
-    const data = await response\.tson();
+    const data = await response.json();
 
     // 2. Update React state with database data
     setStudents(data);
@@ -85,14 +85,14 @@ const router = express.Router();
 // GET /api/students - List all students
 router.get("/", async (req, res) => {
   const students = await Student.find();
-  res\.tson(students);
+  res.json(students);
 });
 
 // POST /api/students - Create student
 router.post("/", async (req, res) => {
   const student = new Student(req.body);
   await student.save();
-  res\.tson(student);
+  res.json(student);
 });
 ```
 
@@ -106,7 +106,7 @@ function useStudents() {
   const fetchStudents = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/students");
-      const data = await response\.tson();
+      const data = await response.json();
       setStudents(data);
     } catch (error) {
       console.error("Error fetching students:", error);
@@ -122,7 +122,7 @@ function useStudents() {
         },
         body: JSON.stringify(studentData),
       });
-      const newStudent = await response\.tson();
+      const newStudent = await response.json();
       setStudents((prev) => [...prev, newStudent]);
     } catch (error) {
       console.error("Error adding student:", error);
@@ -179,7 +179,7 @@ function StudentsList() {
     queryFn: async () => {
       const response = await fetch("http://localhost:5000/api/students");
       if (!response.ok) throw new Error("Failed to fetch students");
-      return response\.tson();
+      return response.json();
     },
   });
 
@@ -191,7 +191,7 @@ function StudentsList() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(studentData),
       });
-      return response\.tson();
+      return response.json();
     },
     onSuccess: () => {
       // Automatically refetch students list
@@ -242,7 +242,7 @@ function StudentSearch() {
       const response = await fetch(
         `http://localhost:5000/api/students?${params}`
       );
-      return response\.tson();
+      return response.json();
     },
     enabled: searchTerm.length >= 2 || major !== "", // Only search when criteria met
   });
@@ -294,7 +294,7 @@ function EditStudent({ studentId }: EditStudentProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      return response\.tson();
+      return response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["students"] });
@@ -343,7 +343,7 @@ function DeleteStudent({ student }: DeleteStudentProps) {
         method: "DELETE",
       });
       if (!response.ok) throw new Error("Failed to delete student");
-      return response\.tson();
+      return response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["students"] });

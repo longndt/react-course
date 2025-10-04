@@ -128,7 +128,7 @@ class ApiClient {
       ...options,
     });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return response\.tson();
+    return response.json();
   }
 
   async get(endpoint: string) {
@@ -282,7 +282,7 @@ const MemoizedList = memo(({ items }: { items: Item[] }) => {
 
 ### ❌ Deployment Problems
 - **Environment confusion**: Use proper env variables
-- **Missing dependencies**: Lock versions in package\.tson
+- **Missing dependencies**: Lock versions in package.json
 - **No rollback plan**: Always have a way to revert
 - **Insufficient monitoring**: Know when things break
 

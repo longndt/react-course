@@ -461,7 +461,7 @@ After completing all exercises in this lab, your project structure should look l
 ```
 lab4-routing-auth/
 ├── index.html
-├── package\.tson
+├── package.json
 ├── readme.md
 ├── vite.config\.ts
 ├── src/

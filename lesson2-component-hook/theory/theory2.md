@@ -1021,7 +1021,7 @@ function useFetch(url) {
         setLoading(true);
         const response = await fetch(url);
         if (!response.ok) throw new Error('Network response was not ok');
-        const json = await response\.tson();
+        const json = await response.json();
         setData(json);
         setError(null);
       } catch (err) {
