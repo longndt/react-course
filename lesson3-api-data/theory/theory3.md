@@ -2,6 +2,23 @@
 
 ---
 
+## 📚 Table of Contents
+
+1. [Why API Integration Matters?](#why-api-integration-matters-)
+2. [Understanding REST APIs with Node.js/MongoDB](#understanding-rest-apis-with-nodejsmongodb-)
+3. [Mapping Node.js Endpoints to React Functions](#mapping-nodejs-endpoints-to-react-functions)
+4. [HTTP Methods & CRUD Operations](#http-methods--crud-operations)
+5. [Data Fetching Patterns](#data-fetching-patterns)
+6. [React Query (TanStack Query)](#react-query-tanstack-query)
+7. [Error Handling](#error-handling)
+8. [Loading States](#loading-states)
+9. [Caching & Optimization](#caching--optimization)
+10. [Authentication with APIs](#authentication-with-apis)
+11. [Best Practices](#best-practices)
+12. [Common Pitfalls](#common-pitfalls)
+
+---
+
 ## Why API Integration Matters? 🤔
 
 **Modern Full-Stack Architecture:**

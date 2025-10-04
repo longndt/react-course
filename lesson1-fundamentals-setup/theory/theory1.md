@@ -4,6 +4,24 @@
 
 ---
 
+## 📚 Table of Contents
+
+1. [What is React?](#what-is-react-)
+2. [React vs Traditional Web Development](#react-vs-traditional-web-development)
+3. [TypeScript with React (TSX)](#typescript-with-react-tsx)
+4. [Setting Up React Projects](#setting-up-react-projects)
+5. [React Project Structure](#react-project-structure)
+6. [Creating Your First Component](#creating-your-first-component)
+7. [JSX/TSX Syntax Rules](#jsxtsx-syntax-rules)
+8. [Styling React Components](#styling-react-components)
+9. [Component Best Practices](#component-best-practices)
+10. [Common Beginner Mistakes](#common-beginner-mistakes)
+11. [Development Workflow](#development-workflow)
+12. [Debugging React Applications](#debugging-react-applications)
+13. [Next Steps](#next-steps)
+
+---
+
 ## What is React? 🎯
 
 **React** is a JavaScript library for building user interfaces, created and maintained by Meta (Facebook).

@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, DependencyList } from "react";
 
 interface UseFetchOptions {
   headers?: HeadersInit;
-  dependencies?: any[];
+  dependencies?: DependencyList;
 }
 
 interface UseFetchResult<T> {

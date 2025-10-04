@@ -78,7 +78,7 @@ Each lesson follows a standardized structure designed for effective learning:
 
 ```
 lessonX-topic/
-├── 📖 reference/          # Quick reference guidep
+├── 📖 reference/          # Quick reference codes
 ├── 💻 examples/           # Working code examples
 ├── 📚 theory/             # Comprehensive documentation
 ├── 🔬 lab/                # Hands-on exercises
@@ -92,7 +92,7 @@ lessonX-topic/
 
 ---
 
-## 🎯 How to Study Effectively ?
+## 🎯 How to Study This Course Effectively ?
 
 ### **Step 1: Start with Reference Guide**
 
@@ -166,13 +166,17 @@ lessonX-topic/
 
 **📋 First, ensure you have all required software installed:**
 
-👉 **[Go to Environment Setup Guide](./extras/environment-setup.md)**
+👉 **[Go to Environment Setup Guide](./setup/environment-setup.md)** for detail setup instructions
 
 Make sure you have installed:
 - Node.js (version 18 or higher)
 - Visual Studio Code
 - Git
 - Required VS Code extensions
+
+**⚠️ Having installation or setup issues?**
+
+👉 **[Check Troubleshooting Guide](./extras/troubleshooting-guide.md)** for common problems and solutions
 
 ### Step 2: Install Markdown Reading Support Extension
 
@@ -202,17 +206,18 @@ cd react-course
 - Master types, interfaces, and generics used in React
 
 #### 2️⃣ **Learn Lessons 1-5** (In sequence)
-- 👉 **[Lesson 1: React Fundamentals & TypeScript Setup](./lesson1-fundamentals-setup/readme.md)**
+- 👉 **[Lesson 1: React Fundamentals & Project Setup](./lesson1-fundamentals-setup/readme.md)**
 - 👉 **[Lesson 2: Component Architecture & React Hook](./lesson2-component-hook/readme.md)**
 - 👉 **[Lesson 3: API Integration & Data Management](./lesson3-api-data/readme.md)**
 - 👉 **[Lesson 4: Routing & Authentication ](./lesson4-routing-auth/readme.md)**
 - 👉 **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack-deployment/readme.md)**
 
 #### 3️⃣ **Continue with Advanced Materials** (After completing all lessons)
-- **[State Management Guide](./extras/state-management-guide.md)** - Advanced state management
-- **[Testing Guide](./extras/testing-guide.md)** - Testing strategies
-- **[Modern React Stack 2025](./extras/modern-stack-2025.md)** - Latest technologies
+- **[State Management](./extras/state-management-guide.md)** - Advanced state management
+- **[Modern React Stack](./extras/modern-stack-2025.md)** - Latest technologies
 - **[Advanced React Patterns](./extras/advanced-patterns.md)** - Enterprise-level patterns
+- **[Testing Guide](./extras/testing-guide.md)** - Testing best practices
+- **[Troubleshooting Guide](./extras/troubleshooting-guide.md)** - Common issues and solutions
 
 ### Step 5: Start Learning
 
@@ -230,5 +235,6 @@ cd lesson1-fundamentals-setup
 - **Read the readme.md** of each lesson carefully before starting
 - **Complete all labs** to solidify your understanding
 - **Follow the "examples" folder** to see complete examples
+- **Stuck on an error?** Check the **[Troubleshooting Guide](./extras/troubleshooting-guide.md)** for quick solutions
 
 ---

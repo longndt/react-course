@@ -1,0 +1,26 @@
+/* Exercise 3 Solution - Welcome Component CSS */
+
+.welcome {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.welcome h2 {
+  margin: 0 0 1rem 0;
+  font-size: 2rem;
+}
+
+.welcome p {
+  margin: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.welcome .small-text {
+  font-size: 0.875rem;
+  margin-top: 1.5rem;
+  opacity: 0.7;
+}

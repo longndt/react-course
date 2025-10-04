@@ -2,6 +2,25 @@
 
 ---
 
+## 📚 Table of Contents
+
+1. [Core Concepts](#1-core-concepts)
+2. [Function Components](#2-function-components)
+3. [React Hooks Overview](#3-react-hooks-overview)
+4. [useState Hook](#4-usestate-hook)
+5. [useEffect Hook](#5-useeffect-hook)
+6. [useRef Hook](#6-useref-hook)
+7. [useContext Hook](#7-usecontext-hook)
+8. [useReducer Hook](#8-usereducer-hook)
+9. [Custom Hooks](#9-custom-hooks)
+10. [Advanced Patterns](#10-advanced-patterns)
+11. [Performance Optimization](#11-performance-optimization)
+12. [Hook Rules & Best Practices](#12-hook-rules--best-practices)
+13. [Common Mistakes](#13-common-mistakes)
+14. [Debugging Hooks](#14-debugging-hooks)
+
+---
+
 ## 1. Core Concepts
 
 ### Why Component Architecture?

@@ -2,6 +2,26 @@
 
 ---
 
+## 📚 Table of Contents
+
+1. [Core Concepts](#1-core-concepts)
+2. [React Router Fundamentals](#2-react-router-fundamentals)
+3. [Navigation Components](#3-navigation-components)
+4. [Route Parameters & Query Strings](#4-route-parameters--query-strings)
+5. [Nested Routes & Layouts](#5-nested-routes--layouts)
+6. [Protected Routes](#6-protected-routes)
+7. [Authentication Fundamentals](#7-authentication-fundamentals)
+8. [JWT Authentication](#8-jwt-authentication)
+9. [Auth Context & State Management](#9-auth-context--state-management)
+10. [Login & Registration Flow](#10-login--registration-flow)
+11. [Role-Based Access Control (RBAC)](#11-role-based-access-control-rbac)
+12. [Session Management](#12-session-management)
+13. [Security Best Practices](#13-security-best-practices)
+14. [Common Authentication Patterns](#14-common-authentication-patterns)
+15. [Debugging Auth Issues](#15-debugging-auth-issues)
+
+---
+
 ## 1. Core Concepts
 
 ### Why Client-Side Routing?

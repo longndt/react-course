@@ -1,4 +1,4 @@
-# Modern React Development Stack 2025
+# Modern React Stack
 
 ## Core Technologies
 
