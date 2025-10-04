@@ -1,12 +1,12 @@
 # Lab 3 - API Integration & Data Management
 
-## 📖 Overview
+## � Overview
 
 Welcome to Lab 3! In this hands-on lab, you'll build a complete full-stack Task Manager application by connecting a React frontend to a Node.js/Express/MongoDB backend. You'll master essential API integration patterns using **React Query** for efficient data fetching, caching, and state management.
 
 **What You'll Build:**
 - RESTful API with Node.js and Express
-- MongoDB database with Mongoose ODM  
+- MongoDB database with Mongoose ODM
 - React frontend with React Query (TanStack Query)
 - Complete CRUD operations (Create, Read, Update, Delete)
 - Real-time data synchronization
@@ -103,7 +103,7 @@ npm install express mongoose cors
 npm install --save-dev typescript @types/express @types/node ts-node nodemon
 ```
 
-_For detailed setup instructions, see [Complete Environment Setup Guide](../../extras/environment-setup.md)_
+_For detailed setup instructions, see [Complete Environment Setup Guide](../../extra/environment-setup.md)_
 
 ---
 
@@ -376,7 +376,7 @@ npm run dev
    - URL: `http://localhost:5000/api/tasks`
    - Expected: `[]` (empty array initially)
 
-2. **POST /api/tasks** 
+2. **POST /api/tasks**
    - Method: POST
    - URL: `http://localhost:5000/api/tasks`
    - Body (JSON):
@@ -435,7 +435,7 @@ db.tasks.find().pretty()
 
 **Key Concepts:**
 - **Query**: Read operation (GET) - uses `useQuery`
-- **Mutation**: Write operation (POST, PUT, DELETE) - uses `useMutation`  
+- **Mutation**: Write operation (POST, PUT, DELETE) - uses `useMutation`
 - **Query Key**: Unique identifier for cached data
 - **Query Client**: Manages all queries and cache
 
@@ -519,7 +519,7 @@ Create `frontend/src/components/TaskManager.tsx`
   - Query function: `taskApi.getTasks`
 - Destructure: `data`, `isLoading`, `error`
 - Display loading state
-- Display error state  
+- Display error state
 - Map through tasks and display them
 
 **💡 Hints:**
@@ -536,7 +536,7 @@ function TaskManager() {
 
   // TODO: Handle loading state
   if (isLoading) return <div>Loading tasks...</div>;
-  
+
   // TODO: Handle error state
   if (error) return <div>Error: {error.message}</div>;
 
@@ -621,7 +621,7 @@ function TaskManager() {
   return (
     <div className="task-manager">
       <h2>My Tasks</h2>
-      
+
       {/* TODO: Add task form */}
       <form onSubmit={handleSubmit}>
         <input
@@ -872,7 +872,7 @@ Create `frontend/src/components/TaskManager.css`:
 ```tsx
 const [priorityFilter, setPriorityFilter] = useState<string>('all');
 
-const filteredTasks = tasks?.filter(task => 
+const filteredTasks = tasks?.filter(task =>
   priorityFilter === 'all' || task.priority === priorityFilter
 );
 ```
@@ -889,15 +889,15 @@ const updateMutation = useMutation({
   onMutate: async (newTask) => {
     // Cancel queries
     await queryClient.cancelQueries({ queryKey: ['tasks'] });
-    
+
     // Snapshot previous value
     const previousTasks = queryClient.getQueryData(['tasks']);
-    
+
     // Optimistically update
     queryClient.setQueryData(['tasks'], (old: Task[]) =>
       old.map(task => task._id === newTask.id ? { ...task, ...newTask.data } : task)
     );
-    
+
     return { previousTasks };
   },
   onError: (err, newTask, context) => {
@@ -1002,10 +1002,10 @@ Congratulations on completing Lab 3! Here's what you've mastered:
   ```bash
   # Windows
   net start MongoDB
-  
+
   # Mac/Linux
   brew services start mongodb-community
-  
+
   # Or use MongoDB Atlas cloud database
   ```
 
@@ -1015,7 +1015,7 @@ Congratulations on completing Lab 3! Here's what you've mastered:
   # Windows
   netstat -ano | findstr :5000
   taskkill /PID [process_id] /F
-  
+
   # Mac/Linux
   lsof -i :5000
   kill -9 [PID]
@@ -1034,7 +1034,7 @@ Congratulations on completing Lab 3! Here's what you've mastered:
   ```
 
 **"Network Error"**
-- **Solution**: 
+- **Solution**:
   - Check backend server is running
   - Verify API_BASE URL is correct
   - Check browser console for exact error
@@ -1046,7 +1046,7 @@ Congratulations on completing Lab 3! Here's what you've mastered:
   ```
 
 **"Tasks not displaying"**
-- **Solution**: 
+- **Solution**:
   - Check browser console for errors
   - Verify data structure matches Task interface
   - Use React DevTools to inspect state

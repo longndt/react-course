@@ -252,7 +252,9 @@ Follow this 4-step learning path:
 **Time**: 30-45 minutes
 
 ### Step 3: Build Examples
-🔨 Follow [examples/](./examples/) - Build:
+**🔨 Hands-On Practice:**
+
+🔨 Follow [example/](./example/) - Build:
 - Reusable component library
 - Todo app with hooks
 - Data fetching with custom hooks
@@ -443,7 +445,7 @@ function Component() {
 
 **Solution:** Only call setState in event handlers or useEffect
 
-> 🔧 **More solutions** → See [Troubleshooting Guide](../extras/troubleshooting-guide.md)
+> 🔧 **More solutions** → See [Troubleshooting Guide](../extra/troubleshooting-guide.md)
 
 ---
 
@@ -488,13 +490,13 @@ function Component() {
 ### Need More Practice?
 📚 **Study theory** → [theory2.md](./theory/theory2.md) - Deep dive into concepts
 💻 **View examples** → [reference/](./reference/) - Ready-to-use code snippets
-🔨 **Build projects** → [examples/](./examples/) - Follow-along tutorials
+🔨 **Build projects** → [example/](./example/) - Follow-along tutorials
 🧪 **Practice exercises** → [lab2.md](./lab/lab2.md) - Hands-on challenges
 
 ### Additional Resources
 🎓 **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
-❓ **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting-guide.md)
-🏗️ **Advanced patterns** → [Advanced Patterns](../extras/advanced-patterns.md)
+❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting-guide.md)
+🏗️ **Advanced patterns** → [Advanced Patterns](../extra/advanced-patterns.md)
 
 ---
 

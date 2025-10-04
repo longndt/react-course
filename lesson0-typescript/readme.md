@@ -2,17 +2,17 @@
 
 ## Overview
 
-This course teaches **React with TypeScript**. Before starting Lesson 1, you should be comfortable with TypeScript fundamentals. This lesson provides a quick review of essential TypeScript concepts you'll use throughout the course.
+**Time Required**: 2-3 hours
+**Difficulty**: Beginner to Intermediate
+**Status**: 📚 Optional but Recommended
 
-**Time Required:** 2-3 hours
-**Difficulty:** Beginner to Intermediate
-**Status:** 📚 Optional but Recommended
+This course teaches **React with TypeScript**. Before starting Lesson 1, you should be comfortable with TypeScript fundamentals. This lesson provides a quick review of essential TypeScript concepts you'll use throughout the course.
 
 ---
 
 ## Learning Objectives
 
-By the end of this lesson, you will be able to:
+After completing this lesson, you will be able to:
 
 - ✅ Use type annotations and type inference effectively
 - ✅ Define interfaces and type aliases for object shapes
@@ -122,7 +122,7 @@ const str = identity<string>("Hello");
 
 1. **Start with [Reference Guide](./reference/)** - Quick TypeScript syntax reference (5-10 minutes)
 2. **Read [Theory Guide](./theory/theory0.md)** - Comprehensive TypeScript fundamentals (1-2 hours)
-3. **Explore [Examples](./examples/)** - Working TypeScript examples
+3. **Explore [Examples](./example/)** - Working TypeScript examples
 4. **Complete [Lab Exercises](./lab/lab0.md)** - Hands-on practice (1-2 hours)
 
 **Prerequisites Checklist:**
@@ -204,7 +204,7 @@ const str = identity<string>("Hello");
 **If you scored below 80% on the quiz:**
 - Review [theory guide](./theory/theory0.md) sections you struggled with
 - Practice more with [lab exercises](./lab/lab0.md)
-- Explore [examples](./examples/) to see concepts in action
+- Explore [example](./example/) to see concepts in action
 
 **Additional Learning:**
 - TypeScript official documentation

@@ -459,7 +459,9 @@ Follow this 4-step learning path:
 **Time**: 45-60 minutes
 
 ### Step 3: Build Example Projects
-🔨 Follow [examples/](./examples/) - Build along:
+**🔨 Hands-On Practice:**
+
+🔨 Follow [example/](./example/) - Build along:
 - Full-stack app with file uploads
 - Real-time chat application
 - Dockerized deployment
@@ -711,7 +713,7 @@ jobs:
 
 **Solution:** Match Node versions, use `npm ci` instead of `npm install`, check build logs
 
-> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extras/troubleshooting-guide.md)
+> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting-guide.md)
 
 ---
 
@@ -776,10 +778,10 @@ You have completed the React course. You now have:
 - ✅ Real-world project portfolio
 
 ### Continue Learning
-📚 **Advanced topics** → [Advanced Patterns](../extras/advanced-patterns.md)
-🏗️ **Modern stack** → [Modern Stack 2025](../extras/modern-stack-2025.md)
-🧪 **Testing** → [Testing Guide](../extras/testing-guide.md)
-📊 **State management** → [State Management Guide](../extras/state-management-guide.md)
+📚 **Advanced topics** → [Advanced Patterns](../extra/advanced-patterns.md)
+🏗️ **Modern stack** → [Modern Stack 2025](../extra/modern-stack-2025.md)
+🧪 **Testing** → [Testing Guide](../extra/testing-guide.md)
+📊 **State management** → [State Management Guide](../extra/state-management-guide.md)
 
 ### Build Your Portfolio
 💼 **Project ideas:**

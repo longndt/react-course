@@ -4,7 +4,11 @@
 
 This course teaches **React with TypeScript** development using industry-standard practices through hands-on examples.
 
-**Format**: Theory, hands-on practice, and project-based learning
+**Format**: Theory, hands-on practice, and project-based learn- **Follow theory**: Read carefully with your code editor open
+- **Code along**: Type examples yourself, don't just read
+- **Experiment**: Modify code to see what happens
+- **Practice**: Complete labs before checking solutions
+- **Follow the "example" folder** to see complete examplesng
 
 **Language**: All examples and exercises use **TypeScript**
 
@@ -79,7 +83,7 @@ Each lesson follows a standardized structure designed for effective learning:
 ```
 lessonX-topic/
 ├── 📖 reference/          # Quick reference codes
-├── 💻 examples/           # Working code examples
+├── 💻 example/           # Working code examples
 ├── 📚 theory/             # Comprehensive documentation
 ├── 🔬 lab/                # Hands-on exercises
 └── ✅ quiz/               # Knowledge assessment
@@ -123,11 +127,11 @@ lessonX-topic/
 ### **Step 4: Code Along with Reference**
 
 **Goal**: Build muscle memory and understanding
-- Create a new project or use examples as base
+- Create a new project or use example as base
 - Type every line yourself (even if you don't understand yet)
 - Run code frequently to see results
 - Make small changes to experiment
-- Compare your code with examples/ when stuck
+- Compare your code with example/ when stuck
 
 ### **Step 5: Complete Lab Project**
 
@@ -138,7 +142,7 @@ lessonX-topic/
 - Test each feature before moving to next
 - **Get stuck?** → Check reference/ → Review example code → Read relevant theory section
 - **Still stuck?** → Review example code more carefully → Try different approach
-- Compare your solution with examples/ after completion
+- Compare your solution with example/ after completion
 
 ### **Step 6: Take the Quiz**
 
@@ -151,7 +155,7 @@ lessonX-topic/
 ### **Step 7: Review and Reflect**
 
 **Goal**: Solidify learning before moving forward
-- Review your lab code vs. examples code
+- Review your lab code vs. example code
 - What did you learn?
 - What was challenging?
 - What would you do differently?
@@ -176,7 +180,7 @@ Make sure you have installed:
 
 **⚠️ Having installation or setup issues?**
 
-👉 **[Check Troubleshooting Guide](./extras/troubleshooting-guide.md)** for common problems and solutions
+👉 **[Check Troubleshooting Guide](./extra/troubleshooting-guide.md)** for common problems and solutions
 
 ### Step 2: Install Markdown Reading Support Extension
 
@@ -213,11 +217,9 @@ cd react-course
 - 👉 **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack-deployment/readme.md)**
 
 #### 3️⃣ **Continue with Advanced Materials** (After completing all lessons)
-- **[State Management](./extras/state-management-guide.md)** - Advanced state management
-- **[Modern React Stack](./extras/modern-stack-2025.md)** - Latest technologies
-- **[Advanced React Patterns](./extras/advanced-patterns.md)** - Enterprise-level patterns
-- **[Testing Guide](./extras/testing-guide.md)** - Testing best practices
-- **[Troubleshooting Guide](./extras/troubleshooting-guide.md)** - Common issues and solutions
+- **[State Management](./extra/state-management-guide.md)** - Advanced state management
+- **[Modern Stack](./extra/modern-stack-2025.md)** - Latest technologies
+- **[Advanced Patterns](./extra/advanced-patterns.md)** - Enterprise-level patterns
 
 ### Step 5: Start Learning
 
@@ -234,7 +236,7 @@ cd lesson1-fundamentals-setup
 - **Use Markdown Preview Enhanced** for better documentation reading experience
 - **Read the readme.md** of each lesson carefully before starting
 - **Complete all labs** to solidify your understanding
-- **Follow the "examples" folder** to see complete examples
-- **Stuck on an error?** Check the **[Troubleshooting Guide](./extras/troubleshooting-guide.md)** for quick solutions
+- **Follow the "example" folder** to see complete example
+- **Stuck on an error?** Check the **[Troubleshooting Guide](./extra/troubleshooting-guide.md)** for quick solutions
 
 ---

@@ -1,12 +1,22 @@
-# Lab - TypeScript Prerequisites
+# Lab 0 - TypeScript Prerequisites
 
-## Overview
+## 📋 Overview
 
 In this lab session, you'll practice TypeScript fundamentals through hands-on exercises. You'll work with types, interfaces, generics, and utility types to build a solid foundation for React development.
 
 > 💡 **Scope:** This lab focuses on TypeScript basics - the foundation you need before diving into React with TypeScript.
 
-## Exercises
+## 🎯 Learning Objectives
+
+By completing this lab, you will be able to:
+- Master TypeScript type annotations and primitive types
+- Create and use interfaces and type aliases
+- Implement generic functions and types
+- Apply utility types for advanced type transformations
+- Use type guards for type narrowing
+- Build type-safe data management systems
+
+## 📚 Exercises
 
 - Exercise 1: Basic Types and Type Annotations
 - Exercise 2: Interfaces and Type Aliases
@@ -14,7 +24,7 @@ In this lab session, you'll practice TypeScript fundamentals through hands-on ex
 - Exercise 4: Utility Types and Type Guards
 - Exercise 5: Build a Type-Safe Data Manager
 
-## Pre-Lab Checklist
+## ✅ Pre-Lab Checklist
 
 - [ ] Node.js v18+ installed
 - [ ] TypeScript installed globally (`npm install -g typescript`)

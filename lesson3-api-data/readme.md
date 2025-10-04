@@ -392,7 +392,9 @@ Follow this 4-step learning path:
 **Time**: 45-60 minutes
 
 ### Step 3: Build Example Projects
-🔨 Follow [examples/](./examples/) - Build along:
+**🔨 Hands-On Practice:**
+
+🔨 Follow [example/](./example/) - Build along:
 - Simple API integration with fetch
 - Full CRUD app with React Query
 - Search and filter functionality
@@ -621,7 +623,7 @@ useEffect(() => {
 
 **Solution:** Debounce user input (500ms typical), or use React Query with enabled option
 
-> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extras/troubleshooting-guide.md)
+> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting-guide.md)
 
 ---
 
@@ -674,12 +676,12 @@ useEffect(() => {
 ### Need More Practice?
 📚 **Study theory** → [theory3.md](./theory/theory3.md) - REST API deep dive
 💻 **View examples** → [reference/](./reference/) - Complete API patterns
-🔨 **Build projects** → [examples/](./examples/) - Follow-along tutorials
+🔨 **Build projects** → [example/](./example/) - Follow-along tutorials
 🧪 **Practice exercises** → [lab3.md](./lab/lab3.md) - CRUD challenges
 
 ### Additional Resources
 🎓 **Quiz yourself** → [quiz/](./quiz/) - Test your API knowledge
-❓ **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting-guide.md)
+❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting-guide.md)
 🔐 **Learn auth next** → Preview [Lesson 4](../lesson4-routing-auth/)
 
 ---

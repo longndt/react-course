@@ -2,17 +2,17 @@
 
 ## Overview
 
-This lesson introduces React fundamentals with modern development practices. You'll set up a professional development environment, understand React's core concepts, and build your first components with TypeScript.
+**Time Required**: 6-8 hours
+**Difficulty**: Beginner
+**Prerequisites**: Lesson 0 (TypeScript basics)
 
-**Time Required:** 6-8 hours  
-**Difficulty:** Beginner  
-**Prerequisites:** Lesson 0 (TypeScript basics)
+This lesson introduces React fundamentals with modern development practices. You'll set up a professional development environment, understand React's core concepts, and build your first components with TypeScript.
 
 ---
 
 ## Learning Objectives
 
-By the end of this lesson, you will be able to:
+After completing this lesson, you will be able to:
 
 - ✅ Understand what React is and why it's useful for building UIs
 - ✅ Set up a modern React development environment with Vite and TypeScript
@@ -35,7 +35,7 @@ By the end of this lesson, you will be able to:
 
 **Technical Requirements:**
 - Node.js v18.0.0 or higher
-- npm v9.0.0 or higher  
+- npm v9.0.0 or higher
 - VS Code with extensions
 - Modern web browser
 
@@ -144,7 +144,7 @@ function Card() {
 
 1. **Start with [Reference Guide](./reference/)** - Quick setup and code snippets (15-30 min)
 2. **Read [Theory Guide](./theory/theory1.md)** - Comprehensive React fundamentals (2-3 hours)
-3. **Explore [Examples](./examples/)** - Working React applications
+3. **Explore [Examples](./example/)** - Working React applications
 4. **Complete [Lab Exercise](./lab/lab1.md)** - Build your first React app (3-4 hours)
 
 **Prerequisites Checklist:**

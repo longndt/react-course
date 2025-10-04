@@ -24,8 +24,6 @@ By completing this lab, you will be able to:
 
 ---
 
----
-
 ## Exercise 1: Component Composition with Card System (Guided - 40% Practice)
 
 ### 📚 Concept Review

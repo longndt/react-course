@@ -1,14 +1,14 @@
-# TypeScript Demo - Lesson 0
+# Lesson 0 Demo: TypeScript Prerequisites
 
 This demo project showcases TypeScript fundamentals with practical examples.
 
 ## 📁 Project Structure
 
 ```
-examples/
+example/
 ├── src/
 │   ├── index.ts              # Main entry point
-│   ├── examples/
+│   ├── example/
 │   │   ├── 01-basic-types.ts
 │   │   ├── 02-interfaces.ts
 │   │   ├── 03-functions.ts

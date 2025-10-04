@@ -2,6 +2,23 @@
 
 ---
 
+## 📚 Table of Contents
+
+1. [Why TypeScript for React?](#why-typescript-for-react-)
+2. [TypeScript vs JavaScript Overview](#typescript-vs-javascript-overview)
+3. [Basic Types & Type Inference](#1-basic-types--type-inference)
+4. [Arrays & Objects](#2-arrays--objects)
+5. [Functions](#3-functions)
+6. [Union Types & Type Aliases](#4-union-types--type-aliases)
+7. [Generics](#5-generics)
+8. [Type Guards & Narrowing](#6-type-guards--narrowing)
+9. [TypeScript with React](#7-typescript-with-react)
+10. [Utility Types](#8-utility-types)
+11. [Best Practices](#9-best-practices)
+12. [Summary](#10-summary)
+
+---
+
 ## Why TypeScript for React?
 
 **Building Better React Applications:**

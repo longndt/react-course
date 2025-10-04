@@ -1,4 +1,4 @@
-# React Components Demo
+# Lesson 2 Demo: Component Architecture & Hooks
 
 This demo project showcases various reusable React components built with TypeScript. It demonstrates important React patterns and best practices.
 

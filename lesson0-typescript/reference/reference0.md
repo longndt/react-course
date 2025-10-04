@@ -2,6 +2,13 @@
 
 > **Quick reference guide for TypeScript essentials**
 
+## Table of Contents
+1. [Setup TypeScript](#part-1-setup-typescript)
+2. [Write Your First TypeScript Code](#part-2-write-your-first-typescript-code)
+3. [Basic Types](#part-3-basic-types)
+4. [Functions](#part-4-functions)
+5. [Quick Reference](#part-5-quick-reference)
+
 ---
 
 ## Part 1: Setup TypeScript

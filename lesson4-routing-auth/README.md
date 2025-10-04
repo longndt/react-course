@@ -351,7 +351,9 @@ Follow this 4-step learning path:
 **Time**: 45-60 minutes
 
 ### Step 3: Build Example Projects
-🔨 Follow [examples/](./examples/) - Build along:
+**🔨 Hands-On Practice:**
+
+🔨 Follow [example/](./example/) - Build along:
 - Multi-page app with React Router
 - Complete auth system with JWT
 - Protected admin dashboard
@@ -571,7 +573,7 @@ useEffect(() => {
 
 **Solution:** Check for existing token on app initialization
 
-> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extras/troubleshooting-guide.md)
+> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting-guide.md)
 
 ---
 
@@ -628,12 +630,12 @@ useEffect(() => {
 ### Need More Practice?
 📚 **Study theory** → [theory4.md](./theory/theory4.md) - Routing & auth deep dive
 💻 **View examples** → [reference/](./reference/) - Complete implementations
-🔨 **Build projects** → [examples/](./examples/) - Follow-along tutorials
+🔨 **Build projects** → [example/](./example/) - Follow-along tutorials
 🧪 **Practice exercises** → [lab4.md](./lab/lab4.md) - Auth challenges
 
 ### Additional Resources
 🎓 **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
-❓ **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting-guide.md)
+❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting-guide.md)
 🚀 **Learn deployment** → Preview [Lesson 5](../lesson5-fullstack-deployment/)
 
 ---

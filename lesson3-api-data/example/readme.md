@@ -44,7 +44,7 @@ This demo shows how to integrate a React frontend with a Node.js/Express backend
 ## Project Structure
 
 ```
-examples/
+example/
 ├── server/                 # Node.js/Express backend
 │   ├── index.js           # Server entry point
 │   ├── models/            # MongoDB models

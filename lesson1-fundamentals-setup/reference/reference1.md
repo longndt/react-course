@@ -2,6 +2,15 @@
 
 > **Quick reference guide for React fundamentals**
 
+## Table of Contents
+1. [Project Setup](#part-1-project-setup)
+2. [Understanding Project Structure](#part-2-understanding-project-structure)
+3. [Your First Component](#part-3-your-first-component)
+4. [Basic JSX Syntax](#part-4-basic-jsx-syntax)
+5. [Adding Styles](#part-5-adding-styles)
+6. [Simple Interactive Example](#part-6-simple-interactive-example)
+7. [Complete Starter Example](#part-7-complete-starter-example)
+
 ---
 
 ## Part 1: Project Setup

@@ -1,6 +1,6 @@
 # Theory - React Fundamentals & Project Setup
 
-> **Prerequisites**: Make sure you've completed the [Environment Setup Guide](../../extras/environment-setup.md) before starting this lesson.
+> **Prerequisites**: Make sure you've completed the [Environment Setup Guide](../../extra/environment-setup.md) before starting this lesson.
 
 ---
 
