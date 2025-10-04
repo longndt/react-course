@@ -1,212 +1,128 @@
-# Lesson 2: Component Architecture & Advanced State
+# Lesson 2: React Components & Hooks
 
 ## Overview
 
-In this lesson, you'll master React component patterns, advanced state management, and build reusable component libraries. We'll cover modern component composition patterns, custom hooks, and form handling techniques used in professional React applications.
+This lesson covers React component architecture and hooks - the foundation of modern React development. You'll learn to build reusable components, manage state effectively, and create custom hooks for shared logic.
 
 ## Learning Objectives
 
 After this lesson, you will be able to:
 
-- Design scalable component architectures
-- Master advanced state management patterns (useState, useReducer, Context)
-- Create custom hooks for reusable business logic
-- Build complex forms with validation
-- Implement component composition patterns
-- Handle performance optimization techniques
-
-## 1. Understanding Components & Props
-
-### Component Types
-
-1. Function Components (Recommended)
-
-```jsx
-function Welcome({ name }) {
-  return <h1>Hello, {name}!</h1>;
-}
-```
-
-2. Class Components (Legacy)
-
-```jsx
-class Welcome extends React.Component {
-  render() {
-    return <h1>Hello, {this.props.name}!</h1>;
-  }
-}
-```
-
-### Props
-
-Props are like arguments for components:
-
-```jsx
-// Component definition
-function UserCard({ name, role, imageUrl }) {
-  return (
-    <div className="card">
-      <img src={imageUrl} alt={name} />
-      <h2>{name}</h2>
-      <p>{role}</p>
-    </div>
-  );
-}
-
-// Using the component
-<UserCard name="John Doe" role="Developer" imageUrl="john.jpg" />;
-```
-
-## 🔍 **Knowledge Checkpoint 1**
-
-Before continuing, make sure you understand:
-
-1. **What's the difference between function and class components?**
-2. **How do you pass multiple props to a component?**
-3. **Can props be modified inside a component? Why or why not?**
-
-_💡 Props are read-only - think of them as the "settings" for your component._
+- ✅ Build reusable component libraries
+- ✅ Understand component composition and props
+- ✅ Apply essential React Hooks (useState, useEffect, useRef, useContext, useReducer)
+- ✅ Create custom hooks for reusable business logic
+- ✅ Handle side effects and lifecycle events properly
+- ✅ Avoid common Hook mistakes and anti-patterns
 
 ---
 
-## 2. Managing State
+## What You'll Learn
 
-### Using useState
+### 1. Component Architecture
 
-```jsx
-function Counter() {
-  // Declare state variable
-  const [count, setCount] = useState(0);
+**Component Patterns:**
+- Function vs Class components
+- Props and composition
+- Reusable component design
+- Component hierarchy
 
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-    </div>
-  );
-}
-```
+**Building Blocks:**
+- Atomic components (Button, Input, Icon)
+- Molecule components (SearchBox, Card, FormField)
+- Organism components (Header, DataTable, Modal)
+- Page components (Dashboard, Profile)
 
-### Using useEffect
+### 2. React Hooks Essentials
 
-```jsx
-function UserProfile({ userId }) {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+**Core Hooks:**
+- **useState** - Manage component state
+- **useEffect** - Handle side effects (API calls, subscriptions, timers)
+- **useRef** - Access DOM elements and persist values without re-renders
+- **useContext** - Share data without prop drilling
+- **useReducer** - Manage complex state logic
 
-  useEffect(() => {
-    // Fetch user data when userId changes
-    // Mock API for testing: https://dummyjson.com/users/${userId}
-    fetch(`/api/users/${userId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setUser(data);
-        setLoading(false);
-      });
-  }, [userId]); // Dependency array
+**Key Concepts:**
+- Hook rules and best practices
+- Dependency arrays in useEffect
+- Avoiding infinite loops and memory leaks
+- When to use each hook
 
-  if (loading) return <div>Loading...</div>;
+### 3. Custom Hooks
 
-  return (
-    <div>
-      <h2>{user.name}</h2>
-      <p>{user.email}</p>
-    </div>
-  );
-}
-```
-
-## 🔍 **Knowledge Checkpoint 2**
-
-Test your understanding of state management:
-
-1. **When should you use useState vs useEffect?**
-2. **What happens if you forget the dependency array in useEffect?**
-3. **Why is it important to not mutate state directly?**
-
-_💡 State changes trigger re-renders, but only if React detects the change!_
+Learn to create custom hooks for:
+- Form handling (`useForm`)
+- Local storage (`useLocalStorage`)
+- Data fetching (`useFetch`)
+- Window dimensions (`useWindowSize`)
 
 ---
 
-## 3. Building Reusable Components
+## Lesson Structure
 
-### 1. Button Component
+### 📚 Theory
+- **[theory2.md](./theory/theory2.md)** - Comprehensive guide to React Hooks and component patterns
 
+### 💻 Demo
+- **[demo/](./demo/)** - Live code examples demonstrating hooks and components
+
+### 🔬 Lab
+- **[lab2.md](./lab/lab2.md)** - Hands-on exercises to build component libraries
+
+### ⚡ Quick Start
+- **[quickstart.md](./quickstart.md)** - Quick reference and code snippets
+
+---
+
+## Quick Examples
+
+### Component with Props
 ```jsx
-function Button({ children, variant = "primary", onClick }) {
+function Button({ children, variant = 'primary', onClick }) {
   return (
-    <button className={`button ${variant}`} onClick={onClick}>
+    <button className={`btn btn-${variant}`} onClick={onClick}>
       {children}
     </button>
   );
 }
 
 // Usage
-<Button variant="secondary" onClick={() => alert("Clicked!")}>
+<Button variant="secondary" onClick={() => alert('Clicked!')}>
   Click Me
-</Button>;
+</Button>
 ```
 
-### 2. Input Component
-
+### useState - Managing State
 ```jsx
-function Input({ label, type = "text", value, onChange }) {
-  return (
-    <div className="input-group">
-      <label>{label}</label>
-      <input
-        type={type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
-    </div>
-  );
-}
-
-// Usage
-function Form() {
-  const [name, setName] = useState("");
-
-  return <Input label="Your Name" value={name} onChange={setName} />;
+function Counter() {
+  const [count, setCount] = useState(0);
+  return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
 }
 ```
 
-### 3. Card Component
-
+### useEffect - Side Effects
 ```jsx
-function Card({ title, content, footer }) {
-  return (
-    <div className="card">
-      <div className="card-header">
-        <h3>{title}</h3>
-      </div>
-      <div className="card-body">{content}</div>
-      {footer && <div className="card-footer">{footer}</div>}
-    </div>
-  );
-}
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
 
-// Usage
-<Card
-  title="Welcome"
-  content={<p>This is a reusable card component.</p>}
-  footer={<Button>Learn More</Button>}
-/>;
+  useEffect(() => {
+    fetch(`/api/users/${userId}`)
+      .then(res => res.json())
+      .then(data => setUser(data));
+  }, [userId]);
+
+  return <div>{user?.name}</div>;
+}
 ```
 
-## 4. Creating Custom Hooks
-
-### 1. useLocalStorage
-
+### Custom Hook - useLocalStorage
 ```jsx
 function useLocalStorage(key, initialValue) {
-  // Get stored value or initial value
   const [value, setValue] = useState(() => {
     const stored = localStorage.getItem(key);
     return stored ? JSON.parse(stored) : initialValue;
   });
 
-  // Update stored value when state changes
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(value));
   }, [key, value]);
@@ -216,98 +132,264 @@ function useLocalStorage(key, initialValue) {
 
 // Usage
 function App() {
-  const [theme, setTheme] = useLocalStorage("theme", "light");
+  const [theme, setTheme] = useLocalStorage('theme', 'light');
+  return <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+    Toggle Theme
+  </button>;
+}
+```
+
+---
+
+## Common Pitfalls to Avoid
+
+**Components:**
+⚠️ **Don't:**
+- Modify props (they're read-only)
+- Forget to use `key` prop in lists
+- Create too many levels of nesting
+
+✅ **Do:**
+- Keep components small and focused
+- Use meaningful prop names
+- Extract reusable logic into custom hooks
+
+**Hooks:**
+⚠️ **Don't:**
+- Call hooks inside loops, conditions, or nested functions
+- Mutate state directly (`state.value = 1`)
+- Forget dependency arrays in useEffect
+- Create infinite loops with useEffect
+
+✅ **Do:**
+- Call hooks at the top level of components
+- Use functional updates for state (`setState(prev => prev + 1)`)
+- Include all dependencies in useEffect arrays
+- Clean up side effects (intervals, subscriptions)
+
+---
+
+## Lab Exercises
+
+### Exercise 1: Component Library
+Build reusable components:
+- Button (multiple variants)
+- Input (with validation)
+- Card (with header/footer)
+- Alert (success/warning/error)
+
+### Exercise 2: Custom Hooks
+Create custom hooks:
+- `useForm` - Form state management
+- `useFetch` - API data fetching
+- `useToggle` - Boolean state toggling
+
+### Exercise 3: Todo App
+Build a complete todo application using:
+- useState for state management
+- useEffect for localStorage persistence
+- Custom hooks for reusable logic
+
+---
+
+## Resources
+
+### Official Documentation
+- [React Hooks Reference](https://react.dev/reference/react) - Official docs
+- [Rules of Hooks](https://react.dev/warnings/invalid-hook-call-warning) - Important rules
+- [Hooks FAQ](https://react.dev/learn#using-hooks) - Common questions
+
+### Learning Resources
+- [useHooks.com](https://usehooks.com/) - Custom hook recipes
+- [React Hooks Cheatsheet](https://react-hooks-cheatsheet.com/) - Quick reference
+
+### Communities
+- [React Discord](https://discord.gg/react) - Official community
+- [r/reactjs](https://www.reddit.com/r/reactjs/) - Reddit community
+
+---
+
+## Self-Assessment Checklist
+
+Before moving to Lesson 3, ensure you can:
+
+**Components (Must Know):**
+- [ ] Create reusable components with props
+- [ ] Use component composition
+- [ ] Pass functions as props
+- [ ] Handle events properly
+- [ ] Use `key` prop in lists
+
+**Hooks (Must Know):**
+- [ ] Use useState for component state
+- [ ] Use useEffect for side effects
+- [ ] Understand dependency arrays
+- [ ] Create custom hooks
+- [ ] Avoid infinite re-render loops
+
+**Advanced (Good to Know):**
+- [ ] Use useReducer for complex state
+- [ ] Use useContext for global state
+- [ ] Optimize with useMemo/useCallback
+- [ ] Implement compound components
+
+**🎯 Target: Check at least 9/14 items before Lesson 3**
+
+---
+
+## Homework Assignment
+
+Create a **Personal Dashboard** with:
+
+1. **Component Library**
+   - Reusable Button, Input, Card components
+   - Multiple variants and sizes
+
+2. **Custom Hooks**
+   - `useLocalStorage` for persistence
+   - `useFetch` for API calls
+   - `useTheme` for dark/light mode
+
+3. **Features**
+   - Theme switcher (light/dark)
+   - Todo list with persistence
+   - Weather widget (API integration)
+   - User profile card
+
+**Deliverables:**
+- Source code on GitHub
+- Live demo (deploy to Netlify/Vercel)
+- README with setup instructions
+
+---
+
+## Next Steps
+
+✅ **Completed Lesson 2?** → Move to [Lesson 3: API Integration & Data Management](../lesson3-data/)
+
+📚 **Need More Practice?** → Review [theory2.md](./theory/theory2.md) for detailed explanations
+
+💻 **Want Examples?** → Check [demo/](./demo/) folder for working code
+
+🔬 **Ready to Code?** → Start [lab2.md](./lab/lab2.md) exercises
+
+**Migration Example:**
+
+```jsx
+// Class Component
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
+
+  componentDidMount() {
+    document.title = `Count: ${this.state.count}`;
+  }
+
+  componentDidUpdate() {
+    document.title = `Count: ${this.state.count}`;
+  }
+
+  render() {
+    return (
+      <div>
+        <p>{this.state.count}</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Increment
+        </button>
+      </div>
+    );
+  }
+}
+
+// Function Component with Hooks (Much simpler!)
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `Count: ${count}`;
+  }, [count]);
 
   return (
-    <div className={theme}>
-      <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-        Toggle Theme
+    <div>
+      <p>{count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
       </button>
     </div>
   );
 }
 ```
 
-### 2. useForm
+---
+
+## Building Reusable Components
+
+### Component Library Best Practices
+
+1. **Keep components small and focused**
+2. **Use TypeScript for type safety**
+3. **Provide sensible defaults**
+4. **Make components composable**
+5. **Document usage examples**
+
+### Example: Button Component
 
 ```jsx
-function useForm(initialValues) {
-  const [values, setValues] = useState(initialValues);
-
-  const handleChange = (name) => (event) => {
-    setValues((prev) => ({
-      ...prev,
-      [name]: event.target.value,
-    }));
-  };
-
-  const reset = () => setValues(initialValues);
-
-  return { values, handleChange, reset };
+function Button({
+  children,
+  variant = "primary",
+  size = "md",
+  disabled = false,
+  onClick
+}) {
+  return (
+    <button
+      className={`button button-${variant} button-${size}`}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {children}
+    </button>
+  );
 }
 
 // Usage
-function SignupForm() {
-  const { values, handleChange, reset } = useForm({
-    username: "",
-    email: "",
-    password: "",
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form values:", values);
-    reset();
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <Input
-        label="Username"
-        value={values.username}
-        onChange={handleChange("username")}
-      />
-      {/* More inputs */}
-    </form>
-  );
-}
+<Button variant="secondary" size="lg" onClick={() => alert("Clicked!")}>
+  Click Me
+</Button>
 ```
 
-## Lab Exercises
+---
 
-### Exercise 1: Component Library
+## Additional Resources 📚
 
-Build a basic component library including:
+### Official Documentation
+- [React Hooks Documentation](https://react.dev/reference/react) - Official React Hooks reference
+- [Rules of Hooks](https://react.dev/warnings/invalid-hook-call-warning) - Understanding Hook rules
+- [Hooks FAQ](https://react.dev/learn#using-hooks) - Common questions answered
 
-1. Button (primary, secondary, danger variants)
-2. Input (text, number, email types)
-3. Card (with header, body, footer)
-4. Alert (success, warning, error variants)
+### Video Tutorials
+- [React Hooks Crash Course](https://www.youtube.com/watch?v=TNhaISOUy6Q) - Traversy Media
+- [React Hooks Tutorial](https://www.youtube.com/watch?v=f687hBjwFcM) - Codevolution
 
-### Exercise 2: Form Builder
+### Interactive Learning
+- [React Hooks Playground](https://codesandbox.io/s/react-hooks-playground) - Try hooks in the browser
+- [useHooks.com](https://usehooks.com/) - Collection of custom hook recipes
+- [React Hooks Cheatsheet](https://react-hooks-cheatsheet.com/) - Quick reference
 
-Create a reusable form system with:
+### Hook Libraries
+- [react-use](https://github.com/streamich/react-use) - Collection of essential hooks
+- [ahooks](https://ahooks.js.org/) - High-quality & reliable React hooks library
+- [react-query](https://tanstack.com/query) - Powerful data fetching hooks
 
-1. Form validation
-2. Error messages
-3. Submit handling
-4. Reset functionality
+### Communities
+- [React Discord](https://discord.gg/react) - Official React community
+- [Reactiflux](https://www.reactiflux.com/) - React developers chat
+- [r/reactjs](https://www.reddit.com/r/reactjs/) - Reddit community
 
-### Exercise 3: Theme Switcher
-
-Build a theme switching system using:
-
-1. Custom hooks
-2. Local storage
-3. CSS variables
-4. Smooth transitions
-
-## Additional Resources
-
-- [React Components](https://react.dev/reference/react/components)
-- [React Hooks](https://react.dev/reference/react/hooks)
-- [React Patterns](https://reactpatterns.com/)
-- [CSS Modules](https://github.com/css-modules/css-modules)
+---
 
 ## 📊 **Final Knowledge Assessment**
 
