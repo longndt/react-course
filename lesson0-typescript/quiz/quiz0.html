@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>TypeScript Fundamentals - Quiz</title>
+    <title>Quiz - TypeScript Fundamentals</title>
     <style>
       * {
         margin: 0;
@@ -224,16 +224,16 @@
 
       .results-card {
         background: white;
-        padding: 40px;
+        padding: 25px;
         border-radius: 15px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         text-align: center;
       }
 
       .score-circle {
-        width: 200px;
-        height: 200px;
-        margin: 30px auto;
+        width: 140px;
+        height: 140px;
+        margin: 20px auto;
         border-radius: 50%;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
@@ -244,18 +244,18 @@
       }
 
       .score-number {
-        font-size: 60px;
+        font-size: 42px;
         font-weight: bold;
       }
 
       .score-label {
-        font-size: 16px;
-        margin-top: 10px;
+        font-size: 13px;
+        margin-top: 5px;
       }
 
       .score-details {
-        margin: 30px 0;
-        padding: 20px;
+        margin: 15px 0;
+        padding: 15px;
         background: #f8f9fa;
         border-radius: 10px;
       }
@@ -263,8 +263,9 @@
       .score-row {
         display: flex;
         justify-content: space-between;
-        padding: 10px 0;
+        padding: 8px 0;
         border-bottom: 1px solid #e0e0e0;
+        font-size: 14px;
       }
 
       .score-row:last-child {
@@ -332,10 +333,10 @@
 
 
       .feedback {
-        margin-top: 20px;
-        padding: 20px;
+        margin-top: 15px;
+        padding: 15px;
         border-radius: 10px;
-        font-size: 18px;
+        font-size: 15px;
       }
 
       .feedback.excellent {
@@ -382,17 +383,14 @@
     <div class="container">
       <!-- Header -->
       <div class="header">
-        <h1>🎯 TypeScript Fundamentals Quiz</h1>
-        <p>
-          Test your understanding of TypeScript basics, interfaces, generics, and utility types
-        </p>
+        <h1>🎯 Quiz - TypeScript Fundamentals</h1>
       </div>
 
       <!-- Progress Bar -->
       <div class="progress-bar" id="progressBar">
         <div class="progress-info">
-          <span id="progressText">Question 1 of 30</span>
-          <span id="answeredText">Answered: 0/30</span>
+          <span id="progressText">Question 1 of 20</span>
+          <span id="answeredText">Answered: 0/20</span>
         </div>
         <div class="progress-track">
           <div class="progress-fill" id="progressFill"></div>
@@ -436,7 +434,7 @@
 
       <!-- Results Card -->
       <div class="results-card hidden" id="resultsCard">
-        <h2 style="color: #667eea; margin-bottom: 20px">
+        <h2 style="color: #667eea; margin-bottom: 12px; font-size: 24px">
           🎉 Quiz Completed!
         </h2>
 
@@ -448,7 +446,7 @@
         <div class="score-details">
           <div class="score-row">
             <span><strong>Total Questions:</strong></span>
-            <span id="totalQuestions">30</span>
+            <span id="totalQuestions">20</span>
           </div>
           <div class="score-row">
             <span><strong>Answered:</strong></span>
@@ -468,7 +466,7 @@
 
         <button
           class="btn btn-primary"
-          style="margin-top: 30px"
+          style="margin-top: 20px"
           onclick="location.reload()"
         >
           🔄 Retake Quiz
@@ -477,9 +475,9 @@
     </div>
 
     <script>
-      // Quiz Data
+      // Quiz Data - TypeScript Fundamentals (Based on readme.md)
       const quizData = [
-        // Multiple Choice Questions (1-20)
+        // Multiple Choice Questions (1-15)
         {
           type: "multiple",
           question: "What is TypeScript?",
@@ -499,245 +497,153 @@
         },
         {
           type: "multiple",
-          question: "What is the correct way to declare a string variable?",
+          question: "What is the purpose of type inference in TypeScript?",
           options: [
-            "let name: String = 'John';",
-            "let name: string = 'John';",
-            "var name = String('John');",
-            "string name = 'John';",
+            "To make code run faster",
+            "To automatically determine types without explicit annotations",
+            "To convert TypeScript to JavaScript",
+            "To check for syntax errors",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "Which TypeScript type represents any type of value?",
-          options: ["unknown", "any", "void", "never"],
+          question: "Which of these is NOT a primitive type in TypeScript?",
+          options: ["string", "number", "boolean", "array"],
+          correct: 3,
+        },
+        {
+          type: "multiple",
+          question: "What is a union type in TypeScript?",
+          options: [
+            "A type that combines multiple classes",
+            "A type that can be one of several types (e.g., string | number)",
+            "A type that merges two interfaces",
+            "A type for database unions",
+          ],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What is the difference between 'interface' and 'type' alias?",
+          options: [
+            "No difference, they are identical",
+            "Interfaces can be extended, types cannot",
+            "Interfaces can be merged (declaration merging), types cannot",
+            "Types are faster than interfaces",
+          ],
+          correct: 2,
+        },
+        {
+          type: "multiple",
+          question: "How do you make a property optional in an interface?",
+          options: [
+            "Use the * symbol",
+            "Use the ? symbol after the property name",
+            "Use the optional keyword",
+            "Wrap it in square brackets",
+          ],
           correct: 1,
         },
         {
           type: "multiple",
           question: "What does the 'readonly' modifier do?",
           options: [
-            "Makes a variable constant",
-            "Prevents reassignment of properties",
-            "Makes a class immutable",
-            "Prevents inheritance",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "How do you define an interface in TypeScript?",
-          options: [
-            "interface User {}",
-            "type User {}",
-            "class User {}",
-            "struct User {}",
+            "Makes a property unchangeable after initialization",
+            "Makes a property private",
+            "Makes a property optional",
+            "Makes a property public",
           ],
           correct: 0,
         },
         {
           type: "multiple",
-          question: "What is a tuple in TypeScript?",
+          question: "What are generics in TypeScript?",
           options: [
-            "A function that returns multiple values",
-            "An array with fixed length and typed elements",
-            "A type of object",
-            "A generic type parameter",
+            "Basic primitive types",
+            "Types that work with any data type while preserving type safety",
+            "A way to create classes",
+            "Built-in utility functions",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "Which keyword is used for type aliases?",
-          options: ["interface", "type", "alias", "typedef"],
+          question: "Which utility type makes all properties optional?",
+          options: ["Required<T>", "Partial<T>", "Pick<T, K>", "Omit<T, K>"],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What does the 'never' type represent?",
-          options: [
-            "A value that can be null",
-            "A value that never occurs",
-            "An undefined value",
-            "An empty object",
-          ],
+          question: "Which utility type makes all properties required?",
+          options: ["Partial<T>", "Required<T>", "Readonly<T>", "Record<K, T>"],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "How do you make a property optional in an interface?",
+          question: "What does the Pick<T, K> utility type do?",
           options: [
-            "property?: type",
-            "property: type?",
-            "optional property: type",
-            "property: type | undefined",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What is a union type?",
-          options: [
-            "A type that combines multiple interfaces",
-            "A type that can be one of several types (type1 | type2)",
-            "A type that merges two types together",
-            "A generic type parameter",
+            "Removes properties from a type",
+            "Creates a type by picking specific properties from T",
+            "Makes properties optional",
+            "Makes properties readonly",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is an intersection type?",
+          question: "What is a type guard in TypeScript?",
           options: [
-            "A type that is one of several types (type1 | type2)",
-            "A type that combines multiple types (type1 & type2)",
-            "A type that excludes common properties",
-            "A type alias",
+            "A security feature",
+            "A runtime check that narrows down types",
+            "A way to prevent type errors",
+            "A compiler optimization",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question:
-            "Which utility type makes all properties of a type optional?",
-          options: ["Readonly<T>", "Partial<T>", "Required<T>", "Pick<T, K>"],
+          question: "Which keyword is used for type assertions?",
+          options: ["cast", "as", "type", "convert"],
           correct: 1,
         },
         {
           type: "multiple",
-          question:
-            "Which utility type makes all properties of a type required?",
-          options: ["Partial<T>", "Readonly<T>", "Required<T>", "Omit<T, K>"],
-          correct: 2,
-        },
-        {
-          type: "multiple",
-          question: "What is a generic in TypeScript?",
+          question: "What is the 'never' type used for?",
           options: [
-            "A type that works with multiple types",
-            "A function that accepts any parameter",
-            "An interface without properties",
-            "A class without methods",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "How do you define a generic function?",
-          options: [
-            "function name<T>(param: T): T {}",
-            "function name(param: any): any {}",
-            "function name<T: any>(param): T {}",
-            "generic function name<T>() {}",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What is the purpose of 'enum' in TypeScript?",
-          options: [
-            "To define a set of named constants",
-            "To create a list of functions",
-            "To declare multiple variables",
-            "To define a class hierarchy",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "Which is the correct way to define a function type?",
-          options: [
-            "(param: type) => returnType",
-            "function(param: type): returnType",
-            "func<type, returnType>",
-            "type => returnType",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What does 'strict: true' enable in tsconfig.json?",
-          options: [
-            "All strict type-checking options",
-            "Only null checking",
-            "Only implicit any checking",
-            "Performance optimizations",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "How do you assert a type in TypeScript?",
-          options: [
-            "value as Type or <Type>value",
-            "value.type = Type",
-            "Type(value)",
-            "value: Type",
+            "Values that never occur",
+            "Optional values",
+            "Null values",
+            "Undefined values",
           ],
           correct: 0,
         },
 
-        // Short Answer Questions (21-30)
+        // Short Answer Questions (16-20)
         {
           type: "short",
-          question:
-            "What command do you use to compile TypeScript to JavaScript? (one word)",
-          answer: "tsc",
+          question: "What is the file extension for TypeScript files?",
+          answer: "ts",
         },
         {
           type: "short",
-          question:
-            "What file is used to configure TypeScript compiler options?",
-          answer: "tsconfig.json",
+          question: "What TypeScript utility type removes specified properties from a type?",
+          answer: "Omit",
         },
         {
           type: "short",
-          question:
-            "What TypeScript type should you use for a value that could be null or undefined?",
-          answer: "union",
+          question: "What symbol is used to create a tuple type with two elements?",
+          answer: "[]",
         },
         {
           type: "short",
-          question:
-            "What keyword is used to define a class property that cannot be changed after initialization?",
-          answer: "readonly",
+          question: "What keyword is used to create a type alias?",
+          answer: "type",
         },
         {
           type: "short",
-          question:
-            "What is the TypeScript feature that allows you to define the shape of an object?",
+          question: "What TypeScript keyword is used to define an object shape?",
           answer: "interface",
-        },
-        {
-          type: "short",
-          question:
-            "What symbol is used to make a parameter optional in a function? (just the symbol)",
-          answer: "?",
-        },
-        {
-          type: "short",
-          question:
-            "What TypeScript type represents a function that never returns?",
-          answer: "never",
-        },
-        {
-          type: "short",
-          question:
-            "What is the TypeScript operator used to check if a property exists in an object?",
-          answer: "in",
-        },
-        {
-          type: "short",
-          question:
-            "What TypeScript feature allows you to write code that works with multiple types?",
-          answer: "generics",
-        },
-        {
-          type: "short",
-          question:
-            "What is the default access modifier for class members in TypeScript?",
-          answer: "public",
         },
       ];
 
@@ -766,6 +672,22 @@
 
       // Initialize Quiz
       function init() {
+        // Shuffle options for all multiple choice questions
+        quizData.forEach(question => {
+          if (question.type === "multiple") {
+            const correctAnswer = question.options[question.correct];
+            // Shuffle options
+            const shuffled = [...question.options];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            question.options = shuffled;
+            // Update correct index
+            question.correct = shuffled.indexOf(correctAnswer);
+          }
+        });
+
         showQuestion(currentQuestion);
       }
 
@@ -784,14 +706,19 @@
           if (i === question.correct) {
             opt.classList.add("correct");
             opt.classList.remove("selected");
+            const icon = document.createElement("span");
+            icon.className = "feedback-icon";
+            icon.textContent = "✓";
+            opt.querySelector("label").appendChild(icon);
           } else if (i === selectedOption) {
             opt.classList.add("incorrect");
             opt.classList.remove("selected");
+            const icon = document.createElement("span");
+            icon.className = "feedback-icon";
+            icon.textContent = "✗";
+            opt.querySelector("label").appendChild(icon);
           }
         });
-
-        // Re-render the question to show feedback icons
-        showQuestion(index);
       }
 
       // Check short answer
@@ -816,7 +743,7 @@
 
         // Update header
         questionNumber.textContent = `Question ${index + 1}`;
-        questionText.textContent = question.question;
+        questionText.textContent = question.question || "Question text missing";
 
         // Update progress
         progressText.textContent = `Question ${index + 1} of ${

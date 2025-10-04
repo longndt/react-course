@@ -2,7 +2,6 @@
 
 ## Overview
 
-**Time Required**: 6-8 hours
 **Difficulty**: Advanced
 **Prerequisites**: Lessons 1-4 completed, Node.js/Express basics
 
@@ -52,6 +51,8 @@ Before starting this lesson, make sure you have:
 - CI/CD concepts
 
 > 💡 **Not ready?** → Review [Lesson 4](../lesson4-routing-auth/) for authentication
+
+> 🔄 **Hooks Review**: This lesson uses advanced React Hooks patterns including `useState`, `useEffect`, `useRef`, and custom hooks for real-time features and optimizations. Review [Lesson 2: React Hooks](../lesson2-component-hook/#2-react-hooks-essentials) if needed.
 
 ---
 
@@ -713,7 +714,7 @@ jobs:
 
 **Solution:** Match Node versions, use `npm ci` instead of `npm install`, check build logs
 
-> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting-guide.md)
+> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting.md)
 
 ---
 
@@ -779,9 +780,9 @@ You have completed the React course. You now have:
 
 ### Continue Learning
 📚 **Advanced topics** → [Advanced Patterns](../extra/advanced-patterns.md)
-🏗️ **Modern stack** → [Modern Stack 2025](../extra/modern-stack-2025.md)
+🏗️ **Modern stack** → [Modern Stack 2025](../extra/modern-stack.md)
 🧪 **Testing** → [Testing Guide](../extra/testing-guide.md)
-📊 **State management** → [State Management Guide](../extra/state-management-guide.md)
+📊 **State management** → [State Management Guide](../extra/state-management.md)
 
 ### Build Your Portfolio
 💼 **Project ideas:**
@@ -802,6 +803,13 @@ You have completed the React course. You now have:
 ---
 
 ## Resources & References
+
+### Course Guides
+- **[Performance Optimization Guide](../extra/performance-optimization.md)** - useMemo, useCallback, code splitting, bundle analysis, Core Web Vitals
+- **[Testing Guide](../extra/testing-guide.md)** - Jest, React Testing Library, E2E testing with Playwright
+- **[Accessibility Guide](../extra/accessibility-guide.md)** - Ensure production apps meet WCAG standards
+- [State Management Guide](../extra/state-management.md) - Redux, Zustand, Jotai patterns for complex apps
+- [Troubleshooting Guide](../extra/troubleshooting.md) - Common deployment issues and solutions
 
 ### Official Documentation
 - [React Production Build](https://react.dev/learn/start-a-new-react-project#production-grade-react-frameworks) - Deployment guide

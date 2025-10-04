@@ -1,46 +1,37 @@
-# Common Errors & Troubleshooting Guide# Common Issues & Troubleshooting Guide
+# Common Issues & Troubleshooting Guide
 
-
-
-> 🎯 **Purpose:** Help students independently resolve common React errors, saving time for both students and instructors.## Quick Solutions for Students
-
-
-
----This guide addresses the most common problems students encounter when learning React. Keep this handy as you work through the course!
-
-
-
-## 📋 Table of Contents## 🚨 **Setup & Installation Issues**
-
-
-
-1. [Environment Setup Errors](#1-environment-setup-errors)### Problem: "npm command not found"
-
-2. [TypeScript Errors](#2-typescript-errors)
-
-3. [React Common Errors](#3-react-common-errors)**Cause:** Node.js is not installed or not in PATH
-
-4. [Build & Bundler Errors](#4-build--bundler-errors)
-
-5. [API & Network Errors](#5-api--network-errors)**Solution:**
-
-6. [Deployment Errors](#6-deployment-errors)
-
-7. [Styling & CSS Issues](#7-styling--css-issues)1. Download and install Node.js from [nodejs.org](https://nodejs.org/)
-
-8. [Performance Issues](#8-performance-issues)2. Restart your terminal/command prompt
-
-3. Verify installation: `node --version` and `npm --version`
+> 🎯 **Purpose:** Help students independently resolve common React errors, saving time for both students and instructors.
 
 ---
 
+This guide addresses the most common problems students encounter when learning React. Keep this handy as you work through the course!
+
+## 📋 Table of Contents
+
+1. [Environment Setup Errors](#1-environment-setup-errors)
+2. [TypeScript Errors](#2-typescript-errors)
+3. [React Common Errors](#3-react-common-errors)
+4. [Build & Bundler Errors](#4-build--bundler-errors)
+5. [API & Network Errors](#5-api--network-errors)
+6. [Deployment Errors](#6-deployment-errors)
+7. [Styling & CSS Issues](#7-styling--css-issues)
+8. [Performance Issues](#8-performance-issues)
+
+---
+
+## 🚨 Setup & Installation Issues
+
+### Problem: "npm command not found"
+
+**Cause:** Node.js is not installed or not in PATH
+
+**Solution:**
+
+1. Download and install Node.js from [nodejs.org](https://nodejs.org/)
+2. Restart your terminal/command prompt
+3. Verify installation: `node --version` and `npm --version`
+
 ### Problem: "Permission denied" when running npm commands
-
-## 1. Environment Setup Errors
-
-**Cause:** Insufficient permissions (common on Mac/Linux)
-
-### ❌ Error: `'node' is not recognized as an internal or external command`**Solution:**
 
 
 

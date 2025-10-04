@@ -2,7 +2,6 @@
 
 ## Overview
 
-**Time Required**: 5-7 hours
 **Difficulty**: Intermediate to Advanced
 **Prerequisites**: Lessons 1-2 completed, async/await knowledge
 
@@ -50,6 +49,8 @@ Before starting this lesson, make sure you have:
 - Knowledge of databases (MongoDB, PostgreSQL)
 
 > 💡 **Not ready?** → Review [Lesson 2](../lesson2-component-hook/) for hooks mastery
+
+> 🔄 **Hooks Review**: This lesson uses `useState` and `useEffect` extensively for data fetching and state management. If you need a refresher on React Hooks, review [Lesson 2: React Hooks](../lesson2-component-hook/#2-react-hooks-essentials) before proceeding.
 
 ---
 
@@ -623,7 +624,7 @@ useEffect(() => {
 
 **Solution:** Debounce user input (500ms typical), or use React Query with enabled option
 
-> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting-guide.md)
+> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting.md)
 
 ---
 
@@ -681,7 +682,7 @@ useEffect(() => {
 
 ### Additional Resources
 🎓 **Quiz yourself** → [quiz/](./quiz/) - Test your API knowledge
-❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting-guide.md)
+❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting.md)
 🔐 **Learn auth next** → Preview [Lesson 4](../lesson4-routing-auth/)
 
 ---

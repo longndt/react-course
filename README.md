@@ -4,11 +4,7 @@
 
 This course teaches **React with TypeScript** development using industry-standard practices through hands-on examples.
 
-**Format**: Theory, hands-on practice, and project-based learn- **Follow theory**: Read carefully with your code editor open
-- **Code along**: Type examples yourself, don't just read
-- **Experiment**: Modify code to see what happens
-- **Practice**: Complete labs before checking solutions
-- **Follow the "example" folder** to see complete examplesng
+**Format**: Theory, hands-on practice, and project-based learn
 
 **Language**: All examples and exercises use **TypeScript**
 
@@ -180,7 +176,7 @@ Make sure you have installed:
 
 **⚠️ Having installation or setup issues?**
 
-👉 **[Check Troubleshooting Guide](./extra/troubleshooting-guide.md)** for common problems and solutions
+👉 **[Check Troubleshooting Guide](./extra/troubleshooting.md)** for common problems and solutions
 
 ### Step 2: Install Markdown Reading Support Extension
 
@@ -216,9 +212,12 @@ cd react-course
 - 👉 **[Lesson 4: Routing & Authentication ](./lesson4-routing-auth/readme.md)**
 - 👉 **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack-deployment/readme.md)**
 
-#### 3️⃣ **Continue with Advanced Materials** (After completing all lessons)
-- **[State Management](./extra/state-management-guide.md)** - Advanced state management
-- **[Modern Stack](./extra/modern-stack-2025.md)** - Latest technologies
+#### 3️⃣ **Continue with Advanced Materials** (At last)
+- **[Web Testing](./extra/web-testing.md)** - Jest, React Testing Library, E2E testing
+- **[Performance Optimization](./extra/performance-optimization.md)** - useMemo, useCallback, bundle optimization
+- **[Web Accessibility](./extra/web-accessibility.md)** - WCAG compliance, ARIA, keyboard navigation
+- **[State Management](./extra/state-management.md)** - Advanced state management patterns
+- **[Modern Stack](./extra/modern-stack.md)** - Latest React ecosystem technologies
 - **[Advanced Patterns](./extra/advanced-patterns.md)** - Enterprise-level patterns
 
 ### Step 5: Start Learning
@@ -233,10 +232,10 @@ cd lesson1-fundamentals-setup
 
 ### 💡 Learning Tips
 
-- **Use Markdown Preview Enhanced** for better documentation reading experience
-- **Read the readme.md** of each lesson carefully before starting
+- **Use *Markdown Preview Enhanced*** for better reading experience
+- **Read the *readme***  of each lesson carefully before starting
 - **Complete all labs** to solidify your understanding
-- **Follow the "example" folder** to see complete example
-- **Stuck on an error?** Check the **[Troubleshooting Guide](./extra/troubleshooting-guide.md)** for quick solutions
+- **Follow the *example* folder** to see complete example
+- **Check the *Troubleshooting Guide*** for quick solutions
 
 ---

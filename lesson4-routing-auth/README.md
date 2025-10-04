@@ -2,7 +2,6 @@
 
 ## Overview
 
-**Time Required**: 5-7 hours
 **Difficulty**: Intermediate to Advanced
 **Prerequisites**: Lessons 1-3 completed, JWT basics helpful
 
@@ -50,6 +49,8 @@ Before starting this lesson, make sure you have:
 - Knowledge of HTTP security concepts
 
 > 💡 **Not ready?** → Review [Lesson 3](../lesson3-api-data/) for API integration
+
+> 🔄 **Hooks Review**: This lesson relies heavily on `useState`, `useEffect`, and `useContext` for authentication state management. If you need to review these concepts, see [Lesson 2: React Hooks](../lesson2-component-hook/#2-react-hooks-essentials).
 
 ---
 
@@ -573,7 +574,7 @@ useEffect(() => {
 
 **Solution:** Check for existing token on app initialization
 
-> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting-guide.md)
+> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting.md)
 
 ---
 
@@ -635,7 +636,7 @@ useEffect(() => {
 
 ### Additional Resources
 🎓 **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
-❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting-guide.md)
+❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting.md)
 🚀 **Learn deployment** → Preview [Lesson 5](../lesson5-fullstack-deployment/)
 
 ---

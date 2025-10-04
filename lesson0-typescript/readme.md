@@ -2,7 +2,6 @@
 
 ## Overview
 
-**Time Required**: 2-3 hours
 **Difficulty**: Beginner to Intermediate
 **Status**: 📚 Optional but Recommended
 

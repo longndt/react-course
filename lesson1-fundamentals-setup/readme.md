@@ -2,7 +2,6 @@
 
 ## Overview
 
-**Time Required**: 6-8 hours
 **Difficulty**: Beginner
 **Prerequisites**: Lesson 0 (TypeScript basics)
 

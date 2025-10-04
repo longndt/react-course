@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Routing & Authentication - Quiz</title>
+    <title>Quiz - Routing & Authentication</title>
     <style>
       * {
         margin: 0;
@@ -224,16 +224,16 @@
 
       .results-card {
         background: white;
-        padding: 40px;
+        padding: 25px;
         border-radius: 15px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         text-align: center;
       }
 
       .score-circle {
-        width: 200px;
-        height: 200px;
-        margin: 30px auto;
+        width: 140px;
+        height: 140px;
+        margin: 20px auto;
         border-radius: 50%;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
@@ -244,18 +244,18 @@
       }
 
       .score-number {
-        font-size: 60px;
+        font-size: 42px;
         font-weight: bold;
       }
 
       .score-label {
-        font-size: 16px;
-        margin-top: 10px;
+        font-size: 13px;
+        margin-top: 5px;
       }
 
       .score-details {
-        margin: 30px 0;
-        padding: 20px;
+        margin: 15px 0;
+        padding: 15px;
         background: #f8f9fa;
         border-radius: 10px;
       }
@@ -263,8 +263,9 @@
       .score-row {
         display: flex;
         justify-content: space-between;
-        padding: 10px 0;
+        padding: 8px 0;
         border-bottom: 1px solid #e0e0e0;
+        font-size: 14px;
       }
 
       .score-row:last-child {
@@ -332,10 +333,10 @@
 
 
       .feedback {
-        margin-top: 20px;
-        padding: 20px;
+        margin-top: 15px;
+        padding: 15px;
         border-radius: 10px;
-        font-size: 18px;
+        font-size: 15px;
       }
 
       .feedback.excellent {
@@ -382,17 +383,14 @@
     <div class="container">
       <!-- Header -->
       <div class="header">
-        <h1>🎯 Routing & Authentication Quiz</h1>
-        <p>
-          Test your understanding of React Router, protected routes, JWT authentication, and authorization
-        </p>
+        <h1>🎯 Quiz - Routing & Authentication</h1>
       </div>
 
       <!-- Progress Bar -->
       <div class="progress-bar" id="progressBar">
         <div class="progress-info">
-          <span id="progressText">Question 1 of 30</span>
-          <span id="answeredText">Answered: 0/30</span>
+          <span id="progressText">Question 1 of 20</span>
+          <span id="answeredText">Answered: 0/20</span>
         </div>
         <div class="progress-track">
           <div class="progress-fill" id="progressFill"></div>
@@ -436,7 +434,7 @@
 
       <!-- Results Card -->
       <div class="results-card hidden" id="resultsCard">
-        <h2 style="color: #667eea; margin-bottom: 20px">
+        <h2 style="color: #667eea; margin-bottom: 12px; font-size: 24px">
           🎉 Quiz Completed!
         </h2>
 
@@ -448,7 +446,7 @@
         <div class="score-details">
           <div class="score-row">
             <span><strong>Total Questions:</strong></span>
-            <span id="totalQuestions">30</span>
+            <span id="totalQuestions">20</span>
           </div>
           <div class="score-row">
             <span><strong>Answered:</strong></span>
@@ -468,7 +466,7 @@
 
         <button
           class="btn btn-primary"
-          style="margin-top: 30px"
+          style="margin-top: 20px"
           onclick="location.reload()"
         >
           🔄 Retake Quiz
@@ -477,265 +475,175 @@
     </div>
 
     <script>
-      // Quiz Data - Routing & Authentication
+      // Quiz Data - Routing & Authentication (Based on theory4.md)
       const quizData = [
-        // Multiple Choice Questions (1-20)
+        // Multiple Choice Questions (1-15)
         {
           type: "multiple",
-          question: "What is the most popular routing library for React?",
+          question: "What is the main advantage of client-side routing in React?",
           options: [
-            "React Navigation",
-            "React Router",
-            "Next.js Router",
-            "React Routing",
+            "Faster server responses",
+            "No page reloads, instant navigation with state persistence",
+            "Better SEO",
+            "Smaller bundle size",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What component wraps your app to enable routing?",
-          options: [
-            "RouterProvider or BrowserRouter",
-            "RouteContainer",
-            "AppRouter",
-            "NavigationProvider",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "Which component defines a route in React Router v6?",
-          options: ["<Path>", "<Route>", "<Link>", "<Router>"],
+          question: "Which library is the standard for routing in React?",
+          options: ["React Navigation", "React Router", "Next Router", "Express Router"],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What component is used to navigate between routes?",
-          options: ["<Navigate>", "<Link>", "<Redirect>", "<Router>"],
+          question: "What component wraps the entire app to enable routing?",
+          options: ["Router", "BrowserRouter", "Routes", "Route"],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "How do you navigate programmatically in React Router v6?",
-          options: [
-            "useNavigate() hook",
-            "useHistory() hook",
-            "browserHistory.push()",
-            "window.location.href",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What hook gets URL parameters in React Router?",
-          options: [
-            "useRouter()",
-            "useParams()",
-            "useQuery()",
-            "useLocation()",
-          ],
+          question: "Which component is used for declarative navigation in React Router?",
+          options: ["<a>", "<Link>", "<Navigate>", "<Redirect>"],
           correct: 1,
         },
         {
           type: "multiple",
           question: "What is a protected route?",
           options: [
+            "A route that loads faster",
+            "A route that requires authentication to access",
             "A route with HTTPS",
-            "A route that requires authentication",
-            "An encrypted route",
-            "A route with error handling",
+            "A route without parameters",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "Where should authentication tokens typically be stored?",
+          question: "What does JWT stand for?",
           options: [
-            "Global variables",
-            "localStorage or sessionStorage",
-            "Cookies only",
-            "In state only",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What is JWT?",
-          options: [
-            "JavaScript Testing Tool",
+            "JavaScript Web Token",
             "JSON Web Token",
             "Java Web Technology",
-            "Just Working Today",
+            "Just Working Token",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What HTTP header typically contains the auth token?",
+          question: "Where should you store JWT tokens in the browser?",
           options: [
-            "Authorization",
-            "Authentication",
-            "Token",
-            "Bearer-Token",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What is the purpose of refresh tokens?",
-          options: [
-            "To refresh the page",
-            "To get a new access token when it expires",
-            "To reload components",
-            "To clear cache",
+            "In global variables",
+            "In localStorage or httpOnly cookies",
+            "In the URL",
+            "In CSS files",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "How do you create a nested route in React Router v6?",
+          question: "What is the purpose of useNavigate hook?",
           options: [
-            "Nest <Route> components",
-            "Use dot notation",
-            "Use nested paths",
-            "Use subroutes prop",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What component renders child routes in nested routing?",
-          options: ["<Children>", "<Outlet>", "<Nested>", "<SubRoute>"],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What is the purpose of a 404 page?",
-          options: [
-            "To show errors",
-            "To handle undefined routes",
-            "To redirect users",
-            "To log out users",
+            "To create navigation menus",
+            "To programmatically navigate between routes",
+            "To fetch navigation data",
+            "To style navigation components",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "How do you create a catch-all route in React Router?",
-          options: [
-            'path="*"',
-            'path="404"',
-            'path="/error"',
-            'fallback={true}',
-          ],
-          correct: 0,
+          question: "What hook is used to access URL parameters?",
+          options: ["useState", "useEffect", "useParams", "useRouter"],
+          correct: 2,
         },
         {
           type: "multiple",
-          question: "What is role-based access control (RBAC)?",
+          question: "What is Role-Based Access Control (RBAC)?",
           options: [
-            "Route-based authentication",
-            "Restricting access based on user roles",
-            "Router backup and caching",
-            "Real-time browser access",
+            "A routing pattern",
+            "Restricting access based on user roles/permissions",
+            "A database design pattern",
+            "A CSS methodology",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What should happen when an unauthenticated user tries to access a protected route?",
+          question: "What component is used as a placeholder for nested routes?",
+          options: ["<Children>", "<Outlet>", "<Nested>", "<Slot>"],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What is the purpose of authentication?",
           options: [
-            "Show 404 page",
-            "Redirect to login page",
-            "Show empty page",
-            "Crash the app",
+            "To make apps faster",
+            "To verify user identity and control access",
+            "To improve SEO",
+            "To reduce bundle size",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is the purpose of the Navigate component in React Router v6?",
+          question: "What should you do when a JWT token expires?",
           options: [
-            "To create links",
-            "To redirect programmatically in JSX",
-            "To navigate back",
-            "To show navigation menu",
+            "Ignore it",
+            "Refresh the token or redirect to login",
+            "Delete the app",
+            "Change the password",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What does SPA stand for in React context?",
+          question: "What is the difference between authentication and authorization?",
           options: [
-            "Simple Page Application",
-            "Single Page Application",
-            "Static Page Architecture",
-            "Secure Page Access",
+            "No difference",
+            "Authentication verifies identity, authorization checks permissions",
+            "Authorization is faster",
+            "Authentication is only for admins",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is the advantage of client-side routing?",
+          question: "What is a common security practice for storing passwords?",
           options: [
-            "Better SEO",
-            "Faster navigation without page reloads",
-            "More secure",
-            "Easier to build",
+            "Store in plain text",
+            "Hash with bcrypt or similar algorithms",
+            "Encrypt with base64",
+            "Store in localStorage",
           ],
           correct: 1,
         },
 
-        // Short Answer Questions (21-30)
+        // Short Answer Questions (16-20)
         {
           type: "short",
-          question: "What React Router component creates clickable links?",
-          answer: "Link",
+          question: "What React Router component defines individual routes?",
+          answer: "Route",
         },
         {
           type: "short",
-          question: "What hook allows programmatic navigation in React Router v6?",
-          answer: "useNavigate",
+          question: "What hook returns the current location object in React Router?",
+          answer: "useLocation",
         },
         {
           type: "short",
-          question: "What hook retrieves URL parameters from the route?",
-          answer: "useParams",
+          question: "What component should render when no routes match (404 page)?",
+          answer: "NotFound",
         },
         {
           type: "short",
-          question: "What component renders nested child routes?",
-          answer: "Outlet",
+          question: "What HTTP status code indicates unauthorized access?",
+          answer: "401",
         },
         {
           type: "short",
-          question: "What does JWT stand for? (3 words)",
-          answer: "JSON Web Token",
-        },
-        {
-          type: "short",
-          question: "Where is the auth token typically stored in the browser?",
-          answer: "localStorage",
-        },
-        {
-          type: "short",
-          question: "What path pattern matches all undefined routes? (just the pattern)",
-          answer: "*",
-        },
-        {
-          type: "short",
-          question: "What does SPA stand for? (3 words)",
-          answer: "Single Page Application",
-        },
-        {
-          type: "short",
-          question: "What HTTP header usually contains the authentication token?",
-          answer: "Authorization",
-        },
-        {
-          type: "short",
-          question: "What React Router component redirects users in JSX?",
-          answer: "Navigate",
+          question: "What React pattern is commonly used to share auth state across components?",
+          answer: "Context",
         },
       ];
 
@@ -764,6 +672,22 @@
 
       // Initialize Quiz
       function init() {
+        // Shuffle options for all multiple choice questions
+        quizData.forEach(question => {
+          if (question.type === "multiple") {
+            const correctAnswer = question.options[question.correct];
+            // Shuffle options
+            const shuffled = [...question.options];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            question.options = shuffled;
+            // Update correct index
+            question.correct = shuffled.indexOf(correctAnswer);
+          }
+        });
+
         showQuestion(currentQuestion);
       }
 
@@ -782,14 +706,19 @@
           if (i === question.correct) {
             opt.classList.add("correct");
             opt.classList.remove("selected");
+            const icon = document.createElement("span");
+            icon.className = "feedback-icon";
+            icon.textContent = "✓";
+            opt.querySelector("label").appendChild(icon);
           } else if (i === selectedOption) {
             opt.classList.add("incorrect");
             opt.classList.remove("selected");
+            const icon = document.createElement("span");
+            icon.className = "feedback-icon";
+            icon.textContent = "✗";
+            opt.querySelector("label").appendChild(icon);
           }
         });
-
-        // Re-render the question to show feedback icons
-        showQuestion(index);
       }
 
       // Check short answer
@@ -814,7 +743,7 @@
 
         // Update header
         questionNumber.textContent = `Question ${index + 1}`;
-        questionText.textContent = question.question;
+        questionText.textContent = question.question || "Question text missing";
 
         // Update progress
         progressText.textContent = `Question ${index + 1} of ${

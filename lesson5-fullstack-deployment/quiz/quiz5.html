@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Fullstack & Deployment - Quiz</title>
+    <title>Quiz - Fullstack & Deployment</title>
     <style>
       * {
         margin: 0;
@@ -224,16 +224,16 @@
 
       .results-card {
         background: white;
-        padding: 40px;
+        padding: 25px;
         border-radius: 15px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         text-align: center;
       }
 
       .score-circle {
-        width: 200px;
-        height: 200px;
-        margin: 30px auto;
+        width: 140px;
+        height: 140px;
+        margin: 20px auto;
         border-radius: 50%;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
@@ -244,18 +244,18 @@
       }
 
       .score-number {
-        font-size: 60px;
+        font-size: 42px;
         font-weight: bold;
       }
 
       .score-label {
-        font-size: 16px;
-        margin-top: 10px;
+        font-size: 13px;
+        margin-top: 5px;
       }
 
       .score-details {
-        margin: 30px 0;
-        padding: 20px;
+        margin: 15px 0;
+        padding: 15px;
         background: #f8f9fa;
         border-radius: 10px;
       }
@@ -263,8 +263,9 @@
       .score-row {
         display: flex;
         justify-content: space-between;
-        padding: 10px 0;
+        padding: 8px 0;
         border-bottom: 1px solid #e0e0e0;
+        font-size: 14px;
       }
 
       .score-row:last-child {
@@ -332,10 +333,10 @@
 
 
       .feedback {
-        margin-top: 20px;
-        padding: 20px;
+        margin-top: 15px;
+        padding: 15px;
         border-radius: 10px;
-        font-size: 18px;
+        font-size: 15px;
       }
 
       .feedback.excellent {
@@ -382,17 +383,14 @@
     <div class="container">
       <!-- Header -->
       <div class="header">
-        <h1>🎯 Fullstack & Deployment Quiz</h1>
-        <p>
-          Test your understanding of Node.js, Express, environment variables, CI/CD, and production deployment
-        </p>
+        <h1>🎯 Quiz - Fullstack & Deployment</h1>
       </div>
 
       <!-- Progress Bar -->
       <div class="progress-bar" id="progressBar">
         <div class="progress-info">
-          <span id="progressText">Question 1 of 30</span>
-          <span id="answeredText">Answered: 0/30</span>
+          <span id="progressText">Question 1 of 20</span>
+          <span id="answeredText">Answered: 0/20</span>
         </div>
         <div class="progress-track">
           <div class="progress-fill" id="progressFill"></div>
@@ -436,7 +434,7 @@
 
       <!-- Results Card -->
       <div class="results-card hidden" id="resultsCard">
-        <h2 style="color: #667eea; margin-bottom: 20px">
+        <h2 style="color: #667eea; margin-bottom: 12px; font-size: 24px">
           🎉 Quiz Completed!
         </h2>
 
@@ -448,7 +446,7 @@
         <div class="score-details">
           <div class="score-row">
             <span><strong>Total Questions:</strong></span>
-            <span id="totalQuestions">30</span>
+            <span id="totalQuestions">20</span>
           </div>
           <div class="score-row">
             <span><strong>Answered:</strong></span>
@@ -468,7 +466,7 @@
 
         <button
           class="btn btn-primary"
-          style="margin-top: 30px"
+          style="margin-top: 20px"
           onclick="location.reload()"
         >
           🔄 Retake Quiz
@@ -477,67 +475,50 @@
     </div>
 
     <script>
-      // Quiz Data - Fullstack & Deployment
+      // Quiz Data - Fullstack & Deployment (Based on theory5.md)
       const quizData = [
-        // Multiple Choice Questions (1-20)
+        // Multiple Choice Questions (1-15)
         {
           type: "multiple",
-          question: "What is a fullstack application?",
+          question: "What does the MERN stack consist of?",
           options: [
-            "An app with many features",
-            "An app with both frontend and backend",
-            "An app deployed to production",
-            "An app with a database",
+            "MySQL, Express, React, Node",
+            "MongoDB, Express, React, Node.js",
+            "MongoDB, Electron, Redux, Next.js",
+            "MySQL, Ember, React, Nginx",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is Node.js commonly used for in fullstack development?",
+          question: "What is Express.js?",
           options: [
-            "Frontend rendering",
-            "Backend server and API",
-            "Database management",
-            "Deployment automation",
+            "A database",
+            "A backend web framework for Node.js",
+            "A React library",
+            "A deployment platform",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What does Express.js provide?",
+          question: "What is the purpose of CORS in a full-stack application?",
           options: [
-            "A React framework",
-            "A web framework for Node.js",
-            "A database driver",
-            "A deployment tool",
+            "To encrypt data",
+            "To allow cross-origin requests between frontend and backend",
+            "To compress files",
+            "To cache responses",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is the purpose of environment variables?",
+          question: "What is an environment variable?",
           options: [
-            "To store CSS variables",
-            "To store configuration and secrets securely",
-            "To define component props",
-            "To manage state",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What file typically stores environment variables locally?",
-          options: [".config", ".env", ".settings", ".vars"],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What platform is popular for deploying React apps?",
-          options: [
-            "MySQL",
-            "Vercel or Netlify",
-            "MongoDB",
-            "PostgreSQL",
+            "A CSS variable",
+            "A configuration value stored outside the code (API keys, DB URLs)",
+            "A JavaScript variable",
+            "A database field",
           ],
           correct: 1,
         },
@@ -545,93 +526,44 @@
           type: "multiple",
           question: "What command builds a production-ready React app?",
           options: [
-            "npm start",
+            "npm run start",
             "npm run build",
-            "npm deploy",
-            "npm production",
+            "npm run deploy",
+            "npm run prod",
           ],
           correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "Where are production build files typically stored in Vite?",
+          options: ["src/", "public/", "dist/", "build/"],
+          correct: 2,
         },
         {
           type: "multiple",
           question: "What is CI/CD?",
           options: [
-            "Code Integration & Deployment",
-            "Continuous Integration & Continuous Deployment",
-            "Client Integration & Development",
-            "Component Integration & Design",
+            "Code Insertion/Code Deletion",
+            "Continuous Integration / Continuous Deployment",
+            "Client Integration / Cloud Deployment",
+            "Code Inspection / Database Connection",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is the purpose of a proxy in development?",
-          options: [
-            "To speed up the app",
-            "To forward API requests to avoid CORS issues",
-            "To encrypt data",
-            "To manage state",
-          ],
+          question: "Which platform is popular for deploying React applications?",
+          options: ["Microsoft Word", "Vercel, Netlify, or AWS", "Photoshop", "Excel"],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What database type is MongoDB?",
+          question: "What is the purpose of a reverse proxy like Nginx?",
           options: [
-            "Relational (SQL)",
-            "NoSQL (Document-based)",
-            "Graph database",
-            "Key-value store",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What is Docker used for?",
-          options: [
-            "Version control",
-            "Containerization of applications",
-            "State management",
-            "API testing",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What does SSR stand for?",
-          options: [
-            "Static Site Rendering",
-            "Server-Side Rendering",
-            "Secure Server Response",
-            "Simple State Reducer",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What framework is known for SSR with React?",
-          options: ["Vite", "Express", "Next.js", "Create React App"],
-          correct: 2,
-        },
-        {
-          type: "multiple",
-          question: "What is the benefit of server-side rendering?",
-          options: [
-            "Faster development",
-            "Better SEO and initial load performance",
-            "Easier debugging",
-            "Smaller bundle size",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What is a CDN?",
-          options: [
-            "Code Deployment Network",
-            "Content Delivery Network",
-            "Client Data Network",
-            "Cloud Database Node",
+            "To write code",
+            "To route requests, serve static files, and load balance",
+            "To design UI",
+            "To manage databases",
           ],
           correct: 1,
         },
@@ -639,102 +571,88 @@
           type: "multiple",
           question: "What should you NEVER commit to version control?",
           options: [
-            "Component files",
-            "API keys and secrets",
-            "CSS files",
+            "Source code",
+            "API keys and secrets (.env files)",
             "README files",
+            "Package.json",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is the purpose of a build folder?",
+          question: "What is the purpose of a .env file?",
           options: [
-            "To store source code",
-            "To store production-optimized files",
-            "To store development files",
-            "To store node_modules",
+            "To style components",
+            "To store environment-specific configuration and secrets",
+            "To define routes",
+            "To manage dependencies",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is a RESTful API?",
+          question: "What is Docker used for in deployment?",
           options: [
-            "An API for resting servers",
-            "An API following REST architectural principles",
-            "A database API",
-            "A React-specific API",
+            "Code editing",
+            "Containerizing applications for consistent deployment",
+            "Database design",
+            "UI testing",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What HTTP status code range indicates success?",
-          options: ["100-199", "200-299", "300-399", "400-499"],
+          question: "What HTTP status code indicates a server error?",
+          options: ["200", "404", "500", "301"],
+          correct: 2,
+        },
+        {
+          type: "multiple",
+          question: "What is the purpose of middleware in Express?",
+          options: [
+            "To create UI components",
+            "To process requests before they reach route handlers",
+            "To store data",
+            "To compile TypeScript",
+          ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is the purpose of error boundaries in React?",
+          question: "What is server-side rendering (SSR)?",
           options: [
-            "To prevent CORS errors",
-            "To catch JavaScript errors in components",
-            "To validate forms",
-            "To handle network errors",
+            "Rendering on the client",
+            "Rendering HTML on the server before sending to client",
+            "Rendering CSS",
+            "Rendering images",
           ],
           correct: 1,
         },
 
-        // Short Answer Questions (21-30)
+        // Short Answer Questions (16-20)
         {
           type: "short",
-          question: "What file stores environment variables locally?",
+          question: "What tool is commonly used to manage environment variables in Node.js?",
+          answer: "dotenv",
+        },
+        {
+          type: "short",
+          question: "What default port does Express typically run on during development?",
+          answer: "5000",
+        },
+        {
+          type: "short",
+          question: "What file should contain environment variables and be excluded from git?",
           answer: ".env",
         },
         {
           type: "short",
-          question: "What command builds a production React app?",
-          answer: "npm run build",
+          question: "What platform is commonly used for hosting MongoDB databases in the cloud?",
+          answer: "MongoDB Atlas",
         },
         {
           type: "short",
-          question: "What does SSR stand for? (3 words)",
-          answer: "Server Side Rendering",
-        },
-        {
-          type: "short",
-          question: "What does CDN stand for? (3 words)",
-          answer: "Content Delivery Network",
-        },
-        {
-          type: "short",
-          question: "What does CI/CD stand for? (full form, use &)",
-          answer: "Continuous Integration & Continuous Deployment",
-        },
-        {
-          type: "short",
-          question: "What popular platform deploys React apps for free?",
-          answer: "Vercel",
-        },
-        {
-          type: "short",
-          question: "What Node.js framework is commonly used for building APIs?",
-          answer: "Express",
-        },
-        {
-          type: "short",
-          question: "What type of database is MongoDB?",
-          answer: "NoSQL",
-        },
-        {
-          type: "short",
-          question: "What React framework is best known for SSR?",
-          answer: "Next.js",
-        },
-        {
-          type: "short",
-          question: "What folder contains the production build output in Vite?",
+          question: "What is the folder name for production build output in Vite projects?",
           answer: "dist",
         },
       ];
@@ -764,6 +682,22 @@
 
       // Initialize Quiz
       function init() {
+        // Shuffle options for all multiple choice questions
+        quizData.forEach(question => {
+          if (question.type === "multiple") {
+            const correctAnswer = question.options[question.correct];
+            // Shuffle options
+            const shuffled = [...question.options];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            question.options = shuffled;
+            // Update correct index
+            question.correct = shuffled.indexOf(correctAnswer);
+          }
+        });
+
         showQuestion(currentQuestion);
       }
 
@@ -782,14 +716,19 @@
           if (i === question.correct) {
             opt.classList.add("correct");
             opt.classList.remove("selected");
+            const icon = document.createElement("span");
+            icon.className = "feedback-icon";
+            icon.textContent = "✓";
+            opt.querySelector("label").appendChild(icon);
           } else if (i === selectedOption) {
             opt.classList.add("incorrect");
             opt.classList.remove("selected");
+            const icon = document.createElement("span");
+            icon.className = "feedback-icon";
+            icon.textContent = "✗";
+            opt.querySelector("label").appendChild(icon);
           }
         });
-
-        // Re-render the question to show feedback icons
-        showQuestion(index);
       }
 
       // Check short answer
@@ -814,7 +753,7 @@
 
         // Update header
         questionNumber.textContent = `Question ${index + 1}`;
-        questionText.textContent = question.question;
+        questionText.textContent = question.question || "Question text missing";
 
         // Update progress
         progressText.textContent = `Question ${index + 1} of ${

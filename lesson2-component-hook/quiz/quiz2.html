@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>React Components & Hooks - Quiz</title>
+    <title>Quiz - Components & Hooks</title>
     <style>
       * {
         margin: 0;
@@ -224,16 +224,16 @@
 
       .results-card {
         background: white;
-        padding: 40px;
+        padding: 25px;
         border-radius: 15px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         text-align: center;
       }
 
       .score-circle {
-        width: 200px;
-        height: 200px;
-        margin: 30px auto;
+        width: 140px;
+        height: 140px;
+        margin: 20px auto;
         border-radius: 50%;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
@@ -244,18 +244,18 @@
       }
 
       .score-number {
-        font-size: 60px;
+        font-size: 42px;
         font-weight: bold;
       }
 
       .score-label {
-        font-size: 16px;
-        margin-top: 10px;
+        font-size: 13px;
+        margin-top: 5px;
       }
 
       .score-details {
-        margin: 30px 0;
-        padding: 20px;
+        margin: 15px 0;
+        padding: 15px;
         background: #f8f9fa;
         border-radius: 10px;
       }
@@ -263,8 +263,9 @@
       .score-row {
         display: flex;
         justify-content: space-between;
-        padding: 10px 0;
+        padding: 8px 0;
         border-bottom: 1px solid #e0e0e0;
+        font-size: 14px;
       }
 
       .score-row:last-child {
@@ -332,10 +333,10 @@
 
 
       .feedback {
-        margin-top: 20px;
-        padding: 20px;
+        margin-top: 15px;
+        padding: 15px;
         border-radius: 10px;
-        font-size: 18px;
+        font-size: 15px;
       }
 
       .feedback.excellent {
@@ -382,17 +383,14 @@
     <div class="container">
       <!-- Header -->
       <div class="header">
-        <h1>🎯 React Components & Hooks Quiz</h1>
-        <p>
-          Test your understanding of React hooks, state management, props, and component lifecycle
-        </p>
+        <h1>🎯 Quiz - Components & Hooks</h1>
       </div>
 
       <!-- Progress Bar -->
       <div class="progress-bar" id="progressBar">
         <div class="progress-info">
-          <span id="progressText">Question 1 of 30</span>
-          <span id="answeredText">Answered: 0/30</span>
+          <span id="progressText">Question 1 of 20</span>
+          <span id="answeredText">Answered: 0/20</span>
         </div>
         <div class="progress-track">
           <div class="progress-fill" id="progressFill"></div>
@@ -436,7 +434,7 @@
 
       <!-- Results Card -->
       <div class="results-card hidden" id="resultsCard">
-        <h2 style="color: #667eea; margin-bottom: 20px">
+        <h2 style="color: #667eea; margin-bottom: 12px; font-size: 24px">
           🎉 Quiz Completed!
         </h2>
 
@@ -448,7 +446,7 @@
         <div class="score-details">
           <div class="score-row">
             <span><strong>Total Questions:</strong></span>
-            <span id="totalQuestions">30</span>
+            <span id="totalQuestions">20</span>
           </div>
           <div class="score-row">
             <span><strong>Answered:</strong></span>
@@ -468,7 +466,7 @@
 
         <button
           class="btn btn-primary"
-          style="margin-top: 30px"
+          style="margin-top: 20px"
           onclick="location.reload()"
         >
           🔄 Retake Quiz
@@ -477,23 +475,62 @@
     </div>
 
     <script>
-      // Quiz Data - React Components & Hooks
+      // Quiz Data - Components & Hooks (Based on theory2.md)
       const quizData = [
-        // Multiple Choice Questions (1-20)
+        // Multiple Choice Questions (1-15)
         {
           type: "multiple",
-          question: "What hook is used to add state to a functional component?",
-          options: ["useState", "useEffect", "useContext", "useReducer"],
-          correct: 0,
+          question: "What are the benefits of component architecture?",
+          options: [
+            "Only code reusability",
+            "Reusability, maintainability, scalability, and collaboration",
+            "Faster compilation",
+            "Automatic testing",
+          ],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What do React function components return?",
+          options: ["A string", "JSX/TSX", "A number", "void"],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What are props in React?",
+          options: [
+            "Global variables",
+            "Data passed from parent to child components",
+            "CSS properties",
+            "HTML attributes",
+          ],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What is the main purpose of React Hooks?",
+          options: [
+            "To style components",
+            "To add state and lifecycle features to function components",
+            "To create class components",
+            "To manage routing",
+          ],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "Which hook is used to add state to function components?",
+          options: ["useEffect", "useState", "useContext", "useRef"],
+          correct: 1,
         },
         {
           type: "multiple",
           question: "What does useState return?",
           options: [
-            "Just the state value",
+            "Only the state value",
             "An array with [state, setState]",
-            "An object with state and setState",
-            "Just the setState function",
+            "An object with state and setter",
+            "A function to update state",
           ],
           correct: 1,
         },
@@ -501,507 +538,127 @@
           type: "multiple",
           question: "When does useEffect run by default?",
           options: [
-            "Before every render",
-            "After every render",
             "Only on mount",
+            "After every render",
+            "Before every render",
             "Only on unmount",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "How do you run useEffect only once on mount?",
+          question: "What is the dependency array in useEffect used for?",
           options: [
-            "Pass an empty dependency array []",
-            "Don't pass any dependencies",
-            "Pass null as dependency",
-            "Use useEffectOnce hook",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What are props in React?",
-          options: [
-            "Internal component state",
-            "Data passed from parent to child component",
-            "CSS properties",
-            "Event handlers",
+            "To list all variables",
+            "To control when the effect runs",
+            "To prevent errors",
+            "To improve performance only",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "Can you modify props inside a child component?",
+          question: "What is useRef commonly used for?",
           options: [
-            "Yes, props are mutable",
-            "No, props are read-only",
-            "Only if using TypeScript",
-            "Only in class components",
+            "Managing state",
+            "Accessing DOM elements and storing mutable values",
+            "Making API calls",
+            "Creating animations",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is prop drilling?",
+          question: "What is useContext used for?",
           options: [
-            "A debugging technique",
-            "Passing props through multiple component levels",
-            "A testing strategy",
-            "A performance optimization",
+            "Creating contexts",
+            "Consuming context values without prop drilling",
+            "Managing local state",
+            "Handling side effects",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is the correct way to update state based on previous state?",
+          question: "When should you use useReducer instead of useState?",
           options: [
-            "setState(state + 1)",
-            "setState((prevState) => prevState + 1)",
-            "state = state + 1",
-            "setState(++state)",
+            "For simple boolean state",
+            "For complex state logic with multiple sub-values",
+            "For API calls",
+            "For styling",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is a controlled component?",
+          question: "What are custom hooks?",
           options: [
-            "A component that uses state",
-            "A form element whose value is controlled by React state",
-            "A component wrapped in React.memo",
-            "A component that uses useEffect",
+            "Built-in React hooks",
+            "Reusable functions that use React hooks",
+            "Third-party libraries",
+            "CSS-in-JS solutions",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "How do you clean up side effects in useEffect?",
+          question: "What is the naming convention for custom hooks?",
           options: [
-            "Return a cleanup function",
-            "Use useCleanup hook",
-            "Call cleanup() manually",
-            "Use componentWillUnmount",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What does the dependency array in useEffect control?",
-          options: [
-            "Which components re-render",
-            "When the effect runs",
-            "What state to update",
-            "Which props to receive",
+            "hookName",
+            "useName",
+            "customName",
+            "getName",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "Can hooks be called conditionally?",
+          question: "What is a key rule of hooks?",
           options: [
-            "Yes, anywhere",
-            "No, must be at top level",
-            "Only in useEffect",
-            "Only in custom hooks",
+            "Call hooks anywhere in the code",
+            "Only call hooks at the top level of functions",
+            "Call hooks inside loops",
+            "Call hooks conditionally",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is the purpose of React.memo?",
+          question: "What does useMemo do?",
           options: [
-            "To memorize values",
-            "To prevent unnecessary re-renders",
-            "To cache API calls",
-            "To store user data",
+            "Memoizes a function",
+            "Memoizes a computed value to avoid expensive recalculations",
+            "Creates a reference",
+            "Manages state",
           ],
           correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What hook would you use to access context?",
-          options: ["useState", "useEffect", "useContext", "useReducer"],
-          correct: 2,
-        },
-        {
-          type: "multiple",
-          question: "What is the correct way to handle form submissions?",
-          options: [
-            "Use onSubmit and preventDefault()",
-            "Just use onClick on button",
-            "Forms auto-handle submissions",
-            "Use action attribute only",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "How do you pass a function as a prop?",
-          options: [
-            "<Child func={myFunc} />",
-            "<Child func={myFunc()} />",
-            "<Child func='myFunc' />",
-            "<Child onClick=myFunc />",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What is lifting state up?",
-          options: [
-            "Moving state to a parent component to share between children",
-            "Using global state",
-            "Increasing state value",
-            "Moving state to Redux",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What does the children prop contain?",
-          options: [
-            "Child components",
-            "Elements between opening and closing tags",
-            "All props passed to component",
-            "Component state",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "How do you type props in TypeScript React?",
-          options: [
-            "interface MyProps {}",
-            "type Props = any",
-            "props: object",
-            "No typing needed",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What happens if you call setState in the render body?",
-          options: [
-            "Nothing",
-            "Component updates",
-            "Infinite loop",
-            "Error thrown immediately",
-          ],
-          correct: 2,
         },
 
-        // Short Answer Questions (21-30)
+        // Short Answer Questions (16-20)
         {
           type: "short",
-          question: "What hook adds side effects to functional components?",
+          question: "What hook would you use to perform side effects like API calls?",
           answer: "useEffect",
         },
         {
           type: "short",
-          question: "What is the second element in the array returned by useState called?",
-          answer: "setState",
+          question: "What hook is used to access a DOM element directly?",
+          answer: "useRef",
         },
         {
           type: "short",
-          question: "What symbol do you use to pass props to a component? (just the symbol)",
-          answer: "{}",
+          question: "What is the prefix required for all custom hooks?",
+          answer: "use",
         },
         {
           type: "short",
-          question: "What is it called when component state is moved to a parent? (two words)",
-          answer: "lifting state",
+          question: "What hook memoizes a function to prevent unnecessary re-creations?",
+          answer: "useCallback",
         },
         {
           type: "short",
-          question: "What method prevents default form submission behavior?",
-          answer: "preventDefault",
-        },
-        {
-          type: "short",
-          question: "What React feature wraps a component to prevent unnecessary renders?",
-          answer: "memo",
-        },
-        {
-          type: "short",
-          question: "What prop contains elements between component tags?",
-          answer: "children",
-        },
-        {
-          type: "short",
-          question: "What is the term for passing props through multiple component levels?",
-          answer: "prop drilling",
-        },
-        {
-          type: "short",
-          question: "Are props mutable or immutable in React?",
-          answer: "immutable",
-        },
-        {
-          type: "short",
-          question: "What hook would you use to share data across many components?",
-          answer: "useContext",
-        },
-      ];
-        // Multiple Choice Questions (1-20)
-        {
-          type: "multiple",
-          question: "What is TypeScript?",
-          options: [
-            "A JavaScript runtime environment",
-            "A superset of JavaScript that adds static typing",
-            "A JavaScript framework for building UIs",
-            "A database query language",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "Which symbol is used to declare a type in TypeScript?",
-          options: ["#", ":", "@", "$"],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What is the correct way to declare a string variable?",
-          options: [
-            "let name: String = 'John';",
-            "let name: string = 'John';",
-            "var name = String('John');",
-            "string name = 'John';",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "Which TypeScript type represents any type of value?",
-          options: ["unknown", "any", "void", "never"],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What does the 'readonly' modifier do?",
-          options: [
-            "Makes a variable constant",
-            "Prevents reassignment of properties",
-            "Makes a class immutable",
-            "Prevents inheritance",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "How do you define an interface in TypeScript?",
-          options: [
-            "interface User {}",
-            "type User {}",
-            "class User {}",
-            "struct User {}",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What is a tuple in TypeScript?",
-          options: [
-            "A function that returns multiple values",
-            "An array with fixed length and typed elements",
-            "A type of object",
-            "A generic type parameter",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "Which keyword is used for type aliases?",
-          options: ["interface", "type", "alias", "typedef"],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What does the 'never' type represent?",
-          options: [
-            "A value that can be null",
-            "A value that never occurs",
-            "An undefined value",
-            "An empty object",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "How do you make a property optional in an interface?",
-          options: [
-            "property?: type",
-            "property: type?",
-            "optional property: type",
-            "property: type | undefined",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What is a union type?",
-          options: [
-            "A type that combines multiple interfaces",
-            "A type that can be one of several types (type1 | type2)",
-            "A type that merges two types together",
-            "A generic type parameter",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What is an intersection type?",
-          options: [
-            "A type that is one of several types (type1 | type2)",
-            "A type that combines multiple types (type1 & type2)",
-            "A type that excludes common properties",
-            "A type alias",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question:
-            "Which utility type makes all properties of a type optional?",
-          options: ["Readonly<T>", "Partial<T>", "Required<T>", "Pick<T, K>"],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question:
-            "Which utility type makes all properties of a type required?",
-          options: ["Partial<T>", "Readonly<T>", "Required<T>", "Omit<T, K>"],
-          correct: 2,
-        },
-        {
-          type: "multiple",
-          question: "What is a generic in TypeScript?",
-          options: [
-            "A type that works with multiple types",
-            "A function that accepts any parameter",
-            "An interface without properties",
-            "A class without methods",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "How do you define a generic function?",
-          options: [
-            "function name<T>(param: T): T {}",
-            "function name(param: any): any {}",
-            "function name<T: any>(param): T {}",
-            "generic function name<T>() {}",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What is the purpose of 'enum' in TypeScript?",
-          options: [
-            "To define a set of named constants",
-            "To create a list of functions",
-            "To declare multiple variables",
-            "To define a class hierarchy",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "Which is the correct way to define a function type?",
-          options: [
-            "(param: type) => returnType",
-            "function(param: type): returnType",
-            "func<type, returnType>",
-            "type => returnType",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What does 'strict: true' enable in tsconfig.json?",
-          options: [
-            "All strict type-checking options",
-            "Only null checking",
-            "Only implicit any checking",
-            "Performance optimizations",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "How do you assert a type in TypeScript?",
-          options: [
-            "value as Type or <Type>value",
-            "value.type = Type",
-            "Type(value)",
-            "value: Type",
-          ],
-          correct: 0,
-        },
-
-        // Short Answer Questions (21-30)
-        {
-          type: "short",
-          question:
-            "What command do you use to compile TypeScript to JavaScript? (one word)",
-          answer: "tsc",
-        },
-        {
-          type: "short",
-          question:
-            "What file is used to configure TypeScript compiler options?",
-          answer: "tsconfig.json",
-        },
-        {
-          type: "short",
-          question:
-            "What TypeScript type should you use for a value that could be null or undefined?",
-          answer: "union",
-        },
-        {
-          type: "short",
-          question:
-            "What keyword is used to define a class property that cannot be changed after initialization?",
-          answer: "readonly",
-        },
-        {
-          type: "short",
-          question:
-            "What is the TypeScript feature that allows you to define the shape of an object?",
-          answer: "interface",
-        },
-        {
-          type: "short",
-          question:
-            "What symbol is used to make a parameter optional in a function? (just the symbol)",
-          answer: "?",
-        },
-        {
-          type: "short",
-          question:
-            "What TypeScript type represents a function that never returns?",
-          answer: "never",
-        },
-        {
-          type: "short",
-          question:
-            "What is the TypeScript operator used to check if a property exists in an object?",
-          answer: "in",
-        },
-        {
-          type: "short",
-          question:
-            "What TypeScript feature allows you to write code that works with multiple types?",
-          answer: "generics",
-        },
-        {
-          type: "short",
-          question:
-            "What is the default access modifier for class members in TypeScript?",
-          answer: "public",
+          question: "What React API is used to create a context?",
+          answer: "createContext",
         },
       ];
 
@@ -1030,6 +687,22 @@
 
       // Initialize Quiz
       function init() {
+        // Shuffle options for all multiple choice questions
+        quizData.forEach(question => {
+          if (question.type === "multiple") {
+            const correctAnswer = question.options[question.correct];
+            // Shuffle options
+            const shuffled = [...question.options];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            question.options = shuffled;
+            // Update correct index
+            question.correct = shuffled.indexOf(correctAnswer);
+          }
+        });
+
         showQuestion(currentQuestion);
       }
 
@@ -1048,14 +721,19 @@
           if (i === question.correct) {
             opt.classList.add("correct");
             opt.classList.remove("selected");
+            const icon = document.createElement("span");
+            icon.className = "feedback-icon";
+            icon.textContent = "✓";
+            opt.querySelector("label").appendChild(icon);
           } else if (i === selectedOption) {
             opt.classList.add("incorrect");
             opt.classList.remove("selected");
+            const icon = document.createElement("span");
+            icon.className = "feedback-icon";
+            icon.textContent = "✗";
+            opt.querySelector("label").appendChild(icon);
           }
         });
-
-        // Re-render the question to show feedback icons
-        showQuestion(index);
       }
 
       // Check short answer
@@ -1080,7 +758,7 @@
 
         // Update header
         questionNumber.textContent = `Question ${index + 1}`;
-        questionText.textContent = question.question;
+        questionText.textContent = question.question || "Question text missing";
 
         // Update progress
         progressText.textContent = `Question ${index + 1} of ${

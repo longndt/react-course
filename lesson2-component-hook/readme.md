@@ -2,7 +2,6 @@
 
 ## Overview
 
-**Time Required**: 4-6 hours
 **Difficulty**: Intermediate
 **Prerequisites**: Lesson 1 completed, TypeScript basics
 
@@ -445,7 +444,7 @@ function Component() {
 
 **Solution:** Only call setState in event handlers or useEffect
 
-> 🔧 **More solutions** → See [Troubleshooting Guide](../extra/troubleshooting-guide.md)
+> 🔧 **More solutions** → See [Troubleshooting Guide](../extra/troubleshooting.md)
 
 ---
 
@@ -495,12 +494,16 @@ function Component() {
 
 ### Additional Resources
 🎓 **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
-❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting-guide.md)
+❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting.md)
 🏗️ **Advanced patterns** → [Advanced Patterns](../extra/advanced-patterns.md)
 
 ---
 
 ## Resources & References
+
+### Course Guides
+- **[Accessibility Guide](../extra/accessibility-guide.md)** - Build accessible React components with ARIA, keyboard navigation, and semantic HTML
+- [Advanced Patterns](../extra/advanced-patterns.md) - Advanced component patterns and techniques
 
 ### Official Documentation
 - [React Hooks Reference](https://react.dev/reference/react) - Official API docs

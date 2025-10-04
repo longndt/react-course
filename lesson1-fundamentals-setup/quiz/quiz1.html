@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>React Fundamentals & Setup - Quiz</title>
+    <title>Quiz - React Fundamentals & Setup</title>
     <style>
       * {
         margin: 0;
@@ -224,16 +224,16 @@
 
       .results-card {
         background: white;
-        padding: 40px;
+        padding: 25px;
         border-radius: 15px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         text-align: center;
       }
 
       .score-circle {
-        width: 200px;
-        height: 200px;
-        margin: 30px auto;
+        width: 140px;
+        height: 140px;
+        margin: 20px auto;
         border-radius: 50%;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
@@ -244,18 +244,18 @@
       }
 
       .score-number {
-        font-size: 60px;
+        font-size: 42px;
         font-weight: bold;
       }
 
       .score-label {
-        font-size: 16px;
-        margin-top: 10px;
+        font-size: 13px;
+        margin-top: 5px;
       }
 
       .score-details {
-        margin: 30px 0;
-        padding: 20px;
+        margin: 15px 0;
+        padding: 15px;
         background: #f8f9fa;
         border-radius: 10px;
       }
@@ -263,8 +263,9 @@
       .score-row {
         display: flex;
         justify-content: space-between;
-        padding: 10px 0;
+        padding: 8px 0;
         border-bottom: 1px solid #e0e0e0;
+        font-size: 14px;
       }
 
       .score-row:last-child {
@@ -332,10 +333,10 @@
 
 
       .feedback {
-        margin-top: 20px;
-        padding: 20px;
+        margin-top: 15px;
+        padding: 15px;
         border-radius: 10px;
-        font-size: 18px;
+        font-size: 15px;
       }
 
       .feedback.excellent {
@@ -382,17 +383,14 @@
     <div class="container">
       <!-- Header -->
       <div class="header">
-        <h1>🎯 React Fundamentals & Setup Quiz</h1>
-        <p>
-          Test your understanding of React basics, JSX, components, and Vite project setup
-        </p>
+        <h1>🎯 Quiz - React Fundamentals & Setup</h1>
       </div>
 
       <!-- Progress Bar -->
       <div class="progress-bar" id="progressBar">
         <div class="progress-info">
-          <span id="progressText">Question 1 of 30</span>
-          <span id="answeredText">Answered: 0/30</span>
+          <span id="progressText">Question 1 of 20</span>
+          <span id="answeredText">Answered: 0/20</span>
         </div>
         <div class="progress-track">
           <div class="progress-fill" id="progressFill"></div>
@@ -436,7 +434,7 @@
 
       <!-- Results Card -->
       <div class="results-card hidden" id="resultsCard">
-        <h2 style="color: #667eea; margin-bottom: 20px">
+        <h2 style="color: #667eea; margin-bottom: 12px; font-size: 24px">
           🎉 Quiz Completed!
         </h2>
 
@@ -448,7 +446,7 @@
         <div class="score-details">
           <div class="score-row">
             <span><strong>Total Questions:</strong></span>
-            <span id="totalQuestions">30</span>
+            <span id="totalQuestions">20</span>
           </div>
           <div class="score-row">
             <span><strong>Answered:</strong></span>
@@ -468,7 +466,7 @@
 
         <button
           class="btn btn-primary"
-          style="margin-top: 30px"
+          style="margin-top: 20px"
           onclick="location.reload()"
         >
           🔄 Retake Quiz
@@ -477,231 +475,171 @@
     </div>
 
     <script>
-      // Quiz Data - React Fundamentals & Setup
+      // Quiz Data - React Fundamentals & Setup (Based on theory1.md)
       const quizData = [
-        // Multiple Choice Questions (1-20)
+        // Multiple Choice Questions (1-15)
         {
           type: "multiple",
           question: "What is React?",
           options: [
             "A JavaScript library for building user interfaces",
-            "A backend framework",
+            "A backend framework for Node.js",
             "A database management system",
-            "A CSS preprocessor",
+            "A CSS preprocessor like Sass",
           ],
           correct: 0,
         },
         {
           type: "multiple",
-          question: "What does JSX stand for?",
+          question: "Which company created and maintains React?",
+          options: ["Google", "Meta (Facebook)", "Microsoft", "Amazon"],
+          correct: 1,
+        },
+        {
+          type: "multiple",
+          question: "What are the three key concepts of React?",
           options: [
-            "JavaScript XML",
-            "Java Syntax Extension",
-            "JavaScript Extension",
-            "JSON XML",
+            "Component-Based, Declarative, Learn Once Write Anywhere",
+            "Fast, Secure, Scalable",
+            "MVC, Templates, Data Binding",
+            "Server-side, Client-side, Hybrid",
           ],
           correct: 0,
         },
         {
           type: "multiple",
-          question: "Which company developed React?",
-          options: ["Google", "Facebook (Meta)", "Microsoft", "Twitter"],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What is the virtual DOM?",
+          question: "How does React differ from traditional web development in terms of DOM updates?",
           options: [
-            "A database for storing DOM elements",
-            "A lightweight copy of the actual DOM used for optimization",
-            "A CSS framework",
-            "A browser extension",
+            "React uses Virtual DOM for efficiency, traditional uses direct DOM manipulation",
+            "React uses server-side rendering only",
+            "React requires full page refreshes",
+            "React doesn't use the DOM at all",
           ],
-          correct: 1,
+          correct: 0,
         },
         {
           type: "multiple",
-          question: "Which tool is recommended for creating a new React app in 2025?",
+          question: "What does TSX stand for?",
           options: [
-            "create-react-app",
+            "TypeScript XML",
+            "TypeScript Extension",
+            "TypeScript Syntax",
+            "TypeScript Express",
+          ],
+          correct: 0,
+        },
+        {
+          type: "multiple",
+          question: "Which tool is recommended for creating new React projects in 2025?",
+          options: [
+            "create-react-app (CRA)",
             "Vite",
-            "Webpack",
+            "Webpack manually",
             "Parcel",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What file extension is used for React components with TypeScript?",
-          options: [".js", ".jsx", ".ts", ".tsx"],
-          correct: 3,
-        },
-        {
-          type: "multiple",
-          question: "In JSX, how do you write a JavaScript expression?",
+          question: "What is the main entry point file for a React application?",
           options: [
-            "{{expression}}",
-            "{expression}",
-            "$(expression)",
-            "[expression]",
+            "App.tsx",
+            "main.tsx",
+            "index.html",
+            "vite.config.ts",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is the correct way to create a React component?",
+          question: "Where should reusable React components be organized?",
           options: [
-            "function MyComponent() { return <div>Hello</div>; }",
-            "const MyComponent = <div>Hello</div>;",
-            "component MyComponent() { return <div>Hello</div>; }",
-            "create MyComponent() { return <div>Hello</div>; }",
+            "public/ folder",
+            "src/components/ folder",
+            "node_modules/ folder",
+            "dist/ folder",
           ],
-          correct: 0,
+          correct: 1,
         },
         {
           type: "multiple",
-          question: "What must a React component return?",
+          question: "What must a React functional component return?",
           options: [
+            "JSX/TSX or null",
             "A JavaScript object",
-            "JSX or null",
             "A string",
             "An array",
           ],
-          correct: 1,
+          correct: 0,
         },
         {
           type: "multiple",
-          question: "Which of the following is NOT a valid React component name?",
+          question: "Which naming convention is correct for React components?",
           options: [
-            "MyComponent",
-            "my-component",
-            "UserProfile",
-            "Button123",
+            "myComponent (camelCase)",
+            "MyComponent (PascalCase)",
+            "my-component (kebab-case)",
+            "MY_COMPONENT (UPPER_CASE)",
           ],
           correct: 1,
         },
         {
           type: "multiple",
-          question: "What is the purpose of ReactDOM.createRoot()?",
+          question: "How do you embed JavaScript expressions in JSX/TSX?",
           options: [
-            "To create a new component",
-            "To render the app to the DOM",
-            "To create a virtual DOM",
-            "To initialize state",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "In JSX, what attribute is used instead of 'class'?",
-          options: ["class", "className", "classname", "style"],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "How do you pass data to a child component?",
-          options: [
-            "Through props",
-            "Through state",
-            "Through context",
-            "Through refs",
+            "Using curly braces { }",
+            "Using double curly braces {{ }}",
+            "Using dollar sign ${ }",
+            "Using square brackets [ ]",
           ],
           correct: 0,
         },
         {
           type: "multiple",
-          question: "What is a Fragment in React?",
+          question: "What is React.Fragment used for?",
           options: [
-            "A broken component",
-            "A way to group elements without adding extra nodes to the DOM",
-            "A type of state",
-            "A routing component",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "Which symbol represents a React Fragment shorthand?",
-          options: ["<div>", "<>", "<<>>", "<frag>"],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What is the main advantage of using Vite over Create React App?",
-          options: [
-            "Better documentation",
-            "Faster build times and HMR",
-            "More features",
-            "Easier to learn",
-          ],
-          correct: 1,
-        },
-        {
-          type: "multiple",
-          question: "What file contains the root HTML in a React app?",
-          options: [
-            "index.html",
-            "app.html",
-            "root.html",
-            "main.html",
-          ],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "Which folder typically contains React components?",
-          options: ["components/", "public/", "assets/", "build/"],
-          correct: 0,
-        },
-        {
-          type: "multiple",
-          question: "What is the purpose of the 'key' prop in lists?",
-          options: [
-            "To style elements",
-            "To help React identify which items have changed",
-            "To encrypt data",
+            "To group multiple elements without adding extra DOM nodes",
             "To create animations",
+            "To handle errors",
+            "To manage state",
           ],
-          correct: 1,
+          correct: 0,
         },
         {
           type: "multiple",
-          question: "What does npm stand for?",
+          question: "Why must every element in a list have a 'key' prop?",
           options: [
-            "New Package Manager",
-            "Node Package Manager",
-            "Next Programming Module",
-            "Network Protocol Manager",
+            "To help React identify which items changed, added, or removed for efficient re-rendering",
+            "To style the elements",
+            "To make the code look better",
+            "To prevent syntax errors",
+          ],
+          correct: 0,
+        },
+        {
+          type: "multiple",
+          question: "What is the advantage of CSS Modules?",
+          options: [
+            "Scoped styles that prevent naming conflicts",
+            "Faster loading times",
+            "Automatic minification",
+            "Better browser compatibility",
+          ],
+          correct: 0,
+        },
+        {
+          type: "multiple",
+          question: "According to best practices, what should each component do?",
+          options: [
+            "Handle multiple unrelated tasks",
+            "One thing well (Single Responsibility Principle)",
+            "Manage global state",
+            "Control all other components",
           ],
           correct: 1,
         },
 
-        // Short Answer Questions (21-30)
-        {
-          type: "short",
-          question: "What command creates a new Vite React app? (format: npm create xxx@latest)",
-          answer: "npm create vite@latest",
-        },
-        {
-          type: "short",
-          question: "What command installs all dependencies listed in package.json?",
-          answer: "npm install",
-        },
-        {
-          type: "short",
-          question: "What command starts the development server in Vite?",
-          answer: "npm run dev",
-        },
-        {
-          type: "short",
-          question: "What is the default port for Vite development server?",
-          answer: "5173",
-        },
-        {
-          type: "short",
-          question: "What React method is used to render the root component? (React 18+, one word)",
-          answer: "render",
-        },
+        // Short Answer Questions (16-20)
         {
           type: "short",
           question: "What is the file extension for TypeScript React components?",
@@ -709,22 +647,22 @@
         },
         {
           type: "short",
-          question: "What folder contains static assets in a Vite project?",
+          question: "Which folder contains static assets like images in a Vite project?",
           answer: "public",
         },
         {
           type: "short",
-          question: "What symbol is used in JSX to embed JavaScript expressions?",
-          answer: "{}",
+          question: "In JSX/TSX, what attribute should you use instead of 'class'?",
+          answer: "className",
         },
         {
           type: "short",
-          question: "What React element groups children without adding extra DOM nodes?",
-          answer: "Fragment",
+          question: "What command starts the development server in a Vite project?",
+          answer: "npm run dev",
         },
         {
           type: "short",
-          question: "What is the recommended Node.js version for React development? (format: number)",
+          question: "What is the recommended minimum Node.js version for React development? (number only)",
           answer: "18",
         },
       ];
@@ -754,6 +692,22 @@
 
       // Initialize Quiz
       function init() {
+        // Shuffle options for all multiple choice questions
+        quizData.forEach(question => {
+          if (question.type === "multiple") {
+            const correctAnswer = question.options[question.correct];
+            // Shuffle options
+            const shuffled = [...question.options];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            question.options = shuffled;
+            // Update correct index
+            question.correct = shuffled.indexOf(correctAnswer);
+          }
+        });
+
         showQuestion(currentQuestion);
       }
 
@@ -772,14 +726,19 @@
           if (i === question.correct) {
             opt.classList.add("correct");
             opt.classList.remove("selected");
+            const icon = document.createElement("span");
+            icon.className = "feedback-icon";
+            icon.textContent = "✓";
+            opt.querySelector("label").appendChild(icon);
           } else if (i === selectedOption) {
             opt.classList.add("incorrect");
             opt.classList.remove("selected");
+            const icon = document.createElement("span");
+            icon.className = "feedback-icon";
+            icon.textContent = "✗";
+            opt.querySelector("label").appendChild(icon);
           }
         });
-
-        // Re-render the question to show feedback icons
-        showQuestion(index);
       }
 
       // Check short answer
@@ -804,7 +763,7 @@
 
         // Update header
         questionNumber.textContent = `Question ${index + 1}`;
-        questionText.textContent = question.question;
+        questionText.textContent = question.question || "Question text missing";
 
         // Update progress
         progressText.textContent = `Question ${index + 1} of ${
