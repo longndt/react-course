@@ -2,7 +2,7 @@
 
 ## Course Overview
 
-This course teaches **React** frontend development using industry-standard practices through hands-on examples.
+This course teaches **React with JavaScript** development using industry-standard practices through hands-on examples.
 
 **Format**: Theory, hands-on practice, and project-based learning
 
@@ -79,7 +79,7 @@ This course teaches **React** frontend development using industry-standard pract
 Each lesson follows a standardized structure designed for effective learning:
 
 ```
-lessonNo-topic/
+lessonX-topic/
 ├──  reference/          # Quick reference codes
 ├──  example/            # Working code examples
 ├──  theory/             # Comprehensive documentation
@@ -94,7 +94,7 @@ lessonNo-topic/
 
 ---
 
-## 📚 How to Study This Course Effectively ?
+## 📚 How to Study This Course Effectively
 
 ### **Step 1: Start with Reference Guide**
 
@@ -225,8 +225,8 @@ cd react-course/react-javascript
 ### Step 5: Start Learning
 
 ```bash
-# Start with Lesson 0 (if you need to review JavaScript ES6)
-cd lesson0-javascript-es6
+# Start with Lesson 0 (if you need to review fundamentals)
+cd lesson0-javascript
 
 # Or start directly with Lesson 1
 cd lesson1-fundamentals-setup
@@ -239,4 +239,5 @@ cd lesson1-fundamentals-setup
 - **Complete all labs** to solidify your understanding
 - **Follow the *example* folder** to see complete example
 - **Check the *Troubleshooting Guide*** for quick solutions
+
 ---
