@@ -22,7 +22,7 @@
 
 ---
 
-## What is React? 
+## What is React?
 
 **React** is a JavaScript library for building user interfaces, created and maintained by Meta (Facebook).
 
@@ -96,7 +96,7 @@ In this course, we use **TypeScript** for all React components (.tsx files).
 ### TSX vs JSX Comparison
 
 ```javascript
-// JSX (JavaScript) - No type safety 
+// JSX (JavaScript) - No type safety
 function Welcome(props) {
   return <h1>Hello, {props.name}!</h1>;
   // What if props.name is undefined? Runtime error!
@@ -104,7 +104,7 @@ function Welcome(props) {
 ```
 
 ```typescript
-// TSX (TypeScript) - Type safe 
+// TSX (TypeScript) - Type safe
 interface WelcomeProps {
   name: string;
   age: number;
@@ -145,7 +145,7 @@ function UserCard({ name, email, age }: UserCardProps) {
 }
 
 // Usage - TypeScript checks types!
-<UserCard name="John" email="john@example.com" />  // 
+<UserCard name="John" email="john@example.com" />  //
 <UserCard name={123} email="john@example.com" />   //  Error: name must be string
 ```
 
@@ -924,5 +924,7 @@ export default StudentProfile;
 **Learning Resources:**
 - [MDN Web Docs](https://developer.mozilla.org) - JavaScript and web API reference
 - [React Tutorial](https://react.dev/learn) - Interactive React tutorial
+
+---
 
 

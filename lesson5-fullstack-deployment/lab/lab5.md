@@ -1247,4 +1247,5 @@ You've completed the React Performance & Deployment course! You now have the ski
 
 ---
 
-**You're now ready to build professional React applications!**
+---
+

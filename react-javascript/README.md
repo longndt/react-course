@@ -1,5 +1,7 @@
 # React Course - LongNDT
 
+---
+
 ## Course Overview
 
 This course teaches **React with JavaScript** development using industry-standard practices through hands-on examples.
@@ -19,7 +21,9 @@ This course teaches **React with JavaScript** development using industry-standar
 - **Optional but helpful**: Basic understanding of HTTP and APIs (will be taught in Lesson 3)
 - **Optional but helpful**: Familiarity with backend concepts (covered in Lessons 3-5)
 
-## What You'll Learn
+---
+
+## What You Will Learn ?
 
 - Build modern React applications with **JavaScript** and functional components
 - Understand React fundamentals and component-based architecture
@@ -34,6 +38,8 @@ This course teaches **React with JavaScript** development using industry-standar
 - Use modern development tools (Vite, npm)
 - Write tests for React components
 - Deploy applications to production
+
+---
 
 ## Course Structure
 
@@ -94,7 +100,21 @@ lessonX-topic/
 
 ---
 
-## 📚 How to Study This Course Effectively
+## 🗺️ Visual Diagrams
+
+📊 **[Diagram Collections](./diagrams/README.md)** - Start here for visual learning
+
+Quick links to key diagrams:
+- 🗺️ [Course Roadmap](./diagrams/COURSE_ROADMAP.md) - Complete learning path visualization
+- 🔄 [Component Lifecycle](./diagrams/COMPONENT_LIFECYCLE.md) - How React components work
+- 📦 [State Management](./diagrams/STATE_MANAGEMENT_FLOW.md) - State patterns and flows
+- 🌐 [API Integration](./diagrams/API_DATA_FLOW.md) - Data fetching and caching
+- 🔐 [Authentication](./diagrams/AUTHENTICATION_FLOW.md) - Auth system architecture
+- 🏗️ [Full-Stack Architecture](./diagrams/PROJECT_ARCHITECTURE.md) - Complete system design
+
+---
+
+## 📚 How to Study This Course Effectively ?
 
 ### **Step 1: Start with Reference Guide**
 
@@ -214,7 +234,7 @@ cd react-course/react-javascript
 -  **[Lesson 4: Routing & Authentication ](./lesson4-routing-auth/readme.md)**
 -  **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack-deployment/readme.md)**
 
-#### 3⃣ **Continue with Extra Materials** (Optional)
+#### 3⃣ **Continue with Advanced Materials** (Optional)
 - **[Modern React Stack](./extra/modern-stack.md)**
 - **[Advanced Patterns](./extra/advanced-patterns.md)**
 - **[State Management Guide](./extra/state-management.md)**
@@ -231,6 +251,7 @@ cd lesson0-javascript
 # Or start directly with Lesson 1
 cd lesson1-fundamentals-setup
 ```
+---
 
 ## 💡 Learning Tips
 

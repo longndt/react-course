@@ -1076,3 +1076,9 @@ const query = `SELECT * FROM users WHERE email = '${userEmail}'`; // Dangerous!
 - SQL injection prevention
 - HTTPS in production
 - Rate limiting and authentication
+
+---
+
+---
+
+---

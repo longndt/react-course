@@ -184,8 +184,8 @@ export default App;
 import { Link, NavLink } from 'react-router-dom';
 
 // NavLink provides an isActive prop in its className function
-<NavLink 
-  to="/about" 
+<NavLink
+  to="/about"
   className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
 >
   About
@@ -260,9 +260,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 function ProductDetail() {
   const { id } = useParams(); // Get :id from URL
   const navigate = useNavigate();
-  
+
   // Find product by id...
-  
+
   return (
     <div>
       <button onClick={() => navigate(-1)}>Back</button>
@@ -450,19 +450,19 @@ function Login() {
     <div className="login-page">
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
-        <input 
-          type="text" 
-          placeholder="Username" 
+        <input
+          type="text"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          required 
+          required
         />
-        <input 
-          type="password" 
-          placeholder="Password" 
+        <input
+          type="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required 
+          required
         />
         <button type="submit" disabled={isLoading}>
           {isLoading ? 'Logging in...' : 'Login'}
@@ -579,7 +579,7 @@ import { useAuth } from '../context/AuthContext';
 
 function Dashboard() {
   const { user } = useAuth();
-  
+
   return (
     <div className="page-container">
       <h1>Dashboard</h1>
@@ -592,13 +592,13 @@ function Dashboard() {
 // Wrapping routes in App.tsx
 import ProtectedRoute from './components/ProtectedRoute';
 
-<Route 
-  path="/dashboard" 
+<Route
+  path="/dashboard"
   element={
     <ProtectedRoute>
       <Dashboard />
     </ProtectedRoute>
-  } 
+  }
 />
 
 // Add to Navbar
@@ -650,7 +650,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 
 function Dashboard() {
   const { user } = useAuth();
-  
+
   return (
     <div className="dashboard-container">
       <aside className="dashboard-sidebar">
@@ -819,8 +819,8 @@ useEffect(() => {
 
 **Solution**: Use function form:
 ```tsx
-<NavLink 
-  to="/about" 
+<NavLink
+  to="/about"
   className={({ isActive }) => isActive ? 'active' : ''}
 >
 ```
@@ -915,4 +915,5 @@ In the next lab, you'll learn:
 
 ---
 
-**Congratulations!** You've mastered React Router and authentication patterns. These skills are essential for building professional web applications!
+
+**Congratulations on completing Lab 4!** 

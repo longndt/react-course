@@ -934,3 +934,9 @@ function TodoList() {
 - Stale closures (use functional updates)
 - Over-optimization with useMemo/useCallback
 - Prop drilling too many levels (use Context)
+
+---
+
+---
+
+---

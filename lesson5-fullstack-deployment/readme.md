@@ -5,12 +5,7 @@
 **Difficulty**: Advanced
 **Prerequisites**: Lessons 1-4 completed, Node.js/Express basics
 
-This lesson covers building compl### File Upload with Progress
-```jsx
-// FileUpload.jsx
-function FileUpload() {
-  const [progress, setProgress] = useState(0);
-  const [file, setFile] = useState(null);ll-stack applications by integrating React with backend services, implementing real-time features, and deploying to production. You'll learn professional deployment strategies, performance optimization, monitoring, and production-ready development practices.
+This lesson covers building complete full-stack applications by integrating React with backend services, implementing real-time features, and deploying to production. You'll learn professional deployment strategies, performance optimization, monitoring, and production-ready development practices.
 
 ---
 

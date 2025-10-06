@@ -2,15 +2,13 @@
 
 ## Course Overview
 
-This course teaches **React with TypeScript** development using industry-standard practices through hands-on examples.
+This course teaches **React with Typescript** development using industry-standard practices through hands-on examples.
 
 **Format**: Theory, hands-on practice, and project-based learning
 
 **Language**: All examples and exercises use **TypeScript**
 
-> **📌 IMPORTANT NOTE**
->
-> This course uses **TypeScript** throughout all lessons and examples.
+> **📌 NOTE**
 >
 > 🔷 **If you are not familiar with TypeScript** or prefer to learn React with JavaScript:
 >
@@ -29,7 +27,9 @@ This course teaches **React with TypeScript** development using industry-standar
 - **Optional but helpful**: Basic understanding of HTTP and APIs (will be taught in Lesson 3)
 - **Optional but helpful**: Familiarity with backend concepts (covered in Lessons 3-5)
 
-## What You'll Learn
+---
+
+## What You Will Learn ?
 
 - Build modern React applications with **TypeScript** and functional components
 - Understand React fundamentals and component-based architecture
@@ -44,6 +44,8 @@ This course teaches **React with TypeScript** development using industry-standar
 - Use modern development tools
 - Write tests for React components
 - Deploy applications to production
+
+---
 
 ## Course Structure
 
@@ -104,7 +106,21 @@ lessonX-topic/
 
 ---
 
-## 📚 How to Study This Course Effectively
+## 🗺️ Visual Diagrams
+
+📊 **[Diagram Collections](./diagrams/README.md)** - Start here for visual learning
+
+Quick links to key diagrams:
+- 🗺️ [Course Roadmap](./diagrams/COURSE_ROADMAP.md) - Complete learning path visualization
+- 🔄 [Component Lifecycle](./diagrams/COMPONENT_LIFECYCLE.md) - How React components work
+- 📦 [State Management](./diagrams/STATE_MANAGEMENT_FLOW.md) - State patterns and flows
+- 🌐 [API Integration](./diagrams/API_DATA_FLOW.md) - Data fetching and caching
+- 🔐 [Authentication](./diagrams/AUTHENTICATION_FLOW.md) - Auth system architecture
+- 🏗️ [Full-Stack Architecture](./diagrams/PROJECT_ARCHITECTURE.md) - Complete system design
+
+---
+
+## 📚 How to Study This Course Effectively ?
 
 ### **Step 1: Start with Reference Guide**
 
@@ -241,6 +257,8 @@ cd lesson0-typescript
 # Or start directly with Lesson 1
 cd lesson1-fundamentals-setup
 ```
+
+---
 
 ## 💡 Learning Tips
 

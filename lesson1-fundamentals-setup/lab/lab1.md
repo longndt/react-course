@@ -754,7 +754,7 @@ Before moving to Lab 2, verify:
 
 ---
 
-**Great job completing Lab 1! You've built a solid foundation in React. Keep practicing and see you in Lab 2!** 
+**Great job completing Lab 1! You've built a solid foundation in React. Keep practicing and see you in Lab 2!**
 
 ---
 
@@ -762,7 +762,7 @@ Before moving to Lab 2, verify:
 
 Ready to take your skills to the next level? Try these optional challenges:
 
-### Challenge 1: Interactive Counter Component 
+### Challenge 1: Interactive Counter Component
 
 Create a `Counter` component with increment/decrement buttons.
 
@@ -784,7 +784,7 @@ function Counter() {
 }
 ```
 
-### Challenge 2: Theme Toggle (Dark/Light Mode) 
+### Challenge 2: Theme Toggle (Dark/Light Mode)
 
 Add a theme switcher to toggle between light and dark mode.
 
@@ -802,7 +802,7 @@ const [theme, setTheme] = useState('light');
 <div className={`App ${theme}-theme`}>
 ```
 
-### Challenge 3: Responsive Navigation Menu 
+### Challenge 3: Responsive Navigation Menu
 
 Create a mobile-responsive navigation menu.
 
@@ -826,7 +826,7 @@ Create a mobile-responsive navigation menu.
 }
 ```
 
-### Challenge 4: Contact Form Component 
+### Challenge 4: Contact Form Component
 
 Build a functional contact form with validation.
 
@@ -845,7 +845,7 @@ const [formData, setFormData] = useState({
 });
 ```
 
-### Challenge 5: Image Gallery with Lightbox 
+### Challenge 5: Image Gallery with Lightbox
 
 Create an image gallery with click-to-enlarge functionality.
 
@@ -869,4 +869,5 @@ Create an image gallery with click-to-enlarge functionality.
 
 ---
 
-**Congratulations on completing Lab 1!**  These bonus challenges will prepare you for Lab 2's advanced patterns.
+
+**Congratulations on completing this lab!** 🎉

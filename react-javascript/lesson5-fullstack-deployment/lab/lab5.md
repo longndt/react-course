@@ -216,7 +216,7 @@ function App() {
 export default App;
 ```
 
-**Test**: 
+**Test**:
 - Run `npm run dev`
 - Open browser DevTools → Network tab
 - Navigate between pages
@@ -392,7 +392,7 @@ interface UserItemProps {
 // Memoized UserItem - only re-renders if props change
 const UserItem = memo(function UserItem({ user, onSelect }: UserItemProps) {
   console.log(`Rendering UserItem: ${user.id}`);
-  
+
   return (
     <div className="user-item" onClick={() => onSelect(user)}>
       <h3>{user.name}</h3>
@@ -408,7 +408,7 @@ interface UserListProps {
 
 function UserList({ users, onSelect }: UserListProps) {
   console.log('Rendering UserList');
-  
+
   return (
     <div className="user-list">
       {users.map(user => (
@@ -532,16 +532,16 @@ export default function Users() {
   // Expensive computation - only runs when dependencies change
   const filteredAndSortedUsers = useMemo(() => {
     console.log('Filtering and sorting users...');
-    
+
     let result = users.filter(user =>
       user.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    
+
     result.sort((a, b) => {
       const comparison = a.name.localeCompare(b.name);
       return sortAsc ? comparison : -comparison;
     });
-    
+
     return result;
   }, [users, searchTerm, sortAsc]); // Only recalculate when these change
 
@@ -635,11 +635,11 @@ interface VirtualListProps<T> {
   renderItem: (item: T, index: number) => React.ReactNode;
 }
 
-function VirtualList<T>({ 
-  items, 
-  itemHeight, 
-  containerHeight, 
-  renderItem 
+function VirtualList<T>({
+  items,
+  itemHeight,
+  containerHeight,
+  renderItem
 }: VirtualListProps<T>) {
   const [scrollTop, setScrollTop] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -676,7 +676,7 @@ function VirtualList<T>({
     >
       {/* Spacer to create scrollbar */}
       <div style={{ height: totalHeight, width: '100%' }} />
-      
+
       {/* Visible items */}
       <div
         style={{
@@ -864,11 +864,11 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  
+
   build: {
     // Target modern browsers
     target: 'esnext',
-    
+
     // Minification
     minify: 'terser',
     terserOptions: {
@@ -877,7 +877,7 @@ export default defineConfig({
         drop_debugger: true,
       },
     },
-    
+
     // Chunk splitting strategy
     rollupOptions: {
       output: {
@@ -889,7 +889,7 @@ export default defineConfig({
         },
       },
     },
-    
+
     // Chunk size warnings
     chunkSizeWarningLimit: 1000, // KB
   },
@@ -1048,7 +1048,7 @@ useEffect(() => {
       observer.disconnect();
     }
   });
-  
+
   if (imgRef.current) observer.observe(imgRef.current);
 }, []);
 
@@ -1111,7 +1111,7 @@ getLCP(console.log);
 
 **Cause**: Missing Suspense boundary or error in component
 
-**Solution**: 
+**Solution**:
 - Wrap routes with `<Suspense fallback={<Loading />}>`
 - Add Error Boundary around Suspense
 - Check console for errors

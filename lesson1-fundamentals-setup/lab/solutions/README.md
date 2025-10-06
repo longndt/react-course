@@ -618,22 +618,6 @@ import Header from './components/Header';
 
 ---
 
-##  Self-Check Questions
-
-After completing this lab, can you:
-
-1.  Create a new React component?
-2.  Import and use a component in another component?
-3.  Apply CSS to components?
-4.  Build a multi-component page?
-5.  Understand component composition?
-
-If yes to all → **Ready for Lesson 2!** 
-
-If no → Review [theory1.md](../../theory/theory1.md) or ask for help!
-
----
-
 ##  Bonus Challenges
 
 ### Challenge 1: Add More Sections

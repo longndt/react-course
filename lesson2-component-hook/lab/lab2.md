@@ -1047,8 +1047,9 @@ Before moving to Lab 3, you should be able to:
 - [ ] Follow naming conventions
 - [ ] Keep components focused and small
 
-**If you can confidently do all above, you're ready for Lab 3!** 
+**If you can confidently do all above, you're ready for Lab 3!**
 
 ---
 
-**Great work completing Lab 2! You've learned professional React patterns used in production applications.**
+
+**Congratulations on completing this lab!** 🎉

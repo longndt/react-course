@@ -9,7 +9,7 @@ export interface Column<T> {
   /** Whether this column can be sorted */
   sortable?: boolean;
   /** Optional function to customize the rendering of cell values */
-  render?: (value: any, row?: T) => JSX.Element | null;
+  render?: (value: unknown, row?: T) => JSX.Element | null;
 }
 
 /**

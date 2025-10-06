@@ -35,11 +35,16 @@ This guide addresses the most common problems students encounter when learning R
 
 
 
-**Symptoms:**```bash
+**Symptoms:**
 
-```bash# Option 1: Use npx instead of npm
+```bash
 
-C:\> node --versionnpx create-vite@latest my-app
+```bash
+# Option 1: Use npx instead of npm
+
+C:\> node --version
+
+npx create-vite@latest my-app
 
 'node' is not recognized as an internal or external command
 
@@ -47,7 +52,9 @@ C:\> node --versionnpx create-vite@latest my-app
 
 sudo chown -R $(whoami) ~/.npm
 
-**Cause:**```
+**Cause:**
+
+```
 
 - Node.js not installed
 
@@ -55,7 +62,9 @@ sudo chown -R $(whoami) ~/.npm
 
 
 
-**Solution:****Cause:** Another application is using the same port
+**Solution:**
+
+**Cause:** Another application is using the same port
 
 1. **Check installation:**
 
@@ -87,121 +96,76 @@ npm run dev -- --port 3001
 
 **Prevention:**
 
-- Always download from official nodejs.org**Cause:** Forgot to import the component
+- Always download from official nodejs.org
+
+**Cause:** Forgot to import the component
 
 - Use LTS version, not Current
 
-- Restart computer after installation**Solution:**
+- Restart computer after installation
+
+**Solution:**
 
 
 
 ---```jsx
 
-//  Wrong - missing import
-
-###  Error: `npm: command not found` (Mac/Linux)function App() {
-
+// ❌ Wrong - missing import
+function App() {
   return <MyComponent />; // Error!
+}
 
-**Symptoms:**}
-
-```bash
-
-$ npm --version//  Correct - with import
-
-npm: command not foundimport MyComponent from "./MyComponent";
-
-```
+// ✅ Correct - with import
+import MyComponent from "./MyComponent";
 
 function App() {
-
-**Cause:**  return <MyComponent />; // Works!
-
-- npm not installed with Node.js}
-
-- Permission issues```
-
-- PATH not updated
+  return <MyComponent />; // Works!
+}
+```
 
 ### Problem: "Cannot read property of undefined"
 
-**Solution:**
-
 **Cause:** Trying to access props that don't exist
 
-**Mac:**
+**Solution:**
 
-```bash**Solution:**
-
-# 1. Install Homebrew (if not installed)
-
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"```tsx
-
+```tsx
 interface User {
+  name: string;
+}
 
-# 2. Install Node.js via Homebrew  name: string;
+interface UserProfileProps {
+  user?: User;
+}
 
-brew install node}
+// ❌ Dangerous - might crash if user is undefined
+function UserProfile({ user }: UserProfileProps) {
+  return <div>{user.name}</div>; // Error if user is undefined
+}
 
+// ✅ Safe - with optional chaining
+function UserProfile({ user }: UserProfileProps) {
+  return <div>{user?.name || "Guest"}</div>;
+}
 
-
-# 3. Verifyinterface UserProfileProps {
-
-node --version  user?: User;
-
-npm --version}
-
+// ✅ Even safer - with conditional rendering
+function UserProfile({ user }: UserProfileProps) {
+  if (!user) return <div>Loading...</div>;
+  return <div>{user.name}</div>;
+}
 ```
 
-//  Dangerous - might crash if user is undefined
+### Problem: Components not re-rendering when data changes
 
-**Linux (Ubuntu/Debian):**function UserProfile({ user }: UserProfileProps) {
+**Cause:** Mutating state directly instead of creating new state
 
-```bash  return <div>{user?.name}</div>; // Error if user is undefined
-
-# 1. Update package manager}
-
-sudo apt update
-
-//  Safe - with default values and checks
-
-# 2. Install Node.js & npmfunction UserProfile({ user }: UserProfileProps) {
-
-sudo apt install nodejs npm  return <div>{user?.name || "Guest"}</div>;
-
-}
-
-# 3. Verify
-
-node --version//  Even safer - with conditional rendering
-
-npm --versionfunction UserProfile({ user }: UserProfileProps) {
-
-```  if (!user) return <div>Loading...</div>;
+**Solution:**
 
 
 
----  return <div>{user.name}</div>;
+**Solution:**
 
-}
-
-###  Error: `Permission denied` when installing packages```
-
-
-
-**Symptoms:**### Problem: Components not re-rendering when data changes
-
-```bash
-
-$ npm install -g create-vite**Cause:** Mutating state directly instead of creating new state
-
-npm ERR! Error: EACCES: permission denied
-
-```**Solution:**
-
-
-
-**Solution:**```jsx
+```jsx
 
 //  Wrong - mutating existing array
 
@@ -285,7 +249,9 @@ function MyComponent() {
 
 
 
-**Symptoms:****Cause:** CSS file not imported or incorrect path
+**Symptoms:**
+
+**Cause:** CSS file not imported or incorrect path
 
 ```tsx
 
@@ -307,13 +273,17 @@ const user: User = {import "./styles/MyComponent.css";
 
 // main.jsx
 
-**Cause:**import "./index.css";
+**Cause:**
+
+import "./index.css";
 
 TypeScript type mismatch - expecting number but receiving string```
 
 
 
-**Solution:**##  **Performance Issues**
+**Solution:**
+
+##  **Performance Issues**
 
 ```tsx
 
@@ -383,7 +353,9 @@ console.log(user.name);
 
 
 
-**Cause:**### Problem: "Type 'X' is not assignable to type 'Y'"
+**Cause:**
+
+### Problem: "Type 'X' is not assignable to type 'Y'"
 
 TypeScript doesn't know the shape of the object
 
@@ -421,7 +393,9 @@ console.log(user.name); //  Works!
 
 <MyComponent age={parseInt("25")} />
 
-**Or:**```
+**Or:**
+
+```
 
 ```tsx
 
@@ -537,13 +511,17 @@ function MyComponent({ isActive }: MyComponentProps) {  })
 
 
 
-**Cause:****Solution:**
+**Cause:**
+
+**Solution:**
 
 Violating Rules of Hooks - hooks must be called unconditionally
 
 ```jsx
 
-**Solution:**//  Wrong - not handling async properly
+**Solution:**
+
+//  Wrong - not handling async properly
 
 ```tsxfunction UserList() {
 
@@ -633,7 +611,9 @@ React cannot render objects directly, only strings, numbers, arrays of JSX  );
 
 }
 
-**Solution:**```
+**Solution:**
+
+```
 
 ```tsx
 
@@ -701,7 +681,8 @@ Error: Too many re-renders. React limits the number of renders to prevent an inf
 
 
 
-```tsx### Problem: Hard to manage data between components
+```tsx
+### Problem: Hard to manage data between components
 
 import { useState } from 'react';
 
@@ -727,13 +708,17 @@ function Counter() {
 
 
 
-**Cause:**//  Context API - share data across components
+**Cause:**
+
+//  Context API - share data across components
 
 `setCount` is called directly in render, causing re-render → calls setCount again → infinite loopconst UserContext = createContext();
 
 
 
-**Solution:**function App() {
+**Solution:**
+
+function App() {
 
 ```tsx  const [user, setUser] = useState(null);
 
@@ -799,7 +784,9 @@ function Counter() {## 🆘 **When All Else Fails**
 
 
 
-**Symptoms:**### Online Resources:
+**Symptoms:**
+
+### Online Resources:
 
 ```
 
@@ -817,7 +804,9 @@ Component unmounted before async operation (fetch, setTimeout) completes##  **Qu
 
 
 
-**Solution:**### Most Common React Patterns:
+**Solution:**
+
+### Most Common React Patterns:
 
 ```tsx
 
@@ -1309,8 +1298,8 @@ function UserList() {
 ###  Error: 404 on refresh (React Router on Netlify/Vercel)
 
 **Symptoms:**
-- App works fine: `yoursite.com` 
-- Refresh on route: `yoursite.com/about` → 404 
+- App works fine: `yoursite.com`
+- Refresh on route: `yoursite.com/about` → 404
 
 **Cause:**
 Server doesn't know React Router, need to redirect all routes to index.html
