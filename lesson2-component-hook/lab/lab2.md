@@ -146,20 +146,20 @@ Create `src/components/Card/Card.css`:
    - Background: #f8f9fa
    - Border top: 1px solid #e9ecef
 
-** Hints:**
+**Hints:**
 - Use `cubic-bezier` for smooth animations
 - Gradients use `linear-gradient(angle, color1, color2)`
 - Transform creates lift effect on hover
 - Overflow hidden keeps corners rounded
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Card has rounded corners and shadow
 - Smooth lift animation on hover
 - Purple gradient header
 - Light gray footer
 - Clean, professional appearance
 
-** Solution:** See `solutions/exercise1-card-system/Card.css`
+**Solution:** See `solutions/exercise1-card-system/Card.css`
 
 ### Step 4: Use Card in App (Your Turn)
 
@@ -176,12 +176,12 @@ Update `src/App.tsx`:
 3. Import and apply `App.css`
 4. Wrap everything in a container div
 
-** Hints:**
+**Hints:**
 - Use `<Card>` as wrapper
 - Place each section inside: `<Card.Header>`, `<Card.Body>`, `<Card.Footer>`
 - Add className for styling if needed
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Product card displays with all sections
 - Hover effect works
 - Professional gradient header
@@ -195,7 +195,7 @@ Update `src/App.tsx`:
 4. All three sections (header, body, footer) should be visible
 5. No console errors
 
-** Solution:** See `solutions/exercise1-card-system/`
+**Solution:** See `solutions/exercise1-card-system/`
 
 ---
 
@@ -259,19 +259,19 @@ Create `src/components/LoadingSpinner/LoadingSpinner.css`:
    - From: `transform: rotate(0deg)`
    - To: `transform: rotate(360deg)`
 
-** Hints:**
+**Hints:**
 - Use flexbox to center the spinner
 - `border-radius: 50%` makes a circle
 - Animation makes it rotate continuously
 - Different border colors create the spinning effect
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Circular spinner displays
 - Spins continuously
 - Purple accent color on top
 - Centered in container
 
-** Solution:** See `solutions/exercise2-hoc/LoadingSpinner.tsx`
+**Solution:** See `solutions/exercise2-hoc/LoadingSpinner.tsx`
 
 ### Task 2: Create withLoading HOC (Your Turn)
 
@@ -293,19 +293,19 @@ Create `src/hoc/withLoading.tsx`:
    - Otherwise, return `<WrappedComponent {...props as P} />`
 5. Export as default
 
-** Hints:**
+**Hints:**
 - Generic `<P extends object>` allows any prop type
 - Destructure `isLoading` from props, spread rest
 - Use conditional rendering: `if (isLoading) return ...`
 - Type casting `props as P` ensures type safety
 
-** Expected Outcome:**
+**Expected Outcome:**
 - HOC function is reusable for any component
 - Shows spinner when loading
 - Shows wrapped component when not loading
 - TypeScript types work correctly
 
-** Solution:** See `solutions/exercise2-hoc/withLoading.tsx`
+**Solution:** See `solutions/exercise2-hoc/withLoading.tsx`
 
 ### Task 3: Create ProductList Component (Your Turn)
 
@@ -334,19 +334,19 @@ Create `src/components/ProductList/ProductList.tsx`:
 4. Wrap everything in div with className "product-list"
 5. Export as default
 
-** Hints:**
+**Hints:**
 - Use `.map()` to render list
 - Format price: `$${product.price.toFixed(2)}`
 - Alert on click: `onClick={() => alert(\`Added ${product.name}\`)}`
 - Don't forget `key` prop for each item
 
-** Expected Outcome:**
+**Expected Outcome:**
 - List of products displays
 - Each product shows name and price
 - Clicking "Add to Cart" shows alert
 - No key prop warnings
 
-** Solution:** See `solutions/exercise2-hoc/ProductList.tsx`
+**Solution:** See `solutions/exercise2-hoc/ProductList.tsx`
 
 ### Task 4: Apply HOC and Test (Your Turn)
 
@@ -370,13 +370,13 @@ Update `src/App.tsx`:
      - After timeout, set products data and isLoading to false
    - Render `<ProductListWithLoading isLoading={isLoading} products={products} />`
 
-** Hints:**
+**Hints:**
 - `useState(true)` for initial loading state
 - useEffect with empty dependency array `[]` runs once
 - setTimeout simulates async data fetch
 - Pass both isLoading and products as props
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Spinner shows for 2 seconds on page load
 - Then displays list of products
 - Smooth transition from loading to content
@@ -390,7 +390,7 @@ Update `src/App.tsx`:
 4. No console errors
 5. Smooth loading experience
 
-** Solution:** See `solutions/exercise2-hoc/`
+**Solution:** See `solutions/exercise2-hoc/`
 
 ---
 
@@ -453,20 +453,20 @@ Create `src/hooks/useForm.ts`:
    - Returns object: `{ values, errors, handleChange, handleSubmit }`
 4. Export as default
 
-** Hints:**
+**Hints:**
 - Use `Record<string, any>` for flexible object types
 - `Object.entries()` to loop through values
 - `e.preventDefault()` stops form submission
 - Return value should have all form utilities
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Hook manages form state
 - Handles input changes
 - Validates required fields
 - Provides submission handler
 - Reusable across different forms
 
-** Solution:** See `solutions/exercise3-custom-hooks/useForm.ts`
+**Solution:** See `solutions/exercise3-custom-hooks/useForm.ts`
 
 ### Task 2: Create Registration Form (Your Turn - 80% Practice)
 
@@ -518,14 +518,14 @@ Create `src/components/Form/RegistrationForm.tsx`:
    - Border radius: 8px
    - Cursor: pointer
 
-** Hints:**
+**Hints:**
 - Input `name` attribute must match initial values keys
 - Conditional rendering: `{errors.username && <span>{errors.username}</span>}`
 - `type="email"` for email input
 - `type="password"` for password input
 - `type="submit"` for submit button
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Form displays with 3 input fields
 - Typing updates values
 - Submitting empty form shows errors
@@ -540,7 +540,7 @@ Create `src/components/Form/RegistrationForm.tsx`:
 4. Check console - should log form data
 5. Inputs should be styled nicely
 
-** Solution:** See `solutions/exercise3-custom-hooks/`
+**Solution:** See `solutions/exercise3-custom-hooks/`
 
 ---
 
@@ -603,19 +603,19 @@ Create `src/context/ThemeContext.tsx`:
    - Return context
 7. Export ThemeProvider and useTheme
 
-** Hints:**
+**Hints:**
 - Use type union: `'light' | 'dark'` for theme
 - Toggle: `setTheme(prev => prev === 'light' ? 'dark' : 'light')`
 - Error check ensures proper usage
 - Custom hook simplifies consumer code
 
-** Expected Outcome:**
+**Expected Outcome:**
 - ThemeContext created successfully
 - Provider manages theme state
 - useTheme hook works in any component
 - Type-safe context usage
 
-** Solution:** See `solutions/exercise4-context/ThemeContext.tsx`
+**Solution:** See `solutions/exercise4-context/ThemeContext.tsx`
 
 ### Task 2: Create Themed Components (Your Turn - 90% Practice)
 
@@ -672,19 +672,19 @@ Create `src/components/ThemedComponents/ThemedComponents.css`:
    - Cursor: pointer
    - Font size: 1rem
 
-** Hints:**
+**Hints:**
 - Template string for className: `theme-button ${theme}`
 - Conditional rendering: `{theme === 'light' ? ' Dark' : ' Light'}`
 - Fixed position keeps toggle visible
 - Gradients different for each theme
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Buttons change color based on theme
 - Theme toggle button works
 - Smooth color transitions
 - Fixed toggle button in corner
 
-** Solution:** See `solutions/exercise4-context/ThemedComponents.tsx`
+**Solution:** See `solutions/exercise4-context/ThemedComponents.tsx`
 
 ### Task 3: Apply Global Theme Styling (Your Turn)
 
@@ -707,13 +707,13 @@ Update `src/index.css` or `src/App.css`:
    - body color: var(--text-color)
    - .card background: var(--card-bg)
 
-** Hints:**
+**Hints:**
 - CSS variables use `--variable-name` syntax
 - Access with `var(--variable-name)`
 - Theme class on root element cascades to children
 - Smooth transition: `transition: background 0.3s ease`
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Light theme: white background, dark text
 - Dark theme: dark background, light text
 - Smooth color transitions
@@ -740,13 +740,13 @@ Update `src/App.tsx`:
    - Section with registration form
 5. Apply theme class to root div
 
-** Hints:**
+**Hints:**
 - ThemeProvider must wrap everything
 - Use useTheme() hook to get current theme
 - Add className: `theme-${theme}` to root div
 - Organize sections with semantic HTML
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Complete app with all features
 - Theme toggle works globally
 - All components change theme together
@@ -781,7 +781,7 @@ Update `src/App.tsx`:
 - [ ] Professional appearance
 - [ ] All features work together
 
-** Complete Solution:** See `solutions/exercise4-context/`
+**Complete Solution:** See `solutions/exercise4-context/`
 
 ---
 
@@ -803,13 +803,13 @@ Error Boundaries catch JavaScript errors in component tree and display fallback 
 5. Render fallback UI when error occurs
 6. Wrap risky components with ErrorBoundary
 
-** Hints:**
+**Hints:**
 - Must be class component (not functional)
 - getDerivedStateFromError updates state
 - componentDidCatch logs errors
 - Provides graceful error recovery
 
-** Solution:** See `solutions/bonus-challenges/ErrorBoundary.tsx`
+**Solution:** See `solutions/bonus-challenges/ErrorBoundary.tsx`
 
 ### Challenge 2: Modal with Portals
 
@@ -824,13 +824,13 @@ React Portals render children outside parent DOM hierarchy, perfect for modals.
 4. Include close button
 5. Prevent body scroll when modal open
 
-** Hints:**
+**Hints:**
 - `createPortal(children, document.body)`
 - Overlay: position fixed, full viewport
 - `overflow: hidden` on body prevents scroll
 - ESC key to close (bonus)
 
-** Solution:** See `solutions/bonus-challenges/Modal.tsx`
+**Solution:** See `solutions/bonus-challenges/Modal.tsx`
 
 ### Challenge 3: useLocalStorage Hook
 
@@ -845,13 +845,13 @@ Custom hook that syncs state with localStorage.
 4. Handle JSON parsing/stringifying
 5. Return [value, setValue] like useState
 
-** Hints:**
+**Hints:**
 - `localStorage.getItem(key)`
 - `localStorage.setItem(key, JSON.stringify(value))`
 - Try/catch for parsing errors
 - useEffect to sync on changes
 
-** Solution:** See `solutions/bonus-challenges/useLocalStorage.ts`
+**Solution:** See `solutions/bonus-challenges/useLocalStorage.ts`
 
 ---
 

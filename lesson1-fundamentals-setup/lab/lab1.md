@@ -53,7 +53,7 @@ npm install
 npm run dev
 ```
 
-** Verify:** Browser should open at `http://localhost:5173` showing default Vite + React page.
+**Verify:** Browser should open at `http://localhost:5173` showing default Vite + React page.
 
 ### Step 2: Understand Project Structure
 
@@ -124,7 +124,7 @@ p {
 }
 ```
 
-** Checkpoint:** Save files and check browser - you should see "My First React App" heading with clean styling.
+**Checkpoint:** Save files and check browser - you should see "My First React App" heading with clean styling.
 
 ###  Testing
 
@@ -191,20 +191,20 @@ Create a new file `src/components/Welcome.tsx` and implement:
    - A `<p>` with className "small-text" that shows "© {currentYear}"
 4. Export the component as default
 
-** Hints:**
+**Hints:**
 - Use `function Welcome() { }` to create the component
 - Put variables before the `return` statement
 - Use `{variableName}` to embed JavaScript in JSX
 - Don't forget `export default Welcome;` at the end
 - Use `className` instead of `class` for CSS classes
 
-** Expected Outcome:**
+**Expected Outcome:**
 - File `src/components/Welcome.tsx` exists
 - Component has 3 variables defined
 - JSX displays all variables correctly
 - No TypeScript errors in VS Code
 
-** Solution:** See `solutions/exercise2-welcome/Welcome.tsx`
+**Solution:** See `solutions/exercise2-welcome/Welcome.tsx`
 
 ### Step 3: Use Component in App (Your Turn)
 
@@ -217,12 +217,12 @@ Update `src/App.tsx`:
 2. Replace the `<h1>` and `<p>` with `<Welcome />`
 3. Keep the App div wrapper
 
-** Hints:**
+**Hints:**
 - Import syntax: `import Welcome from './components/Welcome';`
 - Use component like an HTML tag: `<Welcome />`
 - Self-closing tags need the `/` at the end
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Browser shows "Welcome, [Your Name]!"
 - Shows course name and current year
 - No console errors
@@ -234,7 +234,7 @@ Update `src/App.tsx`:
 3. Current year should display correctly (e.g., 2024)
 4. Open DevTools Console (F12) - should be no errors
 
-** Solution:** See `solutions/exercise2-welcome/` for complete code
+**Solution:** See `solutions/exercise2-welcome/` for complete code
 
 ---
 
@@ -287,13 +287,13 @@ Create `src/components/Welcome.css`:
    - Margin top: 1.5rem
    - Opacity: 0.7
 
-** Hints:**
+**Hints:**
 - Use `background: linear-gradient(135deg, color1, color2);`
 - `padding: 3rem 2rem` means vertical horizontal
 - Use nested selectors: `.welcome h2 { }`
 - `rgba(255, 255, 255, 0.9)` is white with 90% opacity
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Welcome section has purple gradient background
 - White text is clearly visible
 - Rounded corners and shadow effect
@@ -309,12 +309,12 @@ Update `src/components/Welcome.tsx`:
 1. Add CSS import at the top of the file (before the function)
 2. Import path should be `'./Welcome.css'`
 
-** Hints:**
+**Hints:**
 - Import goes above the function definition
 - Syntax: `import './FileName.css';`
 - Make sure the path is correct (same folder)
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Purple gradient background appears
 - All styling from CSS file is applied
 - No console errors
@@ -326,7 +326,7 @@ Update `src/components/Welcome.tsx`:
 3. Hover might show shadow effect
 4. Check DevTools → Elements → Inspect the `.welcome` div to verify CSS is applied
 
-** Solution:** See `solutions/exercise3-styling/`
+**Solution:** See `solutions/exercise3-styling/`
 
 ---
 
@@ -403,13 +403,13 @@ Create `src/components/Feature.tsx` and `src/components/Feature.css`:
 5. `.features li:last-child`:
    - Margin bottom: 0
 
-** Hints:**
+**Hints:**
 - Array syntax: `const arr = ["item1", "item2"];`
 - Map syntax: `{array.map((item, index) => (<li key={index}>{item}</li>))}`
 - Don't forget to import CSS at the top
 - `border-left: 4px solid #667eea` creates the colored left border
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Component displays "What You'll Learn" heading
 - Shows 3 feature items in a list
 - Each item has white background with blue left border
@@ -471,14 +471,14 @@ Create `src/components/Footer.tsx` and `src/components/Footer.css`:
    - Color: #764ba2
    - Text decoration: underline
 
-** Hints:**
+**Hints:**
 - Object array: `[{ name: "...", url: "..." }, ...]`
 - Access object properties: `link.name`, `link.url`
 - `target="_blank"` opens link in new tab
 - `rel="noopener noreferrer"` is for security with external links
 - Flexbox centers items: `display: flex; justify-content: center;`
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Footer appears at bottom with border on top
 - Shows "USEFUL RESOURCES:" in uppercase
 - Three links displayed horizontally
@@ -499,13 +499,13 @@ Update `src/App.tsx`:
    - `<Footer />`
 3. Keep the existing App.css import and App div wrapper
 
-** Hints:**
+**Hints:**
 - You need 3 import statements at the top
 - Import paths: `'./components/ComponentName'`
 - Components are used like HTML tags: `<ComponentName />`
 - Keep everything inside the `<div className="App">` wrapper
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Complete landing page with all three sections
 - Welcome section with gradient at top
 - Features section in the middle
@@ -530,7 +530,7 @@ Update `src/App.tsx`:
 2. Check Elements tab - all CSS classes applied correctly
 3. Verify all components are properly imported
 
-** Solution:** See `solutions/exercise4-landing-page/` for complete implementation
+**Solution:** See `solutions/exercise4-landing-page/` for complete implementation
 
 ---
 
@@ -554,13 +554,13 @@ Add interactive elements to your landing page to get a preview of React's event 
 3. Style it with a card-like design (white background, shadow, padding)
 4. Import and render it in App between Feature and Footer
 
-** Hints:**
+**Hints:**
 - Use similar structure to Welcome component
 - Define variables for name, major, university
 - Apply styling similar to Feature component
 - Use flexbox or grid for better layout
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Personal info displays in a styled card
 - Card appears between Features and Footer sections
 
@@ -578,13 +578,13 @@ Add interactive elements to your landing page to get a preview of React's event 
    - Padding and border radius
    - Hover effect
 
-** Hints:**
+**Hints:**
 - Function syntax: `const handleClick = () => { alert('...'); };`
 - Button syntax: `<button onClick={handleClick}>Click Me!</button>`
 - Place function before the return statement
 - Add button styles to Welcome.css
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Button appears in Welcome section
 - Clicking button shows alert message
 - Button has hover effect
@@ -600,7 +600,7 @@ This is an advanced challenge that previews state management from Lesson 2!
 2. Clicking it should change the page background color
 3. (Note: This will require useState from Lesson 2 to work properly)
 
-** Solutions:** See `solutions/bonus-challenges/` for all challenge solutions
+**Solutions:** See `solutions/bonus-challenges/` for all challenge solutions
 
 ---
 

@@ -338,7 +338,7 @@ Follow this 4-step learning path:
 
 **DON'T:**
 -  Call hooks inside loops, conditions, or nested functions
--  Mutate state directly: `state.value = 1` 
+-  Mutate state directly: `state.value = 1`
 -  Forget dependency arrays (causes bugs)
 -  Create infinite loops with useEffect
 -  Ignore ESLint exhaustive-deps warnings
@@ -477,7 +477,7 @@ function Component() {
 - [ ] Debug components with React DevTools
 - [ ] Handle async operations in useEffect properly
 
-** Goal: Check at least 12/14 items before Lesson 3**
+**Goal: Check at least 12/14 items before Lesson 3**
 
 ---
 

@@ -619,7 +619,7 @@ useEffect(() => {
 - [ ] Add rate limiting for login
 - [ ] Handle CORS properly
 
-** Goal: Check at least 18/23 items before Lesson 5**
+**Goal: Check at least 18/23 items before Lesson 5**
 
 ---
 

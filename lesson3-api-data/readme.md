@@ -665,7 +665,7 @@ useEffect(() => {
 - [ ] Manage complex state with useReducer
 - [ ] Debug API calls with DevTools
 
-** Goal: Check at least 16/20 items before Lesson 4**
+**Goal: Check at least 16/20 items before Lesson 4**
 
 ---
 

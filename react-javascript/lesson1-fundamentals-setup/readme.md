@@ -30,7 +30,7 @@ After completing this lesson, you will be able to:
 - Basic command line operations
 - Understanding of programming fundamentals
 
-** Need a refresher?** Complete [Lesson 0: JavaScript ES6+ Review](../lesson0-javascript-es6/) first.
+**Need a refresher?** Complete [Lesson 0: JavaScript ES6+ Review](../lesson0-javascript-es6/) first.
 
 **Technical Requirements:**
 - Node.js v18.0.0 or higher
@@ -285,4 +285,4 @@ function Card() {
 
 ---
 
-**Remember:** React is about building UIs with components. Master the basics in this lesson, then move to Lesson 2 for props, state, and hooks! 
+**Remember:** React is about building UIs with components. Master the basics in this lesson, then move to Lesson 2 for props, state, and hooks!

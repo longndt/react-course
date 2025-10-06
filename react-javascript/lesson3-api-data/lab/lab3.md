@@ -103,7 +103,7 @@ npm install express mongoose cors
 npm install --save-dev typescript @types/express @types/node ts-node nodemon
 ```
 
-_For detailed setup instructions, see [Complete Environment Setup Guide](../../extra/environment-setup.md)_
+_For detailed setup instructions, see [Complete Environment Setup Guide](../../setup/environment-setup.md)_
 
 ---
 
@@ -188,7 +188,7 @@ Create file: `backend/src/models/Task.ts`
 - Add timestamps option
 - Export Task model
 
-** Hints:**
+**Hints:**
 ```javascript
 import mongoose, { Schema, Document } from 'mongoose';
 
@@ -208,12 +208,12 @@ const TaskSchema = new Schema<ITask>({
 export default mongoose.model<ITask>('Task', TaskSchema);
 ```
 
-** Expected Outcome:**
+**Expected Outcome:**
 - TypeScript interface defines task structure
 - Mongoose schema with validation
 - Model exported for use in routes
 
-** Solution:** See `solutions/exercise1-backend/models/Task.ts`
+**Solution:** See `solutions/exercise1-backend/models/Task.ts`
 
 ---
 
@@ -236,7 +236,7 @@ Create file: `backend/src/index.ts`
 - Start server on port 5000
 - Log server status
 
-** Hints:**
+**Hints:**
 ```javascript
 import express from 'express';
 import mongoose from 'mongoose';
@@ -262,13 +262,13 @@ app.listen(PORT, () => {
 });
 ```
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Server starts successfully
 - MongoDB connection established
 - CORS enabled for frontend requests
 - Console shows success messages
 
-** Solution:** See `solutions/exercise1-backend/index.ts`
+**Solution:** See `solutions/exercise1-backend/index.ts`
 
 ---
 
@@ -305,7 +305,7 @@ Add routes to `backend/src/index.ts` (after MongoDB connection)
 - Return success message
 - Handle errors with 500 status
 
-** Hints:**
+**Hints:**
 ```javascript
 import Task from './models/Task';
 
@@ -350,7 +350,7 @@ app.delete('/api/tasks/:id', async (req, res) => {
 });
 ```
 
-** Expected Outcome:**
+**Expected Outcome:**
 - All 4 CRUD endpoints working
 - Proper HTTP status codes
 - Error handling in place
@@ -360,7 +360,7 @@ app.delete('/api/tasks/:id', async (req, res) => {
 
 ### Task 1.5: Test API Endpoints (Testing)
 
-** Testing Checklist:**
+**Testing Checklist:**
 
 **Start Backend:**
 ```bash
@@ -412,7 +412,7 @@ use task_manager
 db.tasks.find().pretty()
 ```
 
-** Exercise 1 Complete When:**
+**Exercise 1 Complete When:**
 - [ ] Backend server runs without errors
 - [ ] MongoDB connection successful
 - [ ] All 4 API endpoints respond correctly
@@ -523,7 +523,7 @@ Create `frontend/src/components/TaskManager.jsx`
 - Display error state
 - Map through tasks and display them
 
-** Hints:**
+**Hints:**
 ```jsx
 import { useQuery } from '@tanstack/react-query';
 import { taskApi, Task } from '../services/api';
@@ -559,13 +559,13 @@ function TaskManager() {
 export default TaskManager;
 ```
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Tasks fetch automatically on component mount
 - Loading state shows while fetching
 - Error state shows if API fails
 - Tasks display in a list
 
-** Solution:** See `solutions/exercise2-frontend/TaskManager-basic.jsx`
+**Solution:** See `solutions/exercise2-frontend/TaskManager-basic.jsx`
 
 ---
 
@@ -583,7 +583,7 @@ export default TaskManager;
 - Add form with input and submit button
 - Handle mutation loading state (disable button)
 
-** Hints:**
+**Hints:**
 ```jsx
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -643,14 +643,14 @@ function TaskManager() {
 }
 ```
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Form input captures task title
 - Submit creates new task in database
 - UI updates automatically with new task
 - Input clears after submission
 - Button disabled while creating
 
-** Solution:** See `solutions/exercise2-frontend/TaskManager-create.jsx`
+**Solution:** See `solutions/exercise2-frontend/TaskManager-create.jsx`
 
 ---
 
@@ -674,7 +674,7 @@ function TaskManager() {
 - Add "Delete" button for each task
 - Handle pending states (disable buttons)
 
-** Hints:**
+**Hints:**
 ```jsx
 function TaskManager() {
   // Existing code...
@@ -737,14 +737,14 @@ function TaskManager() {
 }
 ```
 
-** Expected Outcome:**
+**Expected Outcome:**
 - Click "Complete" toggles task completion
 - Completed tasks show strikethrough
 - Click "Delete" removes task
 - UI updates automatically
 - Buttons disable during mutations
 
-** Solution:** See `solutions/exercise2-frontend/TaskManager-full.jsx`
+**Solution:** See `solutions/exercise2-frontend/TaskManager-full.jsx`
 
 ---
 
@@ -846,7 +846,7 @@ Create `frontend/src/components/TaskManager.css`:
 }
 ```
 
-** Exercise 2 Complete When:**
+**Exercise 2 Complete When:**
 - [ ] Tasks fetch and display automatically
 - [ ] Can add new tasks via form
 - [ ] Can toggle task completion
@@ -869,7 +869,7 @@ Create `frontend/src/components/TaskManager.css`:
 - Filter tasks array before mapping
 - Show all tasks by default
 
-** Hint:**
+**Hint:**
 ```jsx
 const [priorityFilter, setPriorityFilter] = useState<string>('all');
 

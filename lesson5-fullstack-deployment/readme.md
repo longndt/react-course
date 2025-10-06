@@ -768,7 +768,7 @@ jobs:
 - [ ] Update all dependencies
 - [ ] Implement rate limiting
 
-** Goal: Check at least 22/26 items to be production-ready**
+**Goal: Check at least 22/26 items to be production-ready**
 
 ---
 

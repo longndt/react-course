@@ -1,6 +1,6 @@
 # Theory - React Fundamentals & Project Setup
 
-> **Prerequisites**: Make sure you've completed the [Environment Setup Guide](../../extra/environment-setup.md) before starting this lesson.
+> **Prerequisites**: Make sure you've completed the [Environment Setup Guide](../../setup/environment-setup.md) before starting this lesson.
 
 ---
 
@@ -286,9 +286,9 @@ function Profile({ username, email, role, isActive, joinDate }: ProfileProps) {
 />  //  Error: missing required props!
 ```
 
->  **Complete TypeScript Guide**: For a comprehensive TypeScript review, see [Lesson 0: TypeScript Prerequisites](../../lesson0-typescript/)
+> **Complete TypeScript Guide**: For a comprehensive TypeScript review, see [Lesson 0: TypeScript Prerequisites](../../lesson0-typescript/)
 
->  **Advanced Patterns**: State management, hooks, and advanced TypeScript patterns are covered in [Lesson 2: Components & Hooks](../../lesson2-component-hook/)
+> **Advanced Patterns**: State management, hooks, and advanced TypeScript patterns are covered in [Lesson 2: Components & Hooks](../../lesson2-component-hook/)
 
 ---
 
@@ -643,7 +643,7 @@ function EventDemo() {
 }
 ```
 
->  **Note**: Advanced event handling with state will be covered in Lesson 2
+> **Note**: Advanced event handling with state will be covered in Lesson 2
 
 ---
 
@@ -878,7 +878,7 @@ function StudentProfile() {
 export default StudentProfile;
 ```
 
->  **Challenge**: Try styling this component to make it look professional!
+> **Challenge**: Try styling this component to make it look professional!
 
 ---
 

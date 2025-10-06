@@ -192,7 +192,7 @@ const str = identity<string>("Hello");
 - [ ] Can use generics confidently
 - [ ] Understand utility types (Partial, Pick, Omit)
 
-** Test your knowledge:** Take the [interactive quiz](./quiz/quiz0.html)
+**Test your knowledge:** Take the [interactive quiz](./quiz/quiz0.html)
 
 ---
 

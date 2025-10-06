@@ -159,7 +159,7 @@ function App() {
 export default App;
 ```
 
-** Test**: Run `npm run dev`, manually navigate to:
+**Test**: Run `npm run dev`, manually navigate to:
 - `http://localhost:5173/` → Home page
 - `http://localhost:5173/about` → About page
 - `http://localhost:5173/contact` → Contact page
@@ -177,7 +177,7 @@ export default App;
 4. Apply `active` class to currently active links
 5. Add the Navbar to `App.tsx` above the `<Routes>`
 
-** Hints**:
+**Hints**:
 
 ```tsx
 // Import the routing components
@@ -215,13 +215,13 @@ function Navbar() {
 }
 ```
 
-** Expected Outcome**:
+**Expected Outcome**:
 - Navigation bar appears on all pages
 - Logo/brand links to home page
 - Nav links highlight when active
 - Clicking links changes pages without full reload
 
-** Solution**: See `solutions/exercise1-routing/`
+**Solution**: See `solutions/exercise1-routing/`
 
 ---
 
@@ -237,7 +237,7 @@ function Navbar() {
 5. Use `useNavigate()` hook to add a "Back" button
 6. Add Products link to Navbar
 
-** Hints**:
+**Hints**:
 
 ```tsx
 // Products page with links
@@ -278,14 +278,14 @@ function ProductDetail() {
 
 **Product Data Hint**: Use the array provided above or create your own
 
-** Expected Outcome**:
+**Expected Outcome**:
 - Products page shows list of clickable products
 - Clicking a product navigates to `/products/1` (or 2, 3)
 - Product detail page displays the correct product info
 - Back button navigates to previous page
 - URL changes reflect the current product
 
-** Solution**: See `solutions/exercise1-routing/`
+**Solution**: See `solutions/exercise1-routing/`
 
 ---
 
@@ -394,7 +394,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 );
 ```
 
-** Test**: No visible changes yet, but AuthContext is ready to use!
+**Test**: No visible changes yet, but AuthContext is ready to use!
 
 ---
 
@@ -412,7 +412,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 7. If user is already logged in, redirect to dashboard automatically
 8. Add Login link to Navbar (show only when NOT logged in)
 
-** Hints**:
+**Hints**:
 
 ```tsx
 import { useState } from 'react';
@@ -488,7 +488,7 @@ const { isAuthenticated, user, logout } = useAuth();
 )}
 ```
 
-** Expected Outcome**:
+**Expected Outcome**:
 - Login form displays with username and password fields
 - Submitting form shows loading state
 - After login, redirects to dashboard
@@ -496,7 +496,7 @@ const { isAuthenticated, user, logout } = useAuth();
 - Navbar shows username and "Logout" when logged in
 - Test credentials: any username/password works (simulated auth)
 
-** Solution**: See `solutions/exercise2-auth/`
+**Solution**: See `solutions/exercise2-auth/`
 
 ---
 
@@ -512,7 +512,7 @@ const { isAuthenticated, user, logout } = useAuth();
 5. Use `useLocation()` to save the attempted URL
 6. Pass the location to Login so it can redirect back after login
 
-** Hints**:
+**Hints**:
 
 ```tsx
 import { Navigate, useLocation } from 'react-router-dom';
@@ -549,13 +549,13 @@ const from = location.state?.from?.pathname || '/dashboard';
 navigate(from, { replace: true });
 ```
 
-** Expected Outcome**:
+**Expected Outcome**:
 - Protected routes are inaccessible without login
 - Attempting to access redirects to login
 - After login, redirects back to attempted page
 - Logged-in users can access protected routes
 
-** Solution**: See `solutions/exercise2-auth/`
+**Solution**: See `solutions/exercise2-auth/`
 
 ---
 
@@ -571,7 +571,7 @@ navigate(from, { replace: true });
 5. Add navigation links to these pages in Navbar (only when authenticated)
 6. Each page should display the current user's information from `useAuth()`
 
-** Hints**:
+**Hints**:
 
 ```tsx
 // Example Dashboard page
@@ -615,7 +615,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 **Settings Page Hint**: Create a form to "update" username (just update state, no backend)
 
-** Expected Outcome**:
+**Expected Outcome**:
 - Dashboard, Profile, Settings pages created
 - All three pages require authentication
 - Trying to access while logged out redirects to login
@@ -623,7 +623,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 - Navbar shows these links only when logged in
 - Logout clears user and redirects to home
 
-** Solution**: See `solutions/exercise2-auth/`
+**Solution**: See `solutions/exercise2-auth/`
 
 ---
 
@@ -642,7 +642,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 4. Add sidebar navigation within Dashboard
 5. Default to Overview when visiting `/dashboard`
 
-** Hints**:
+**Hints**:
 
 ```tsx
 // Dashboard as layout
@@ -685,14 +685,14 @@ function Overview() {
 }
 ```
 
-** Expected Outcome**:
+**Expected Outcome**:
 - Dashboard has sidebar with sub-navigation
 - Clicking sidebar links changes content area
 - URL changes to `/dashboard/overview`, `/dashboard/stats`, etc.
 - Default shows Overview when visiting `/dashboard`
 - Main navbar still visible
 
-** Solution**: See `solutions/exercise3-advanced/`
+**Solution**: See `solutions/exercise3-advanced/`
 
 ---
 
@@ -915,4 +915,4 @@ In the next lab, you'll learn:
 
 ---
 
-** Congratulations!** You've mastered React Router and authentication patterns. These skills are essential for building professional web applications!
+**Congratulations!** You've mastered React Router and authentication patterns. These skills are essential for building professional web applications!

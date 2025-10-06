@@ -216,7 +216,7 @@ function App() {
 export default App;
 ```
 
-** Test**:
+**Test**:
 - Run `npm run dev`
 - Open browser DevTools → Network tab
 - Navigate between pages
@@ -236,7 +236,7 @@ export default App;
 5. Add a "Retry" button that reloads the page
 6. Wrap `<Suspense>` with `<ErrorBoundary>` in App.tsx
 
-** Hints**:
+**Hints**:
 
 ```jsx
 import { Component } from 'react';
@@ -306,13 +306,13 @@ export default ErrorBoundary;
 }
 ```
 
-** Expected Outcome**:
+**Expected Outcome**:
 - App handles lazy loading failures
 - Error message displayed if chunk fails to load
 - Retry button reloads the application
 - Console logs error details
 
-** Solution**: See `solutions/exercise1-code-splitting/`
+**Solution**: See `solutions/exercise1-code-splitting/`
 
 ---
 
@@ -326,7 +326,7 @@ export default ErrorBoundary;
 3. Note the sizes of individual chunks
 4. Compare with non-lazy loaded version (optional)
 
-** Hints**:
+**Hints**:
 
 ```bash
 # Build for production
@@ -352,13 +352,13 @@ export default defineConfig({
 });
 ```
 
-** Expected Outcome**:
+**Expected Outcome**:
 - Production build creates separate chunks for each lazy-loaded component
 - Main bundle is smaller than if all components were bundled together
 - Each route loads its own JavaScript file on demand
 - Improved initial load time (especially noticeable with larger apps)
 
-** Solution**: See `solutions/exercise1-code-splitting/README.md`
+**Solution**: See `solutions/exercise1-code-splitting/README.md`
 
 ---
 
@@ -463,7 +463,7 @@ export default function Users() {
 }
 ```
 
-** Test**:
+**Test**:
 - Click "Increment" button
 - Check console - UserItems should NOT re-render
 - Problem: They DO re-render because `handleSelect` is recreated each render!
@@ -481,7 +481,7 @@ export default function Users() {
 4. Click "Increment" again and verify UserItems don't re-render
 5. Add console logs to track renders
 
-** Hints**:
+**Hints**:
 
 ```tsx
 import { useState, useCallback } from 'react';
@@ -504,13 +504,13 @@ const handleSelect = useCallback((user: User) => {
 - With `useCallback`: Same function reference across renders
 - `memo()` sees no change, skips re-render
 
-** Expected Outcome**:
+**Expected Outcome**:
 - Clicking "Increment" does NOT trigger UserItem re-renders
 - Console shows "Rendering UserList" but NOT "Rendering UserItem: X"
 - Selected user still updates correctly when clicking a user
 - Performance improves with larger lists
 
-** Solution**: See `solutions/exercise2-memoization/`
+**Solution**: See `solutions/exercise2-memoization/`
 
 ---
 
@@ -525,7 +525,7 @@ const handleSelect = useCallback((user: User) => {
 4. Add console logs to see when filtering/sorting happens
 5. Verify it only recalculates when search term or sort order changes
 
-** Hints**:
+**Hints**:
 
 ```tsx
 import { useState, useMemo, useCallback } from 'react';
@@ -572,14 +572,14 @@ export default function Users() {
 
 **With useMemo**: Only runs when `users`, `searchTerm`, or `sortAsc` changes
 
-** Expected Outcome**:
+**Expected Outcome**:
 - Typing in search filters the list
 - Clicking sort button reverses order
 - Console shows "Filtering and sorting..." only when needed
 - Unrelated state changes (count) don't trigger recalculation
 - Smooth performance even with 1000+ users
 
-** Solution**: See `solutions/exercise2-memoization/`
+**Solution**: See `solutions/exercise2-memoization/`
 
 ---
 
@@ -628,7 +628,7 @@ function BadList() {
 5. Only render visible items (+ small buffer)
 6. Use absolute positioning to create illusion of full list
 
-** Hints**:
+**Hints**:
 
 ```tsx
 // src/components/VirtualList.tsx
@@ -746,14 +746,14 @@ export default function VirtualListDemo() {
 }
 ```
 
-** Expected Outcome**:
+**Expected Outcome**:
 - Smooth scrolling through 10,000 items
 - Only ~10-15 items rendered in DOM at any time
 - Scroll bar reflects full list height
 - Items appear/disappear as you scroll
 - Performance much better than rendering all items
 
-** Solution**: See `solutions/exercise3-virtual-list/`
+**Solution**: See `solutions/exercise3-virtual-list/`
 
 ---
 
@@ -768,7 +768,7 @@ export default function VirtualListDemo() {
 4. Record FPS (frames per second) while scrolling
 5. Document the performance difference
 
-** Hints**:
+**Hints**:
 
 **Profiling Steps**:
 1. Open Chrome DevTools → Performance tab
@@ -782,13 +782,13 @@ export default function VirtualListDemo() {
 - **Regular List**: Laggy scrolling, FPS drops to 20-30, janky animations
 - **Virtual List**: Smooth scrolling, FPS stays at 55-60, butter smooth
 
-** Expected Outcome**:
+**Expected Outcome**:
 - Clear performance difference visible
 - Virtual list maintains 60 FPS
 - Regular list struggles with large dataset
 - Understanding of when virtualization is needed
 
-** Solution**: See `solutions/exercise3-virtual-list/README.md`
+**Solution**: See `solutions/exercise3-virtual-list/README.md`
 
 ---
 
@@ -807,7 +807,7 @@ export default function VirtualListDemo() {
 4. Create a config file that reads these variables
 5. Use different API URLs for dev and prod
 
-** Hints**:
+**Hints**:
 
 ```bash
 # .env.development
@@ -840,13 +840,13 @@ fetch(`${ENV.apiUrl}/users`)
   .then(/* ... */);
 ```
 
-** Expected Outcome**:
+**Expected Outcome**:
 - `npm run dev` uses development variables
 - `npm run build` uses production variables
 - API calls use correct URLs per environment
 - Analytics only enabled in production
 
-** Solution**: See `solutions/exercise4-deployment/`
+**Solution**: See `solutions/exercise4-deployment/`
 
 ---
 
@@ -861,7 +861,7 @@ fetch(`${ENV.apiUrl}/users`)
 4. Build and analyze the bundle size
 5. Document bundle sizes before and after optimization
 
-** Hints**:
+**Hints**:
 
 ```ts
 // vite.config.ts
@@ -913,14 +913,14 @@ ls -lh dist/assets
 npm install --save-dev rollup-plugin-visualizer
 ```
 
-** Expected Outcome**:
+**Expected Outcome**:
 - Production build completes successfully
 - Separate vendor chunks for React libraries
 - Minified JavaScript and CSS
 - No console.logs in production code
 - Bundle sizes documented and optimized
 
-** Solution**: See `solutions/exercise4-deployment/`
+**Solution**: See `solutions/exercise4-deployment/`
 
 ---
 
@@ -936,7 +936,7 @@ npm install --save-dev rollup-plugin-visualizer
 5. Configure build settings
 6. Deploy and verify the live URL
 
-** Hints**:
+**Hints**:
 
 **Step 1: Prepare Git Repository**
 ```bash
@@ -987,14 +987,14 @@ Create `netlify.toml`:
   status = 200
 ```
 
-** Expected Outcome**:
+**Expected Outcome**:
 - Live URL provided (e.g., `your-app.vercel.app`)
 - App loads and works correctly
 - Routing works (no 404 on refresh)
 - Environment variables applied
 - Auto-deploys on Git push
 
-** Solution**: See `solutions/exercise4-deployment/README.md`
+**Solution**: See `solutions/exercise4-deployment/README.md`
 
 ---
 
@@ -1247,4 +1247,4 @@ You've completed the React Performance & Deployment course! You now have the ski
 
 ---
 
-** You're now ready to build professional React applications!**
+**You're now ready to build professional React applications!**

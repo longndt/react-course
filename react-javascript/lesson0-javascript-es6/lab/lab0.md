@@ -10,7 +10,7 @@ In this lab session, you'll practice modern JavaScript (ES6+) fundamentals throu
 
 
 
->  **Scope:** This lab focuses on JavaScript ES6+ basics - the foundation you need before diving into React.>  **Scope:** This lab focuses on TypeScript basics - the foundation you need before diving into React with TypeScript.
+> **Scope:** This lab focuses on JavaScript ES6+ basics - the foundation you need before diving into React.>  **Scope:** This lab focuses on TypeScript basics - the foundation you need before diving into React with TypeScript.
 
 
 
@@ -468,7 +468,7 @@ console.log("Student:", student);
 
 
 
-** Solution:**
+**Solution:**
 
 // Rest pattern
 

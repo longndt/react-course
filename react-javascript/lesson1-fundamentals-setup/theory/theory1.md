@@ -1,6 +1,6 @@
 # Theory - React Fundamentals & Project Setup
 
-> **Prerequisites**: Make sure you've completed the [Environment Setup Guide](../../extra/environment-setup.md) before starting this lesson.
+> **Prerequisites**: Make sure you've completed the [Environment Setup Guide](../../setup/environment-setup.md) before starting this lesson.
 
 ---
 
@@ -280,11 +280,11 @@ Card.propTypes = {
 -  Requires learning TypeScript
 -  Additional build step (compilation)
 
->  **For this course**: We use PropTypes for simplicity. If you want type safety, consider learning TypeScript after mastering React fundamentals.
+> **For this course**: We use PropTypes for simplicity. If you want type safety, consider learning TypeScript after mastering React fundamentals.
 
->  **Complete JavaScript ES6+ Guide**: For a comprehensive JavaScript review, see [Lesson 0: JavaScript ES6+ Prerequisites](../lesson0-javascript-es6/)
+> **Complete JavaScript ES6+ Guide**: For a comprehensive JavaScript review, see [Lesson 0: JavaScript ES6+ Prerequisites](../lesson0-javascript-es6/)
 
->  **Advanced Patterns**: State management, hooks, and advanced patterns are covered in [Lesson 2: Components & Hooks](../lesson2-component-hook/)
+> **Advanced Patterns**: State management, hooks, and advanced patterns are covered in [Lesson 2: Components & Hooks](../lesson2-component-hook/)
 
 ---
 
@@ -642,7 +642,7 @@ function EventDemo() {
 }
 ```
 
->  **Note**: Advanced event handling with state will be covered in Lesson 2
+> **Note**: Advanced event handling with state will be covered in Lesson 2
 
 ---
 
@@ -879,7 +879,7 @@ function StudentProfile() {
 export default StudentProfile;
 ```
 
->  **Challenge**: Try styling this component to make it look professional!
+> **Challenge**: Try styling this component to make it look professional!
 
 ---
 

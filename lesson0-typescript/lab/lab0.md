@@ -4,7 +4,7 @@
 
 In this lab session, you'll practice TypeScript fundamentals through hands-on exercises. You'll work with types, interfaces, generics, and utility types to build a solid foundation for React development.
 
->  **Scope:** This lab focuses on TypeScript basics - the foundation you need before diving into React with TypeScript.
+> **Scope:** This lab focuses on TypeScript basics - the foundation you need before diving into React with TypeScript.
 
 ##  Learning Objectives
 
@@ -109,7 +109,7 @@ console.log("Grades:", grades);
 console.log("Subjects:", subjects);
 ```
 
-** Solution:**
+**Solution:**
 
 ```typescript
 // 1. Create a variable 'studentName' of type string
@@ -155,7 +155,7 @@ console.log("Student tuple:", student);
 console.log("User role:", userRole);
 ```
 
-** Solution:**
+**Solution:**
 
 ```typescript
 // 1. Create a tuple 'student' with [name: string, id: number, gpa: number]
@@ -233,7 +233,7 @@ console.log("Student:", student);
 console.log("Course:", course);
 ```
 
-** Solution:**
+**Solution:**
 
 ```typescript
 // 1. Define interface 'Person'
@@ -313,7 +313,7 @@ let apiResult: Result = "Success";
 console.log({ userId, orderId, orderStatus, coordinate, apiResult });
 ```
 
-** Solution:**
+**Solution:**
 
 ```typescript
 // 1. Create type alias 'ID' that can be string or number
@@ -379,7 +379,7 @@ console.log(combineStrings("Hello", "World", "!"));
 console.log(multiply(5, 3));
 ```
 
-** Solution:**
+**Solution:**
 
 ```typescript
 // 1. Calculate average of numbers
@@ -440,7 +440,7 @@ const stringContainer: Container<string> = { value: "Hello" };
 console.log(numberContainer, stringContainer);
 ```
 
-** Solution:**
+**Solution:**
 
 ```typescript
 // 1. Get first element of array
@@ -541,7 +541,7 @@ const immutableUser: ReadonlyUser = {
 console.log({ updateData, publicProfile, preview });
 ```
 
-** Solution:**
+**Solution:**
 
 ```typescript
 // Base interface
@@ -645,7 +645,7 @@ makeSound(myDog);
 makeSound(myCat);
 ```
 
-** Solution:**
+**Solution:**
 
 ```typescript
 // 1. Process value based on type

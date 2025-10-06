@@ -15,7 +15,7 @@ After completing this lesson, you will be able to:
 
 -  Build reusable component li### Additional Resources
  **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
-❓ **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting-guide.md)
+❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting-guide.md)
  **Advanced patterns** → [Advanced Patterns](../extras/advanced-patterns.md)ies with JavaScript and PropTypes
 -  Master component composition and props patterns
 -  Apply essential React Hooks (useState, useEffect, useRef, useContext, useReducer)
@@ -359,7 +359,7 @@ Follow this 4-step learning path:
 
 **DON'T:**
 -  Call hooks inside loops, conditions, or nested functions
--  Mutate state directly: `state.value = 1` 
+-  Mutate state directly: `state.value = 1`
 -  Forget dependency arrays (causes bugs)
 -  Create infinite loops with useEffect
 -  Ignore ESLint exhaustive-deps warnings
@@ -481,7 +481,7 @@ function Component() {
 
 **Solution:** Only call setState in event handlers or useEffect
 
->  **More solutions** → See [Troubleshooting Guide](../extras/troubleshooting-guide.md)
+> **More solutions** → See [Troubleshooting Guide](../extra/troubleshooting-guide.md)
 
 ---
 
@@ -514,7 +514,7 @@ function Component() {
 - [ ] Debug components with React DevTools
 - [ ] Handle async operations in useEffect properly
 
-** Goal: Check at least 12/14 items before Lesson 3**
+**Goal: Check at least 12/14 items before Lesson 3**
 
 ---
 
