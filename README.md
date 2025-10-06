@@ -2,7 +2,7 @@
 
 ## Course Overview
 
-This course teaches **React with TypeScript** development using industry-standard practices through hands-on examples.
+This course teaches **React** frontend development using industry-standard practices through hands-on examples.
 
 **Format**: Theory, hands-on practice, and project-based learning
 
@@ -10,11 +10,9 @@ This course teaches **React with TypeScript** development using industry-standar
 
 > **📌 IMPORTANT NOTE**
 >
-> This course uses **TypeScript** throughout all lessons and examples.
->
 > 🔷 **If you are not familiar with TypeScript** or prefer to learn React with JavaScript:
 >
-> ➡️ **[Switch to JavaScript Version](./react-javascript/)** ⬅️
+> ➡️ **[Switch to JavaScript](./react-javascript/)** ⬅️
 >
 > The JavaScript version contains the same lessons and examples but uses plain JavaScript instead of TypeScript.
 
@@ -89,7 +87,7 @@ This course teaches **React with TypeScript** development using industry-standar
 Each lesson follows a standardized structure designed for effective learning:
 
 ```
-lessonX-topic/
+lessonNo-topic/
 ├──  reference/          # Quick reference codes
 ├──  example/            # Working code examples
 ├──  theory/             # Comprehensive documentation
@@ -104,8 +102,7 @@ lessonX-topic/
 
 ---
 
-## 📚 How to Study This Course Effectively
-
+## 📚 How to Study This Course Effectively ?
 ### **Step 1: Start with Reference Guide**
 
 **Goal**: Get a quick overview of what you'll learn
@@ -224,19 +221,18 @@ cd react-course
 -  **[Lesson 4: Routing & Authentication ](./lesson4-routing-auth/readme.md)**
 -  **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack-deployment/readme.md)**
 
-#### 3⃣ **Continue with Extra Materials** (Optional)
-- **[Web Testing Guide](./extra/web-testing.md)** - Jest, React Testing Library, E2E testing strategies
-- **[Web Accessibility Guide](./extra/web-accessibility.md)** - WCAG compliance, ARIA, keyboard navigation
-- **[Performance Optimization](./extra/performance-optimization.md)** - useMemo, useCallback, bundle optimization
-- **[State Management Guide](./extra/state-management.md)** - Context API, Zustand, Redux patterns
-- **[Advanced Patterns](./extra/advanced-patterns.md)** - Compound components, render props, HOC
-- **[Modern React Stack](./extra/modern-stack.md)** - Latest React ecosystem and best practices
-- **[Troubleshooting Guide](./extra/troubleshooting.md)** - Common issues and solutions
+#### 3⃣ **Continue with Advanced Materials** (Optional)
+- **[Modern React Stack](./extra/modern-stack.md)**
+- **[Advanced Patterns](./extra/advanced-patterns.md)**
+- **[State Management Guide](./extra/state-management.md)**
+- **[Performance Optimization](./extra/performance-optimization.md)**
+- **[Web Testing Guide](./extra/web-testing.md)**
+- **[Web Accessibility Guide](./extra/web-accessibility.md)**
 
 ### Step 5: Start Learning
 
 ```bash
-# Start with Lesson 0 (if you need to review fundamentals)
+# Start with Lesson 0 (if you need to study TypeScript)
 cd lesson0-typescript
 
 # Or start directly with Lesson 1
@@ -250,5 +246,4 @@ cd lesson1-fundamentals-setup
 - **Complete all labs** to solidify your understanding
 - **Follow the *example* folder** to see complete example
 - **Check the *Troubleshooting Guide*** for quick solutions
-
 ---
