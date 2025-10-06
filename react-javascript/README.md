@@ -8,8 +8,6 @@ This course teaches **React with JavaScript** development using industry-standar
 
 **Format**: Theory, hands-on practice, and project-based learning
 
-**Language**: All examples and exercises use **JavaScript (ES6+)**
-
 ---
 
 ## Prerequisites
@@ -198,7 +196,7 @@ Make sure you have installed:
 
 **Having installation or setup issues?**
 
- **[Check Troubleshooting Guide](../extra/troubleshooting.md)** for common problems and solutions
+**[Check Troubleshooting Guide](../extra/troubleshooting.md)** for common problems and solutions
 
 ### Step 2: Install Markdown Reading Support Extension
 
@@ -223,7 +221,7 @@ cd react-course/react-javascript
 **Follow this exact order for the best learning experience:**
 
 #### 1⃣ **Start with Prerequisites** (If needed)
- **[Lesson 0: JavaScript Prerequisites](./lesson0-javascript-es6/readme.md)**
+- **[Lesson 0: JavaScript Prerequisites](./lesson0-javascript-es6/readme.md)**
 - Review JavaScript ES6+ fundamentals
 - Master arrow functions, destructuring, and async/await used in React
 

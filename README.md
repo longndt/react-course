@@ -6,15 +6,9 @@ This course teaches **React with Typescript** development using industry-standar
 
 **Format**: Theory, hands-on practice, and project-based learning
 
-**Language**: All examples and exercises use **TypeScript**
-
-> **📌 NOTE**
+> **If you are not familiar with TypeScript** or prefer to learn React with JavaScript
 >
-> 🔷 **If you are not familiar with TypeScript** or prefer to learn React with JavaScript:
->
-> ➡️ **[Switch to JavaScript Version](./react-javascript/)** ⬅️
->
-> The JavaScript version contains the same lessons and examples but uses plain JavaScript instead of TypeScript.
+> ➡️ **[Switch to JavaScript Track](./react-javascript/)** ⬅️
 
 ---
 
@@ -204,7 +198,7 @@ Make sure you have installed:
 
 **Having installation or setup issues?**
 
- **[Check Troubleshooting Guide](./extra/troubleshooting.md)** for common problems and solutions
+**[Check Troubleshooting Guide](./extra/troubleshooting.md)** for common problems and solutions
 
 ### Step 2: Install Markdown Reading Support Extension
 
@@ -229,7 +223,7 @@ cd react-course
 **Follow this exact order for the best learning experience:**
 
 #### 1⃣ **Start with Prerequisites** (If needed)
- **[Lesson 0: TypeScript Prerequisites](./lesson0-typescript/readme.md)**
+- **[Lesson 0: TypeScript Prerequisites](./lesson0-typescript/readme.md)**
 - Review TypeScript fundamentals
 - Master types, interfaces, and generics used in React
 

@@ -11,16 +11,9 @@ This lesson covers React component architecture and hooks - the foundation of mo
 
 ## Learning Objectives
 
-After completing this lesson, you will be ab>  **More solutions** → See [Troubleshooting Guide](../extra/troubleshooting.md)
+After completing this lesson, you will be able to:
 
----
-
-## 📚 What's Nexte to:
-
--  Build reusable component li### Additional Resources
- **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
-❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting.md)
- **Advanced patterns** → [Advanced Patterns](../extra/advanced-patterns.md)
+-  Build reusable component libraries
 -  Master component composition and props patterns
 -  Apply essential React Hooks (useState, useEffect, useRef, useContext, useReducer)
 -  Create custom hooks for reusable business logic
@@ -28,6 +21,16 @@ After completing this lesson, you will be ab>  **More solutions** → See [Troub
 -  Avoid common Hook mistakes and anti-patterns
 -  Debug components with React DevTools
 -  Optimize component performance
+
+---
+
+## 📚 What's Next
+
+### Additional Resources
+-  **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
+-  **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting.md)
+-  **Advanced patterns** → [Advanced Patterns](../extra/advanced-patterns.md)
+-  **More solutions** → See [Troubleshooting Guide](../extra/troubleshooting.md)
 
 ---
 
