@@ -1,584 +1,678 @@
-# JavaScript ES6+ Quick Reference# Reference - TypeScript Prerequisites
+# JavaScript ES6+ Quick Reference
 
+## 1. Arrow Functions
 
+```javascript
+// Traditional function
+function add(a, b) {
+  return a + b;
+}
 
-> **Quick reference guide for modern JavaScript features used in React development**> **Quick reference guide for TypeScript essentials**
+// Arrow function
+const add = (a, b) => a + b;
 
+// With single parameter (parentheses optional)
+const square = x => x * x;
 
+// With no parameters
+const greet = () => console.log('Hello!');
 
----## Table of Contents
-
-1. [Setup TypeScript](#part-1-setup-typescript)
-
-## Variables2. [Write Your First TypeScript Code](#part-2-write-your-first-typescript-code)
-
-3. [Basic Types](#part-3-basic-types)
-
-```javascript4. [Functions](#part-4-functions)
-
-// const (default)5. [Quick Reference](#part-5-quick-reference)
-
-const API_URL = "https://api.example.com";
-
-const user = { name: "John" };---
-
-
-
-// let (when reassignment needed)## Part 1: Setup TypeScript
-
-let counter = 0;
-
-counter++;### Install TypeScript Globally
-
-
-
-//  var (avoid)```bash
-
-var oldStyle = "don't use";# Install TypeScript compiler
-
-```npm install -g typescript
-
-
-
----# Verify installation
-
-tsc --version
-
-## Arrow Functions```
-
-
-
-```javascript### Create Your First TypeScript Project
-
-// Basic
-
-const add = (a, b) => a + b;```bash
-
-const square = n => n * n;# Create project folder
-
-const random = () => Math.random();mkdir my-typescript-project
-
-cd my-typescript-project
-
-// Multiple statements
-
-const greet = name => {# Initialize npm project
-
-  const message = `Hello ${name}`;npm init -y
-
-  return message;
-
-};# Install TypeScript locally
-
-npm install --save-dev typescript
-
-// Object return
-
-const makePerson = (name, age) => ({ name, age });# Initialize TypeScript config
-
-```npx tsc --init
-
+// With block body (explicit return needed)
+const multiply = (a, b) => {
+  const result = a * b;
+  return result;
+};
 ```
 
----
-
- You should see `tsconfig.json` created!
-
-## Template Literals
-
----
-
-```javascript
-
-const name = "John";## Part 2: Write Your First TypeScript Code
-
-const age = 25;
-
-### Create `hello.ts`
-
-const message = `Hello ${name}, you are ${age} years old`;
-
-```javascript
-
-const html = `// hello.ts
-
-  <div>function greet(name: string): string {
-
-    <h1>${name}</h1>  return `Hello, ${name}!`;
-
-  </div>}
-
-`;
-
-```const message = greet("TypeScript");
-
-console.log(message);
+**Use Cases:**
+- Callbacks and array methods
+- Short function expressions
+- When you don't need `this` binding
 
 ---
 
-// This will cause an error:
+## 2. Destructuring
 
-## Destructuring// const error = greet(123); //  Argument of type 'number' is not assignable to parameter of type 'string'
-
-```
-
+### Object Destructuring
 ```javascript
+const user = { name: 'John', age: 30, city: 'NYC' };
 
-// Object### Compile and Run
-
+// Extract properties
 const { name, age } = user;
 
-const { name: userName } = user; // Rename```bash
+// Rename variables
+const { name: userName, age: userAge } = user;
 
-const { role = "user" } = user; // Default# Compile TypeScript to JavaScript
+// Default values
+const { country = 'USA' } = user;
 
-const { address: { city } } = user; // Nestednpx tsc hello.ts
-
-
-
-// Array# Run the generated JavaScript
-
-const [first, second] = colors;node hello.js
-
-const [first, , third] = colors; // Skip```
-
-const [first, ...rest] = colors; // Rest
-
-**Output:**
-
-// Swap```
-
-[a, b] = [b, a];Hello, TypeScript!
-
+// Nested destructuring
+const person = {
+  name: 'Alice',
+  address: { city: 'Boston', zip: '02101' }
+};
+const { address: { city } } = person;
 ```
 
-// Function params
+### Array Destructuring
+```javascript
+const colors = ['red', 'green', 'blue'];
 
-function greet({ name, age }) { }---
+// Extract elements
+const [first, second] = colors;
 
+// Skip elements
+const [, , third] = colors;
+
+// Rest operator
+const [primary, ...others] = colors;
+
+// Swap variables
+let a = 1, b = 2;
+[a, b] = [b, a];
 ```
-
-## Part 3: Basic Types
 
 ---
 
-### Primitive Types
-
-## Spread & Rest
+## 3. Template Literals
 
 ```javascript
+const name = 'World';
+const greeting = `Hello, ${name}!`;
 
-```javascript// String
+// Multi-line strings
+const message = `
+  This is a
+  multi-line
+  string
+`;
 
-// Spreadlet userName: string = "John";
+// Expression evaluation
+const price = 19.99;
+const tax = 0.08;
+const total = `Total: $${(price * (1 + tax)).toFixed(2)}`;
 
+// Tagged templates
+function highlight(strings, ...values) {
+  return strings.reduce((result, str, i) => {
+    return `${result}${str}<strong>${values[i] || ''}</strong>`;
+  }, '');
+}
+const product = 'Book';
+const tagged = highlight`Buy this ${product} now!`;
+```
+
+---
+
+## 4. Spread & Rest Operators
+
+### Spread Operator (...)
+```javascript
+// Array spreading
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
 const combined = [...arr1, ...arr2];
 
-const copy = [...arr1];// Number
+// Object spreading
+const obj1 = { a: 1, b: 2 };
+const obj2 = { c: 3, d: 4 };
+const merged = { ...obj1, ...obj2 };
 
-const updated = { ...user, age: 26 };let age: number = 25;
+// Copy with modifications
+const original = { name: 'John', age: 30 };
+const updated = { ...original, age: 31 };
 
+// Function arguments
+const numbers = [1, 2, 3, 4, 5];
+Math.max(...numbers);
+```
 
+### Rest Parameters
+```javascript
+// Collect remaining arguments
+function sum(...numbers) {
+  return numbers.reduce((total, n) => total + n, 0);
+}
+sum(1, 2, 3, 4); // 10
 
-// Rest// Boolean
-
-function sum(...numbers) {let isStudent: boolean = true;
-
-  return numbers.reduce((a, b) => a + b, 0);
-
-}// Array
-
-let scores: number[] = [90, 85, 88];
-
-const [first, ...rest] = [1, 2, 3, 4];let names: Array<string> = ["Alice", "Bob"];
-
-const { name, ...other} = user;
-
-```// Tuple
-
-let person: [string, number] = ["John", 25];
+// With other parameters
+function greet(greeting, ...names) {
+  return `${greeting}, ${names.join(' and ')}!`;
+}
+greet('Hello', 'Alice', 'Bob'); // "Hello, Alice and Bob!"
+```
 
 ---
 
-// Any (avoid when possible)
+## 5. Default Parameters
 
-## Array Methodslet anything: any = "can be anything";
-
-anything = 123;
-
-```javascriptanything = true;
-
-// map```
-
-const doubled = numbers.map(n => n * 2);
-
-### Object Types
-
-// filter
-
-const evens = numbers.filter(n => n % 2 === 0);```javascript
-
-// Interface
-
-// reduceinterface User {
-
-const sum = numbers.reduce((total, n) => total + n, 0);  id: number;
-
-  name: string;
-
-// find  email: string;
-
-const user = users.find(u => u.id === 2);  age?: number; // Optional property
-
+```javascript
+// Simple defaults
+function greet(name = 'Guest') {
+  return `Hello, ${name}!`;
 }
 
-// some / every
+// Expression as default
+function createUser(name, role = name.includes('admin') ? 'admin' : 'user') {
+  return { name, role };
+}
 
-const hasEven = numbers.some(n => n % 2 === 0);const user: User = {
-
-const allPositive = numbers.every(n => n > 0);  id: 1,
-
-  name: "John Doe",
-
-// sort  email: "john@example.com"
-
-const sorted = [...numbers].sort((a, b) => a - b);};
-
-
-
-// Chaining// Type Alias
-
-const result = numberstype Point = {
-
-  .filter(n => n % 2 === 0)  x: number;
-
-  .map(n => n * 2)  y: number;
-
-  .reduce((sum, n) => sum + n, 0);};
-
+// Using previous parameters
+function calculatePrice(price, tax = price * 0.1) {
+  return price + tax;
+}
 ```
 
-const point: Point = { x: 10, y: 20 };
+---
 
----```
+## 6. Modules (Import/Export)
 
-
-
-## Promises---
-
-
-
-```javascript## Part 4: Functions
-
-// Create
-
-const promise = new Promise((resolve, reject) => {```javascript
-
-  if (success) resolve("Done");// Function with typed parameters and return type
-
-  else reject("Error");function add(a: number, b: number): number {
-
-});  return a + b;
-
+### Named Exports
+```javascript
+// math.js
+export const PI = 3.14159;
+export function add(a, b) {
+  return a + b;
+}
+export class Calculator {
+  // ...
 }
 
-// Use
+// Importing
+import { PI, add, Calculator } from './math.js';
+// Or rename
+import { add as sum } from './math.js';
+// Or import all
+import * as Math from './math.js';
+```
 
-promise// Arrow function
+### Default Export
+```javascript
+// User.js
+export default class User {
+  constructor(name) {
+    this.name = name;
+  }
+}
 
-  .then(result => console.log(result))const multiply = (a: number, b: number): number => a * b;
+// Importing
+import User from './User.js';
+// Can use any name
+import MyUser from './User.js';
+```
 
+### Re-exporting
+```javascript
+// components/index.js
+export { Button } from './Button.js';
+export { Input } from './Input.js';
+export { default as Card } from './Card.js';
+
+// Usage
+import { Button, Input, Card } from './components';
+```
+
+---
+
+## 7. Promises
+
+```javascript
+// Creating a Promise
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    const success = true;
+    if (success) {
+      resolve('Success!');
+    } else {
+      reject('Error!');
+    }
+  }, 1000);
+});
+
+// Using Promises
+myPromise
+  .then(result => console.log(result))
   .catch(error => console.error(error))
+  .finally(() => console.log('Done'));
 
-  .finally(() => console.log("Finished"));// Optional parameters
+// Chaining
+fetch('/api/users')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
 
-function greet(name: string, greeting?: string): string {
+// Promise.all
+Promise.all([promise1, promise2, promise3])
+  .then(results => console.log(results));
 
-// Promise.all  return greeting ? `${greeting}, ${name}!` : `Hello, ${name}!`;
+// Promise.race
+Promise.race([promise1, promise2])
+  .then(result => console.log('First to resolve:', result));
+```
 
-Promise.all([p1, p2, p3])}
+---
 
-  .then(([r1, r2, r3]) => { });
+## 8. Async/Await
 
-// Default parameters
-
-// Promise.racefunction power(base: number, exponent: number = 2): number {
-
-Promise.race([p1, p2])  return Math.pow(base, exponent);
-
-  .then(first => { });}
-
-``````
-
-
-
-------
-
-
-
-## Async/Await## Part 5: Quick Reference
-
-
-
-```javascript### Common Commands
-
-// Basic
-
-async function fetchUser(id) {```bash
-
-  const response = await fetch(`/api/users/${id}`);# Compile single file
-
-  const user = await response.json();tsc filename.ts
-
-  return user;
-
-}# Compile all files in project
-
-tsc
+```javascript
+// Basic async function
+async function fetchUser() {
+  const response = await fetch('/api/user');
+  const data = await response.json();
+  return data;
+}
 
 // Error handling
-
-async function fetchSafely(id) {# Watch mode (auto-compile on save)
-
-  try {tsc --watch
-
-    const data = await fetchUser(id);
-
-    return data;# Compile and run immediately
-
-  } catch (error) {ts-node filename.ts
-
-    console.error(error);```
-
-    return null;
-
-  }### tsconfig.json Quick Settings
-
+async function getData() {
+  try {
+    const response = await fetch('/api/data');
+    if (!response.ok) throw new Error('Failed to fetch');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
 }
 
-```json
+// Multiple awaits
+async function getMultipleData() {
+  // Sequential
+  const user = await fetchUser();
+  const posts = await fetchPosts(user.id);
 
-// Parallel{
+  // Parallel (faster)
+  const [user2, posts2] = await Promise.all([
+    fetchUser(),
+    fetchPosts()
+  ]);
+}
 
-const [user, posts] = await Promise.all([  "compilerOptions": {
-
-  fetchUser(1),    "target": "ES2020",
-
-  fetchPosts(1)    "module": "commonjs",
-
-]);    "strict": true,
-
-```    "esModuleInterop": true,
-
-    "skipLibCheck": true,
-
----    "forceConsistentCasingInFileNames": true,
-
-    "outDir": "./dist",
-
-## Modules    "rootDir": "./src"
-
-  },
-
-```javascript  "include": ["src/**/*"],
-
-// Export  "exclude": ["node_modules"]
-
-export const PI = 3.14;}
-
-export function add(a, b) { return a + b; }```
-
-export default class User { }
-
----
-
-// Import
-
-import { PI, add } from './utils.js';## Common Errors & Quick Fixes
-
-import User from './User.js';
-
-import * as utils from './utils.js';### Error: Cannot find name 'console'
-
-
-
-// Dynamic**Fix:** Add type definitions
-
-const module = await import('./module.js');```bash
-
-```npm install --save-dev @types/node
-
+// Async arrow functions
+const loadData = async () => {
+  const data = await fetch('/api/data');
+  return data.json();
+};
 ```
 
 ---
 
-### Error: Property does not exist on type
+## 9. Array Methods
 
-## Classes
+### map() - Transform
+```javascript
+const numbers = [1, 2, 3, 4];
+const doubled = numbers.map(n => n * 2);
+// [2, 4, 6, 8]
 
-**Fix:** Define proper interface
+const users = [
+  { name: 'John', age: 30 },
+  { name: 'Jane', age: 25 }
+];
+const names = users.map(user => user.name);
+// ['John', 'Jane']
+```
 
-```javascript```javascript
+### filter() - Select
+```javascript
+const numbers = [1, 2, 3, 4, 5, 6];
+const evens = numbers.filter(n => n % 2 === 0);
+// [2, 4, 6]
 
-class User {//  Wrong
+const users = [
+  { name: 'John', active: true },
+  { name: 'Jane', active: false }
+];
+const activeUsers = users.filter(user => user.active);
+```
 
-  #balance = 0; // Privateconst user = {};
+### reduce() - Accumulate
+```javascript
+const numbers = [1, 2, 3, 4];
+const sum = numbers.reduce((total, n) => total + n, 0);
+// 10
 
-  user.name = "John"; // Error!
+const items = [
+  { name: 'Book', price: 10 },
+  { name: 'Pen', price: 5 }
+];
+const total = items.reduce((sum, item) => sum + item.price, 0);
+// 15
+```
 
-  constructor(name) {
+### find() & findIndex()
+```javascript
+const users = [
+  { id: 1, name: 'John' },
+  { id: 2, name: 'Jane' }
+];
+const user = users.find(u => u.id === 2);
+// { id: 2, name: 'Jane' }
 
-    this.name = name;//  Correct
+const index = users.findIndex(u => u.name === 'Jane');
+// 1
+```
 
-  }interface User {
+### some() & every()
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+numbers.some(n => n > 3); // true
+numbers.every(n => n > 0); // true
+numbers.every(n => n > 3); // false
+```
 
-    name: string;
+---
 
-  greet() {}
+## 10. Optional Chaining & Nullish Coalescing
 
-    return `Hello, ${this.name}`;const user: User = { name: "John" };
+### Optional Chaining (?.)
+```javascript
+const user = {
+  name: 'John',
+  address: {
+    city: 'NYC'
+  }
+};
 
-  }```
+// Safe property access
+const city = user?.address?.city; // 'NYC'
+const zip = user?.address?.zip; // undefined (no error)
 
-  
+// Safe method call
+const userName = user?.getName?.(); // undefined if method doesn't exist
 
-  static createGuest() {### Error: Type 'null' is not assignable
+// Safe array access
+const firstItem = items?.[0];
+```
 
-    return new User("Guest");
+### Nullish Coalescing (??)
+```javascript
+// Returns right side only if left is null or undefined
+const value1 = null ?? 'default'; // 'default'
+const value2 = undefined ?? 'default'; // 'default'
+const value3 = 0 ?? 'default'; // 0 (not null/undefined)
+const value4 = '' ?? 'default'; // '' (not null/undefined)
 
-  }**Fix:** Use union types
+// vs OR operator (||)
+const a = 0 || 'default'; // 'default' (0 is falsy)
+const b = 0 ?? 'default'; // 0 (0 is not null/undefined)
 
-  ```javascript
+// With optional chaining
+const userName = user?.name ?? 'Guest';
+```
 
-  get fullName() {// Allow null values
+---
 
-    return `${this.firstName} ${this.lastName}`;let value: string | null = null;
+## 11. Object & Array Shortcuts
 
-  }value = "Hello";
+### Object Property Shorthand
+```javascript
+const name = 'John';
+const age = 30;
 
-}```
+// Old way
+const user1 = { name: name, age: age };
 
+// Shorthand
+const user2 = { name, age };
+```
 
+### Computed Property Names
+```javascript
+const key = 'name';
+const obj = {
+  [key]: 'John',
+  ['age']: 30,
+  [`${key}Count`]: 1
+};
+// { name: 'John', age: 30, nameCount: 1 }
+```
 
-class Admin extends User {---
+### Method Shorthand
+```javascript
+// Old way
+const obj1 = {
+  greet: function() {
+    return 'Hello';
+  }
+};
 
-  constructor(name, role) {
+// Shorthand
+const obj2 = {
+  greet() {
+    return 'Hello';
+  }
+};
+```
 
-    super(name);## Next Steps
+---
 
+## 12. Classes
+
+```javascript
+class User {
+  // Constructor
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  // Method
+  greet() {
+    return `Hello, I'm ${this.name}`;
+  }
+
+  // Getter
+  get info() {
+    return `${this.name} (${this.age})`;
+  }
+
+  // Setter
+  set updateAge(newAge) {
+    this.age = newAge;
+  }
+
+  // Static method
+  static create(name, age) {
+    return new User(name, age);
+  }
+}
+
+// Inheritance
+class Admin extends User {
+  constructor(name, age, role) {
+    super(name, age);
     this.role = role;
+  }
 
-  }1.  Complete **Theory 0** - Deep dive into TypeScript concepts
-
-}2.  Do **Lab 0** - Practice exercises
-
-```3.  Check **Demo** - See TypeScript in action
-
-4.  Take **Quiz** - Test your knowledge
-
----
-
----
-
-## Modern Features
-
-## Useful Resources
-
-```javascript
-
-// Optional chaining- [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
-
-const city = user?.address?.city;- [TypeScript Playground](https://www.typescriptlang.org/play)
-
-const result = obj?.method?.();- [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) - Type definitions
-
-
-
-// Nullish coalescing---
-
-const port = config.port ?? 3000;
-
-const username = user?.name ?? 'Guest';**Ready to learn more?** Continue with the full theory and lab exercises! 
-
-
-// Logical assignment
-value ||= 'default';
-obj.name &&= obj.name.toUpperCase();
-config.port ??= 3000;
-
-// Array.at
-arr.at(-1);  // Last element
-
-// Object.hasOwn
-Object.hasOwn(obj, 'name');
+  greet() {
+    return `${super.greet()} - I'm an admin`;
+  }
+}
 ```
 
 ---
 
-## React Patterns
+## React-Specific Usage Examples
 
+### Component with Destructuring
 ```javascript
-// Component
-function Button({ onClick, children, disabled = false }) {
+// Props destructuring
+function UserCard({ name, age, email }) {
   return (
-    <button onClick={onClick} disabled={disabled}>
-      {children}
-    </button>
+    <div>
+      <h2>{name}</h2>
+      <p>Age: {age}</p>
+      <p>Email: {email}</p>
+    </div>
   );
 }
+```
 
-// Hooks
-const [count, setCount] = useState(0);
-const [user, setUser] = useState(null);
+### Array Methods in JSX
+```javascript
+function UserList({ users }) {
+  return (
+    <ul>
+      {users.map(user => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+}
+```
 
-// Immutable updates
-setUsers([...users, newUser]); // Add
-setUsers(users.filter(u => u.id !== id)); // Remove
-setUsers(users.map(u => u.id === id ? {...u, name} : u)); // Update
+### Async Data Fetching
+```javascript
+import { useState, useEffect } from 'react';
 
-// Conditional rendering
-{user && <Profile user={user} />}
-{loading ? <Spinner /> : <Content />}
+function DataComponent() {
+  const [data, setData] = useState(null);
 
-// List rendering
-{users.map(user => (
-  <UserCard key={user.id} {...user} />
-))}
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch('/api/data');
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
 
-// useEffect with async
-useEffect(() => {
-  async function load() {
-    const data = await fetchData();
-    setData(data);
-  }
-  load();
-}, []);
+    fetchData();
+  }, []);
+
+  return <div>{data?.message ?? 'Loading...'}</div>;
+}
+```
+
+### Spread for Props
+```javascript
+function Button({ children, ...props }) {
+  return <button {...props}>{children}</button>;
+}
+
+// Usage
+<Button className="btn" onClick={handleClick}>
+  Click me
+</Button>
 ```
 
 ---
 
-## Best Practices
+## Common Patterns in React
+
+### State Updates with Spread
+```javascript
+// Update object state
+const [user, setUser] = useState({ name: '', age: 0 });
+setUser({ ...user, age: 31 });
+
+// Update array state
+const [items, setItems] = useState([]);
+setItems([...items, newItem]);
+```
+
+### Conditional Rendering
+```javascript
+// Using && (short-circuit)
+{isLoggedIn && <UserProfile />}
+
+// Using ternary
+{isLoading ? <Spinner /> : <Content />}
+
+// Using nullish coalescing
+<div>{userName ?? 'Guest'}</div>
+```
+
+### Event Handlers
+```javascript
+// Arrow function in JSX
+<button onClick={() => handleClick(id)}>Click</button>
+
+// Method reference
+<button onClick={handleClick}>Click</button>
+
+// With event object
+const handleSubmit = (e) => {
+  e.preventDefault();
+  // ...
+};
+```
+
+---
+
+## Browser Console Testing
+
+Try these in your browser console:
 
 ```javascript
-//  Good
-const isActive = true;
-const users = [...originalUsers];
-const updated = { ...user, age: 26 };
+// Arrow functions
+const greet = name => `Hello, ${name}!`;
+console.log(greet('World'));
 
-//  Bad
-var x = true;
-originalUsers.push(newUser); // Mutation
-user.age = 26; // Mutation
+// Destructuring
+const { log } = console;
+log('Using destructured log');
 
-//  Pure functions
-const add = (a, b) => a + b;
-const double = n => n * 2;
+// Template literals
+const name = 'JavaScript';
+log(`Learning ${name}`);
 
-//  Side effects
-let total = 0;
-const add = n => { total += n; }; // Impure
+// Array methods
+[1, 2, 3, 4, 5]
+  .filter(n => n % 2 === 0)
+  .map(n => n * 2);
+
+// Async/await
+async function test() {
+  const response = await fetch('https://api.github.com/users/github');
+  const data = await response.json();
+  return data;
+}
+test().then(console.log);
 ```
 
 ---
 
-**Quick Reference - Keep this handy!** 
+## Practice Exercises
+
+### Exercise 1: Refactor to ES6+
+```javascript
+// Old ES5 code - refactor this!
+var numbers = [1, 2, 3, 4, 5];
+var doubled = [];
+for (var i = 0; i < numbers.length; i++) {
+  doubled.push(numbers[i] * 2);
+}
+
+function greet(name) {
+  if (name === undefined) {
+    name = 'Guest';
+  }
+  return 'Hello, ' + name + '!';
+}
+
+var user = { name: 'John', age: 30 };
+var userName = user.name;
+var userAge = user.age;
+```
+
+### Exercise 2: Async Data Processing
+```javascript
+// Fetch data from multiple APIs and combine results
+// Use async/await, Promise.all, and array methods
+```
+
+### Exercise 3: Object Manipulation
+```javascript
+// Create functions using destructuring, spread, and shortcuts
+// - mergeUsers(user1, user2)
+// - updateUser(user, updates)
+// - getUserInfo({ name, age, email })
+```
+
+---
+
+**[⬅ Back to Lesson Overview](../readme.md)** | **[➡ Next: Theory Documentation](../theory/theory0.md)**

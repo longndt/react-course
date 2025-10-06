@@ -203,7 +203,7 @@ cd react-course/react-javascript
 **Follow this exact order for the best learning experience:**
 
 #### 1⃣ **Start with Prerequisites** (If needed)
- **[Lesson 0: JavaScript Prerequisites](./lesson0-javascript/readme.md)**
+ **[Lesson 0: JavaScript Prerequisites](./lesson0-javascript-es6/readme.md)**
 - Review JavaScript ES6+ fundamentals
 - Master arrow functions, destructuring, and async/await used in React
 
@@ -214,13 +214,14 @@ cd react-course/react-javascript
 -  **[Lesson 4: Routing & Authentication ](./lesson4-routing-auth/readme.md)**
 -  **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack-deployment/readme.md)**
 
-#### 3⃣ **Continue with Advanced Materials** (Optional)
-- **[Web Testing](../extra/testing-guide.md)** - Jest, React Testing Library, E2E testing
-- **[Performance Optimization](../extra/advanced-patterns.md)** - useMemo, useCallback, bundle optimization
-- **[Web Accessibility](../extra/advanced-patterns.md)** - WCAG compliance, ARIA, keyboard navigation
-- **[State Management](../extra/state-management-guide.md)** - Advanced state management patterns
-- **[Modern Stack](../extra/modern-stack-2025.md)** - Latest React ecosystem technologies
-- **[Advanced Patterns](../extra/advanced-patterns.md)** - Enterprise-level patterns
+#### 3⃣ **Continue with Extra Materials** (Optional)
+- **[Web Testing Guide](../extra/web-testing.md)** - Jest, React Testing Library, E2E testing strategies
+- **[Web Accessibility Guide](../extra/web-accessibility.md)** - WCAG compliance, ARIA, keyboard navigation
+- **[Performance Optimization](../extra/performance-optimization.md)** - useMemo, useCallback, bundle optimization
+- **[State Management Guide](../extra/state-management.md)** - Context API, Zustand, Redux patterns
+- **[Advanced Patterns](../extra/advanced-patterns.md)** - Compound components, render props, HOC
+- **[Modern Stack](../extra/modern-stack.md)** - Latest React ecosystem and best practices
+- **[Troubleshooting Guide](../extra/troubleshooting.md)** - Common issues and solutions
 
 ### Step 5: Start Learning
 

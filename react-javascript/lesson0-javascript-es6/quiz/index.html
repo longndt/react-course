@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS ES6+ Quiz</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .question {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      border-left: 4px solid #667eea;
+    }
+
+    .question h3 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .question pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    .options {
+      list-style: none;
+    }
+
+    .options li {
+      margin: 10px 0;
+    }
+
+    .options label {
+      display: block;
+      padding: 12px 15px;
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .options label:hover {
+      background: #f0f0f0;
+      border-color: #667eea;
+    }
+
+    .options input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .options label.correct {
+      background: #d4edda;
+      border-color: #28a745;
+    }
+
+    .options label.incorrect {
+      background: #f8d7da;
+      border-color: #dc3545;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      display: none;
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    .result.pass {
+      background: #d4edda;
+      border: 2px solid #28a745;
+      color: #155724;
+    }
+
+    .result.fail {
+      background: #f8d7da;
+      border: 2px solid #dc3545;
+      color: #721c24;
+    }
+
+    .result h2 {
+      margin-bottom: 10px;
+    }
+
+    .result p {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    .reset-btn {
+      margin-top: 15px;
+      padding: 10px 30px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JavaScript ES6+ Quiz</h1>
+    <p class="subtitle">Test your knowledge of modern JavaScript features</p>
+
+    <form id="quiz-form">
+      <!-- Question 1 -->
+      <div class="question">
+        <h3>1. What is the output of this code?</h3>
+        <pre>const greet = name => `Hello, ${name}!`;
+console.log(greet('World'));</pre>
+        <ul class="options">
+          <li><label><input type="radio" name="q1" value="a"> Hello, name!</label></li>
+          <li><label><input type="radio" name="q1" value="b"> Hello, ${name}!</label></li>
+          <li><label><input type="radio" name="q1" value="c"> Hello, World!</label></li>
+          <li><label><input type="radio" name="q1" value="d"> Error</label></li>
+        </ul>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="question">
+        <h3>2. Which statement about arrow functions is TRUE?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q2" value="a"> Arrow functions have their own 'this' context</label></li>
+          <li><label><input type="radio" name="q2" value="b"> Arrow functions inherit 'this' from parent scope</label></li>
+          <li><label><input type="radio" name="q2" value="c"> Arrow functions can be used as constructors</label></li>
+          <li><label><input type="radio" name="q2" value="d"> Arrow functions have arguments object</label></li>
+        </ul>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="question">
+        <h3>3. What will be the value of 'city'?</h3>
+        <pre>const user = { name: 'John', address: { city: 'NYC' } };
+const { address: { city } } = user;</pre>
+        <ul class="options">
+          <li><label><input type="radio" name="q3" value="a"> undefined</label></li>
+          <li><label><input type="radio" name="q3" value="b"> { city: 'NYC' }</label></li>
+          <li><label><input type="radio" name="q3" value="c"> 'NYC'</label></li>
+          <li><label><input type="radio" name="q3" value="d"> Error</label></li>
+        </ul>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="question">
+        <h3>4. What is the result?</h3>
+        <pre>const arr1 = [1, 2, 3];
+const arr2 = [...arr1, 4, 5];
+console.log(arr2);</pre>
+        <ul class="options">
+          <li><label><input type="radio" name="q4" value="a"> [[1, 2, 3], 4, 5]</label></li>
+          <li><label><input type="radio" name="q4" value="b"> [1, 2, 3, 4, 5]</label></li>
+          <li><label><input type="radio" name="q4" value="c"> [1, 2, 3, [4, 5]]</label></li>
+          <li><label><input type="radio" name="q4" value="d"> Error</label></li>
+        </ul>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="question">
+        <h3>5. What does this function return?</h3>
+        <pre>function sum(...numbers) {
+  return numbers.reduce((total, n) => total + n, 0);
+}
+sum(1, 2, 3, 4);</pre>
+        <ul class="options">
+          <li><label><input type="radio" name="q5" value="a"> [1, 2, 3, 4]</label></li>
+          <li><label><input type="radio" name="q5" value="b"> 10</label></li>
+          <li><label><input type="radio" name="q5" value="c"> "1234"</label></li>
+          <li><label><input type="radio" name="q5" value="d"> undefined</label></li>
+        </ul>
+      </div>
+
+      <!-- Question 6 -->
+      <div class="question">
+        <h3>6. What will this output?</h3>
+        <pre>const numbers = [1, 2, 3, 4, 5];
+const result = numbers.map(n => n * 2).filter(n => n > 5);
+console.log(result);</pre>
+        <ul class="options">
+          <li><label><input type="radio" name="q6" value="a"> [2, 4, 6, 8, 10]</label></li>
+          <li><label><input type="radio" name="q6" value="b"> [6, 8, 10]</label></li>
+          <li><label><input type="radio" name="q6" value="c"> [3, 4, 5]</label></li>
+          <li><label><input type="radio" name="q6" value="d"> [4, 5]</label></li>
+        </ul>
+      </div>
+
+      <!-- Question 7 -->
+      <div class="question">
+        <h3>7. What is the output?</h3>
+        <pre>const value = null ?? 'default';
+console.log(value);</pre>
+        <ul class="options">
+          <li><label><input type="radio" name="q7" value="a"> null</label></li>
+          <li><label><input type="radio" name="q7" value="b"> 'default'</label></li>
+          <li><label><input type="radio" name="q7" value="c"> undefined</label></li>
+          <li><label><input type="radio" name="q7" value="d"> Error</label></li>
+        </ul>
+      </div>
+
+      <!-- Question 8 -->
+      <div class="question">
+        <h3>8. What is the correct way to use async/await?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q8" value="a"> const data = await fetch('/api');</label></li>
+          <li><label><input type="radio" name="q8" value="b"> async function getData() { const data = await fetch('/api'); }</label></li>
+          <li><label><input type="radio" name="q8" value="c"> function getData() { const data = await fetch('/api'); }</label></li>
+          <li><label><input type="radio" name="q8" value="d"> const getData = () => { const data = await fetch('/api'); }</label></li>
+        </ul>
+      </div>
+
+      <!-- Question 9 -->
+      <div class="question">
+        <h3>9. What will be the output?</h3>
+        <pre>const obj = { a: 1, b: 2 };
+const updated = { ...obj, b: 3, c: 4 };
+console.log(updated);</pre>
+        <ul class="options">
+          <li><label><input type="radio" name="q9" value="a"> { a: 1, b: 2 }</label></li>
+          <li><label><input type="radio" name="q9" value="b"> { a: 1, b: 3, c: 4 }</label></li>
+          <li><label><input type="radio" name="q9" value="c"> { b: 3, c: 4 }</label></li>
+          <li><label><input type="radio" name="q9" value="d"> Error</label></li>
+        </ul>
+      </div>
+
+      <!-- Question 10 -->
+      <div class="question">
+        <h3>10. What is the result?</h3>
+        <pre>const user = { name: 'John' };
+const age = user?.age ?? 18;
+console.log(age);</pre>
+        <ul class="options">
+          <li><label><input type="radio" name="q10" value="a"> undefined</label></li>
+          <li><label><input type="radio" name="q10" value="b"> null</label></li>
+          <li><label><input type="radio" name="q10" value="c"> 18</label></li>
+          <li><label><input type="radio" name="q10" value="d"> Error</label></li>
+        </ul>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Quiz</button>
+    </form>
+
+    <div id="result" class="result">
+      <h2 id="result-title"></h2>
+      <p id="result-score"></p>
+      <p id="result-message"></p>
+      <button class="reset-btn" onclick="location.reload()">Retake Quiz</button>
+    </div>
+  </div>
+
+  <script>
+    // Correct answers
+    const answers = {
+      q1: 'c',
+      q2: 'b',
+      q3: 'c',
+      q4: 'b',
+      q5: 'b',
+      q6: 'b',
+      q7: 'b',
+      q8: 'b',
+      q9: 'b',
+      q10: 'c'
+    };
+
+    document.getElementById('quiz-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      let score = 0;
+      const totalQuestions = Object.keys(answers).length;
+
+      // Check each answer
+      for (let question in answers) {
+        const userAnswer = document.querySelector(`input[name="${question}"]:checked`);
+        const correctAnswer = answers[question];
+
+        if (userAnswer) {
+          const label = userAnswer.parentElement;
+
+          if (userAnswer.value === correctAnswer) {
+            score++;
+            label.classList.add('correct');
+          } else {
+            label.classList.add('incorrect');
+            // Also highlight the correct answer
+            const correctLabel = document.querySelector(
+              `input[name="${question}"][value="${correctAnswer}"]`
+            ).parentElement;
+            correctLabel.classList.add('correct');
+          }
+        } else {
+          // Highlight correct answer even if not answered
+          const correctLabel = document.querySelector(
+            `input[name="${question}"][value="${answers[question]}"]`
+          ).parentElement;
+          correctLabel.classList.add('correct');
+        }
+      }
+
+      // Calculate percentage
+      const percentage = (score / totalQuestions) * 100;
+
+      // Show result
+      const resultDiv = document.getElementById('result');
+      const resultTitle = document.getElementById('result-title');
+      const resultScore = document.getElementById('result-score');
+      const resultMessage = document.getElementById('result-message');
+
+      resultScore.textContent = `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(0)}%)`;
+
+      if (percentage >= 80) {
+        resultDiv.classList.add('pass');
+        resultTitle.textContent = '🎉 Excellent! You passed!';
+        resultMessage.textContent = 'You have a solid understanding of JavaScript ES6+. Ready for React!';
+      } else if (percentage >= 60) {
+        resultDiv.classList.add('pass');
+        resultTitle.textContent = '✅ Good job! You passed!';
+        resultMessage.textContent = 'You understand most concepts. Review the areas you missed and you\'re ready to move on.';
+      } else {
+        resultDiv.classList.add('fail');
+        resultTitle.textContent = '📚 Keep learning!';
+        resultMessage.textContent = 'Review the theory and examples, then retake the quiz. Understanding these concepts is crucial for React.';
+      }
+
+      resultDiv.classList.add('show');
+
+      // Disable form
+      document.querySelector('.submit-btn').disabled = true;
+
+      // Scroll to result
+      resultDiv.scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
