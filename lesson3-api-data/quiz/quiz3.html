@@ -359,6 +359,26 @@
         color: #721c24;
       }
 
+      /* Accessibility - Screen reader only text */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+
+      /* Semantic HTML updates */
+      .options {
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+
       @media (max-width: 600px) {
         .quiz-card,
         .results-card {
@@ -382,64 +402,65 @@
   <body>
     <div class="container">
       <!-- Header -->
-      <div class="header">
-        <h1>🎯 Quiz - API & Data Management</h1>
-      </div>
+      <header class="header" role="banner">
+        <h1> Quiz - API & Data Management</h1>
+      </header>
 
-      <!-- Progress Bar -->
-      <div class="progress-bar" id="progressBar">
-        <div class="progress-info">
-          <span id="progressText">Question 1 of 20</span>
-          <span id="answeredText">Answered: 0/20</span>
-        </div>
-        <div class="progress-track">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-      </div>
+      <!-- Main Content -->
+      <main role="main">
+        <!-- Progress Bar -->
+        <section class="progress-bar" id="progressBar" aria-label="Quiz Progress">
+          <div class="progress-info">
+            <span id="progressText" aria-live="polite">Question 1 of 20</span>
+            <span id="answeredText" aria-live="polite">Answered: 0/20</span>
+          </div>
+          <div class="progress-track" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" aria-label="Quiz completion progress">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </section>
 
-      <!-- Quiz Card -->
-      <div class="quiz-card" id="quizCard">
+        <!-- Quiz Card -->
+        <article class="quiz-card" id="quizCard" role="form" aria-labelledby="questionText">
         <div class="question-header">
-          <span class="question-number" id="questionNumber">Question 1</span>
+          <span class="question-number" id="questionNumber" aria-label="Current question number">Question 1</span>
         </div>
 
-        <div class="question-text" id="questionText"></div>
+        <h2 class="question-text" id="questionText" role="heading" aria-level="2"></h2>
 
         <!-- Multiple Choice Options -->
-        <div class="options" id="optionsContainer"></div>
+        <fieldset class="options" id="optionsContainer" aria-label="Answer options"></fieldset>
 
         <!-- Short Answer Input -->
         <div class="short-answer-container hidden" id="shortAnswerContainer">
+          <label for="shortAnswerInput" class="sr-only">Your answer</label>
           <input
             type="text"
             class="short-answer-input"
             id="shortAnswerInput"
             placeholder="Type your answer here..."
+            aria-label="Short answer input field"
+            aria-describedby="shortAnswerFeedback"
           />
-          <div class="answer-feedback" id="shortAnswerFeedback"></div>
+          <div class="answer-feedback" id="shortAnswerFeedback" role="status" aria-live="polite"></div>
         </div>
 
-        <div class="buttons">
-          <button class="btn btn-secondary" id="skipBtn">
-            Skip Question
+        <nav class="buttons" aria-label="Quiz navigation">
+          <button class="btn btn-secondary" id="prevBtn" disabled aria-label="Go to previous question">
+            ← Previous
           </button>
-          <div style="display: flex; gap: 15px">
-            <button class="btn btn-secondary" id="prevBtn" disabled>
-              ← Previous
-            </button>
-            <button class="btn btn-primary" id="nextBtn">Next →</button>
-          </div>
-        </div>
-      </div>
+          <button class="btn btn-primary" id="nextBtn" disabled aria-label="Go to next question">Next →</button>
+        </nav>
+      </article>
+      </main>
 
       <!-- Results Card -->
-      <div class="results-card hidden" id="resultsCard">
-        <h2 style="color: #667eea; margin-bottom: 12px; font-size: 24px">
-          🎉 Quiz Completed!
+      <section class="results-card hidden" id="resultsCard" role="region" aria-labelledby="resultsTitle" aria-live="polite">
+        <h2 id="resultsTitle" style="color: #667eea; margin-bottom: 12px; font-size: 24px">
+           Quiz Completed!
         </h2>
 
-        <div class="score-circle">
-          <div class="score-number" id="scoreNumber">0%</div>
+        <div class="score-circle" role="img" aria-label="Score visualization">
+          <div class="score-number" id="scoreNumber" aria-label="Your quiz score">0%</div>
           <div class="score-label">Your Score</div>
         </div>
 
@@ -462,16 +483,17 @@
           </div>
         </div>
 
-        <div class="feedback" id="feedback"></div>
+        <div class="feedback" id="feedback" role="status"></div>
 
         <button
           class="btn btn-primary"
           style="margin-top: 20px"
           onclick="location.reload()"
+          aria-label="Restart the quiz"
         >
-          🔄 Retake Quiz
+           Retake Quiz
         </button>
-      </div>
+      </section>
     </div>
 
     <script>
@@ -676,7 +698,6 @@
       const shortAnswerFeedback = document.getElementById("shortAnswerFeedback");
       const prevBtn = document.getElementById("prevBtn");
       const nextBtn = document.getElementById("nextBtn");
-      const skipBtn = document.getElementById("skipBtn");
       const quizCard = document.getElementById("quizCard");
       const resultsCard = document.getElementById("resultsCard");
 
@@ -729,6 +750,9 @@
             opt.querySelector("label").appendChild(icon);
           }
         });
+
+        // Enable Next button after answer is checked
+        nextBtn.disabled = false;
       }
 
       // Check short answer
@@ -745,6 +769,9 @@
         shortAnswerFeedback.textContent = isCorrect
           ? `✓ Correct! The answer is "${question.answer}"`
           : `✗ Incorrect. The correct answer is "${question.answer}"`;
+
+        // Enable Next button after answer is checked
+        nextBtn.disabled = false;
       }
 
       // Show Question
@@ -858,6 +885,9 @@
         prevBtn.disabled = index === 0;
         nextBtn.textContent =
           index === quizData.length - 1 ? "Submit Quiz" : "Next →";
+
+        // Enable/disable Next button based on answer status
+        nextBtn.disabled = !answerChecked[index];
       }
 
       // Update Progress
@@ -865,6 +895,13 @@
         const answered = userAnswers.filter((a) => a !== null && a !== "")
           .length;
         answeredText.textContent = `Answered: ${answered}/${quizData.length}`;
+
+        // Update ARIA progress bar
+        const progressPercentage = ((currentQuestion + 1) / quizData.length) * 100;
+        const progressTrack = document.querySelector('.progress-track');
+        if (progressTrack) {
+          progressTrack.setAttribute('aria-valuenow', Math.round(progressPercentage));
+        }
       }
 
       // Next Question
@@ -882,18 +919,6 @@
         if (currentQuestion > 0) {
           currentQuestion--;
           showQuestion(currentQuestion);
-        }
-      });
-
-      // Skip Question
-      skipBtn.addEventListener("click", () => {
-        userAnswers[currentQuestion] = null;
-        answerChecked[currentQuestion] = false;
-        if (currentQuestion < quizData.length - 1) {
-          currentQuestion++;
-          showQuestion(currentQuestion);
-        } else {
-          showResults();
         }
       });
 
@@ -940,7 +965,7 @@
         if (percentage >= 90) {
           feedback.className = "feedback excellent";
           feedback.textContent =
-            "🌟 Excellent! You have a strong grasp of TypeScript fundamentals!";
+            " Excellent! You have a strong grasp of TypeScript fundamentals!";
         } else if (percentage >= 70) {
           feedback.className = "feedback good";
           feedback.textContent =
@@ -948,7 +973,7 @@
         } else if (percentage >= 50) {
           feedback.className = "feedback average";
           feedback.textContent =
-            "📚 Not bad! Review the materials to improve your understanding.";
+            " Not bad! Review the materials to improve your understanding.";
         } else {
           feedback.className = "feedback needs-improvement";
           feedback.textContent =

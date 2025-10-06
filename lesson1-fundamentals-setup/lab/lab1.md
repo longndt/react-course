@@ -4,7 +4,7 @@
 
 In this lab session, you'll create a simple Welcome Page application using TypeScript and React. This hands-on lab focuses on practical application of React fundamentals through guided exercises and independent practice sections.
 
-## 🎯 Learning Objectives
+##  Learning Objectives
 
 By completing this lab, you will be able to:
 - Set up a React + TypeScript project using Vite
@@ -13,7 +13,7 @@ By completing this lab, you will be able to:
 - Apply CSS styling to React components
 - Build a multi-component landing page application
 
-## ✅ Pre-Lab Checklist
+##  Pre-Lab Checklist
 
 - [ ] Node.js v18+ installed (`node --version` to verify)
 - [ ] VS Code with React extensions installed
@@ -25,11 +25,11 @@ By completing this lab, you will be able to:
 
 ## Exercise 1: Project Setup & First Component (Guided)
 
-### 📚 Concept Review
+###  Concept Review
 
 React is a JavaScript library for building user interfaces using **components** - reusable, self-contained pieces of UI. Vite is a modern build tool that provides fast development experience with hot module replacement (HMR).
 
-### 🎯 Goals
+###  Goals
 
 - Create a React + TypeScript project
 - Understand project structure
@@ -53,7 +53,7 @@ npm install
 npm run dev
 ```
 
-**✅ Verify:** Browser should open at `http://localhost:5173` showing default Vite + React page.
+** Verify:** Browser should open at `http://localhost:5173` showing default Vite + React page.
 
 ### Step 2: Understand Project Structure
 
@@ -124,9 +124,9 @@ p {
 }
 ```
 
-**✅ Checkpoint:** Save files and check browser - you should see "My First React App" heading with clean styling.
+** Checkpoint:** Save files and check browser - you should see "My First React App" heading with clean styling.
 
-### 🧪 Testing
+###  Testing
 
 1. Open browser to `http://localhost:5173`
 2. You should see centered heading and paragraph
@@ -136,7 +136,7 @@ p {
 
 ## Exercise 2: Create Your First Component (Your Turn - 60% Practice)
 
-### 📚 Concept Review
+###  Concept Review
 
 A **React component** is a JavaScript function that returns JSX (HTML-like syntax). Components let you split the UI into independent, reusable pieces. You can embed JavaScript expressions in JSX using curly braces `{}`.
 
@@ -155,7 +155,7 @@ function ComponentName() {
 export default ComponentName;
 ```
 
-### 🎯 Goals
+###  Goals
 
 - Create a `components` folder for organization
 - Build a `Welcome` component with JavaScript variables
@@ -191,20 +191,20 @@ Create a new file `src/components/Welcome.tsx` and implement:
    - A `<p>` with className "small-text" that shows "© {currentYear}"
 4. Export the component as default
 
-**💡 Hints:**
+** Hints:**
 - Use `function Welcome() { }` to create the component
 - Put variables before the `return` statement
 - Use `{variableName}` to embed JavaScript in JSX
 - Don't forget `export default Welcome;` at the end
 - Use `className` instead of `class` for CSS classes
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - File `src/components/Welcome.tsx` exists
 - Component has 3 variables defined
 - JSX displays all variables correctly
 - No TypeScript errors in VS Code
 
-**📊 Solution:** See `solutions/exercise2-welcome/Welcome.tsx`
+** Solution:** See `solutions/exercise2-welcome/Welcome.tsx`
 
 ### Step 3: Use Component in App (Your Turn)
 
@@ -217,30 +217,30 @@ Update `src/App.tsx`:
 2. Replace the `<h1>` and `<p>` with `<Welcome />`
 3. Keep the App div wrapper
 
-**💡 Hints:**
+** Hints:**
 - Import syntax: `import Welcome from './components/Welcome';`
 - Use component like an HTML tag: `<Welcome />`
 - Self-closing tags need the `/` at the end
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - Browser shows "Welcome, [Your Name]!"
 - Shows course name and current year
 - No console errors
 
-### 🧪 Testing
+###  Testing
 
 1. Open `http://localhost:5173`
 2. You should see your welcome message with your name
 3. Current year should display correctly (e.g., 2024)
 4. Open DevTools Console (F12) - should be no errors
 
-**📊 Solution:** See `solutions/exercise2-welcome/` for complete code
+** Solution:** See `solutions/exercise2-welcome/` for complete code
 
 ---
 
 ## Exercise 3: Add Styling to Components (Your Turn - 70% Practice)
 
-### 📚 Concept Review
+###  Concept Review
 
 React components can have their own CSS files. Import CSS files at the top of the component file using `import './ComponentName.css'`. This keeps styles organized and scoped to each component.
 
@@ -253,7 +253,7 @@ function MyComponent() {
 }
 ```
 
-### 🎯 Goals
+###  Goals
 
 - Create a CSS file for the Welcome component
 - Apply gradient background and modern styling
@@ -287,13 +287,13 @@ Create `src/components/Welcome.css`:
    - Margin top: 1.5rem
    - Opacity: 0.7
 
-**💡 Hints:**
+** Hints:**
 - Use `background: linear-gradient(135deg, color1, color2);`
 - `padding: 3rem 2rem` means vertical horizontal
 - Use nested selectors: `.welcome h2 { }`
 - `rgba(255, 255, 255, 0.9)` is white with 90% opacity
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - Welcome section has purple gradient background
 - White text is clearly visible
 - Rounded corners and shadow effect
@@ -309,30 +309,30 @@ Update `src/components/Welcome.tsx`:
 1. Add CSS import at the top of the file (before the function)
 2. Import path should be `'./Welcome.css'`
 
-**💡 Hints:**
+** Hints:**
 - Import goes above the function definition
 - Syntax: `import './FileName.css';`
 - Make sure the path is correct (same folder)
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - Purple gradient background appears
 - All styling from CSS file is applied
 - No console errors
 
-### 🧪 Testing
+###  Testing
 
 1. Refresh browser - Welcome component should have gradient background
 2. Text should be white and clearly readable
 3. Hover might show shadow effect
 4. Check DevTools → Elements → Inspect the `.welcome` div to verify CSS is applied
 
-**📊 Solution:** See `solutions/exercise3-styling/`
+** Solution:** See `solutions/exercise3-styling/`
 
 ---
 
 ## Exercise 4: Build Multi-Component Landing Page (Your Turn - 80% Practice)
 
-### 📚 Concept Review
+###  Concept Review
 
 Real applications are built from many components working together. The `.map()` method is commonly used to render lists in React. Each item in a list needs a unique `key` prop.
 
@@ -349,7 +349,7 @@ return (
 );
 ```
 
-### 🎯 Goals
+###  Goals
 
 - Create Feature component with list rendering
 - Create Footer component with links
@@ -403,13 +403,13 @@ Create `src/components/Feature.tsx` and `src/components/Feature.css`:
 5. `.features li:last-child`:
    - Margin bottom: 0
 
-**💡 Hints:**
+** Hints:**
 - Array syntax: `const arr = ["item1", "item2"];`
 - Map syntax: `{array.map((item, index) => (<li key={index}>{item}</li>))}`
 - Don't forget to import CSS at the top
 - `border-left: 4px solid #667eea` creates the colored left border
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - Component displays "What You'll Learn" heading
 - Shows 3 feature items in a list
 - Each item has white background with blue left border
@@ -471,14 +471,14 @@ Create `src/components/Footer.tsx` and `src/components/Footer.css`:
    - Color: #764ba2
    - Text decoration: underline
 
-**💡 Hints:**
+** Hints:**
 - Object array: `[{ name: "...", url: "..." }, ...]`
 - Access object properties: `link.name`, `link.url`
 - `target="_blank"` opens link in new tab
 - `rel="noopener noreferrer"` is for security with external links
 - Flexbox centers items: `display: flex; justify-content: center;`
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - Footer appears at bottom with border on top
 - Shows "USEFUL RESOURCES:" in uppercase
 - Three links displayed horizontally
@@ -499,13 +499,13 @@ Update `src/App.tsx`:
    - `<Footer />`
 3. Keep the existing App.css import and App div wrapper
 
-**💡 Hints:**
+** Hints:**
 - You need 3 import statements at the top
 - Import paths: `'./components/ComponentName'`
 - Components are used like HTML tags: `<ComponentName />`
 - Keep everything inside the `<div className="App">` wrapper
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - Complete landing page with all three sections
 - Welcome section with gradient at top
 - Features section in the middle
@@ -513,12 +513,12 @@ Update `src/App.tsx`:
 - All sections styled correctly
 - No console errors
 
-### 🧪 Testing Your Landing Page
+###  Testing Your Landing Page
 
 **Visual Check:**
-1. ✅ Purple gradient Welcome section with your name
-2. ✅ Light gray Features section with 3 items
-3. ✅ Footer with 3 clickable resource links
+1.  Purple gradient Welcome section with your name
+2.  Light gray Features section with 3 items
+3.  Footer with 3 clickable resource links
 
 **Functionality Check:**
 1. Click each footer link - should open in new tab
@@ -530,13 +530,13 @@ Update `src/App.tsx`:
 2. Check Elements tab - all CSS classes applied correctly
 3. Verify all components are properly imported
 
-**📊 Solution:** See `solutions/exercise4-landing-page/` for complete implementation
+** Solution:** See `solutions/exercise4-landing-page/` for complete implementation
 
 ---
 
 ## Bonus Challenge: Add Interactivity (Optional - 90% Practice)
 
-### 🎯 Challenge Goals
+###  Challenge Goals
 
 Add interactive elements to your landing page to get a preview of React's event handling. This is optional but will give you a head start on Lesson 2!
 
@@ -554,13 +554,13 @@ Add interactive elements to your landing page to get a preview of React's event 
 3. Style it with a card-like design (white background, shadow, padding)
 4. Import and render it in App between Feature and Footer
 
-**💡 Hints:**
+** Hints:**
 - Use similar structure to Welcome component
 - Define variables for name, major, university
 - Apply styling similar to Feature component
 - Use flexbox or grid for better layout
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - Personal info displays in a styled card
 - Card appears between Features and Footer sections
 
@@ -570,7 +570,7 @@ Add interactive elements to your landing page to get a preview of React's event 
 
 **Requirements:**
 1. Update Welcome component to include a button
-2. Create a function `handleClick` that shows an alert: "Welcome to React! 🎉"
+2. Create a function `handleClick` that shows an alert: "Welcome to React! "
 3. Button should call `handleClick` when clicked
 4. Style the button with:
    - Background color matching the gradient
@@ -578,13 +578,13 @@ Add interactive elements to your landing page to get a preview of React's event 
    - Padding and border radius
    - Hover effect
 
-**💡 Hints:**
+** Hints:**
 - Function syntax: `const handleClick = () => { alert('...'); };`
 - Button syntax: `<button onClick={handleClick}>Click Me!</button>`
 - Place function before the return statement
 - Add button styles to Welcome.css
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - Button appears in Welcome section
 - Clicking button shows alert message
 - Button has hover effect
@@ -600,46 +600,46 @@ This is an advanced challenge that previews state management from Lesson 2!
 2. Clicking it should change the page background color
 3. (Note: This will require useState from Lesson 2 to work properly)
 
-**📊 Solutions:** See `solutions/bonus-challenges/` for all challenge solutions
+** Solutions:** See `solutions/bonus-challenges/` for all challenge solutions
 
 ---
 
-## 🎓 Key Takeaways
+##  Key Takeaways
 
 Congratulations! You've completed Lab 1. Here's what you've mastered:
 
 ### Project Setup
-- ✅ Created React + TypeScript project with Vite
-- ✅ Understood project folder structure and key files
-- ✅ Installed dependencies and ran development server
-- ✅ Experienced Hot Module Replacement (HMR)
+-  Created React + TypeScript project with Vite
+-  Understood project folder structure and key files
+-  Installed dependencies and ran development server
+-  Experienced Hot Module Replacement (HMR)
 
 ### Component Fundamentals
-- ✅ Created functional components using function syntax
-- ✅ Organized components in separate files and folders
-- ✅ Used `export default` and `import` for component modules
-- ✅ Composed multiple components into a complete application
+-  Created functional components using function syntax
+-  Organized components in separate files and folders
+-  Used `export default` and `import` for component modules
+-  Composed multiple components into a complete application
 
 ### JSX & TypeScript
-- ✅ Embedded JavaScript in JSX using `{}`
-- ✅ Rendered lists with `.map()` and `key` prop
-- ✅ Applied `className` for styling (not `class`)
-- ✅ Wrote type-safe React components with TypeScript
+-  Embedded JavaScript in JSX using `{}`
+-  Rendered lists with `.map()` and `key` prop
+-  Applied `className` for styling (not `class`)
+-  Wrote type-safe React components with TypeScript
 
 ### Styling
-- ✅ Created CSS files for individual components
-- ✅ Imported CSS in component files
-- ✅ Applied modern CSS (flexbox, gradients, transitions)
-- ✅ Built responsive, centered layouts
+-  Created CSS files for individual components
+-  Imported CSS in component files
+-  Applied modern CSS (flexbox, gradients, transitions)
+-  Built responsive, centered layouts
 
 ### Project Organization
-- ✅ Separated concerns (components vs styles vs logic)
-- ✅ Followed React conventions and best practices
-- ✅ Built maintainable, modular code structure
+-  Separated concerns (components vs styles vs logic)
+-  Followed React conventions and best practices
+-  Built maintainable, modular code structure
 
 ---
 
-## 🚀 Next Steps
+##  Next Steps
 
 You're now ready for more advanced React concepts!
 
@@ -659,7 +659,7 @@ You're now ready for more advanced React concepts!
 
 ---
 
-## 📚 Additional Resources
+##  Additional Resources
 
 **Official Documentation:**
 - [React Documentation](https://react.dev) - Official React docs
@@ -677,7 +677,7 @@ You're now ready for more advanced React concepts!
 
 ---
 
-## 🔧 Troubleshooting
+##  Troubleshooting
 
 ### Common Issues and Solutions
 
@@ -696,22 +696,22 @@ npm install
 ```
 
 #### CSS not applying
-- ✅ Verify CSS file is imported: `import './Component.css'`
-- ✅ Check `className` spelling matches CSS file exactly
-- ✅ Clear browser cache: `Ctrl+Shift+R` (Windows) or `Cmd+Shift+R` (Mac)
-- ✅ Check browser DevTools → Elements → See if CSS is loaded
+-  Verify CSS file is imported: `import './Component.css'`
+-  Check `className` spelling matches CSS file exactly
+-  Clear browser cache: `Ctrl+Shift+R` (Windows) or `Cmd+Shift+R` (Mac)
+-  Check browser DevTools → Elements → See if CSS is loaded
 
 #### TypeScript errors
-- ✅ Verify all imports have correct file paths
-- ✅ Check file extensions (`.tsx` for components with JSX, `.ts` for utilities)
-- ✅ Restart VS Code TypeScript server: `Ctrl+Shift+P` → "TypeScript: Restart TS Server"
-- ✅ Make sure all required properties are provided
+-  Verify all imports have correct file paths
+-  Check file extensions (`.tsx` for components with JSX, `.ts` for utilities)
+-  Restart VS Code TypeScript server: `Ctrl+Shift+P` → "TypeScript: Restart TS Server"
+-  Make sure all required properties are provided
 
 #### Component not rendering
-- ✅ Check if component is imported correctly
-- ✅ Verify component is used in JSX: `<ComponentName />`
-- ✅ Make sure component has `export default`
-- ✅ Check browser console for error messages
+-  Check if component is imported correctly
+-  Verify component is used in JSX: `<ComponentName />`
+-  Make sure component has `export default`
+-  Check browser console for error messages
 
 #### Development server issues
 ```bash
@@ -731,7 +731,7 @@ npm run dev
 
 ---
 
-## ✅ Submission Checklist
+##  Submission Checklist
 
 Before moving to Lab 2, verify:
 
@@ -754,15 +754,15 @@ Before moving to Lab 2, verify:
 
 ---
 
-**Great job completing Lab 1! You've built a solid foundation in React. Keep practicing and see you in Lab 2!** 🚀
+**Great job completing Lab 1! You've built a solid foundation in React. Keep practicing and see you in Lab 2!** 
 
 ---
 
-## 🏆 Bonus Challenges
+##  Bonus Challenges
 
 Ready to take your skills to the next level? Try these optional challenges:
 
-### Challenge 1: Interactive Counter Component ⭐
+### Challenge 1: Interactive Counter Component 
 
 Create a `Counter` component with increment/decrement buttons.
 
@@ -784,7 +784,7 @@ function Counter() {
 }
 ```
 
-### Challenge 2: Theme Toggle (Dark/Light Mode) ⭐⭐
+### Challenge 2: Theme Toggle (Dark/Light Mode) 
 
 Add a theme switcher to toggle between light and dark mode.
 
@@ -802,7 +802,7 @@ const [theme, setTheme] = useState('light');
 <div className={`App ${theme}-theme`}>
 ```
 
-### Challenge 3: Responsive Navigation Menu ⭐⭐⭐
+### Challenge 3: Responsive Navigation Menu 
 
 Create a mobile-responsive navigation menu.
 
@@ -826,7 +826,7 @@ Create a mobile-responsive navigation menu.
 }
 ```
 
-### Challenge 4: Contact Form Component ⭐⭐⭐
+### Challenge 4: Contact Form Component 
 
 Build a functional contact form with validation.
 
@@ -845,7 +845,7 @@ const [formData, setFormData] = useState({
 });
 ```
 
-### Challenge 5: Image Gallery with Lightbox ⭐⭐⭐⭐
+### Challenge 5: Image Gallery with Lightbox 
 
 Create an image gallery with click-to-enlarge functionality.
 
@@ -859,7 +859,7 @@ Create an image gallery with click-to-enlarge functionality.
 
 ---
 
-## 📚 Additional Resources for Challenges
+##  Additional Resources for Challenges
 
 - [React useState Hook](https://react.dev/reference/react/useState)
 - [CSS Media Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries)
@@ -869,4 +869,4 @@ Create an image gallery with click-to-enlarge functionality.
 
 ---
 
-**Congratulations on completing Lab 1!** 🎉 These bonus challenges will prepare you for Lab 2's advanced patterns.
+**Congratulations on completing Lab 1!**  These bonus challenges will prepare you for Lab 2's advanced patterns.

@@ -2,15 +2,15 @@
 
 Complete solution demonstrating virtual scrolling (windowing) for efficiently rendering large lists.
 
-## 🎯 Features Implemented
+##  Features Implemented
 
-- ✅ **Virtual Scrolling** - Only renders visible items
-- ✅ **10,000+ Items** - Handles massive datasets smoothly
-- ✅ **Performance Comparison** - Side-by-side regular vs virtual list
-- ✅ **Smooth 60 FPS** - Buttery smooth scrolling
-- ✅ **Constant Memory** - Memory usage doesn't grow with list size
+-  **Virtual Scrolling** - Only renders visible items
+-  **10,000+ Items** - Handles massive datasets smoothly
+-  **Performance Comparison** - Side-by-side regular vs virtual list
+-  **Smooth 60 FPS** - Buttery smooth scrolling
+-  **Constant Memory** - Memory usage doesn't grow with list size
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 exercise3-virtual-list/
@@ -27,7 +27,7 @@ exercise3-virtual-list/
 └── README.md
 ```
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Installation
 
@@ -43,7 +43,7 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173)
 
-## 🧪 How to Test Performance
+##  How to Test Performance
 
 ### Visual Test (Easiest)
 
@@ -58,7 +58,7 @@ Open [http://localhost:5173](http://localhost:5173)
 3. **Increase to 100,000 items**
    - Select "100,000 items" from dropdown
    - Virtual List: Still smooth!
-   - Regular List: Browser may freeze ⚠️
+   - Regular List: Browser may freeze 
 
 ### Chrome DevTools Performance Profiling
 
@@ -66,21 +66,21 @@ Open [http://localhost:5173](http://localhost:5173)
 2. **Go to Performance tab**
 3. **Record Virtual List**:
    - Switch to Virtual List tab
-   - Click **Record ⏺️**
+   - Click **Record ⏺**
    - Scroll for ~3 seconds
-   - Click **Stop ⏹️**
+   - Click **Stop ⏹**
    - Observe:
-     - **FPS**: Steady at **60 FPS** ✅
+     - **FPS**: Steady at **60 FPS** 
      - **Main thread**: Mostly green (fast)
      - **Memory**: Constant
 
 4. **Record Regular List**:
    - Switch to Regular List tab
-   - Click **Record ⏺️**
+   - Click **Record ⏺**
    - Scroll for ~3 seconds
-   - Click **Stop ⏹️**
+   - Click **Stop ⏹**
    - Observe:
-     - **FPS**: Drops to **20-40 FPS** ⚠️
+     - **FPS**: Drops to **20-40 FPS** 
      - **Main thread**: Lots of red (slow)
      - **Memory**: High
 
@@ -95,12 +95,12 @@ Open [http://localhost:5173](http://localhost:5173)
    - Virtual List: Only ~15 components rendered
    - Regular List: All 10,000 components rendered
 
-## 💡 How Virtual Lists Work
+##  How Virtual Lists Work
 
 ### The Problem
 
 ```tsx
-// ❌ Regular List: Renders ALL items
+//  Regular List: Renders ALL items
 function RegularList({ items }: { items: Item[] }) {
   return (
     <div style={{ height: '600px', overflow: 'auto' }}>
@@ -117,7 +117,7 @@ function RegularList({ items }: { items: Item[] }) {
 ### The Solution
 
 ```tsx
-// ✅ Virtual List: Only renders visible items
+//  Virtual List: Only renders visible items
 function VirtualList({ items, itemHeight, containerHeight }) {
   const [scrollTop, setScrollTop] = useState(0);
 
@@ -144,7 +144,7 @@ function VirtualList({ items, itemHeight, containerHeight }) {
 
 **Result**: ~15 DOM nodes (constant) = fast, smooth, low memory
 
-## 📊 Performance Comparison
+##  Performance Comparison
 
 | Metric | Regular List (10K items) | Virtual List (10K items) | Improvement |
 |--------|--------------------------|--------------------------|-------------|
@@ -158,9 +158,9 @@ function VirtualList({ items, itemHeight, containerHeight }) {
 
 With **100,000 items**:
 - **Regular List**: Browser freezes, may crash
-- **Virtual List**: Still smooth 60 FPS ✅
+- **Virtual List**: Still smooth 60 FPS 
 
-## 🎯 Key Concepts
+##  Key Concepts
 
 ### 1. Viewport Calculation
 
@@ -196,17 +196,17 @@ const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - buffer);
 const endIndex = Math.min(items.length, startIndex + itemsPerPage + buffer * 2);
 ```
 
-## ⚠️ Limitations & Considerations
+##  Limitations & Considerations
 
 ### When to Use Virtual Lists
 
-✅ **Use when:**
+ **Use when:**
 - List has 1000+ items
 - Items have consistent height
 - Scrolling performance is critical
 - Memory is limited (mobile)
 
-❌ **Don't use when:**
+ **Don't use when:**
 - List has < 100 items (overhead not worth it)
 - Items have variable heights (more complex)
 - Simple pagination works fine
@@ -223,7 +223,7 @@ const startOffset = itemHeights.slice(0, startIndex).reduce((a, b) => a + b, 0);
 
 Libraries like `react-window` and `react-virtualized` handle this!
 
-## 🔧 Production-Ready Libraries
+##  Production-Ready Libraries
 
 For production, consider these battle-tested libraries:
 
@@ -268,16 +268,16 @@ npm install @tanstack/react-virtual
 
 **Pros**: Modern, headless, very flexible
 
-## 🎓 Learning Outcomes
+##  Learning Outcomes
 
 After completing this exercise, you understand:
 
-✅ Why large lists cause performance problems
-✅ How virtual scrolling (windowing) works
-✅ How to calculate visible items based on scroll position
-✅ How to use absolute positioning to create illusion of full list
-✅ When to use virtualization vs pagination
-✅ How to profile and measure performance
+ Why large lists cause performance problems
+ How virtual scrolling (windowing) works
+ How to calculate visible items based on scroll position
+ How to use absolute positioning to create illusion of full list
+ When to use virtualization vs pagination
+ How to profile and measure performance
 
 ## 💪 Challenge Exercises
 
@@ -287,13 +287,13 @@ After completing this exercise, you understand:
 4. **Grid Layout**: Create a virtual grid (rows and columns)
 5. **Smooth Scroll**: Add smooth scrolling to specific items
 
-## 🔗 Related Exercises
+##  Related Exercises
 
 - **Exercise 1**: Code Splitting & Lazy Loading
 - **Exercise 2**: Component Memoization
 - **Exercise 4**: Production Build & Deployment
 
-## 📚 Additional Resources
+##  Additional Resources
 
 - [react-window Documentation](https://react-window.vercel.app/)
 - [Virtual Scrolling Guide](https://developer.mozilla.org/en-US/docs/Web/Performance/Virtual_scrolling)

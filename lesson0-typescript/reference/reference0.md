@@ -40,7 +40,7 @@ npm install --save-dev typescript
 npx tsc --init
 ```
 
-✅ You should see `tsconfig.json` created!
+ You should see `tsconfig.json` created!
 
 ---
 
@@ -58,7 +58,7 @@ const message = greet("TypeScript");
 console.log(message);
 
 // This will cause an error:
-// const error = greet(123); // ❌ Argument of type 'number' is not assignable to parameter of type 'string'
+// const error = greet(123); //  Argument of type 'number' is not assignable to parameter of type 'string'
 ```
 
 ### Compile and Run
@@ -209,11 +209,11 @@ npm install --save-dev @types/node
 
 **Fix:** Define proper interface
 ```typescript
-// ❌ Wrong
+//  Wrong
 const user = {};
 user.name = "John"; // Error!
 
-// ✅ Correct
+//  Correct
 interface User {
   name: string;
 }
@@ -233,10 +233,10 @@ value = "Hello";
 
 ## Next Steps
 
-1. ✅ Complete **Theory 0** - Deep dive into TypeScript concepts
-2. ✅ Do **Lab 0** - Practice exercises
-3. ✅ Check **Demo** - See TypeScript in action
-4. ✅ Take **Quiz** - Test your knowledge
+1.  Complete **Theory 0** - Deep dive into TypeScript concepts
+2.  Do **Lab 0** - Practice exercises
+3.  Check **Demo** - See TypeScript in action
+4.  Take **Quiz** - Test your knowledge
 
 ---
 
@@ -248,4 +248,4 @@ value = "Hello";
 
 ---
 
-**Ready to learn more?** Continue with the full theory and lab exercises! 🚀
+**Ready to learn more?** Continue with the full theory and lab exercises! 

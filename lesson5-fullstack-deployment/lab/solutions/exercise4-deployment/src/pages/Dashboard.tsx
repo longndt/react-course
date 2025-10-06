@@ -67,19 +67,19 @@ export default function Dashboard() {
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon">📁</div>
+            <div className="stat-icon"></div>
             <div className="stat-value">{stats.activeProjects}</div>
             <div className="stat-label">Active Projects</div>
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon">🚀</div>
+            <div className="stat-icon"></div>
             <div className="stat-value">{stats.deployments}</div>
             <div className="stat-label">Deployments</div>
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon">⏱️</div>
+            <div className="stat-icon">⏱</div>
             <div className="stat-value">{stats.uptime}</div>
             <div className="stat-label">Uptime</div>
           </div>
@@ -100,11 +100,11 @@ export default function Dashboard() {
 
         {ENV.enableAnalytics ? (
           <div className="status-success">
-            ✅ Analytics is ENABLED in this environment
+             Analytics is ENABLED in this environment
           </div>
         ) : (
           <div className="status-warning">
-            ⚠️ Analytics is DISABLED in this environment
+             Analytics is DISABLED in this environment
           </div>
         )}
       </div>

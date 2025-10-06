@@ -2,7 +2,7 @@
 
 ---
 
-## 📚 Table of Contents
+##  Table of Contents
 
 1. [Core Concepts](#1-core-concepts)
 2. [Backend API Development](#2-backend-api-development)
@@ -66,13 +66,13 @@ Client (Browser)               Server (Node.js)             Database
 
 ```bash
 npm install express cors dotenv
-npm install --save-dev nodemon @types/express @types/node
+npm install --save-dev nodemon
 ```
 
 **Basic Express Server:**
-```typescript
-// server/index.ts
-import express, { Request, Response } from 'express';
+```javascript
+// server/index.js
+import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
@@ -87,7 +87,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Health check
-app.get('/api/health', (req: Request, res: Response) => {
+app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
@@ -102,15 +102,15 @@ export default app;
 ### RESTful API Design
 
 **CRUD Operations:**
-```typescript
-// server/routes/products.ts
-import { Router, Request, Response } from 'express';
-import { Product } from '../models/Product';
+```javascript
+// server/routes/products.js
+import { Router } from 'express';
+import { Product } from '../models/Product.js';
 
 const router = Router();
 
 // GET /api/products - List all products
-router.get('/', async (req: Request, res: Response) => {
+router.get('/', async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);
@@ -120,7 +120,7 @@ router.get('/', async (req: Request, res: Response) => {
 });
 
 // GET /api/products/:id - Get single product
-router.get('/:id', async (req: Request, res: Response) => {
+router.get('/:id', async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     if (!product) {
@@ -133,7 +133,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 // POST /api/products - Create product
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', async (req, res) => {
   try {
     const product = new Product(req.body);
     await product.save();
@@ -144,7 +144,7 @@ router.post('/', async (req: Request, res: Response) => {
 });
 
 // PUT /api/products/:id - Update product
-router.put('/:id', async (req: Request, res: Response) => {
+router.put('/:id', async (req, res) => {
   try {
     const product = await Product.findByIdAndUpdate(
       req.params.id,
@@ -161,7 +161,7 @@ router.put('/:id', async (req: Request, res: Response) => {
 });
 
 // DELETE /api/products/:id - Delete product
-router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:id', async (req, res) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
     if (!product) {
@@ -179,8 +179,8 @@ export default router;
 ### Database Integration
 
 **MongoDB with Mongoose:**
-```typescript
-// server/config/database.ts
+```javascript
+// server/config/database.js
 import mongoose from 'mongoose';
 
 export async function connectDatabase() {
@@ -194,20 +194,22 @@ export async function connectDatabase() {
   }
 }
 
-// server/models/Product.ts
-import mongoose, { Schema, Document } from 'mongoose';
+// server/models/Product.js
+import mongoose, { Schema } from 'mongoose';
 
-interface IProduct extends Document {
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  inStock: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-}
+/**
+ * Product model
+ * @typedef {Object} IProduct
+ * @property {string} name
+ * @property {string} description
+ * @property {number} price
+ * @property {string} category
+ * @property {boolean} inStock
+ * @property {Date} createdAt
+ * @property {Date} updatedAt
+ */
 
-const productSchema = new Schema<IProduct>(
+const productSchema = new Schema(
   {
     name: { type: String, required: true, trim: true },
     description: { type: String, required: true },
@@ -218,11 +220,11 @@ const productSchema = new Schema<IProduct>(
   { timestamps: true }
 );
 
-export const Product = mongoose.model<IProduct>('Product', productSchema);
+export const Product = mongoose.model('Product', productSchema);
 ```
 
 **PostgreSQL with Prisma:**
-```typescript
+```javascript
 // prisma/schema.prisma
 generator client {
   provider = "prisma-client-js"
@@ -244,7 +246,7 @@ model Product {
   updatedAt   DateTime @updatedAt
 }
 
-// server/db.ts
+// server/db.js
 import { PrismaClient } from '@prisma/client';
 
 export const prisma = new PrismaClient();
@@ -261,11 +263,10 @@ const product = await prisma.product.create({
 ### Middleware
 
 **Custom Middleware:**
-```typescript
-// server/middleware/logger.ts
-import { Request, Response, NextFunction } from 'express';
+```javascript
+// server/middleware/logger.js
 
-export function logger(req: Request, res: Response, next: NextFunction) {
+export function logger(req, res, next) {
   const start = Date.now();
 
   res.on('finish', () => {
@@ -276,11 +277,10 @@ export function logger(req: Request, res: Response, next: NextFunction) {
   next();
 }
 
-// server/middleware/auth.ts
-import { Request, Response, NextFunction } from 'express';
+// server/middleware/auth.js
 import jwt from 'jsonwebtoken';
 
-export function authenticate(req: Request, res: Response, next: NextFunction) {
+export function authenticate(req, res, next) {
   const token = req.headers.authorization?.split(' ')[1];
 
   if (!token) {
@@ -288,7 +288,7 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch {
@@ -322,19 +322,25 @@ VITE_API_URL=http://localhost:5000/api
 ```
 
 **Frontend Configuration:**
-```typescript
-// src/config/api.ts
+```javascript
+// src/config/api.js
 export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
-// src/utils/api.ts
-export async function apiRequest<T>(
-  endpoint: string,
-  options: RequestInit = {}
-): Promise<T> {
+// src/utils/api.js
+/**
+ * Make an API request
+ * @param {string} endpoint - API endpoint
+ * @param {RequestInit} options - Fetch options
+ * @returns {Promise<any>} Response data
+ */
+export async function apiRequest(
+  endpoint,
+  options = {}
+) {
   const url = `${API_URL}${endpoint}`;
   const token = localStorage.getItem('auth_token');
 
-  const config: RequestInit = {
+  const config = {
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -356,46 +362,48 @@ export async function apiRequest<T>(
 
 ### API Service Layer
 
-```typescript
-// src/services/productService.ts
+```javascript
+// src/services/productService.js
 import { apiRequest } from '../utils/api';
 
-export interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  inStock: boolean;
-}
+/**
+ * Product object
+ * @typedef {Object} Product
+ * @property {string} id
+ * @property {string} name
+ * @property {string} description
+ * @property {number} price
+ * @property {string} category
+ * @property {boolean} inStock
+ */
 
 export const productService = {
-  getAll: () => apiRequest<Product[]>('/products'),
+  getAll: () => apiRequest('/products'),
 
-  getById: (id: string) => apiRequest<Product>(`/products/${id}`),
+  getById: (id) => apiRequest(`/products/${id}`),
 
-  create: (product: Omit<Product, 'id'>) =>
-    apiRequest<Product>('/products', {
+  create: (product) =>
+    apiRequest('/products', {
       method: 'POST',
       body: JSON.stringify(product),
     }),
 
-  update: (id: string, product: Partial<Product>) =>
-    apiRequest<Product>(`/products/${id}`, {
+  update: (id, product) =>
+    apiRequest(`/products/${id}`, {
       method: 'PUT',
       body: JSON.stringify(product),
     }),
 
-  delete: (id: string) =>
-    apiRequest<void>(`/products/${id}`, { method: 'DELETE' }),
+  delete: (id) =>
+    apiRequest(`/products/${id}`, { method: 'DELETE' }),
 };
 
 // Usage in component
 import { useEffect, useState } from 'react';
-import { productService, Product } from '../services/productService';
+import { productService } from '../services/productService';
 
 function ProductList() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -425,21 +433,21 @@ function ProductList() {
 npm install @tanstack/react-query
 ```
 
-```typescript
-// src/main.tsx
+```javascript
+// src/main.jsx
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <QueryClientProvider client={queryClient}>
     <App />
   </QueryClientProvider>
 );
 
-// src/hooks/useProducts.ts
+// src/hooks/useProducts.js
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { productService, Product } from '../services/productService';
+import { productService } from '../services/productService';
 
 export function useProducts() {
   return useQuery({
@@ -448,7 +456,7 @@ export function useProducts() {
   });
 }
 
-export function useProduct(id: string) {
+export function useProduct(id) {
   return useQuery({
     queryKey: ['products', id],
     queryFn: () => productService.getById(id),
@@ -511,8 +519,8 @@ function ProductList() {
 npm install socket.io
 ```
 
-```typescript
-// server/index.ts
+```javascript
+// server/index.js
 import { Server } from 'socket.io';
 import { createServer } from 'http';
 
@@ -548,13 +556,13 @@ httpServer.listen(PORT, () => {
 npm install socket.io-client
 ```
 
-```typescript
-// src/services/socket.ts
-import { io, Socket } from 'socket.io-client';
+```javascript
+// src/services/socket.js
+import { io } from 'socket.io-client';
 
 const SOCKET_URL = 'http://localhost:5000';
 
-export const socket: Socket = io(SOCKET_URL, {
+export const socket = io(SOCKET_URL, {
   autoConnect: false,
 });
 
@@ -570,12 +578,12 @@ export function disconnectSocket() {
   }
 }
 
-// src/components/Chat.tsx
+// src/components/Chat.jsx
 import { useState, useEffect } from 'react';
 import { socket, connectSocket, disconnectSocket } from '../services/socket';
 
-function Chat({ room }: { room: string }) {
-  const [messages, setMessages] = useState<string[]>([]);
+function Chat({ room }) {
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
 
   useEffect(() => {
@@ -612,14 +620,14 @@ function Chat({ room }: { room: string }) {
 ### Server-Sent Events (SSE)
 
 **Backend:**
-```typescript
-// server/routes/notifications.ts
-router.get('/stream', (req: Request, res: Response) => {
+```javascript
+// server/routes/notifications.js
+router.get('/stream', (req, res) => {
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
 
-  const sendNotification = (data: any) => {
+  const sendNotification = (data) => {
     res.write(`data: ${JSON.stringify(data)}\n\n`);
   };
 
@@ -636,12 +644,12 @@ router.get('/stream', (req: Request, res: Response) => {
 ```
 
 **Frontend:**
-```typescript
-// src/hooks/useNotifications.ts
+```javascript
+// src/hooks/useNotifications.js
 import { useState, useEffect } from 'react';
 
 export function useNotifications() {
-  const [notifications, setNotifications] = useState<any[]>([]);
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     const eventSource = new EventSource('http://localhost:5000/api/notifications/stream');
@@ -664,7 +672,7 @@ export function useNotifications() {
 
 ### Code Splitting
 
-```typescript
+```javascript
 // Lazy loading routes
 import { lazy, Suspense } from 'react';
 
@@ -685,7 +693,7 @@ function App() {
 
 ### Caching Strategies
 
-```typescript
+```javascript
 // React Query cache configuration
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -725,7 +733,7 @@ self.addEventListener('fetch', (event) => {
 
 ### Backend Performance
 
-```typescript
+```javascript
 // Compression
 import compression from 'compression';
 app.use(compression());
@@ -763,8 +771,8 @@ npm run build
 ```
 
 **Optimized Vite Configuration:**
-```typescript
-// vite.config.ts
+```javascript
+// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -787,7 +795,7 @@ export default defineConfig({
 
 ### Environment Configuration
 
-```typescript
+```javascript
 // .env.production (Frontend)
 VITE_API_URL=https://api.yourapp.com
 
@@ -897,7 +905,7 @@ railway up
 
 ### Monitoring and Logging
 
-```typescript
+```javascript
 // Backend logging with Winston
 import winston from 'winston';
 
@@ -926,7 +934,7 @@ logger.error('Database connection failed', { error: err.message });
 npm install @sentry/react @sentry/node
 ```
 
-```typescript
+```javascript
 // Frontend
 import * as Sentry from '@sentry/react';
 
@@ -954,7 +962,7 @@ app.use(Sentry.Handlers.errorHandler());
 
 ### CORS Configuration
 
-```typescript
+```javascript
 import cors from 'cors';
 
 const corsOptions = {
@@ -974,7 +982,7 @@ app.use(cors(corsOptions));
 npm install helmet
 ```
 
-```typescript
+```javascript
 import helmet from 'helmet';
 
 app.use(helmet());
@@ -994,7 +1002,7 @@ app.use(helmet.contentSecurityPolicy({
 npm install joi
 ```
 
-```typescript
+```javascript
 import Joi from 'joi';
 
 const productSchema = Joi.object({
@@ -1015,13 +1023,13 @@ router.post('/', async (req, res) => {
 
 ### SQL Injection Prevention
 
-```typescript
-// ✅ Use parameterized queries (Prisma/Mongoose)
+```javascript
+//  Use parameterized queries (Prisma/Mongoose)
 const user = await prisma.user.findFirst({
   where: { email: userEmail } // Safe: parameterized
 });
 
-// ❌ Never concatenate SQL strings
+//  Never concatenate SQL strings
 const query = `SELECT * FROM users WHERE email = '${userEmail}'`; // Dangerous!
 ```
 

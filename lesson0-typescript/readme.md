@@ -3,7 +3,7 @@
 ## Overview
 
 **Difficulty**: Beginner to Intermediate
-**Status**: 📚 Optional but Recommended
+**Status**:  Optional but Recommended
 
 This course teaches **React with TypeScript**. Before starting Lesson 1, you should be comfortable with TypeScript fundamentals. This lesson provides a quick review of essential TypeScript concepts you'll use throughout the course.
 
@@ -13,14 +13,14 @@ This course teaches **React with TypeScript**. Before starting Lesson 1, you sho
 
 After completing this lesson, you will be able to:
 
-- ✅ Use type annotations and type inference effectively
-- ✅ Define interfaces and type aliases for object shapes
-- ✅ Work with generic types and functions
-- ✅ Apply utility types (Partial, Pick, Omit, etc.)
-- ✅ Use type guards and narrowing techniques
-- ✅ Work with array methods (map, filter, reduce)
-- ✅ Use async/await with proper typing
-- ✅ Import and export TypeScript modules
+-  Use type annotations and type inference effectively
+-  Define interfaces and type aliases for object shapes
+-  Work with generic types and functions
+-  Apply utility types (Partial, Pick, Omit, etc.)
+-  Use type guards and narrowing techniques
+-  Work with array methods (map, filter, reduce)
+-  Use async/await with proper typing
+-  Import and export TypeScript modules
 
 ---
 
@@ -146,14 +146,14 @@ const str = identity<string>("Hello");
 
 ## Best Practices Summary
 
-✅ **DO:**
+ **DO:**
 - Use type inference when obvious, explicit types when needed
 - Prefer interfaces for object shapes (can be extended)
 - Use generics for reusable, type-safe functions
 - Enable strict mode in tsconfig.json
 - Use utility types instead of manual type manipulation
 
-❌ **DON'T:**
+ **DON'T:**
 - Overuse `any` type - it defeats the purpose of TypeScript
 - Create overly complex types - keep them simple and readable
 - Forget optional chaining (`?.`) and nullish coalescing (`??`)
@@ -192,13 +192,13 @@ const str = identity<string>("Hello");
 - [ ] Can use generics confidently
 - [ ] Understand utility types (Partial, Pick, Omit)
 
-**✅ Test your knowledge:** Take the [interactive quiz](./quiz/quiz0.html)
+** Test your knowledge:** Take the [interactive quiz](./quiz/quiz0.html)
 
 ---
 
 ## Next Steps
 
-✅ **Ready for React?** → Proceed to [Lesson 1: React Fundamentals & Setup](../lesson1-fundamentals-setup/)
+ **Ready for React?** → Proceed to [Lesson 1: React Fundamentals & Setup](../lesson1-fundamentals-setup/)
 
 **If you scored below 80% on the quiz:**
 - Review [theory guide](./theory/theory0.md) sections you struggled with

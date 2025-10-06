@@ -4,9 +4,9 @@
 
 In this lab session, you'll practice TypeScript fundamentals through hands-on exercises. You'll work with types, interfaces, generics, and utility types to build a solid foundation for React development.
 
-> 💡 **Scope:** This lab focuses on TypeScript basics - the foundation you need before diving into React with TypeScript.
+>  **Scope:** This lab focuses on TypeScript basics - the foundation you need before diving into React with TypeScript.
 
-## 🎯 Learning Objectives
+##  Learning Objectives
 
 By completing this lab, you will be able to:
 - Master TypeScript type annotations and primitive types
@@ -16,7 +16,7 @@ By completing this lab, you will be able to:
 - Use type guards for type narrowing
 - Build type-safe data management systems
 
-## 📚 Exercises
+##  Exercises
 
 - Exercise 1: Basic Types and Type Annotations
 - Exercise 2: Interfaces and Type Aliases
@@ -24,7 +24,7 @@ By completing this lab, you will be able to:
 - Exercise 4: Utility Types and Type Guards
 - Exercise 5: Build a Type-Safe Data Manager
 
-## ✅ Pre-Lab Checklist
+##  Pre-Lab Checklist
 
 - [ ] Node.js v18+ installed
 - [ ] TypeScript installed globally (`npm install -g typescript`)
@@ -109,7 +109,7 @@ console.log("Grades:", grades);
 console.log("Subjects:", subjects);
 ```
 
-**✅ Solution:**
+** Solution:**
 
 ```typescript
 // 1. Create a variable 'studentName' of type string
@@ -155,7 +155,7 @@ console.log("Student tuple:", student);
 console.log("User role:", userRole);
 ```
 
-**✅ Solution:**
+** Solution:**
 
 ```typescript
 // 1. Create a tuple 'student' with [name: string, id: number, gpa: number]
@@ -233,7 +233,7 @@ console.log("Student:", student);
 console.log("Course:", course);
 ```
 
-**✅ Solution:**
+** Solution:**
 
 ```typescript
 // 1. Define interface 'Person'
@@ -313,7 +313,7 @@ let apiResult: Result = "Success";
 console.log({ userId, orderId, orderStatus, coordinate, apiResult });
 ```
 
-**✅ Solution:**
+** Solution:**
 
 ```typescript
 // 1. Create type alias 'ID' that can be string or number
@@ -379,7 +379,7 @@ console.log(combineStrings("Hello", "World", "!"));
 console.log(multiply(5, 3));
 ```
 
-**✅ Solution:**
+** Solution:**
 
 ```typescript
 // 1. Calculate average of numbers
@@ -440,7 +440,7 @@ const stringContainer: Container<string> = { value: "Hello" };
 console.log(numberContainer, stringContainer);
 ```
 
-**✅ Solution:**
+** Solution:**
 
 ```typescript
 // 1. Get first element of array
@@ -541,7 +541,7 @@ const immutableUser: ReadonlyUser = {
 console.log({ updateData, publicProfile, preview });
 ```
 
-**✅ Solution:**
+** Solution:**
 
 ```typescript
 // Base interface
@@ -645,7 +645,7 @@ makeSound(myDog);
 makeSound(myCat);
 ```
 
-**✅ Solution:**
+** Solution:**
 
 ```typescript
 // 1. Process value based on type
@@ -886,7 +886,7 @@ Remaining students: 2
 
 ---
 
-## Bonus Challenges 🎯
+## Bonus Challenges 
 
 ### Challenge 1: Add Course Management
 
@@ -926,20 +926,20 @@ Implement advanced search:
 
 ## Key Takeaways
 
-1. ✅ **Type Safety**: TypeScript catches errors at compile time
-2. ✅ **IntelliSense**: Better IDE support and autocomplete
-3. ✅ **Interfaces**: Define clear contracts for objects
-4. ✅ **Generics**: Write reusable, type-safe code
-5. ✅ **Utility Types**: Transform types efficiently
-6. ✅ **Type Guards**: Safely narrow types at runtime
+1.  **Type Safety**: TypeScript catches errors at compile time
+2.  **IntelliSense**: Better IDE support and autocomplete
+3.  **Interfaces**: Define clear contracts for objects
+4.  **Generics**: Write reusable, type-safe code
+5.  **Utility Types**: Transform types efficiently
+6.  **Type Guards**: Safely narrow types at runtime
 
 ---
 
 ## Next Steps
 
-1. ✅ Review **Theory 0** for concepts you found challenging
-2. ✅ Take the **Quiz** to test your understanding
-3. ✅ Check out **Demo** examples for more patterns
-4. ✅ Move to **Lesson 1** - React with TypeScript
+1.  Review **Theory 0** for concepts you found challenging
+2.  Take the **Quiz** to test your understanding
+3.  Check out **Demo** examples for more patterns
+4.  Move to **Lesson 1** - React with TypeScript
 
 ---

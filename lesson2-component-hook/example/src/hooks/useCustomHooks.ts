@@ -46,7 +46,7 @@ export function useFetch<T>(
         const json = await response.json();
         setData(json);
       } catch (err) {
-        if (err.name === "AbortError") {
+        if (err instanceof Error && err.name === "AbortError") {
           return;
         }
         setError(err instanceof Error ? err : new Error(String(err)));

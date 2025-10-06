@@ -1,0 +1,23 @@
+{
+  "name": "lab3-backend-solution",
+  "version": "1.0.0",
+  "description": "Backend solution for Lab 3 - Express + MongoDB Task API",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "keywords": ["express", "mongodb", "mongoose", "rest-api"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

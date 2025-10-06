@@ -2,15 +2,15 @@
 
 Complete solution demonstrating React performance optimization with React.memo, useCallback, and useMemo.
 
-## 🎯 Features Implemented
+##  Features Implemented
 
-- ✅ **React.memo** - Prevent unnecessary component re-renders
-- ✅ **useCallback** - Memoize callback functions
-- ✅ **useMemo** - Memoize expensive computations
-- ✅ **Performance Comparison** - Side-by-side memoized vs non-memoized
-- ✅ **Real-world example** - 1000 user list with filtering and sorting
+-  **React.memo** - Prevent unnecessary component re-renders
+-  **useCallback** - Memoize callback functions
+-  **useMemo** - Memoize expensive computations
+-  **Performance Comparison** - Side-by-side memoized vs non-memoized
+-  **Real-world example** - 1000 user list with filtering and sorting
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 exercise2-memoization/
@@ -29,7 +29,7 @@ exercise2-memoization/
 └── README.md
 ```
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Installation
 
@@ -51,15 +51,15 @@ Open [http://localhost:5173](http://localhost:5173) and **press F12 to open Cons
 npm run build
 ```
 
-## 🧪 How to Test Memoization
+##  How to Test Memoization
 
 ### Test 1: React.memo with useCallback
 
 1. **Open Console** (F12)
 2. **Click "Increment (Test Re-render)" button** multiple times
 3. **Observe Console Output**:
-   - ✅ See: `"✅ Rendering UserList (parent component)"`
-   - ❌ Don't see: `"Rendering UserItem: X"` messages
+   -  See: `" Rendering UserList (parent component)"`
+   -  Don't see: `"Rendering UserItem: X"` messages
 
 4. **What This Proves**:
    - Parent component re-renders
@@ -70,8 +70,8 @@ npm run build
 
 1. **Type in Search Box** (e.g., "User 5")
 2. **Observe Console**:
-   - See: `"🔄 Filtering and sorting users..."`
-   - See: `"📊 Calculating stats..."`
+   - See: `" Filtering and sorting users..."`
+   - See: `" Calculating stats..."`
 
 3. **Click "Increment" button** (unrelated state)
 4. **Observe Console**:
@@ -80,22 +80,22 @@ npm run build
 
 5. **Change Sort Order** (A→Z / Z→A)
 6. **Observe Console**:
-   - See: `"🔄 Filtering and sorting users..."`
+   - See: `" Filtering and sorting users..."`
    - useMemo recalculates only when dependencies change
 
 ### Test 3: Performance Comparison Component
 
-Scroll down to the "🔬 React.memo Performance Comparison" section.
+Scroll down to the " React.memo Performance Comparison" section.
 
 1. **Click "Increment Parent"**:
-   - ❌ Left (No Memo): Logs `"⚠️ ExpensiveComponentNoMemo rendering..."`
-   - ✅ Right (With Memo): Does NOT log anything (skipped render)
+   -  Left (No Memo): Logs `" ExpensiveComponentNoMemo rendering..."`
+   -  Right (With Memo): Does NOT log anything (skipped render)
 
 2. **Click "Increment Child"**:
-   - ❌ Left (No Memo): Logs rendering
-   - ✅ Right (With Memo): Logs rendering (prop changed, so it should render)
+   -  Left (No Memo): Logs rendering
+   -  Right (With Memo): Logs rendering (prop changed, so it should render)
 
-## 💡 Key Concepts Demonstrated
+##  Key Concepts Demonstrated
 
 ### 1. React.memo
 
@@ -124,7 +124,7 @@ Memoizes callback functions to keep reference stable.
 **Problem (Without useCallback):**
 ```typescript
 function UsersPage() {
-  const handleSelect = (user: User) => {  // ❌ New function every render
+  const handleSelect = (user: User) => {  //  New function every render
     setSelectedUser(user.id);
   };
 
@@ -135,7 +135,7 @@ function UsersPage() {
 **Solution (With useCallback):**
 ```typescript
 function UsersPage() {
-  const handleSelect = useCallback((user: User) => {  // ✅ Same function reference
+  const handleSelect = useCallback((user: User) => {  //  Same function reference
     setSelectedUser(user.id);
   }, []); // Empty deps = never recreated
 
@@ -150,7 +150,7 @@ Memoizes expensive calculations.
 **Problem (Without useMemo):**
 ```typescript
 function UsersPage() {
-  const filtered = users.filter(...).sort(...);  // ❌ Runs every render
+  const filtered = users.filter(...).sort(...);  //  Runs every render
   return <UserList users={filtered} />;
 }
 ```
@@ -159,14 +159,14 @@ function UsersPage() {
 ```typescript
 function UsersPage() {
   const filtered = useMemo(() => {
-    return users.filter(...).sort(...);  // ✅ Only runs when deps change
+    return users.filter(...).sort(...);  //  Only runs when deps change
   }, [users, searchTerm, sortAsc]);
 
   return <UserList users={filtered} />;
 }
 ```
 
-## 📊 Performance Impact
+##  Performance Impact
 
 ### Scenario: 1000 User List
 
@@ -188,46 +188,46 @@ function UsersPage() {
 | Type in Search | ~1000 renders | ~500 renders (filtered) | **50%** faster |
 | Change Sort | ~1000 renders | ~1000 renders (all need update) | Same (expected) |
 
-## 🎯 When to Use Each Hook
+##  When to Use Each Hook
 
 ### React.memo
 
-✅ **Use when:**
+ **Use when:**
 - Component renders often with same props
 - Component is expensive to render
 - Component is in a list
 - Parent re-renders frequently
 
-❌ **Don't use when:**
+ **Don't use when:**
 - Component is cheap to render
 - Props change on every render
 - Adds unnecessary complexity
 
 ### useCallback
 
-✅ **Use when:**
+ **Use when:**
 - Passing callbacks to memoized child components
 - Callbacks are dependencies of useEffect/useMemo
 - Function is expensive to create
 
-❌ **Don't use when:**
+ **Don't use when:**
 - Function is not passed as prop
 - Child is not memoized
 - Premature optimization
 
 ### useMemo
 
-✅ **Use when:**
+ **Use when:**
 - Calculation is expensive (filtering, sorting, heavy math)
 - Used in render or as dependency
 - Noticeable performance impact
 
-❌ **Don't use when:**
+ **Don't use when:**
 - Calculation is simple (`x + y`)
 - Only used once
 - Premature optimization
 
-## 🔍 Advanced Patterns
+##  Advanced Patterns
 
 ### Custom Comparison Function
 
@@ -246,19 +246,19 @@ const UserItem = memo(
 ### Dependencies Best Practices
 
 ```typescript
-// ✅ Good: Specific dependencies
+//  Good: Specific dependencies
 const filtered = useMemo(
   () => users.filter(u => u.name.includes(search)),
   [users, search]
 );
 
-// ❌ Bad: Missing dependencies
+//  Bad: Missing dependencies
 const filtered = useMemo(
   () => users.filter(u => u.name.includes(search)),
   [users] // Missing 'search'!
 );
 
-// ❌ Bad: No dependencies (defeats purpose)
+//  Bad: No dependencies (defeats purpose)
 const filtered = useMemo(
   () => users.filter(u => u.name.includes(search)),
   []
@@ -294,15 +294,15 @@ function UsersPage() {
 }
 ```
 
-## ⚠️ Common Pitfalls
+##  Common Pitfalls
 
 ### 1. Object/Array Props Break Memoization
 
 ```typescript
-// ❌ Bad: New object every render
+//  Bad: New object every render
 <UserItem user={user} style={{ color: 'red' }} />
 
-// ✅ Good: Stable reference
+//  Good: Stable reference
 const style = useMemo(() => ({ color: 'red' }), []);
 <UserItem user={user} style={style} />
 ```
@@ -310,10 +310,10 @@ const style = useMemo(() => ({ color: 'red' }), []);
 ### 2. Inline Functions Break Memoization
 
 ```typescript
-// ❌ Bad: New function every render
+//  Bad: New function every render
 <UserList onSelect={(user) => setSelected(user.id)} />
 
-// ✅ Good: Memoized callback
+//  Good: Memoized callback
 const handleSelect = useCallback((user) => setSelected(user.id), []);
 <UserList onSelect={handleSelect} />
 ```
@@ -321,33 +321,33 @@ const handleSelect = useCallback((user) => setSelected(user.id), []);
 ### 3. Over-Optimization
 
 ```typescript
-// ❌ Bad: Unnecessary for simple component
+//  Bad: Unnecessary for simple component
 const SimpleText = memo(({ text }: { text: string }) => <p>{text}</p>);
 
-// ✅ Good: Just use regular component
+//  Good: Just use regular component
 function SimpleText({ text }: { text: string }) {
   return <p>{text}</p>;
 }
 ```
 
-## 🎓 Learning Outcomes
+##  Learning Outcomes
 
 After completing this exercise, you understand:
 
-✅ How React.memo prevents unnecessary re-renders
-✅ Why callbacks need useCallback for memoization
-✅ How useMemo optimizes expensive calculations
-✅ When to apply each optimization technique
-✅ How to measure performance impact
-✅ Common pitfalls and how to avoid them
+ How React.memo prevents unnecessary re-renders
+ Why callbacks need useCallback for memoization
+ How useMemo optimizes expensive calculations
+ When to apply each optimization technique
+ How to measure performance impact
+ Common pitfalls and how to avoid them
 
-## 🔗 Related Exercises
+##  Related Exercises
 
 - **Exercise 1**: Code Splitting & Lazy Loading
 - **Exercise 3**: Virtual Lists for Large Datasets
 - **Exercise 4**: Production Build & Deployment
 
-## 📚 Additional Resources
+##  Additional Resources
 
 - [React.memo API](https://react.dev/reference/react/memo)
 - [useCallback Hook](https://react.dev/reference/react/useCallback)
@@ -355,15 +355,15 @@ After completing this exercise, you understand:
 - [React Performance Optimization](https://react.dev/learn/render-and-commit)
 - [Profiling Components](https://react.dev/learn/react-developer-tools)
 
-## 🧪 Performance Profiling
+##  Performance Profiling
 
 ### Using React DevTools
 
 1. Install [React DevTools](https://react.dev/learn/react-developer-tools)
 2. Open Profiler tab
-3. Click Record ⏺️
+3. Click Record ⏺
 4. Interact with app (click increment, search, etc.)
-5. Stop recording ⏹️
+5. Stop recording ⏹
 6. Analyze flame graph:
    - Gray bars = Memoized (didn't render)
    - Colored bars = Rendered

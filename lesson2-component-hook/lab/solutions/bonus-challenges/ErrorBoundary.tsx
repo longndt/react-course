@@ -54,7 +54,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       return (
         <div className="error-boundary">
           <div className="error-container">
-            <h1 className="error-title">⚠️ Something Went Wrong</h1>
+            <h1 className="error-title"> Something Went Wrong</h1>
             <p className="error-message">
               {this.state.error?.message || "An unexpected error occurred"}
             </p>

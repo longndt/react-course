@@ -1,16 +1,16 @@
 # Reference - Component Architecture & React Hook
 
 ## Table of Contents
-1. [Basic Components 🚀](#part-1-basic-components-)
+1. [Basic Components ](#part-1-basic-components-)
 2. [React Hooks Patterns 🎣](#part-2-react-hooks-patterns-)
-3. [Custom Hooks 🔧](#part-3-custom-hooks-)
-4. [Complete Component Library 📦](#part-4-complete-component-library-)
-5. [Complete Form Example 📝](#part-5-complete-form-example-)
-6. [Complete App Example 🎯](#part-6-complete-app-example-)
+3. [Custom Hooks ](#part-3-custom-hooks-)
+4. [Complete Component Library ](#part-4-complete-component-library-)
+5. [Complete Form Example ](#part-5-complete-form-example-)
+6. [Complete App Example ](#part-6-complete-app-example-)
 
 ---
 
-## Part 1: Basic Components 🚀
+## Part 1: Basic Components
 
 ### 1. Simplest Component
 
@@ -48,8 +48,19 @@ export default Greeting;
 
 **Usage:**
 ```tsx
-<Greeting name="Alice" age={25} />
-<Greeting name="Bob" />
+import React from 'react';
+import Greeting from './Greeting';
+
+function App() {
+  return (
+    <div>
+      <Greeting name="Alice" age={25} />
+      <Greeting name="Bob" />
+    </div>
+  );
+}
+
+export default App;
 ```
 
 ---
@@ -229,7 +240,7 @@ export default UserList;
 
 ---
 
-## Part 3: Custom Hooks 🔧
+## Part 3: Custom Hooks
 
 ### useToggle Hook
 
@@ -252,8 +263,18 @@ export default useToggle;
 
 **Usage:**
 ```tsx
-const { value: isOpen, toggle } = useToggle(false);
-<button onClick={toggle}>{isOpen ? 'Close' : 'Open'}</button>
+import React from 'react';
+import useToggle from '../hooks/useToggle';
+
+function ToggleDemo() {
+  const { value: isOpen, toggle } = useToggle(false);
+
+  return (
+    <button onClick={toggle}>{isOpen ? 'Close' : 'Open'}</button>
+  );
+}
+
+export default ToggleDemo;
 ```
 
 ---
@@ -290,11 +311,20 @@ export default useLocalStorage;
 
 **Usage:**
 ```tsx
-const [theme, setTheme] = useLocalStorage('theme', 'light');
+import React from 'react';
+import useLocalStorage from '../hooks/useLocalStorage';
 
-<button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-  Current: {theme}
-</button>
+function ThemeToggle() {
+  const [theme, setTheme] = useLocalStorage('theme', 'light');
+
+  return (
+    <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+      Current: {theme}
+    </button>
+  );
+}
+
+export default ThemeToggle;
 ```
 
 ---
@@ -348,22 +378,34 @@ export default useFetch;
 
 **Usage:**
 ```tsx
-const { data, loading, error, refetch } = useFetch<User[]>('/api/users');
+import React from 'react';
+import useFetch from '../hooks/useFetch';
 
-if (loading) return <div>Loading...</div>;
-if (error) return <div>Error: {error}</div>;
+interface User {
+  id: number;
+  name: string;
+}
 
-return (
-  <>
-    {data?.map(user => <div key={user.id}>{user.name}</div>)}
-    <button onClick={refetch}>Refresh</button>
-  </>
-);
+function UserList() {
+  const { data, loading, error, refetch } = useFetch<User[]>('/api/users');
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  return (
+    <>
+      {data?.map(user => <div key={user.id}>{user.name}</div>)}
+      <button onClick={refetch}>Refresh</button>
+    </>
+  );
+}
+
+export default UserList;
 ```
 
 ---
 
-## Part 4: Complete Component Library 📦
+## Part 4: Complete Component Library
 
 ### Button Component
 
@@ -419,9 +461,18 @@ export default Button;
 
 **Usage:**
 ```tsx
-<Button variant="primary" size="large" onClick={() => alert('Clicked!')}>
-  Click Me
-</Button>
+import React from 'react';
+import Button from './Button';
+
+function ButtonDemo() {
+  return (
+    <Button variant="primary" size="large" onClick={() => alert('Clicked!')}>
+      Click Me
+    </Button>
+  );
+}
+
+export default ButtonDemo;
 ```
 
 ---
@@ -491,18 +542,27 @@ export default Input;
 
 **Usage:**
 ```tsx
-const [email, setEmail] = useState('');
-const [error, setError] = useState('');
+import React, { useState } from 'react';
+import Input from './Input';
 
-<Input
-  label="Email"
-  type="email"
-  value={email}
-  onChange={setEmail}
-  placeholder="Enter your email"
-  error={error}
-  required
-/>
+function EmailForm() {
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+
+  return (
+    <Input
+      label="Email"
+      type="email"
+      value={email}
+      onChange={setEmail}
+      placeholder="Enter your email"
+      error={error}
+      required
+    />
+  );
+}
+
+export default EmailForm;
 ```
 
 ---
@@ -551,18 +611,28 @@ export default Card;
 
 **Usage:**
 ```tsx
-<Card
-  title="User Profile"
-  footer={<Button>Edit Profile</Button>}
->
-  <p>Name: John Doe</p>
-  <p>Email: john@example.com</p>
-</Card>
+import React from 'react';
+import Card from './Card';
+import Button from './Button';
+
+function ProfileCard() {
+  return (
+    <Card
+      title="User Profile"
+      footer={<Button>Edit Profile</Button>}
+    >
+      <p>Name: John Doe</p>
+      <p>Email: john@example.com</p>
+    </Card>
+  );
+}
+
+export default ProfileCard;
 ```
 
 ---
 
-## Part 5: Complete Form Example 📝
+## Part 5: Complete Form Example
 
 ```tsx
 // src/components/UserForm.tsx
@@ -682,7 +752,7 @@ export default UserForm;
 
 ---
 
-## Part 6: Complete App Example 🎯
+## Part 6: Complete App Example
 
 ```tsx
 // src/App.tsx

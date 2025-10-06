@@ -13,13 +13,13 @@ This lesson introduces React fundamentals with modern development practices. You
 
 After completing this lesson, you will be able to:
 
-- ✅ Understand what React is and why it's useful for building UIs
-- ✅ Set up a modern React development environment with Vite and TypeScript
-- ✅ Understand TSX syntax (TypeScript + JSX) and its rules
-- ✅ Create functional components with TypeScript
-- ✅ Understand component-based architecture
-- ✅ Apply basic CSS styling to React components
-- ✅ Run and debug React applications in the browser
+-  Understand what React is and why it's useful for building UIs
+-  Set up a modern React development environment with Vite and TypeScript
+-  Understand TSX syntax (TypeScript + JSX) and its rules
+-  Create functional components with TypeScript
+-  Understand component-based architecture
+-  Apply basic CSS styling to React components
+-  Run and debug React applications in the browser
 
 ---
 
@@ -30,7 +30,7 @@ After completing this lesson, you will be able to:
 - Basic command line operations
 - Understanding of programming fundamentals
 
-**📚 Need a refresher?** Complete [Lesson 0: TypeScript Review](../lesson0-typescript/) first.
+** Need a refresher?** Complete [Lesson 0: TypeScript Review](../lesson0-typescript/) first.
 
 **Technical Requirements:**
 - Node.js v18.0.0 or higher
@@ -87,7 +87,7 @@ After completing this lesson, you will be able to:
 - Props concept (detailed in Lesson 2)
 - Basic styling with CSS
 
-> 💡 **Note:** Advanced topics like props, state, hooks, and component composition are covered in Lesson 2.
+>  **Note:** Advanced topics like props, state, hooks, and component composition are covered in Lesson 2.
 
 ---
 
@@ -170,7 +170,7 @@ function Card() {
 
 ## Best Practices Summary
 
-✅ **DO:**
+ **DO:**
 - Use PascalCase for component names (`Button`, not `button`)
 - Use `className` instead of `class` for CSS classes
 - Close all JSX tags (self-closing for empty elements)
@@ -178,7 +178,7 @@ function Card() {
 - Keep components small and focused
 - Use TypeScript for type safety
 
-❌ **DON'T:**
+ **DON'T:**
 - Use lowercase for component names
 - Forget to close JSX tags
 - Use `class` attribute (it's `className`)
@@ -243,7 +243,7 @@ function Card() {
 
 ## Next Steps
 
-✅ **Completed this lesson?** → Proceed to [Lesson 2: Components & Hooks](../lesson2-component-hook/)
+ **Completed this lesson?** → Proceed to [Lesson 2: Components & Hooks](../lesson2-component-hook/)
 
 **In Lesson 2, you'll learn:**
 - Props and component composition
@@ -285,4 +285,4 @@ function Card() {
 
 ---
 
-**Remember:** React is about building UIs with components. Master the basics in this lesson, then move to Lesson 2 for props, state, and hooks! 🚀
+**Remember:** React is about building UIs with components. Master the basics in this lesson, then move to Lesson 2 for props, state, and hooks! 

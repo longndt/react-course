@@ -4,9 +4,21 @@
 
 This course teaches **React with TypeScript** development using industry-standard practices through hands-on examples.
 
-**Format**: Theory, hands-on practice, and project-based learn
+**Format**: Theory, hands-on practice, and project-based learning
 
 **Language**: All examples and exercises use **TypeScript**
+
+> **📌 IMPORTANT NOTE**
+>
+> This course uses **TypeScript** throughout all lessons and examples.
+>
+> 🔷 **If you are not familiar with TypeScript** or prefer to learn React with JavaScript:
+>
+> ➡️ **[Switch to JavaScript Version](./react-javascript/)** ⬅️
+>
+> The JavaScript version contains the same lessons and examples but uses plain JavaScript instead of TypeScript.
+
+---
 
 ## Prerequisites
 
@@ -78,21 +90,21 @@ Each lesson follows a standardized structure designed for effective learning:
 
 ```
 lessonX-topic/
-├── 📖 reference/          # Quick reference codes
-├── 💻 example/           # Working code examples
-├── 📚 theory/             # Comprehensive documentation
-├── 🔬 lab/                # Hands-on exercises
-└── ✅ quiz/               # Knowledge assessment
+├──  reference/          # Quick reference codes
+├──  example/            # Working code examples
+├──  theory/             # Comprehensive documentation
+├──  lab/                # Hands-on exercises
+└──  quiz/               # Knowledge assessment
 ```
 
-**📌 How to run quizzes**: Use **Live Server** extension in VS Code
+**How to run quizzes**: Use **Live Server** extension in VS Code
 - Right-click quiz file → "Open with Live Server"
 - Or click "Go Live" button in bottom status bar
 - Quiz opens in browser with interactive features
 
 ---
 
-## 🎯 How to Study This Course Effectively ?
+## 📚 How to Study This Course Effectively
 
 ### **Step 1: Start with Reference Guide**
 
@@ -114,8 +126,8 @@ lessonX-topic/
 ### **Step 3: Read Theory as Reference**
 
 **Goal**: Understand concepts deeply when needed
-- ⚠️ **DON'T** read cover-to-cover like a novel
-- ✅ **DO** read sections related to what you're coding
+-  **DON'T** read cover-to-cover like a novel
+-  **DO** read sections related to what you're coding
 - Read concept → Go to example code → See it in action → Return to theory
 - Use Ctrl+F to search for specific topics
 - Bookmark important sections for later reference
@@ -166,7 +178,7 @@ lessonX-topic/
 
 **📋 First, ensure you have all required software installed:**
 
-👉 **[Go to Environment Setup Guide](./setup/environment-setup.md)** for detail setup instructions
+**[Go to Environment Setup Guide](./setup/environment-setup.md)** for detailed setup instructions
 
 Make sure you have installed:
 - Node.js (version 18 or higher)
@@ -174,9 +186,9 @@ Make sure you have installed:
 - Git
 - Required VS Code extensions
 
-**⚠️ Having installation or setup issues?**
+**Having installation or setup issues?**
 
-👉 **[Check Troubleshooting Guide](./extra/troubleshooting.md)** for common problems and solutions
+ **[Check Troubleshooting Guide](./extra/troubleshooting-guide.md)** for common problems and solutions
 
 ### Step 2: Install Markdown Reading Support Extension
 
@@ -198,26 +210,26 @@ cd react-course
 
 ### Step 4: Recommended Learning Path
 
-**🎯 Follow this exact order for the best learning experience:**
+**Follow this exact order for the best learning experience:**
 
-#### 1️⃣ **Start with Prerequisites** (If needed)
-👉 **[Lesson 0: TypeScript Prerequisites](./lesson0-typescript/readme.md)**
+#### 1⃣ **Start with Prerequisites** (If needed)
+ **[Lesson 0: TypeScript Prerequisites](./lesson0-typescript/readme.md)**
 - Review TypeScript fundamentals
 - Master types, interfaces, and generics used in React
 
-#### 2️⃣ **Learn Lessons 1-5** (In sequence)
-- 👉 **[Lesson 1: React Fundamentals & Project Setup](./lesson1-fundamentals-setup/readme.md)**
-- 👉 **[Lesson 2: Component Architecture & React Hook](./lesson2-component-hook/readme.md)**
-- 👉 **[Lesson 3: API Integration & Data Management](./lesson3-api-data/readme.md)**
-- 👉 **[Lesson 4: Routing & Authentication ](./lesson4-routing-auth/readme.md)**
-- 👉 **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack-deployment/readme.md)**
+#### 2⃣ **Learn Lessons 1-5** (In sequence)
+-  **[Lesson 1: React Fundamentals & Project Setup](./lesson1-fundamentals-setup/readme.md)**
+-  **[Lesson 2: Component Architecture & React Hook](./lesson2-component-hook/readme.md)**
+-  **[Lesson 3: API Integration & Data Management](./lesson3-api-data/readme.md)**
+-  **[Lesson 4: Routing & Authentication ](./lesson4-routing-auth/readme.md)**
+-  **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack-deployment/readme.md)**
 
-#### 3️⃣ **Continue with Advanced Materials** (At last)
-- **[Web Testing](./extra/web-testing.md)** - Jest, React Testing Library, E2E testing
-- **[Performance Optimization](./extra/performance-optimization.md)** - useMemo, useCallback, bundle optimization
-- **[Web Accessibility](./extra/web-accessibility.md)** - WCAG compliance, ARIA, keyboard navigation
-- **[State Management](./extra/state-management.md)** - Advanced state management patterns
-- **[Modern Stack](./extra/modern-stack.md)** - Latest React ecosystem technologies
+#### 3⃣ **Continue with Advanced Materials** (At last)
+- **[Web Testing](./extra/testing-guide.md)** - Jest, React Testing Library, E2E testing
+- **[Performance Optimization](./extra/advanced-patterns.md)** - useMemo, useCallback, bundle optimization
+- **[Web Accessibility](./extra/advanced-patterns.md)** - WCAG compliance, ARIA, keyboard navigation
+- **[State Management](./extra/state-management-guide.md)** - Advanced state management patterns
+- **[Modern Stack](./extra/modern-stack-2025.md)** - Latest React ecosystem technologies
 - **[Advanced Patterns](./extra/advanced-patterns.md)** - Enterprise-level patterns
 
 ### Step 5: Start Learning
@@ -230,7 +242,7 @@ cd lesson0-typescript
 cd lesson1-fundamentals-setup
 ```
 
-### 💡 Learning Tips
+## 💡 Learning Tips
 
 - **Use *Markdown Preview Enhanced*** for better reading experience
 - **Read the *readme***  of each lesson carefully before starting

@@ -37,7 +37,7 @@ const products = [
     name: 'Mechanical Keyboard',
     price: 149.99,
     category: 'Electronics',
-    image: '⌨️',
+    image: '⌨',
     description: 'RGB mechanical keyboard for gaming',
     features: ['Cherry MX switches', 'RGB backlight', 'Programmable keys', 'USB passthrough'],
     inStock: false
@@ -47,7 +47,7 @@ const products = [
     name: 'Wireless Mouse',
     price: 49.99,
     category: 'Electronics',
-    image: '🖱️',
+    image: '🖱',
     description: 'Ergonomic wireless mouse with precision tracking',
     features: ['16000 DPI', 'Wireless 2.4GHz', 'Rechargeable battery', '7 programmable buttons'],
     inStock: true

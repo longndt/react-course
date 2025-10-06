@@ -1,0 +1,84 @@
+/* Themed Button Styles */
+.themed-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+/* Light Theme Buttons */
+.themed-button.light.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.themed-button.light.secondary {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+/* Dark Theme Buttons */
+.themed-button.dark.primary {
+  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+  color: white;
+}
+
+.themed-button.dark.secondary {
+  background: #4a5568;
+  color: #e2e8f0;
+}
+
+/* Button Hover Effects */
+.themed-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.themed-button:active {
+  transform: translateY(0);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  border: 2px solid;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  z-index: 1000;
+}
+
+.theme-toggle.light {
+  background: white;
+  color: #2d3748;
+  border-color: #e2e8f0;
+}
+
+.theme-toggle.dark {
+  background: #2d3748;
+  color: #e2e8f0;
+  border-color: #4a5568;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .theme-toggle {
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+}

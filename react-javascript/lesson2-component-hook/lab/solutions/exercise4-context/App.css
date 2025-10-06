@@ -1,0 +1,147 @@
+/* App Container */
+.app {
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Light Theme */
+.app.light {
+  --bg-primary: #f7fafc;
+  --bg-secondary: white;
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --border-color: #e2e8f0;
+  --shadow: rgba(0, 0, 0, 0.08);
+}
+
+/* Dark Theme */
+.app.dark {
+  --bg-primary: #1a202c;
+  --bg-secondary: #2d3748;
+  --text-primary: #e2e8f0;
+  --text-secondary: #cbd5e0;
+  --border-color: #4a5568;
+  --shadow: rgba(0, 0, 0, 0.3);
+}
+
+.app {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Content Container */
+.content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 6rem 2rem 2rem 2rem;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+}
+
+/* Demo Sections */
+.demo-section {
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 25px var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.demo-section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px var(--shadow);
+}
+
+.demo-section h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.demo-section p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.demo-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.demo-section ul li {
+  padding: 0.75rem 0;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.demo-section ul li:last-child {
+  border-bottom: none;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+/* Emphasis Text */
+strong {
+  color: #667eea;
+  font-weight: 700;
+}
+
+.dark strong {
+  color: #4299e1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content {
+    padding: 5rem 1rem 1rem 1rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .header p {
+    font-size: 1rem;
+  }
+
+  .demo-section {
+    padding: 1.5rem;
+  }
+
+  .demo-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+}

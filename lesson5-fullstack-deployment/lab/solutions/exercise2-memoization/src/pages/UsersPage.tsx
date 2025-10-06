@@ -37,11 +37,10 @@ export default function UsersPage() {
 
   // Expensive computation - memoized
   const filteredAndSortedUsers = useMemo(() => {
-    console.log('🔄 Filtering and sorting users...');
+    // Educational log - shows when this expensive computation runs
+    console.log(' [DEMO] Filtering and sorting users...');
 
-    let result = [...users];
-
-    // Filter by search term
+    let result = [...users];    // Filter by search term
     if (searchTerm) {
       result = result.filter(user =>
         user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -65,7 +64,7 @@ export default function UsersPage() {
 
   // Non-memoized version for comparison
   const nonMemoizedFiltered = () => {
-    console.log('⚠️ NON-MEMOIZED: Filtering and sorting...');
+    console.log(' NON-MEMOIZED: Filtering and sorting...');
     let result = [...users];
 
     if (searchTerm) {
@@ -88,7 +87,7 @@ export default function UsersPage() {
 
   // Stats calculated with useMemo
   const stats = useMemo(() => {
-    console.log('📊 Calculating stats...');
+    console.log(' Calculating stats...');
     return {
       total: users.length,
       filtered: filteredAndSortedUsers.length,
@@ -111,7 +110,7 @@ export default function UsersPage() {
         <h3>Performance Test</h3>
         <p>Count: <strong>{count}</strong></p>
         <button onClick={() => setCount(count + 1)} className="btn-test">
-          🔄 Increment (Test Re-render)
+           Increment (Test Re-render)
         </button>
         <p className="help-text">
           Open Console (F12) and click this button. UserItems should NOT re-render thanks to React.memo + useCallback!
@@ -120,7 +119,7 @@ export default function UsersPage() {
 
       {/* Statistics */}
       <div className="stats-section">
-        <h3>📊 Statistics (Memoized)</h3>
+        <h3> Statistics (Memoized)</h3>
         <div className="stats-grid">
           <div className="stat-card">
             <div className="stat-value">{stats.total}</div>
@@ -151,7 +150,7 @@ export default function UsersPage() {
 
       {/* Filters */}
       <div className="filters-section">
-        <h3>🔍 Filters</h3>
+        <h3> Filters</h3>
         <div className="filters">
           <div className="filter-group">
             <label htmlFor="search">Search:</label>
@@ -211,7 +210,7 @@ export default function UsersPage() {
 
       {/* Educational Info */}
       <div className="info-section">
-        <h3>💡 What's Happening Here?</h3>
+        <h3> What's Happening Here?</h3>
 
         <div className="info-card">
           <h4>React.memo</h4>
@@ -229,7 +228,7 @@ export default function UsersPage() {
             preventing unnecessary UserItem re-renders.
           </p>
           <code>
-            const handleSelect = useCallback((user: User) ={'>'} {...}, []);
+            const handleSelect = useCallback((user: User) ={'>'} {'{'}...{'}'}, []);
           </code>
         </div>
 
@@ -240,12 +239,12 @@ export default function UsersPage() {
             This expensive computation only runs when search term, role filter, or sort order changes.
           </p>
           <code>
-            const filtered = useMemo(() ={'>'} {...}, [users, searchTerm, sortAsc, filterRole]);
+            const filtered = useMemo(() ={'>'} {'{'}...{'}'}, [users, searchTerm, sortAsc, filterRole]);
           </code>
         </div>
 
         <div className="info-card highlight">
-          <h4>🔍 Try This:</h4>
+          <h4> Try This:</h4>
           <ul>
             <li>Click "Increment" button - UserItems don't re-render (check console)</li>
             <li>Type in search - Only filtering/sorting recalculates</li>

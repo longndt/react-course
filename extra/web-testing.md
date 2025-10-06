@@ -23,11 +23,11 @@
 Testing ensures your React applications work correctly and continue to work as you make changes. This guide covers modern testing strategies for React applications.
 
 **Why Test?**
-- ✅ Catch bugs early (before production)
-- ✅ Refactor with confidence
-- ✅ Documentation through tests
-- ✅ Better code design
-- ✅ Faster development (long-term)
+-  Catch bugs early (before production)
+-  Refactor with confidence
+-  Documentation through tests
+-  Better code design
+-  Faster development (long-term)
 
 **Testing Stack**:
 - **Jest**: Testing framework
@@ -41,7 +41,7 @@ Testing ensures your React applications work correctly and continue to work as y
 
 ### Test Behavior, Not Implementation
 
-❌ **Bad**: Testing implementation details
+ **Bad**: Testing implementation details
 ```tsx
 test('counter increments internal state', () => {
   const wrapper = shallow(<Counter />);
@@ -51,7 +51,7 @@ test('counter increments internal state', () => {
 });
 ```
 
-✅ **Good**: Testing user-visible behavior
+ **Good**: Testing user-visible behavior
 ```tsx
 test('counter increments when button clicked', () => {
   render(<Counter />);
@@ -901,10 +901,10 @@ test('user can submit form', async () => {
 ### 2. Use data-testid Sparingly
 
 ```tsx
-// ❌ Avoid
+//  Avoid
 <div data-testid="user-card">...</div>
 
-// ✅ Prefer accessible queries
+//  Prefer accessible queries
 <article aria-label="User card">...</article>
 
 // Then query
@@ -914,7 +914,7 @@ screen.getByRole('article', { name: /user card/i });
 ### 3. Test One Thing Per Test
 
 ```tsx
-// ❌ Bad: Multiple assertions
+//  Bad: Multiple assertions
 test('form validation', () => {
   // Tests 3 different things
   expect(email).toBeInvalid();
@@ -922,7 +922,7 @@ test('form validation', () => {
   expect(submitButton).toBeDisabled();
 });
 
-// ✅ Good: Split into separate tests
+//  Good: Split into separate tests
 test('email is invalid when empty', () => {
   expect(email).toBeInvalid();
 });
@@ -939,11 +939,11 @@ test('submit button disabled when form invalid', () => {
 ### 4. Use Descriptive Test Names
 
 ```tsx
-// ❌ Bad
+//  Bad
 test('it works', () => {});
 test('test 1', () => {});
 
-// ✅ Good
+//  Good
 test('displays error when email is invalid', () => {});
 test('disables submit button while loading', () => {});
 ```
@@ -963,7 +963,7 @@ afterEach(() => {
 
 ### Pitfall 1: Testing Implementation Details
 
-❌ **Bad**:
+ **Bad**:
 ```tsx
 test('sets loading state to true', () => {
   const { result } = renderHook(() => useFetch());
@@ -971,7 +971,7 @@ test('sets loading state to true', () => {
 });
 ```
 
-✅ **Good**:
+ **Good**:
 ```tsx
 test('shows loading indicator while fetching', () => {
   render(<UserList />);
@@ -981,7 +981,7 @@ test('shows loading indicator while fetching', () => {
 
 ### Pitfall 2: Not Waiting for Async Updates
 
-❌ **Bad**:
+ **Bad**:
 ```tsx
 test('displays user after fetch', () => {
   render(<UserProfile />);
@@ -989,7 +989,7 @@ test('displays user after fetch', () => {
 });
 ```
 
-✅ **Good**:
+ **Good**:
 ```tsx
 test('displays user after fetch', async () => {
   render(<UserProfile />);
@@ -999,7 +999,7 @@ test('displays user after fetch', async () => {
 
 ### Pitfall 3: Overusing Snapshot Tests
 
-❌ **Bad**:
+ **Bad**:
 ```tsx
 test('renders correctly', () => {
   const { container } = render(<ComplexComponent />);
@@ -1007,7 +1007,7 @@ test('renders correctly', () => {
 });
 ```
 
-✅ **Good**:
+ **Good**:
 ```tsx
 test('displays user information', () => {
   render(<UserCard user={mockUser} />);

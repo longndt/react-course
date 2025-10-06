@@ -1,4 +1,5 @@
 import axios from 'axios';
+import type { Task, CreateTaskInput, UpdateTaskInput } from '../types/task';
 
 const API_BASE_URL = 'http://localhost:3000/api';
 
@@ -19,25 +20,25 @@ export const taskApi = {
   },
 
   // Get single task
-  getTask: async (id) => {
+  getTask: async (id: string): Promise<Task> => {
     const response = await api.get(`/tasks/${id}`);
     return response.data.data;
   },
 
   // Create new task
-  createTask: async (taskData) => {
+  createTask: async (taskData: CreateTaskInput): Promise<Task> => {
     const response = await api.post('/tasks', taskData);
     return response.data.data;
   },
 
   // Update task
-  updateTask: async ({ id, ...taskData }) => {
+  updateTask: async ({ id, ...taskData }: UpdateTaskInput): Promise<Task> => {
     const response = await api.put(`/tasks/${id}`, taskData);
     return response.data.data;
   },
 
   // Delete task
-  deleteTask: async (id) => {
+  deleteTask: async (id: string): Promise<void> => {
     const response = await api.delete(`/tasks/${id}`);
     return response.data.data;
   },

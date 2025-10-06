@@ -41,7 +41,7 @@ node --version    # Should be v18.0.0+
 npm --version     # Should be v9.0.0+
 ```
 
-✅ If you see the default Vite + React page, you're ready!
+ If you see the default Vite + React page, you're ready!
 
 ---
 
@@ -134,46 +134,52 @@ export default App;
 ### JSX Rules
 
 ```tsx
+import React from 'react';
+
 function MyComponent() {
   return (
-    // ✅ Correct - wrapped in one parent element
+    //  Correct - wrapped in one parent element
     <div>
       <h1>Title</h1>
       <p>Paragraph</p>
     </div>
 
-    // ❌ Wrong - multiple elements without parent
+    //  Wrong - multiple elements without parent
     // <h1>Title</h1>
     // <p>Paragraph</p>
   );
 }
+
+export default MyComponent;
 ```
 
 ### JSX vs HTML Differences
 
 ```tsx
-// ❌ HTML attribute
+//  HTML attribute
 <div class="container">
 
-// ✅ JSX attribute
+//  JSX attribute
 <div className="container">
 
-// ❌ Not closed
+//  Not closed
 <img src="photo.jpg">
 
-// ✅ Self-closing
+//  Self-closing
 <img src="photo.jpg" />
 
-// ❌ Inline style as string
+//  Inline style as string
 <div style="color: red">
 
-// ✅ Inline style as object
+//  Inline style as object
 <div style={{ color: 'red' }}>
 ```
 
 ### Embedding JavaScript in JSX
 
 ```tsx
+import React from 'react';
+
 function Greeting() {
   const name = "John";
   const age = 25;
@@ -186,6 +192,8 @@ function Greeting() {
     </div>
   );
 }
+
+export default Greeting;
 ```
 
 **Key:** Use `{}` to embed JavaScript expressions in JSX.
@@ -229,6 +237,8 @@ export default Welcome;
 ### Option 2: Inline Styles
 
 ```tsx
+import React from 'react';
+
 function Welcome() {
   return (
     <div style={{
@@ -242,6 +252,8 @@ function Welcome() {
     </div>
   );
 }
+
+export default Welcome;
 ```
 
 ---
@@ -249,6 +261,8 @@ function Welcome() {
 ## Part 6: Simple Interactive Example
 
 ```tsx
+import React from 'react';
+
 function ClickDemo() {
   function handleClick() {
     alert('Button clicked!');
@@ -267,7 +281,7 @@ function ClickDemo() {
 export default ClickDemo;
 ```
 
-> 💡 **Note:** State management (making the UI update) is covered in Lesson 2 with `useState` hook.
+>  **Note:** State management (making the UI update) is covered in Lesson 2 with `useState` hook.
 
 ---
 
@@ -389,16 +403,16 @@ npm install
 
 ## Next Steps
 
-✅ **Completed setup?** Great! You now have:
+ **Completed setup?** Great! You now have:
 - A working React development environment
 - Understanding of basic JSX syntax
 - Your first custom component
 
-📚 **Want deeper understanding?** Read [theory1.md](./theory/theory1.md)
+ **Want deeper understanding?** Read [theory1.md](./theory/theory1.md)
 
-🔬 **Ready to practice?** Try [lab1.md](./lab/lab1.md) exercises
+ **Ready to practice?** Try [lab1.md](./lab/lab1.md) exercises
 
-🚀 **Ready for more features?** Continue to [Lesson 2: Components & Hooks](../lesson2-component-hook/) to learn:
+ **Ready for more features?** Continue to [Lesson 2: Components & Hooks](../lesson2-component-hook/) to learn:
 - Props and component communication
 - State management with hooks
 - Building reusable component libraries

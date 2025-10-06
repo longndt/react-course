@@ -50,7 +50,7 @@ export default function PerformanceDemo() {
   return (
     <div className="performance-demo">
       <div className="demo-header">
-        <h1>🚀 Virtual List Performance Demo</h1>
+        <h1> Virtual List Performance Demo</h1>
         <p className="subtitle">
           Comparing regular list vs virtual list with {itemCount.toLocaleString()} items
         </p>
@@ -78,7 +78,7 @@ export default function PerformanceDemo() {
           onClick={() => setShowStats(!showStats)}
           className="btn-stats"
         >
-          {showStats ? '📊 Hide' : '📊 Show'} Performance Stats
+          {showStats ? ' Hide' : ' Show'} Performance Stats
         </button>
       </div>
 
@@ -102,13 +102,13 @@ export default function PerformanceDemo() {
             <div className="stat-card">
               <div className="stat-label">Memory Usage</div>
               <div className="stat-value">
-                {activeTab === 'virtual' ? 'Low ✅' : 'High ⚠️'}
+                {activeTab === 'virtual' ? 'Low ' : 'High '}
               </div>
             </div>
             <div className="stat-card">
               <div className="stat-label">Scroll Performance</div>
               <div className="stat-value">
-                {activeTab === 'virtual' ? '60 FPS ✅' : '< 30 FPS ⚠️'}
+                {activeTab === 'virtual' ? '60 FPS ' : '< 30 FPS '}
               </div>
             </div>
           </div>
@@ -121,13 +121,13 @@ export default function PerformanceDemo() {
           className={`tab ${activeTab === 'virtual' ? 'active' : ''}`}
           onClick={() => setActiveTab('virtual')}
         >
-          ✅ Virtual List (Optimized)
+           Virtual List (Optimized)
         </button>
         <button
           className={`tab ${activeTab === 'regular' ? 'active' : ''}`}
           onClick={() => setActiveTab('regular')}
         >
-          ⚠️ Regular List (Slow)
+           Regular List (Slow)
         </button>
       </div>
 
@@ -136,7 +136,7 @@ export default function PerformanceDemo() {
         {activeTab === 'virtual' ? (
           <>
             <div className="list-info success">
-              <strong>✅ Virtual List:</strong> Only renders visible items (~15 at a time).
+              <strong> Virtual List:</strong> Only renders visible items (~15 at a time).
               Smooth 60 FPS scrolling regardless of list size!
             </div>
             <VirtualList
@@ -150,12 +150,12 @@ export default function PerformanceDemo() {
         ) : (
           <>
             <div className="list-info warning">
-              <strong>⚠️ Warning:</strong> Regular list renders ALL {itemCount.toLocaleString()} items.
+              <strong> Warning:</strong> Regular list renders ALL {itemCount.toLocaleString()} items.
               This will be slow and janky. Open DevTools Performance tab to see the difference!
             </div>
             {itemCount > 10000 && (
               <div className="list-info error">
-                <strong>🚨 Danger:</strong> Rendering {itemCount.toLocaleString()} items may freeze your browser!
+                <strong> Danger:</strong> Rendering {itemCount.toLocaleString()} items may freeze your browser!
                 Consider reducing the count or switching to Virtual List.
               </div>
             )}
@@ -171,7 +171,7 @@ export default function PerformanceDemo() {
 
       {/* Instructions */}
       <div className="instructions">
-        <h3>🧪 How to Test Performance</h3>
+        <h3> How to Test Performance</h3>
 
         <div className="instruction-section">
           <h4>1. Visual Test</h4>
@@ -188,9 +188,9 @@ export default function PerformanceDemo() {
           <ol>
             <li>Open Chrome DevTools (F12)</li>
             <li>Go to <strong>Performance</strong> tab</li>
-            <li>Click <strong>Record ⏺️</strong> button</li>
+            <li>Click <strong>Record ⏺</strong> button</li>
             <li>Scroll through the list for ~3 seconds</li>
-            <li>Click <strong>Stop ⏹️</strong> button</li>
+            <li>Click <strong>Stop ⏹</strong> button</li>
             <li>Analyze the results:
               <ul>
                 <li><strong>FPS</strong> graph: Virtual list = 60 FPS, Regular = 20-40 FPS</li>
@@ -214,7 +214,7 @@ export default function PerformanceDemo() {
         </div>
 
         <div className="instruction-section highlight">
-          <h4>💡 Key Insights</h4>
+          <h4> Key Insights</h4>
           <ul>
             <li><strong>Virtual List:</strong> Constant DOM size (~15 nodes) regardless of data size</li>
             <li><strong>Regular List:</strong> DOM size = data size (10,000 nodes = slow!)</li>
@@ -226,7 +226,7 @@ export default function PerformanceDemo() {
 
       {/* Comparison Table */}
       <div className="comparison-table">
-        <h3>📊 Performance Comparison</h3>
+        <h3> Performance Comparison</h3>
         <table>
           <thead>
             <tr>

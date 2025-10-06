@@ -13,16 +13,16 @@ This lesson covers integrating React applications with backend APIs and managing
 
 After completing this lesson, you will be able to:
 
-- ✅ Understand REST API concepts and HTTP methods (GET, POST, PUT, DELETE)
-- ✅ Integrate React with Node.js/Express backends and databases
-- ✅ Implement data fetching patterns with fetch API and React Query
-- ✅ Handle loading states, errors, and edge cases professionally
-- ✅ Build complete CRUD operations with optimistic updates
-- ✅ Manage complex application state with data synchronization
-- ✅ Implement search, filtering, sorting, and pagination
-- ✅ Handle file uploads and media management
-- ✅ Secure API calls with authentication tokens
-- ✅ Debug API integration issues effectively
+-  Understand REST API concepts and HTTP methods (GET, POST, PUT, DELETE)
+-  Integrate React with Node.js/Express backends and databases
+-  Implement data fetching patterns with fetch API and React Query
+-  Handle loading states, errors, and edge cases professionally
+-  Build complete CRUD operations with optimistic updates
+-  Manage complex application state with data synchronization
+-  Implement search, filtering, sorting, and pagination
+-  Handle file uploads and media management
+-  Secure API calls with authentication tokens
+-  Debug API integration issues effectively
 
 ---
 
@@ -31,26 +31,26 @@ After completing this lesson, you will be able to:
 Before starting this lesson, make sure you have:
 
 ### Required Knowledge
-- ✅ React fundamentals and hooks (useState, useEffect)
-- ✅ JavaScript async/await and Promises
-- ✅ HTTP basics (requests, responses, status codes)
-- ✅ JSON data format
-- ✅ Completed Lessons 1 and 2
+-  React fundamentals and hooks (useState, useEffect)
+-  JavaScript async/await and Promises
+-  HTTP basics (requests, responses, status codes)
+-  JSON data format
+-  Completed Lessons 1 and 2
 
 ### Environment Setup
-- ✅ Node.js 18+ installed
-- ✅ React project set up (Vite recommended)
-- ✅ Code editor (VS Code recommended)
-- ✅ API testing tool (Postman or Thunder Client)
+-  Node.js 18+ installed
+-  React project set up (Vite recommended)
+-  Code editor (VS Code recommended)
+-  API testing tool (Postman or Thunder Client)
 
 ### Optional but Helpful
 - Basic understanding of REST APIs
 - Familiarity with Express.js
 - Knowledge of databases (MongoDB, PostgreSQL)
 
-> 💡 **Not ready?** → Review [Lesson 2](../lesson2-component-hook/) for hooks mastery
+>  **Not ready?** → Review [Lesson 2](../lesson2-component-hook/) for hooks mastery
 
-> 🔄 **Hooks Review**: This lesson uses `useState` and `useEffect` extensively for data fetching and state management. If you need a refresher on React Hooks, review [Lesson 2: React Hooks](../lesson2-component-hook/#2-react-hooks-essentials) before proceeding.
+>  **Hooks Review**: This lesson uses `useState` and `useEffect` extensively for data fetching and state management. If you need a refresher on React Hooks, review [Lesson 2: React Hooks](../lesson2-component-hook/#2-react-hooks-essentials) before proceeding.
 
 ---
 
@@ -364,7 +364,7 @@ function SearchableUserList() {
 }
 ```
 
-> 💡 **More examples** → Check [reference/](./reference/) for complete patterns
+>  **More examples** → Check [reference/](./reference/) for complete patterns
 
 ---
 
@@ -383,7 +383,7 @@ Follow this 4-step learning path:
 **Time**: 60-90 minutes
 
 ### Step 2: Explore Reference Code
-💻 Browse [reference/](./reference/) - Working examples:
+ Browse [reference/](./reference/) - Working examples:
 - API client setup and configuration
 - All CRUD operations with TypeScript
 - React Query setup and patterns
@@ -405,20 +405,20 @@ Follow this 4-step learning path:
 **Time**: 120-150 minutes
 
 ### Step 4: Complete Lab Exercises
-🧪 Practice in [lab3.md](./lab/lab3.md) - Hands-on challenges:
+ Practice in [lab3.md](./lab/lab3.md) - Hands-on challenges:
 - Level 1: Basic API integration
 - Level 2: Full CRUD operations
 - Level 3: Advanced features (search, pagination, uploads)
 
 **Time**: 180-240 minutes
 
-> 🎯 **Pro tip**: Test APIs with Postman before integrating with React
+>  **Pro tip**: Test APIs with Postman before integrating with React
 
 ---
 
 ## Key Takeaways
 
-### 🎯 Core Concepts to Remember
+###  Core Concepts to Remember
 
 1. **Separate concerns** - API logic separate from UI components
 2. **Handle all states** - loading, success, error, empty
@@ -429,7 +429,7 @@ Follow this 4-step learning path:
 7. **Optimistic updates** - update UI before API confirms
 8. **Always clean up** - cancel pending requests on unmount
 
-### 🔑 Most Important Skills
+###  Most Important Skills
 
 - Making HTTP requests with fetch/axios
 - Managing loading and error states
@@ -438,7 +438,7 @@ Follow this 4-step learning path:
 - Handling forms and validation
 - Debugging API integration issues
 
-### 💡 Common Realizations
+###  Common Realizations
 
 - "Server state is different from client state!"
 - "React Query makes data fetching so much easier"
@@ -450,74 +450,74 @@ Follow this 4-step learning path:
 
 ## Best Practices Summary
 
-### ✅ API Integration Best Practices
+###  API Integration Best Practices
 
 **DO:**
-- ✅ Use centralized API client for all HTTP requests
-- ✅ Implement proper error handling with try/catch
-- ✅ Always check `response.ok` before parsing JSON
-- ✅ Show clear loading and error states to users
-- ✅ Use environment variables for API URLs
-- ✅ Add request/response interceptors for auth
-- ✅ Validate API responses with TypeScript types
+-  Use centralized API client for all HTTP requests
+-  Implement proper error handling with try/catch
+-  Always check `response.ok` before parsing JSON
+-  Show clear loading and error states to users
+-  Use environment variables for API URLs
+-  Add request/response interceptors for auth
+-  Validate API responses with TypeScript types
 
 **DON'T:**
-- ❌ Hardcode API URLs in components
-- ❌ Ignore error responses from API
-- ❌ Parse JSON without checking response status
-- ❌ Make API calls in render function
-- ❌ Store sensitive data in localStorage
-- ❌ Forget to handle network failures
+-  Hardcode API URLs in components
+-  Ignore error responses from API
+-  Parse JSON without checking response status
+-  Make API calls in render function
+-  Store sensitive data in localStorage
+-  Forget to handle network failures
 
-### ✅ React Query Best Practices
+###  React Query Best Practices
 
 **DO:**
-- ✅ Use query keys consistently
-- ✅ Invalidate queries after mutations
-- ✅ Implement optimistic updates for better UX
-- ✅ Configure stale time appropriately
-- ✅ Use enabled option to control query execution
-- ✅ Handle loading and error states
-- ✅ Cancel queries when component unmounts
+-  Use query keys consistently
+-  Invalidate queries after mutations
+-  Implement optimistic updates for better UX
+-  Configure stale time appropriately
+-  Use enabled option to control query execution
+-  Handle loading and error states
+-  Cancel queries when component unmounts
 
 **DON'T:**
-- ❌ Use useState for server data
-- ❌ Forget to invalidate related queries
-- ❌ Ignore mutation error handling
-- ❌ Over-fetch data (use pagination)
-- ❌ Cache sensitive data too long
+-  Use useState for server data
+-  Forget to invalidate related queries
+-  Ignore mutation error handling
+-  Over-fetch data (use pagination)
+-  Cache sensitive data too long
 
-### ✅ Performance Optimization
+###  Performance Optimization
 
 **DO:**
-- ✅ Debounce search inputs (500ms recommended)
-- ✅ Implement pagination for large datasets
-- ✅ Use React Query's automatic caching
-- ✅ Lazy load heavy components
-- ✅ Cancel pending requests on navigation
-- ✅ Use optimistic updates to reduce perceived latency
+-  Debounce search inputs (500ms recommended)
+-  Implement pagination for large datasets
+-  Use React Query's automatic caching
+-  Lazy load heavy components
+-  Cancel pending requests on navigation
+-  Use optimistic updates to reduce perceived latency
 
 **DON'T:**
-- ❌ Fetch all data at once (use pagination)
-- ❌ Make API calls on every keystroke
-- ❌ Load large images without optimization
-- ❌ Re-fetch unchanged data repeatedly
+-  Fetch all data at once (use pagination)
+-  Make API calls on every keystroke
+-  Load large images without optimization
+-  Re-fetch unchanged data repeatedly
 
-### ✅ Security Best Practices
+###  Security Best Practices
 
 **DO:**
-- ✅ Store API keys in environment variables
-- ✅ Validate and sanitize all user inputs
-- ✅ Use HTTPS in production
-- ✅ Implement proper CORS configuration
-- ✅ Add authentication tokens to requests
-- ✅ Handle 401/403 responses (unauthorized)
+-  Store API keys in environment variables
+-  Validate and sanitize all user inputs
+-  Use HTTPS in production
+-  Implement proper CORS configuration
+-  Add authentication tokens to requests
+-  Handle 401/403 responses (unauthorized)
 
 **DON'T:**
-- ❌ Store tokens in localStorage (use httpOnly cookies)
-- ❌ Send passwords in URL parameters
-- ❌ Expose API keys in frontend code
-- ❌ Trust user input without validation
+-  Store tokens in localStorage (use httpOnly cookies)
+-  Send passwords in URL parameters
+-  Expose API keys in frontend code
+-  Trust user input without validation
 
 ---
 
@@ -526,12 +526,12 @@ Follow this 4-step learning path:
 ### Challenge 1: Infinite Re-renders with useEffect
 **Problem:** Component keeps re-rendering and making API calls
 ```tsx
-// ❌ Wrong - creates new object reference every render
+//  Wrong - creates new object reference every render
 useEffect(() => {
   fetchUsers({ filter: 'active' });
 }, [{ filter: 'active' }]); // New object every render
 
-// ✅ Correct - stable dependencies
+//  Correct - stable dependencies
 const filter = 'active';
 useEffect(() => {
   fetchUsers({ filter });
@@ -543,13 +543,13 @@ useEffect(() => {
 ### Challenge 2: Stale Data After Mutations
 **Problem:** List doesn't update after creating/deleting item
 ```tsx
-// ❌ Wrong - no refetch after mutation
+//  Wrong - no refetch after mutation
 const createUser = async (user) => {
   await api.createUser(user);
   // List still shows old data
 };
 
-// ✅ Correct - invalidate query
+//  Correct - invalidate query
 const createMutation = useMutation({
   mutationFn: api.createUser,
   onSuccess: () => {
@@ -563,14 +563,14 @@ const createMutation = useMutation({
 ### Challenge 3: Race Conditions
 **Problem:** Fast typing causes out-of-order responses
 ```tsx
-// ❌ Wrong - no cancellation
+//  Wrong - no cancellation
 useEffect(() => {
   fetch(`/api/search?q=${query}`)
     .then(res => res.json())
     .then(setResults);
 }, [query]);
 
-// ✅ Correct - use AbortController
+//  Correct - use AbortController
 useEffect(() => {
   const controller = new AbortController();
 
@@ -590,12 +590,12 @@ useEffect(() => {
 ### Challenge 4: Poor Error Messages
 **Problem:** Generic errors don't help users
 ```tsx
-// ❌ Wrong - unclear error
+//  Wrong - unclear error
 catch (error) {
   setError('Something went wrong');
 }
 
-// ✅ Correct - specific, actionable errors
+//  Correct - specific, actionable errors
 catch (error) {
   if (error.status === 404) {
     setError('User not found. Please check the ID.');
@@ -612,10 +612,10 @@ catch (error) {
 ### Challenge 5: Too Many API Calls
 **Problem:** Search makes API call on every keystroke
 ```tsx
-// ❌ Wrong - API call on every keystroke
+//  Wrong - API call on every keystroke
 <input onChange={(e) => searchUsers(e.target.value)} />
 
-// ✅ Correct - debounced search
+//  Correct - debounced search
 const debouncedSearch = useDebounce(search, 500);
 useEffect(() => {
   if (debouncedSearch) searchUsers(debouncedSearch);
@@ -624,7 +624,7 @@ useEffect(() => {
 
 **Solution:** Debounce user input (500ms typical), or use React Query with enabled option
 
-> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting.md)
+>  **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting.md)
 
 ---
 
@@ -665,23 +665,23 @@ useEffect(() => {
 - [ ] Manage complex state with useReducer
 - [ ] Debug API calls with DevTools
 
-**🎯 Goal: Check at least 16/20 items before Lesson 4**
+** Goal: Check at least 16/20 items before Lesson 4**
 
 ---
 
 ## Next Steps
 
 ### Ready to Continue?
-✅ **Completed this lesson?** → Proceed to [Lesson 4: Routing & Authentication](../lesson4-routing-auth/)
+ **Completed this lesson?** → Proceed to [Lesson 4: Routing & Authentication](../lesson4-routing-auth/)
 
 ### Need More Practice?
-📚 **Study theory** → [theory3.md](./theory/theory3.md) - REST API deep dive
-💻 **View examples** → [reference/](./reference/) - Complete API patterns
+ **Study theory** → [theory3.md](./theory/theory3.md) - REST API deep dive
+ **View examples** → [reference/](./reference/) - Complete API patterns
 🔨 **Build projects** → [example/](./example/) - Follow-along tutorials
-🧪 **Practice exercises** → [lab3.md](./lab/lab3.md) - CRUD challenges
+ **Practice exercises** → [lab3.md](./lab/lab3.md) - CRUD challenges
 
 ### Additional Resources
-🎓 **Quiz yourself** → [quiz/](./quiz/) - Test your API knowledge
+ **Quiz yourself** → [quiz/](./quiz/) - Test your API knowledge
 ❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting.md)
 🔐 **Learn auth next** → Preview [Lesson 4](../lesson4-routing-auth/)
 

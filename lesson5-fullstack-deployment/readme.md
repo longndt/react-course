@@ -5,7 +5,12 @@
 **Difficulty**: Advanced
 **Prerequisites**: Lessons 1-4 completed, Node.js/Express basics
 
-This lesson covers building complete full-stack applications by integrating React with backend services, implementing real-time features, and deploying to production. You'll learn professional deployment strategies, performance optimization, monitoring, and production-ready development practices.
+This lesson covers building compl### File Upload with Progress
+```jsx
+// FileUpload.jsx
+function FileUpload() {
+  const [progress, setProgress] = useState(0);
+  const [file, setFile] = useState(null);ll-stack applications by integrating React with backend services, implementing real-time features, and deploying to production. You'll learn professional deployment strategies, performance optimization, monitoring, and production-ready development practices.
 
 ---
 
@@ -13,16 +18,16 @@ This lesson covers building complete full-stack applications by integrating Reac
 
 After completing this lesson, you will be able to:
 
-- ✅ Design full-stack application architectures (Monolithic vs Microservices)
-- ✅ Integrate React with Node.js/Express/MongoDB backends
-- ✅ Implement file upload and media management systems
-- ✅ Build real-time features with WebSockets and Server-Sent Events
-- ✅ Optimize React applications for production performance
-- ✅ Deploy full-stack applications using modern CI/CD pipelines
-- ✅ Set up monitoring, logging, and error tracking
-- ✅ Configure environment management for different deployment stages
-- ✅ Implement security best practices for production
-- ✅ Handle scaling and performance optimization
+-  Design full-stack application architectures (Monolithic vs Microservices)
+-  Integrate React with Node.js/Express/MongoDB backends
+-  Implement file upload and media management systems
+-  Build real-time features with WebSockets and Server-Sent Events
+-  Optimize React applications for production performance
+-  Deploy full-stack applications using modern CI/CD pipelines
+-  Set up monitoring, logging, and error tracking
+-  Configure environment management for different deployment stages
+-  Implement security best practices for production
+-  Handle scaling and performance optimization
 
 ---
 
@@ -31,18 +36,18 @@ After completing this lesson, you will be able to:
 Before starting this lesson, make sure you have:
 
 ### Required Knowledge
-- ✅ React fundamentals and all previous lessons
-- ✅ Node.js and Express basics
-- ✅ REST API concepts and implementation
-- ✅ Git version control
-- ✅ Command line proficiency
+-  React fundamentals and all previous lessons
+-  Node.js and Express basics
+-  REST API concepts and implementation
+-  Git version control
+-  Command line proficiency
 
 ### Environment Setup
-- ✅ Node.js 18+ installed
-- ✅ Git installed and configured
-- ✅ Docker installed (for containerization)
-- ✅ Code editor (VS Code recommended)
-- ✅ GitHub/GitLab account (for CI/CD)
+-  Node.js 18+ installed
+-  Git installed and configured
+-  Docker installed (for containerization)
+-  Code editor (VS Code recommended)
+-  GitHub/GitLab account (for CI/CD)
 
 ### Optional but Helpful
 - Basic Docker knowledge
@@ -50,9 +55,9 @@ Before starting this lesson, make sure you have:
 - MongoDB or PostgreSQL basics
 - CI/CD concepts
 
-> 💡 **Not ready?** → Review [Lesson 4](../lesson4-routing-auth/) for authentication
+>  **Not ready?** → Review [Lesson 4](../lesson4-routing-auth/) for authentication
 
-> 🔄 **Hooks Review**: This lesson uses advanced React Hooks patterns including `useState`, `useEffect`, `useRef`, and custom hooks for real-time features and optimizations. Review [Lesson 2: React Hooks](../lesson2-component-hook/#2-react-hooks-essentials) if needed.
+>  **Hooks Review**: This lesson uses advanced React Hooks patterns including `useState`, `useEffect`, `useRef`, and custom hooks for real-time features and optimizations. Review [Lesson 2: React Hooks](../lesson2-component-hook/#2-react-hooks-essentials) if needed.
 
 ---
 
@@ -203,8 +208,8 @@ project/
 ```
 
 ### File Upload with Progress
-```tsx
-// FileUpload.tsx
+```jsx
+// FileUpload.jsx
 function FileUpload() {
   const [progress, setProgress] = useState(0);
   const [file, setFile] = useState<File | null>(null);
@@ -242,14 +247,14 @@ function FileUpload() {
 ```
 
 ### WebSocket Integration
-```tsx
-// useWebSocket.ts
+```jsx
+// useWebSocket.js
 import { useEffect, useRef, useState } from 'react';
 
-function useWebSocket(url: string) {
-  const [messages, setMessages] = useState<any[]>([]);
+function useWebSocket(url) {
+  const [messages, setMessages] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
-  const ws = useRef<WebSocket | null>(null);
+  const ws = useRef(null);
 
   useEffect(() => {
     ws.current = new WebSocket(url);
@@ -393,7 +398,7 @@ jobs:
 ```
 
 ### Performance Optimization Example
-```tsx
+```jsx
 // Code splitting with lazy loading
 import { lazy, Suspense } from 'react';
 
@@ -431,7 +436,7 @@ function ExpensiveComponent({ data, onUpdate }) {
 export default React.memo(ExpensiveComponent);
 ```
 
-> 💡 **More examples** → Check [reference/](./reference/) for production-ready code
+>  **More examples** → Check [reference/](./reference/) for production-ready code
 
 ---
 
@@ -450,7 +455,7 @@ Follow this 4-step learning path:
 **Time**: 60-90 minutes
 
 ### Step 2: Explore Reference Code
-💻 Browse [reference/](./reference/) - Working examples:
+ Browse [reference/](./reference/) - Working examples:
 - Complete full-stack project structure
 - File upload implementation
 - WebSocket integration
@@ -472,20 +477,20 @@ Follow this 4-step learning path:
 **Time**: 150-180 minutes
 
 ### Step 4: Complete Lab Exercises
-🧪 Practice in [lab5.md](./lab/lab5.md) - Hands-on challenges:
+ Practice in [lab5.md](./lab/lab5.md) - Hands-on challenges:
 - Level 1: Full-stack integration
 - Level 2: Real-time features and file uploads
 - Level 3: Production deployment with CI/CD
 
 **Time**: 240-300 minutes
 
-> 🎯 **Pro tip**: Test deployment in staging environment before production
+>  **Pro tip**: Test deployment in staging environment before production
 
 ---
 
 ## Key Takeaways
 
-### 🎯 Core Concepts to Remember
+###  Core Concepts to Remember
 
 1. **Separation of concerns** - Keep frontend, backend, database independent
 2. **Environment configuration** - Use .env files, never commit secrets
@@ -496,7 +501,7 @@ Follow this 4-step learning path:
 7. **Secure by default** - HTTPS, validation, authentication everywhere
 8. **Plan for scale** - Design for growth from the start
 
-### 🔑 Most Important Skills
+###  Most Important Skills
 
 - Architecting full-stack applications
 - Containerizing apps with Docker
@@ -506,7 +511,7 @@ Follow this 4-step learning path:
 - Deploying to cloud platforms
 - Monitoring and debugging production issues
 
-### 💡 Common Realizations
+###  Common Realizations
 
 - "Docker makes deployment so much easier!"
 - "CI/CD saves hours of manual work"
@@ -519,80 +524,80 @@ Follow this 4-step learning path:
 
 ## Best Practices Summary
 
-### ✅ Architecture Best Practices
+###  Architecture Best Practices
 
 **DO:**
-- ✅ Separate frontend, backend, and database layers
-- ✅ Use TypeScript across the full stack
-- ✅ Implement proper error handling everywhere
-- ✅ Validate data on both client and server
-- ✅ Use environment variables for configuration
-- ✅ Follow REST or GraphQL conventions consistently
-- ✅ Design APIs with versioning in mind
+-  Separate frontend, backend, and database layers
+-  Use TypeScript across the full stack
+-  Implement proper error handling everywhere
+-  Validate data on both client and server
+-  Use environment variables for configuration
+-  Follow REST or GraphQL conventions consistently
+-  Design APIs with versioning in mind
 
 **DON'T:**
-- ❌ Mix business logic with UI code
-- ❌ Trust client-side validation alone
-- ❌ Hardcode configuration values
-- ❌ Expose sensitive data in API responses
-- ❌ Create tight coupling between layers
+-  Mix business logic with UI code
+-  Trust client-side validation alone
+-  Hardcode configuration values
+-  Expose sensitive data in API responses
+-  Create tight coupling between layers
 
-### ✅ Performance Best Practices
+###  Performance Best Practices
 
 **DO:**
-- ✅ Measure performance before optimizing
-- ✅ Use code splitting for large applications
-- ✅ Lazy load routes and heavy components
-- ✅ Optimize images (WebP, lazy loading, responsive)
-- ✅ Implement proper caching strategies
-- ✅ Minimize bundle size (tree shaking, compression)
-- ✅ Use React.memo, useMemo, useCallback appropriately
-- ✅ Monitor Web Vitals in production
+-  Measure performance before optimizing
+-  Use code splitting for large applications
+-  Lazy load routes and heavy components
+-  Optimize images (WebP, lazy loading, responsive)
+-  Implement proper caching strategies
+-  Minimize bundle size (tree shaking, compression)
+-  Use React.memo, useMemo, useCallback appropriately
+-  Monitor Web Vitals in production
 
 **DON'T:**
-- ❌ Optimize prematurely without data
-- ❌ Load all JavaScript upfront
-- ❌ Serve unoptimized images
-- ❌ Ignore bundle size warnings
-- ❌ Skip performance testing
+-  Optimize prematurely without data
+-  Load all JavaScript upfront
+-  Serve unoptimized images
+-  Ignore bundle size warnings
+-  Skip performance testing
 
-### ✅ Deployment Best Practices
+###  Deployment Best Practices
 
 **DO:**
-- ✅ Automate everything with CI/CD
-- ✅ Use Docker for consistent environments
-- ✅ Test in staging before production
-- ✅ Implement health checks and monitoring
-- ✅ Have rollback strategy ready
-- ✅ Use environment-specific configurations
-- ✅ Enable HTTPS in production
-- ✅ Set up error tracking (Sentry, LogRocket)
+-  Automate everything with CI/CD
+-  Use Docker for consistent environments
+-  Test in staging before production
+-  Implement health checks and monitoring
+-  Have rollback strategy ready
+-  Use environment-specific configurations
+-  Enable HTTPS in production
+-  Set up error tracking (Sentry, LogRocket)
 
 **DON'T:**
-- ❌ Deploy manually to production
-- ❌ Skip testing before deployment
-- ❌ Commit secrets or API keys
-- ❌ Deploy without rollback plan
-- ❌ Ignore deployment logs and errors
+-  Deploy manually to production
+-  Skip testing before deployment
+-  Commit secrets or API keys
+-  Deploy without rollback plan
+-  Ignore deployment logs and errors
 
-### ✅ Security Best Practices
+###  Security Best Practices
 
 **DO:**
-- ✅ Use HTTPS everywhere in production
-- ✅ Validate and sanitize all inputs
-- ✅ Implement rate limiting
-- ✅ Use httpOnly cookies for tokens
-- ✅ Configure CORS properly
-- ✅ Add security headers (CSP, HSTS)
-- ✅ Keep dependencies updated
-- ✅ Use environment variables for secrets
+-  Use HTTPS everywhere in production
+-  Validate and sanitize all inputs
+-  Implement rate limiting
+-  Use httpOnly cookies for tokens
+-  Configure CORS properly
+-  Add security headers (CSP, HSTS)
+-  Keep dependencies updated
+-  Use environment variables for secrets
 
 **DON'T:**
-- ❌ Store passwords in plain text
-- ❌ Trust user input without validation
-- ❌ Expose internal error details to users
-- ❌ Use outdated dependencies
-- ❌ Commit API keys to git
+-  Store passwords in plain text
+-  Trust user input without validation
+-  Expose internal error details to users
+-  Use outdated dependencies
+-  Commit API keys to git
 
 ---
 
@@ -601,12 +606,12 @@ Follow this 4-step learning path:
 ### Challenge 1: CORS Errors in Development
 **Problem:** API calls blocked by CORS policy
 ```javascript
-// ❌ Wrong - no CORS configuration
+//  Wrong - no CORS configuration
 app.get('/api/users', (req, res) => {
   res.json(users);
 });
 
-// ✅ Correct - configure CORS
+//  Correct - configure CORS
 import cors from 'cors';
 
 app.use(cors({
@@ -619,13 +624,13 @@ app.use(cors({
 
 ### Challenge 2: Large Bundle Sizes
 **Problem:** Initial bundle is too large (>500KB)
-```tsx
-// ❌ Wrong - import everything upfront
+```jsx
+//  Wrong - import everything upfront
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 
-// ✅ Correct - lazy load routes
+//  Correct - lazy load routes
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Settings = lazy(() => import('./pages/Settings'));
@@ -642,13 +647,13 @@ const Settings = lazy(() => import('./pages/Settings'));
 ### Challenge 3: Environment Variables Not Working
 **Problem:** Environment variables undefined in production
 ```javascript
-// ❌ Wrong - direct access without prefix
+//  Wrong - direct access without prefix
 const API_URL = process.env.API_URL;
 
-// ✅ Correct - use proper prefix (Vite)
+//  Correct - use proper prefix (Vite)
 const API_URL = import.meta.env.VITE_API_URL;
 
-// ✅ Correct - use proper prefix (Create React App)
+//  Correct - use proper prefix (Create React App)
 const API_URL = process.env.REACT_APP_API_URL;
 ```
 
@@ -656,11 +661,11 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 ### Challenge 4: WebSocket Disconnections
 **Problem:** WebSocket connection drops frequently
-```tsx
-// ✅ Solution - implement reconnection logic
-function useWebSocket(url: string) {
-  const [ws, setWs] = useState<WebSocket | null>(null);
-  const reconnectTimeout = useRef<NodeJS.Timeout>();
+```jsx
+//  Solution - implement reconnection logic
+function useWebSocket(url) {
+  const [ws, setWs] = useState(null);
+  const reconnectTimeout = useRef();
 
   const connect = useCallback(() => {
     const socket = new WebSocket(url);
@@ -690,7 +695,7 @@ function useWebSocket(url: string) {
 ### Challenge 5: Deployment Failures
 **Problem:** Build succeeds locally but fails in CI/CD
 ```yaml
-# ✅ Solution - match environments
+#  Solution - match environments
 # .github/workflows/deploy.yml
 jobs:
   deploy:
@@ -714,7 +719,7 @@ jobs:
 
 **Solution:** Match Node versions, use `npm ci` instead of `npm install`, check build logs
 
-> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting.md)
+>  **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting.md)
 
 ---
 
@@ -763,7 +768,7 @@ jobs:
 - [ ] Update all dependencies
 - [ ] Implement rate limiting
 
-**🎯 Goal: Check at least 22/26 items to be production-ready**
+** Goal: Check at least 22/26 items to be production-ready**
 
 ---
 
@@ -772,17 +777,17 @@ jobs:
 ### Course Completion
 
 You have completed the React course. You now have:
-- ✅ Strong React fundamentals
-- ✅ Full-stack development skills
-- ✅ Production deployment experience
-- ✅ Performance optimization knowledge
-- ✅ Real-world project portfolio
+-  Strong React fundamentals
+-  Full-stack development skills
+-  Production deployment experience
+-  Performance optimization knowledge
+-  Real-world project portfolio
 
 ### Continue Learning
-📚 **Advanced topics** → [Advanced Patterns](../extra/advanced-patterns.md)
-🏗️ **Modern stack** → [Modern Stack 2025](../extra/modern-stack.md)
-🧪 **Testing** → [Testing Guide](../extra/testing-guide.md)
-📊 **State management** → [State Management Guide](../extra/state-management.md)
+ **Advanced topics** → [Advanced Patterns](../extra/advanced-patterns.md)
+ **Modern stack** → [Modern Stack 2025](../extra/modern-stack.md)
+ **Testing** → [Testing Guide](../extra/testing-guide.md)
+ **State management** → [State Management Guide](../extra/state-management.md)
 
 ### Build Your Portfolio
 💼 **Project ideas:**
@@ -793,7 +798,7 @@ You have completed the React course. You now have:
 - Mobile app with React Native
 
 ### Stay Updated
-🌐 **Communities:**
+ **Communities:**
 - Join React Discord and Reactiflux
 - Follow React team on Twitter
 - Contribute to open source

@@ -14,7 +14,7 @@ export default function Login() {
   const location = useLocation();
 
   // Get the page they were trying to access (or default to dashboard)
-  const from = (location.state as any)?.from?.pathname || '/dashboard';
+  const from = (location.state as { from?: { pathname: string } })?.from?.pathname || '/dashboard';
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function Login() {
         <form onSubmit={handleSubmit} className="login-form">
           {error && (
             <div className="error-message">
-              <span>⚠️</span> {error}
+              <span></span> {error}
             </div>
           )}
 

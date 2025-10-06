@@ -2,7 +2,7 @@
 
 ---
 
-## 📚 Table of Contents
+##  Table of Contents
 
 1. [Why API Integration Matters?](#why-api-integration-matters-)
 2. [Understanding REST APIs with Node.js/MongoDB](#understanding-rest-apis-with-nodejsmongodb-)
@@ -152,7 +152,7 @@ function useStudents() {
 
 ---
 
-## Professional Data Fetching with React Query 🔄
+## Professional Data Fetching with React Query 
 
 ### Basic Setup
 
@@ -240,7 +240,7 @@ function StudentsList() {
 
 ---
 
-## Advanced CRUD Operations with MongoDB 📝
+## Advanced CRUD Operations with MongoDB 
 
 ### Search and Filtering
 
@@ -397,7 +397,7 @@ function DeleteStudent({ student }: DeleteStudentProps) {
 
 ---
 
-## Professional Error Handling & Loading States 🚨
+## Professional Error Handling & Loading States 
 
 ### Error Boundaries for API Failures
 
@@ -482,7 +482,7 @@ function StudentDashboard() {
 
 ---
 
-## Best Practices for Production Apps 🏗️
+## Best Practices for Production Apps 
 
 ### 1. Environment Configuration
 
@@ -563,7 +563,7 @@ function useStudent(id) {
 
 ---
 
-## Lab Exercise Preview 🧪
+## Lab Exercise Preview 
 
 **What You'll Build:**
 

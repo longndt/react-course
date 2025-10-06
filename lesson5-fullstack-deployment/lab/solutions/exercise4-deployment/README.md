@@ -1,8 +1,8 @@
-# Exercise 4: Production Build & Deployment 🚀
+# Exercise 4: Production Build & Deployment 
 
 A complete production-ready React application demonstrating environment configuration, build optimization, and cloud deployment.
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 exercise4-deployment/
@@ -31,7 +31,7 @@ exercise4-deployment/
 └── .gitignore                  # Git ignore rules
 ```
 
-## 🎯 Learning Objectives
+##  Learning Objectives
 
 After completing this exercise, you will understand:
 
@@ -41,7 +41,7 @@ After completing this exercise, you will understand:
 4. **SPA Routing** - Configuring servers for client-side routing
 5. **Performance** - Bundle analysis and optimization techniques
 
-## 🔧 Setup Instructions
+##  Setup Instructions
 
 ### 1. Install Dependencies
 
@@ -89,11 +89,11 @@ npm run build
 ```
 
 This creates an optimized production build in the `dist/` folder:
-- ✅ Minified JavaScript and CSS
-- ✅ Console.logs removed
-- ✅ Code split into chunks
-- ✅ Tree shaking applied
-- ✅ Assets hashed for cache busting
+-  Minified JavaScript and CSS
+-  Console.logs removed
+-  Code split into chunks
+-  Tree shaking applied
+-  Assets hashed for cache busting
 
 ### 5. Preview Production Build Locally
 
@@ -105,7 +105,7 @@ Visit: http://localhost:4173
 
 This lets you test the production build before deploying.
 
-## 📦 Build Optimization Features
+##  Build Optimization Features
 
 ### 1. **Code Minification**
 
@@ -215,21 +215,21 @@ function MyComponent() {
 }
 ```
 
-### ⚠️ Security Warning
+###  Security Warning
 
 **Never put secret API keys in frontend environment variables!**
 
 ```bash
-# ❌ WRONG - Secret keys should never be in frontend code
+#  WRONG - Secret keys should never be in frontend code
 VITE_SECRET_API_KEY=sk_live_1234567890
 
-# ✅ CORRECT - Use public keys or backend proxy
+#  CORRECT - Use public keys or backend proxy
 VITE_PUBLIC_API_KEY=pk_live_abcdefghij
 ```
 
 For sensitive operations, create a backend API route that uses secrets server-side.
 
-## ☁️ Deployment Guide
+## ☁ Deployment Guide
 
 ### Option 1: Deploy to Vercel (Recommended)
 
@@ -276,7 +276,7 @@ Every push to `main` branch automatically deploys to production!
 git add .
 git commit -m "Update homepage"
 git push
-# 🚀 Auto-deploys in ~30 seconds
+#  Auto-deploys in ~30 seconds
 ```
 
 #### vercel.json Configuration
@@ -376,7 +376,7 @@ location / {
 </IfModule>
 ```
 
-## 📊 Performance Optimization Tips
+##  Performance Optimization Tips
 
 ### 1. **Lazy Load Routes**
 
@@ -443,7 +443,7 @@ gzip on;
 gzip_types text/css application/javascript application/json;
 ```
 
-## 🧪 Testing Production Build Locally
+##  Testing Production Build Locally
 
 ### Method 1: Preview Command
 
@@ -465,7 +465,7 @@ cd dist
 python -m http.server 8000
 ```
 
-## 🔍 Debugging Production Issues
+##  Debugging Production Issues
 
 ### 1. **Enable Source Maps**
 
@@ -477,7 +477,7 @@ build: {
 }
 ```
 
-**⚠️ Warning:** Source maps expose your source code. Only enable for debugging.
+** Warning:** Source maps expose your source code. Only enable for debugging.
 
 ### 2. **Test Environment Variables**
 
@@ -498,7 +498,7 @@ Open DevTools → Network tab:
 - Check chunk sizes
 - Ensure assets are cached (304 responses)
 
-## ✅ Production Deployment Checklist
+##  Production Deployment Checklist
 
 Before deploying to production, verify:
 
@@ -518,7 +518,7 @@ Before deploying to production, verify:
 - [x] Mobile responsive
 - [x] Accessibility (a11y) tested
 
-## 📚 Additional Resources
+##  Additional Resources
 
 - [Vite Build Guide](https://vitejs.dev/guide/build.html)
 - [Vercel Deployment Docs](https://vercel.com/docs)
@@ -526,7 +526,7 @@ Before deploying to production, verify:
 - [Web Vitals](https://web.dev/vitals/)
 - [Lighthouse Performance Audit](https://developers.google.com/web/tools/lighthouse)
 
-## 🚀 Next Steps
+##  Next Steps
 
 1. **Add Monitoring**: Integrate Sentry for error tracking
 2. **Add Analytics**: Set up Google Analytics or Plausible
@@ -536,16 +536,16 @@ Before deploying to production, verify:
 6. **Add Database**: Connect to Firebase, Supabase, or PostgreSQL
 7. **Add Authentication**: Implement Auth0, Clerk, or Firebase Auth
 
-## 🎓 What You Learned
+##  What You Learned
 
-✅ How to configure environment variables for different environments
-✅ How to optimize production builds (minification, code splitting)
-✅ How to deploy React apps to Vercel and Netlify
-✅ How to configure SPA routing for production servers
-✅ How to analyze and optimize bundle sizes
-✅ How to test production builds locally
-✅ How to set up automatic deployments from Git
+ How to configure environment variables for different environments
+ How to optimize production builds (minification, code splitting)
+ How to deploy React apps to Vercel and Netlify
+ How to configure SPA routing for production servers
+ How to analyze and optimize bundle sizes
+ How to test production builds locally
+ How to set up automatic deployments from Git
 
 ---
 
-**Congratulations!** 🎉 You've completed Exercise 4 and now have a production-ready, fully-deployed React application!
+**Congratulations!**  You've completed Exercise 4 and now have a production-ready, fully-deployed React application!

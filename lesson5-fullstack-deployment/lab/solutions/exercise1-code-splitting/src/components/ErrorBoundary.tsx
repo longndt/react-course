@@ -61,7 +61,7 @@ class ErrorBoundary extends Component<Props, State> {
       return (
         <div className="error-boundary">
           <div className="error-container">
-            <div className="error-icon">⚠️</div>
+            <div className="error-icon"></div>
             <h1>Oops! Something went wrong</h1>
             <p className="error-message">
               {this.state.error?.message || 'An unexpected error occurred'}
@@ -76,7 +76,7 @@ class ErrorBoundary extends Component<Props, State> {
 
             <div className="error-actions">
               <button onClick={this.handleRetry} className="btn-primary">
-                🔄 Retry
+                 Retry
               </button>
               <button onClick={this.handleGoHome} className="btn-secondary">
                 🏠 Go Home

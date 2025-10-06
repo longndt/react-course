@@ -13,14 +13,14 @@ This lesson covers React component architecture and hooks - the foundation of mo
 
 After completing this lesson, you will be able to:
 
-- ✅ Build reusable component libraries with TypeScript
-- ✅ Master component composition and props patterns
-- ✅ Apply essential React Hooks (useState, useEffect, useRef, useContext, useReducer)
-- ✅ Create custom hooks for reusable business logic
-- ✅ Handle side effects and lifecycle events properly
-- ✅ Avoid common Hook mistakes and anti-patterns
-- ✅ Debug components with React DevTools
-- ✅ Optimize component performance
+-  Build reusable component libraries with TypeScript
+-  Master component composition and props patterns
+-  Apply essential React Hooks (useState, useEffect, useRef, useContext, useReducer)
+-  Create custom hooks for reusable business logic
+-  Handle side effects and lifecycle events properly
+-  Avoid common Hook mistakes and anti-patterns
+-  Debug components with React DevTools
+-  Optimize component performance
 
 ---
 
@@ -29,15 +29,15 @@ After completing this lesson, you will be able to:
 Before starting this lesson, make sure you have:
 
 ### Required Knowledge
-- ✅ React fundamentals (JSX, component basics)
-- ✅ TypeScript basics (types, interfaces, generics)
-- ✅ JavaScript ES6+ features (arrow functions, destructuring)
-- ✅ Completed Lesson 1 setup
+-  React fundamentals (JSX, component basics)
+-  TypeScript basics (types, interfaces, generics)
+-  JavaScript ES6+ features (arrow functions, destructuring)
+-  Completed Lesson 1 setup
 
 ### Environment Setup
-- ✅ Node.js and npm installed
-- ✅ VS Code with React extensions
-- ✅ React project created (Vite recommended)
+-  Node.js and npm installed
+-  VS Code with React extensions
+-  React project created (Vite recommended)
 
 ### Verification
 ```bash
@@ -46,7 +46,7 @@ node --version  # Should be 18+
 npm --version   # Should be 9+
 ```
 
-> 💡 **Not ready?** → Review [Lesson 1](../lesson1-fundamentals-setup/) first
+>  **Not ready?** → Review [Lesson 1](../lesson1-fundamentals-setup/) first
 
 ---
 
@@ -224,7 +224,7 @@ function App() {
 }
 ```
 
-> 💡 **Want more examples?** Check [reference/](./reference/) for ready-to-use code snippets
+>  **Want more examples?** Check [reference/](./reference/) for ready-to-use code snippets
 
 ---
 
@@ -242,7 +242,7 @@ Follow this 4-step learning path:
 **Time**: 45-60 minutes
 
 ### Step 2: Explore Code Examples
-💻 Browse [reference/](./reference/) - Working code for:
+ Browse [reference/](./reference/) - Working code for:
 - Component patterns (composition, render props, HOC)
 - All essential hooks with examples
 - Custom hook implementations
@@ -262,20 +262,20 @@ Follow this 4-step learning path:
 **Time**: 90-120 minutes
 
 ### Step 4: Complete Lab Exercises
-🧪 Practice in [lab2.md](./lab/lab2.md) - Hands-on exercises:
+ Practice in [lab2.md](./lab/lab2.md) - Hands-on exercises:
 - Level 1: Build UI component library
 - Level 2: Create custom hooks
 - Level 3: Complete Todo application with persistence
 
 **Time**: 120-180 minutes
 
-> 🎯 **Pro tip**: Complete examples before attempting lab exercises
+>  **Pro tip**: Complete examples before attempting lab exercises
 
 ---
 
 ## Key Takeaways
 
-### 🎯 Core Concepts to Remember
+###  Core Concepts to Remember
 
 1. **Components are functions** that return JSX
 2. **Props flow down** (one-way data flow)
@@ -286,7 +286,7 @@ Follow this 4-step learning path:
 7. **Custom hooks share logic** without sharing state
 8. **Always clean up** side effects (intervals, subscriptions)
 
-### 🔑 Most Important Skills
+###  Most Important Skills
 
 - Creating reusable components with TypeScript props
 - Managing state with useState
@@ -295,7 +295,7 @@ Follow this 4-step learning path:
 - Avoiding infinite render loops
 - Cleaning up resources properly
 
-### 💡 Common Realizations
+###  Common Realizations
 
 - "Components are just JavaScript functions!"
 - "Hooks are composable building blocks"
@@ -306,45 +306,45 @@ Follow this 4-step learning path:
 
 ## Best Practices Summary
 
-### ✅ Component Best Practices
+###  Component Best Practices
 
 **DO:**
-- ✅ Keep components small and focused (single responsibility)
-- ✅ Use TypeScript interfaces for all props
-- ✅ Extract reusable logic into custom hooks
-- ✅ Use meaningful component and prop names
-- ✅ Provide default prop values when optional
-- ✅ Use children prop for composition
-- ✅ Add key prop for list items
+-  Keep components small and focused (single responsibility)
+-  Use TypeScript interfaces for all props
+-  Extract reusable logic into custom hooks
+-  Use meaningful component and prop names
+-  Provide default prop values when optional
+-  Use children prop for composition
+-  Add key prop for list items
 
 **DON'T:**
-- ❌ Modify props (they're read-only)
-- ❌ Forget `key` prop in lists
-- ❌ Create too many nesting levels (max 5)
-- ❌ Mix business logic with UI rendering
-- ❌ Use index as key in dynamic lists
-- ❌ Create giant "god components"
+-  Modify props (they're read-only)
+-  Forget `key` prop in lists
+-  Create too many nesting levels (max 5)
+-  Mix business logic with UI rendering
+-  Use index as key in dynamic lists
+-  Create giant "god components"
 
-### ✅ Hooks Best Practices
+###  Hooks Best Practices
 
 **DO:**
-- ✅ Call hooks at the top level (not in loops/conditions)
-- ✅ Include all dependencies in useEffect arrays
-- ✅ Use functional updates: `setState(prev => prev + 1)`
-- ✅ Clean up side effects (intervals, subscriptions, listeners)
-- ✅ Use multiple useEffect for different concerns
-- ✅ Create custom hooks for reusable logic
-- ✅ Name custom hooks starting with "use"
+-  Call hooks at the top level (not in loops/conditions)
+-  Include all dependencies in useEffect arrays
+-  Use functional updates: `setState(prev => prev + 1)`
+-  Clean up side effects (intervals, subscriptions, listeners)
+-  Use multiple useEffect for different concerns
+-  Create custom hooks for reusable logic
+-  Name custom hooks starting with "use"
 
 **DON'T:**
-- ❌ Call hooks inside loops, conditions, or nested functions
-- ❌ Mutate state directly: `state.value = 1` ❌
-- ❌ Forget dependency arrays (causes bugs)
-- ❌ Create infinite loops with useEffect
-- ❌ Ignore ESLint exhaustive-deps warnings
-- ❌ Overuse useEffect (prefer derived state)
+-  Call hooks inside loops, conditions, or nested functions
+-  Mutate state directly: `state.value = 1` 
+-  Forget dependency arrays (causes bugs)
+-  Create infinite loops with useEffect
+-  Ignore ESLint exhaustive-deps warnings
+-  Overuse useEffect (prefer derived state)
 
-### ✅ Performance Tips
+###  Performance Tips
 
 - Use React.memo for expensive components
 - Memoize callbacks with useCallback
@@ -352,7 +352,7 @@ Follow this 4-step learning path:
 - Split state to avoid unnecessary re-renders
 - Lazy load heavy components with React.lazy
 
-> 📚 **Detailed patterns** → See [theory2.md](./theory/theory2.md)
+>  **Detailed patterns** → See [theory2.md](./theory/theory2.md)
 
 ---
 
@@ -361,12 +361,12 @@ Follow this 4-step learning path:
 ### Challenge 1: Infinite Re-render Loop
 **Problem:** Component keeps re-rendering forever
 ```tsx
-// ❌ Wrong - creates new array reference every render
+//  Wrong - creates new array reference every render
 useEffect(() => {
   doSomething();
 }, [someArray]);
 
-// ✅ Correct - stable reference
+//  Correct - stable reference
 useEffect(() => {
   doSomething();
 }, [someArray.join(',')]);
@@ -377,12 +377,12 @@ useEffect(() => {
 ### Challenge 2: Stale Closure in useEffect
 **Problem:** Effect uses old state values
 ```tsx
-// ❌ Wrong - count is stale
+//  Wrong - count is stale
 useEffect(() => {
   setInterval(() => console.log(count), 1000);
 }, []);
 
-// ✅ Correct - include dependency
+//  Correct - include dependency
 useEffect(() => {
   const id = setInterval(() => console.log(count), 1000);
   return () => clearInterval(id);
@@ -394,12 +394,12 @@ useEffect(() => {
 ### Challenge 3: Memory Leaks
 **Problem:** Subscriptions/timers not cleaned up
 ```tsx
-// ❌ Wrong - interval never cleared
+//  Wrong - interval never cleared
 useEffect(() => {
   setInterval(() => console.log('tick'), 1000);
 }, []);
 
-// ✅ Correct - cleanup function
+//  Correct - cleanup function
 useEffect(() => {
   const id = setInterval(() => console.log('tick'), 1000);
   return () => clearInterval(id);
@@ -411,10 +411,10 @@ useEffect(() => {
 ### Challenge 4: Props Not Updating
 **Problem:** Component doesn't re-render when props change
 ```tsx
-// ❌ Wrong - only runs on mount
+//  Wrong - only runs on mount
 const [data, setData] = useState(props.initialData);
 
-// ✅ Correct - syncs with props
+//  Correct - syncs with props
 useEffect(() => {
   setData(props.initialData);
 }, [props.initialData]);
@@ -425,14 +425,14 @@ useEffect(() => {
 ### Challenge 5: Too Many Re-renders
 **Problem:** setState called during render phase
 ```tsx
-// ❌ Wrong - setState during render
+//  Wrong - setState during render
 function Component() {
   const [count, setCount] = useState(0);
-  setCount(count + 1); // ❌ Causes infinite loop
+  setCount(count + 1); //  Causes infinite loop
   return <div>{count}</div>;
 }
 
-// ✅ Correct - setState in event handler or useEffect
+//  Correct - setState in event handler or useEffect
 function Component() {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -444,7 +444,7 @@ function Component() {
 
 **Solution:** Only call setState in event handlers or useEffect
 
-> 🔧 **More solutions** → See [Troubleshooting Guide](../extra/troubleshooting.md)
+>  **More solutions** → See [Troubleshooting Guide](../extra/troubleshooting.md)
 
 ---
 
@@ -477,25 +477,25 @@ function Component() {
 - [ ] Debug components with React DevTools
 - [ ] Handle async operations in useEffect properly
 
-**🎯 Goal: Check at least 12/14 items before Lesson 3**
+** Goal: Check at least 12/14 items before Lesson 3**
 
 ---
 
 ## Next Steps
 
 ### Ready to Continue?
-✅ **Completed this lesson?** → Proceed to [Lesson 3: API Integration & Data Management](../lesson3-api-data/)
+ **Completed this lesson?** → Proceed to [Lesson 3: API Integration & Data Management](../lesson3-api-data/)
 
 ### Need More Practice?
-📚 **Study theory** → [theory2.md](./theory/theory2.md) - Deep dive into concepts
-💻 **View examples** → [reference/](./reference/) - Ready-to-use code snippets
+ **Study theory** → [theory2.md](./theory/theory2.md) - Deep dive into concepts
+ **View examples** → [reference/](./reference/) - Ready-to-use code snippets
 🔨 **Build projects** → [example/](./example/) - Follow-along tutorials
-🧪 **Practice exercises** → [lab2.md](./lab/lab2.md) - Hands-on challenges
+ **Practice exercises** → [lab2.md](./lab/lab2.md) - Hands-on challenges
 
 ### Additional Resources
-🎓 **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
+ **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
 ❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting.md)
-🏗️ **Advanced patterns** → [Advanced Patterns](../extra/advanced-patterns.md)
+ **Advanced patterns** → [Advanced Patterns](../extra/advanced-patterns.md)
 
 ---
 

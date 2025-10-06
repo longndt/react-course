@@ -28,5 +28,5 @@ export type Environment = typeof ENV;
 
 // Log configuration in development
 if (ENV.isDevelopment) {
-  console.log('🔧 Environment Configuration:', ENV);
+  console.log(' Environment Configuration:', ENV);
 }

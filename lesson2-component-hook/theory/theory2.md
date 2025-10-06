@@ -2,7 +2,7 @@
 
 ---
 
-## 📚 Table of Contents
+##  Table of Contents
 
 1. [Core Concepts](#1-core-concepts)
 2. [Function Components](#2-function-components)
@@ -94,17 +94,17 @@ function Welcome({ name, age }: WelcomeProps) {
 ### Destructuring Props
 
 ```tsx
-// ❌ Without destructuring
+//  Without destructuring
 function Card(props) {
   return <div>{props.title} - {props.description}</div>;
 }
 
-// ✅ With destructuring (cleaner)
+//  With destructuring (cleaner)
 function Card({ title, description }) {
   return <div>{title} - {description}</div>;
 }
 
-// ✅ With default values
+//  With default values
 function Card({ title, description = 'No description' }) {
   return <div>{title} - {description}</div>;
 }
@@ -694,13 +694,13 @@ function UserList() {
 ### Component Organization
 
 ```tsx
-// ✅ Good: One component per file
+//  Good: One component per file
 // Button.tsx
 export function Button({ children, onClick }) {
   return <button onClick={onClick}>{children}</button>;
 }
 
-// ❌ Bad: Multiple unrelated components in one file
+//  Bad: Multiple unrelated components in one file
 function Button() { ... }
 function Input() { ... }
 function Form() { ... }
@@ -739,7 +739,7 @@ function Button({
 ### Conditional Rendering
 
 ```tsx
-// ✅ Good: Ternary for simple conditions
+//  Good: Ternary for simple conditions
 function Status({ isOnline }) {
   return (
     <div>
@@ -748,7 +748,7 @@ function Status({ isOnline }) {
   );
 }
 
-// ✅ Good: && for rendering or nothing
+//  Good: && for rendering or nothing
 function Notification({ message }) {
   return (
     <div>
@@ -757,7 +757,7 @@ function Notification({ message }) {
   );
 }
 
-// ✅ Good: Early return for complex conditions
+//  Good: Early return for complex conditions
 function UserProfile({ user }) {
   if (!user) return <div>Loading...</div>;
   if (user.banned) return <div>Account suspended</div>;
@@ -774,7 +774,7 @@ function UserProfile({ user }) {
 ### State Management Rules
 
 ```tsx
-// ✅ Good: Lift state up to common parent
+//  Good: Lift state up to common parent
 function Parent() {
   const [sharedData, setSharedData] = useState('');
 
@@ -786,7 +786,7 @@ function Parent() {
   );
 }
 
-// ❌ Bad: Prop drilling too deep
+//  Bad: Prop drilling too deep
 function GrandParent() {
   const [data, setData] = useState('');
   return <Parent data={data} setData={setData} />;
@@ -807,7 +807,7 @@ function Child({ data, setData }) {
 ### Problem 1: Stale Closure
 
 ```tsx
-// ❌ Wrong
+//  Wrong
 function Counter() {
   const [count, setCount] = useState(0);
 
@@ -821,7 +821,7 @@ function Counter() {
   return <div>{count}</div>;
 }
 
-// ✅ Correct
+//  Correct
 function Counter() {
   const [count, setCount] = useState(0);
 
@@ -839,7 +839,7 @@ function Counter() {
 ### Problem 2: Infinite Loop
 
 ```tsx
-// ❌ Wrong: Infinite loop
+//  Wrong: Infinite loop
 function BadComponent() {
   const [data, setData] = useState([]);
 
@@ -852,7 +852,7 @@ function BadComponent() {
   return <div>{data.length}</div>;
 }
 
-// ✅ Correct
+//  Correct
 function GoodComponent() {
   const [data, setData] = useState([]);
 
@@ -869,7 +869,7 @@ function GoodComponent() {
 ### Problem 3: Direct State Mutation
 
 ```tsx
-// ❌ Wrong: Mutating state directly
+//  Wrong: Mutating state directly
 function TodoList() {
   const [todos, setTodos] = useState([]);
 
@@ -881,7 +881,7 @@ function TodoList() {
   return <div>...</div>;
 }
 
-// ✅ Correct: Create new array
+//  Correct: Create new array
 function TodoList() {
   const [todos, setTodos] = useState([]);
 

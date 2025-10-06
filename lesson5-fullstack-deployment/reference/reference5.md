@@ -13,11 +13,11 @@
 
 ## 1. Express Backend Setup
 
-### Basic Express Server with TypeScript
+### Basic Express Server
 
-```typescript
-// server/src/server.ts
-import express, { Request, Response, NextFunction } from 'express';
+```javascript
+// server/src/server.js
+import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
@@ -37,22 +37,22 @@ app.use(express.urlencoded({ extended: true }));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/myapp')
-  .then(() => console.log('✅ MongoDB connected'))
-  .catch((err) => console.error('❌ MongoDB connection error:', err));
+  .then(() => console.log(' MongoDB connected'))
+  .catch((err) => console.error(' MongoDB connection error:', err));
 
 // Routes
-app.get('/api/health', (req: Request, res: Response) => {
+app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
 // Error Handler
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: err.message });
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(` Server running on http://localhost:${PORT}`);
 });
 ```
 
@@ -75,14 +75,12 @@ AWS_REGION=us-east-1
 
 ### API Client (Frontend)
 
-```typescript
-// src/lib/api-client.ts
-import axios, { AxiosInstance, AxiosError } from 'axios';
+```javascript
+// src/lib/api-client.js
+import axios from 'axios';
 
 class ApiClient {
-  private client: AxiosInstance;
-
-  constructor(baseURL: string) {
+  constructor(baseURL) {
     this.client = axios.create({
       baseURL,
       headers: {
@@ -106,7 +104,7 @@ class ApiClient {
     // Response interceptor - handle errors
     this.client.interceptors.response.use(
       (response) => response,
-      (error: AxiosError) => {
+      (error) => {
         if (error.response?.status === 401) {
           localStorage.removeItem('authToken');
           window.location.href = '/login';
@@ -116,28 +114,28 @@ class ApiClient {
     );
   }
 
-  async get<T>(url: string): Promise<T> {
-    const response = await this.client.get<T>(url);
+  async get(url) {
+    const response = await this.client.get(url);
     return response.data;
   }
 
-  async post<T>(url: string, data?: any): Promise<T> {
-    const response = await this.client.post<T>(url, data);
+  async post(url, data) {
+    const response = await this.client.post(url, data);
     return response.data;
   }
 
-  async put<T>(url: string, data?: any): Promise<T> {
-    const response = await this.client.put<T>(url, data);
+  async put(url, data) {
+    const response = await this.client.put(url, data);
     return response.data;
   }
 
-  async delete<T>(url: string): Promise<T> {
-    const response = await this.client.delete<T>(url);
+  async delete(url) {
+    const response = await this.client.delete(url);
     return response.data;
   }
 
-  async upload<T>(url: string, formData: FormData, onProgress?: (progress: number) => void): Promise<T> {
-    const response = await this.client.post<T>(url, formData, {
+  async upload(url, formData, onProgress) {
+    const response = await this.client.post(url, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -161,11 +159,10 @@ export const apiClient = new ApiClient(import.meta.env.VITE_API_URL || 'http://l
 
 ### Backend - Multer Configuration
 
-```typescript
-// server/src/middleware/upload.ts
+```javascript
+// server/src/middleware/upload.js
 import multer from 'multer';
 import path from 'path';
-import { Request } from 'express';
 
 // Local storage configuration
 const storage = multer.diskStorage({
@@ -179,7 +176,7 @@ const storage = multer.diskStorage({
 });
 
 // File filter for images
-const fileFilter = (req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+const fileFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png|gif|webp/;
   const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype = allowedTypes.test(file.mimetype);
@@ -203,18 +200,18 @@ export const upload = multer({
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 const s3Client = new S3Client({
-  region: process.env.AWS_REGION!,
+  region: process.env.AWS_REGION,
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   },
 });
 
-export async function uploadToS3(file: Express.Multer.File): Promise<string> {
+export async function uploadToS3(file) {
   const key = `uploads/${Date.now()}-${file.originalname}`;
 
   const command = new PutObjectCommand({
-    Bucket: process.env.AWS_BUCKET_NAME!,
+    Bucket: process.env.AWS_BUCKET_NAME,
     Key: key,
     Body: file.buffer,
     ContentType: file.mimetype,
@@ -228,15 +225,15 @@ export async function uploadToS3(file: Express.Multer.File): Promise<string> {
 
 ### Backend - Upload Route
 
-```typescript
-// server/src/routes/upload.ts
-import express, { Request, Response } from 'express';
+```javascript
+// server/src/routes/upload.js
+import express from 'express';
 import { upload } from '../middleware/upload';
 
 const router = express.Router();
 
 // Single file upload
-router.post('/single', upload.single('file'), (req: Request, res: Response) => {
+router.post('/single', upload.single('file'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
@@ -276,34 +273,37 @@ export default router;
 
 ### Frontend - File Upload Component
 
-```typescript
-// src/components/FileUpload.tsx
+```javascript
+// src/components/FileUpload.jsx
 import { useState, useRef } from 'react';
 import { apiClient } from '../lib/api-client';
+import PropTypes from 'prop-types';
 
-interface UploadedFile {
-  filename: string;
-  path: string;
-  size: number;
-  mimetype: string;
-}
+/**
+ * Uploaded file object
+ * @typedef {Object} UploadedFile
+ * @property {string} filename
+ * @property {string} path
+ * @property {number} size
+ * @property {string} mimetype
+ */
 
 function FileUpload() {
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
-  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef(null);
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = (event) => {
     const files = event.target.files;
     if (files) {
       setSelectedFiles(Array.from(files));
     }
   };
 
-  const handleDragOver = (event: React.DragEvent) => {
+  const handleDragOver = (event) => {
     event.preventDefault();
     setIsDragging(true);
   };
@@ -312,7 +312,7 @@ function FileUpload() {
     setIsDragging(false);
   };
 
-  const handleDrop = (event: React.DragEvent) => {
+  const handleDrop = (event) => {
     event.preventDefault();
     setIsDragging(false);
 
@@ -334,7 +334,7 @@ function FileUpload() {
         formData.append('files', file);
       });
 
-      const response = await apiClient.upload<{ files: UploadedFile[] }>(
+      const response = await apiClient.upload(
         '/upload/multiple',
         formData,
         (progress) => setUploadProgress(progress)
@@ -450,12 +450,11 @@ export default FileUpload;
 
 ### Backend - WebSocket Server
 
-```typescript
-// server/src/websocket.ts
+```javascript
+// server/src/websocket.js
 import { Server } from 'socket.io';
-import { Server as HttpServer } from 'http';
 
-export function setupWebSocket(httpServer: HttpServer) {
+export function setupWebSocket(httpServer) {
   const io = new Server(httpServer, {
     cors: {
       origin: process.env.CLIENT_URL || 'http://localhost:5173',
@@ -464,10 +463,10 @@ export function setupWebSocket(httpServer: HttpServer) {
   });
 
   io.on('connection', (socket) => {
-    console.log(`✅ User connected: ${socket.id}`);
+    console.log(` User connected: ${socket.id}`);
 
     // Join room
-    socket.on('join-room', (roomId: string) => {
+    socket.on('join-room', (roomId) => {
       socket.join(roomId);
       console.log(`User ${socket.id} joined room ${roomId}`);
       socket.to(roomId).emit('user-joined', { userId: socket.id });
@@ -494,7 +493,7 @@ export function setupWebSocket(httpServer: HttpServer) {
 
     // Disconnect
     socket.on('disconnect', () => {
-      console.log(`❌ User disconnected: ${socket.id}`);
+      console.log(` User disconnected: ${socket.id}`);
     });
   });
 
@@ -509,25 +508,30 @@ const httpServer = createServer(app);
 setupWebSocket(httpServer);
 
 httpServer.listen(PORT, () => {
-  console.log(`🚀 Server with WebSocket running on http://localhost:${PORT}`);
+  console.log(` Server with WebSocket running on http://localhost:${PORT}`);
 });
 ```
 
 ### Frontend - WebSocket Hook
 
-```typescript
-// src/hooks/useWebSocket.ts
+```javascript
+// src/hooks/useWebSocket.js
 import { useEffect, useState, useCallback, useRef } from 'react';
-import { io, Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
 
-interface UseWebSocketOptions {
-  url: string;
-  autoConnect?: boolean;
-}
+/**
+ * WebSocket hook options
+ * @typedef {Object} UseWebSocketOptions
+ * @property {string} url
+ * @property {boolean} [autoConnect]
+ */
 
-export function useWebSocket({ url, autoConnect = true }: UseWebSocketOptions) {
+/**
+ * @param {UseWebSocketOptions} options
+ */
+export function useWebSocket({ url, autoConnect = true }) {
   const [isConnected, setIsConnected] = useState(false);
-  const socketRef = useRef<Socket | null>(null);
+  const socketRef = useRef(null);
 
   useEffect(() => {
     if (!autoConnect) return;
@@ -538,12 +542,12 @@ export function useWebSocket({ url, autoConnect = true }: UseWebSocketOptions) {
     });
 
     socket.on('connect', () => {
-      console.log('✅ WebSocket connected');
+      console.log(' WebSocket connected');
       setIsConnected(true);
     });
 
     socket.on('disconnect', () => {
-      console.log('❌ WebSocket disconnected');
+      console.log(' WebSocket disconnected');
       setIsConnected(false);
     });
 
@@ -559,19 +563,19 @@ export function useWebSocket({ url, autoConnect = true }: UseWebSocketOptions) {
     };
   }, [url, autoConnect]);
 
-  const emit = useCallback((event: string, data?: any) => {
+  const emit = useCallback((event, data) => {
     if (socketRef.current) {
       socketRef.current.emit(event, data);
     }
   }, []);
 
-  const on = useCallback((event: string, callback: (...args: any[]) => void) => {
+  const on = useCallback((event, callback) => {
     if (socketRef.current) {
       socketRef.current.on(event, callback);
     }
   }, []);
 
-  const off = useCallback((event: string) => {
+  const off = useCallback((event) => {
     if (socketRef.current) {
       socketRef.current.off(event);
     }
@@ -583,29 +587,27 @@ export function useWebSocket({ url, autoConnect = true }: UseWebSocketOptions) {
 
 ### Frontend - Chat Component
 
-```typescript
-// src/components/Chat.tsx
+```javascript
+// src/components/Chat.jsx
 import { useState, useEffect, useRef } from 'react';
 import { useWebSocket } from '../hooks/useWebSocket';
+import PropTypes from 'prop-types';
 
-interface Message {
-  id: number;
-  message: string;
-  user: string;
-  timestamp: string;
-}
+/**
+ * Message object
+ * @typedef {Object} Message
+ * @property {number} id
+ * @property {string} message
+ * @property {string} user
+ * @property {string} timestamp
+ */
 
-interface ChatProps {
-  roomId: string;
-  username: string;
-}
-
-function Chat({ roomId, username }: ChatProps) {
-  const [messages, setMessages] = useState<Message[]>([]);
+function Chat({ roomId, username }) {
+  const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
-  const [typingUsers, setTypingUsers] = useState<string[]>([]);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const typingTimeoutRef = useRef<NodeJS.Timeout>();
+  const [typingUsers, setTypingUsers] = useState([]);
+  const messagesEndRef = useRef(null);
+  const typingTimeoutRef = useRef();
 
   const { isConnected, emit, on, off } = useWebSocket({
     url: import.meta.env.VITE_WS_URL || 'http://localhost:5000',
@@ -616,17 +618,17 @@ function Chat({ roomId, username }: ChatProps) {
       emit('join-room', roomId);
     }
 
-    on('chat-message', (message: Message) => {
+    on('chat-message', (message) => {
       setMessages((prev) => [...prev, message]);
     });
 
-    on('user-typing', ({ user }: { user: string }) => {
+    on('user-typing', ({ user }) => {
       if (user !== username) {
         setTypingUsers((prev) => [...new Set([...prev, user])]);
       }
     });
 
-    on('user-stopped-typing', ({ userId }: { userId: string }) => {
+    on('user-stopped-typing', ({ userId }) => {
       setTypingUsers((prev) => prev.filter((u) => u !== userId));
     });
 
@@ -641,7 +643,7 @@ function Chat({ roomId, username }: ChatProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const handleSendMessage = (e) => {
     e.preventDefault();
     if (!newMessage.trim()) return;
 
@@ -735,6 +737,11 @@ function Chat({ roomId, username }: ChatProps) {
   );
 }
 
+Chat.propTypes = {
+  roomId: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+};
+
 export default Chat;
 ```
 
@@ -744,8 +751,8 @@ export default Chat;
 
 ### Code Splitting with React.lazy
 
-```typescript
-// src/App.tsx
+```javascript
+// src/App.jsx
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -774,24 +781,22 @@ export default App;
 
 ### Memoization Patterns
 
-```typescript
-// src/components/OptimizedList.tsx
+```javascript
+// src/components/OptimizedList.jsx
 import { memo, useMemo, useCallback } from 'react';
+import PropTypes from 'prop-types';
 
-interface Item {
-  id: number;
-  name: string;
-  price: number;
-  category: string;
-}
-
-interface OptimizedListProps {
-  items: Item[];
-  onItemClick: (id: number) => void;
-}
+/**
+ * Item object
+ * @typedef {Object} Item
+ * @property {number} id
+ * @property {string} name
+ * @property {number} price
+ * @property {string} category
+ */
 
 // Memoized child component
-const ListItem = memo(({ item, onClick }: { item: Item; onClick: (id: number) => void }) => {
+const ListItem = memo(({ item, onClick }) => {
   console.log('ListItem render:', item.name);
 
   return (
@@ -806,7 +811,7 @@ const ListItem = memo(({ item, onClick }: { item: Item; onClick: (id: number) =>
   );
 });
 
-function OptimizedList({ items, onItemClick }: OptimizedListProps) {
+function OptimizedList({ items, onItemClick }) {
   // Memoize expensive calculation
   const sortedItems = useMemo(() => {
     console.log('Sorting items...');
@@ -814,7 +819,7 @@ function OptimizedList({ items, onItemClick }: OptimizedListProps) {
   }, [items]);
 
   // Memoize callback to prevent unnecessary re-renders
-  const handleItemClick = useCallback((id: number) => {
+  const handleItemClick = useCallback((id) => {
     onItemClick(id);
   }, [onItemClick]);
 
@@ -833,24 +838,37 @@ function OptimizedList({ items, onItemClick }: OptimizedListProps) {
   );
 }
 
+OptimizedList.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    category: PropTypes.string.isRequired,
+  })).isRequired,
+  onItemClick: PropTypes.func.isRequired,
+};
+
+ListItem.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    category: PropTypes.string.isRequired,
+  }).isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
 export default OptimizedList;
 ```
 
 ### Image Optimization
 
-```typescript
-// src/components/OptimizedImage.tsx
+```javascript
+// src/components/OptimizedImage.jsx
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-interface OptimizedImageProps {
-  src: string;
-  alt: string;
-  width?: number;
-  height?: number;
-  className?: string;
-}
-
-function OptimizedImage({ src, alt, width, height, className }: OptimizedImageProps) {
+function OptimizedImage({ src, alt, width, height, className }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
@@ -875,13 +893,21 @@ function OptimizedImage({ src, alt, width, height, className }: OptimizedImagePr
   );
 }
 
+OptimizedImage.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  className: PropTypes.string,
+};
+
 export default OptimizedImage;
 ```
 
 ### Bundle Analyzer Setup
 
-```typescript
-// vite.config.ts
+```javascript
+// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
@@ -1131,9 +1157,9 @@ jobs:
 {
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "test": "vitest",
     "docker:build": "docker build -t myapp .",
     "docker:run": "docker run -p 3000:80 myapp",
@@ -1158,20 +1184,19 @@ my-fullstack-app/
 │   │   ├── pages/
 │   │   ├── hooks/
 │   │   ├── lib/
-│   │   ├── App.tsx
-│   │   └── main.tsx
+│   │   ├── App.jsx
+│   │   └── main.jsx
 │   ├── package.json
-│   ├── vite.config.ts
+│   ├── vite.config.js
 │   └── Dockerfile
 ├── server/                 # Node.js backend
 │   ├── src/
 │   │   ├── models/
 │   │   ├── routes/
 │   │   ├── middleware/
-│   │   ├── websocket.ts
-│   │   └── server.ts
+│   │   ├── websocket.js
+│   │   └── server.js
 │   ├── package.json
-│   ├── tsconfig.json
 │   └── Dockerfile
 ├── docker-compose.yml
 ├── .github/
@@ -1237,8 +1262,7 @@ npm install socket.io
 npm install multer @aws-sdk/client-s3
 
 # Install dev dependencies
-npm install --save-dev @types/express @types/cors @types/multer
-npm install --save-dev typescript ts-node nodemon
+npm install --save-dev nodemon
 
 # Frontend dependencies
 npm install axios socket.io-client
@@ -1276,4 +1300,4 @@ netlify deploy --prod
 
 ---
 
-**🎯 You now have all the code patterns for building and deploying production-ready full-stack applications!**
+** You now have all the code patterns for building and deploying production-ready full-stack applications!**

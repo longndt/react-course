@@ -5,18 +5,18 @@
 Complete frontend solution demonstrating **React Query** (TanStack Query) for server state management with the Task Manager API.
 
 This solution showcases:
-- ✅ React Query setup and configuration
-- ✅ Data fetching with `useQuery`
-- ✅ Data mutations with `useMutation` (Create, Update, Delete)
-- ✅ Automatic cache invalidation and refetching
-- ✅ Loading and error states
-- ✅ Optimistic UI updates
-- ✅ React Query DevTools integration
-- ✅ TypeScript integration throughout
+-  React Query setup and configuration
+-  Data fetching with `useQuery`
+-  Data mutations with `useMutation` (Create, Update, Delete)
+-  Automatic cache invalidation and refetching
+-  Loading and error states
+-  Optimistic UI updates
+-  React Query DevTools integration
+-  TypeScript integration throughout
 
 ---
 
-## 🏗️ Project Structure
+##  Project Structure
 
 ```
 exercise2-frontend/
@@ -38,7 +38,7 @@ exercise2-frontend/
 
 ---
 
-## 📦 Installation & Setup
+##  Installation & Setup
 
 ### Prerequisites
 - **Backend API** running on `http://localhost:3000`
@@ -73,7 +73,7 @@ App will start at: `http://localhost:5173`
 
 ---
 
-## 🎯 Key Concepts Explained
+##  Key Concepts Explained
 
 ### 1. React Query Setup
 
@@ -303,7 +303,7 @@ export const taskApi = {
 
 ---
 
-## 🎨 Component Structure
+##  Component Structure
 
 ### TaskManager Component
 
@@ -332,9 +332,9 @@ const [newTask, setNewTask] = useState({
 
 ---
 
-## 🎯 Features Implemented
+##  Features Implemented
 
-### ✅ Core Features
+###  Core Features
 - [x] Fetch and display all tasks
 - [x] Create new tasks with form
 - [x] Toggle task completion (checkbox)
@@ -344,7 +344,7 @@ const [newTask, setNewTask] = useState({
 - [x] Automatic refetching on success
 - [x] Form validation and reset
 
-### ✅ UX Enhancements
+###  UX Enhancements
 - [x] Priority badges (high/medium/low)
 - [x] Strikethrough completed tasks
 - [x] Disabled buttons during mutations
@@ -352,7 +352,7 @@ const [newTask, setNewTask] = useState({
 - [x] Responsive design
 - [x] Smooth animations and transitions
 
-### ✅ Developer Experience
+###  Developer Experience
 - [x] TypeScript for type safety
 - [x] React Query DevTools
 - [x] Organized file structure
@@ -413,7 +413,7 @@ getAllTasks: async (): Promise<Task[]> => {
 
 ---
 
-## 📚 React Query Concepts Summary
+##  React Query Concepts Summary
 
 ### Query States
 - **Fresh:** Data is up-to-date (within `staleTime`)
@@ -442,29 +442,29 @@ getAllTasks: async (): Promise<Task[]> => {
 
 ---
 
-## 🎓 Learning Objectives Achieved
+##  Learning Objectives Achieved
 
 After completing this exercise, you should understand:
 
-✅ **React Query Basics**
+ **React Query Basics**
 - Setting up QueryClient and Provider
 - Using useQuery for data fetching
 - Using useMutation for data modifications
 - Query keys and caching
 
-✅ **State Management**
+ **State Management**
 - Server state vs client state
 - Automatic cache management
 - Cache invalidation strategies
 - Optimistic updates (bonus)
 
-✅ **Best Practices**
+ **Best Practices**
 - Separation of concerns (API layer)
 - TypeScript for type safety
 - Error handling patterns
 - Loading states and UX
 
-✅ **Advanced Patterns**
+ **Advanced Patterns**
 - Query invalidation
 - Mutation side effects
 - DevTools for debugging
@@ -472,12 +472,12 @@ After completing this exercise, you should understand:
 
 ---
 
-## 🚀 Next Steps
+##  Next Steps
 
 ### Completed
-- ✅ Basic CRUD with React Query
-- ✅ Loading and error states
-- ✅ Cache invalidation
+-  Basic CRUD with React Query
+-  Loading and error states
+-  Cache invalidation
 
 ### Bonus Challenges (Try These!)
 
@@ -523,4 +523,4 @@ onMutate: async (newTask) => {
 
 ---
 
-**🎉 Frontend Solution Complete!** You've mastered React Query for server state management. This pattern is used in production apps by companies like Google, Microsoft, and Netflix!
+** Frontend Solution Complete!** You've mastered React Query for server state management. This pattern is used in production apps by companies like Google, Microsoft, and Netflix!

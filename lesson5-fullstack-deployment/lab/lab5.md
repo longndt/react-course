@@ -25,36 +25,36 @@ A performance-optimized React application featuring:
 
 ---
 
-## 🎯 Learning Objectives
+##  Learning Objectives
 
 By the end of this lab, you will:
 
 ### Performance Optimization Skills
-- ✅ Implement code splitting with React.lazy() and dynamic imports
-- ✅ Use Suspense for loading states
-- ✅ Apply React.memo to prevent unnecessary re-renders
-- ✅ Optimize expensive computations with useMemo
-- ✅ Prevent function recreation with useCallback
-- ✅ Build virtual lists for large datasets (10,000+ items)
-- ✅ Monitor performance with React Profiler API
+-  Implement code splitting with React.lazy() and dynamic imports
+-  Use Suspense for loading states
+-  Apply React.memo to prevent unnecessary re-renders
+-  Optimize expensive computations with useMemo
+-  Prevent function recreation with useCallback
+-  Build virtual lists for large datasets (10,000+ items)
+-  Monitor performance with React Profiler API
 
 ### Production Deployment Skills
-- ✅ Create optimized production builds
-- ✅ Configure environment variables for different environments
-- ✅ Understand bundle size and optimization techniques
-- ✅ Deploy to Vercel or Netlify
-- ✅ Set up deployment workflows
-- ✅ Handle routing in production (SPA config)
+-  Create optimized production builds
+-  Configure environment variables for different environments
+-  Understand bundle size and optimization techniques
+-  Deploy to Vercel or Netlify
+-  Set up deployment workflows
+-  Handle routing in production (SPA config)
 
 ### Advanced Patterns
-- ✅ Lazy load components and routes
-- ✅ Create efficient custom hooks
-- ✅ Implement windowing/virtualization
-- ✅ Profile and measure performance improvements
+-  Lazy load components and routes
+-  Create efficient custom hooks
+-  Implement windowing/virtualization
+-  Profile and measure performance improvements
 
 ---
 
-## ✅ Pre-Lab Checklist
+##  Pre-Lab Checklist
 
 ### Required Software
 - [ ] **Node.js** (v18+) installed
@@ -87,7 +87,7 @@ npm install react-router-dom
 
 ---
 
-## 💻 Exercises
+##  Exercises
 
 ---
 
@@ -216,7 +216,7 @@ function App() {
 export default App;
 ```
 
-**✅ Test**: 
+** Test**:
 - Run `npm run dev`
 - Open browser DevTools → Network tab
 - Navigate between pages
@@ -236,32 +236,24 @@ export default App;
 5. Add a "Retry" button that reloads the page
 6. Wrap `<Suspense>` with `<ErrorBoundary>` in App.tsx
 
-**💡 Hints**:
+** Hints**:
 
-```tsx
-import { Component, ReactNode, ErrorInfo } from 'react';
+```jsx
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 
-interface Props {
-  children: ReactNode;
-}
-
-interface State {
-  hasError: boolean;
-  error: Error | null;
-}
-
-class ErrorBoundary extends Component<Props, State> {
-  state: State = {
+class ErrorBoundary extends Component {
+  state = {
     hasError: false,
     error: null,
   };
 
-  static getDerivedStateFromError(error: Error): State {
+  static getDerivedStateFromError(error) {
     // Update state so next render shows fallback UI
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+  componentDidCatch(error, errorInfo) {
     // Log error to console or error reporting service
     console.error('Error caught by boundary:', error, errorInfo);
   }
@@ -287,9 +279,13 @@ class ErrorBoundary extends Component<Props, State> {
   }
 }
 
+ErrorBoundary.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
 export default ErrorBoundary;
 
-// Wrap in App.tsx
+// Wrap in App.jsx
 <ErrorBoundary>
   <Suspense fallback={<LoadingSpinner />}>
     <Routes>...</Routes>
@@ -310,13 +306,13 @@ export default ErrorBoundary;
 }
 ```
 
-**✅ Expected Outcome**:
+** Expected Outcome**:
 - App handles lazy loading failures
 - Error message displayed if chunk fails to load
 - Retry button reloads the application
 - Console logs error details
 
-**📊 Solution**: See `solutions/exercise1-code-splitting/`
+** Solution**: See `solutions/exercise1-code-splitting/`
 
 ---
 
@@ -330,7 +326,7 @@ export default ErrorBoundary;
 3. Note the sizes of individual chunks
 4. Compare with non-lazy loaded version (optional)
 
-**💡 Hints**:
+** Hints**:
 
 ```bash
 # Build for production
@@ -356,13 +352,13 @@ export default defineConfig({
 });
 ```
 
-**✅ Expected Outcome**:
+** Expected Outcome**:
 - Production build creates separate chunks for each lazy-loaded component
 - Main bundle is smaller than if all components were bundled together
 - Each route loads its own JavaScript file on demand
 - Improved initial load time (especially noticeable with larger apps)
 
-**📊 Solution**: See `solutions/exercise1-code-splitting/README.md`
+** Solution**: See `solutions/exercise1-code-splitting/README.md`
 
 ---
 
@@ -378,21 +374,18 @@ export default defineConfig({
 // src/components/UserList.tsx
 import { memo } from 'react';
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-interface UserItemProps {
-  user: User;
-  onSelect: (user: User) => void;
-}
+/**
+ * User object
+ * @typedef {Object} User
+ * @property {number} id
+ * @property {string} name
+ * @property {string} email
+ */
 
 // Memoized UserItem - only re-renders if props change
-const UserItem = memo(function UserItem({ user, onSelect }: UserItemProps) {
+const UserItem = memo(function UserItem({ user, onSelect }) {
   console.log(`Rendering UserItem: ${user.id}`);
-  
+
   return (
     <div className="user-item" onClick={() => onSelect(user)}>
       <h3>{user.name}</h3>
@@ -401,14 +394,18 @@ const UserItem = memo(function UserItem({ user, onSelect }: UserItemProps) {
   );
 });
 
-interface UserListProps {
-  users: User[];
-  onSelect: (user: User) => void;
-}
+UserItem.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
+  onSelect: PropTypes.func.isRequired,
+};
 
-function UserList({ users, onSelect }: UserListProps) {
+function UserList({ users, onSelect }) {
   console.log('Rendering UserList');
-  
+
   return (
     <div className="user-list">
       {users.map(user => (
@@ -418,18 +415,27 @@ function UserList({ users, onSelect }: UserListProps) {
   );
 }
 
+UserList.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  })).isRequired,
+  onSelect: PropTypes.func.isRequired,
+};
+
 export default memo(UserList);
 ```
 
 **Step 2: Use UserList in a Page**
 
-```tsx
-// src/pages/Users.tsx
+```jsx
+// src/pages/Users.jsx
 import { useState } from 'react';
 import UserList from '../components/UserList';
 
 // Generate mock users
-const generateUsers = (count: number) => {
+const generateUsers = (count) => {
   return Array.from({ length: count }, (_, i) => ({
     id: i + 1,
     name: `User ${i + 1}`,
@@ -439,10 +445,10 @@ const generateUsers = (count: number) => {
 
 export default function Users() {
   const [users] = useState(() => generateUsers(100));
-  const [selectedUser, setSelectedUser] = useState<number | null>(null);
+  const [selectedUser, setSelectedUser] = useState(null);
   const [count, setCount] = useState(0);
 
-  const handleSelect = (user: any) => {
+  const handleSelect = (user) => {
     setSelectedUser(user.id);
   };
 
@@ -457,7 +463,7 @@ export default function Users() {
 }
 ```
 
-**✅ Test**:
+** Test**:
 - Click "Increment" button
 - Check console - UserItems should NOT re-render
 - Problem: They DO re-render because `handleSelect` is recreated each render!
@@ -475,7 +481,7 @@ export default function Users() {
 4. Click "Increment" again and verify UserItems don't re-render
 5. Add console logs to track renders
 
-**💡 Hints**:
+** Hints**:
 
 ```tsx
 import { useState, useCallback } from 'react';
@@ -498,13 +504,13 @@ const handleSelect = useCallback((user: User) => {
 - With `useCallback`: Same function reference across renders
 - `memo()` sees no change, skips re-render
 
-**✅ Expected Outcome**:
+** Expected Outcome**:
 - Clicking "Increment" does NOT trigger UserItem re-renders
 - Console shows "Rendering UserList" but NOT "Rendering UserItem: X"
 - Selected user still updates correctly when clicking a user
 - Performance improves with larger lists
 
-**📊 Solution**: See `solutions/exercise2-memoization/`
+** Solution**: See `solutions/exercise2-memoization/`
 
 ---
 
@@ -519,7 +525,7 @@ const handleSelect = useCallback((user: User) => {
 4. Add console logs to see when filtering/sorting happens
 5. Verify it only recalculates when search term or sort order changes
 
-**💡 Hints**:
+** Hints**:
 
 ```tsx
 import { useState, useMemo, useCallback } from 'react';
@@ -532,16 +538,16 @@ export default function Users() {
   // Expensive computation - only runs when dependencies change
   const filteredAndSortedUsers = useMemo(() => {
     console.log('Filtering and sorting users...');
-    
+
     let result = users.filter(user =>
       user.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    
+
     result.sort((a, b) => {
       const comparison = a.name.localeCompare(b.name);
       return sortAsc ? comparison : -comparison;
     });
-    
+
     return result;
   }, [users, searchTerm, sortAsc]); // Only recalculate when these change
 
@@ -566,14 +572,14 @@ export default function Users() {
 
 **With useMemo**: Only runs when `users`, `searchTerm`, or `sortAsc` changes
 
-**✅ Expected Outcome**:
+** Expected Outcome**:
 - Typing in search filters the list
 - Clicking sort button reverses order
 - Console shows "Filtering and sorting..." only when needed
 - Unrelated state changes (count) don't trigger recalculation
 - Smooth performance even with 1000+ users
 
-**📊 Solution**: See `solutions/exercise2-memoization/`
+** Solution**: See `solutions/exercise2-memoization/`
 
 ---
 
@@ -622,7 +628,7 @@ function BadList() {
 5. Only render visible items (+ small buffer)
 6. Use absolute positioning to create illusion of full list
 
-**💡 Hints**:
+** Hints**:
 
 ```tsx
 // src/components/VirtualList.tsx
@@ -635,11 +641,11 @@ interface VirtualListProps<T> {
   renderItem: (item: T, index: number) => React.ReactNode;
 }
 
-function VirtualList<T>({ 
-  items, 
-  itemHeight, 
-  containerHeight, 
-  renderItem 
+function VirtualList<T>({
+  items,
+  itemHeight,
+  containerHeight,
+  renderItem
 }: VirtualListProps<T>) {
   const [scrollTop, setScrollTop] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -676,7 +682,7 @@ function VirtualList<T>({
     >
       {/* Spacer to create scrollbar */}
       <div style={{ height: totalHeight, width: '100%' }} />
-      
+
       {/* Visible items */}
       <div
         style={{
@@ -740,14 +746,14 @@ export default function VirtualListDemo() {
 }
 ```
 
-**✅ Expected Outcome**:
+** Expected Outcome**:
 - Smooth scrolling through 10,000 items
 - Only ~10-15 items rendered in DOM at any time
 - Scroll bar reflects full list height
 - Items appear/disappear as you scroll
 - Performance much better than rendering all items
 
-**📊 Solution**: See `solutions/exercise3-virtual-list/`
+** Solution**: See `solutions/exercise3-virtual-list/`
 
 ---
 
@@ -762,7 +768,7 @@ export default function VirtualListDemo() {
 4. Record FPS (frames per second) while scrolling
 5. Document the performance difference
 
-**💡 Hints**:
+** Hints**:
 
 **Profiling Steps**:
 1. Open Chrome DevTools → Performance tab
@@ -776,13 +782,13 @@ export default function VirtualListDemo() {
 - **Regular List**: Laggy scrolling, FPS drops to 20-30, janky animations
 - **Virtual List**: Smooth scrolling, FPS stays at 55-60, butter smooth
 
-**✅ Expected Outcome**:
+** Expected Outcome**:
 - Clear performance difference visible
 - Virtual list maintains 60 FPS
 - Regular list struggles with large dataset
 - Understanding of when virtualization is needed
 
-**📊 Solution**: See `solutions/exercise3-virtual-list/README.md`
+** Solution**: See `solutions/exercise3-virtual-list/README.md`
 
 ---
 
@@ -801,7 +807,7 @@ export default function VirtualListDemo() {
 4. Create a config file that reads these variables
 5. Use different API URLs for dev and prod
 
-**💡 Hints**:
+** Hints**:
 
 ```bash
 # .env.development
@@ -834,13 +840,13 @@ fetch(`${ENV.apiUrl}/users`)
   .then(/* ... */);
 ```
 
-**✅ Expected Outcome**:
+** Expected Outcome**:
 - `npm run dev` uses development variables
 - `npm run build` uses production variables
 - API calls use correct URLs per environment
 - Analytics only enabled in production
 
-**📊 Solution**: See `solutions/exercise4-deployment/`
+** Solution**: See `solutions/exercise4-deployment/`
 
 ---
 
@@ -855,7 +861,7 @@ fetch(`${ENV.apiUrl}/users`)
 4. Build and analyze the bundle size
 5. Document bundle sizes before and after optimization
 
-**💡 Hints**:
+** Hints**:
 
 ```ts
 // vite.config.ts
@@ -864,11 +870,11 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  
+
   build: {
     // Target modern browsers
     target: 'esnext',
-    
+
     // Minification
     minify: 'terser',
     terserOptions: {
@@ -877,7 +883,7 @@ export default defineConfig({
         drop_debugger: true,
       },
     },
-    
+
     // Chunk splitting strategy
     rollupOptions: {
       output: {
@@ -889,7 +895,7 @@ export default defineConfig({
         },
       },
     },
-    
+
     // Chunk size warnings
     chunkSizeWarningLimit: 1000, // KB
   },
@@ -907,14 +913,14 @@ ls -lh dist/assets
 npm install --save-dev rollup-plugin-visualizer
 ```
 
-**✅ Expected Outcome**:
+** Expected Outcome**:
 - Production build completes successfully
 - Separate vendor chunks for React libraries
 - Minified JavaScript and CSS
 - No console.logs in production code
 - Bundle sizes documented and optimized
 
-**📊 Solution**: See `solutions/exercise4-deployment/`
+** Solution**: See `solutions/exercise4-deployment/`
 
 ---
 
@@ -930,7 +936,7 @@ npm install --save-dev rollup-plugin-visualizer
 5. Configure build settings
 6. Deploy and verify the live URL
 
-**💡 Hints**:
+** Hints**:
 
 **Step 1: Prepare Git Repository**
 ```bash
@@ -981,18 +987,18 @@ Create `netlify.toml`:
   status = 200
 ```
 
-**✅ Expected Outcome**:
+** Expected Outcome**:
 - Live URL provided (e.g., `your-app.vercel.app`)
 - App loads and works correctly
 - Routing works (no 404 on refresh)
 - Environment variables applied
 - Auto-deploys on Git push
 
-**📊 Solution**: See `solutions/exercise4-deployment/README.md`
+** Solution**: See `solutions/exercise4-deployment/README.md`
 
 ---
 
-## 🎁 Bonus Challenges
+##  Bonus Challenges
 
 ### Bonus 1: React Profiler Integration (Advanced)
 
@@ -1048,7 +1054,7 @@ useEffect(() => {
       observer.disconnect();
     }
   });
-  
+
   if (imgRef.current) observer.observe(imgRef.current);
 }, []);
 
@@ -1080,28 +1086,28 @@ getLCP(console.log);
 
 ---
 
-## 🎓 Key Takeaways
+##  Key Takeaways
 
 ### Performance Optimization
-- ✅ **Code Splitting**: Reduces initial bundle size, improves load time
-- ✅ **React.lazy()**: Dynamically import components only when needed
-- ✅ **Suspense**: Provides loading states during code splitting
-- ✅ **React.memo**: Prevents re-renders when props haven't changed
-- ✅ **useMemo**: Caches expensive computations
-- ✅ **useCallback**: Prevents function recreation across renders
-- ✅ **Virtual Lists**: Efficiently render large datasets
+-  **Code Splitting**: Reduces initial bundle size, improves load time
+-  **React.lazy()**: Dynamically import components only when needed
+-  **Suspense**: Provides loading states during code splitting
+-  **React.memo**: Prevents re-renders when props haven't changed
+-  **useMemo**: Caches expensive computations
+-  **useCallback**: Prevents function recreation across renders
+-  **Virtual Lists**: Efficiently render large datasets
 
 ### Production Deployment
-- ✅ **Environment Variables**: Different configs for dev/prod
-- ✅ **Build Optimization**: Minification, chunk splitting, tree shaking
-- ✅ **Hosting**: Deploy to Vercel/Netlify with CI/CD
-- ✅ **SPA Routing**: Configure server for client-side routing
+-  **Environment Variables**: Different configs for dev/prod
+-  **Build Optimization**: Minification, chunk splitting, tree shaking
+-  **Hosting**: Deploy to Vercel/Netlify with CI/CD
+-  **SPA Routing**: Configure server for client-side routing
 
 ### Best Practices
-- ✅ Measure before optimizing (use profiler)
-- ✅ Don't over-optimize - profile first!
-- ✅ Use production builds for performance testing
-- ✅ Monitor real user metrics (Web Vitals)
+-  Measure before optimizing (use profiler)
+-  Don't over-optimize - profile first!
+-  Use production builds for performance testing
+-  Monitor real user metrics (Web Vitals)
 
 ---
 
@@ -1111,7 +1117,7 @@ getLCP(console.log);
 
 **Cause**: Missing Suspense boundary or error in component
 
-**Solution**: 
+**Solution**:
 - Wrap routes with `<Suspense fallback={<Loading />}>`
 - Add Error Boundary around Suspense
 - Check console for errors
@@ -1161,7 +1167,7 @@ getLCP(console.log);
 
 ---
 
-## 📚 Self-Assessment Checklist
+##  Self-Assessment Checklist
 
 Before completing this course, ensure you can:
 
@@ -1218,15 +1224,15 @@ Before completing this course, ensure you can:
 
 ---
 
-## 🎉 Congratulations!
+##  Congratulations!
 
 You've completed the React Performance & Deployment course! You now have the skills to:
 
-✅ Build performant React applications
-✅ Optimize rendering and bundle sizes
-✅ Handle large datasets efficiently
-✅ Deploy production-ready applications
-✅ Configure professional development workflows
+ Build performant React applications
+ Optimize rendering and bundle sizes
+ Handle large datasets efficiently
+ Deploy production-ready applications
+ Configure professional development workflows
 
 ### Next Steps
 
@@ -1241,4 +1247,4 @@ You've completed the React Performance & Deployment course! You now have the ski
 
 ---
 
-**🚀 You're now ready to build professional React applications!**
+** You're now ready to build professional React applications!**

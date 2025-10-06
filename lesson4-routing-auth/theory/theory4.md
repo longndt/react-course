@@ -2,7 +2,7 @@
 
 ---
 
-## 📚 Table of Contents
+##  Table of Contents
 
 1. [Core Concepts](#1-core-concepts)
 2. [React Router Fundamentals](#2-react-router-fundamentals)
@@ -856,12 +856,12 @@ res.cookie('token', token, {
 ### XSS Protection
 
 ```tsx
-// ❌ Dangerous: Direct HTML injection
+//  Dangerous: Direct HTML injection
 function UserProfile({ bio }: { bio: string }) {
   return <div dangerouslySetInnerHTML={{ __html: bio }} />;
 }
 
-// ✅ Safe: React automatically escapes content
+//  Safe: React automatically escapes content
 function UserProfile({ bio }: { bio: string }) {
   return <div>{bio}</div>;
 }
@@ -883,13 +883,13 @@ function UserProfile({ bio }: { bio: string }) {
 
 **Issue:**
 ```tsx
-// ❌ Wrong: Causes full page reload
+//  Wrong: Causes full page reload
 <a href="/dashboard">Dashboard</a>
 ```
 
 **Solution:**
 ```tsx
-// ✅ Correct: Client-side navigation
+//  Correct: Client-side navigation
 import { Link } from 'react-router-dom';
 <Link to="/dashboard">Dashboard</Link>
 ```

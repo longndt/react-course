@@ -1,7 +1,6 @@
 import { useState } from "react";
 import TaskList from "./components/TaskList.jsx";
 import TaskForm from "./components/TaskForm.jsx";
-import "./App.css";
 
 function App() {
   const [showForm, setShowForm] = useState(false);

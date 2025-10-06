@@ -1,0 +1,44 @@
+/* Bonus Challenge 1 - About Component CSS */
+
+.about {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.about h3 {
+  color: #333;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 0.75rem;
+}
+
+.about-content {
+  text-align: left;
+}
+
+.about p {
+  color: #555;
+  margin: 1rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.about p strong {
+  color: #667eea;
+  display: inline-block;
+  min-width: 120px;
+}
+
+.about .message {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+  font-style: italic;
+  color: #666;
+}

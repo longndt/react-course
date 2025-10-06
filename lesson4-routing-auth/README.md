@@ -13,16 +13,16 @@ This lesson covers creating multi-page React applications using React Router and
 
 After completing this lesson, you will be able to:
 
-- ✅ Set up complex routing architectures with React Router v6
-- ✅ Create protected routes with authentication guards
-- ✅ Implement JWT-based authentication systems
-- ✅ Manage user sessions and role-based access control (RBAC)
-- ✅ Apply advanced React patterns (HOCs, Render Props, Compound Components)
-- ✅ Implement global state management with Context API
-- ✅ Build scalable authentication workflows
-- ✅ Handle navigation and URL parameters
-- ✅ Secure applications with proper authentication flow
-- ✅ Debug routing and auth issues effectively
+-  Set up complex routing architectures with React Router v6
+-  Create protected routes with authentication guards
+-  Implement JWT-based authentication systems
+-  Manage user sessions and role-based access control (RBAC)
+-  Apply advanced React patterns (HOCs, Render Props, Compound Components)
+-  Implement global state management with Context API
+-  Build scalable authentication workflows
+-  Handle navigation and URL parameters
+-  Secure applications with proper authentication flow
+-  Debug routing and auth issues effectively
 
 ---
 
@@ -31,26 +31,26 @@ After completing this lesson, you will be able to:
 Before starting this lesson, make sure you have:
 
 ### Required Knowledge
-- ✅ React hooks (useState, useEffect, useContext)
-- ✅ React Router basics or navigation concepts
-- ✅ API integration and data fetching
-- ✅ HTTP basics and status codes
-- ✅ Completed Lessons 1-3
+-  React hooks (useState, useEffect, useContext)
+-  React Router basics or navigation concepts
+-  API integration and data fetching
+-  HTTP basics and status codes
+-  Completed Lessons 1-3
 
 ### Environment Setup
-- ✅ Node.js 18+ installed
-- ✅ React project with React Router installed
-- ✅ Backend API with auth endpoints (or use mock)
-- ✅ Understanding of JWT tokens
+-  Node.js 18+ installed
+-  React project with React Router installed
+-  Backend API with auth endpoints (or use mock)
+-  Understanding of JWT tokens
 
 ### Optional but Helpful
 - Basic understanding of authentication flow
 - Familiarity with localStorage/sessionStorage
 - Knowledge of HTTP security concepts
 
-> 💡 **Not ready?** → Review [Lesson 3](../lesson3-api-data/) for API integration
+>  **Not ready?** → Review [Lesson 3](../lesson3-api-data/) for API integration
 
-> 🔄 **Hooks Review**: This lesson relies heavily on `useState`, `useEffect`, and `useContext` for authentication state management. If you need to review these concepts, see [Lesson 2: React Hooks](../lesson2-component-hook/#2-react-hooks-essentials).
+>  **Hooks Review**: This lesson relies heavily on `useState`, `useEffect`, and `useContext` for authentication state management. If you need to review these concepts, see [Lesson 2: React Hooks](../lesson2-component-hook/#2-react-hooks-essentials).
 
 ---
 
@@ -323,7 +323,7 @@ function withAuth<P extends object>(Component: React.ComponentType<P>) {
 const ProtectedDashboard = withAuth(Dashboard);
 ```
 
-> 💡 **More examples** → Check [reference/](./reference/) for complete patterns
+>  **More examples** → Check [reference/](./reference/) for complete patterns
 
 ---
 
@@ -342,7 +342,7 @@ Follow this 4-step learning path:
 **Time**: 60-90 minutes
 
 ### Step 2: Explore Reference Code
-💻 Browse [reference/](./reference/) - Working examples:
+ Browse [reference/](./reference/) - Working examples:
 - Complete routing setup with all features
 - Full authentication system implementation
 - Protected routes and guards
@@ -364,20 +364,20 @@ Follow this 4-step learning path:
 **Time**: 120-150 minutes
 
 ### Step 4: Complete Lab Exercises
-🧪 Practice in [lab4.md](./lab/lab4.md) - Hands-on challenges:
+ Practice in [lab4.md](./lab/lab4.md) - Hands-on challenges:
 - Level 1: Basic routing and navigation
 - Level 2: Authentication system
 - Level 3: Advanced patterns and RBAC
 
 **Time**: 180-240 minutes
 
-> 🎯 **Pro tip**: Test routing with React Router DevTools browser extension
+>  **Pro tip**: Test routing with React Router DevTools browser extension
 
 ---
 
 ## Key Takeaways
 
-### 🎯 Core Concepts to Remember
+###  Core Concepts to Remember
 
 1. **Client-side routing** doesn't reload the page
 2. **Protected routes** check auth before rendering
@@ -388,7 +388,7 @@ Follow this 4-step learning path:
 7. **Compound components** communicate via context
 8. **Always validate auth** on both client and server
 
-### 🔑 Most Important Skills
+###  Most Important Skills
 
 - Setting up React Router with nested routes
 - Creating protected route components
@@ -397,7 +397,7 @@ Follow this 4-step learning path:
 - Handling navigation and redirects
 - Choosing the right pattern for your use case
 
-### 💡 Common Realizations
+###  Common Realizations
 
 - "Client-side routing is so much faster!"
 - "Protected routes are just conditional rendering"
@@ -409,68 +409,68 @@ Follow this 4-step learning path:
 
 ## Best Practices Summary
 
-### ✅ Routing Best Practices
+###  Routing Best Practices
 
 **DO:**
-- ✅ Use meaningful, RESTful URL paths (`/users/:id`)
-- ✅ Implement 404 catch-all routes (`path="*"`)
-- ✅ Lazy load route components for better performance
-- ✅ Group related routes with nested routing
-- ✅ Use Link/NavLink, never `<a>` tags
-- ✅ Handle loading states during navigation
-- ✅ Preserve scroll position appropriately
+-  Use meaningful, RESTful URL paths (`/users/:id`)
+-  Implement 404 catch-all routes (`path="*"`)
+-  Lazy load route components for better performance
+-  Group related routes with nested routing
+-  Use Link/NavLink, never `<a>` tags
+-  Handle loading states during navigation
+-  Preserve scroll position appropriately
 
 **DON'T:**
-- ❌ Use `<a>` tags (causes full page reload)
-- ❌ Forget to add 404 pages
-- ❌ Create overly deep route nesting (max 3-4 levels)
-- ❌ Ignore accessibility in navigation
-- ❌ Hardcode URLs everywhere (use constants)
+-  Use `<a>` tags (causes full page reload)
+-  Forget to add 404 pages
+-  Create overly deep route nesting (max 3-4 levels)
+-  Ignore accessibility in navigation
+-  Hardcode URLs everywhere (use constants)
 
-### ✅ Authentication Best Practices
+###  Authentication Best Practices
 
 **DO:**
-- ✅ Always validate auth on the server (never trust client)
-- ✅ Use HTTPS in production (encrypt data in transit)
-- ✅ Store tokens in httpOnly cookies (most secure) or secure localStorage
-- ✅ Implement token refresh for better UX
-- ✅ Add rate limiting to prevent brute force
-- ✅ Hash passwords with bcrypt (never store plain text)
-- ✅ Show clear error messages for failed auth
-- ✅ Redirect users after login to intended page
+-  Always validate auth on the server (never trust client)
+-  Use HTTPS in production (encrypt data in transit)
+-  Store tokens in httpOnly cookies (most secure) or secure localStorage
+-  Implement token refresh for better UX
+-  Add rate limiting to prevent brute force
+-  Hash passwords with bcrypt (never store plain text)
+-  Show clear error messages for failed auth
+-  Redirect users after login to intended page
 
 **DON'T:**
-- ❌ Store tokens in regular cookies (vulnerable to XSS)
-- ❌ Trust client-side auth checks alone
-- ❌ Store passwords in plain text
-- ❌ Use weak password requirements
-- ❌ Forget to handle token expiration
-- ❌ Expose sensitive data in JWT payload
-- ❌ Allow unlimited login attempts
+-  Store tokens in regular cookies (vulnerable to XSS)
+-  Trust client-side auth checks alone
+-  Store passwords in plain text
+-  Use weak password requirements
+-  Forget to handle token expiration
+-  Expose sensitive data in JWT payload
+-  Allow unlimited login attempts
 
-### ✅ Pattern Selection Guide
+###  Pattern Selection Guide
 
 **Use HOCs when:**
-- ✅ Adding behavior to multiple components
-- ✅ Component logic can be extracted and reused
-- ✅ Need to enhance component props
+-  Adding behavior to multiple components
+-  Component logic can be extracted and reused
+-  Need to enhance component props
 
 **Use Render Props when:**
-- ✅ Need flexible, runtime composition
-- ✅ Sharing stateful logic with different UIs
-- ✅ Want explicit control over rendering
+-  Need flexible, runtime composition
+-  Sharing stateful logic with different UIs
+-  Want explicit control over rendering
 
 **Use Compound Components when:**
-- ✅ Building reusable UI libraries
-- ✅ Need implicit parent-child communication
-- ✅ Want flexible, declarative APIs
+-  Building reusable UI libraries
+-  Need implicit parent-child communication
+-  Want flexible, declarative APIs
 
 **Use Custom Hooks when:**
-- ✅ Extracting stateful logic (most common)
-- ✅ Sharing logic without affecting component tree
-- ✅ Composing multiple hooks together
+-  Extracting stateful logic (most common)
+-  Sharing logic without affecting component tree
+-  Composing multiple hooks together
 
-### ✅ Performance Tips
+###  Performance Tips
 
 - Lazy load routes: `const Dashboard = lazy(() => import('./Dashboard'));`
 - Memoize auth context value with useMemo
@@ -485,10 +485,10 @@ Follow this 4-step learning path:
 ### Challenge 1: Full Page Refresh on Navigation
 **Problem:** Clicking links causes full page reload
 ```tsx
-// ❌ Wrong - causes full reload
+//  Wrong - causes full reload
 <a href="/dashboard">Dashboard</a>
 
-// ✅ Correct - client-side navigation
+//  Correct - client-side navigation
 <Link to="/dashboard">Dashboard</Link>
 ```
 
@@ -497,7 +497,7 @@ Follow this 4-step learning path:
 ### Challenge 2: Token Expiration Without Warning
 **Problem:** User gets logged out suddenly without notice
 ```tsx
-// ✅ Solution - Check token expiration and refresh
+//  Solution - Check token expiration and refresh
 useEffect(() => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -520,13 +520,13 @@ useEffect(() => {
 ### Challenge 3: Protected Routes Allow Brief Access
 **Problem:** Users see protected content briefly before redirect
 ```tsx
-// ❌ Wrong - no loading state
+//  Wrong - no loading state
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? children : <Navigate to="/login" />;
 }
 
-// ✅ Correct - handle loading state
+//  Correct - handle loading state
 function ProtectedRoute({ children }) {
   const { isAuthenticated, loading } = useAuth();
 
@@ -541,10 +541,10 @@ function ProtectedRoute({ children }) {
 ### Challenge 4: Context Causing Excessive Re-renders
 **Problem:** Every component re-renders when auth state changes
 ```tsx
-// ❌ Wrong - creates new object every render
+//  Wrong - creates new object every render
 <AuthContext.Provider value={{ user, login, logout, isAuthenticated: !!user }}>
 
-// ✅ Correct - memoize context value
+//  Correct - memoize context value
 const value = useMemo(
   () => ({ user, login, logout, isAuthenticated: !!user }),
   [user]
@@ -557,7 +557,7 @@ const value = useMemo(
 ### Challenge 5: Lost State After Refresh
 **Problem:** User gets logged out on page refresh
 ```tsx
-// ✅ Solution - Restore auth state on mount
+//  Solution - Restore auth state on mount
 useEffect(() => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -574,7 +574,7 @@ useEffect(() => {
 
 **Solution:** Check for existing token on app initialization
 
-> 🔧 **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting.md)
+>  **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting.md)
 
 ---
 
@@ -619,25 +619,25 @@ useEffect(() => {
 - [ ] Add rate limiting for login
 - [ ] Handle CORS properly
 
-**🎯 Goal: Check at least 18/23 items before Lesson 5**
+** Goal: Check at least 18/23 items before Lesson 5**
 
 ---
 
 ## Next Steps
 
 ### Ready to Continue?
-✅ **Completed this lesson?** → Proceed to [Lesson 5: Full-Stack Integration & Deployment](../lesson5-fullstack-deployment/)
+ **Completed this lesson?** → Proceed to [Lesson 5: Full-Stack Integration & Deployment](../lesson5-fullstack-deployment/)
 
 ### Need More Practice?
-📚 **Study theory** → [theory4.md](./theory/theory4.md) - Routing & auth deep dive
-💻 **View examples** → [reference/](./reference/) - Complete implementations
+ **Study theory** → [theory4.md](./theory/theory4.md) - Routing & auth deep dive
+ **View examples** → [reference/](./reference/) - Complete implementations
 🔨 **Build projects** → [example/](./example/) - Follow-along tutorials
-🧪 **Practice exercises** → [lab4.md](./lab/lab4.md) - Auth challenges
+ **Practice exercises** → [lab4.md](./lab/lab4.md) - Auth challenges
 
 ### Additional Resources
-🎓 **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
+ **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
 ❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting.md)
-🚀 **Learn deployment** → Preview [Lesson 5](../lesson5-fullstack-deployment/)
+ **Learn deployment** → Preview [Lesson 5](../lesson5-fullstack-deployment/)
 
 ---
 

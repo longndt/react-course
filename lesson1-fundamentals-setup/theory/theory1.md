@@ -4,7 +4,7 @@
 
 ---
 
-## 📚 Table of Contents
+##  Table of Contents
 
 1. [What is React?](#what-is-react-)
 2. [React vs Traditional Web Development](#react-vs-traditional-web-development)
@@ -22,7 +22,7 @@
 
 ---
 
-## What is React? 🎯
+## What is React? 
 
 **React** is a JavaScript library for building user interfaces, created and maintained by Meta (Facebook).
 
@@ -87,16 +87,16 @@ In this course, we use **TypeScript** for all React components (.tsx files).
 - File extension: `.tsx` (not `.ts` or `.jsx`)
 
 **Why TSX?**
-- ✅ Type-safe components and props
-- ✅ Catch errors during development (not at runtime)
-- ✅ Better IDE support (autocomplete, IntelliSense)
-- ✅ Self-documenting code
-- ✅ Easier refactoring
+-  Type-safe components and props
+-  Catch errors during development (not at runtime)
+-  Better IDE support (autocomplete, IntelliSense)
+-  Self-documenting code
+-  Easier refactoring
 
 ### TSX vs JSX Comparison
 
 ```javascript
-// JSX (JavaScript) - No type safety ❌
+// JSX (JavaScript) - No type safety 
 function Welcome(props) {
   return <h1>Hello, {props.name}!</h1>;
   // What if props.name is undefined? Runtime error!
@@ -104,7 +104,7 @@ function Welcome(props) {
 ```
 
 ```typescript
-// TSX (TypeScript) - Type safe ✅
+// TSX (TypeScript) - Type safe 
 interface WelcomeProps {
   name: string;
   age: number;
@@ -145,8 +145,8 @@ function UserCard({ name, email, age }: UserCardProps) {
 }
 
 // Usage - TypeScript checks types!
-<UserCard name="John" email="john@example.com" />  // ✅
-<UserCard name={123} email="john@example.com" />   // ❌ Error: name must be string
+<UserCard name="John" email="john@example.com" />  // 
+<UserCard name={123} email="john@example.com" />   //  Error: name must be string
 ```
 
 **2. Event Handlers with Types**
@@ -278,17 +278,17 @@ function Profile({ username, email, role, isActive, joinDate }: ProfileProps) {
   role="admin"
   isActive={true}
   joinDate={new Date()}
-/>  // ✅ All props provided with correct types
+/>  //  All props provided with correct types
 
 <Profile
   username="johndoe"
   email="john@example.com"
-/>  // ❌ Error: missing required props!
+/>  //  Error: missing required props!
 ```
 
-> 💡 **Complete TypeScript Guide**: For a comprehensive TypeScript review, see [Lesson 0: TypeScript Prerequisites](../../lesson0-typescript/)
+>  **Complete TypeScript Guide**: For a comprehensive TypeScript review, see [Lesson 0: TypeScript Prerequisites](../../lesson0-typescript/)
 
-> 💡 **Advanced Patterns**: State management, hooks, and advanced TypeScript patterns are covered in [Lesson 2: Components & Hooks](../../lesson2-component-hook/)
+>  **Advanced Patterns**: State management, hooks, and advanced TypeScript patterns are covered in [Lesson 2: Components & Hooks](../../lesson2-component-hook/)
 
 ---
 
@@ -323,7 +323,7 @@ function Greeting() {
 
 1. **Must return a single parent element**
    ```typescript
-   // ✅ Good - wrapped in div
+   //  Good - wrapped in div
    function App() {
      return (
        <div>
@@ -333,7 +333,7 @@ function Greeting() {
      );
    }
 
-   // ❌ Bad - multiple root elements
+   //  Bad - multiple root elements
    function App() {
      return (
        <h1>Title</h1>
@@ -643,7 +643,7 @@ function EventDemo() {
 }
 ```
 
-> 💡 **Note**: Advanced event handling with state will be covered in Lesson 2
+>  **Note**: Advanced event handling with state will be covered in Lesson 2
 
 ---
 
@@ -725,27 +725,27 @@ export default Welcome;
 
 ## What You Should Know After Lesson 1
 
-✅ **Fundamentals:**
+ **Fundamentals:**
 - What React is and why we use it
 - Difference between React and traditional web development
 - How to create a React project with Vite
 
-✅ **TSX Syntax:**
+ **TSX Syntax:**
 - Basic TSX syntax and rules
 - Embedding JavaScript in TSX with `{}`
 -ClassName, self-closing tags, single parent rule
 
-✅ **Components:**
+ **Components:**
 - Creating functional components
 - Exporting and importing components
 - Component file organization
 
-✅ **Styling:**
+ **Styling:**
 - Using CSS files with className
 - Inline styles
 - Basic styling approaches
 
-✅ **Events (Basic):**
+ **Events (Basic):**
 - onClick, onSubmit, onChange
 - Alert-based event handling
 - preventDefault for forms
@@ -760,38 +760,38 @@ export default Welcome;
 🔜 **Forms** - Controlled components and validation
 🔜 **Component Patterns** - Composition and reusability
 
-> 💡 Lesson 1 focuses on **fundamentals only**. Advanced features like props, state, and hooks are covered in [Lesson 2: Components & Hooks](../../lesson2-component-hook/)
+>  Lesson 1 focuses on **fundamentals only**. Advanced features like props, state, and hooks are covered in [Lesson 2: Components & Hooks](../../lesson2-component-hook/)
 
 ---
 
 ## Best Practices for Lesson 1
 
-1. ✅ **Component Naming**: Always use PascalCase (e.g., `MyComponent`)
-2. ✅ **File Extension**: Use `.tsx` for components with TypeScript
-3. ✅ **Single Responsibility**: One component per file
-4. ✅ **Clean Code**: Use meaningful variable and function names
-5. ✅ **Comments**: Add comments for complex logic
+1.  **Component Naming**: Always use PascalCase (e.g., `MyComponent`)
+2.  **File Extension**: Use `.tsx` for components with TypeScript
+3.  **Single Responsibility**: One component per file
+4.  **Clean Code**: Use meaningful variable and function names
+5.  **Comments**: Add comments for complex logic
 
 ---
 
 ## Common Mistakes to Avoid
 
-❌ **Mistake 1: Lowercase component names**
+ **Mistake 1: Lowercase component names**
 ```typescript
-// ❌ Wrong
+//  Wrong
 function myComponent() {
   return <div>Hello</div>;
 }
 
-// ✅ Correct
+//  Correct
 function MyComponent() {
   return <div>Hello</div>;
 }
 ```
 
-❌ **Mistake 2: Multiple root elements**
+ **Mistake 2: Multiple root elements**
 ```typescript
-// ❌ Wrong
+//  Wrong
 function App() {
   return (
     <h1>Title</h1>
@@ -799,7 +799,7 @@ function App() {
   );
 }
 
-// ✅ Correct
+//  Correct
 function App() {
   return (
     <div>
@@ -810,22 +810,22 @@ function App() {
 }
 ```
 
-❌ **Mistake 3: Using `class` instead of `className`**
+ **Mistake 3: Using `class` instead of `className`**
 ```typescript
-// ❌ Wrong
+//  Wrong
 <div class="container">Content</div>
 
-// ✅ Correct
+//  Correct
 <div className="container">Content</div>
 ```
 
-❌ **Mistake 4: Forgetting to close tags**
+ **Mistake 4: Forgetting to close tags**
 ```typescript
-// ❌ Wrong
+//  Wrong
 <img src="logo.png">
 <input type="text">
 
-// ✅ Correct
+//  Correct
 <img src="logo.png" />
 <input type="text" />
 ```
@@ -878,7 +878,7 @@ function StudentProfile() {
 export default StudentProfile;
 ```
 
-> 💡 **Challenge**: Try styling this component to make it look professional!
+>  **Challenge**: Try styling this component to make it look professional!
 
 ---
 

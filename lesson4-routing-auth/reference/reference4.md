@@ -1240,4 +1240,4 @@ npm install --save-dev @types/react-router-dom
 
 ---
 
-**🎯 You now have all the code patterns for building authenticated React applications with routing!**
+** You now have all the code patterns for building authenticated React applications with routing!**

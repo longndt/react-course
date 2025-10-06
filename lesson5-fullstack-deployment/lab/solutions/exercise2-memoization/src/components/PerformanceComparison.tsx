@@ -3,14 +3,14 @@ import './PerformanceComparison.css';
 
 // Non-memoized component - re-renders every time
 function ExpensiveComponentNoMemo({ count }: { count: number }) {
-  console.log('⚠️ ExpensiveComponentNoMemo rendering...');
+  console.log(' ExpensiveComponentNoMemo rendering...');
 
   // Simulate expensive calculation
   const expensiveValue = Array.from({ length: 1000 }).reduce((acc, _, i) => acc + i, 0);
 
   return (
     <div className="component-card no-memo">
-      <h4>❌ Without React.memo</h4>
+      <h4> Without React.memo</h4>
       <p>Renders: Every time parent renders</p>
       <p>Count prop: {count}</p>
       <p>Expensive value: {expensiveValue}</p>
@@ -21,14 +21,14 @@ function ExpensiveComponentNoMemo({ count }: { count: number }) {
 
 // Memoized component - only re-renders if props change
 const ExpensiveComponentWithMemo = memo(function ExpensiveComponentWithMemo({ count }: { count: number }) {
-  console.log('✅ ExpensiveComponentWithMemo rendering...');
+  console.log(' ExpensiveComponentWithMemo rendering...');
 
   // Simulate expensive calculation
   const expensiveValue = Array.from({ length: 1000 }).reduce((acc, _, i) => acc + i, 0);
 
   return (
     <div className="component-card with-memo">
-      <h4>✅ With React.memo</h4>
+      <h4> With React.memo</h4>
       <p>Renders: Only when props change</p>
       <p>Count prop: {count}</p>
       <p>Expensive value: {expensiveValue}</p>
@@ -43,7 +43,7 @@ export default function PerformanceComparison() {
 
   return (
     <div className="performance-comparison">
-      <h3>🔬 React.memo Performance Comparison</h3>
+      <h3> React.memo Performance Comparison</h3>
 
       <div className="controls">
         <div className="control-group">
@@ -67,25 +67,25 @@ export default function PerformanceComparison() {
       </div>
 
       <div className="explanation">
-        <h4>🧪 Experiment:</h4>
+        <h4> Experiment:</h4>
         <ol>
           <li>
             <strong>Click "Increment Parent"</strong>
             <ul>
-              <li>❌ Left component re-renders (no memo)</li>
-              <li>✅ Right component does NOT re-render (memoized, props unchanged)</li>
+              <li> Left component re-renders (no memo)</li>
+              <li> Right component does NOT re-render (memoized, props unchanged)</li>
             </ul>
           </li>
           <li>
             <strong>Click "Increment Child"</strong>
             <ul>
-              <li>❌ Left component re-renders (no memo)</li>
-              <li>✅ Right component re-renders (memoized, but props changed)</li>
+              <li> Left component re-renders (no memo)</li>
+              <li> Right component re-renders (memoized, but props changed)</li>
             </ul>
           </li>
         </ol>
         <p className="note">
-          <strong>💡 Key Insight:</strong> React.memo prevents unnecessary re-renders when props haven't changed,
+          <strong> Key Insight:</strong> React.memo prevents unnecessary re-renders when props haven't changed,
           but still updates when props do change. This is perfect for expensive components in large lists!
         </p>
       </div>

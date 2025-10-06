@@ -2,11 +2,11 @@
 
 This folder contains complete solution code for all exercises in Lab 1.
 
-> ⚠️ **Important:** Try completing each exercise on your own first before checking solutions. Learning by doing!
+>  **Important:** Try completing each exercise on your own first before checking solutions. Learning by doing!
 
 ---
 
-## 📁 Solution Structure
+##  Solution Structure
 
 ```
 solutions/
@@ -37,17 +37,17 @@ solutions/
 
 ---
 
-## 🎯 How to Use These Solutions
+##  How to Use These Solutions
 
 ### When to Check Solutions
 
-✅ **Good reasons to check:**
+ **Good reasons to check:**
 - Stuck for more than 15-20 minutes
 - Completed exercise and want to verify approach
 - Got it working but want to see best practices
 - Want to understand a specific technique better
 
-❌ **Avoid checking solutions:**
+ **Avoid checking solutions:**
 - Before attempting the exercise
 - At first sign of difficulty
 - To copy-paste without understanding
@@ -71,7 +71,7 @@ solutions/
 
 ---
 
-## 📝 Exercise Solutions Overview
+##  Exercise Solutions Overview
 
 ### Exercise 2: Welcome Component
 
@@ -137,7 +137,7 @@ solutions/
 
 ---
 
-## 🔍 Common Patterns in Solutions
+##  Common Patterns in Solutions
 
 ### Pattern 1: Component Structure
 
@@ -189,10 +189,10 @@ import './Component.css';  // Must be at top
 ### Component Not Showing
 
 **Checklist:**
-1. ✅ Component exported: `export default ComponentName`
-2. ✅ Component imported in parent: `import ComponentName from '...'`
-3. ✅ Component rendered: `<ComponentName />`
-4. ✅ No syntax errors in console
+1.  Component exported: `export default ComponentName`
+2.  Component imported in parent: `import ComponentName from '...'`
+3.  Component rendered: `<ComponentName />`
+4.  No syntax errors in console
 
 **Compare with solution:**
 - Check import/export syntax
@@ -202,10 +202,10 @@ import './Component.css';  // Must be at top
 ### CSS Not Applying
 
 **Checklist:**
-1. ✅ CSS imported: `import './Component.css'`
-2. ✅ className matches CSS: `.welcome` → `className="welcome"`
-3. ✅ File path correct
-4. ✅ CSS syntax valid
+1.  CSS imported: `import './Component.css'`
+2.  className matches CSS: `.welcome` → `className="welcome"`
+3.  File path correct
+4.  CSS syntax valid
 
 **Compare with solution:**
 - Check CSS selectors match className
@@ -215,16 +215,16 @@ import './Component.css';  // Must be at top
 ### TypeScript Errors
 
 **Checklist:**
-1. ✅ File extension is `.tsx` (not `.ts`)
-2. ✅ All imports have correct paths
-3. ✅ Variables defined before use
+1.  File extension is `.tsx` (not `.ts`)
+2.  All imports have correct paths
+3.  Variables defined before use
 
 **Compare with solution:**
 - Check file extensions
 - Verify import syntax
 ---
 
-## 💡 Tips for Success
+##  Tips for Success
 
 1. **Type code manually** - Don't copy-paste. Typing helps you learn
 2. **Read README files** - Each solution has detailed explanations
@@ -234,7 +234,7 @@ import './Component.css';  // Must be at top
 
 ---
 
-## 🎓 Learning Objectives
+##  Learning Objectives
 
 After studying these solutions, you should understand:
 
@@ -264,7 +264,7 @@ After studying these solutions, you should understand:
 
 ---
 
-## 🚀 Next Steps
+##  Next Steps
 
 **After reviewing these solutions:**
 
@@ -289,7 +289,7 @@ After studying these solutions, you should understand:
 
 ---
 
-## ✅ Self-Assessment
+##  Self-Assessment
 
 Before moving to Lab 2, you should be able to:
 
@@ -312,12 +312,12 @@ Before moving to Lab 2, you should be able to:
 }
 ```
 
-❌ **Mistake 2: Using `class` instead of `className`**
+ **Mistake 2: Using `class` instead of `className`**
 ```tsx
-// ❌ Wrong
+//  Wrong
 <div class="App">  // Warning!
 
-// ✅ Correct
+//  Correct
 <div className="App">
 ```
 
@@ -563,7 +563,7 @@ export default App;
 
 ---
 
-## 🎯 Key Learning Points
+##  Key Learning Points
 
 ### 1. Component Composition
 ```
@@ -588,9 +588,9 @@ import Header from './components/Header';
 ```
 
 ### 3. Component Naming
-- ✅ PascalCase: `Header`, `Hero`, `Footer`
-- ✅ Descriptive names
-- ✅ File name matches component name
+-  PascalCase: `Header`, `Hero`, `Footer`
+-  Descriptive names
+-  File name matches component name
 
 ### 4. CSS Organization
 - One CSS file per component
@@ -618,23 +618,23 @@ import Header from './components/Header';
 
 ---
 
-## 🔍 Self-Check Questions
+##  Self-Check Questions
 
 After completing this lab, can you:
 
-1. ✅ Create a new React component?
-2. ✅ Import and use a component in another component?
-3. ✅ Apply CSS to components?
-4. ✅ Build a multi-component page?
-5. ✅ Understand component composition?
+1.  Create a new React component?
+2.  Import and use a component in another component?
+3.  Apply CSS to components?
+4.  Build a multi-component page?
+5.  Understand component composition?
 
-If yes to all → **Ready for Lesson 2!** 🚀
+If yes to all → **Ready for Lesson 2!** 
 
 If no → Review [theory1.md](../../theory/theory1.md) or ask for help!
 
 ---
 
-## 💡 Bonus Challenges
+##  Bonus Challenges
 
 ### Challenge 1: Add More Sections
 Create `About`, `Projects`, `Contact` components

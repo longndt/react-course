@@ -59,7 +59,7 @@
 #### Event Handler
 ```tsx
 const handleClick = () => {
-  alert('Welcome to React! 🎉');
+  alert('Welcome to React! ');
 };
 ```
 - Arrow function for the handler

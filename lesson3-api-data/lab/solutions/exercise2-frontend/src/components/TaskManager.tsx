@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { taskApi } from '../services/api';
-import type { Task, CreateTaskInput, UpdateTaskInput } from '../types/task';
+import type { Task, CreateTaskInput } from '../types/task';
 import './TaskManager.css';
 
 export default function TaskManager() {
@@ -42,8 +42,9 @@ export default function TaskManager() {
         priority: 'medium',
       });
     },
-    onError: (error: any) => {
-      alert(`Error creating task: ${error.response?.data?.message || error.message}`);
+    onError: (error: Error) => {
+      const axiosError = error as any; // Axios error has response property
+      alert(`Error creating task: ${axiosError.response?.data?.message || error.message}`);
     },
   });
 
@@ -55,8 +56,9 @@ export default function TaskManager() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
     },
-    onError: (error: any) => {
-      alert(`Error updating task: ${error.response?.data?.message || error.message}`);
+    onError: (error: Error) => {
+      const axiosError = error as { response?: { data?: { message?: string } } };
+      alert(`Error updating task: ${axiosError.response?.data?.message || error.message}`);
     },
   });
 
@@ -68,8 +70,9 @@ export default function TaskManager() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
     },
-    onError: (error: any) => {
-      alert(`Error deleting task: ${error.response?.data?.message || error.message}`);
+    onError: (error: Error) => {
+      const axiosError = error as { response?: { data?: { message?: string } } };
+      alert(`Error deleting task: ${axiosError.response?.data?.message || error.message}`);
     },
   });
 
@@ -116,7 +119,7 @@ export default function TaskManager() {
     return (
       <div className="task-manager">
         <div className="error">
-          <h2>❌ Error Loading Tasks</h2>
+          <h2> Error Loading Tasks</h2>
           <p>{(error as Error).message}</p>
           <p>Make sure the backend server is running on http://localhost:3000</p>
         </div>
@@ -130,7 +133,7 @@ export default function TaskManager() {
   return (
     <div className="task-manager">
       <header>
-        <h1>📝 Task Manager</h1>
+        <h1> Task Manager</h1>
         <p>Full-stack app with React Query + Express + MongoDB</p>
       </header>
 
@@ -223,7 +226,7 @@ export default function TaskManager() {
                       onClick={() => handleDeleteTask(task._id)}
                       disabled={deleteMutation.isPending}
                     >
-                      🗑️
+                      🗑
                     </button>
                   </div>
                 </div>

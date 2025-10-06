@@ -19,7 +19,7 @@ _For detailed concepts and theory, see [../readme.md](../readme.md)_
 
 ---
 
-## 🎯 Learning Objectives
+##  Learning Objectives
 
 By the end of this lab, you will be able to:
 
@@ -49,7 +49,7 @@ By the end of this lab, you will be able to:
 
 ---
 
-## ✅ Pre-Lab Checklist
+##  Pre-Lab Checklist
 
 Before starting, ensure you have:
 
@@ -107,9 +107,9 @@ _For detailed setup instructions, see [Complete Environment Setup Guide](../../e
 
 ---
 
-## 🎯 Exercise 1: Backend Setup (30% Practice)
+##  Exercise 1: Backend Setup (30% Practice)
 
-### 📚 Concept Review
+###  Concept Review
 
 A **RESTful API** follows REST principles for building web services:
 - **Resources** are accessed via URLs (e.g., `/api/tasks`)
@@ -123,7 +123,7 @@ A **RESTful API** follows REST principles for building web services:
 **MongoDB** is a NoSQL database that stores data as JSON-like documents.
 **Mongoose** is an ODM (Object Data Modeling) library that provides schema validation and easier interaction with MongoDB.
 
-### 🎯 Goals
+###  Goals
 
 - Set up Express server with TypeScript
 - Connect to MongoDB database
@@ -188,7 +188,7 @@ Create file: `backend/src/models/Task.ts`
 - Add timestamps option
 - Export Task model
 
-**💡 Hints:**
+** Hints:**
 ```typescript
 import mongoose, { Schema, Document } from 'mongoose';
 
@@ -208,12 +208,12 @@ const TaskSchema = new Schema<ITask>({
 export default mongoose.model<ITask>('Task', TaskSchema);
 ```
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - TypeScript interface defines task structure
 - Mongoose schema with validation
 - Model exported for use in routes
 
-**📊 Solution:** See `solutions/exercise1-backend/models/Task.ts`
+** Solution:** See `solutions/exercise1-backend/models/Task.ts`
 
 ---
 
@@ -236,7 +236,7 @@ Create file: `backend/src/index.ts`
 - Start server on port 5000
 - Log server status
 
-**💡 Hints:**
+** Hints:**
 ```typescript
 import express from 'express';
 import mongoose from 'mongoose';
@@ -251,24 +251,24 @@ app.use(express.json());
 
 // MongoDB connection
 mongoose.connect('YOUR_CONNECTION_STRING')
-  .then(() => console.log('✅ Connected to MongoDB'))
-  .catch((err) => console.error('❌ MongoDB error:', err));
+  .then(() => console.log(' Connected to MongoDB'))
+  .catch((err) => console.error(' MongoDB error:', err));
 
 // TODO: Add routes here later
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(` Server running on http://localhost:${PORT}`);
 });
 ```
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - Server starts successfully
 - MongoDB connection established
 - CORS enabled for frontend requests
 - Console shows success messages
 
-**📊 Solution:** See `solutions/exercise1-backend/index.ts`
+** Solution:** See `solutions/exercise1-backend/index.ts`
 
 ---
 
@@ -305,7 +305,7 @@ Add routes to `backend/src/index.ts` (after MongoDB connection)
 - Return success message
 - Handle errors with 500 status
 
-**💡 Hints:**
+** Hints:**
 ```typescript
 import Task from './models/Task';
 
@@ -350,7 +350,7 @@ app.delete('/api/tasks/:id', async (req, res) => {
 });
 ```
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - All 4 CRUD endpoints working
 - Proper HTTP status codes
 - Error handling in place
@@ -360,13 +360,13 @@ app.delete('/api/tasks/:id', async (req, res) => {
 
 ### Task 1.5: Test API Endpoints (Testing)
 
-**🧪 Testing Checklist:**
+** Testing Checklist:**
 
 **Start Backend:**
 ```bash
 cd backend
 npm run dev
-# Should see: "✅ Connected to MongoDB" and "🚀 Server running..."
+# Should see: " Connected to MongoDB" and " Server running..."
 ```
 
 **Test with Thunder Client (or Postman):**
@@ -412,7 +412,7 @@ use task_manager
 db.tasks.find().pretty()
 ```
 
-**✅ Exercise 1 Complete When:**
+** Exercise 1 Complete When:**
 - [ ] Backend server runs without errors
 - [ ] MongoDB connection successful
 - [ ] All 4 API endpoints respond correctly
@@ -421,9 +421,9 @@ db.tasks.find().pretty()
 
 ---
 
-## 🎯 Exercise 2: Frontend Integration with React Query (70% Practice)
+##  Exercise 2: Frontend Integration with React Query (70% Practice)
 
-### 📚 Concept Review
+###  Concept Review
 
 **React Query (TanStack Query)** is a powerful library for managing server state in React applications:
 
@@ -439,7 +439,7 @@ db.tasks.find().pretty()
 - **Query Key**: Unique identifier for cached data
 - **Query Client**: Manages all queries and cache
 
-### 🎯 Goals
+###  Goals
 
 - Set up React Query in React app
 - Fetch data with `useQuery`
@@ -522,7 +522,7 @@ Create `frontend/src/components/TaskManager.tsx`
 - Display error state
 - Map through tasks and display them
 
-**💡 Hints:**
+** Hints:**
 ```tsx
 import { useQuery } from '@tanstack/react-query';
 import { taskApi, Task } from '../services/api';
@@ -558,13 +558,13 @@ function TaskManager() {
 export default TaskManager;
 ```
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - Tasks fetch automatically on component mount
 - Loading state shows while fetching
 - Error state shows if API fails
 - Tasks display in a list
 
-**📊 Solution:** See `solutions/exercise2-frontend/TaskManager-basic.tsx`
+** Solution:** See `solutions/exercise2-frontend/TaskManager-basic.tsx`
 
 ---
 
@@ -582,7 +582,7 @@ export default TaskManager;
 - Add form with input and submit button
 - Handle mutation loading state (disable button)
 
-**💡 Hints:**
+** Hints:**
 ```tsx
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -642,14 +642,14 @@ function TaskManager() {
 }
 ```
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - Form input captures task title
 - Submit creates new task in database
 - UI updates automatically with new task
 - Input clears after submission
 - Button disabled while creating
 
-**📊 Solution:** See `solutions/exercise2-frontend/TaskManager-create.tsx`
+** Solution:** See `solutions/exercise2-frontend/TaskManager-create.tsx`
 
 ---
 
@@ -673,7 +673,7 @@ function TaskManager() {
 - Add "Delete" button for each task
 - Handle pending states (disable buttons)
 
-**💡 Hints:**
+** Hints:**
 ```tsx
 function TaskManager() {
   // Existing code...
@@ -736,14 +736,14 @@ function TaskManager() {
 }
 ```
 
-**✅ Expected Outcome:**
+** Expected Outcome:**
 - Click "Complete" toggles task completion
 - Completed tasks show strikethrough
 - Click "Delete" removes task
 - UI updates automatically
 - Buttons disable during mutations
 
-**📊 Solution:** See `solutions/exercise2-frontend/TaskManager-full.tsx`
+** Solution:** See `solutions/exercise2-frontend/TaskManager-full.tsx`
 
 ---
 
@@ -845,7 +845,7 @@ Create `frontend/src/components/TaskManager.css`:
 }
 ```
 
-**✅ Exercise 2 Complete When:**
+** Exercise 2 Complete When:**
 - [ ] Tasks fetch and display automatically
 - [ ] Can add new tasks via form
 - [ ] Can toggle task completion
@@ -856,7 +856,7 @@ Create `frontend/src/components/TaskManager.css`:
 
 ---
 
-## 🌟 Bonus Challenges (Advanced - Optional)
+##  Bonus Challenges (Advanced - Optional)
 
 ### Challenge 1: Add Task Priority Filter
 
@@ -868,7 +868,7 @@ Create `frontend/src/components/TaskManager.css`:
 - Filter tasks array before mapping
 - Show all tasks by default
 
-**💡 Hint:**
+** Hint:**
 ```tsx
 const [priorityFilter, setPriorityFilter] = useState<string>('all');
 
@@ -929,32 +929,32 @@ const updateMutation = useMutation({
 
 ---
 
-## 🎓 Key Takeaways
+##  Key Takeaways
 
 Congratulations on completing Lab 3! Here's what you've mastered:
 
 ### Backend Skills
-- ✅ **Express Server**: RESTful API with proper routing
-- ✅ **MongoDB Integration**: Mongoose schemas and CRUD operations
-- ✅ **Error Handling**: Try-catch blocks and proper status codes
-- ✅ **CORS Configuration**: Cross-origin request handling
+-  **Express Server**: RESTful API with proper routing
+-  **MongoDB Integration**: Mongoose schemas and CRUD operations
+-  **Error Handling**: Try-catch blocks and proper status codes
+-  **CORS Configuration**: Cross-origin request handling
 
 ### Frontend Skills
-- ✅ **React Query**: useQuery for data fetching
-- ✅ **Mutations**: useMutation for create/update/delete
-- ✅ **Cache Management**: Automatic caching and invalidation
-- ✅ **Loading States**: Built-in pending states
-- ✅ **Error Handling**: Error boundaries and user feedback
+-  **React Query**: useQuery for data fetching
+-  **Mutations**: useMutation for create/update/delete
+-  **Cache Management**: Automatic caching and invalidation
+-  **Loading States**: Built-in pending states
+-  **Error Handling**: Error boundaries and user feedback
 
 ### Full-Stack Patterns
-- ✅ **API Design**: RESTful endpoints with proper HTTP methods
-- ✅ **Data Flow**: Frontend ↔ Backend communication
-- ✅ **State Management**: Server state vs client state
-- ✅ **TypeScript**: Type-safe API communication
+-  **API Design**: RESTful endpoints with proper HTTP methods
+-  **Data Flow**: Frontend ↔ Backend communication
+-  **State Management**: Server state vs client state
+-  **TypeScript**: Type-safe API communication
 
 ---
 
-## 🚀 Next Steps
+##  Next Steps
 
 **Ready for more?** Continue to [Lab 4 - Routing & Authentication](../../lesson4-routing-auth/lab/lab4.md) to learn:
 
@@ -975,7 +975,7 @@ Congratulations on completing Lab 3! Here's what you've mastered:
 
 ---
 
-## 📚 Additional Resources
+##  Additional Resources
 
 **Official Documentation:**
 - [React Query Docs](https://tanstack.com/query/latest) - Complete guide
@@ -993,7 +993,7 @@ Congratulations on completing Lab 3! Here's what you've mastered:
 
 ---
 
-## 🔧 Troubleshooting Guide
+##  Troubleshooting Guide
 
 ### Backend Issues
 
@@ -1066,7 +1066,7 @@ Congratulations on completing Lab 3! Here's what you've mastered:
 
 ---
 
-## ✅ Self-Assessment Checklist
+##  Self-Assessment Checklist
 
 Before moving to Lab 4, you should be able to:
 
@@ -1100,7 +1100,7 @@ Before moving to Lab 4, you should be able to:
 - [ ] Can explain optimistic updates
 - [ ] Understand background refetching
 
-**If you can confidently do all above, you're ready for Lab 4!** 🎉
+**If you can confidently do all above, you're ready for Lab 4!** 
 
 ---
 

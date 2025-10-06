@@ -32,7 +32,7 @@ interface UserListProps {
 
 // Memoized UserList - prevents re-render if users array reference is the same
 function UserList({ users, onSelect }: UserListProps) {
-  console.log('✅ Rendering UserList (parent component)');
+  console.log(' Rendering UserList (parent component)');
 
   if (users.length === 0) {
     return (
