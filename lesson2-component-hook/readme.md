@@ -502,7 +502,7 @@ function Component() {
 ## Resources & References
 
 ### Course Guides
-- **[Accessibility Guide](../extra/accessibility-guide.md)** - Build accessible React components with ARIA, keyboard navigation, and semantic HTML
+- **[Web Accessibility Guide](../extra/web-accessibility.md)** - Build accessible React components with ARIA, keyboard navigation, and semantic HTML
 - [Advanced Patterns](../extra/advanced-patterns.md) - Advanced component patterns and techniques
 
 ### Official Documentation

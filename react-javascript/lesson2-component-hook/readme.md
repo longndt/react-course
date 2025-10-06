@@ -11,12 +11,16 @@ This lesson covers React component architecture and hooks - the foundation of mo
 
 ## Learning Objectives
 
-After completing this lesson, you will be able to:
+After completing this lesson, you will be ab>  **More solutions** → See [Troubleshooting Guide](../extra/troubleshooting.md)
+
+---
+
+## 📚 What's Nexte to:
 
 -  Build reusable component li### Additional Resources
  **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
-❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting-guide.md)
- **Advanced patterns** → [Advanced Patterns](../extras/advanced-patterns.md)ies with JavaScript and PropTypes
+❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting.md)
+ **Advanced patterns** → [Advanced Patterns](../extra/advanced-patterns.md)
 -  Master component composition and props patterns
 -  Apply essential React Hooks (useState, useEffect, useRef, useContext, useReducer)
 -  Create custom hooks for reusable business logic
@@ -481,7 +485,7 @@ function Component() {
 
 **Solution:** Only call setState in event handlers or useEffect
 
-> **More solutions** → See [Troubleshooting Guide](../extra/troubleshooting-guide.md)
+> **More solutions** → See [Troubleshooting Guide](../extra/troubleshooting.md)
 
 ---
 
@@ -539,9 +543,9 @@ function Component() {
 ## Resources & References
 
 ### Course Guides
-- [Advanced Patterns](../extras/advanced-patterns.md) - Advanced component patterns and techniques
-- [State Management Guide](../extras/state-management-guide.md) - Managing state in React applications
-- [Testing Guide](../extras/testing-guide.md) - Testing React components
+- [Advanced Patterns](../extra/advanced-patterns.md) - Advanced component patterns and techniques
+- [State Management Guide](../extra/state-management.md) - Managing state in React applications
+- [Web Testing Guide](../extra/web-testing.md) - Testing React components
 
 ### Official Documentation
 - [React Hooks Reference](https://react.dev/reference/react) - Official API docs

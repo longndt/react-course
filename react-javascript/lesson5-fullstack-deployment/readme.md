@@ -780,8 +780,8 @@ You have completed the React course. You now have:
 
 ### Continue Learning
  **Advanced topics** → [Advanced Patterns](../extra/advanced-patterns.md)
- **Modern stack** → [Modern Stack 2025](../extra/modern-stack.md)
- **Testing** → [Testing Guide](../extra/testing-guide.md)
+ **Modern stack** → [Modern React Stack](../extra/modern-stack.md)
+ **Testing** → [Web Testing Guide](../extra/web-testing.md)
  **State management** → [State Management Guide](../extra/state-management.md)
 
 ### Build Your Portfolio
@@ -806,8 +806,8 @@ You have completed the React course. You now have:
 
 ### Course Guides
 - **[Performance Optimization Guide](../extra/performance-optimization.md)** - useMemo, useCallback, code splitting, bundle analysis, Core Web Vitals
-- **[Testing Guide](../extra/testing-guide.md)** - Jest, React Testing Library, E2E testing with Playwright
-- **[Accessibility Guide](../extra/accessibility-guide.md)** - Ensure production apps meet WCAG standards
+- **[Web Testing Guide](../extra/web-testing.md)** - Jest, React Testing Library, E2E testing with Playwright
+- **[Web Accessibility Guide](../extra/web-accessibility.md)** - Ensure production apps meet WCAG standards
 - [State Management Guide](../extra/state-management.md) - Redux, Zustand, Jotai patterns for complex apps
 - [Troubleshooting Guide](../extra/troubleshooting.md) - Common deployment issues and solutions
 

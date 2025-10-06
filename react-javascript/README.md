@@ -178,7 +178,7 @@ Make sure you have installed:
 
 **Having installation or setup issues?**
 
- **[Check Troubleshooting Guide](../extra/troubleshooting-guide.md)** for common problems and solutions
+ **[Check Troubleshooting Guide](../extra/troubleshooting.md)** for common problems and solutions
 
 ### Step 2: Install Markdown Reading Support Extension
 
@@ -220,7 +220,7 @@ cd react-course/react-javascript
 - **[Performance Optimization](../extra/performance-optimization.md)** - useMemo, useCallback, bundle optimization
 - **[State Management Guide](../extra/state-management.md)** - Context API, Zustand, Redux patterns
 - **[Advanced Patterns](../extra/advanced-patterns.md)** - Compound components, render props, HOC
-- **[Modern Stack](../extra/modern-stack.md)** - Latest React ecosystem and best practices
+- **[Modern React Stack](../extra/modern-stack.md)** - Latest React ecosystem and best practices
 - **[Troubleshooting Guide](../extra/troubleshooting.md)** - Common issues and solutions
 
 ### Step 5: Start Learning

@@ -240,7 +240,7 @@ After completing this lesson, you'll be ready for:
 - **Stuck on a concept?** → Check the theory documentation
 - **Code not working?** → Compare with example code
 - **General questions?** → Review the reference guide
-- **Still confused?** → [Check Troubleshooting Guide](../../extra/troubleshooting-guide.md)
+- **Still confused?** → [Check Troubleshooting Guide](../../extra/troubleshooting.md)
 
 ---
 
