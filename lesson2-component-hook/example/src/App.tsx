@@ -4,6 +4,7 @@ import { Form } from "./components/Form";
 import { Modal } from "./components/Modal";
 import "./App.css";
 
+// ✅ CHECKPOINT 1: Basic TypeScript interfaces
 interface User {
   id: number;
   name: string;
@@ -12,6 +13,7 @@ interface User {
   status: "active" | "inactive";
 }
 
+// ✅ CHECKPOINT 2: Mock data setup
 const mockUsers: User[] = [
   {
     id: 1,
@@ -37,17 +39,20 @@ const mockUsers: User[] = [
 ];
 
 export function App() {
+  // ✅ CHECKPOINT 3: useState hooks for state management
   const [users, setUsers] = useState<User[]>(mockUsers);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
 
+  // ✅ CHECKPOINT 4: Form data interface
   interface NewUserForm {
     name: string;
     email: string;
     role: string;
   }
 
+  // ✅ CHECKPOINT 5: CRUD operations with functional state updates
   const handleAddUser = async (values: NewUserForm) => {
     const newUser: User = {
       id: users.length + 1,
@@ -90,10 +95,12 @@ export function App() {
     <div className="container">
       <h1>User Management</h1>
 
+      {/* ✅ CHECKPOINT 6: Event handlers and state updates */}
       <button onClick={() => setIsAddModalOpen(true)} className="button">
         Add User
       </button>
 
+      {/* ✅ CHECKPOINT 7: DataTable with custom render functions */}
       <DataTable<User>
         data={users}
         columns={[
@@ -134,7 +141,7 @@ export function App() {
         ]}
       />
 
-      {/* Add User Modal */}
+      {/* ✅ CHECKPOINT 8: Modal components with form handling */}
       <Modal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
@@ -196,7 +203,7 @@ export function App() {
         </Form>
       </Modal>
 
-      {/* Edit User Modal */}
+      {/* ✅ CHECKPOINT 9: Edit modal with default values */}
       <Modal
         isOpen={isEditModalOpen}
         onClose={() => {

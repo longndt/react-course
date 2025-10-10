@@ -23,7 +23,7 @@ This course teaches **React with Typescript** development using industry-standar
 
 ---
 
-## What You Will Learn ?
+## What You Will Learn 📚
 
 - Build modern React applications with **TypeScript** and functional components
 - Understand React fundamentals and component-based architecture
@@ -114,7 +114,7 @@ Quick links to key diagrams:
 
 ---
 
-## 📚 How to Study This Course Effectively ?
+## 📚 How to Study This Course Effectively 📚
 
 ### **Step 1: Start with Reference Guide**
 

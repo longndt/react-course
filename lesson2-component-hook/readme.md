@@ -259,7 +259,6 @@ Follow this 4-step learning path:
 - Data fetching with custom hooks
 - Form handling with validation
 
-**Time**: 90-120 minutes
 
 ### Step 4: Complete Lab Exercises
  Practice in [lab2.md](./lab/lab2.md) - Hands-on exercises:
@@ -267,7 +266,6 @@ Follow this 4-step learning path:
 - Level 2: Create custom hooks
 - Level 3: Complete Todo application with persistence
 
-**Time**: 120-180 minutes
 
 >  **Pro tip**: Complete examples before attempting lab exercises
 

@@ -62,7 +62,7 @@ npm --version   # Should be 9+
 
 ## What You'll Learn
 
-### 1. Component Architecture (1.5 hours)
+### 1. Component Architecture
 
 **Component Patterns:**
 - Function vs Class components (modern vs legacy)
@@ -98,7 +98,7 @@ npm --version   # Should be 9+
 - Avoiding infinite render loops
 - When to use each hook (decision tree)
 
-### 3. Custom Hooks (1.5 hours)
+### 3. Custom Hooks
 
 **Why Custom Hooks:**
 - Extract reusable stateful logic
@@ -266,7 +266,6 @@ Follow this 4-step learning path:
 - Common patterns and anti-patterns
 - Performance optimization techniques
 
-**Time**: 45-60 minutes
 
 ### Step 2: Explore Code Examples
  Browse [reference/](./reference/) - Working code for:

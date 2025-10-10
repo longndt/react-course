@@ -447,7 +447,6 @@ Follow this 4-step learning path:
 - Real-time communication protocols
 - Production security considerations
 
-**Time**: 60-90 minutes
 
 ### Step 2: Explore Reference Code
  Browse [reference/](./reference/) - Working examples:
@@ -457,7 +456,6 @@ Follow this 4-step learning path:
 - Docker configuration
 - CI/CD pipeline setup
 
-**Time**: 45-60 minutes
 
 ### Step 3: Build Example Projects
 **🔨 Hands-On Practice:**
@@ -469,7 +467,6 @@ Follow this 4-step learning path:
 - CI/CD pipeline setup
 - Performance optimization
 
-**Time**: 150-180 minutes
 
 ### Step 4: Complete Lab Exercises
  Practice in [lab5.md](./lab/lab5.md) - Hands-on challenges:
@@ -477,7 +474,6 @@ Follow this 4-step learning path:
 - Level 2: Real-time features and file uploads
 - Level 3: Production deployment with CI/CD
 
-**Time**: 240-300 minutes
 
 >  **Pro tip**: Test deployment in staging environment before production
 

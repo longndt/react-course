@@ -42,7 +42,7 @@ solutions/
 ### When to Check Solutions
 
  **Good reasons to check:**
-- Stuck for more than 15-20 minutes
+- Stuck for an extended period
 - Completed exercise and want to verify approach
 - Got it working but want to see best practices
 - Want to understand a specific technique better

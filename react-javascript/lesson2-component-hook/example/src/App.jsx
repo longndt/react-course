@@ -4,6 +4,7 @@ import { Form } from "./components/Form";
 import { Modal } from "./components/Modal";
 import "./App.css";
 
+// ✅ CHECKPOINT 1: Mock data setup
 const mockUsers = [
   {
     id: 1,
@@ -29,11 +30,13 @@ const mockUsers = [
 ];
 
 export function App() {
+  // ✅ CHECKPOINT 2: useState hooks for state management
   const [users, setUsers] = useState(mockUsers);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
 
+  // ✅ CHECKPOINT 3: CRUD operations with functional state updates
   const handleAddUser = async (values) => {
     const newUser = {
       id: users.length + 1,
@@ -76,10 +79,12 @@ export function App() {
     <div className="container">
       <h1>User Management</h1>
 
+      {/* ✅ CHECKPOINT 4: Event handlers and state updates */}
       <button onClick={() => setIsAddModalOpen(true)} className="button">
         Add User
       </button>
 
+      {/* ✅ CHECKPOINT 5: DataTable with custom render functions */}
       <DataTable
         data={users}
         columns={[
@@ -120,7 +125,7 @@ export function App() {
         ]}
       />
 
-      {/* Add User Modal */}
+      {/* ✅ CHECKPOINT 6: Modal components with form handling */}
       <Modal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
@@ -179,7 +184,7 @@ export function App() {
         </Form>
       </Modal>
 
-      {/* Edit User Modal */}
+      {/* ✅ CHECKPOINT 7: Edit modal with default values */}
       <Modal
         isOpen={isEditModalOpen}
         onClose={() => {

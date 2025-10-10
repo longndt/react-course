@@ -402,7 +402,6 @@ Follow this 4-step learning path:
 - Pagination and infinite scroll
 - File upload with progress
 
-**Time**: 120-150 minutes
 
 ### Step 4: Complete Lab Exercises
  Practice in [lab3.md](./lab/lab3.md) - Hands-on challenges:
@@ -410,7 +409,6 @@ Follow this 4-step learning path:
 - Level 2: Full CRUD operations
 - Level 3: Advanced features (search, pagination, uploads)
 
-**Time**: 180-240 minutes
 
 >  **Pro tip**: Test APIs with Postman before integrating with React
 

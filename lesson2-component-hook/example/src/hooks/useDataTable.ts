@@ -6,14 +6,17 @@ import type {
 } from "../types/DataTable.types";
 
 /**
- * Custom hook to handle sorting functionality in DataTable
+ * ✅ CHECKPOINT: Custom hook to handle sorting functionality in DataTable
+ * Key concepts: useState, useMemo, functional state updates
  */
 export function useDataTableSort<T extends Record<string, any>>(
   data: T[],
   sortable: boolean = true
 ): UseDataTableSortResult<T> {
+  // ✅ CHECKPOINT: State management with useState
   const [sortConfig, setSortConfig] = useState<SortConfig<T> | null>(null);
 
+  // ✅ CHECKPOINT: Event handler with functional state updates
   const requestSort = (key: keyof T) => {
     if (!sortable) return;
 
@@ -28,6 +31,7 @@ export function useDataTableSort<T extends Record<string, any>>(
     });
   };
 
+  // ✅ CHECKPOINT: useMemo for expensive calculations
   const sortedData = useMemo(() => {
     if (!sortConfig) return data;
 
@@ -46,13 +50,16 @@ export function useDataTableSort<T extends Record<string, any>>(
 }
 
 /**
- * Custom hook to handle filtering functionality in DataTable
+ * ✅ CHECKPOINT: Custom hook to handle filtering functionality in DataTable
+ * Key concepts: useState, useMemo, string manipulation
  */
 export function useDataTableFilter<T extends Record<string, any>>(
   data: T[]
 ): UseDataTableFilterResult<T> {
+  // ✅ CHECKPOINT: State for filter text
   const [filterText, setFilterText] = useState<string>("");
 
+  // ✅ CHECKPOINT: useMemo for filtering logic
   const filteredData = useMemo(() => {
     if (!filterText) return data;
 

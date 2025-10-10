@@ -97,7 +97,7 @@ export function DataTable<T extends Record<string, any>>({
           {filteredData.length === 0 ? (
             <tr>
               <td colSpan={columns.length} className="no-data">
-                No user available
+                No data available
               </td>
             </tr>
           ) : (

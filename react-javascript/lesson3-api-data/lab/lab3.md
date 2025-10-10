@@ -1101,8 +1101,51 @@ Before moving to Lab 4, you should be able to:
 - [ ] Can explain optimistic updates
 - [ ] Understand background refetching
 
-**If you can confidently do all above, you're ready for Lab 4!** 
+**If you can confidently do all above, you're ready for Lab 4!**
 
 ---
 
-**Great work completing Lab 3! You've built a production-ready full-stack application with modern patterns.**
+## ✅ Success Criteria Checklist
+
+Before moving to Lesson 4, verify you can:
+
+### **REST API Fundamentals**
+- [ ] Understand HTTP methods (GET, POST, PUT, DELETE)
+- [ ] Know common status codes (200, 201, 400, 404, 500)
+- [ ] Make API requests using fetch or axios
+- [ ] Handle JSON responses correctly
+- [ ] Work with async/await patterns
+
+### **React Integration**
+- [ ] Fetch data in useEffect hook
+- [ ] Manage loading, error, and success states
+- [ ] Display API data in components
+- [ ] Handle form submissions to API
+- [ ] Cancel requests on component unmount
+
+### **React Query (TanStack Query)**
+- [ ] Set up QueryClient provider
+- [ ] Use useQuery for data fetching
+- [ ] Use useMutation for create/update/delete
+- [ ] Invalidate queries after mutations
+- [ ] Implement optimistic updates
+
+### **CRUD Operations**
+- [ ] Create resources with POST requests
+- [ ] Read/List resources with GET requests
+- [ ] Update resources with PUT/PATCH requests
+- [ ] Delete resources with DELETE requests
+- [ ] Handle success/error feedback properly
+
+### **Advanced Features**
+- [ ] Implement debounced search functionality
+- [ ] Add pagination to large lists
+- [ ] Handle file uploads with FormData
+- [ ] Manage complex state with useReducer
+- [ ] Debug API calls with DevTools
+
+**Goal: Check at least 16/20 items before Lesson 4**
+
+---
+
+**Great work completing Lab 3! You've built a production-ready full-stack application with modern patterns.** 🎉

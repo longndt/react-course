@@ -349,7 +349,6 @@ Follow this 4-step learning path:
 - Advanced patterns (HOC, Render Props, Compound)
 - Context API examples
 
-**Time**: 45-60 minutes
 
 ### Step 3: Build Example Projects
 **🔨 Hands-On Practice:**
@@ -361,7 +360,6 @@ Follow this 4-step learning path:
 - Role-based access control
 - Advanced pattern implementations
 
-**Time**: 120-150 minutes
 
 ### Step 4: Complete Lab Exercises
  Practice in [lab4.md](./lab/lab4.md) - Hands-on challenges:
@@ -369,7 +367,6 @@ Follow this 4-step learning path:
 - Level 2: Authentication system
 - Level 3: Advanced patterns and RBAC
 
-**Time**: 180-240 minutes
 
 >  **Pro tip**: Test routing with React Router DevTools browser extension
 
