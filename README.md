@@ -188,7 +188,7 @@ Quick links to key diagrams:
 
 **📋 First, ensure you have all required software installed:**
 
-**[Go to Environment Setup Guide](./setup/environment-setup.md)** for detailed setup instructions
+**[Go to Environment Setup Guide](./extra/environment-setup.md)** for detailed setup instructions
 
 Make sure you have installed:
 - Node.js (version 18 or higher)
