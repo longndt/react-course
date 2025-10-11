@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductList from "./components/ProductList.jsx";
 import ProductForm from "./components/ProductForm.jsx";
 import "./App.css";
@@ -6,6 +6,18 @@ import "./App.css";
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
+
+  // Start MSW in mock mode
+  useEffect(() => {
+    if (import.meta.env.MODE === 'mock') {
+      import('./mocks/browser').then(({ worker }) => {
+        worker.start({
+          onUnhandledRequest: 'bypass',
+        });
+        console.log('MSW started in mock mode');
+      });
+    }
+  }, []);
 
   const handleProductCreated = () => {
     setRefreshKey(prev => prev + 1);

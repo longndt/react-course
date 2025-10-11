@@ -132,14 +132,8 @@ const data = response.data; // Already parsed JSON
 // Install: npm install axios
 import axios from 'axios';
 
-// Create axios instance with base URL
-const api = axios.create({
-  baseURL: 'http://localhost:3001/api',
-  timeout: 5000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+// Simple configuration
+const API_BASE_URL = 'http://localhost:3001/api';
 ```
 
 ### Basic CRUD with Axios
@@ -148,7 +142,7 @@ const api = axios.create({
 // GET - Fetch all tasks
 const fetchTasks = async () => {
   try {
-    const response = await api.get('/tasks');
+    const response = await axios.get(`${API_BASE_URL}/tasks`);
     return response.data;
   } catch (error) {
     console.error('Error fetching tasks:', error);
@@ -159,7 +153,7 @@ const fetchTasks = async () => {
 // POST - Create new task
 const createTask = async (taskData) => {
   try {
-    const response = await api.post('/tasks', taskData);
+    const response = await axios.post(`${API_BASE_URL}/tasks`, taskData);
     return response.data;
   } catch (error) {
     console.error('Error creating task:', error);
@@ -170,7 +164,7 @@ const createTask = async (taskData) => {
 // PUT - Update task
 const updateTask = async (id, taskData) => {
   try {
-    const response = await api.put(`/tasks/${id}`, taskData);
+    const response = await axios.put(`${API_BASE_URL}/tasks/${id}`, taskData);
     return response.data;
   } catch (error) {
     console.error('Error updating task:', error);
@@ -181,7 +175,7 @@ const updateTask = async (id, taskData) => {
 // DELETE - Remove task
 const deleteTask = async (id) => {
   try {
-    await api.delete(`/tasks/${id}`);
+    await axios.delete(`${API_BASE_URL}/tasks/${id}`);
   } catch (error) {
     console.error('Error deleting task:', error);
     throw error;
@@ -320,6 +314,11 @@ function TaskManager() {
 
 ### React Query Setup
 
+```bash
+# Install React Query
+npm install @tanstack/react-query
+```
+
 ```typescript
 // main.tsx
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -335,10 +334,10 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
+  <QueryClientProvider client={queryClient}>
       <TaskManager />
     </QueryClientProvider>
-  );
+);
 }
 ```
 
@@ -406,7 +405,7 @@ function TaskManager() {
           </button>
           <button onClick={() => deleteMutation.mutate(task._id)}>
             Delete
-          </button>
+    </button>
         </div>
       ))}
     </div>

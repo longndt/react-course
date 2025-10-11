@@ -7,7 +7,7 @@
 4. [Data Fetching Components](#4-data-fetching-components)
 5. [CRUD Operations with Axios](#5-crud-operations-with-axios)
 6. [Error Handling & Loading States](#6-error-handling--loading-states)
-7. [React Query (Advanced)](#7-react-query-advanced)
+7. [Advanced Patterns](#7-advanced-patterns)
 8. [Complete Examples](#8-complete-examples)
 
 ---
@@ -30,443 +30,302 @@ app.use(cors());
 app.use(express.json());
 
 // Mock data (replace with MongoDB later)
-let tasks = [
-  { id: 1, title: 'Learn React', description: 'Study React fundamentals', status: 'pending' },
-  { id: 2, title: 'Build API', description: 'Create REST API with Express', status: 'completed' },
+let products = [
+  { id: 1, name: 'iPhone 15 Pro', price: 999.99, category: 'electronics', inStock: true },
+  { id: 2, name: 'MacBook Air', price: 1199.99, category: 'electronics', inStock: true },
 ];
 
-// GET - Fetch all tasks
-app.get('/api/tasks', (req, res) => {
-  res.json(tasks);
+// GET - Fetch all products
+app.get('/api/products', (req, res) => {
+  res.json(products);
 });
 
-// GET - Fetch single task
-app.get('/api/tasks/:id', (req, res) => {
-  const task = tasks.find(t => t.id === parseInt(req.params.id));
-  if (task) {
-    res.json(task);
+// GET - Fetch single product
+app.get('/api/products/:id', (req, res) => {
+  const product = products.find(p => p.id === parseInt(req.params.id));
+  if (product) {
+    res.json(product);
   } else {
-    res.status(404).json({ error: 'Task not found' });
+    res.status(404).json({ error: 'Product not found' });
   }
 });
 
-// POST - Create new task
-app.post('/api/tasks', (req, res) => {
-  const { title, description } = req.body;
-  const newTask = {
-    id: tasks.length + 1,
-    title,
-    description,
-    status: 'pending',
+// POST - Create new product
+app.post('/api/products', (req, res) => {
+  const { name, price, category } = req.body;
+  const newProduct = {
+    id: products.length + 1,
+    name,
+    price,
+    category,
+    inStock: true,
     createdAt: new Date().toISOString()
   };
-  tasks.push(newTask);
-  res.status(201).json(newTask);
+  products.push(newProduct);
+  res.status(201).json(newProduct);
 });
 
-// PUT - Update task
-app.put('/api/tasks/:id', (req, res) => {
-  const taskId = parseInt(req.params.id);
-  const taskIndex = tasks.findIndex(t => t.id === taskId);
-  
-  if (taskIndex === -1) {
-    return res.status(404).json({ error: 'Task not found' });
+// PUT - Update product
+app.put('/api/products/:id', (req, res) => {
+  const productIndex = products.findIndex(p => p.id === parseInt(req.params.id));
+  if (productIndex === -1) {
+    return res.status(404).json({ error: 'Product not found' });
   }
   
-  tasks[taskIndex] = { ...tasks[taskIndex], ...req.body };
-  res.json(tasks[taskIndex]);
+  products[productIndex] = { ...products[productIndex], ...req.body };
+  res.json(products[productIndex]);
 });
 
-// DELETE - Delete task
-app.delete('/api/tasks/:id', (req, res) => {
-  const taskId = parseInt(req.params.id);
-  const taskIndex = tasks.findIndex(t => t.id === taskId);
-  
-  if (taskIndex === -1) {
-    return res.status(404).json({ error: 'Task not found' });
+// DELETE - Delete product
+app.delete('/api/products/:id', (req, res) => {
+  const productIndex = products.findIndex(p => p.id === parseInt(req.params.id));
+  if (productIndex === -1) {
+    return res.status(404).json({ error: 'Product not found' });
   }
   
-  tasks.splice(taskIndex, 1);
-  res.json({ message: 'Task deleted successfully' });
+  products.splice(productIndex, 1);
+  res.json({ message: 'Product deleted successfully' });
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
+```
+
+### MongoDB Integration
+
+```javascript
+// models/Product.js
+const mongoose = require('mongoose');
+
+const productSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  price: { type: Number, required: true, min: 0 },
+  category: { 
+    type: String, 
+    required: true,
+    enum: ['electronics', 'clothing', 'books', 'home', 'sports', 'other']
+  },
+  inStock: { type: Boolean, default: true },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now }
+});
+
+module.exports = mongoose.model('Product', productSchema);
 ```
 
 ---
 
 ## 2. Axios Setup & Configuration
 
-### Installation and Basic Setup
+### Basic Axios Installation
+
+```bash
+npm install axios
+```
+
+### Axios Configuration
 
 ```javascript
-// Install dependencies
-npm install axios
-
 // services/api.js
 import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:3001/api';
 
-// Create axios instance with default config
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 10000, // 10 seconds
-      headers: {
-        'Content-Type': 'application/json',
-  },
-});
-
 // Request interceptor
-api.interceptors.request.use(
+axios.interceptors.request.use(
   (config) => {
-    // Add auth token if available
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-// Response interceptor
-api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    // Handle common errors
-    if (error.response?.status === 401) {
-      // Redirect to login
-      localStorage.removeItem('authToken');
-      window.location.href = '/login';
-    }
-    return Promise.reject(error);
-  }
-);
-
-export default api;
-```
-
-### Advanced Axios Configuration
-
-```javascript
-// services/apiClient.js
-import axios from 'axios';
-
-class ApiClient {
-  constructor(baseURL) {
-    this.client = axios.create({
-      baseURL,
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-    this.setupInterceptors();
-  }
-
-  setupInterceptors() {
-// Request interceptor
-    this.client.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    console.log(`Making ${config.method?.toUpperCase()} request to ${config.url}`);
     return config;
   },
   (error) => Promise.reject(error)
 );
 
 // Response interceptor
-    this.client.interceptors.response.use(
-  (response) => response,
+axios.interceptors.response.use(
+  (response) => {
+    console.log(`Response received from ${response.config.url}`);
+    return response;
+  },
   (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem('authToken');
-      window.location.href = '/login';
-    }
+    console.error(`API Error: ${error.message}`);
     return Promise.reject(error);
   }
 );
-  }
 
-  async get(url, config) {
-    const response = await this.client.get(url, config);
-    return response.data;
-  }
+export default axios;
+```
 
-  async post(url, data, config) {
-    const response = await this.client.post(url, data, config);
-    return response.data;
-  }
+### PropTypes for Type Safety
 
-  async put(url, data, config) {
-    const response = await this.client.put(url, data, config);
-    return response.data;
-  }
+```javascript
+// types/product.js
+import PropTypes from 'prop-types';
 
-  async delete(url, config) {
-    const response = await this.client.delete(url, config);
-    return response.data;
-  }
-}
+export const ProductShape = PropTypes.shape({
+  _id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  category: PropTypes.oneOf(['electronics', 'clothing', 'books', 'home', 'sports', 'other']).isRequired,
+  inStock: PropTypes.bool.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  updatedAt: PropTypes.string.isRequired,
+});
 
-export const apiClient = new ApiClient('http://localhost:3001/api');
+export const CreateProductInputShape = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  category: PropTypes.string.isRequired,
+});
 ```
 
 ---
 
 ## 3. API Client Patterns with Axios
 
-### Task API Service
+### Product API Service
 
 ```javascript
-// services/taskApi.js
-import api from './api';
+// services/productApi.js
+import axios from './api';
 
-/**
- * @typedef {Object} Task
- * @property {number} id
- * @property {string} title
- * @property {string} description
- * @property {'pending'|'completed'} status
- * @property {string} createdAt
- */
+const API_BASE_URL = 'http://localhost:3001/api';
 
-/**
- * @typedef {Object} CreateTaskInput
- * @property {string} title
- * @property {string} description
- */
-
-/**
- * @typedef {Object} UpdateTaskInput
- * @property {string} [title]
- * @property {string} [description]
- * @property {'pending'|'completed'} [status]
- */
-
-export const taskApi = {
-  // Get all tasks
+export const productApi = {
+  // Get all products
   getAll: async () => {
-    const response = await api.get('/tasks');
+    const response = await axios.get(`${API_BASE_URL}/products`);
     return response.data;
   },
 
-  // Get single task
+  // Get single product
   getById: async (id) => {
-    const response = await api.get(`/tasks/${id}`);
+    const response = await axios.get(`${API_BASE_URL}/products/${id}`);
     return response.data;
   },
 
-  // Create new task
-  create: async (data) => {
-    const response = await api.post('/tasks', data);
+  // Create new product
+  create: async (productData) => {
+    const response = await axios.post(`${API_BASE_URL}/products`, productData);
     return response.data;
   },
 
-  // Update task
-  update: async (id, data) => {
-    const response = await api.put(`/tasks/${id}`, data);
+  // Update product
+  update: async ({ _id, ...updateData }) => {
+    const response = await axios.put(`${API_BASE_URL}/products/${_id}`, updateData);
     return response.data;
   },
 
-  // Delete task
+  // Delete product
   delete: async (id) => {
-    await api.delete(`/tasks/${id}`);
+    await axios.delete(`${API_BASE_URL}/products/${id}`);
   },
 };
 ```
 
-### Generic API Service Pattern
+### Error Handling Service
 
 ```javascript
-// services/baseApi.js
-import api from './api';
-
-export class BaseApiService {
-  constructor(endpoint) {
-    this.endpoint = endpoint;
+// services/errorHandler.js
+export const handleApiError = (error) => {
+  if (error.response) {
+    // Server responded with error status
+    return `Server Error: ${error.response.data.message || error.message}`;
+  } else if (error.request) {
+    // Request was made but no response received
+    return 'Network Error: Please check your connection';
+  } else {
+    // Something else happened
+    return `Request Error: ${error.message}`;
   }
-
-  async getAll() {
-    const response = await api.get(`/${this.endpoint}`);
-    return response.data;
-  }
-
-  async getById(id) {
-    const response = await api.get(`/${this.endpoint}/${id}`);
-    return response.data;
-  }
-
-  async create(data) {
-    const response = await api.post(`/${this.endpoint}`, data);
-    return response.data;
-  }
-
-  async update(id, data) {
-    const response = await api.put(`/${this.endpoint}/${id}`, data);
-    return response.data;
-  }
-
-  async delete(id) {
-    await api.delete(`/${this.endpoint}/${id}`);
-  }
-}
-
-// Usage
-export const taskService = new BaseApiService('tasks');
-export const userService = new BaseApiService('users');
+};
 ```
 
 ---
 
 ## 4. Data Fetching Components
 
-### Basic Data Fetching with Axios
+### Product List Component
 
 ```javascript
-// components/TaskList.jsx
+// components/ProductList.jsx
 import { useState, useEffect } from 'react';
-import { taskApi } from '../services/taskApi';
+import { productApi } from '../services/productApi';
+import { handleApiError } from '../services/errorHandler';
+import { ProductShape } from '../types/product';
+import PropTypes from 'prop-types';
 
-const TaskList = () => {
-  const [tasks, setTasks] = useState([]);
+const ProductList = () => {
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const data = await taskApi.getAll();
-        setTasks(data);
-      } catch (err) {
-        setError('Failed to fetch tasks');
-        console.error('Error fetching tasks:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTasks();
-  }, []);
-
-  if (loading) {
-    return <div className="loading">Loading tasks...</div>;
-  }
-
-  if (error) {
-    return (
-      <div className="error">
-        <p>{error}</p>
-        <button onClick={() => window.location.reload()}>Retry</button>
-      </div>
-    );
-  }
-
-  return (
-    <div className="task-list">
-      <h2>Tasks ({tasks.length})</h2>
-      {tasks.length === 0 ? (
-        <p>No tasks found. Create your first task!</p>
-      ) : (
-        <div className="tasks">
-          {tasks.map(task => (
-            <div key={task.id} className={`task-card ${task.status}`}>
-              <h3>{task.title}</h3>
-              <p>{task.description}</p>
-              <small>Created: {new Date(task.createdAt).toLocaleDateString()}</small>
-        </div>
-      ))}
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default TaskList;
-```
-
-### Custom Hook for Data Fetching
-
-```javascript
-// hooks/useTasks.js
-import { useState, useEffect } from 'react';
-import { taskApi } from '../services/taskApi';
-
-/**
- * @typedef {Object} UseTasksReturn
- * @property {Array} tasks
- * @property {boolean} loading
- * @property {string|null} error
- * @property {Function} refetch
- */
-
-/**
- * Custom hook for managing tasks
- * @returns {UseTasksReturn}
- */
-export const useTasks = () => {
-  const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const fetchTasks = async () => {
+  const fetchProducts = async () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await taskApi.getAll();
-      setTasks(data);
+      const data = await productApi.getAll();
+      setProducts(data);
     } catch (err) {
-      setError('Failed to fetch tasks');
-      console.error('Error fetching tasks:', err);
+      setError(handleApiError(err));
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchTasks();
+    fetchProducts();
   }, []);
 
-  return {
-    tasks,
-    loading,
-    error,
-    refetch: fetchTasks,
-  };
+  if (loading) return <div className="loading">Loading products...</div>;
+  if (error) return <div className="error">Error: {error}</div>;
+
+  return (
+    <div className="product-list">
+      <h2>Products ({products.length})</h2>
+      {products.map(product => (
+        <div key={product._id} className="product-card">
+          <h3>{product.name}</h3>
+          <p>{product.description}</p>
+          <div className="product-details">
+            <span className="price">${product.price}</span>
+            <span className="category">{product.category}</span>
+            <span className={`stock ${product.inStock ? 'in-stock' : 'out-of-stock'}`}>
+              {product.inStock ? 'In Stock' : 'Out of Stock'}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 };
+
+ProductList.propTypes = {
+  // No props for this component
+};
+
+export default ProductList;
 ```
 
----
-
-## 5. CRUD Operations with Axios
-
-### Create Operation
+### Product Form Component
 
 ```javascript
-// components/TaskForm.jsx
+// components/ProductForm.jsx
 import { useState } from 'react';
-import { taskApi } from '../services/taskApi';
+import { productApi } from '../services/productApi';
+import { handleApiError } from '../services/errorHandler';
+import { CreateProductInputShape } from '../types/product';
+import PropTypes from 'prop-types';
 
-/**
- * @param {Object} props
- * @param {Function} props.onTaskCreated
- */
-const TaskForm = ({ onTaskCreated }) => {
+const ProductForm = ({ onProductCreated }) => {
   const [formData, setFormData] = useState({
-    title: '',
+    name: '',
     description: '',
+    price: 0,
+    category: 'electronics',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -474,610 +333,594 @@ const TaskForm = ({ onTaskCreated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!formData.title.trim() || !formData.description.trim()) {
-      setError('Please fill in all fields');
+    if (!formData.name.trim() || !formData.description.trim() || formData.price <= 0) {
+      setError('Please fill in all fields with valid values.');
       return;
     }
 
     try {
       setLoading(true);
       setError(null);
-      
-      await taskApi.create({
-        title: formData.title.trim(),
-        description: formData.description.trim(),
-      });
-      
-      // Reset form
-      setFormData({ title: '', description: '' });
-      
-      // Notify parent component
-      onTaskCreated();
-      
+      await productApi.create(formData);
+      setFormData({ name: '', description: '', price: 0, category: 'electronics' });
+      onProductCreated();
     } catch (err) {
-      setError('Failed to create task');
-      console.error('Error creating task:', err);
+      setError(handleApiError(err));
     } finally {
       setLoading(false);
     }
   };
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value,
+      [name]: name === 'price' ? parseFloat(value) || 0 : value,
     }));
   };
 
   return (
-    <form onSubmit={handleSubmit} className="task-form">
+    <form onSubmit={handleSubmit} className="product-form">
+      <h3>Add New Product</h3>
+      
       <div className="form-group">
-        <label htmlFor="title">Title:</label>
+        <label htmlFor="name">Product Name</label>
         <input
           type="text"
-          id="title"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          placeholder="Enter task title"
-          disabled={loading}
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
+          required
         />
       </div>
 
       <div className="form-group">
-        <label htmlFor="description">Description:</label>
+        <label htmlFor="description">Description</label>
         <textarea
           id="description"
           name="description"
           value={formData.description}
-          onChange={handleChange}
-          placeholder="Enter task description"
-          rows={3}
-          disabled={loading}
+          onChange={handleInputChange}
+          required
         />
       </div>
 
-      {error && (
-        <div className="error-message">
-          {error}
+      <div className="form-group">
+        <label htmlFor="price">Price ($)</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          value={formData.price}
+          onChange={handleInputChange}
+          min="0"
+          step="0.01"
+          required
+        />
       </div>
-      )}
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="btn btn-primary"
-      >
-        {loading ? 'Creating...' : 'Create Task'}
+      <div className="form-group">
+        <label htmlFor="category">Category</label>
+        <select
+          id="category"
+          name="category"
+          value={formData.category}
+          onChange={handleInputChange}
+          required
+        >
+          <option value="electronics">Electronics</option>
+          <option value="clothing">Clothing</option>
+          <option value="books">Books</option>
+          <option value="home">Home & Garden</option>
+          <option value="sports">Sports</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <button type="submit" disabled={loading}>
+        {loading ? 'Creating...' : 'Create Product'}
       </button>
+
+      {error && <div className="error">{error}</div>}
     </form>
   );
 };
 
-export default TaskForm;
-```
-
-### Update Operation
-
-```javascript
-// components/TaskCard.jsx
-import { useState } from 'react';
-import { taskApi } from '../services/taskApi';
-
-/**
- * @param {Object} props
- * @param {Object} props.task
- * @param {Function} props.onTaskUpdated
- */
-const TaskCard = ({ task, onTaskUpdated }) => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const handleStatusToggle = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      
-      const newStatus = task.status === 'pending' ? 'completed' : 'pending';
-      await taskApi.update(task.id, { status: newStatus });
-      
-      onTaskUpdated();
-    } catch (err) {
-      setError('Failed to update task');
-      console.error('Error updating task:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleDelete = async () => {
-    if (!window.confirm('Are you sure you want to delete this task?')) {
-      return;
-    }
-
-    try {
-      setLoading(true);
-      setError(null);
-      
-      await taskApi.delete(task.id);
-      onTaskUpdated();
-    } catch (err) {
-      setError('Failed to delete task');
-      console.error('Error deleting task:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className={`task-card ${task.status}`}>
-      <div className="task-content">
-        <h3>{task.title}</h3>
-        <p>{task.description}</p>
-        <small>Created: {new Date(task.createdAt).toLocaleDateString()}</small>
-      </div>
-
-      <div className="task-actions">
-        <button
-          onClick={handleStatusToggle}
-          disabled={loading}
-          className={`btn ${task.status === 'pending' ? 'btn-success' : 'btn-warning'}`}
-        >
-          {task.status === 'pending' ? 'Complete' : 'Undo'}
-        </button>
-        
-    <button
-      onClick={handleDelete}
-          disabled={loading}
-          className="btn btn-danger"
-    >
-          Delete
-    </button>
-      </div>
-
-      {error && (
-        <div className="error-message">
-          {error}
-        </div>
-      )}
-    </div>
-  );
+ProductForm.propTypes = {
+  onProductCreated: PropTypes.func.isRequired,
 };
 
-export default TaskCard;
+export default ProductForm;
+```
+
+---
+
+## 5. CRUD Operations with Axios
+
+### Complete CRUD Implementation
+
+```javascript
+// hooks/useProducts.js
+import { useState, useEffect } from 'react';
+import { productApi } from '../services/productApi';
+import { handleApiError } from '../services/errorHandler';
+
+export const useProducts = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await productApi.getAll();
+      setProducts(data);
+    } catch (err) {
+      setError(handleApiError(err));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const createProduct = async (productData) => {
+    try {
+      const newProduct = await productApi.create(productData);
+      setProducts(prev => [...prev, newProduct]);
+      return newProduct;
+    } catch (err) {
+      throw new Error(handleApiError(err));
+    }
+  };
+
+  const updateProduct = async (updateData) => {
+    try {
+      const updatedProduct = await productApi.update(updateData);
+      setProducts(prev => prev.map(p => 
+        p._id === updateData._id ? updatedProduct : p
+      ));
+      return updatedProduct;
+    } catch (err) {
+      throw new Error(handleApiError(err));
+    }
+  };
+
+  const deleteProduct = async (id) => {
+    try {
+      await productApi.delete(id);
+      setProducts(prev => prev.filter(p => p._id !== id));
+    } catch (err) {
+      throw new Error(handleApiError(err));
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  return {
+    products,
+    loading,
+    error,
+    createProduct,
+    updateProduct,
+    deleteProduct,
+    refetch: fetchProducts,
+  };
+};
 ```
 
 ---
 
 ## 6. Error Handling & Loading States
 
-### Comprehensive Error Handling
+### Loading Component
 
 ```javascript
-// utils/errorHandler.js
-/**
- * @typedef {Object} ApiError
- * @property {string} message
- * @property {number} [status]
- * @property {string} [code]
- */
+// components/LoadingSpinner.jsx
+import PropTypes from 'prop-types';
 
-/**
- * Handle API errors and return standardized error object
- * @param {any} error
- * @returns {ApiError}
- */
-export const handleApiError = (error) => {
-  if (error.response) {
-    // Server responded with error status
-    return {
-      message: error.response.data?.message || 'Server error occurred',
-      status: error.response.status,
-      code: error.response.data?.code,
-    };
-  } else if (error.request) {
-    // Request was made but no response received
-    return {
-      message: 'Network error - please check your connection',
-      status: 0,
-      code: 'NETWORK_ERROR',
-    };
-  } else {
-    // Something else happened
-    return {
-      message: error.message || 'An unexpected error occurred',
-      code: 'UNKNOWN_ERROR',
-    };
-  }
+const LoadingSpinner = ({ size = 'medium', text = 'Loading...' }) => {
+  const sizeClasses = {
+    small: 'w-4 h-4',
+    medium: 'w-8 h-8',
+    large: 'w-12 h-12',
+  };
+
+  return (
+    <div className="loading-container">
+      <div className={`spinner ${sizeClasses[size]}`}></div>
+      <p className="loading-text">{text}</p>
+    </div>
+  );
 };
 
-// Usage in component
-const handleError = (error) => {
-  const apiError = handleApiError(error);
-  
-  if (apiError.status === 401) {
-    // Redirect to login
-    window.location.href = '/login';
-  } else if (apiError.status === 403) {
-    // Show permission denied message
-    setError('You do not have permission to perform this action');
-  } else {
-    // Show generic error message
-    setError(apiError.message);
-  }
+LoadingSpinner.propTypes = {
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  text: PropTypes.string,
 };
+
+export default LoadingSpinner;
 ```
 
-### Loading States with Skeleton
+### Error Display Component
+
+```javascript
+// components/ErrorDisplay.jsx
+import PropTypes from 'prop-types';
+
+const ErrorDisplay = ({ error, onRetry, showRetry = true }) => {
+  return (
+    <div className="error-display">
+      <div className="error-icon">⚠️</div>
+      <div className="error-content">
+        <h3>Something went wrong</h3>
+        <p>{error}</p>
+        {showRetry && onRetry && (
+          <button onClick={onRetry} className="retry-button">
+            Try Again
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
+ErrorDisplay.propTypes = {
+  error: PropTypes.string.isRequired,
+  onRetry: PropTypes.func,
+  showRetry: PropTypes.bool,
+};
+
+export default ErrorDisplay;
+```
+
+### Skeleton Loading
 
 ```javascript
 // components/SkeletonLoader.jsx
 const SkeletonLoader = () => {
   return (
     <div className="skeleton-container">
-      {[...Array(3)].map((_, index) => (
+      {Array.from({ length: 3 }).map((_, index) => (
         <div key={index} className="skeleton-card">
           <div className="skeleton-line skeleton-title"></div>
           <div className="skeleton-line skeleton-description"></div>
-          <div className="skeleton-line skeleton-meta"></div>
-          </div>
-        ))}
+          <div className="skeleton-line skeleton-price"></div>
+        </div>
+      ))}
     </div>
   );
 };
-
-// CSS for skeleton
-const skeletonStyles = `
-.skeleton-container {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-}
-
-.skeleton-card {
-  background: #f0f0f0;
-  border-radius: 6px;
-  padding: 1rem;
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-.skeleton-line {
-  height: 1rem;
-  background: #e0e0e0;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
-}
-
-.skeleton-title {
-  width: 70%;
-}
-
-.skeleton-description {
-  width: 100%;
-}
-
-.skeleton-meta {
-  width: 40%;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-`;
 
 export default SkeletonLoader;
 ```
 
 ---
 
-## 7. React Query (Advanced)
+## 7. Advanced Patterns
 
-### React Query Setup
-
-```javascript
-// Install dependencies
-npm install @tanstack/react-query
-
-// main.jsx
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      gcTime: 10 * 60 * 1000, // 10 minutes
-      retry: 3,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <YourApp />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  );
-}
-```
-
-### Data Fetching with React Query
+### Custom Hooks for API Calls
 
 ```javascript
-// hooks/useTasksQuery.js
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { taskApi } from '../services/taskApi';
+// hooks/useApi.js
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-export const useTasksQuery = () => {
-  return useQuery({
-    queryKey: ['tasks'],
-    queryFn: taskApi.getAll,
-    staleTime: 5 * 60 * 1000, // 5 minutes
-  });
-};
+export function useApi({ url, immediate = true, onSuccess, onError }) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-export const useCreateTaskMutation = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: taskApi.create,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-    },
-  });
-};
-
-export const useUpdateTaskMutation = () => {
-  const queryClient = useQueryClient();
-  
-  return useMutation({
-    mutationFn: ({ id, data }) => taskApi.update(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-    },
-  });
-};
-
-export const useDeleteTaskMutation = () => {
-  const queryClient = useQueryClient();
-  
-  return useMutation({
-    mutationFn: taskApi.delete,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-    },
-  });
-};
-```
-
-### Component with React Query
-
-```javascript
-// components/TaskListQuery.jsx
-import { useTasksQuery, useUpdateTaskMutation, useDeleteTaskMutation } from '../hooks/useTasksQuery';
-
-const TaskListQuery = () => {
-  const { data: tasks = [], isLoading, error } = useTasksQuery();
-  const updateMutation = useUpdateTaskMutation();
-  const deleteMutation = useDeleteTaskMutation();
-
-  const handleStatusToggle = (task) => {
-    const newStatus = task.status === 'pending' ? 'completed' : 'pending';
-    updateMutation.mutate({ id: task.id, data: { status: newStatus } });
-  };
-
-  const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this task?')) {
-      deleteMutation.mutate(id);
+  const execute = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await axios.get(url);
+      setData(response.data);
+      onSuccess?.(response.data);
+    } catch (err) {
+      const errorMessage = err.message || 'An error occurred';
+      setError(errorMessage);
+      onError?.(errorMessage);
+    } finally {
+      setLoading(false);
     }
   };
 
-  if (isLoading) {
-    return <div className="loading">Loading tasks...</div>;
+  useEffect(() => {
+    if (immediate) {
+      execute();
+    }
+  }, [url, immediate]);
+
+  return { data, loading, error, execute };
+}
+```
+
+### API Service Layer
+
+```javascript
+// services/apiService.js
+import axios from 'axios';
+
+class ApiService {
+  constructor(baseURL) {
+    this.client = axios.create({
+      baseURL,
+      timeout: 10000,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    this.setupInterceptors();
   }
 
-  if (error) {
-  return (
-      <div className="error">
-        <p>Failed to load tasks</p>
-        <button onClick={() => window.location.reload()}>Retry</button>
-        </div>
+  setupInterceptors() {
+    // Request interceptor
+    this.client.interceptors.request.use(
+      (config) => {
+        console.log(`Making ${config.method?.toUpperCase()} request to ${config.url}`);
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
+
+    // Response interceptor
+    this.client.interceptors.response.use(
+      (response) => {
+        console.log(`Response received from ${response.config.url}`);
+        return response;
+      },
+      (error) => {
+        console.error(`API Error: ${error.message}`);
+        return Promise.reject(error);
+      }
     );
   }
 
-  return (
-    <div className="task-list">
-      <h2>Tasks ({tasks.length})</h2>
-      {tasks.length === 0 ? (
-        <p>No tasks found. Create your first task!</p>
-      ) : (
-        <div className="tasks">
-          {tasks.map(task => (
-            <div key={task.id} className={`task-card ${task.status}`}>
-              <h3>{task.title}</h3>
-              <p>{task.description}</p>
-              <small>Created: {new Date(task.createdAt).toLocaleDateString()}</small>
-              <div className="task-actions">
-                      <button
-                  onClick={() => handleStatusToggle(task)}
-                  disabled={updateMutation.isPending}
-                  className={`btn ${task.status === 'pending' ? 'btn-success' : 'btn-warning'}`}
-                      >
-                  {task.status === 'pending' ? 'Complete' : 'Undo'}
-                      </button>
-                      <button
-                  onClick={() => handleDelete(task.id)}
-                  disabled={deleteMutation.isPending}
-                  className="btn btn-danger"
-                      >
-                  Delete
-                      </button>
-                    </div>
-                  </div>
-          ))}
-                    </div>
-      )}
-    </div>
-  );
+  async get(url) {
+    const response = await this.client.get(url);
+    return response.data;
+  }
+
+  async post(url, data) {
+    const response = await this.client.post(url, data);
+    return response.data;
+  }
+
+  async put(url, data) {
+    const response = await this.client.put(url, data);
+    return response.data;
+  }
+
+  async delete(url) {
+    const response = await this.client.delete(url);
+    return response.data;
+  }
+}
+
+export const apiService = new ApiService('http://localhost:3001/api');
+```
+
+### Error Boundary Component
+
+```javascript
+// components/ErrorBoundary.jsx
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('Error caught by boundary:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback || (
+        <div className="error-boundary">
+          <h2>Something went wrong</h2>
+          <p>{this.state.error?.message}</p>
+          <button onClick={() => this.setState({ hasError: false })}>
+            Try again
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+ErrorBoundary.propTypes = {
+  children: PropTypes.node.isRequired,
+  fallback: PropTypes.node,
 };
 
-export default TaskListQuery;
+export default ErrorBoundary;
+```
+
+### Optimistic Updates
+
+```javascript
+// hooks/useOptimisticUpdate.js
+import { useState } from 'react';
+import axios from 'axios';
+
+export function useOptimisticUpdate({ updateFn, onSuccess, onError }) {
+  const [loading, setLoading] = useState(false);
+
+  const execute = async (data, optimisticData) => {
+    try {
+      setLoading(true);
+      
+      // Update UI immediately (optimistic)
+      onSuccess?.(optimisticData);
+      
+      // Make actual API call
+      const result = await updateFn(data);
+      
+      // Update with real data
+      onSuccess?.(result);
+    } catch (error) {
+      const errorMessage = error.message || 'Update failed';
+      onError?.(errorMessage);
+      
+      // Revert optimistic update
+      onSuccess?.(data);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { execute, loading };
+}
+```
+
+### Retry Logic
+
+```javascript
+// utils/retry.js
+export async function retry(fn, maxAttempts = 3, delay = 1000) {
+  let lastError;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error;
+      
+      if (attempt === maxAttempts) {
+        throw lastError;
+      }
+      
+      // Exponential backoff
+      await new Promise(resolve => setTimeout(resolve, delay * attempt));
+    }
+  }
+
+  throw lastError;
+}
+
+// Usage
+const fetchData = async () => {
+  return await retry(
+    () => axios.get('/api/data'),
+    3, // max attempts
+    1000 // initial delay
+  );
+};
+```
+
+### Performance Optimization
+
+```javascript
+// hooks/useDebounce.js
+import { useState, useEffect } from 'react';
+
+export function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+// Usage in search
+const [searchTerm, setSearchTerm] = useState('');
+const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+useEffect(() => {
+  if (debouncedSearchTerm) {
+    // Perform search API call
+    searchProducts(debouncedSearchTerm);
+  }
+}, [debouncedSearchTerm]);
 ```
 
 ---
 
 ## 8. Complete Examples
 
-### Full Task Manager with Axios
+### Main App Component
 
 ```javascript
 // App.jsx
 import { useState } from 'react';
-import TaskList from './components/TaskList';
-import TaskForm from './components/TaskForm';
+import ProductList from './components/ProductList';
+import ProductForm from './components/ProductForm';
+import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
 
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleTaskCreated = () => {
+  const handleProductCreated = () => {
     setRefreshKey(prev => prev + 1);
     setShowForm(false);
   };
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <h1>Task Manager (Axios)</h1>
-        <p>Learn API integration with Axios - the most popular HTTP client</p>
-                      <button
-          onClick={() => setShowForm(!showForm)}
-          className="btn btn-primary"
-                      >
-          {showForm ? 'Hide Form' : 'Add New Task'}
-                      </button>
-      </header>
-
-      <main className="app-main">
-        {showForm && (
-          <div className="form-section">
-            <TaskForm onTaskCreated={handleTaskCreated} />
-                  </div>
-                )}
-
-        <div className="tasks-section">
-          <TaskList key={refreshKey} />
-              </div>
-      </main>
-    </div>
-  );
-}
-
-export default App;
-```
-
-### Full Task Manager with React Query
-
-```javascript
-// AppQuery.jsx
-import { useState } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import TaskListQuery from './components/TaskListQuery';
-import TaskFormQuery from './components/TaskFormQuery';
-import './App.css';
-
-const queryClient = new QueryClient();
-
-function AppQuery() {
-  const [showForm, setShowForm] = useState(false);
-
-  return (
-    <QueryClientProvider client={queryClient}>
+    <ErrorBoundary>
       <div className="app">
         <header className="app-header">
-          <h1>Task Manager (React Query)</h1>
-          <p>Advanced data management with caching and optimization</p>
+          <h1>Product Catalog</h1>
           <button
-            onClick={() => setShowForm(!showForm)}
             className="btn btn-primary"
+            onClick={() => setShowForm(!showForm)}
           >
-            {showForm ? 'Hide Form' : 'Add New Task'}
+            {showForm ? 'Hide Form' : 'Add New Product'}
           </button>
         </header>
 
         <main className="app-main">
           {showForm && (
             <div className="form-section">
-              <TaskFormQuery onSuccess={() => setShowForm(false)} />
+              <ProductForm onProductCreated={handleProductCreated} />
             </div>
           )}
 
-          <div className="tasks-section">
-            <TaskListQuery />
+          <div className="products-section">
+            <ProductList key={refreshKey} />
           </div>
         </main>
       </div>
-    </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 
-export default AppQuery;
+export default App;
 ```
 
-### Comparison: Axios vs React Query
+### Best Practices Summary
 
-| Feature | Axios | React Query |
-|---------|-------|-------------|
-| **Learning Curve** | Easy | Moderate |
-| **Bundle Size** | Small | Larger |
-| **Caching** | Manual | Automatic |
-| **Background Updates** | Manual | Automatic |
-| **Optimistic Updates** | Manual | Built-in |
-| **Error Handling** | Manual | Built-in |
-| **Loading States** | Manual | Built-in |
-| **Use Case** | Simple API calls | Complex data management |
-
-### When to Use What
-
-**Use Axios when:**
-- Simple API calls
-- Small applications
-- Learning API integration
-- Need full control over requests
-
-**Use React Query when:**
-- Complex data management
-- Need caching and background updates
-- Multiple components using same data
-- Want optimistic updates
-- Building large applications
-
----
-
-## Best Practices Summary
-
-### Axios Best Practices
-1. **Create centralized API client** with interceptors
-2. **Handle errors consistently** with proper error messages
-3. **Show loading states** for better UX
-4. **Use PropTypes** for type safety
-5. **Implement retry logic** for failed requests
-
-### React Query Best Practices
-1. **Use consistent query keys** for cache management
-2. **Invalidate queries** after mutations
-3. **Implement optimistic updates** for better UX
-4. **Configure stale time** appropriately
-5. **Use error boundaries** for error handling
-
-### General Best Practices
-1. **Separate API logic** from components
-2. **Handle all states** (loading, error, success, empty)
-3. **Validate data** before using
-4. **Implement proper error boundaries**
-5. **Test API integration** thoroughly
+1. **Create reusable API hooks** for common patterns
+2. **Implement error boundaries** for graceful error handling
+3. **Use optimistic updates** for better user experience
+4. **Add retry logic** for failed requests
+5. **Implement debouncing** for search and input fields
+6. **Use PropTypes** for type safety in JavaScript
+7. **Add loading states** for better UX
+8. **Implement proper error messages** for users
+9. **Create API service layer** for centralized API management
+10. **Use interceptors** for common functionality like logging and error handling
