@@ -727,17 +727,23 @@
           if (i === question.correct) {
             opt.classList.add("correct");
             opt.classList.remove("selected");
-            const icon = document.createElement("span");
-            icon.className = "feedback-icon";
-            icon.textContent = "✓";
-            opt.querySelector("label").appendChild(icon);
+            // Check if icon already exists
+            if (!opt.querySelector(".feedback-icon")) {
+              const icon = document.createElement("span");
+              icon.className = "feedback-icon";
+              icon.textContent = "✓";
+              opt.querySelector("label").appendChild(icon);
+            }
           } else if (i === selectedOption) {
             opt.classList.add("incorrect");
             opt.classList.remove("selected");
-            const icon = document.createElement("span");
-            icon.className = "feedback-icon";
-            icon.textContent = "✗";
-            opt.querySelector("label").appendChild(icon);
+            // Check if icon already exists
+            if (!opt.querySelector(".feedback-icon")) {
+              const icon = document.createElement("span");
+              icon.className = "feedback-icon";
+              icon.textContent = "✗";
+              opt.querySelector("label").appendChild(icon);
+            }
           }
         });
 

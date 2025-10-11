@@ -40,25 +40,27 @@ graph TB
 ### 🎯 Lesson 0: TypeScript Prerequisites (Foundation)
 **Difficulty**: ⭐ Beginner
 **Time**: 2-3 days
-**Type**: TypeScript Essentials
+**Requires**: HTML, CSS, Basic JavaScript
 
 ```mermaid
-flowchart LR
-    A[Lesson 0] --> B[TypeScript Basics]
+flowchart TD
+    A[Lesson 0 Start] --> B[TypeScript Basics]
     B --> C[Types & Interfaces]
     C --> D[Generics]
     D --> E[Type Safety]
-    E --> F[Ready for React]
+    E --> F[Lab: TypeScript Practice]
+    F --> G{Quiz}
+    G -->|Pass| H[✅ Lesson 0 Complete]
+    G -->|Need Review| B
 
-    style A fill:#fff3cd
-    style B fill:#cce5ff
-    style C fill:#cce5ff
-    style D fill:#cce5ff
-    style E fill:#cce5ff
-    style F fill:#e1f5e1
+    style A fill:#e1f5e1
+    style H fill:#d4edda
+    style G fill:#fff3cd
+    style D fill:#ffe1e1
+    style E fill:#ffe1e1
 ```
 
-**What You'll Learn**:
+**Key Topics**:
 - TypeScript fundamentals (types, interfaces, generics)
 - Type annotations and type inference
 - Interface definitions for props and state
@@ -66,32 +68,38 @@ flowchart LR
 - Utility types (Partial, Pick, Omit, etc.)
 - Type guards and type assertions
 
-**Prerequisites**: HTML, CSS, Basic JavaScript
+**TypeScript Features**:
+- Basic type system
+- Interface definitions
+- Generic programming
+- Type safety patterns
+- Advanced type utilities
+
+**Lab Project**: TypeScript Practice Exercises
 
 ---
 
 ### 📘 Lesson 1: React Fundamentals with TypeScript
 **Difficulty**: ⭐ Beginner
 **Time**: 1 week
-**Components**: 6 (Reference, Example, Theory, Lab, Quiz, Solutions)
+**Requires**: Lesson 0
 
 ```mermaid
 flowchart TD
-    A[Lesson 1 Start] --> B[📖 Read Theory]
-    B --> C[💻 Study Examples]
-    C --> D[🛠️ Lab Exercises]
-    D --> E{Quiz}
-    E -->|Pass| F[✅ Lesson 1 Complete]
-    E -->|Need Review| B
-
-    D --> D1[Exercise 1: 40% Practice<br/>Guided Setup]
-    D --> D2[Exercise 2: 60% Practice<br/>Your Turn - Components]
-    D --> D3[Exercise 3: 70% Practice<br/>Your Turn - Props]
-    D --> D4[Exercise 4: 80% Practice<br/>Your Turn - Events]
+    A[Lesson 1 Start] --> B[React Setup]
+    B --> C[Components & JSX]
+    C --> D[Props & State]
+    D --> E[Event Handling]
+    E --> F[Lab: Welcome Page]
+    F --> G{Quiz}
+    G -->|Pass| H[✅ Lesson 1 Complete]
+    G -->|Need Review| B
 
     style A fill:#e1f5e1
-    style F fill:#d4edda
-    style E fill:#fff3cd
+    style H fill:#d4edda
+    style G fill:#fff3cd
+    style D fill:#ffe1e1
+    style E fill:#ffe1e1
 ```
 
 **Key Topics**:
