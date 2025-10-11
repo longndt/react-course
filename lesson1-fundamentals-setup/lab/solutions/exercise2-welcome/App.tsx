@@ -1,7 +1,7 @@
 // Exercise 2 Solution - App Component with Welcome
 
 import './App.css';
-import Welcome from './components/Welcome';
+import Welcome from './Welcome';
 
 function App() {
   return (

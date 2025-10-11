@@ -104,7 +104,7 @@ Before starting this lesson, make sure you have:
 - Password hashing and validation
 - Rate limiting for login attempts
 
-### 3. Advanced React Patterns (1.5 hours)
+### 3. Advanced React Patterns
 
 **Higher-Order Components (HOCs):**
 - Concept and use cases

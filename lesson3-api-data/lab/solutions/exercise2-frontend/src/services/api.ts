@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { Task, CreateTaskInput, UpdateTaskInput } from '../types/task';
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'http://localhost:3001/api';
 
 // API client with axios
 const api = axios.create({
@@ -16,31 +16,31 @@ export const taskApi = {
   // Get all tasks
   getAllTasks: async () => {
     const response = await api.get('/tasks');
-    return response.data.data; // Return just the tasks array
+    return response.data; // Return the tasks array directly
   },
 
   // Get single task
   getTask: async (id: string): Promise<Task> => {
     const response = await api.get(`/tasks/${id}`);
-    return response.data.data;
+    return response.data;
   },
 
   // Create new task
   createTask: async (taskData: CreateTaskInput): Promise<Task> => {
     const response = await api.post('/tasks', taskData);
-    return response.data.data;
+    return response.data;
   },
 
   // Update task
   updateTask: async ({ id, ...taskData }: UpdateTaskInput): Promise<Task> => {
     const response = await api.put(`/tasks/${id}`, taskData);
-    return response.data.data;
+    return response.data;
   },
 
   // Delete task
   deleteTask: async (id: string): Promise<void> => {
-    const response = await api.delete(`/tasks/${id}`);
-    return response.data.data;
+    await api.delete(`/tasks/${id}`);
+    return;
   },
 };
 

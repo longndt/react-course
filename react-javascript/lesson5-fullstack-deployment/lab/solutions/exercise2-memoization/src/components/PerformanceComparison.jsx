@@ -4,7 +4,7 @@ import './PerformanceComparison.css';
 
 // Non-memoized component - re-renders every time
 function ExpensiveComponentNoMemo({ count }) {
-  console.log(' ExpensiveComponentNoMemo rendering...');
+  console.log('ExpensiveComponentNoMemo rendering...');
 
   // Simulate expensive calculation
   const expensiveValue = Array.from({ length: 1000 }).reduce((acc, _, i) => acc + i, 0);
@@ -26,7 +26,7 @@ ExpensiveComponentNoMemo.propTypes = {
 
 // Memoized component - only re-renders if props change
 const ExpensiveComponentWithMemo = memo(function ExpensiveComponentWithMemo({ count }) {
-  console.log(' ExpensiveComponentWithMemo rendering...');
+  console.log('ExpensiveComponentWithMemo rendering...');
 
   // Simulate expensive calculation
   const expensiveValue = Array.from({ length: 1000 }).reduce((acc, _, i) => acc + i, 0);

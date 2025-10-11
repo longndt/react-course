@@ -78,7 +78,7 @@ Before starting this lesson, make sure you have:
 - API versioning (`/api/v1/users`)
 - Authentication patterns (JWT tokens, API keys)
 
-### 2. Data Fetching Patterns (1.5 hours)
+### 2. Data Fetching Patterns
 
 **Native Fetch API:**
 - Making HTTP requests with fetch()
@@ -108,7 +108,7 @@ Before starting this lesson, make sure you have:
 - Implement retry mechanisms
 - Use environment variables for API URLs
 
-### 3. State Management for Data (1.5 hours)
+### 3. State Management for Data
 
 **Local Component State:**
 - useState for simple data
@@ -160,7 +160,7 @@ Before starting this lesson, make sure you have:
 - Cascade deletes for related data
 - Soft delete vs hard delete
 
-### 5. Advanced Features (1-2 hours)
+### 5. Advanced Features
 
 **Search & Filtering:**
 - Client-side vs server-side filtering

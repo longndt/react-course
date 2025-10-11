@@ -31,7 +31,7 @@ export default function UsersPage() {
   // Expensive computation - memoized
   const filteredAndSortedUsers = useMemo(() => {
     // Educational log - shows when this expensive computation runs
-    console.log(' [DEMO] Filtering and sorting users...');
+    console.log('[DEMO] Filtering and sorting users...');
 
     let result = [...users];    // Filter by search term
     if (searchTerm) {
@@ -57,7 +57,7 @@ export default function UsersPage() {
 
   // Non-memoized version for comparison
   const nonMemoizedFiltered = () => {
-    console.log(' NON-MEMOIZED: Filtering and sorting...');
+    console.log('NON-MEMOIZED: Filtering and sorting...');
     let result = [...users];
 
     if (searchTerm) {
@@ -80,7 +80,7 @@ export default function UsersPage() {
 
   // Stats calculated with useMemo
   const stats = useMemo(() => {
-    console.log(' Calculating stats...');
+    console.log('Calculating stats...');
     return {
       total: users.length,
       filtered: filteredAndSortedUsers.length,
@@ -103,7 +103,7 @@ export default function UsersPage() {
         <h3>Performance Test</h3>
         <p>Count: <strong>{count}</strong></p>
         <button onClick={() => setCount(count + 1)} className="btn-test">
-           Increment (Test Re-render)
+          Increment (Test Re-render)
         </button>
         <p className="help-text">
           Open Console (F12) and click this button. UserItems should NOT re-render thanks to React.memo + useCallback!

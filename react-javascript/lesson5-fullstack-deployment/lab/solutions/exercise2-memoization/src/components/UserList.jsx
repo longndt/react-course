@@ -22,7 +22,7 @@ const UserItem = memo(function UserItem({ user, onSelect }) {
 
 // Memoized UserList - prevents re-render if users array reference is the same
 function UserList({ users, onSelect }) {
-  console.log(' Rendering UserList (parent component)');
+  console.log('Rendering UserList (parent component)');
 
   if (users.length === 0) {
     return (

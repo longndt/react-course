@@ -1,34 +1,36 @@
-/* Base styles */
+/* Simple Light Theme for Lesson 2 (JavaScript) */
 :root {
-  --primary-color: #6366f1;
-  --primary-hover: #4f46e5;
-  --primary-light: #eef2ff;
-  --error-color: #ef4444;
-  --success-color: #10b981;
-  --text-color: #1f2937;
-  --text-secondary: #6b7280;
-  --border-color: #e5e7eb;
+  --primary-color: #007bff;
+  --primary-hover: #0056b3;
+  --error-color: #dc3545;
+  --success-color: #28a745;
+  --text-color: #2c3e50;
+  --text-secondary: #6c757d;
+  --border-color: #ced4da;
   --background-color: #ffffff;
-  --hover-color: #f9fafb;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --hover-color: #f8f9fa;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
   color: var(--text-color);
   line-height: 1.6;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: #f8f9fa;
   min-height: 100vh;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid #e9ecef;
 }
 
 /* Button styles */
@@ -36,88 +38,79 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
-  font-size: 0.875rem;
-  font-weight: 600;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
   color: white;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
-  border: none;
-  border-radius: 0.5rem;
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   box-shadow: var(--shadow-sm);
 }
 
 .button:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.button:active {
-  transform: translateY(0);
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
 }
 
 .button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.3);
 }
 
 /* Status badge styles */
 .status {
   display: inline-flex;
   align-items: center;
-  padding: 0.375rem 0.875rem;
+  padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 9999px;
+  font-weight: 500;
+  border-radius: 4px;
   text-transform: capitalize;
-  letter-spacing: 0.025em;
 }
 
 .status.active {
-  color: #065f46;
-  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-  box-shadow: 0 0 0 1px #10b981 inset;
+  color: #155724;
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
 }
 
 .status.inactive {
-  color: #991b1b;
-  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-  box-shadow: 0 0 0 1px #ef4444 inset;
+  color: #721c24;
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
 }
 
 /* Typography */
 h1 {
-  font-size: 2.25rem;
-  font-weight: 700;
+  font-size: 1.8rem;
+  font-weight: 600;
   color: var(--text-color);
-  margin-bottom: 2rem;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  margin-bottom: 1rem;
 }
 
 /* Form group styles */
 .form-group {
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
   color: var(--text-color);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
 }
 
 .form-group .text-input,
 .form-group .select-input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 2px solid var(--border-color);
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 0.85rem;
   transition: all 0.2s ease;
   background-color: var(--background-color);
   box-sizing: border-box;
@@ -127,7 +120,7 @@ h1 {
 .form-group .select-input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
 }
 
 /* Responsive adjustments */
@@ -150,31 +143,25 @@ h1 {
 .delete-button {
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
+  gap: 0.25rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
   color: white;
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  border: none;
-  border-radius: 0.375rem;
+  background: var(--error-color);
+  border: 1px solid var(--error-color);
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .delete-button:hover {
-  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-}
-
-.delete-button:active {
-  transform: translateY(0);
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  background: #c82333;
+  border-color: #bd2130;
 }
 
 .delete-button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.3);
 }
