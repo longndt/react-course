@@ -2,18 +2,18 @@
 
 ## � Overview
 
-Welcome to Lab 3! In this hands-on lab, you'll build a complete full-stack Task Manager application by connecting a React frontend to a Node.js/Express/MongoDB backend. You'll master essential API integration patterns using **React Query** for efficient data fetching, caching, and state management.
+Welcome to Lab 3! In this hands-on lab, you'll build a complete full-stack Task Manager application by connecting a React frontend to a Node.js/Express/MongoDB backend. You'll master essential API integration patterns using **Axios** for HTTP requests and **React Query** for advanced data management.
 
 **What You'll Build:**
 - RESTful API with Node.js and Express
 - MongoDB database with Mongoose ODM
-- React frontend with React Query (TanStack Query)
+- React frontend with Axios for API calls
 - Complete CRUD operations (Create, Read, Update, Delete)
-- Real-time data synchronization
 - Professional error handling and loading states
+- React Query integration for advanced features (optional)
 
 **Why This Matters:**
-Most modern web applications require backend communication for data persistence. React Query is the industry-standard solution for managing server state in React applications, used by companies like Google, Amazon, and Netflix. This lab teaches you the patterns used in production applications.
+Most modern web applications require backend communication for data persistence. Axios is the most popular HTTP client for React applications, while React Query provides advanced features like caching and background updates. This lab teaches you both approaches used in production applications.
 
 _For detailed concepts and theory, see [../readme.md](../readme.md)_
 
@@ -29,11 +29,11 @@ By the end of this lab, you will be able to:
    - Implement CRUD operations
    - Handle errors and validate data
 
-2. **API Integration**
-   - Fetch data from APIs using React Query
-   - Implement mutations (create, update, delete)
+2. **API Integration with Axios**
+   - Fetch data from APIs using Axios
+   - Implement CRUD operations with Axios
    - Handle loading and error states
-   - Manage cache invalidation
+   - Create reusable API service modules
 
 3. **Full-Stack Communication**
    - Configure CORS for cross-origin requests
@@ -41,7 +41,7 @@ By the end of this lab, you will be able to:
    - Handle async operations in React
    - Separate server state from client state
 
-4. **React Query Mastery**
+4. **React Query (Advanced)**
    - Use `useQuery` for data fetching
    - Use `useMutation` for data modifications
    - Implement optimistic updates

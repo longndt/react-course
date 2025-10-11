@@ -2,10 +2,10 @@
 
 ## Overview
 
-**Difficulty**: Intermediate to Advanced
+**Difficulty**: Intermediate
 **Prerequisites**: Lessons 1-2 completed, async/await knowledge
 
-This lesson covers integrating React applications with backend APIs and managing data effectively. You'll learn REST API integration, data fetching patterns, error handling, and state management for complex data workflows with React Query/TanStack Query.
+This lesson covers integrating React applications with backend APIs and managing data effectively. You'll learn REST API integration, data fetching with Axios, error handling, and advanced data management with React Query.
 
 ---
 
@@ -13,16 +13,13 @@ This lesson covers integrating React applications with backend APIs and managing
 
 After completing this lesson, you will be able to:
 
--  Understand REST API concepts and HTTP methods (GET, POST, PUT, DELETE)
--  Integrate React with Node.js/Express backends and databases
--  Implement data fetching patterns with fetch API and React Query
--  Handle loading states, errors, and edge cases professionally
--  Build complete CRUD operations with optimistic updates
--  Manage complex application state with data synchronization
--  Implement search, filtering, sorting, and pagination
--  Handle file uploads and media management
--  Secure API calls with authentication tokens
--  Debug API integration issues effectively
+- Understand REST API concepts and HTTP methods (GET, POST, PUT, DELETE)
+- Integrate React with backend APIs using Axios
+- Handle loading states, errors, and edge cases professionally
+- Build complete CRUD operations with proper error handling
+- Use React Query for advanced data management (optional)
+- Implement search and filtering functionality
+- Debug API integration issues effectively
 
 ---
 
@@ -31,17 +28,17 @@ After completing this lesson, you will be able to:
 Before starting this lesson, make sure you have:
 
 ### Required Knowledge
--  React fundamentals and hooks (useState, useEffect)
--  JavaScript async/await and Promises
--  HTTP basics (requests, responses, status codes)
--  JSON data format
--  Completed Lessons 1 and 2
+- React fundamentals and hooks (useState, useEffect)
+- JavaScript async/await and Promises
+- HTTP basics (requests, responses, status codes)
+- JSON data format
+- Completed Lessons 1 and 2
 
 ### Environment Setup
--  Node.js 18+ installed
--  React project set up (Vite recommended)
--  Code editor (VS Code recommended)
--  API testing tool (Postman or Thunder Client)
+- Node.js 18+ installed
+- React project set up (Vite recommended)
+- Code editor (VS Code recommended)
+- API testing tool (Postman or Thunder Client)
 
 ### Optional but Helpful
 - Basic understanding of REST APIs
@@ -49,8 +46,6 @@ Before starting this lesson, make sure you have:
 - Knowledge of databases (MongoDB, PostgreSQL)
 
 >  **Not ready?** → Review [Lesson 2](../lesson2-component-hook/) for hooks mastery
-
->  **Hooks Review**: This lesson uses `useState` and `useEffect` extensively for data fetching and state management. If you need a refresher on React Hooks, review [Lesson 2: React Hooks](../lesson2-component-hook/#2-react-hooks-essentials) before proceeding.
 
 ---
 
@@ -71,253 +66,91 @@ Before starting this lesson, make sure you have:
 - Response handling and parsing
 - Error codes and messages
 
-**API Design Patterns:**
-- RESTful endpoints structure (`/api/users`, `/api/users/:id`)
-- Query parameters for filtering/sorting (`?search=john&sort=name`)
-- Pagination strategies (page-based, cursor-based)
-- API versioning (`/api/v1/users`)
-- Authentication patterns (JWT tokens, API keys)
+### 2. Data Fetching with Axios
 
-### 2. Data Fetching Patterns
-
-**Native Fetch API:**
-- Making HTTP requests with fetch()
-- Handling JSON responses
-- Error handling with try/catch
-- Async/await patterns
-- Request configuration (headers, method, body)
-
-**Axios Library:**
-- Installation and setup
-- Request/response interceptors
-- Automatic JSON parsing
+**Why Axios over Fetch:**
+- Cleaner syntax and automatic JSON parsing
 - Better error handling
-- Request cancellation
+- Request/response interceptors
+- Automatic request cancellation
+- Built-in timeout support
 
-**React Query (TanStack Query):**
-- Automatic caching and background updates
-- Loading and error states management
-- Optimistic updates for better UX
-- Query invalidation and refetching
-- Infinite queries for pagination
+**Basic CRUD Operations:**
+- GET requests for fetching data
+- POST requests for creating resources
+- PUT requests for updating resources
+- DELETE requests for removing resources
 
-**Best Practices:**
-- Separate API logic from components
-- Create reusable API client module
-- Handle network errors gracefully
-- Implement retry mechanisms
-- Use environment variables for API URLs
+### 3. Error Handling & Loading States
 
-### 3. State Management for Data
+**Proper Error Handling:**
+- Network errors vs server errors
+- User-friendly error messages
+- Retry mechanisms
+- Error boundaries
 
-**Local Component State:**
-- useState for simple data
-- useReducer for complex state logic
-- Derived state patterns
-- State normalization techniques
+**Loading States:**
+- Loading indicators
+- Skeleton screens
+- Disabled states during requests
+- Success/error feedback
 
-**Global State with Context:**
-- When to use global vs local state
-- AuthContext for user authentication
-- DataContext for shared resources
-- Performance considerations with Context
-- Avoiding unnecessary re-renders
+### 4. React Query (Advanced)
 
-**React Query State:**
-- Server state vs client state separation
-- Cache management and invalidation
-- Background synchronization
-- Stale-while-revalidate pattern
-- Query keys and organization
-
-### 4. CRUD Operations
-
-**Create (POST):**
-- Form handling and validation
-- POST requests with request body
-- Success/error feedback to users
-- Optimistic UI updates
-- Redirect after creation
-
-**Read (GET):**
-- GET requests with query parameters
-- List views and detail views
-- Loading skeletons for better UX
-- Empty states when no data
-- Refresh and refetch patterns
-
-**Update (PUT/PATCH):**
-- PUT (full update) vs PATCH (partial update)
-- Inline editing patterns
-- Conflict resolution strategies
+**Why React Query is Better:**
+- Automatic caching (no refetching same data)
+- Background updates
+- Built-in loading and error states
 - Optimistic updates
-- Undo/redo functionality
+- Automatic retries
+- Request deduplication
 
-**Delete (DELETE):**
-- DELETE requests with confirmation
-- Confirmation dialogs for safety
-- Undo functionality for better UX
-- Cascade deletes for related data
-- Soft delete vs hard delete
-
-### 5. Advanced Features
-
-**Search & Filtering:**
-- Client-side vs server-side filtering
-- Debounced search input (reduce API calls)
-- Multiple filter combinations
-- Filter persistence in URL
-- Clear/reset filters functionality
-
-**Pagination:**
-- Page-based pagination (page numbers)
-- Cursor-based pagination (infinite scroll)
-- Infinite scroll with React Query
-- "Load more" button pattern
-- Total count and page info display
-
-**Sorting:**
-- Single-column and multi-column sort
-- Ascending/descending toggle
-- Server-side vs client-side sorting
-- Sort persistence in URL
-- Default sort orders
-
-**File Uploads:**
-- FormData API for file uploads
-- Image preview before upload
-- Progress indicators
-- File size and type validation
-- Multiple file uploads
+**When to Use:**
+- Complex data fetching requirements
+- Need for caching and background updates
+- Multiple components using same data
+- Optimistic updates for better UX
 
 ---
 
 ## Quick Concept Preview
 
-### Basic Fetch Example
+### Basic Axios Example
 ```tsx
-function UserList() {
-  const [users, setUsers] = useState([]);
+import axios from 'axios';
+
+function TaskList() {
+  const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function fetchUsers() {
+    const fetchTasks = async () => {
       try {
-        const response = await fetch('https://api.example.com/users');
-        if (!response.ok) throw new Error('Failed to fetch users');
-        const data = await response.json();
-        setUsers(data);
+        setLoading(true);
+        const response = await axios.get('http://localhost:3001/api/tasks');
+        setTasks(response.data);
+        setError(null);
       } catch (err) {
-        setError(err.message);
+        setError('Failed to fetch tasks');
+        console.error(err);
       } finally {
         setLoading(false);
       }
-    }
-    fetchUsers();
+    };
+
+    fetchTasks();
   }, []);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
-  return <ul>{users.map(user => <li key={user.id}>{user.name}</li>)}</ul>;
-}
-```
-
-### API Client Module
-```tsx
-// api/client.ts
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
-
-export async function apiRequest<T>(
-  endpoint: string,
-  options?: RequestInit
-): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...options?.headers,
-    },
-    ...options,
-  });
-
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'API request failed');
-  }
-
-  return response.json();
-}
-
-// Usage
-export const userApi = {
-  getAll: () => apiRequest<User[]>('/users'),
-  getById: (id: string) => apiRequest<User>(`/users/${id}`),
-  create: (user: Partial<User>) =>
-    apiRequest<User>('/users', { method: 'POST', body: JSON.stringify(user) }),
-  update: (id: string, user: Partial<User>) =>
-    apiRequest<User>(`/users/${id}`, { method: 'PUT', body: JSON.stringify(user) }),
-  delete: (id: string) =>
-    apiRequest<void>(`/users/${id}`, { method: 'DELETE' }),
-};
-```
-
-### React Query Example
-```tsx
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-
-function UserList() {
-  const queryClient = useQueryClient();
-
-  // Fetch users with automatic caching
-  const { data: users, isLoading, error } = useQuery({
-    queryKey: ['users'],
-    queryFn: () => userApi.getAll(),
-  });
-
-  // Create user mutation
-  const createMutation = useMutation({
-    mutationFn: (newUser: Partial<User>) => userApi.create(newUser),
-    onSuccess: () => {
-      // Invalidate and refetch users query
-      queryClient.invalidateQueries({ queryKey: ['users'] });
-    },
-  });
-
-  // Delete user mutation with optimistic update
-  const deleteMutation = useMutation({
-    mutationFn: (id: string) => userApi.delete(id),
-    onMutate: async (id) => {
-      // Cancel outgoing refetches
-      await queryClient.cancelQueries({ queryKey: ['users'] });
-
-      // Snapshot previous value
-      const previous = queryClient.getQueryData(['users']);
-
-      // Optimistically update
-      queryClient.setQueryData(['users'], (old: User[]) =>
-        old.filter(user => user.id !== id)
-      );
-
-      return { previous };
-    },
-    onError: (err, id, context) => {
-      // Rollback on error
-      queryClient.setQueryData(['users'], context?.previous);
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['users'] });
-    },
-  });
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div>
-      {users?.map(user => (
-        <div key={user.id}>
-          {user.name}
-          <button onClick={() => deleteMutation.mutate(user.id)}>Delete</button>
+      {tasks.map(task => (
+        <div key={task._id}>
+          <h3>{task.title}</h3>
+          <p>{task.description}</p>
         </div>
       ))}
     </div>
@@ -325,40 +158,57 @@ function UserList() {
 }
 ```
 
-### Search with Debounce
+### API Service Organization
 ```tsx
-import { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
+// services/api.ts
+import axios from 'axios';
 
-function useDebounce(value: string, delay: number) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
+const api = axios.create({
+  baseURL: 'http://localhost:3001/api',
+  timeout: 5000,
+});
 
-  useEffect(() => {
-    const handler = setTimeout(() => setDebouncedValue(value), delay);
-    return () => clearTimeout(handler);
-  }, [value, delay]);
+export const taskApi = {
+  getAll: () => api.get('/tasks'),
+  getById: (id: string) => api.get(`/tasks/${id}`),
+  create: (data: CreateTaskInput) => api.post('/tasks', data),
+  update: (id: string, data: UpdateTaskInput) => api.put(`/tasks/${id}`, data),
+  delete: (id: string) => api.delete(`/tasks/${id}`),
+};
+```
 
-  return debouncedValue;
-}
+### React Query Example (Advanced)
+```tsx
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-function SearchableUserList() {
-  const [search, setSearch] = useState('');
-  const debouncedSearch = useDebounce(search, 500);
+function TaskManager() {
+  const queryClient = useQueryClient();
 
-  const { data: users } = useQuery({
-    queryKey: ['users', debouncedSearch],
-    queryFn: () => userApi.search(debouncedSearch),
-    enabled: debouncedSearch.length > 2, // Only search if 3+ characters
+  // Fetch tasks with automatic caching
+  const { data: tasks = [], isLoading, error } = useQuery({
+    queryKey: ['tasks'],
+    queryFn: () => taskApi.getAll().then(res => res.data),
   });
+
+  // Create task mutation
+  const createMutation = useMutation({
+    mutationFn: (taskData: CreateTaskInput) => taskApi.create(taskData),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+    },
+  });
+
+  if (isLoading) return <div>Loading tasks...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div>
-      <input
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        placeholder="Search users..."
-      />
-      {users?.map(user => <div key={user.id}>{user.name}</div>)}
+      {tasks.map(task => (
+        <div key={task._id}>
+          <h3>{task.title}</h3>
+          <p>{task.description}</p>
+        </div>
+      ))}
     </div>
   );
 }
@@ -374,255 +224,104 @@ Follow this 4-step learning path:
 
 ### Step 1: Study the Theory
 📖 Read [theory3.md](./theory/theory3.md) - Deep dive into:
-- REST API architecture and design
-- HTTP protocol and status codes
-- Data fetching strategies
-- State management patterns
+- REST API concepts and HTTP methods
+- Axios vs Fetch comparison
 - Error handling techniques
-
-**Time**: 60-90 minutes
-
-### Step 2: Explore Reference Code
- Browse [reference/](./reference/) - Working examples:
-- API client setup and configuration
-- All CRUD operations with TypeScript
-- React Query setup and patterns
-- Search, filter, pagination examples
-- Error handling and loading states
+- React Query benefits (advanced)
 
 **Time**: 45-60 minutes
+
+### Step 2: Explore Reference Code
+Browse [reference/](./reference/) - Working examples:
+- API client setup with Axios
+- All CRUD operations with TypeScript
+- Error handling patterns
+- React Query setup (advanced)
+
+**Time**: 30-45 minutes
 
 ### Step 3: Build Example Projects
 **🔨 Hands-On Practice:**
 
 🔨 Follow [example/](./example/) - Build along:
-- Simple API integration with fetch
-- Full CRUD app with React Query
-- Search and filter functionality
-- Pagination and infinite scroll
-- File upload with progress
-
+- Task Manager with Axios
+- Full CRUD operations
+- Error handling and loading states
+- React Query integration (optional)
 
 ### Step 4: Complete Lab Exercises
- Practice in [lab3.md](./lab/lab3.md) - Hands-on challenges:
-- Level 1: Basic API integration
+Practice in [lab3.md](./lab/lab3.md) - Hands-on challenges:
+- Level 1: Basic API integration with Axios
 - Level 2: Full CRUD operations
-- Level 3: Advanced features (search, pagination, uploads)
+- Level 3: React Query implementation (advanced)
 
-
->  **Pro tip**: Test APIs with Postman before integrating with React
+>  **Pro tip**: Start with Axios, then explore React Query when you need advanced features
 
 ---
 
 ## Key Takeaways
 
-###  Core Concepts to Remember
+### Core Concepts to Remember
 
-1. **Separate concerns** - API logic separate from UI components
+1. **Use Axios** - Better than fetch for API calls
 2. **Handle all states** - loading, success, error, empty
-3. **Cache intelligently** - React Query handles this automatically
-4. **Validate user input** - both client-side and server-side
-5. **Use TypeScript** - type safety for API responses
-6. **Debounce searches** - reduce unnecessary API calls
-7. **Optimistic updates** - update UI before API confirms
-8. **Always clean up** - cancel pending requests on unmount
+3. **Separate API logic** - Create service modules
+4. **Validate responses** - Check for errors before using data
+5. **Use TypeScript** - Type safety for API responses
+6. **React Query is advanced** - Use when you need caching and optimization
+7. **Always clean up** - Cancel pending requests on unmount
 
-###  Most Important Skills
+### Most Important Skills
 
-- Making HTTP requests with fetch/axios
+- Making HTTP requests with Axios
 - Managing loading and error states
-- Using React Query for server state
 - Implementing CRUD operations
 - Handling forms and validation
 - Debugging API integration issues
 
-###  Common Realizations
+### Common Realizations
 
-- "Server state is different from client state!"
-- "React Query makes data fetching so much easier"
-- "Always check response.ok before parsing JSON"
-- "Debouncing is essential for search inputs"
-- "Optimistic updates create better UX"
+- "Axios is much cleaner than fetch!"
+- "React Query makes complex data fetching easier"
+- "Always handle loading and error states"
+- "Separate API logic from components"
+- "TypeScript helps catch API response errors"
 
 ---
 
 ## Best Practices Summary
 
-###  API Integration Best Practices
+### API Integration Best Practices
 
 **DO:**
--  Use centralized API client for all HTTP requests
--  Implement proper error handling with try/catch
--  Always check `response.ok` before parsing JSON
--  Show clear loading and error states to users
--  Use environment variables for API URLs
--  Add request/response interceptors for auth
--  Validate API responses with TypeScript types
+- Use Axios for HTTP requests
+- Create centralized API service modules
+- Implement proper error handling with try/catch
+- Show clear loading and error states to users
+- Use environment variables for API URLs
+- Validate API responses with TypeScript types
 
 **DON'T:**
--  Hardcode API URLs in components
--  Ignore error responses from API
--  Parse JSON without checking response status
--  Make API calls in render function
--  Store sensitive data in localStorage
--  Forget to handle network failures
+- Hardcode API URLs in components
+- Ignore error responses from API
+- Make API calls in render function
+- Forget to handle loading states
+- Use fetch when Axios is available
 
-###  React Query Best Practices
+### React Query Best Practices (Advanced)
 
 **DO:**
--  Use query keys consistently
--  Invalidate queries after mutations
--  Implement optimistic updates for better UX
--  Configure stale time appropriately
--  Use enabled option to control query execution
--  Handle loading and error states
--  Cancel queries when component unmounts
+- Use React Query for complex data fetching
+- Use query keys consistently
+- Invalidate queries after mutations
+- Implement optimistic updates for better UX
+- Configure stale time appropriately
 
 **DON'T:**
--  Use useState for server data
--  Forget to invalidate related queries
--  Ignore mutation error handling
--  Over-fetch data (use pagination)
--  Cache sensitive data too long
-
-###  Performance Optimization
-
-**DO:**
--  Debounce search inputs (500ms recommended)
--  Implement pagination for large datasets
--  Use React Query's automatic caching
--  Lazy load heavy components
--  Cancel pending requests on navigation
--  Use optimistic updates to reduce perceived latency
-
-**DON'T:**
--  Fetch all data at once (use pagination)
--  Make API calls on every keystroke
--  Load large images without optimization
--  Re-fetch unchanged data repeatedly
-
-###  Security Best Practices
-
-**DO:**
--  Store API keys in environment variables
--  Validate and sanitize all user inputs
--  Use HTTPS in production
--  Implement proper CORS configuration
--  Add authentication tokens to requests
--  Handle 401/403 responses (unauthorized)
-
-**DON'T:**
--  Store tokens in localStorage (use httpOnly cookies)
--  Send passwords in URL parameters
--  Expose API keys in frontend code
--  Trust user input without validation
-
----
-
-## Common Challenges & Solutions
-
-### Challenge 1: Infinite Re-renders with useEffect
-**Problem:** Component keeps re-rendering and making API calls
-```tsx
-//  Wrong - creates new object reference every render
-useEffect(() => {
-  fetchUsers({ filter: 'active' });
-}, [{ filter: 'active' }]); // New object every render
-
-//  Correct - stable dependencies
-const filter = 'active';
-useEffect(() => {
-  fetchUsers({ filter });
-}, [filter]);
-```
-
-**Solution:** Use primitive values in dependencies, or useMemo for objects
-
-### Challenge 2: Stale Data After Mutations
-**Problem:** List doesn't update after creating/deleting item
-```tsx
-//  Wrong - no refetch after mutation
-const createUser = async (user) => {
-  await api.createUser(user);
-  // List still shows old data
-};
-
-//  Correct - invalidate query
-const createMutation = useMutation({
-  mutationFn: api.createUser,
-  onSuccess: () => {
-    queryClient.invalidateQueries({ queryKey: ['users'] });
-  },
-});
-```
-
-**Solution:** Invalidate queries with React Query after mutations
-
-### Challenge 3: Race Conditions
-**Problem:** Fast typing causes out-of-order responses
-```tsx
-//  Wrong - no cancellation
-useEffect(() => {
-  fetch(`/api/search?q=${query}`)
-    .then(res => res.json())
-    .then(setResults);
-}, [query]);
-
-//  Correct - use AbortController
-useEffect(() => {
-  const controller = new AbortController();
-
-  fetch(`/api/search?q=${query}`, { signal: controller.signal })
-    .then(res => res.json())
-    .then(setResults)
-    .catch(err => {
-      if (err.name !== 'AbortError') console.error(err);
-    });
-
-  return () => controller.abort();
-}, [query]);
-```
-
-**Solution:** Use AbortController or React Query (handles this automatically)
-
-### Challenge 4: Poor Error Messages
-**Problem:** Generic errors don't help users
-```tsx
-//  Wrong - unclear error
-catch (error) {
-  setError('Something went wrong');
-}
-
-//  Correct - specific, actionable errors
-catch (error) {
-  if (error.status === 404) {
-    setError('User not found. Please check the ID.');
-  } else if (error.status === 401) {
-    setError('Please log in to continue.');
-  } else {
-    setError(`Failed to load user: ${error.message}`);
-  }
-}
-```
-
-**Solution:** Map API errors to user-friendly, actionable messages
-
-### Challenge 5: Too Many API Calls
-**Problem:** Search makes API call on every keystroke
-```tsx
-//  Wrong - API call on every keystroke
-<input onChange={(e) => searchUsers(e.target.value)} />
-
-//  Correct - debounced search
-const debouncedSearch = useDebounce(search, 500);
-useEffect(() => {
-  if (debouncedSearch) searchUsers(debouncedSearch);
-}, [debouncedSearch]);
-```
-
-**Solution:** Debounce user input (500ms typical), or use React Query with enabled option
-
->  **More troubleshooting** → See [Troubleshooting Guide](../extra/troubleshooting.md)
+- Use React Query for simple one-time requests
+- Forget to invalidate related queries
+- Ignore mutation error handling
+- Over-fetch data (use pagination)
 
 ---
 
@@ -631,7 +330,7 @@ useEffect(() => {
 ### REST API Fundamentals (Must Know)
 - [ ] Understand HTTP methods (GET, POST, PUT, DELETE)
 - [ ] Know common status codes (200, 201, 400, 404, 500)
-- [ ] Make API requests using fetch or axios
+- [ ] Make API requests using Axios
 - [ ] Handle JSON responses correctly
 - [ ] Work with async/await patterns
 
@@ -642,44 +341,37 @@ useEffect(() => {
 - [ ] Handle form submissions to API
 - [ ] Cancel requests on component unmount
 
-### React Query (Should Know)
+### CRUD Operations (Must Know)
+- [ ] Create resources with POST requests
+- [ ] Read/List resources with GET requests
+- [ ] Update resources with PUT requests
+- [ ] Delete resources with DELETE requests
+- [ ] Handle success/error feedback properly
+
+### React Query (Advanced - Optional)
 - [ ] Set up QueryClient provider
 - [ ] Use useQuery for data fetching
 - [ ] Use useMutation for create/update/delete
 - [ ] Invalidate queries after mutations
 - [ ] Implement optimistic updates
 
-### CRUD Operations (Must Know)
-- [ ] Create resources with POST requests
-- [ ] Read/List resources with GET requests
-- [ ] Update resources with PUT/PATCH requests
-- [ ] Delete resources with DELETE requests
-- [ ] Handle success/error feedback properly
-
-### Advanced Features (Good to Know)
-- [ ] Implement debounced search functionality
-- [ ] Add pagination to large lists
-- [ ] Handle file uploads with FormData
-- [ ] Manage complex state with useReducer
-- [ ] Debug API calls with DevTools
-
-**Goal: Check at least 16/20 items before Lesson 4**
+**Goal: Check at least 12/15 items before Lesson 4**
 
 ---
 
 ## Next Steps
 
 ### Ready to Continue?
- **Completed this lesson?** → Proceed to [Lesson 4: Routing & Authentication](../lesson4-routing-auth/)
+**Completed this lesson?** → Proceed to [Lesson 4: Routing & Authentication](../lesson4-routing-auth/)
 
 ### Need More Practice?
- **Study theory** → [theory3.md](./theory/theory3.md) - REST API deep dive
- **View examples** → [reference/](./reference/) - Complete API patterns
+**Study theory** → [theory3.md](./theory/theory3.md) - API integration deep dive
+**View examples** → [reference/](./reference/) - Complete API patterns
 🔨 **Build projects** → [example/](./example/) - Follow-along tutorials
- **Practice exercises** → [lab3.md](./lab/lab3.md) - CRUD challenges
+**Practice exercises** → [lab3.md](./lab/lab3.md) - CRUD challenges
 
 ### Additional Resources
- **Quiz yourself** → [quiz/](./quiz/) - Test your API knowledge
+**Quiz yourself** → [quiz/](./quiz/) - Test your API knowledge
 ❓ **Having issues?** → [Troubleshooting Guide](../extra/troubleshooting.md)
 🔐 **Learn auth next** → Preview [Lesson 4](../lesson4-routing-auth/)
 
@@ -688,15 +380,14 @@ useEffect(() => {
 ## Resources & References
 
 ### Official Documentation
-- [Fetch API - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) - Native fetch reference
-- [React Query (TanStack Query)](https://tanstack.com/query/latest) - Official docs
 - [Axios Documentation](https://axios-http.com/) - Popular HTTP client
+- [React Query (TanStack Query)](https://tanstack.com/query/latest) - Advanced data fetching
+- [Fetch API - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) - Native fetch reference
 - [REST API Tutorial](https://restfulapi.net/) - REST principles
 
 ### HTTP & REST
 - [HTTP Status Codes](https://httpstatuses.com/) - Complete status code reference
 - [HTTP Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) - GET, POST, PUT, DELETE
-- [JSON API Specification](https://jsonapi.org/) - API design standard
 - [REST API Design Best Practices](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design) - Microsoft guide
 
 ### React Query Resources
@@ -705,15 +396,14 @@ useEffect(() => {
 - [TkDodo's Blog](https://tkdodo.eu/blog/practical-react-query) - React Query best practices
 
 ### Video Tutorials
+- [Axios Crash Course](https://www.youtube.com/watch?v=6LyagkoRWYA) - Traversy Media
 - [React Query Tutorial](https://www.youtube.com/watch?v=r8Dg0KVnfMA) - Codevolution
-- [Fetch API Crash Course](https://www.youtube.com/watch?v=cuEtnrL9-H0) - Traversy Media
 - [REST API Crash Course](https://www.youtube.com/watch?v=Q-BpqyOT3a8) - Traversy Media
 
 ### Testing APIs
 - [Postman](https://www.postman.com/) - API testing tool
 - [Thunder Client](https://www.thunderclient.com/) - VS Code extension
 - [Insomnia](https://insomnia.rest/) - Alternative to Postman
-- [HTTPie](https://httpie.io/) - Command-line HTTP client
 
 ### Communities
 - [React Query Discord](https://discord.com/invite/tanstack) - Official community

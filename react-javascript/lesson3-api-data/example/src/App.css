@@ -1,0 +1,372 @@
+/* App Layout */
+.app {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+    min-height: 100vh;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.app-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.app-header p {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin: 0 0 1rem 0;
+}
+
+.version-toggle {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.version-toggle .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+    background: white;
+    color: #6c757d;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.version-toggle .btn:hover {
+    background: #f8f9fa;
+    border-color: #adb5bd;
+}
+
+.version-toggle .btn-primary {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.version-toggle .btn-primary:hover {
+    background: #0056b3;
+    border-color: #0056b3;
+}
+
+.version-toggle .btn-secondary {
+    background: #6c757d;
+    color: white;
+    border-color: #6c757d;
+}
+
+.version-toggle .btn-secondary:hover {
+    background: #545b62;
+    border-color: #545b62;
+}
+
+.app-main {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-controls {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Form Section */
+.form-section {
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e9ecef;
+}
+
+.task-form h3 {
+    margin: 0 0 1rem 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.form-group input:disabled,
+.form-group textarea:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.form-actions {
+    text-align: right;
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    border: 1px solid #f5c6cb;
+}
+
+/* Tasks Section */
+.tasks-section {
+    flex: 1;
+}
+
+.task-list h2 {
+    margin: 0 0 1rem 0;
+    color: #2c3e50;
+    font-size: 1.3rem;
+}
+
+.tasks {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.task-card {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.task-card:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.task-card.completed {
+    background: #f8f9fa;
+    border-color: #28a745;
+}
+
+.task-card.completed .task-content h3 {
+    text-decoration: line-through;
+    color: #6c757d;
+}
+
+.task-content h3 {
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.task-content p {
+    margin: 0 0 0.5rem 0;
+    color: #6c757d;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.task-content small {
+    color: #adb5bd;
+    font-size: 0.75rem;
+}
+
+.task-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    justify-content: flex-end;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #0056b3;
+}
+
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+    background: #1e7e34;
+}
+
+.btn-warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+.btn-warning:hover:not(:disabled) {
+    background: #e0a800;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: #c82333;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #545b62;
+}
+
+/* Loading and Error States */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+.error {
+    text-align: center;
+    padding: 2rem;
+    background: #f8d7da;
+    color: #721c24;
+    border-radius: 6px;
+    border: 1px solid #f5c6cb;
+}
+
+.error p {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+}
+
+.error button {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.error button:hover {
+    background: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .app {
+        padding: 0.5rem;
+    }
+
+    .app-main {
+        padding: 1rem;
+    }
+
+    .tasks {
+        grid-template-columns: 1fr;
+    }
+
+    .task-actions {
+        flex-direction: column;
+    }
+
+    .version-toggle {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .version-toggle .btn {
+        width: 200px;
+    }
+}
+
+/* Footer */
+.app-footer {
+    margin-top: 2rem;
+    padding: 1rem;
+    text-align: center;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+}
+
+.app-footer p {
+    margin: 0.25rem 0;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.app-footer strong {
+    color: #495057;
+}
+
+.app-footer em {
+    color: #6c757d;
+    font-style: italic;
+}

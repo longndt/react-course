@@ -2,12 +2,12 @@
 
 ## Table of Contents
 1. [Express Backend Setup](#1-express-backend-setup)
-2. [React Query Setup](#2-react-query-setup)
-3. [API Client Patterns](#3-api-client-patterns)
+2. [Axios Setup & Configuration](#2-axios-setup--configuration)
+3. [API Client Patterns with Axios](#3-api-client-patterns-with-axios)
 4. [Data Fetching Components](#4-data-fetching-components)
-5. [CRUD Operations](#5-crud-operations)
-6. [Advanced Patterns](#6-advanced-patterns)
-7. [Error Handling](#7-error-handling)
+5. [CRUD Operations with Axios](#5-crud-operations-with-axios)
+6. [Error Handling & Loading States](#6-error-handling--loading-states)
+7. [React Query (Advanced)](#7-react-query-advanced)
 8. [Complete Examples](#8-complete-examples)
 
 ---
@@ -23,63 +23,71 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const app = express();
-const PORT = 5000;
+const PORT = 3001;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // Mock data (replace with MongoDB later)
-let students = [
-  { id: 1, name: 'John Doe', email: 'john@example.com', grade: 'A' },
-  { id: 2, name: 'Jane Smith', email: 'jane@example.com', grade: 'B' },
+let tasks = [
+  { id: 1, title: 'Learn React', description: 'Study React fundamentals', status: 'pending' },
+  { id: 2, title: 'Build API', description: 'Create REST API with Express', status: 'completed' },
 ];
 
-// GET - Fetch all students
-app.get('/api/students', (req, res) => {
-  res.json(students);
+// GET - Fetch all tasks
+app.get('/api/tasks', (req, res) => {
+  res.json(tasks);
 });
 
-// GET - Fetch single student
-app.get('/api/students/:id', (req, res) => {
-  const student = students.find(s => s.id === parseInt(req.params.id));
-  if (student) {
-    res.json(student);
+// GET - Fetch single task
+app.get('/api/tasks/:id', (req, res) => {
+  const task = tasks.find(t => t.id === parseInt(req.params.id));
+  if (task) {
+    res.json(task);
   } else {
-    res.status(404).json({ error: 'Student not found' });
+    res.status(404).json({ error: 'Task not found' });
   }
 });
 
-// POST - Create student
-app.post('/api/students', (req, res) => {
-  const newStudent = {
-    id: Date.now(),
-    name: req.body.name,
-    email: req.body.email,
-    grade: req.body.grade || 'N/A',
+// POST - Create new task
+app.post('/api/tasks', (req, res) => {
+  const { title, description } = req.body;
+  const newTask = {
+    id: tasks.length + 1,
+    title,
+    description,
+    status: 'pending',
+    createdAt: new Date().toISOString()
   };
-  students.push(newStudent);
-  res.status(201).json(newStudent);
+  tasks.push(newTask);
+  res.status(201).json(newTask);
 });
 
-// PUT - Update student
-app.put('/api/students/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = students.findIndex(s => s.id === id);
-
-  if (index !== -1) {
-    students[index] = { ...students[index], ...req.body };
-    res.json(students[index]);
-  } else {
-    res.status(404).json({ error: 'Student not found' });
+// PUT - Update task
+app.put('/api/tasks/:id', (req, res) => {
+  const taskId = parseInt(req.params.id);
+  const taskIndex = tasks.findIndex(t => t.id === taskId);
+  
+  if (taskIndex === -1) {
+    return res.status(404).json({ error: 'Task not found' });
   }
+  
+  tasks[taskIndex] = { ...tasks[taskIndex], ...req.body };
+  res.json(tasks[taskIndex]);
 });
 
-// DELETE - Remove student
-app.delete('/api/students/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  students = students.filter(s => s.id !== id);
-  res.json({ message: 'Student deleted successfully' });
+// DELETE - Delete task
+app.delete('/api/tasks/:id', (req, res) => {
+  const taskId = parseInt(req.params.id);
+  const taskIndex = tasks.findIndex(t => t.id === taskId);
+  
+  if (taskIndex === -1) {
+    return res.status(404).json({ error: 'Task not found' });
+  }
+  
+  tasks.splice(taskIndex, 1);
+  res.json({ message: 'Task deleted successfully' });
 });
 
 app.listen(PORT, () => {
@@ -87,205 +95,87 @@ app.listen(PORT, () => {
 });
 ```
 
-### Express Server with MongoDB
-
-```javascript
-// server/server.js
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv').config();
-
-const app = express();
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
-
-// Student Schema
-const studentSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  grade: { type: String, default: 'N/A' },
-  createdAt: { type: Date, default: Date.now },
-});
-
-const Student = mongoose.model('Student', studentSchema);
-
-// Routes
-app.get('/api/students', async (req, res) => {
-  try {
-    const students = await Student.find();
-    res.json(students);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-app.post('/api/students', async (req, res) => {
-  try {
-    const student = new Student(req.body);
-    await student.save();
-    res.status(201).json(student);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
-
-app.put('/api/students/:id', async (req, res) => {
-  try {
-    const student = await Student.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true }
-    );
-    if (!student) {
-      return res.status(404).json({ error: 'Student not found' });
-    }
-    res.json(student);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
-
-app.delete('/api/students/:id', async (req, res) => {
-  try {
-    const student = await Student.findByIdAndDelete(req.params.id);
-    if (!student) {
-      return res.status(404).json({ error: 'Student not found' });
-    }
-    res.json({ message: 'Student deleted successfully' });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-```
-
 ---
 
-## 2. React Query Setup
+## 2. Axios Setup & Configuration
 
-### Install Dependencies
-
-```bash
-npm install @tanstack/react-query axios
-npm install @tanstack/react-query-devtools --save-dev
-```
-
-### Setup QueryClient Provider
-
-```jsx
-// src/main.jsx
-import ReactDOM from 'react-dom/client';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import App from './App';
-import './index.css';
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
-      retry: 1,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <QueryClientProvider client={queryClient}>
-    <App />
-    <ReactQueryDevtools initialIsOpen={false} />
-  </QueryClientProvider>
-);
-```
-
----
-
-## 3. API Client Patterns
-
-### Basic Fetch API Client
+### Installation and Basic Setup
 
 ```javascript
-// src/services/api.js
-const API_BASE = 'http://localhost:5000/api';
+// Install dependencies
+npm install axios
 
-export const api = {
-  // Generic request handler
-  async request(endpoint, options = {}) {
-    const response = await fetch(`${API_BASE}${endpoint}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
-      ...options,
-    });
-
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({ message: 'Request failed' }));
-      throw new Error(error.message || `HTTP ${response.status}`);
-    }
-
-    return response.json();
-  },
-
-  // GET
-  get(endpoint) {
-    return this.request(endpoint);
-  },
-
-  // POST
-  post(endpoint, data) {
-    return this.request<T>(endpoint, {
-      method: 'POST',
-      body: JSON.stringify(data),
-    });
-  },
-
-  // PUT
-  put(endpoint, data) {
-    return this.request(endpoint, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-    });
-  },
-
-  // DELETE
-  delete(endpoint) {
-    return this.request(endpoint, {
-      method: 'DELETE',
-    });
-  },
-};
-```
-
-### Axios API Client
-
-```javascript
-// src/services/api.js
+// services/api.js
 import axios from 'axios';
 
-const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000/api',
+const API_BASE_URL = 'http://localhost:3001/api';
+
+// Create axios instance with default config
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 10000, // 10 seconds
+      headers: {
+        'Content-Type': 'application/json',
+  },
+});
+
+// Request interceptor
+api.interceptors.request.use(
+  (config) => {
+    // Add auth token if available
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Response interceptor
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    // Handle common errors
+    if (error.response?.status === 401) {
+      // Redirect to login
+      localStorage.removeItem('authToken');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default api;
+```
+
+### Advanced Axios Configuration
+
+```javascript
+// services/apiClient.js
+import axios from 'axios';
+
+class ApiClient {
+  constructor(baseURL) {
+    this.client = axios.create({
+      baseURL,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
+    this.setupInterceptors();
+  }
+
+  setupInterceptors() {
 // Request interceptor
-axiosInstance.interceptors.request.use(
+    this.client.interceptors.request.use(
   (config) => {
-    // Add auth token if exists
     const token = localStorage.getItem('authToken');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -296,977 +186,898 @@ axiosInstance.interceptors.request.use(
 );
 
 // Response interceptor
-axiosInstance.interceptors.response.use(
+    this.client.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Handle unauthorized
       localStorage.removeItem('authToken');
       window.location.href = '/login';
     }
     return Promise.reject(error);
   }
 );
+  }
 
-export const api = {
-  get: (url) => axiosInstance.get(url).then(res => res.data),
-  post: (url, data) => axiosInstance.post(url, data).then(res => res.data),
-  put: (url, data) => axiosInstance.put(url, data).then(res => res.data),
-  delete: (url) => axiosInstance.delete(url).then(res => res.data),
+  async get(url, config) {
+    const response = await this.client.get(url, config);
+    return response.data;
+  }
+
+  async post(url, data, config) {
+    const response = await this.client.post(url, data, config);
+    return response.data;
+  }
+
+  async put(url, data, config) {
+    const response = await this.client.put(url, data, config);
+    return response.data;
+  }
+
+  async delete(url, config) {
+    const response = await this.client.delete(url, config);
+    return response.data;
+  }
+}
+
+export const apiClient = new ApiClient('http://localhost:3001/api');
+```
+
+---
+
+## 3. API Client Patterns with Axios
+
+### Task API Service
+
+```javascript
+// services/taskApi.js
+import api from './api';
+
+/**
+ * @typedef {Object} Task
+ * @property {number} id
+ * @property {string} title
+ * @property {string} description
+ * @property {'pending'|'completed'} status
+ * @property {string} createdAt
+ */
+
+/**
+ * @typedef {Object} CreateTaskInput
+ * @property {string} title
+ * @property {string} description
+ */
+
+/**
+ * @typedef {Object} UpdateTaskInput
+ * @property {string} [title]
+ * @property {string} [description]
+ * @property {'pending'|'completed'} [status]
+ */
+
+export const taskApi = {
+  // Get all tasks
+  getAll: async () => {
+    const response = await api.get('/tasks');
+    return response.data;
+  },
+
+  // Get single task
+  getById: async (id) => {
+    const response = await api.get(`/tasks/${id}`);
+    return response.data;
+  },
+
+  // Create new task
+  create: async (data) => {
+    const response = await api.post('/tasks', data);
+    return response.data;
+  },
+
+  // Update task
+  update: async (id, data) => {
+    const response = await api.put(`/tasks/${id}`, data);
+    return response.data;
+  },
+
+  // Delete task
+  delete: async (id) => {
+    await api.delete(`/tasks/${id}`);
+  },
 };
 ```
 
-### Type-Safe API Client
+### Generic API Service Pattern
 
 ```javascript
-// src/services/studentApi.js
-import { api } from './api';
-import PropTypes from 'prop-types';
+// services/baseApi.js
+import api from './api';
 
-// Student shape: { id, name, email, grade }
-// CreateStudentDto: { name, email, grade? }
-// UpdateStudentDto: { name?, email?, grade? }
+export class BaseApiService {
+  constructor(endpoint) {
+    this.endpoint = endpoint;
+  }
 
-export const studentApi = {
-  getAll: () => api.get('/students'),
+  async getAll() {
+    const response = await api.get(`/${this.endpoint}`);
+    return response.data;
+  }
 
-  getById: (id) => api.get(`/students/${id}`),
+  async getById(id) {
+    const response = await api.get(`/${this.endpoint}/${id}`);
+    return response.data;
+  }
 
-  create: (data) => api.post('/students', data),
+  async create(data) {
+    const response = await api.post(`/${this.endpoint}`, data);
+    return response.data;
+  }
 
-  update: (id, data) =>
-    api.put(`/students/${id}`, data),
+  async update(id, data) {
+    const response = await api.put(`/${this.endpoint}/${id}`, data);
+    return response.data;
+  }
 
-  delete: (id) => api.delete(`/students/${id}`),
-};
+  async delete(id) {
+    await api.delete(`/${this.endpoint}/${id}`);
+  }
+}
+
+// Usage
+export const taskService = new BaseApiService('tasks');
+export const userService = new BaseApiService('users');
 ```
 
 ---
 
 ## 4. Data Fetching Components
 
-### Basic useQuery Hook
+### Basic Data Fetching with Axios
 
-```jsx
-// src/components/StudentList.jsx
-import { useQuery } from '@tanstack/react-query';
-import { studentApi } from '../services/studentApi';
+```javascript
+// components/TaskList.jsx
+import { useState, useEffect } from 'react';
+import { taskApi } from '../services/taskApi';
 
-function StudentList() {
-  const { data: students, isLoading, error } = useQuery({
-    queryKey: ['students'],
-    queryFn: studentApi.getAll,
-  });
+const TaskList = () => {
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (isLoading) return <div>Loading students...</div>;
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await taskApi.getAll();
+        setTasks(data);
+      } catch (err) {
+        setError('Failed to fetch tasks');
+        console.error('Error fetching tasks:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (error) return <div>Error: {error.message}</div>;
+    fetchTasks();
+  }, []);
 
-  return (
-    <div>
-      <h2>Student List</h2>
-      <ul>
-        {students?.map(student => (
-          <li key={student.id}>
-            {student.name} - {student.email} - Grade: {student.grade}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default StudentList;
-```
-
-### useQuery with Loading Skeleton
-
-```jsx
-// src/components/StudentListWithSkeleton.jsx
-import { useQuery } from '@tanstack/react-query';
-import { studentApi } from '../services/studentApi';
-
-function StudentSkeleton() {
-  return (
-    <div className="animate-pulse space-y-4">
-      {[1, 2, 3].map(i => (
-        <div key={i} className="bg-gray-200 h-16 rounded"></div>
-      ))}
-    </div>
-  );
-}
-
-function StudentListWithSkeleton() {
-  const { data: students, isLoading, error } = useQuery({
-    queryKey: ['students'],
-    queryFn: studentApi.getAll,
-  });
+  if (loading) {
+    return <div className="loading">Loading tasks...</div>;
+  }
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 p-4 rounded">
-        <p className="text-red-600">Failed to load students: {error.message}</p>
-        <button className="mt-2 text-red-700 underline">Retry</button>
-      </div>
-    );
-  }
-
-  if (isLoading) return <StudentSkeleton />;
-
-  if (!students || students.length === 0) {
-    return (
-      <div className="text-center py-8 text-gray-500">
-        <p>No students found. Add your first student!</p>
+      <div className="error">
+        <p>{error}</p>
+        <button onClick={() => window.location.reload()}>Retry</button>
       </div>
     );
   }
 
   return (
-    <div className="space-y-2">
-      {students.map(student => (
-        <div key={student.id} className="bg-white border p-4 rounded shadow-sm">
-          <h3 className="font-semibold">{student.name}</h3>
-          <p className="text-sm text-gray-600">{student.email}</p>
-          <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
-            Grade: {student.grade}
-          </span>
+    <div className="task-list">
+      <h2>Tasks ({tasks.length})</h2>
+      {tasks.length === 0 ? (
+        <p>No tasks found. Create your first task!</p>
+      ) : (
+        <div className="tasks">
+          {tasks.map(task => (
+            <div key={task.id} className={`task-card ${task.status}`}>
+              <h3>{task.title}</h3>
+              <p>{task.description}</p>
+              <small>Created: {new Date(task.createdAt).toLocaleDateString()}</small>
         </div>
       ))}
-    </div>
-  );
-}
-
-export default StudentListWithSkeleton;
-```
-
-### Custom Hook for Data Fetching
-
-```jsx
-// src/hooks/useStudents.js
-import { useQuery } from '@tanstack/react-query';
-import { studentApi } from '../services/studentApi';
-
-export function useStudents() {
-  return useQuery({
-    queryKey: ['students'],
-    queryFn: studentApi.getAll,
-    staleTime: 5 * 60 * 1000, // 5 minutes
-  });
-}
-
-export function useStudent(id) {
-  return useQuery({
-    queryKey: ['students', id],
-    queryFn: () => studentApi.getById(id),
-    enabled: !!id, // Only run if id exists
-  });
-}
-
-// Usage in component:
-function StudentComponent() {
-  const { data: students, isLoading, error, refetch } = useStudents();
-
-  // Component logic...
-}
-```
-
----
-
-## 5. CRUD Operations
-
-### Create Operation with useMutation
-
-```jsx
-// src/components/CreateStudent.jsx
-import { useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { studentApi } from '../services/studentApi';
-import PropTypes from 'prop-types';
-
-function CreateStudent() {
-  const [formData, setFormData] = useState<CreateStudentDto>({
-    name: '',
-    email: '',
-    grade: 'A',
-  });
-
-  const queryClient = useQueryClient();
-
-  const createMutation = useMutation({
-    mutationFn: studentApi.create,
-    onSuccess: () => {
-      // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ['students'] });
-
-      // Reset form
-      setFormData({ name: '', email: '', grade: 'A' });
-
-      // Show success message
-      alert('Student created successfully!');
-    },
-    onError: (error: Error) => {
-      alert(`Failed to create student: ${error.message}`);
-    },
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createMutation.mutate(formData);
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium">Name</label>
-        <input
-          type="text"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          required
-          className="mt-1 block w-full border rounded px-3 py-2"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium">Email</label>
-        <input
-          type="email"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          required
-          className="mt-1 block w-full border rounded px-3 py-2"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium">Grade</label>
-        <select
-          value={formData.grade}
-          onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
-          className="mt-1 block w-full border rounded px-3 py-2"
-        >
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="D">D</option>
-          <option value="F">F</option>
-        </select>
-      </div>
-
-      <button
-        type="submit"
-        disabled={createMutation.isPending}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
-      >
-        {createMutation.isPending ? 'Creating...' : 'Create Student'}
-      </button>
-    </form>
-  );
-}
-
-export default CreateStudent;
-```
-
-### Update Operation
-
-```jsx
-// src/components/EditStudent.jsx
-import { useState, useEffect } from 'react';
-import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
-import { studentApi } from '../services/studentApi';
-import PropTypes from 'prop-types';
-
-function EditStudent({ studentId, onClose }) {
-  const queryClient = useQueryClient();
-
-  // Fetch student data
-  const { data: student } = useQuery({
-    queryKey: ['students', studentId],
-    queryFn: () => studentApi.getById(studentId),
-  });
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    grade: '',
-  });
-
-  // Update form when student data loads
-  useEffect(() => {
-    if (student) {
-      setFormData({
-        name: student.name,
-        email: student.email,
-        grade: student.grade,
-      });
-    }
-  }, [student]);
-
-  const updateMutation = useMutation({
-    mutationFn: (data) => studentApi.update(studentId, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['students'] });
-      queryClient.invalidateQueries({ queryKey: ['students', studentId] });
-      alert('Student updated successfully!');
-      onClose();
-    },
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    updateMutation.mutate(formData);
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <h3 className="text-lg font-semibold">Edit Student</h3>
-
-      <div>
-        <label className="block text-sm font-medium">Name</label>
-        <input
-          type="text"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="mt-1 block w-full border rounded px-3 py-2"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium">Email</label>
-        <input
-          type="email"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="mt-1 block w-full border rounded px-3 py-2"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium">Grade</label>
-        <select
-          value={formData.grade}
-          onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
-          className="mt-1 block w-full border rounded px-3 py-2"
-        >
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="D">D</option>
-          <option value="F">F</option>
-        </select>
-      </div>
-
-      <div className="flex gap-2">
-        <button
-          type="submit"
-          disabled={updateMutation.isPending}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          {updateMutation.isPending ? 'Updating...' : 'Update'}
-        </button>
-        <button
-          type="button"
-          onClick={onClose}
-          className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
-        >
-          Cancel
-        </button>
-      </div>
-    </form>
-  );
-}
-
-export default EditStudent;
-```
-
-### Delete Operation with Confirmation
-
-```jsx
-// src/components/DeleteStudent.jsx
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { studentApi } from '../services/studentApi';
-import PropTypes from 'prop-types';
-
-function DeleteStudent({ studentId, studentName }) {
-  const queryClient = useQueryClient();
-
-  const deleteMutation = useMutation({
-    mutationFn: () => studentApi.delete(studentId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['students'] });
-      alert('Student deleted successfully!');
-    },
-    onError: (error) => {
-      alert(`Failed to delete: ${error.message}`);
-    },
-  });
-
-  const handleDelete = () => {
-    if (window.confirm(`Are you sure you want to delete ${studentName}?`)) {
-      deleteMutation.mutate();
-    }
-  };
-
-  return (
-    <button
-      onClick={handleDelete}
-      disabled={deleteMutation.isPending}
-      className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 disabled:bg-gray-400"
-    >
-      {deleteMutation.isPending ? 'Deleting...' : 'Delete'}
-    </button>
-  );
-}
-
-DeleteStudent.propTypes = {
-  studentId: PropTypes.number.isRequired,
-  studentName: PropTypes.string.isRequired
-};
-
-export default DeleteStudent;
-```
-
----
-
-## 6. Advanced Patterns
-
-### Optimistic Updates
-
-```jsx
-// src/hooks/useOptimisticStudent.ts
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { studentApi } from '../services/studentApi';
-
-export function useOptimisticUpdate() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: ({ id, data }) =>
-      studentApi.update(id, data),
-
-    // Optimistic update
-    onMutate: async ({ id, data }) => {
-      // Cancel outgoing refetches
-      await queryClient.cancelQueries({ queryKey: ['students'] });
-
-      // Snapshot previous value
-      const previousStudents = queryClient.getQueryData(['students']);
-
-      // Optimistically update
-      queryClient.setQueryData(['students'], (old) =>
-        old?.map(student =>
-          student.id === id ? { ...student, ...data } : student
-        )
-      );
-
-      // Return context with snapshot
-      return { previousStudents };
-    },
-
-    // Rollback on error
-    onError: (err, variables, context) => {
-      if (context?.previousStudents) {
-        queryClient.setQueryData(['students'], context.previousStudents);
-      }
-    },
-
-    // Refetch after success or error
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['students'] });
-    },
-  });
-}
-```
-
-### Pagination with useInfiniteQuery
-
-```jsx
-// src/components/InfiniteStudentList.jsx
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useEffect, useRef } from 'react';
-
-/**
- * @typedef {Object} PaginatedResponse
- * @property {Student[]} data - Array of students
- * @property {number|null} nextPage - Next page number or null
- * @property {boolean} hasMore - Whether there are more pages
- */
-
-const fetchStudents = async ({ pageParam = 1 }) => {
-  const response = await fetch(`http://localhost:5000/api/students?page=${pageParam}&limit=10`);
-  return response.json();
-};
-
-function InfiniteStudentList() {
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    isLoading,
-  } = useInfiniteQuery({
-    queryKey: ['students', 'infinite'],
-    queryFn: fetchStudents,
-    getNextPageParam: (lastPage) => lastPage.nextPage,
-    initialPageParam: 1,
-  });
-
-  const observerTarget = useRef(null);
-
-  // Infinite scroll observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 1 }
-    );
-
-    if (observerTarget.current) {
-      observer.observe(observerTarget.current);
-    }
-
-    return () => observer.disconnect();
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
-
-  if (isLoading) return <div>Loading...</div>;
-
-  return (
-    <div>
-      {data?.pages.map((page, i) => (
-        <div key={i}>
-          {page.data.map(student => (
-            <div key={student.id} className="border p-4 mb-2">
-              {student.name} - {student.email}
-            </div>
-          ))}
-        </div>
-      ))}
-
-      <div ref={observerTarget} className="h-10 flex items-center justify-center">
-        {isFetchingNextPage && <div>Loading more...</div>}
-      </div>
-    </div>
-  );
-}
-
-export default InfiniteStudentList;
-```
-
-### Search and Filter
-
-```jsx
-// src/components/SearchableStudentList.jsx
-import { useState, useMemo } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { studentApi } from '../services/studentApi';
-
-function SearchableStudentList() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [gradeFilter, setGradeFilter] = useState('all');
-
-  const { data: students, isLoading } = useQuery({
-    queryKey: ['students'],
-    queryFn: studentApi.getAll,
-  });
-
-  const filteredStudents = useMemo(() => {
-    if (!students) return [];
-
-    return students.filter(student => {
-      const matchesSearch = student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           student.email.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesGrade = gradeFilter === 'all' || student.grade === gradeFilter;
-
-      return matchesSearch && matchesGrade;
-    });
-  }, [students, searchTerm, gradeFilter]);
-
-  if (isLoading) return <div>Loading...</div>;
-
-  return (
-    <div>
-      <div className="mb-4 flex gap-4">
-        <input
-          type="text"
-          placeholder="Search by name or email..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="flex-1 border rounded px-3 py-2"
-        />
-
-        <select
-          value={gradeFilter}
-          onChange={(e) => setGradeFilter(e.target.value)}
-          className="border rounded px-3 py-2"
-        >
-          <option value="all">All Grades</option>
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="D">D</option>
-          <option value="F">F</option>
-        </select>
-      </div>
-
-      <div className="text-sm text-gray-600 mb-2">
-        Showing {filteredStudents.length} of {students?.length} students
-      </div>
-
-      <div className="space-y-2">
-        {filteredStudents.map(student => (
-          <div key={student.id} className="border p-3 rounded">
-            <h3 className="font-semibold">{student.name}</h3>
-            <p className="text-sm text-gray-600">{student.email}</p>
-            <span className="text-xs bg-blue-100 px-2 py-1 rounded">
-              Grade: {student.grade}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {filteredStudents.length === 0 && (
-        <div className="text-center py-8 text-gray-500">
-          No students found matching your criteria
         </div>
       )}
     </div>
   );
-}
+};
 
-export default SearchableStudentList;
+export default TaskList;
+```
+
+### Custom Hook for Data Fetching
+
+```javascript
+// hooks/useTasks.js
+import { useState, useEffect } from 'react';
+import { taskApi } from '../services/taskApi';
+
+/**
+ * @typedef {Object} UseTasksReturn
+ * @property {Array} tasks
+ * @property {boolean} loading
+ * @property {string|null} error
+ * @property {Function} refetch
+ */
+
+/**
+ * Custom hook for managing tasks
+ * @returns {UseTasksReturn}
+ */
+export const useTasks = () => {
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchTasks = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await taskApi.getAll();
+      setTasks(data);
+    } catch (err) {
+      setError('Failed to fetch tasks');
+      console.error('Error fetching tasks:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  return {
+    tasks,
+    loading,
+    error,
+    refetch: fetchTasks,
+  };
+};
 ```
 
 ---
 
-## 7. Error Handling
+## 5. CRUD Operations with Axios
 
-### Global Error Boundary
+### Create Operation
 
-```jsx
-// src/components/ErrorBoundary.jsx
-import { Component } from 'react';
-import PropTypes from 'prop-types';
+```javascript
+// components/TaskForm.jsx
+import { useState } from 'react';
+import { taskApi } from '../services/taskApi';
 
-class ErrorBoundary extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false, error: null };
-  }
+/**
+ * @param {Object} props
+ * @param {Function} props.onTaskCreated
+ */
+const TaskForm = ({ onTaskCreated }) => {
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  static getDerivedStateFromError(error) {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    console.error('Error caught by boundary:', error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return this.props.fallback || (
-        <div className="min-h-screen flex items-center justify-center bg-red-50">
-          <div className="bg-white p-8 rounded shadow-lg max-w-md">
-            <h2 className="text-2xl font-bold text-red-600 mb-4">
-              Something went wrong
-            </h2>
-            <p className="text-gray-700 mb-4">
-              {this.state.error?.message || 'An unexpected error occurred'}
-            </p>
-            <button
-              onClick={() => window.location.reload()}
-              className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-            >
-              Reload Page
-            </button>
-          </div>
-        </div>
-      );
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!formData.title.trim() || !formData.description.trim()) {
+      setError('Please fill in all fields');
+      return;
     }
 
-    return this.props.children;
-  }
-}
+    try {
+      setLoading(true);
+      setError(null);
+      
+      await taskApi.create({
+        title: formData.title.trim(),
+        description: formData.description.trim(),
+      });
+      
+      // Reset form
+      setFormData({ title: '', description: '' });
+      
+      // Notify parent component
+      onTaskCreated();
+      
+    } catch (err) {
+      setError('Failed to create task');
+      console.error('Error creating task:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-ErrorBoundary.propTypes = {
-  children: PropTypes.node.isRequired,
-  fallback: PropTypes.node
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="task-form">
+      <div className="form-group">
+        <label htmlFor="title">Title:</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          placeholder="Enter task title"
+          disabled={loading}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="description">Description:</label>
+        <textarea
+          id="description"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          placeholder="Enter task description"
+          rows={3}
+          disabled={loading}
+        />
+      </div>
+
+      {error && (
+        <div className="error-message">
+          {error}
+      </div>
+      )}
+
+      <button
+        type="submit"
+        disabled={loading}
+        className="btn btn-primary"
+      >
+        {loading ? 'Creating...' : 'Create Task'}
+      </button>
+    </form>
+  );
 };
 
-export default ErrorBoundary;
+export default TaskForm;
 ```
 
-### Retry Logic with React Query
+### Update Operation
 
-```jsx
-// src/hooks/useStudentsWithRetry.ts
-import { useQuery } from '@tanstack/react-query';
-import { studentApi } from '../services/studentApi';
+```javascript
+// components/TaskCard.jsx
+import { useState } from 'react';
+import { taskApi } from '../services/taskApi';
 
-export function useStudentsWithRetry() {
-  return useQuery({
-    queryKey: ['students'],
-    queryFn: studentApi.getAll,
-    retry: 3, // Retry failed requests 3 times
-    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000), // Exponential backoff
-    staleTime: 5 * 60 * 1000,
-  });
+/**
+ * @param {Object} props
+ * @param {Object} props.task
+ * @param {Function} props.onTaskUpdated
+ */
+const TaskCard = ({ task, onTaskUpdated }) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleStatusToggle = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const newStatus = task.status === 'pending' ? 'completed' : 'pending';
+      await taskApi.update(task.id, { status: newStatus });
+      
+      onTaskUpdated();
+    } catch (err) {
+      setError('Failed to update task');
+      console.error('Error updating task:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!window.confirm('Are you sure you want to delete this task?')) {
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError(null);
+      
+      await taskApi.delete(task.id);
+      onTaskUpdated();
+    } catch (err) {
+      setError('Failed to delete task');
+      console.error('Error deleting task:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className={`task-card ${task.status}`}>
+      <div className="task-content">
+        <h3>{task.title}</h3>
+        <p>{task.description}</p>
+        <small>Created: {new Date(task.createdAt).toLocaleDateString()}</small>
+      </div>
+
+      <div className="task-actions">
+        <button
+          onClick={handleStatusToggle}
+          disabled={loading}
+          className={`btn ${task.status === 'pending' ? 'btn-success' : 'btn-warning'}`}
+        >
+          {task.status === 'pending' ? 'Complete' : 'Undo'}
+        </button>
+        
+    <button
+      onClick={handleDelete}
+          disabled={loading}
+          className="btn btn-danger"
+    >
+          Delete
+    </button>
+      </div>
+
+      {error && (
+        <div className="error-message">
+          {error}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default TaskCard;
+```
+
+---
+
+## 6. Error Handling & Loading States
+
+### Comprehensive Error Handling
+
+```javascript
+// utils/errorHandler.js
+/**
+ * @typedef {Object} ApiError
+ * @property {string} message
+ * @property {number} [status]
+ * @property {string} [code]
+ */
+
+/**
+ * Handle API errors and return standardized error object
+ * @param {any} error
+ * @returns {ApiError}
+ */
+export const handleApiError = (error) => {
+  if (error.response) {
+    // Server responded with error status
+    return {
+      message: error.response.data?.message || 'Server error occurred',
+      status: error.response.status,
+      code: error.response.data?.code,
+    };
+  } else if (error.request) {
+    // Request was made but no response received
+    return {
+      message: 'Network error - please check your connection',
+      status: 0,
+      code: 'NETWORK_ERROR',
+    };
+  } else {
+    // Something else happened
+    return {
+      message: error.message || 'An unexpected error occurred',
+      code: 'UNKNOWN_ERROR',
+    };
+  }
+};
+
+// Usage in component
+const handleError = (error) => {
+  const apiError = handleApiError(error);
+  
+  if (apiError.status === 401) {
+    // Redirect to login
+    window.location.href = '/login';
+  } else if (apiError.status === 403) {
+    // Show permission denied message
+    setError('You do not have permission to perform this action');
+  } else {
+    // Show generic error message
+    setError(apiError.message);
+  }
+};
+```
+
+### Loading States with Skeleton
+
+```javascript
+// components/SkeletonLoader.jsx
+const SkeletonLoader = () => {
+  return (
+    <div className="skeleton-container">
+      {[...Array(3)].map((_, index) => (
+        <div key={index} className="skeleton-card">
+          <div className="skeleton-line skeleton-title"></div>
+          <div className="skeleton-line skeleton-description"></div>
+          <div className="skeleton-line skeleton-meta"></div>
+          </div>
+        ))}
+    </div>
+  );
+};
+
+// CSS for skeleton
+const skeletonStyles = `
+.skeleton-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
+
+.skeleton-card {
+  background: #f0f0f0;
+  border-radius: 6px;
+  padding: 1rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-line {
+  height: 1rem;
+  background: #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-title {
+  width: 70%;
+}
+
+.skeleton-description {
+  width: 100%;
+}
+
+.skeleton-meta {
+  width: 40%;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+`;
+
+export default SkeletonLoader;
+```
+
+---
+
+## 7. React Query (Advanced)
+
+### React Query Setup
+
+```javascript
+// Install dependencies
+npm install @tanstack/react-query
+
+// main.jsx
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      gcTime: 10 * 60 * 1000, // 10 minutes
+      retry: 3,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <YourApp />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
+}
+```
+
+### Data Fetching with React Query
+
+```javascript
+// hooks/useTasksQuery.js
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { taskApi } from '../services/taskApi';
+
+export const useTasksQuery = () => {
+  return useQuery({
+    queryKey: ['tasks'],
+    queryFn: taskApi.getAll,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
+};
+
+export const useCreateTaskMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: taskApi.create,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+    },
+  });
+};
+
+export const useUpdateTaskMutation = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: ({ id, data }) => taskApi.update(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+    },
+  });
+};
+
+export const useDeleteTaskMutation = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: taskApi.delete,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+    },
+  });
+};
+```
+
+### Component with React Query
+
+```javascript
+// components/TaskListQuery.jsx
+import { useTasksQuery, useUpdateTaskMutation, useDeleteTaskMutation } from '../hooks/useTasksQuery';
+
+const TaskListQuery = () => {
+  const { data: tasks = [], isLoading, error } = useTasksQuery();
+  const updateMutation = useUpdateTaskMutation();
+  const deleteMutation = useDeleteTaskMutation();
+
+  const handleStatusToggle = (task) => {
+    const newStatus = task.status === 'pending' ? 'completed' : 'pending';
+    updateMutation.mutate({ id: task.id, data: { status: newStatus } });
+  };
+
+  const handleDelete = (id) => {
+    if (window.confirm('Are you sure you want to delete this task?')) {
+      deleteMutation.mutate(id);
+    }
+  };
+
+  if (isLoading) {
+    return <div className="loading">Loading tasks...</div>;
+  }
+
+  if (error) {
+  return (
+      <div className="error">
+        <p>Failed to load tasks</p>
+        <button onClick={() => window.location.reload()}>Retry</button>
+        </div>
+    );
+  }
+
+  return (
+    <div className="task-list">
+      <h2>Tasks ({tasks.length})</h2>
+      {tasks.length === 0 ? (
+        <p>No tasks found. Create your first task!</p>
+      ) : (
+        <div className="tasks">
+          {tasks.map(task => (
+            <div key={task.id} className={`task-card ${task.status}`}>
+              <h3>{task.title}</h3>
+              <p>{task.description}</p>
+              <small>Created: {new Date(task.createdAt).toLocaleDateString()}</small>
+              <div className="task-actions">
+                      <button
+                  onClick={() => handleStatusToggle(task)}
+                  disabled={updateMutation.isPending}
+                  className={`btn ${task.status === 'pending' ? 'btn-success' : 'btn-warning'}`}
+                      >
+                  {task.status === 'pending' ? 'Complete' : 'Undo'}
+                      </button>
+                      <button
+                  onClick={() => handleDelete(task.id)}
+                  disabled={deleteMutation.isPending}
+                  className="btn btn-danger"
+                      >
+                  Delete
+                      </button>
+                    </div>
+                  </div>
+          ))}
+                    </div>
+      )}
+    </div>
+  );
+};
+
+export default TaskListQuery;
 ```
 
 ---
 
 ## 8. Complete Examples
 
-### Full CRUD Component
+### Full Task Manager with Axios
 
-```jsx
-// src/components/StudentManager.jsx
+```javascript
+// App.jsx
 import { useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { studentApi } from '../services/studentApi';
+import TaskList from './components/TaskList';
+import TaskForm from './components/TaskForm';
+import './App.css';
 
-function StudentManager() {
-  const [editingId, setEditingId] = useState(null);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    grade: 'A',
-  });
+function App() {
+  const [showForm, setShowForm] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
 
-  const queryClient = useQueryClient();
-
-  // Fetch students
-  const { data: students, isLoading, error } = useQuery({
-    queryKey: ['students'],
-    queryFn: studentApi.getAll,
-  });
-
-  // Create mutation
-  const createMutation = useMutation({
-    mutationFn: studentApi.create,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['students'] });
-      setFormData({ name: '', email: '', grade: 'A' });
-    },
-  });
-
-  // Update mutation
-  const updateMutation = useMutation({
-    mutationFn: ({ id, data }) =>
-      studentApi.update(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['students'] });
-      setEditingId(null);
-    },
-  });
-
-  // Delete mutation
-  const deleteMutation = useMutation({
-    mutationFn: studentApi.delete,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['students'] });
-    },
-  });
-
-  const handleCreate = (e) => {
-    e.preventDefault();
-    createMutation.mutate(formData);
+  const handleTaskCreated = () => {
+    setRefreshKey(prev => prev + 1);
+    setShowForm(false);
   };
-
-  const handleUpdate = (student) => {
-    if (editingId === student.id) {
-      updateMutation.mutate({ id: student.id, data: formData });
-    } else {
-      setEditingId(student.id);
-      setFormData({
-        name: student.name,
-        email: student.email,
-        grade: student.grade,
-      });
-    }
-  };
-
-  const handleDelete = (id, name) => {
-    if (window.confirm(`Delete ${name}?`)) {
-      deleteMutation.mutate(id);
-    }
-  };
-
-  if (error) return <div className="text-red-600">Error: {error.message}</div>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Student Manager</h1>
+    <div className="app">
+      <header className="app-header">
+        <h1>Task Manager (Axios)</h1>
+        <p>Learn API integration with Axios - the most popular HTTP client</p>
+                      <button
+          onClick={() => setShowForm(!showForm)}
+          className="btn btn-primary"
+                      >
+          {showForm ? 'Hide Form' : 'Add New Task'}
+                      </button>
+      </header>
 
-      {/* Create Form */}
-      <form onSubmit={handleCreate} className="bg-white p-6 rounded shadow mb-6">
-        <h2 className="text-xl font-semibold mb-4">Add New Student</h2>
-        <div className="grid grid-cols-3 gap-4">
-          <input
-            type="text"
-            placeholder="Name"
-            value={editingId ? '' : formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            required
-            disabled={editingId !== null}
-            className="border rounded px-3 py-2"
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={editingId ? '' : formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            required
-            disabled={editingId !== null}
-            className="border rounded px-3 py-2"
-          />
-          <select
-            value={editingId ? '' : formData.grade}
-            onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
-            disabled={editingId !== null}
-            className="border rounded px-3 py-2"
-          >
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-            <option value="F">F</option>
-          </select>
-        </div>
-        <button
-          type="submit"
-          disabled={createMutation.isPending || editingId !== null}
-          className="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
-        >
-          {createMutation.isPending ? 'Creating...' : 'Add Student'}
-        </button>
-      </form>
-
-      {/* Student List */}
-      <div className="bg-white rounded shadow">
-        <h2 className="text-xl font-semibold p-6 border-b">Students</h2>
-        {isLoading ? (
-          <div className="p-6">Loading...</div>
-        ) : (
-          <div className="divide-y">
-            {students?.map(student => (
-              <div key={student.id} className="p-4 hover:bg-gray-50">
-                {editingId === student.id ? (
-                  <div className="grid grid-cols-4 gap-3">
-                    <input
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="border rounded px-2 py-1"
-                    />
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="border rounded px-2 py-1"
-                    />
-                    <select
-                      value={formData.grade}
-                      onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
-                      className="border rounded px-2 py-1"
-                    >
-                      <option value="A">A</option>
-                      <option value="B">B</option>
-                      <option value="C">C</option>
-                      <option value="D">D</option>
-                      <option value="F">F</option>
-                    </select>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => handleUpdate(student)}
-                        className="bg-green-600 text-white px-3 py-1 rounded text-sm"
-                      >
-                        Save
-                      </button>
-                      <button
-                        onClick={() => setEditingId(null)}
-                        className="bg-gray-400 text-white px-3 py-1 rounded text-sm"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="font-semibold">{student.name}</h3>
-                      <p className="text-sm text-gray-600">{student.email}</p>
-                      <span className="text-xs bg-blue-100 px-2 py-1 rounded">
-                        Grade: {student.grade}
-                      </span>
-                    </div>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => handleUpdate(student)}
-                        className="bg-blue-600 text-white px-3 py-1 rounded text-sm"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDelete(student.id, student.name)}
-                        className="bg-red-600 text-white px-3 py-1 rounded text-sm"
-                      >
-                        Delete
-                      </button>
-                    </div>
+      <main className="app-main">
+        {showForm && (
+          <div className="form-section">
+            <TaskForm onTaskCreated={handleTaskCreated} />
                   </div>
                 )}
+
+        <div className="tasks-section">
+          <TaskList key={refreshKey} />
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+      </main>
     </div>
   );
 }
 
-export default StudentManager;
+export default App;
 ```
 
----
+### Full Task Manager with React Query
 
-## Quick Reference Commands
+```javascript
+// AppQuery.jsx
+import { useState } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import TaskListQuery from './components/TaskListQuery';
+import TaskFormQuery from './components/TaskFormQuery';
+import './App.css';
 
-```bash
-# Start Express Backend
-cd server
-node server.js
+const queryClient = new QueryClient();
 
-# Start React Frontend
-npm run dev
+function AppQuery() {
+  const [showForm, setShowForm] = useState(false);
 
-# Install React Query
-npm install @tanstack/react-query
+  return (
+    <QueryClientProvider client={queryClient}>
+      <div className="app">
+        <header className="app-header">
+          <h1>Task Manager (React Query)</h1>
+          <p>Advanced data management with caching and optimization</p>
+          <button
+            onClick={() => setShowForm(!showForm)}
+            className="btn btn-primary"
+          >
+            {showForm ? 'Hide Form' : 'Add New Task'}
+          </button>
+        </header>
 
-# Install Axios
-npm install axios
+        <main className="app-main">
+          {showForm && (
+            <div className="form-section">
+              <TaskFormQuery onSuccess={() => setShowForm(false)} />
+            </div>
+          )}
 
-# Install React Query Devtools
-npm install @tanstack/react-query-devtools --save-dev
+          <div className="tasks-section">
+            <TaskListQuery />
+          </div>
+        </main>
+      </div>
+    </QueryClientProvider>
+  );
+}
+
+export default AppQuery;
 ```
 
+### Comparison: Axios vs React Query
+
+| Feature | Axios | React Query |
+|---------|-------|-------------|
+| **Learning Curve** | Easy | Moderate |
+| **Bundle Size** | Small | Larger |
+| **Caching** | Manual | Automatic |
+| **Background Updates** | Manual | Automatic |
+| **Optimistic Updates** | Manual | Built-in |
+| **Error Handling** | Manual | Built-in |
+| **Loading States** | Manual | Built-in |
+| **Use Case** | Simple API calls | Complex data management |
+
+### When to Use What
+
+**Use Axios when:**
+- Simple API calls
+- Small applications
+- Learning API integration
+- Need full control over requests
+
+**Use React Query when:**
+- Complex data management
+- Need caching and background updates
+- Multiple components using same data
+- Want optimistic updates
+- Building large applications
+
 ---
 
-## Common Patterns Summary
+## Best Practices Summary
 
-| Pattern | Use Case | Tool |
-|---------|----------|------|
-| **Basic Fetch** | Simple GET requests | useQuery |
-| **Mutations** | Create/Update/Delete | useMutation |
-| **Optimistic Updates** | Instant UI feedback | onMutate |
-| **Infinite Scroll** | Large lists | useInfiniteQuery |
-| **Polling** | Real-time updates | refetchInterval |
-| **Dependent Queries** | Sequential requests | enabled option |
-| **Parallel Queries** | Multiple endpoints | Multiple useQuery |
+### Axios Best Practices
+1. **Create centralized API client** with interceptors
+2. **Handle errors consistently** with proper error messages
+3. **Show loading states** for better UX
+4. **Use PropTypes** for type safety
+5. **Implement retry logic** for failed requests
 
----
+### React Query Best Practices
+1. **Use consistent query keys** for cache management
+2. **Invalidate queries** after mutations
+3. **Implement optimistic updates** for better UX
+4. **Configure stale time** appropriately
+5. **Use error boundaries** for error handling
 
-** You now have a complete reference for building React applications with API integration!**
+### General Best Practices
+1. **Separate API logic** from components
+2. **Handle all states** (loading, error, success, empty)
+3. **Validate data** before using
+4. **Implement proper error boundaries**
+5. **Test API integration** thoroughly

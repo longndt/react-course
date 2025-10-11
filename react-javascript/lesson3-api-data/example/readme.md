@@ -1,6 +1,9 @@
-# Lesson 3 Demo: React + Node.js + MongoDB Integration
+# Lesson 3 Demo: API Integration & Data Management
 
-This demo shows how to integrate a React frontend with a Node.js/Express backend and MongoDB database.
+This demo shows how to integrate a React frontend with a Node.js/Express backend and MongoDB database. It includes **two approaches** for learning API integration:
+
+1. **Axios (Basic)** - Most popular HTTP client for React applications
+2. **React Query (Advanced)** - Advanced data management with caching and optimization
 
 ## Setup Instructions
 

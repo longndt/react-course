@@ -5,17 +5,12 @@
 ##  Table of Contents
 
 1. [Why API Integration Matters?](#why-api-integration-matters-)
-2. [Understanding REST APIs with Node.js/MongoDB](#understanding-rest-apis-with-nodejsmongodb-)
-3. [Mapping Node.js Endpoints to React Functions](#mapping-nodejs-endpoints-to-react-functions)
-4. [HTTP Methods & CRUD Operations](#http-methods--crud-operations)
-5. [Data Fetching Patterns](#data-fetching-patterns)
-6. [React Query (TanStack Query)](#react-query-tanstack-query)
-7. [Error Handling](#error-handling)
-8. [Loading States](#loading-states)
-9. [Caching & Optimization](#caching--optimization)
-10. [Authentication with APIs](#authentication-with-apis)
-11. [Best Practices](#best-practices)
-12. [Common Pitfalls](#common-pitfalls)
+2. [Understanding REST APIs](#understanding-rest-apis)
+3. [HTTP Methods & CRUD Operations](#http-methods--crud-operations)
+4. [Data Fetching with Axios](#data-fetching-with-axios)
+5. [Error Handling & Loading States](#error-handling--loading-states)
+6. [React Query (Advanced)](#react-query-advanced)
+7. [Best Practices](#best-practices)
 
 ---
 
@@ -34,7 +29,6 @@ Your Modern Stack:
 ```
 
 **Key Benefits:**
-
 - **Scalability**: Each layer scales independently
 - **Maintainability**: Clear frontend/backend separation
 - **Team Collaboration**: Independent development workflows
@@ -42,45 +36,198 @@ Your Modern Stack:
 
 ---
 
-## Understanding REST APIs with Node.js/MongoDB 📡
+## Understanding REST APIs 📡
 
-### From Database to API Response
+### What is a REST API?
+
+REST (Representational State Transfer) is a way for your React app to communicate with a backend server.
+
+**Simple Example:**
+```
+Frontend (React)  ←→  Backend (Node.js/Express)  ←→  Database (MongoDB)
+     ↓                        ↓                           ↓
+   User Interface         API Endpoints              Data Storage
+```
+
+### Basic API Structure
 
 ```javascript
-// Node.js/Express backend endpoint
-app.get("/api/students", async (req, res) => {
-  try {
-    // 1. Query MongoDB database
-    const students = await Student.find();
+// Backend API endpoints
+GET    /api/tasks     → Get all tasks
+POST   /api/tasks     → Create new task  
+PUT    /api/tasks/:id → Update task
+DELETE /api/tasks/:id → Delete task
+```
 
-    // 2. Send JSON response to React
-    res.json(students);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+**Why APIs Matter:**
+- **Separation**: Frontend and backend work independently
+- **Reusability**: Same API can serve web, mobile, desktop apps
+- **Scalability**: Each part can scale separately
+
+---
+
+## HTTP Methods & CRUD Operations
+
+### CRUD Operations Explained
+
+| Operation | HTTP Method | Description | Example |
+|-----------|-------------|-------------|---------|
+| **Create** | POST | Add new data | Create new task |
+| **Read** | GET | Retrieve data | Get all tasks |
+| **Update** | PUT | Modify existing data | Update task status |
+| **Delete** | DELETE | Remove data | Delete task |
+
+### Backend API Example
+
+```javascript
+// Node.js/Express backend
+app.get('/api/tasks', async (req, res) => {
+  const tasks = await Task.find();
+  res.json(tasks);
+});
+
+app.post('/api/tasks', async (req, res) => {
+  const task = new Task(req.body);
+  await task.save();
+  res.json(task);
+});
+
+app.put('/api/tasks/:id', async (req, res) => {
+  const task = await Task.findByIdAndUpdate(req.params.id, req.body);
+  res.json(task);
+});
+
+app.delete('/api/tasks/:id', async (req, res) => {
+  await Task.findByIdAndDelete(req.params.id);
+  res.json({ message: 'Task deleted' });
 });
 ```
 
-### React Frontend Consumption
+---
 
-```jsx
-// React component using the API
-function StudentsList() {
-  const [students, setStudents] = useState([]);
+## Data Fetching with Axios
+
+### Why Axios? (vs Fetch)
+
+**Fetch API (Native - Older Method):**
+```javascript
+// Fetch - more verbose, manual error handling
+const response = await fetch('/api/tasks');
+if (!response.ok) {
+  throw new Error('Network response was not ok');
+}
+const data = await response.json();
+```
+
+**Axios (Recommended - Modern Method):**
+```javascript
+// Axios - cleaner, automatic JSON parsing, better error handling
+const response = await axios.get('/api/tasks');
+const data = response.data; // Already parsed JSON
+```
+
+### Axios Setup
+
+```javascript
+// Install: npm install axios
+import axios from 'axios';
+
+// Create axios instance with base URL
+const api = axios.create({
+  baseURL: 'http://localhost:3001/api',
+  timeout: 5000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+```
+
+### Basic CRUD with Axios
+
+```javascript
+// GET - Fetch all tasks
+const fetchTasks = async () => {
+  try {
+    const response = await api.get('/tasks');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching tasks:', error);
+    throw error;
+  }
+};
+
+// POST - Create new task
+const createTask = async (taskData) => {
+  try {
+    const response = await api.post('/tasks', taskData);
+    return response.data;
+  } catch (error) {
+    console.error('Error creating task:', error);
+    throw error;
+  }
+};
+
+// PUT - Update task
+const updateTask = async (id, taskData) => {
+  try {
+    const response = await api.put(`/tasks/${id}`, taskData);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating task:', error);
+    throw error;
+  }
+};
+
+// DELETE - Remove task
+const deleteTask = async (id) => {
+  try {
+    await api.delete(`/tasks/${id}`);
+  } catch (error) {
+    console.error('Error deleting task:', error);
+    throw error;
+  }
+};
+```
+
+### Using Axios in React Components
+
+```javascript
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+function TaskList() {
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // 1. Send HTTP request to your Node.js backend
-    const response = await fetch('http://localhost:5000/api/students');
-    const data = await response.json();
+    const fetchTasks = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('http://localhost:3001/api/tasks');
+        setTasks(response.data);
+        setError(null);
+      } catch (err) {
+        setError('Failed to fetch tasks');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    // 2. Update React state with database data
-    setStudents(data);
+    fetchTasks();
   }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div>
-      {students.map(student => (
-        <div key={student._id}>{student.name}</div>
+      {tasks.map(task => (
+        <div key={task._id}>
+          <h3>{task.title}</h3>
+          <p>{task.description}</p>
+        </div>
       ))}
     </div>
   );
@@ -89,76 +236,93 @@ function StudentsList() {
 
 ---
 
-## Mapping Node.js Endpoints to React Functions
+## Error Handling & Loading States
 
-**Your Node.js API Structure:**
+### Proper Error Handling
 
 ```javascript
-// server/routes/students.js - Your backend API
-const express = require("express");
-const Student = require("../models/Student");
-const router = express.Router();
-
-// GET /api/students - List all students
-router.get("/", async (req, res) => {
-  const students = await Student.find();
-  res.json(students);
-});
-
-// POST /api/students - Create student
-router.post("/", async (req, res) => {
-  const student = new Student(req.body);
-  await student.save();
-  res.json(student);
-});
+const handleApiCall = async () => {
+  try {
+    setLoading(true);
+    setError(null);
+    
+    const response = await api.get('/tasks');
+    setTasks(response.data);
+  } catch (error) {
+    // Handle different error types
+    if (error.response) {
+      // Server responded with error status
+      setError(`Server Error: ${error.response.status}`);
+    } else if (error.request) {
+      // Request was made but no response
+      setError('Network Error: No response from server');
+    } else {
+      // Something else happened
+      setError('Error: ' + error.message);
+    }
+  } finally {
+    setLoading(false);
+  }
+};
 ```
 
-**React Frontend Implementation:**
+### Loading States
 
-```jsx
-// React frontend calling your Node.js API
-function useStudents() {
-  const [students, setStudents] = useState([]);
+```javascript
+function TaskManager() {
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const fetchStudents = async () => {
+  const addTask = async (taskData) => {
+    setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/students");
-      const data = await response.json();
-      setStudents(data);
+      const response = await api.post('/tasks', taskData);
+      setTasks(prev => [...prev, response.data]);
     } catch (error) {
-      console.error("Error fetching students:", error);
+      setError('Failed to add task');
+    } finally {
+      setLoading(false);
     }
   };
 
-  const addStudent = async (studentData) => {
-    try {
-      const response = await fetch("http://localhost:5000/api/students", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(studentData),
-      });
-      const newStudent = await response.json();
-      setStudents((prev) => [...prev, newStudent]);
-    } catch (error) {
-      console.error("Error adding student:", error);
-    }
-  };
-
-  return { students, fetchStudents, addStudent };
+  return (
+    <div>
+      {loading && <div>Adding task...</div>}
+      {error && <div className="error">{error}</div>}
+      {/* Rest of component */}
+    </div>
+  );
 }
 ```
 
 ---
 
-## Professional Data Fetching with React Query 
+## React Query (Advanced) 🚀
 
-### Basic Setup
+### Why React Query is Better Than Axios Alone?
 
-```jsx
-// main.jsx - Configure React Query
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+**Problems with Basic Axios:**
+- ❌ Manual loading states for every request
+- ❌ No automatic caching (refetch same data repeatedly)
+- ❌ No background updates
+- ❌ Complex error handling for each component
+- ❌ No automatic retries
+- ❌ Manual state synchronization
+
+**React Query Benefits:**
+- ✅ **Automatic Caching**: Never refetch the same data unnecessarily
+- ✅ **Background Updates**: Keep data fresh automatically
+- ✅ **Loading States**: Built-in loading, error, and success states
+- ✅ **Optimistic Updates**: UI updates immediately, syncs with server
+- ✅ **Automatic Retries**: Retry failed requests intelligently
+- ✅ **Deduplication**: Multiple components requesting same data = single request
+
+### React Query Setup
+
+```javascript
+// main.jsx
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -169,436 +333,200 @@ const queryClient = new QueryClient({
   },
 });
 
-ReactDOM.render(
-  <QueryClientProvider client={queryClient}>
-    <App />
-  </QueryClientProvider>,
-  document.getElementById("root")
-);
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TaskManager />
+    </QueryClientProvider>
+  );
+}
 ```
 
-### Query Implementation
+### React Query Implementation
 
-```jsx
-// components/StudentsList.jsx - Using React Query
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+```javascript
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-function StudentsList() {
+function TaskManager() {
   const queryClient = useQueryClient();
 
-  // Fetch students with automatic caching and error handling
-  const {
-    data: students = [],
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["students"],
+  // Fetch tasks with automatic caching and error handling
+  const { data: tasks = [], isLoading, error } = useQuery({
+    queryKey: ['tasks'],
     queryFn: async () => {
-      const response = await fetch("http://localhost:5000/api/students");
-      if (!response.ok) throw new Error("Failed to fetch students");
-      return response.json();
+      const response = await api.get('/tasks');
+      return response.data;
     },
   });
 
-  // Create mutation for adding students
+  // Create task mutation
   const createMutation = useMutation({
-    mutationFn: async (studentData) => {
-      const response = await fetch("http://localhost:5000/api/students", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(studentData),
-      });
-      return response.json();
+    mutationFn: async (taskData) => {
+      const response = await api.post('/tasks', taskData);
+      return response.data;
     },
     onSuccess: () => {
-      // Automatically refetch students list
-      queryClient.invalidateQueries({ queryKey: ["students"] });
+      // Automatically refetch tasks after creating
+      queryClient.invalidateQueries(['tasks']);
     },
   });
 
-  if (isLoading) return <div>Loading students...</div>;
+  // Update task mutation
+  const updateMutation = useMutation({
+    mutationFn: async ({ id, ...taskData }) => {
+      const response = await api.put(`/tasks/${id}`, taskData);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['tasks']);
+    },
+  });
+
+  // Delete task mutation
+  const deleteMutation = useMutation({
+    mutationFn: async (id) => {
+      await api.delete(`/tasks/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['tasks']);
+    },
+  });
+
+  if (isLoading) return <div>Loading tasks...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div>
-      {students.map((student) => (
-        <div key={student._id}>
-          {student.name} - {student.major}
+      {tasks.map(task => (
+        <div key={task._id}>
+          <h3>{task.title}</h3>
+          <p>{task.description}</p>
+          <button onClick={() => updateMutation.mutate({ id: task._id, status: 'completed' })}>
+            Complete
+          </button>
+          <button onClick={() => deleteMutation.mutate(task._id)}>
+            Delete
+          </button>
         </div>
       ))}
-      <button
-        onClick={() =>
-          createMutation.mutate({ name: "New Student", major: "CS" })
-        }
-      >
-        Add Student {createMutation.isPending && "..."}
-      </button>
     </div>
   );
 }
 ```
 
----
+### React Query vs Basic Axios Comparison
 
-## Advanced CRUD Operations with MongoDB 
-
-### Search and Filtering
-
-```jsx
-import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import PropTypes from 'prop-types';
-
-function StudentSearch() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [major, setMajor] = useState("");
-
-  const { data: students = [], isLoading } = useQuery({
-    queryKey: ["students", { search: searchTerm, major }],
-    queryFn: async () => {
-      const params = new URLSearchParams();
-      if (searchTerm) params.append("search", searchTerm);
-      if (major) params.append("major", major);
-
-      const response = await fetch(
-        `http://localhost:5000/api/students?${params}`
-      );
-      return response.json();
-    },
-    enabled: searchTerm.length >= 2 || major !== "", // Only search when criteria met
-  });
-
-  return (
-    <div>
-      <input
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Search students..."
-      />
-      <select value={major} onChange={(e) => setMajor(e.target.value)}>
-        <option value="">All Majors</option>
-        <option value="Computer Science">Computer Science</option>
-        <option value="Information Technology">Information Technology</option>
-      </select>
-      {isLoading ? "Searching..." : students.length + " students found"}
-    </div>
-  );
-}
-```
-
-### Update Operations
-
-```jsx
-import PropTypes from 'prop-types';
-
-function EditStudent({ studentId }) {
-  const queryClient = useQueryClient();
-
-  const updateMutation = useMutation({
-    mutationFn: async ({ id, data }) => {
-      const response = await fetch(`http://localhost:5000/api/students/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      return response.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["students"] });
-    },
-  });
-
-  const handleUpdate = (updatedData) => {
-    updateMutation.mutate({ id: studentId, data: updatedData });
-  };
-
-  return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        handleUpdate(Object.fromEntries(formData));
-      }}
-    >
-      <input name="name" placeholder="Student name" />
-      <input name="email" placeholder="Email" />
-      <select name="major">
-        <option value="Computer Science">Computer Science</option>
-        <option value="Information Technology">IT</option>
-      </select>
-      <button type="submit" disabled={updateMutation.isPending}>
-        {updateMutation.isPending ? "Updating..." : "Update Student"}
-      </button>
-    </form>
-  );
-}
-
-EditStudent.propTypes = {
-  studentId: PropTypes.string.isRequired
-};
-```
-
-### Delete Operations
-
-```jsx
-import PropTypes from 'prop-types';
-
-function DeleteStudent({ student }) {
-  const queryClient = useQueryClient();
-
-  const deleteMutation = useMutation({
-    mutationFn: async (id) => {
-      const response = await fetch(`http://localhost:5000/api/students/${id}`, {
-        method: "DELETE",
-      });
-      if (!response.ok) throw new Error("Failed to delete student");
-      return response.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["students"] });
-    },
-  });
-
-  const handleDelete = () => {
-    if (confirm(`Delete ${student.name}?`)) {
-      deleteMutation.mutate(student._id);
-    }
-  };
-
-  return (
-    <button
-      onClick={handleDelete}
-      disabled={deleteMutation.isPending}
-      className="delete-btn"
-    >
-      {deleteMutation.isPending ? "Deleting..." : "Delete"}
-    </button>
-  );
-}
-
-DeleteStudent.propTypes = {
-  student: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
-  }).isRequired
-};
-```
+| Feature | Basic Axios | React Query |
+|---------|-------------|-------------|
+| **Caching** | Manual | Automatic |
+| **Loading States** | Manual for each request | Built-in |
+| **Error Handling** | Manual | Built-in |
+| **Background Updates** | Manual | Automatic |
+| **Optimistic Updates** | Complex to implement | Easy |
+| **Code Complexity** | High | Low |
+| **Performance** | Poor (refetch everything) | Excellent (smart caching) |
 
 ---
 
-## Professional Error Handling & Loading States 
+## Best Practices
 
-### Error Boundaries for API Failures
+### 1. API Service Organization
 
-```jsx
-// components/ErrorBoundary.jsx
+```javascript
+// services/api.js
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://localhost:3001/api',
+  timeout: 5000,
+});
+
+export const taskApi = {
+  getAll: () => api.get('/tasks'),
+  getById: (id) => api.get(`/tasks/${id}`),
+  create: (data) => api.post('/tasks', data),
+  update: (id, data) => api.put(`/tasks/${id}`, data),
+  delete: (id) => api.delete(`/tasks/${id}`),
+};
+```
+
+### 2. Error Boundaries
+
+```javascript
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false };
   }
 
   static getDerivedStateFromError(error) {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    console.error("API Error caught by boundary:", error, errorInfo);
+    return { hasError: true };
   }
 
   render() {
     if (this.state.hasError) {
-      return (
-        <div className="error-boundary">
-          <h2>Something went wrong with the API</h2>
-          <details>{this.state.error && this.state.error.toString()}</details>
-          <button onClick={() => window.location.reload()}>Reload Page</button>
-        </div>
-      );
+      return <h1>Something went wrong with API calls.</h1>;
     }
-
     return this.props.children;
   }
 }
 ```
 
-### Advanced Loading States
+### 3. Environment Variables
 
-```jsx
-function StudentDashboard() {
-  const {
-    data: students,
-    isLoading,
-    error,
-    isFetching,
-  } = useQuery({
-    queryKey: ["students"],
-    queryFn: fetchStudents,
-  });
+```javascript
+// .env
+REACT_APP_API_URL=http://localhost:3001/api
 
-  if (isLoading) {
-    return (
-      <div className="loading-skeleton">
-        <div className="skeleton-item"></div>
-        <div className="skeleton-item"></div>
-        <div className="skeleton-item"></div>
-      </div>
-    );
-  }
+// api.js
+const api = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+});
+```
 
-  if (error) {
-    return (
-      <div className="error-state">
-        <h3>Unable to load students</h3>
-        <p>{error.message}</p>
-        <button onClick={() => window.location.reload()}>Try Again</button>
-      </div>
-    );
-  }
+### 4. PropTypes for Type Safety
 
+```javascript
+import PropTypes from 'prop-types';
+
+function TaskItem({ task, onUpdate, onDelete }) {
   return (
     <div>
-      {isFetching && <div className="background-loading">Updating...</div>}
-      <div className="students-grid">
-        {students.map((student) => (
-          <StudentCard key={student._id} student={student} />
-        ))}
-      </div>
+      <h3>{task.title}</h3>
+      <p>{task.description}</p>
+      <button onClick={() => onUpdate(task._id)}>Update</button>
+      <button onClick={() => onDelete(task._id)}>Delete</button>
     </div>
   );
 }
-```
 
----
-
-## Best Practices for Production Apps 
-
-### 1. Environment Configuration
-
-```javascript
-// config/api.js
-const API_BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://your-api.com/api"
-    : "http://localhost:5000/api";
-
-export const apiClient = {
-  get: (endpoint) => fetch(`${API_BASE_URL}${endpoint}`),
-  post: (endpoint, data) =>
-    fetch(`${API_BASE_URL}${endpoint}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    }),
+TaskItem.propTypes = {
+  task: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 ```
-
-### 2. Optimistic Updates
-
-```jsx
-function useOptimisticStudents() {
-  const queryClient = useQueryClient();
-
-  const addStudentMutation = useMutation({
-    mutationFn: createStudent,
-    onMutate: async (newStudent) => {
-      // Cancel outgoing refetches
-      await queryClient.cancelQueries({ queryKey: ["students"] });
-
-      // Snapshot previous value
-      const previousStudents = queryClient.getQueryData(["students"]);
-
-      // Optimistically update the cache
-      queryClient.setQueryData(["students"], (old) => [
-        ...old,
-        { ...newStudent, _id: Date.now(), isOptimistic: true },
-      ]);
-
-      return { previousStudents };
-    },
-    onError: (err, newStudent, context) => {
-      // Rollback on error
-      queryClient.setQueryData(["students"], context.previousStudents);
-    },
-    onSettled: () => {
-      // Always refetch after error or success
-      queryClient.invalidateQueries({ queryKey: ["students"] });
-    },
-  });
-
-  return addStudentMutation;
-}
-```
-
-### 3. Request Caching and Deduplication
-
-```jsx
-// Custom hook with intelligent caching
-function useStudent(id) {
-  return useQuery({
-    queryKey: ["student", id],
-    queryFn: () => fetchStudent(id),
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    cacheTime: 30 * 60 * 1000, // 30 minutes
-    retry: (failureCount, error) => {
-      // Don't retry on 404s
-      if (error.status === 404) return false;
-      // Retry up to 3 times for other errors
-      return failureCount < 3;
-    },
-  });
-}
-```
-
----
-
-## Lab Exercise Preview 
-
-**What You'll Build:**
-
-1. **Node.js/Express API**
-
-   - MongoDB connection with Mongoose
-   - CRUD endpoints for tasks
-   - Error handling middleware
-
-2. **React Frontend Integration**
-
-   - React Query setup
-   - Task list with CRUD operations
-   - Loading states and error handling
-
-3. **Testing & Polish**
-   - Test all functionality
-   - Add optimistic updates
-
-**Result:** A fully functional task management system with modern architecture!
 
 ---
 
 ## Summary
 
-**Key Concepts:**
-- REST API architecture with HTTP methods (GET, POST, PUT, DELETE)
-- React integration with Node.js/Express backends
-- Data fetching patterns using fetch API and React Query
-- CRUD operations implementation in full-stack applications
-- Error handling and loading state management
-- Search, filtering, and pagination strategies
+**What You've Learned:**
+- ✅ REST APIs and HTTP methods
+- ✅ Axios for data fetching (recommended)
+- ✅ Error handling and loading states
+- ✅ React Query for advanced data management
+- ✅ Best practices for API integration
 
-**React Query Benefits:**
-- Automatic caching and background updates
-- Built-in loading and error states
-- Optimistic updates for better UX
-- Query invalidation and refetching
-- Reduced boilerplate code
+**Next Steps:**
+- Practice with the lab exercises
+- Build the Task Manager application
+- Try both Axios and React Query approaches
+- Focus on Axios first, then explore React Query
 
-**Best Practices:**
-- Separate API logic from UI components
-- Use environment variables for API URLs
-- Implement proper error handling with user-friendly messages
-- Add loading states for better UX
-- Validate data on both client and server
-- Use PropTypes for type-safe API integration and component validation
-
-
+**Key Takeaway:**
+Start with Axios for basic API calls, then upgrade to React Query when you need advanced features like caching, background updates, and optimistic updates.

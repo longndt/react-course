@@ -24,7 +24,52 @@
 .app-header p {
   font-size: 0.9rem;
   color: #6c757d;
-  margin: 0;
+  margin: 0 0 1rem 0;
+}
+
+.version-toggle {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.version-toggle .btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  background: white;
+  color: #6c757d;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.version-toggle .btn:hover {
+  background: #f8f9fa;
+  border-color: #adb5bd;
+}
+
+.version-toggle .btn-primary {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.version-toggle .btn-primary:hover {
+  background: #0056b3;
+  border-color: #0056b3;
+}
+
+.version-toggle .btn-secondary {
+  background: #6c757d;
+  color: white;
+  border-color: #6c757d;
+}
+
+.version-toggle .btn-secondary:hover {
+  background: #545b62;
+  border-color: #545b62;
 }
 
 .app-main {
