@@ -612,9 +612,3 @@ function useStudent(id) {
 - Validate data on both client and server
 - Use TypeScript for type-safe API integration
 
----
-
----
-
----
-
