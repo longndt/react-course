@@ -12,7 +12,7 @@ This lesson provides two ways to run the API integration examples:
 1. Install dependencies: `npm install`
 2. Create `.env` file with MongoDB connection string:
    ```
-   MONGODB_URI=mongodb://localhost:27017/taskmanager
+   MONGODB_URI=mongodb://localhost:27017/react-course-lesson3
    ```
 3. Start the backend server: `npm run server`
 4. In another terminal, start the frontend: `npm run dev`

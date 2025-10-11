@@ -6,7 +6,7 @@ const mockTasks = [
     _id: '1',
     title: 'Learn React',
     description: 'Complete React fundamentals course',
-    completed: false,
+    status: 'pending',
     priority: 'high',
     createdAt: '2024-01-01T00:00:00.000Z',
     updatedAt: '2024-01-01T00:00:00.000Z'
@@ -15,7 +15,7 @@ const mockTasks = [
     _id: '2',
     title: 'Build Todo App',
     description: 'Create a todo application with React',
-    completed: true,
+    status: 'completed',
     priority: 'medium',
     createdAt: '2024-01-02T00:00:00.000Z',
     updatedAt: '2024-01-02T00:00:00.000Z'
@@ -24,7 +24,7 @@ const mockTasks = [
     _id: '3',
     title: 'Deploy to Production',
     description: 'Deploy the application to production',
-    completed: false,
+    status: 'pending',
     priority: 'low',
     createdAt: '2024-01-03T00:00:00.000Z',
     updatedAt: '2024-01-03T00:00:00.000Z'
@@ -35,10 +35,7 @@ const mockTasks = [
 export const handlers = [
   // GET /api/tasks - Fetch all tasks
   http.get('/api/tasks', () => {
-    return HttpResponse.json({
-      success: true,
-      data: mockTasks
-    })
+    return HttpResponse.json(mockTasks)
   }),
 
   // GET /api/tasks/:id - Fetch single task
@@ -46,14 +43,11 @@ export const handlers = [
     const task = mockTasks.find(t => t._id === params.id)
     if (!task) {
       return HttpResponse.json(
-        { success: false, message: 'Task not found' },
+        { message: 'Task not found' },
         { status: 404 }
       )
     }
-    return HttpResponse.json({
-      success: true,
-      data: task
-    })
+    return HttpResponse.json(task)
   }),
 
   // POST /api/tasks - Create new task
@@ -62,16 +56,13 @@ export const handlers = [
     const newTask = {
       _id: String(mockTasks.length + 1),
       ...body,
-      completed: false,
+      status: 'pending',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     }
     mockTasks.push(newTask)
 
-    return HttpResponse.json({
-      success: true,
-      data: newTask
-    }, { status: 201 })
+    return HttpResponse.json(newTask, { status: 201 })
   }),
 
   // PUT /api/tasks/:id - Update task
@@ -81,7 +72,7 @@ export const handlers = [
 
     if (taskIndex === -1) {
       return HttpResponse.json(
-        { success: false, message: 'Task not found' },
+        { message: 'Task not found' },
         { status: 404 }
       )
     }
@@ -92,10 +83,7 @@ export const handlers = [
       updatedAt: new Date().toISOString()
     }
 
-    return HttpResponse.json({
-      success: true,
-      data: mockTasks[taskIndex]
-    })
+    return HttpResponse.json(mockTasks[taskIndex])
   }),
 
   // DELETE /api/tasks/:id - Delete task
@@ -104,16 +92,13 @@ export const handlers = [
 
     if (taskIndex === -1) {
       return HttpResponse.json(
-        { success: false, message: 'Task not found' },
+        { message: 'Task not found' },
         { status: 404 }
       )
     }
 
     mockTasks.splice(taskIndex, 1)
 
-    return HttpResponse.json({
-      success: true,
-      message: 'Task deleted successfully'
-    })
+    return HttpResponse.json({ message: 'Task deleted successfully' })
   })
 ]

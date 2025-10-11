@@ -37,8 +37,10 @@ build/
 # Coverage reports
 coverage/
 
-# Lab source codes
-labs/
+# package lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
 # Archives files
 archives/

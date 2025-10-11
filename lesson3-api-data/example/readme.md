@@ -33,11 +33,14 @@ This demo shows how to integrate a React frontend with a Node.js/Express backend
 4. **Run the application:**
 
    ```bash
-   # Run both frontend and backend
+   # Run with mock data (recommended for testing)
+   npm run dev:mock
+
+   # Run with real backend and database
    npm run dev:full
 
    # Or run separately:
-   npm run server  # Backend (Port 5000)
+   npm run server  # Backend (Port 3001)
    npm run dev     # Frontend (Port 5173)
    ```
 
@@ -74,6 +77,16 @@ example/
   - Loading states and error handling
   - Form handling with validation
   - Responsive UI components
+  - Modern gradient design with smooth animations
+
+## Recent Fixes
+
+- ✅ Fixed data structure mismatch between frontend and backend (status vs completed)
+- ✅ Fixed API response format consistency
+- ✅ Updated server port from 5000 to 3001 to match frontend expectations
+- ✅ Added comprehensive CSS styling with modern design
+- ✅ Improved responsive design for mobile devices
+- ✅ Enhanced user experience with hover effects and transitions
 
 ## API Endpoints
 
