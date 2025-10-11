@@ -727,17 +727,23 @@
           if (i === question.correct) {
             opt.classList.add("correct");
             opt.classList.remove("selected");
-            const icon = document.createElement("span");
-            icon.className = "feedback-icon";
-            icon.textContent = "✓";
-            opt.querySelector("label").appendChild(icon);
+            // Check if icon already exists
+            if (!opt.querySelector(".feedback-icon")) {
+              const icon = document.createElement("span");
+              icon.className = "feedback-icon";
+              icon.textContent = "✓";
+              opt.querySelector("label").appendChild(icon);
+            }
           } else if (i === selectedOption) {
             opt.classList.add("incorrect");
             opt.classList.remove("selected");
-            const icon = document.createElement("span");
-            icon.className = "feedback-icon";
-            icon.textContent = "✗";
-            opt.querySelector("label").appendChild(icon);
+            // Check if icon already exists
+            if (!opt.querySelector(".feedback-icon")) {
+              const icon = document.createElement("span");
+              icon.className = "feedback-icon";
+              icon.textContent = "✗";
+              opt.querySelector("label").appendChild(icon);
+            }
           }
         });
 
@@ -955,19 +961,19 @@
         if (percentage >= 90) {
           feedback.className = "feedback excellent";
           feedback.textContent =
-            " Excellent! You have a strong grasp of TypeScript fundamentals!";
+            " Excellent! You have a strong grasp of routing and authentication!";
         } else if (percentage >= 70) {
           feedback.className = "feedback good";
           feedback.textContent =
-            "👍 Good job! You understand most TypeScript concepts well!";
+            "👍 Good job! You understand most routing and authentication concepts well!";
         } else if (percentage >= 50) {
           feedback.className = "feedback average";
           feedback.textContent =
-            " Not bad! Review the materials to improve your understanding.";
+            " Not bad! Review the routing and authentication materials to improve your understanding.";
         } else {
           feedback.className = "feedback needs-improvement";
           feedback.textContent =
-            "💪 Keep studying! Practice more to master TypeScript fundamentals.";
+            "💪 Keep studying! Practice more to master routing and authentication.";
         }
 
         // Show results
