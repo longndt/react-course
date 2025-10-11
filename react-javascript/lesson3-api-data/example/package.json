@@ -9,7 +9,6 @@
     "preview": "vite preview",
     "server": "nodemon server/index.js",
     "dev:full": "concurrently \"npm run server\" \"npm run dev\"",
-    "dev:mock": "vite --mode mock",
     "test": "vitest",
     "test:ui": "vitest --ui"
   },
@@ -17,8 +16,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "axios": "^1.5.0",
-    "prop-types": "^15.8.1",
-    "msw": "^2.0.0"
+    "prop-types": "^15.8.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.1.0",

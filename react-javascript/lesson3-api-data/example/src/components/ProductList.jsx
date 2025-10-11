@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_BASE_URL = import.meta.env.MODE === 'mock' ? "/api" : "/api";
+// API base URL for real server
+const API_BASE_URL = "/api";
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
@@ -13,20 +14,14 @@ const ProductList = () => {
             setLoading(true);
             setError(null);
             console.log('=== FETCHING PRODUCTS ===');
-            console.log('Mode:', import.meta.env.MODE);
             console.log('API URL:', `${API_BASE_URL}/products`);
 
             const response = await axios.get(`${API_BASE_URL}/products`);
             console.log('API Response:', response);
 
-            // Check if response is HTML (indicates MSW failed and we got the dev server page)
-            if (typeof response.data === 'string' && response.data.includes('<!DOCTYPE html>')) {
-                throw new Error('MSW failed to start - received HTML instead of JSON. Please check MSW configuration.');
-            }
-
             // Ensure response.data is an array
             if (!Array.isArray(response.data)) {
-                throw new Error('Invalid API response - expected array but got: ' + typeof response.data);
+                throw new Error('API response is not an array. Expected product data.');
             }
 
             setProducts(response.data);
@@ -36,13 +31,8 @@ const ProductList = () => {
             console.error("Error fetching products:", err);
 
             let errorMessage = "Failed to fetch products";
-            let useFallback = false;
 
-            // Check if it's an MSW failure (our custom error)
-            if (err.message && err.message.includes('MSW failed to start')) {
-                errorMessage = "Mock API failed to start. Using fallback data for demonstration.";
-                useFallback = true;
-            } else if (axios.isAxiosError && axios.isAxiosError(err)) {
+            if (axios.isAxiosError && axios.isAxiosError(err)) {
                 console.error("Axios error details:", {
                     message: err.message,
                     status: err.response?.status,
@@ -64,43 +54,7 @@ const ProductList = () => {
 
             console.log('Setting error message:', errorMessage);
             setError(errorMessage);
-
-            if (useFallback) {
-                console.log('MSW failed, using fallback mock data');
-                const fallbackProducts = [
-                    {
-                        _id: '1',
-                        name: 'iPhone 15 Pro',
-                        description: 'Latest iPhone with advanced camera system and A17 Pro chip',
-                        price: 999.99,
-                        category: 'electronics',
-                        inStock: true,
-                        createdAt: '2024-01-01T00:00:00.000Z'
-                    },
-                    {
-                        _id: '2',
-                        name: 'MacBook Air M2',
-                        description: 'Ultra-thin laptop with M2 chip and all-day battery life',
-                        price: 1199.99,
-                        category: 'electronics',
-                        inStock: true,
-                        createdAt: '2024-01-05T00:00:00.000Z'
-                    },
-                    {
-                        _id: '3',
-                        name: 'Nike Air Max 270',
-                        description: 'Comfortable and stylish athletic shoes',
-                        price: 150.00,
-                        category: 'sports',
-                        inStock: false,
-                        createdAt: '2024-01-10T00:00:00.000Z'
-                    }
-                ];
-                setProducts(fallbackProducts);
-                setError(null); // Clear error since we have fallback data
-            } else {
-                setProducts([]); // Clear products on error
-            }
+            setProducts([]); // Clear products on error
         } finally {
             setLoading(false);
             console.log('=== LOADING COMPLETE ===');

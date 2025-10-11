@@ -15,32 +15,29 @@ This demo shows how to integrate a React frontend with a Node.js/Express backend
 npm install
 ```
 
-### 2. Start the Development Server
+### 2. Start the Backend Server
 ```bash
-# Start with REAL server (requires backend running on port 3001)
-npm run dev
-
-# Or start with MOCK API (fake server - no backend needed)
-npm run dev:mock
+# Start the backend server (required)
+npm run server
 ```
 
-### 3. Open in Browser
+### 3. Start the Frontend (in another terminal)
+```bash
+# Start the React development server
+npm run dev
+```
+
+### 4. Open in Browser
 Navigate to `http://localhost:5173` (or the port shown in terminal)
 
-## 🚀 **Server Options**
+## 🚀 **Server Requirements**
 
-### **Real Server Mode** (`npm run dev`)
-- **Requires**: Backend server running on `http://localhost:3001`
+### **Backend Server** (Required)
+- **Runs on**: `http://localhost:3001`
 - **Uses**: Real HTTP requests to your backend API
-- **Best for**: Testing with actual database and server logic
-- **Setup**: Run `npm run server` in another terminal first
+- **Database**: MongoDB for data persistence
+- **Setup**: Run `npm run server` in one terminal, `npm run dev` in another
 - **Error Handling**: Shows proper error messages if server is unavailable
-
-### **Mock API Mode** (`npm run dev:mock`)
-- **Requires**: No backend server needed
-- **Uses**: MSW (Mock Service Worker) to intercept API calls
-- **Best for**: Learning, development, and testing without backend
-- **Setup**: Just run the command - no additional setup needed
 
 ## What You'll Learn
 
@@ -71,8 +68,6 @@ src/
 ├── components/
 │   ├── ProductList.tsx      # Product display and management
 │   └── ProductForm.tsx      # Product creation form
-├── mocks/
-│   └── handlers.ts          # Mock API responses
 ├── App.tsx                  # Main application component
 ├── App.css                  # Styling
 └── main.tsx                 # Application entry point
@@ -131,20 +126,16 @@ The demo includes realistic product data:
 
 ### Common Issues:
 
-#### **Real Server Mode** (`npm run dev`)
 1. **"Failed to fetch products"** - Make sure backend server is running on port 3001
 2. **"Connection refused"** - Run `npm run server` in another terminal first
 3. **CORS errors** - Backend should handle CORS, check server configuration
-
-#### **Mock API Mode** (`npm run dev:mock`)
-1. **"Failed to fetch products"** - MSW should start automatically, check console for MSW messages
-2. **Empty page** - Check browser console for MSW startup messages
-3. **Port conflicts** - Vite will automatically use the next available port
+4. **Empty page** - Check that both frontend and backend servers are running
+5. **Port conflicts** - Vite will automatically use the next available port
 
 ### Debug Mode:
 - Open browser DevTools to see console logs
 - Check Network tab for API calls
-- Verify mock data in handlers.ts
+- Verify backend server is running on port 3001
 
 ---
 
