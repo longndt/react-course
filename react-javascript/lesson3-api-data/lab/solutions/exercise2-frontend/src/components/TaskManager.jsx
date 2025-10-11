@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
 import { taskApi } from '../services/api';
 import './TaskManager.css';
 
 export default function TaskManager() {
-  const queryClient = useQueryClient();
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [newTask, setNewTask] = useState({
     title: '',
     description: '',
@@ -12,239 +13,208 @@ export default function TaskManager() {
   });
 
   // ============================================
-  // FETCH TASKS with useQuery
+  // FETCH TASKS with Axios
   // ============================================
-  const {
-    data: tasks,
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ['tasks'],
-    queryFn: taskApi.getAllTasks,
-    staleTime: 1000 * 60, // Data stays fresh for 1 minute
-    refetchOnWindowFocus: true, // Refetch when window regains focus
-  });
+  const fetchTasks = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await taskApi.getAllTasks();
+      setTasks(data);
+    } catch (err) {
+      setError('Failed to fetch tasks');
+      console.error('Error fetching tasks:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // ============================================
-  // CREATE TASK with useMutation
+  // CREATE TASK with Axios
   // ============================================
-  const createMutation = useMutation({
-    mutationFn: taskApi.createTask,
-    onSuccess: () => {
-      // Invalidate and refetch tasks
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-      // Reset form
+  const createTask = async (e) => {
+    e.preventDefault();
+
+    if (!newTask.title.trim() || !newTask.description.trim()) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    try {
+      const createdTask = await taskApi.createTask(newTask);
+      setTasks(prev => [...prev, createdTask]);
       setNewTask({
         title: '',
         description: '',
         priority: 'medium',
       });
-    },
-    onError: (error) => {
-      const axiosError = error; // Axios error has response property
-      alert(`Error creating task: ${axiosError.response?.data?.message || error.message}`);
-    },
-  });
+    } catch (err) {
+      console.error('Error creating task:', err);
+      alert('Failed to create task');
+    }
+  };
 
   // ============================================
-  // UPDATE TASK with useMutation
+  // UPDATE TASK with Axios
   // ============================================
-  const updateMutation = useMutation({
-    mutationFn: taskApi.updateTask,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-    },
-    onError: (error) => {
-      const axiosError = error;
-      alert(`Error updating task: ${axiosError.response?.data?.message || error.message}`);
-    },
-  });
+  const updateTask = async (id, updates) => {
+    try {
+      const updatedTask = await taskApi.updateTask({ id, ...updates });
+      setTasks(prev => prev.map(task =>
+        task._id === id ? updatedTask : task
+      ));
+    } catch (err) {
+      console.error('Error updating task:', err);
+      alert('Failed to update task');
+    }
+  };
 
   // ============================================
-  // DELETE TASK with useMutation
+  // DELETE TASK with Axios
   // ============================================
-  const deleteMutation = useMutation({
-    mutationFn: taskApi.deleteTask,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-    },
-    onError: (error) => {
-      const axiosError = error;
-      alert(`Error deleting task: ${axiosError.response?.data?.message || error.message}`);
-    },
-  });
-
-  // ============================================
-  // EVENT HANDLERS
-  // ============================================
-  const handleCreateTask = (e) => {
-    e.preventDefault();
-    if (!newTask.title.trim() || !newTask.description.trim()) {
-      alert('Title and description are required!');
+  const deleteTask = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this task?')) {
       return;
     }
-    createMutation.mutate(newTask);
-  };
 
-  const handleToggleComplete = (task) => {
-    updateMutation.mutate({
-      id: task._id,
-      status: task.status === 'pending' ? 'completed' : 'pending',
-    });
-  };
-
-  const handleDeleteTask = (taskId) => {
-    if (window.confirm('Are you sure you want to delete this task?')) {
-      deleteMutation.mutate(taskId);
+    try {
+      await taskApi.deleteTask(id);
+      setTasks(prev => prev.filter(task => task._id !== id));
+    } catch (err) {
+      console.error('Error deleting task:', err);
+      alert('Failed to delete task');
     }
   };
 
   // ============================================
-  // LOADING & ERROR STATES
+  // TOGGLE TASK STATUS
   // ============================================
-  if (isLoading) {
+  const toggleTaskStatus = (id, currentStatus) => {
+    const newStatus = currentStatus === 'pending' ? 'completed' : 'pending';
+    updateTask(id, { status: newStatus });
+  };
+
+  // ============================================
+  // EFFECTS
+  // ============================================
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  // ============================================
+  // RENDER
+  // ============================================
+  if (loading) {
     return (
       <div className="task-manager">
-        <div className="loading">
-          <div className="spinner"></div>
-          <p>Loading tasks...</p>
-        </div>
+        <div className="loading">Loading tasks...</div>
       </div>
     );
   }
 
-  if (isError) {
+  if (error) {
     return (
       <div className="task-manager">
         <div className="error">
-          <h2> Error Loading Tasks</h2>
-          <p>{error?.message || 'An error occurred'}</p>
-          <p>Make sure the backend server is running on http://localhost:3001</p>
+          <p>{error}</p>
+          <button onClick={fetchTasks}>Retry</button>
         </div>
       </div>
     );
   }
 
-  // ============================================
-  // RENDER UI
-  // ============================================
   return (
     <div className="task-manager">
-      <header>
-        <h1> Task Manager</h1>
-        <p>Full-stack app with React Query + Express + MongoDB</p>
-      </header>
+      <h1>Task Manager</h1>
 
-      {/* CREATE TASK FORM */}
-      <section className="create-task-section">
-        <h2>➕ Create New Task</h2>
-        <form onSubmit={handleCreateTask} className="task-form">
-          <div className="form-group">
-            <label htmlFor="title">Title *</label>
-            <input
-              id="title"
-              type="text"
-              placeholder="Enter task title..."
-              value={newTask.title}
-              onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-              required
-            />
-          </div>
+      {/* Create Task Form */}
+      <form onSubmit={createTask} className="task-form">
+        <h2>Add New Task</h2>
+        <div className="form-group">
+          <label htmlFor="title">Title:</label>
+          <input
+            type="text"
+            id="title"
+            value={newTask.title}
+            onChange={(e) => setNewTask(prev => ({ ...prev, title: e.target.value }))}
+            placeholder="Enter task title"
+            required
+          />
+        </div>
 
-          <div className="form-group">
-            <label htmlFor="description">Description *</label>
-            <textarea
-              id="description"
-              placeholder="Enter task description..."
-              value={newTask.description}
-              onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-              required
-              rows={3}
-            />
-          </div>
+        <div className="form-group">
+          <label htmlFor="description">Description:</label>
+          <textarea
+            id="description"
+            value={newTask.description}
+            onChange={(e) => setNewTask(prev => ({ ...prev, description: e.target.value }))}
+            placeholder="Enter task description"
+            rows={3}
+            required
+          />
+        </div>
 
-          <div className="form-group">
-            <label htmlFor="priority">Priority</label>
-            <select
-              id="priority"
-              value={newTask.priority}
-              onChange={(e) =>
-                setNewTask({ ...newTask, priority: e.target.value })
-              }
-            >
-              <option value="low">🟢 Low</option>
-              <option value="medium">🟡 Medium</option>
-              <option value="high">🔴 High</option>
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            className="btn btn-primary"
-            disabled={createMutation.isPending}
+        <div className="form-group">
+          <label htmlFor="priority">Priority:</label>
+          <select
+            id="priority"
+            value={newTask.priority}
+            onChange={(e) => setNewTask(prev => ({ ...prev, priority: e.target.value }))}
           >
-            {createMutation.isPending ? 'Creating...' : '➕ Create Task'}
-          </button>
-        </form>
-      </section>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
 
-      {/* TASK LIST */}
-      <section className="task-list-section">
-        <h2>📋 Tasks ({tasks?.length || 0})</h2>
+        <button type="submit" className="btn btn-primary">
+          Create Task
+        </button>
+      </form>
 
-        {tasks && tasks.length === 0 ? (
-          <div className="empty-state">
-            <p>No tasks yet. Create your first task above!</p>
-          </div>
+      {/* Tasks List */}
+      <div className="tasks-section">
+        <h2>Tasks ({tasks.length})</h2>
+        {tasks.length === 0 ? (
+          <p>No tasks found. Create your first task!</p>
         ) : (
-          <div className="task-list">
-            {tasks?.map((task) => (
-              <div
-                key={task._id}
-                className={`task-card ${task.status === 'completed' ? 'completed' : ''} priority-${task.priority}`}
-              >
-                <div className="task-header">
-                  <div className="task-checkbox">
-                    <input
-                      type="checkbox"
-                      checked={task.status === 'completed'}
-                      onChange={() => handleToggleComplete(task)}
-                      disabled={updateMutation.isPending}
-                    />
-                  </div>
-                  <div className="task-content">
-                    <h3 className={task.status === 'completed' ? 'strikethrough' : ''}>
-                      {task.title}
-                    </h3>
-                    <p>{task.description}</p>
-                  </div>
-                  <div className="task-actions">
-                    <button
-                      className="btn btn-danger btn-sm"
-                      onClick={() => handleDeleteTask(task._id)}
-                      disabled={deleteMutation.isPending}
-                    >
-                      🗑
-                    </button>
+          <div className="tasks">
+            {tasks.map(task => (
+              <div key={task._id} className={`task-card ${task.status}`}>
+                <div className="task-content">
+                  <h3>{task.title}</h3>
+                  <p>{task.description}</p>
+                  <div className="task-meta">
+                    <span className={`priority priority-${task.priority}`}>
+                      {task.priority}
+                    </span>
+                    <span className="status">
+                      {task.status}
+                    </span>
+                    <small>Created: {new Date(task.createdAt).toLocaleDateString()}</small>
                   </div>
                 </div>
-                <div className="task-footer">
-                  <span className={`priority-badge priority-${task.priority}`}>
-                    {task.priority === 'high' && '🔴'}
-                    {task.priority === 'medium' && '🟡'}
-                    {task.priority === 'low' && '🟢'}
-                    {' '}{task.priority}
-                  </span>
-                  <span className="task-date">
-                    {new Date(task.createdAt).toLocaleDateString()}
-                  </span>
+
+                <div className="task-actions">
+                  <button
+                    onClick={() => toggleTaskStatus(task._id, task.status)}
+                    className={`btn ${task.status === 'pending' ? 'btn-success' : 'btn-warning'}`}
+                  >
+                    {task.status === 'pending' ? 'Complete' : 'Reopen'}
+                  </button>
+
+                  <button
+                    onClick={() => deleteTask(task._id)}
+                    className="btn btn-danger"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             ))}
           </div>
         )}
-      </section>
+      </div>
     </div>
   );
 }

@@ -1,57 +1,38 @@
 import { useState } from "react";
-import TaskList from "./components/TaskList.jsx";
-import TaskForm from "./components/TaskForm.jsx";
-import TaskListAxios from "./components/TaskListAxios.jsx";
-import TaskFormAxios from "./components/TaskFormAxios.jsx";
+import ProductList from "./components/ProductList.jsx";
+import ProductForm from "./components/ProductForm.jsx";
+import "./App.css";
 
 function App() {
   const [showForm, setShowForm] = useState(false);
-  const [useAxios, setUseAxios] = useState(true);
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleProductCreated = () => {
+    setRefreshKey(prev => prev + 1);
+    setShowForm(false);
+  };
 
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Task Management App</h1>
-        <p>React + Node.js + MongoDB Integration Demo</p>
-
-        <div className="version-toggle">
-          <button
-            className={`btn ${useAxios ? 'btn-primary' : 'btn-secondary'}`}
-            onClick={() => setUseAxios(true)}
-          >
-            Axios (Basic)
-          </button>
-          <button
-            className={`btn ${!useAxios ? 'btn-primary' : 'btn-secondary'}`}
-            onClick={() => setUseAxios(false)}
-          >
-            React Query (Advanced)
-          </button>
-        </div>
+        <h1>Product Catalog</h1>
+        <button
+          className="btn btn-primary"
+          onClick={() => setShowForm(!showForm)}
+        >
+          {showForm ? "Hide Form" : "Add New Product"}
+        </button>
       </header>
 
       <main className="app-main">
-        <div className="app-controls">
-          <button
-            className="btn btn-primary"
-            onClick={() => setShowForm(!showForm)}
-          >
-            {showForm ? "Hide Form" : "Add New Task"}
-          </button>
-        </div>
-
         {showForm && (
           <div className="form-section">
-            {useAxios ? (
-              <TaskFormAxios onTaskCreated={() => setShowForm(false)} />
-            ) : (
-              <TaskForm onSuccess={() => setShowForm(false)} />
-            )}
+            <ProductForm onProductCreated={handleProductCreated} />
           </div>
         )}
 
-        <div className="tasks-section">
-          {useAxios ? <TaskListAxios /> : <TaskList />}
+        <div className="products-section">
+          <ProductList key={refreshKey} />
         </div>
       </main>
     </div>

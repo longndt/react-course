@@ -2,7 +2,7 @@
 
 ## � Overview
 
-Welcome to Lab 3! In this hands-on lab, you'll build a complete full-stack Task Manager application by connecting a React frontend to a Node.js/Express/MongoDB backend. You'll master essential API integration patterns using **Axios** for HTTP requests and **React Query** for advanced data management.
+Welcome to Lab 3! In this hands-on lab, you'll build a complete full-stack Task Manager application by connecting a React frontend to a Node.js/Express/MongoDB backend. You'll master essential API integration patterns using **Axios** - the most popular HTTP client for React applications.
 
 **What You'll Build:**
 - RESTful API with Node.js and Express
@@ -10,10 +10,9 @@ Welcome to Lab 3! In this hands-on lab, you'll build a complete full-stack Task 
 - React frontend with Axios for API calls
 - Complete CRUD operations (Create, Read, Update, Delete)
 - Professional error handling and loading states
-- React Query integration for advanced features (optional)
 
 **Why This Matters:**
-Most modern web applications require backend communication for data persistence. Axios is the most popular HTTP client for React applications, while React Query provides advanced features like caching and background updates. This lab teaches you both approaches used in production applications.
+Most modern web applications require backend communication for data persistence. Axios is the most popular HTTP client for React applications, providing clean syntax, automatic JSON parsing, and excellent error handling. This lab teaches you the essential patterns used in production applications.
 
 _For detailed concepts and theory, see [../readme.md](../readme.md)_
 
@@ -41,11 +40,11 @@ By the end of this lab, you will be able to:
    - Handle async operations in React
    - Separate server state from client state
 
-4. **React Query (Advanced)**
-   - Use `useQuery` for data fetching
-   - Use `useMutation` for data modifications
-   - Implement optimistic updates
-   - Manage query cache effectively
+4. **Advanced Patterns**
+   - Create custom hooks for API calls
+   - Implement proper error boundaries
+   - Handle loading states professionally
+   - Optimize API calls and performance
 
 ---
 

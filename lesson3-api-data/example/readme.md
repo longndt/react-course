@@ -1,101 +1,130 @@
-# Lesson 3 Demo: API Integration & Data Management
+# Lesson 3 Demo: Product Catalog with Axios
 
-This demo shows how to integrate a React frontend with a Node.js/Express backend and MongoDB database. It includes **two approaches** for learning API integration:
+This demo shows how to integrate a React frontend with a Node.js/Express backend and MongoDB database using **Axios** - the most popular HTTP client for React applications.
 
-1. **Axios (Basic)** - Most popular HTTP client for React applications
-2. **React Query (Advanced)** - Advanced data management with caching and optimization
+**Learning Focus:**
+- Axios for HTTP requests
+- Error handling and loading states
+- CRUD operations (Create, Read, Update, Delete)
+- Professional API integration patterns
 
 ## Setup Instructions
 
-### Prerequisites
+### 1. Install Dependencies
+```bash
+npm install
+```
 
-- Node.js (v18+)
-- MongoDB (local installation or MongoDB Atlas)
-- VS Code with React and Node.js extensions
+### 2. Start the Development Server
+```bash
+# Start with mock data (recommended for learning)
+npm run dev:mock
 
-### Installation
+# Or start with real backend (requires backend server running)
+npm run dev
+```
 
-1. **Install dependencies:**
+### 3. Open in Browser
+Navigate to `http://localhost:5173` (or the port shown in terminal)
 
-   ```bash
-   npm install
-   ```
+## What You'll Learn
 
-2. **Set up MongoDB:**
+### 🛍️ **Product Catalog Features:**
+- **View Products** - Browse all products with details
+- **Add Products** - Create new products with form validation
+- **Update Stock** - Toggle product availability
+- **Delete Products** - Remove products from catalog
+- **Real-time Updates** - See changes immediately
 
-   - Local: Start MongoDB service
-   - Cloud: Create MongoDB Atlas cluster and get connection string
+### 🔧 **Technical Skills:**
+- **Axios Integration** - HTTP client setup and usage
+- **Error Handling** - Professional error states and retry logic
+- **Loading States** - User feedback during API calls
+- **Form Management** - Controlled components and validation
+- **State Management** - Local state with React hooks
 
-3. **Environment setup:**
-
-   ```bash
-   cp .env.example .env
-   # Edit .env with your MongoDB connection string
-   ```
-
-4. **Run the application:**
-
-   ```bash
-   # Run with mock data (recommended for testing)
-   npm run dev:mock
-
-   # Run with real backend and database
-   npm run dev:full
-
-   # Or run separately:
-   npm run server  # Backend (Port 3001)
-   npm run dev     # Frontend (Port 5173)
-   ```
+### 📊 **API Endpoints Used:**
+- `GET /api/products` - Fetch all products
+- `POST /api/products` - Create new product
+- `PUT /api/products/:id` - Update product
+- `DELETE /api/products/:id` - Delete product
 
 ## Project Structure
 
 ```
-example/
-├── server/                 # Node.js/Express backend
-│   ├── index.js           # Server entry point
-│   ├── models/            # MongoDB models
-│   ├── routes/            # API routes
-│   └── middleware/        # Express middleware
-├── src/                   # React frontend
-│   ├── components/        # React components
-│   ├── hooks/            # Custom hooks
-│   ├── services/         # API services
-│   └── utils/            # Utilities
-└── package.json
+src/
+├── components/
+│   ├── ProductList.tsx      # Product display and management
+│   └── ProductForm.tsx      # Product creation form
+├── mocks/
+│   └── handlers.ts          # Mock API responses
+├── App.tsx                  # Main application component
+├── App.css                  # Styling
+└── main.tsx                 # Application entry point
 ```
 
-## Features Demonstrated
+## Key Concepts Demonstrated
 
-- **Backend (Node.js/Express/MongoDB):**
+### 1. **Axios Configuration**
+```typescript
+const API_BASE_URL = "http://localhost:3001/api";
+const response = await axios.get<Product[]>(`${API_BASE_URL}/products`);
+```
 
-  - RESTful API endpoints
-  - MongoDB integration with Mongoose
-  - CRUD operations
-  - Error handling middleware
-  - CORS configuration
+### 2. **Error Handling**
+```typescript
+try {
+  const response = await axios.get(`${API_BASE_URL}/products`);
+  setProducts(response.data);
+} catch (err) {
+  if (axios.isAxiosError(err)) {
+    setError(`Failed to fetch products: ${err.message}`);
+  }
+}
+```
 
-- **Frontend (React):**
-  - React Query for data fetching
-  - Custom hooks for API integration
-  - Loading states and error handling
-  - Form handling with validation
-  - Responsive UI components
-  - Modern gradient design with smooth animations
+### 3. **Loading States**
+```typescript
+const [loading, setLoading] = useState(true);
+// Show loading spinner while fetching data
+```
 
-## Recent Fixes
+### 4. **Form Validation**
+```typescript
+if (!formData.name.trim() || formData.price <= 0) {
+  setError("Please fill in all fields with valid values.");
+  return;
+}
+```
 
-- ✅ Fixed data structure mismatch between frontend and backend (status vs completed)
-- ✅ Fixed API response format consistency
-- ✅ Updated server port from 5000 to 3001 to match frontend expectations
-- ✅ Added comprehensive CSS styling with modern design
-- ✅ Improved responsive design for mobile devices
-- ✅ Enhanced user experience with hover effects and transitions
+## Mock Data
 
-## API Endpoints
+The demo includes realistic product data:
+- **Electronics** - iPhones, MacBooks, etc.
+- **Books** - Classic novels and textbooks
+- **Sports** - Athletic shoes and equipment
+- **Home** - Kitchen appliances and furniture
 
-- `GET /api/tasks` - Get all tasks
-- `POST /api/tasks` - Create new task
-- `PUT /api/tasks/:id` - Update task
-- `DELETE /api/tasks/:id` - Delete task
+## Next Steps
 
+1. **Try the Features** - Add, edit, and delete products
+2. **Check the Code** - Examine how Axios is used
+3. **Modify the UI** - Customize the styling
+4. **Add Features** - Implement search, filtering, or pagination
 
+## Troubleshooting
+
+### Common Issues:
+
+1. **"Failed to fetch products"** - Check if mock server is running
+2. **Port conflicts** - Vite will automatically use the next available port
+3. **CORS errors** - Mock server handles CORS automatically
+
+### Debug Mode:
+- Open browser DevTools to see console logs
+- Check Network tab for API calls
+- Verify mock data in handlers.ts
+
+---
+
+**Ready to build your own API-integrated React app?** This demo provides the foundation for any e-commerce or catalog application! 🚀
