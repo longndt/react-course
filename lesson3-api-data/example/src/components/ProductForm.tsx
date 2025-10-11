@@ -1,7 +1,4 @@
 import { useState, FormEvent, ChangeEvent } from "react";
-import axios from "axios";
-
-const API_BASE_URL = "http://localhost:3001/api";
 
 interface ProductFormProps {
     onProductCreated: () => void;
@@ -35,17 +32,16 @@ const ProductForm = ({ onProductCreated }: ProductFormProps) => {
             setLoading(true);
             setError(null);
             console.log('Creating product with data:', formData);
-            await axios.post(`${API_BASE_URL}/products`, formData);
+
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
             console.log('Product created successfully');
             setFormData({ name: "", description: "", price: 0, category: "electronics" });
             onProductCreated();
         } catch (err) {
             console.error("Error creating product:", err);
-            if (axios.isAxiosError(err)) {
-                setError(`Failed to create product: ${err.message}`);
-            } else {
-                setError("Failed to create product");
-            }
+            setError("Failed to create product");
         } finally {
             setLoading(false);
         }

@@ -3,6 +3,37 @@ import axios from "axios";
 
 const API_BASE_URL = "http://localhost:3001/api";
 
+// Mock data for demo
+const mockProducts = [
+    {
+        _id: '1',
+        name: 'iPhone 15 Pro',
+        description: 'Latest iPhone with advanced camera system and A17 Pro chip',
+        price: 999.99,
+        category: 'electronics',
+        inStock: true,
+        createdAt: '2024-01-01T00:00:00.000Z'
+    },
+    {
+        _id: '2',
+        name: 'MacBook Air M2',
+        description: 'Ultra-thin laptop with M2 chip and all-day battery life',
+        price: 1199.99,
+        category: 'electronics',
+        inStock: true,
+        createdAt: '2024-01-05T00:00:00.000Z'
+    },
+    {
+        _id: '3',
+        name: 'Nike Air Max 270',
+        description: 'Comfortable and stylish athletic shoes',
+        price: 150.00,
+        category: 'sports',
+        inStock: false,
+        createdAt: '2024-01-10T00:00:00.000Z'
+    }
+];
+
 interface Product {
     _id: string;
     name: string;
@@ -22,17 +53,17 @@ const ProductList = () => {
         try {
             setLoading(true);
             setError(null);
-            console.log('Fetching products from:', `${API_BASE_URL}/products`);
-            const response = await axios.get<Product[]>(`${API_BASE_URL}/products`);
-            console.log('Products fetched successfully:', response.data);
-            setProducts(response.data);
+            console.log('Fetching products from mock data');
+
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // Use mock data instead of API call
+            setProducts(mockProducts);
+            console.log('Products fetched successfully:', mockProducts);
         } catch (err) {
             console.error("Error fetching products:", err);
-            if (axios.isAxiosError(err)) {
-                setError(`Failed to fetch products: ${err.message}`);
-            } else {
-                setError("Failed to fetch products");
-            }
+            setError("Failed to fetch products");
         } finally {
             setLoading(false);
         }
@@ -44,8 +75,17 @@ const ProductList = () => {
 
     const updateProduct = async (productId: string, inStock: boolean) => {
         try {
-            await axios.put(`${API_BASE_URL}/products/${productId}`, { inStock });
-            fetchProducts();
+            console.log('Updating product:', productId, 'inStock:', inStock);
+
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            // Update local state
+            setProducts(prev => prev.map(product =>
+                product._id === productId
+                    ? { ...product, inStock }
+                    : product
+            ));
         } catch (err) {
             console.error("Error updating product:", err);
             setError("Failed to update product");
@@ -54,8 +94,13 @@ const ProductList = () => {
 
     const deleteProduct = async (productId: string) => {
         try {
-            await axios.delete(`${API_BASE_URL}/products/${productId}`);
-            fetchProducts();
+            console.log('Deleting product:', productId);
+
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            // Update local state
+            setProducts(prev => prev.filter(product => product._id !== productId));
         } catch (err) {
             console.error("Error deleting product:", err);
             setError("Failed to delete product");
