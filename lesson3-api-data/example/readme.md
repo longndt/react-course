@@ -17,15 +17,29 @@ npm install
 
 ### 2. Start the Development Server
 ```bash
-# Start with mock API (default - recommended for learning)
+# Start with REAL server (requires backend running on port 3001)
 npm run dev
 
-# Or start with real backend (requires backend server running)
-npm run dev:full
+# Or start with MOCK API (fake server - no backend needed)
+npm run dev:mock
 ```
 
 ### 3. Open in Browser
 Navigate to `http://localhost:5173` (or the port shown in terminal)
+
+## 🚀 **Server Options**
+
+### **Real Server Mode** (`npm run dev`)
+- **Requires**: Backend server running on `http://localhost:3001`
+- **Uses**: Real HTTP requests to your backend API
+- **Best for**: Testing with actual database and server logic
+- **Setup**: Run `npm run server` in another terminal first
+
+### **Mock API Mode** (`npm run dev:mock`)
+- **Requires**: No backend server needed
+- **Uses**: MSW (Mock Service Worker) to intercept API calls
+- **Best for**: Learning, development, and testing without backend
+- **Setup**: Just run the command - no additional setup needed
 
 ## What You'll Learn
 
@@ -116,9 +130,15 @@ The demo includes realistic product data:
 
 ### Common Issues:
 
-1. **"Failed to fetch products"** - Mock API should start automatically with MSW
-2. **Port conflicts** - Vite will automatically use the next available port
-3. **CORS errors** - MSW handles CORS automatically
+#### **Real Server Mode** (`npm run dev`)
+1. **"Failed to fetch products"** - Make sure backend server is running on port 3001
+2. **"Connection refused"** - Run `npm run server` in another terminal first
+3. **CORS errors** - Backend should handle CORS, check server configuration
+
+#### **Mock API Mode** (`npm run dev:mock`)
+1. **"Failed to fetch products"** - MSW should start automatically, check console for MSW messages
+2. **Empty page** - Check browser console for MSW startup messages
+3. **Port conflicts** - Vite will automatically use the next available port
 
 ### Debug Mode:
 - Open browser DevTools to see console logs

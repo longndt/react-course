@@ -58,6 +58,7 @@ const mockProducts = [
 export const handlers = [
   // GET /api/products - Fetch all products
   http.get('/api/products', () => {
+    console.log('MSW: Intercepted GET /api/products');
     return HttpResponse.json(mockProducts)
   }),
 
@@ -75,6 +76,7 @@ export const handlers = [
 
   // POST /api/products - Create new product
   http.post('/api/products', async ({ request }) => {
+    console.log('MSW: Intercepted POST /api/products');
     const body = await request.json() as any
     const newProduct = {
       _id: String(mockProducts.length + 1),

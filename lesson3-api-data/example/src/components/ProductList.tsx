@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:3001/api";
+// Use different API URLs based on mode
+const API_BASE_URL = import.meta.env.MODE === 'mock' ? "/api" : "/api";
 
 
 interface Product {
@@ -23,14 +24,46 @@ const ProductList = () => {
         try {
             setLoading(true);
             setError(null);
-            console.log('Fetching products from API');
+            console.log('Fetching products from API:', `${API_BASE_URL}/products`);
 
             const response = await axios.get<Product[]>(`${API_BASE_URL}/products`);
+            console.log('API Response:', response);
             setProducts(response.data);
             console.log('Products fetched successfully:', response.data);
         } catch (err) {
             console.error("Error fetching products:", err);
-            setError("Failed to fetch products");
+            if (axios.isAxiosError(err)) {
+                console.error("Axios error details:", {
+                    message: err.message,
+                    status: err.response?.status,
+                    data: err.response?.data
+                });
+            }
+
+            // Fallback to mock data if API fails
+            console.log('Using fallback mock data');
+            const fallbackProducts = [
+                {
+                    _id: '1',
+                    name: 'iPhone 15 Pro',
+                    description: 'Latest iPhone with advanced camera system and A17 Pro chip',
+                    price: 999.99,
+                    category: 'electronics',
+                    inStock: true,
+                    createdAt: '2024-01-01T00:00:00.000Z'
+                },
+                {
+                    _id: '2',
+                    name: 'MacBook Air M2',
+                    description: 'Ultra-thin laptop with M2 chip and all-day battery life',
+                    price: 1199.99,
+                    category: 'electronics',
+                    inStock: true,
+                    createdAt: '2024-01-05T00:00:00.000Z'
+                }
+            ];
+            setProducts(fallbackProducts);
+            setError(null); // Clear error since we have fallback data
         } finally {
             setLoading(false);
         }

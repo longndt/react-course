@@ -1,4 +1,8 @@
 import { useState } from "react";
+import axios from "axios";
+
+// Use different API URLs based on mode
+const API_BASE_URL = import.meta.env.MODE === 'mock' ? "/api" : "/api";
 
 const ProductForm = ({ onProductCreated }) => {
     const [formData, setFormData] = useState({
@@ -22,10 +26,9 @@ const ProductForm = ({ onProductCreated }) => {
             setError(null);
             console.log('Creating product with data:', formData);
 
-            // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            const response = await axios.post(`${API_BASE_URL}/products`, formData);
+            console.log('Product created successfully:', response.data);
 
-            console.log('Product created successfully');
             setFormData({ name: "", description: "", price: 0, category: "electronics" });
             onProductCreated();
         } catch (err) {

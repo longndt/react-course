@@ -1,7 +1,8 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:3001/api";
+// Use different API URLs based on mode
+const API_BASE_URL = import.meta.env.MODE === 'mock' ? "/api" : "/api";
 
 interface ProductFormProps {
     onProductCreated: () => void;
