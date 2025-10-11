@@ -17,15 +17,33 @@ async function enableMocking() {
   }
 
   console.log('MSW: Starting MSW worker for mock API...');
-  const { worker } = await import('./mocks/browser.js');
 
-  // MSW 2.0 syntax
-  await worker.start({
-    onUnhandledRequest: 'bypass',
-  });
+  try {
+    const { worker } = await import('./mocks/browser.js');
+    console.log('MSW: Worker imported successfully');
 
-  console.log('MSW: Mock API worker started successfully');
-  return worker;
+    // MSW 2.0 with simpler setup and timeout
+    console.log('MSW: Attempting to start worker...');
+
+    // Wrap in timeout to prevent hanging
+    const startWithTimeout = Promise.race([
+      worker.start({
+        onUnhandledRequest: 'bypass',
+      }),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('MSW start timeout')), 5000)
+      )
+    ]);
+
+    await startWithTimeout;
+
+    console.log('MSW: Mock API worker started successfully');
+    return worker;
+  } catch (error) {
+    console.error('MSW: Failed to start worker:', error);
+    console.error('MSW: Error details:', error.message);
+    throw error;
+  }
 }
 
 enableMocking()

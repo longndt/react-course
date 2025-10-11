@@ -34,6 +34,7 @@ Navigate to `http://localhost:5173` (or the port shown in terminal)
 - **Uses**: Real HTTP requests to your backend API
 - **Best for**: Testing with actual database and server logic
 - **Setup**: Run `npm run server` in another terminal first
+- **Error Handling**: Shows proper error messages if server is unavailable
 
 ### **Mock API Mode** (`npm run dev:mock`)
 - **Requires**: No backend server needed

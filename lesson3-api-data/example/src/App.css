@@ -98,14 +98,18 @@
 }
 
 /* Product List Styles */
+.product-list-header {
+  margin-bottom: 25px;
+}
+
 .product-list h2 {
   color: #2c3e50;
-  margin-bottom: 25px;
+  margin: 0;
   font-size: 1.8rem;
   text-align: center;
 }
 
-.products {
+.products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 20px;
@@ -134,13 +138,40 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.product-content h3 {
-  color: #2c3e50;
-  margin: 0 0 10px 0;
-  font-size: 1.3rem;
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
 }
 
-.product-content p {
+.product-header h3 {
+  color: #2c3e50;
+  margin: 0;
+  font-size: 1.3rem;
+  flex: 1;
+}
+
+.stock-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-left: 10px;
+}
+
+.stock-badge.in-stock {
+  background: #27ae60;
+  color: white;
+}
+
+.stock-badge.out-of-stock {
+  background: #e74c3c;
+  color: white;
+}
+
+.description {
   color: #7f8c8d;
   margin: 0 0 15px 0;
   line-height: 1.5;
@@ -197,6 +228,38 @@
   display: flex;
   gap: 10px;
   margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.stock-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.stock-toggle input[type="checkbox"] {
+  margin: 0;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  background: #c0392b;
+  transform: translateY(-1px);
 }
 
 /* Button Styles */
@@ -321,8 +384,18 @@
     font-size: 2rem;
   }
 
-  .products {
+  .products-grid {
     grid-template-columns: 1fr;
+  }
+
+  .product-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .stock-badge {
+    margin-left: 0;
   }
 
   .form-actions {

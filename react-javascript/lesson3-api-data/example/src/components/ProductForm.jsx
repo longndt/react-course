@@ -33,7 +33,23 @@ const ProductForm = ({ onProductCreated }) => {
             onProductCreated();
         } catch (err) {
             console.error("Error creating product:", err);
-            setError("Failed to create product");
+            let errorMessage = "Failed to create product";
+
+            if (axios.isAxiosError && axios.isAxiosError(err)) {
+                if (err.code === 'ECONNREFUSED' || err.message.includes('ECONNREFUSED')) {
+                    errorMessage = "Cannot connect to server. Please make sure the backend server is running on port 3001.";
+                } else if (err.response?.status === 404) {
+                    errorMessage = "API endpoint not found. Please check the server configuration.";
+                } else if (err.response?.status >= 500) {
+                    errorMessage = "Server error. Please try again later.";
+                } else if (err.message.includes('Network Error')) {
+                    errorMessage = "Network error. Please check your connection and server status.";
+                } else {
+                    errorMessage = `Create failed: ${err.message}`;
+                }
+            }
+
+            setError(errorMessage);
         } finally {
             setLoading(false);
         }
