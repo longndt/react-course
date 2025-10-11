@@ -17,11 +17,11 @@ npm install
 
 ### 2. Start the Development Server
 ```bash
-# Start with mock data (recommended for learning)
-npm run dev:mock
+# Start with mock API (default - recommended for learning)
+npm run dev
 
 # Or start with real backend (requires backend server running)
-npm run dev
+npm run dev:full
 ```
 
 ### 3. Open in Browser
@@ -116,9 +116,9 @@ The demo includes realistic product data:
 
 ### Common Issues:
 
-1. **"Failed to fetch products"** - Check if mock server is running
+1. **"Failed to fetch products"** - Mock API should start automatically with MSW
 2. **Port conflicts** - Vite will automatically use the next available port
-3. **CORS errors** - Mock server handles CORS automatically
+3. **CORS errors** - MSW handles CORS automatically
 
 ### Debug Mode:
 - Open browser DevTools to see console logs

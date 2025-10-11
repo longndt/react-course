@@ -29,7 +29,7 @@ Before starting this lesson, make sure you have:
 
 ### Required Knowledge
 - React fundamentals and hooks (useState, useEffect)
-- JavaScript async/await and Promises
+- TypeScript async/await and Promises
 - HTTP basics (requests, responses, status codes)
 - JSON data format
 - Completed Lessons 1 and 2
