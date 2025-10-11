@@ -6,11 +6,7 @@ In this lab session, you'll create a simple Welcome Page application using JavaS
 
 ##  Learning Objectives
 
-By completing this lab, you will be CrCreate `src/components/Feature.jsx` and `src/components/Feature.css`:
-
-**Requirements for Feature.jsx:**e `src/components/Feature.jsx` and `src/components/Feature.css`:
-
-**Requirements for Feature.jsx:**e to:
+By completing this lab, you will be able to:
 - Set up a React + JavaScript project using Vite
 - Create and organize React functional components
 - Use JSX syntax to embed JavaScript in components

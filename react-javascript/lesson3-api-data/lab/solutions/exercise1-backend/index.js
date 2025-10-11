@@ -9,7 +9,7 @@ dotenv.config();
 
 // Create Express app
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/taskdb';
 
 // Middleware
@@ -52,11 +52,7 @@ app.get('/', (req, res) => {
 app.get('/api/tasks', async (req, res) => {
   try {
     const tasks = await Task.find().sort({ createdAt: -1 }); // Sort by newest first
-    res.json({
-      success: true,
-      count: tasks.length,
-      data: tasks
-    });
+    res.json(tasks);
   } catch (error) {
     console.error('Error fetching tasks:', error);
     res.status(500).json({
@@ -79,10 +75,7 @@ app.get('/api/tasks/:id', async (req, res) => {
       });
     }
 
-    res.json({
-      success: true,
-      data: task
-    });
+    res.json(task);
   } catch (error) {
     console.error('Error fetching task:', error);
 
@@ -126,11 +119,7 @@ app.post('/api/tasks', async (req, res) => {
     // Save to database
     const savedTask = await task.save();
 
-    res.status(201).json({
-      success: true,
-      message: 'Task created successfully',
-      data: savedTask
-    });
+    res.status(201).json(savedTask);
   } catch (error) {
     console.error('Error creating task:', error);
 
@@ -154,7 +143,7 @@ app.post('/api/tasks', async (req, res) => {
 // 4. PUT /api/tasks/:id - Update task
 app.put('/api/tasks/:id', async (req, res) => {
   try {
-    const { title, description, completed, priority, dueDate } = req.body;
+    const { title, description, status, priority, dueDate } = req.body;
 
     // Find task and update
     const task = await Task.findByIdAndUpdate(
@@ -162,7 +151,7 @@ app.put('/api/tasks/:id', async (req, res) => {
       {
         title,
         description,
-        completed,
+        status,
         priority,
         dueDate
       },
@@ -179,11 +168,7 @@ app.put('/api/tasks/:id', async (req, res) => {
       });
     }
 
-    res.json({
-      success: true,
-      message: 'Task updated successfully',
-      data: task
-    });
+    res.json(task);
   } catch (error) {
     console.error('Error updating task:', error);
 
@@ -224,11 +209,7 @@ app.delete('/api/tasks/:id', async (req, res) => {
       });
     }
 
-    res.json({
-      success: true,
-      message: 'Task deleted successfully',
-      data: task
-    });
+    res.json({ message: 'Task deleted successfully' });
   } catch (error) {
     console.error('Error deleting task:', error);
 

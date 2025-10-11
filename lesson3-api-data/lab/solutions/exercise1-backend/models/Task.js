@@ -16,9 +16,10 @@ const taskSchema = new mongoose.Schema({
     minlength: [5, 'Description must be at least 5 characters long'],
     maxlength: [500, 'Description cannot exceed 500 characters']
   },
-  completed: {
-    type: Boolean,
-    default: false
+  status: {
+    type: String,
+    enum: ['pending', 'completed'],
+    default: 'pending'
   },
   priority: {
     type: String,

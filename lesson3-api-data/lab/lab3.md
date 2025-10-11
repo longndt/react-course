@@ -180,7 +180,7 @@ Create file: `backend/src/models/Task.ts`
 **Requirements:**
 - Define `ITask` interface with fields:
   - `title`: string, required
-  - `completed`: boolean, default false
+  - `status`: string, enum ['pending', 'completed'], default 'pending'
   - `priority`: string enum ('low', 'medium', 'high'), default 'medium'
   - `createdAt`: Date
   - `updatedAt`: Date
@@ -468,7 +468,7 @@ const API_BASE = 'http://localhost:5000/api';
 export interface Task {
   _id: string;
   title: string;
-  completed: boolean;
+  status: 'pending' | 'completed';
   priority: 'low' | 'medium' | 'high';
   createdAt: string;
   updatedAt: string;

@@ -98,7 +98,7 @@ export default App;
 ```jsx
 import { Link } from 'react-router-dom';
 
-function Navbar() {
+function Navigation() {
   return (
     <nav>
       <Link to="/">Home</Link>
@@ -109,24 +109,25 @@ function Navbar() {
 }
 ```
 
-**NavLink with Active Styling:**
+**NavLink Component (with active styling):**
 ```jsx
 import { NavLink } from 'react-router-dom';
 
-function Navbar() {
+function Navigation() {
   return (
     <nav>
-      <NavLink
-        to="/"
-        className={({ isActive }) => isActive ? 'active' : ''}
+      <NavLink 
+        to="/" 
+        className={({ isActive }) => 
+          isActive ? 'active-link' : 'normal-link'
+        }
       >
         Home
       </NavLink>
-
-      <NavLink
+      <NavLink 
         to="/about"
         style={({ isActive }) => ({
-          color: isActive ? 'blue' : 'black'
+          color: isActive ? 'red' : 'blue'
         })}
       >
         About
@@ -134,75 +135,6 @@ function Navbar() {
     </nav>
   );
 }
-```
-
-### URL Parameters
-
-**Dynamic Routes:**
-```jsx
-// Define route with parameter
-<Route path="/users/:userId" element={<UserProfile />} />
-<Route path="/products/:category/:productId" element={<Product />} />
-
-// Access parameters in component
-import { useParams } from 'react-router-dom';
-
-function UserProfile() {
-  const { userId } = useParams<{ userId: string }>();
-
-  return <div>User ID: {userId}</div>;
-}
-
-function Product() {
-  const { category, productId } = useParams();
-
-  return (
-    <div>
-      <p>Category: {category}</p>
-      <p>Product: {productId}</p>
-    </div>
-  );
-}
-```
-
-### Query Parameters
-
-```jsx
-import { useSearchParams } from 'react-router-dom';
-
-function SearchPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  // Get query parameters
-  const query = searchParams.get('q') || '';
-  const page = searchParams.get('page') || '1';
-  const sort = searchParams.get('sort') || 'date';
-
-  // Update query parameters
-  const handleSearch = (newQuery) => {
-    setSearchParams({ q: newQuery, page: '1', sort });
-  };
-
-  const handlePageChange = (newPage) => {
-    setSearchParams({ q: query, page: String(newPage), sort });
-  };
-
-  return (
-    <div>
-      <input
-        value={query}
-        onChange={(e) => handleSearch(e.target.value)}
-      />
-      <p>Results for: {query}</p>
-      <p>Page: {page}</p>
-      <button onClick={() => handlePageChange(Number(page) + 1)}>
-        Next Page
-      </button>
-    </div>
-  );
-}
-
-// URL: /search?q=react&page=2&sort=date
 ```
 
 ### Programmatic Navigation
@@ -213,783 +145,913 @@ import { useNavigate } from 'react-router-dom';
 function LoginForm() {
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // ... login logic
-
-    // Navigate after successful login
-    navigate('/dashboard');
-
-    // Navigate with replace (no back button)
-    navigate('/dashboard', { replace: true });
-
-    // Navigate with state
-    navigate('/profile', { state: { from: 'login' } });
-
-    // Go back
-    navigate(-1);
-
-    // Go forward
-    navigate(1);
+  const handleLogin = async (credentials) => {
+    try {
+      await loginUser(credentials);
+      navigate('/dashboard'); // Navigate after successful login
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
 
-  return <form onSubmit={handleSubmit}>...</form>;
+  const handleCancel = () => {
+    navigate(-1); // Go back to previous page
+  };
+
+  return (
+    <form onSubmit={handleLogin}>
+      {/* form fields */}
+      <button type="submit">Login</button>
+      <button type="button" onClick={handleCancel}>Cancel</button>
+    </form>
+  );
 }
 ```
 
-### Nested Routes and Layouts
+---
 
-**Shared Layout Pattern:**
+## 3. Route Parameters & Query Strings
+
+### Dynamic Routes with Parameters
+
 ```jsx
-import { Outlet } from 'react-router-dom';
+// Route definition
+<Route path="/user/:id" element={<UserProfile />} />
+<Route path="/posts/:category/:id" element={<PostDetail />} />
 
-// Layout component
-function DashboardLayout() {
+// Accessing parameters
+import { useParams } from 'react-router-dom';
+
+function UserProfile() {
+  const { id } = useParams();
+  
+  return <div>User ID: {id}</div>;
+}
+
+function PostDetail() {
+  const { category, id } = useParams();
+  
   return (
-    <div className="dashboard">
-      <Sidebar />
-      <main className="content">
-        <Header />
-        <Outlet /> {/* Child routes render here */}
-      </main>
+    <div>
+      <h1>Post {id} in {category}</h1>
+    </div>
+  );
+}
+```
+
+### Query String Parameters
+
+```jsx
+import { useSearchParams } from 'react-router-dom';
+
+function SearchResults() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  const query = searchParams.get('q');
+  const page = searchParams.get('page') || '1';
+  
+  const updateSearch = (newQuery) => {
+    setSearchParams({ q: newQuery, page: '1' });
+  };
+  
+  return (
+    <div>
+      <h1>Search Results for: {query}</h1>
+      <p>Page: {page}</p>
     </div>
   );
 }
 
-// App routes
+// URL: /search?q=react&page=2
+```
+
+---
+
+## 4. Nested Routes & Layouts
+
+### Layout Components
+
+```jsx
+// Layout.jsx
+import { Outlet } from 'react-router-dom';
+
+function Layout() {
+  return (
+    <div className="app-layout">
+      <header>
+        <h1>My App</h1>
+        <Navigation />
+      </header>
+      <main>
+        <Outlet /> {/* Child routes render here */}
+      </main>
+      <footer>
+        <p>&copy; 2024 My App</p>
+      </footer>
+    </div>
+  );
+}
+
+// App.jsx
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-
-        {/* Nested routes with shared layout */}
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route index element={<DashboardHome />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="analytics" element={<Analytics />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
         </Route>
       </Routes>
     </BrowserRouter>
   );
 }
+```
 
-// URLs:
-// /dashboard → Shows DashboardLayout + DashboardHome
-// /dashboard/profile → Shows DashboardLayout + Profile
-// /dashboard/settings → Shows DashboardLayout + Settings
+### Nested Route Structure
+
+```jsx
+// Complex nested routes
+<Routes>
+  <Route path="/" element={<Layout />}>
+    <Route index element={<Home />} />
+    <Route path="dashboard" element={<Dashboard />}>
+      <Route index element={<DashboardHome />} />
+      <Route path="profile" element={<Profile />} />
+      <Route path="settings" element={<Settings />} />
+    </Route>
+    <Route path="admin" element={<AdminLayout />}>
+      <Route index element={<AdminDashboard />} />
+      <Route path="users" element={<UserManagement />} />
+    </Route>
+  </Route>
+</Routes>
 ```
 
 ---
 
-## 3. Authentication Fundamentals
+## 5. Protected Routes
 
-### What is Authentication?
+### Basic Protected Route Component
 
-**Authentication** = Verifying who you are
-**Authorization** = Verifying what you can access
+```jsx
+import { Navigate } from 'react-router-dom';
 
-**Common Authentication Flow:**
-```
-1. User enters credentials (email, password)
-2. Frontend sends to backend API
-3. Backend validates credentials
-4. Backend generates JWT token
-5. Frontend stores token
-6. Frontend sends token with each request
-7. Backend verifies token for protected resources
-```
+function ProtectedRoute({ children, isAuthenticated }) {
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  
+  return children;
+}
 
-### JWT (JSON Web Token)
-
-**What is JWT?**
-- Secure token format for authentication
-- Contains user information (payload)
-- Cryptographically signed by server
-- Can be verified without database lookup
-
-**JWT Structure:**
-```
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-
-Header.Payload.Signature
+// Usage
+<Route 
+  path="/dashboard" 
+  element={
+    <ProtectedRoute isAuthenticated={user}>
+      <Dashboard />
+    </ProtectedRoute>
+  } 
+/>
 ```
 
-**Decoded JWT Payload:**
-```json
-{
-  "sub": "user123",
-  "name": "John Doe",
-  "email": "john@example.com",
-  "role": "admin",
-  "iat": 1516239022,
-  "exp": 1516242622
+### Advanced Protected Route with Redirect
+
+```jsx
+import { Navigate, useLocation } from 'react-router-dom';
+
+function ProtectedRoute({ children, isAuthenticated, requiredRole }) {
+  const location = useLocation();
+  
+  if (!isAuthenticated) {
+    // Redirect to login with return URL
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+  
+  if (requiredRole && !hasRole(requiredRole)) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+  
+  return children;
 }
 ```
 
-### Token Storage Options
+---
 
-**1. localStorage (Common, Simple):**
-```jsx
-// Store token
-localStorage.setItem('auth_token', token);
+## 6. Authentication Fundamentals
 
-// Retrieve token
-const token = localStorage.getItem('auth_token');
+### What is Authentication?
 
-// Remove token
-localStorage.removeItem('auth_token');
+**Authentication** verifies who a user is, while **Authorization** determines what they can do.
 
-// Pros: Simple, persists across tabs
-// Cons: Vulnerable to XSS attacks
+**Common Authentication Methods:**
+- Username/Password
+- Social Login (Google, Facebook, GitHub)
+- Multi-Factor Authentication (MFA)
+- Biometric authentication
+- Single Sign-On (SSO)
+
+### Authentication Flow
+
 ```
-
-**2. sessionStorage (Session-Only):**
-```jsx
-// Similar to localStorage but cleared when tab closes
-sessionStorage.setItem('auth_token', token);
-const token = sessionStorage.getItem('auth_token');
-
-// Pros: Auto-clears on tab close
-// Cons: Lost when user closes tab, still vulnerable to XSS
-```
-
-**3. HttpOnly Cookies (Most Secure):**
-```jsx
-// Set by server (cannot be accessed by JavaScript)
-// Set-Cookie: token=abc123; HttpOnly; Secure; SameSite=Strict
-
-// Pros: XSS protection, CSRF protection with SameSite
-// Cons: Requires server configuration, more complex
+1. User enters credentials
+2. Frontend sends to backend
+3. Backend validates credentials
+4. Backend returns JWT token
+5. Frontend stores token
+6. Frontend includes token in API requests
+7. Backend validates token for protected routes
 ```
 
 ---
 
-## 4. Authentication Implementation
+## 7. JWT Authentication
 
-### Auth Context Setup
+### What is JWT?
+
+**JSON Web Token (JWT)** is a compact, URL-safe way to represent claims between parties.
+
+**JWT Structure:**
+```
+header.payload.signature
+```
+
+**Example JWT:**
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+```
+
+### JWT Implementation
 
 ```jsx
-// contexts/AuthContext.jsx
+// auth.js
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = 'your-secret-key';
+
+export const generateToken = (payload) => {
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: '24h' });
+};
+
+export const verifyToken = (token) => {
+  try {
+    return jwt.verify(token, JWT_SECRET);
+  } catch (error) {
+    return null;
+  }
+};
+
+export const decodeToken = (token) => {
+  return jwt.decode(token);
+};
+```
+
+### Token Storage
+
+```jsx
+// tokenStorage.js
+const TOKEN_KEY = 'auth_token';
+
+export const setToken = (token) => {
+  localStorage.setItem(TOKEN_KEY, token);
+};
+
+export const getToken = () => {
+  return localStorage.getItem(TOKEN_KEY);
+};
+
+export const removeToken = () => {
+  localStorage.removeItem(TOKEN_KEY);
+};
+
+export const isTokenValid = () => {
+  const token = getToken();
+  if (!token) return false;
+  
+  try {
+    const decoded = jwt.decode(token);
+    return decoded.exp > Date.now() / 1000;
+  } catch {
+    return false;
+  }
+};
+```
+
+---
+
+## 8. Auth Context & State Management
+
+### Authentication Context
+
+```jsx
+// AuthContext.jsx
 import { createContext, useContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { getToken, setToken, removeToken, isTokenValid } from './tokenStorage';
 
-/**
- * @typedef {Object} User
- * @property {string} id - User ID
- * @property {string} username - Username
- * @property {string} email - User email
- * @property {'user'|'admin'} role - User role
- */
-
-const AuthContext = createContext(undefined);
+const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check for existing token on mount
   useEffect(() => {
-    const token = localStorage.getItem('auth_token');
-    if (token) {
-      verifyToken(token)
-        .then(userData => setUser(userData))
-        .catch(() => localStorage.removeItem('auth_token'))
-        .finally(() => setLoading(false));
-    } else {
-      setLoading(false);
+    // Check if user is already logged in
+    const token = getToken();
+    if (token && isTokenValid(token)) {
+      const userData = jwt.decode(token);
+      setUser(userData);
     }
+    setLoading(false);
   }, []);
 
-  const login = async (email, password) => {
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Login failed');
+  const login = async (credentials) => {
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials)
+      });
+      
+      const { token, user } = await response.json();
+      setToken(token);
+      setUser(user);
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: error.message };
     }
-
-    const { token, user } = await response.json();
-    localStorage.setItem('auth_token', token);
-    setUser(user);
   };
 
   const logout = () => {
-    localStorage.removeItem('auth_token');
+    removeToken();
     setUser(null);
   };
 
+  const value = {
+    user,
+    login,
+    logout,
+    loading,
+    isAuthenticated: !!user
+  };
+
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        loading,
-        login,
-        logout,
-        isAuthenticated: !!user,
-      }}
-    >
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-export function useAuth() {
+export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error('useAuth must be used within AuthProvider');
   }
   return context;
-}
-
-// Helper function
-async function verifyToken(token) {
-  const response = await fetch('/api/auth/verify', {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-
-  if (!response.ok) throw new Error('Token verification failed');
-
-  return response.json();
-}
-```
-
-### Protected Routes
-
-**Basic Protected Route:**
-```jsx
-// components/ProtectedRoute.jsx
-import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import PropTypes from 'prop-types';
-
-function ProtectedRoute({ children }) {
-  const { isAuthenticated, loading } = useAuth();
-  const location = useLocation();
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!isAuthenticated) {
-    // Redirect to login, save intended destination
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-
-  return <>{children}</>;
-}
-
-ProtectedRoute.propTypes = {
-  children: PropTypes.node.isRequired
 };
-
-export default ProtectedRoute;
 ```
 
-**Role-Based Protected Route:**
-```jsx
-function RoleProtectedRoute({ children, requiredRole }) {
-  const { user, loading, isAuthenticated } = useAuth();
-  const location = useLocation();
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-
-  if (user?.role !== requiredRole) {
-    return <Navigate to="/unauthorized" replace />;
-  }
-
-  return <>{children}</>;
-}
-```
-
-### Login Component
-
-```jsx
-// pages/Login.jsx
-import { useState, FormEvent } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-
-function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const { login } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
-
-    try {
-      await login(email, password);
-
-      // Redirect to intended destination or dashboard
-      const from = location.state?.from?.pathname || '/dashboard';
-      navigate(from, { replace: true });
-    } catch (err) {
-      setError('Invalid email or password');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="login-container">
-      <h2>Login</h2>
-
-      {error && <div className="error">{error}</div>}
-
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-
-        <button type="submit" disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
-    </div>
-  );
-}
-
-export default Login;
-```
-
-### Complete App with Auth
+### Using Auth Context
 
 ```jsx
 // App.jsx
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
-import ProtectedRoute from './components/ProtectedRoute';
-import RoleProtectedRoute from './components/RoleProtectedRoute';
-
-// Pages
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import Profile from './pages/Profile';
-import AdminPanel from './pages/AdminPanel';
-import Unauthorized from './pages/Unauthorized';
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Public routes */}
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/unauthorized" element={<Unauthorized />} />
-
-          {/* Protected routes (any authenticated user) */}
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-
-          {/* Admin-only routes */}
-          <Route
-            path="/admin"
-            element={
-              <RoleProtectedRoute requiredRole="admin">
-                <AdminPanel />
-              </RoleProtectedRoute>
-            }
-          />
+          {/* routes */}
         </Routes>
       </BrowserRouter>
     </AuthProvider>
   );
 }
 
-export default App;
+// LoginForm.jsx
+import { useAuth } from './contexts/AuthContext';
+
+function LoginForm() {
+  const { login } = useAuth();
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const result = await login(credentials);
+    if (result.success) {
+      navigate('/dashboard');
+    } else {
+      setError(result.error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* form fields */}
+    </form>
+  );
+}
 ```
 
 ---
 
-## 5. Advanced Patterns
+## 9. Login & Registration Flow
 
-### Token Refresh Mechanism
+### Login Component
 
 ```jsx
-// hooks/useTokenRefresh.ts
+import { useState } from 'react';
+import { useAuth } from './contexts/AuthContext';
+
+function LoginForm() {
+  const { login } = useAuth();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [error, setError] = useState('');
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    
+    const result = await login(formData);
+    if (!result.success) {
+      setError(result.error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label>Password:</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      {error && <div className="error">{error}</div>}
+      <button type="submit">Login</button>
+    </form>
+  );
+}
+```
+
+### Registration Component
+
+```jsx
+function RegistrationForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password
+        })
+      });
+
+      if (response.ok) {
+        navigate('/login');
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message);
+      }
+    } catch (error) {
+      setError('Registration failed');
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* form fields */}
+    </form>
+  );
+}
+```
+
+---
+
+## 10. Role-Based Access Control (RBAC)
+
+### User Roles and Permissions
+
+```jsx
+// roles.js
+export const ROLES = {
+  ADMIN: 'admin',
+  USER: 'user',
+  MODERATOR: 'moderator'
+};
+
+export const PERMISSIONS = {
+  READ_USERS: 'read:users',
+  WRITE_USERS: 'write:users',
+  DELETE_USERS: 'delete:users',
+  READ_POSTS: 'read:posts',
+  WRITE_POSTS: 'write:posts',
+  DELETE_POSTS: 'delete:posts'
+};
+
+export const ROLE_PERMISSIONS = {
+  [ROLES.ADMIN]: [
+    PERMISSIONS.READ_USERS,
+    PERMISSIONS.WRITE_USERS,
+    PERMISSIONS.DELETE_USERS,
+    PERMISSIONS.READ_POSTS,
+    PERMISSIONS.WRITE_POSTS,
+    PERMISSIONS.DELETE_POSTS
+  ],
+  [ROLES.MODERATOR]: [
+    PERMISSIONS.READ_USERS,
+    PERMISSIONS.READ_POSTS,
+    PERMISSIONS.WRITE_POSTS,
+    PERMISSIONS.DELETE_POSTS
+  ],
+  [ROLES.USER]: [
+    PERMISSIONS.READ_POSTS,
+    PERMISSIONS.WRITE_POSTS
+  ]
+};
+```
+
+### Permission Checking
+
+```jsx
+// usePermissions.js
+import { useAuth } from './contexts/AuthContext';
+import { ROLE_PERMISSIONS } from './roles';
+
+export function usePermissions() {
+  const { user } = useAuth();
+
+  const hasPermission = (permission) => {
+    if (!user) return false;
+    const userPermissions = ROLE_PERMISSIONS[user.role] || [];
+    return userPermissions.includes(permission);
+  };
+
+  const hasRole = (role) => {
+    return user?.role === role;
+  };
+
+  const hasAnyRole = (roles) => {
+    return roles.includes(user?.role);
+  };
+
+  return {
+    hasPermission,
+    hasRole,
+    hasAnyRole
+  };
+}
+
+// Usage
+function UserManagement() {
+  const { hasPermission } = usePermissions();
+
+  if (!hasPermission('read:users')) {
+    return <div>Access denied</div>;
+  }
+
+  return (
+    <div>
+      {/* User management UI */}
+    </div>
+  );
+}
+```
+
+---
+
+## 11. Session Management
+
+### Token Refresh
+
+```jsx
+// useTokenRefresh.js
 import { useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import jwtDecode from 'jwt-decode';
+import { useAuth } from './contexts/AuthContext';
 
 export function useTokenRefresh() {
-  const { logout } = useAuth();
+  const { user, login } = useAuth();
 
   useEffect(() => {
-    const checkAndRefreshToken = async () => {
-      const token = localStorage.getItem('auth_token');
-      if (!token) return;
+    if (!user) return;
 
+    const refreshToken = async () => {
       try {
-        const decoded = jwtDecode<{ exp: number }>(token);
-        const expiresIn = decoded.exp * 1000 - Date.now();
-
-        // Refresh if expires in less than 5 minutes
-        if (expiresIn < 5 * 60 * 1000) {
-          const response = await fetch('/api/auth/refresh', {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-
-          if (response.ok) {
-            const { token: newToken } = await response.json();
-            localStorage.setItem('auth_token', newToken);
-          } else {
-            logout();
+        const response = await fetch('/api/auth/refresh', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${getToken()}`
           }
-        }
+        });
 
-        // Set timer to check again
-        const timer = setTimeout(checkAndRefreshToken, 60 * 1000);
-        return () => clearTimeout(timer);
-      } catch {
+        if (response.ok) {
+          const { token } = await response.json();
+          setToken(token);
+        } else {
+          logout();
+        }
+      } catch (error) {
         logout();
       }
     };
 
-    checkAndRefreshToken();
+    // Refresh token every 30 minutes
+    const interval = setInterval(refreshToken, 30 * 60 * 1000);
+    
+    return () => clearInterval(interval);
+  }, [user]);
+}
+```
+
+### Auto Logout on Token Expiry
+
+```jsx
+// useAutoLogout.js
+import { useEffect } from 'react';
+import { useAuth } from './contexts/AuthContext';
+
+export function useAutoLogout() {
+  const { logout } = useAuth();
+
+  useEffect(() => {
+    const checkTokenExpiry = () => {
+      const token = getToken();
+      if (token && !isTokenValid(token)) {
+        logout();
+      }
+    };
+
+    // Check every minute
+    const interval = setInterval(checkTokenExpiry, 60000);
+    
+    return () => clearInterval(interval);
   }, [logout]);
 }
 ```
 
-### API Request Interceptor
-
-```jsx
-// utils/api.ts
-export async function apiRequest<T>(
-  url: string,
-  options: RequestInit = {}
-): Promise {
-  const token = localStorage.getItem('auth_token');
-
-  const headers = {
-    'Content-Type': 'application/json',
-    ...(token && { Authorization: `Bearer ${token}` }),
-    ...options.headers,
-  };
-
-  const response = await fetch(url, { ...options, headers });
-
-  // Handle unauthorized
-  if (response.status === 401) {
-    localStorage.removeItem('auth_token');
-    window.location.href = '/login';
-    throw new Error('Unauthorized');
-  }
-
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Request failed');
-  }
-
-  return response.json();
-}
-
-// Usage
-const users = await apiRequest('/api/users');
-```
-
-### Higher-Order Component (HOC) Pattern
-
-```jsx
-// hoc/withAuth.jsx
-import { ComponentType } from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-
-function withAuth<P extends object>(
-  Component: ComponentType<P>
-) {
-  return function AuthenticatedComponent(props: P) {
-    const { isAuthenticated, loading } = useAuth();
-
-    if (loading) {
-      return <div>Loading...</div>;
-    }
-
-    if (!isAuthenticated) {
-      return <Navigate to="/login" />;
-    }
-
-    return <Component {...props} />;
-  };
-}
-
-export default withAuth;
-
-// Usage
-const ProtectedDashboard = withAuth(Dashboard);
-<Route path="/dashboard" element={<ProtectedDashboard />} />
-```
-
 ---
 
-## 6. Security Best Practices
+## 12. Security Best Practices
+
+### Secure Token Storage
+
+```jsx
+// Secure token storage with httpOnly cookies (preferred)
+// Backend sets httpOnly cookie
+app.post('/api/auth/login', (req, res) => {
+  const token = generateToken(user);
+  res.cookie('auth_token', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  });
+  res.json({ user });
+});
+
+// Frontend doesn't need to handle token storage
+```
 
 ### Input Validation
 
 ```jsx
-/**
- * @typedef {Object} LoginFormData
- * @property {string} email - User email
- * @property {string} password - User password
- */
-
-/**
- * @typedef {Object} ValidationErrors
- * @property {string} [email] - Email error message
- * @property {string} [password] - Password error message
- */
-
-function validateLoginForm(data) {
-  const errors = {};
-
-  // Email validation
+// Frontend validation
+const validateEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!data.email) {
-    errors.email = 'Email is required';
-  } else if (!emailRegex.test(data.email)) {
-    errors.email = 'Invalid email format';
-  }
-
-  // Password validation
-  if (!data.password) {
-    errors.password = 'Password is required';
-  } else if (data.password.length < 8) {
-    errors.password = 'Password must be at least 8 characters';
-  }
-
-  return errors;
-}
-
-// In component
-const handleSubmit = (e) => {
-  e.preventDefault();
-
-  const errors = validateLoginForm({ email, password });
-
-  if (Object.keys(errors).length > 0) {
-    setValidationErrors(errors);
-    return;
-  }
-
-  // Proceed with login
-  login(email, password);
+  return emailRegex.test(email);
 };
+
+const validatePassword = (password) => {
+  return password.length >= 8 && 
+         /[A-Z]/.test(password) && 
+         /[0-9]/.test(password);
+};
+
+// Always validate on backend too!
 ```
 
-### HTTPS and Secure Cookies
+### CORS Configuration
 
-```jsx
-// Production configuration
-const API_URL = import.meta.env.PROD
-  ? 'https://api.example.com'  // Use HTTPS in production
-  : 'http://localhost:3000';
-
-// Cookie security settings (server-side)
-res.cookie('token', token, {
-  httpOnly: true,     // Cannot be accessed by JavaScript
-  secure: true,       // HTTPS only
-  sameSite: 'strict', // CSRF protection
-  maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-});
+```javascript
+// Backend CORS setup
+app.use(cors({
+  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 ```
 
-### XSS Protection
+---
+
+## 13. Common Authentication Patterns
+
+### Higher-Order Component for Auth
 
 ```jsx
-//  Dangerous: Direct HTML injection
-function UserProfile({ bio }: { bio: string }) {
-  return <div dangerouslySetInnerHTML={{ __html: bio }} />;
+// withAuth.jsx
+import { useAuth } from './contexts/AuthContext';
+import { Navigate } from 'react-router-dom';
+
+export function withAuth(WrappedComponent, requiredRole = null) {
+  return function AuthenticatedComponent(props) {
+    const { isAuthenticated, user } = useAuth();
+
+    if (!isAuthenticated) {
+      return <Navigate to="/login" replace />;
+    }
+
+    if (requiredRole && user.role !== requiredRole) {
+      return <Navigate to="/unauthorized" replace />;
+    }
+
+    return <WrappedComponent {...props} />;
+  };
 }
 
-//  Safe: React automatically escapes content
-function UserProfile({ bio }: { bio: string }) {
-  return <div>{bio}</div>;
+// Usage
+const ProtectedDashboard = withAuth(Dashboard);
+const AdminPanel = withAuth(AdminPanel, 'admin');
+```
+
+### Custom Hook for Route Protection
+
+```jsx
+// useRouteGuard.js
+import { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from './contexts/AuthContext';
+
+export function useRouteGuard(requiredRole = null) {
+  const { isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login', { 
+        state: { from: location },
+        replace: true 
+      });
+      return;
+    }
+
+    if (requiredRole && user.role !== requiredRole) {
+      navigate('/unauthorized', { replace: true });
+    }
+  }, [isAuthenticated, user, requiredRole, navigate, location]);
 }
 
-// If HTML is needed, sanitize it first
-import DOMPurify from 'dompurify';
-
-function UserProfile({ bio }: { bio: string }) {
-  const sanitizedBio = DOMPurify.sanitize(bio);
-  return <div dangerouslySetInnerHTML={{ __html: sanitizedBio }} />;
+// Usage in component
+function AdminPage() {
+  useRouteGuard('admin');
+  
+  return <div>Admin content</div>;
 }
 ```
 
 ---
 
-## 7. Common Pitfalls and Solutions
+## 14. Debugging Auth Issues
 
-### Problem 1: Full Page Reload
+### Common Problems and Solutions
 
-**Issue:**
+**Problem: Token not being sent with requests**
 ```jsx
-//  Wrong: Causes full page reload
-<a href="/dashboard">Dashboard</a>
-```
-
-**Solution:**
-```jsx
-//  Correct: Client-side navigation
-import { Link } from 'react-router-dom';
-<Link to="/dashboard">Dashboard</Link>
-```
-
-### Problem 2: Protected Route Flashing
-
-**Issue:** User briefly sees protected content before redirect
-
-**Solution:**
-```jsx
-import PropTypes from 'prop-types';
-
-function ProtectedRoute({ children }) {
-  const { isAuthenticated, loading } = useAuth();
-
-  // Show loading state while checking auth
-  if (loading) {
-    return <LoadingSpinner />;
+// Solution: Add token to axios interceptor
+axios.interceptors.request.use((config) => {
+  const token = getToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
+  return config;
+});
+```
 
-  return isAuthenticated ? children : <Navigate to="/login" />;
+**Problem: User logged out unexpectedly**
+```jsx
+// Solution: Check token expiry
+const isTokenExpired = (token) => {
+  try {
+    const decoded = jwt.decode(token);
+    return decoded.exp < Date.now() / 1000;
+  } catch {
+    return true;
+  }
+};
+```
+
+**Problem: Redirect loop after login**
+```jsx
+// Solution: Use replace instead of push
+navigate('/dashboard', { replace: true });
+```
+
+### Debugging Tools
+
+```jsx
+// Auth debug component
+function AuthDebug() {
+  const { user, isAuthenticated } = useAuth();
+  const token = getToken();
+
+  return (
+    <div style={{ position: 'fixed', top: 0, right: 0, background: 'white', padding: '10px' }}>
+      <h4>Auth Debug</h4>
+      <p>Authenticated: {isAuthenticated ? 'Yes' : 'No'}</p>
+      <p>User: {user ? user.name : 'None'}</p>
+      <p>Token: {token ? 'Present' : 'Missing'}</p>
+      <p>Token Valid: {isTokenValid(token) ? 'Yes' : 'No'}</p>
+    </div>
+  );
 }
-```
-
-### Problem 3: Token Expiration
-
-**Issue:** User suddenly logged out
-
-**Solution:**
-```jsx
-// Implement token refresh before expiration
-useEffect(() => {
-  const interval = setInterval(async () => {
-    const token = localStorage.getItem('auth_token');
-    if (token) {
-      const decoded = jwtDecode<{ exp: number }>(token);
-      const timeUntilExpiry = decoded.exp * 1000 - Date.now();
-
-      // Refresh if expires in < 5 minutes
-      if (timeUntilExpiry < 5 * 60 * 1000) {
-        await refreshToken();
-      }
-    }
-  }, 60 * 1000); // Check every minute
-
-  return () => clearInterval(interval);
-}, []);
-```
-
-### Problem 4: Lost State After Refresh
-
-**Issue:** Auth state lost on page reload
-
-**Solution:**
-```jsx
-// Restore auth state on app initialization
-useEffect(() => {
-  const initializeAuth = async () => {
-    const token = localStorage.getItem('auth_token');
-    if (token) {
-      try {
-        const user = await verifyToken(token);
-        setUser(user);
-      } catch {
-        localStorage.removeItem('auth_token');
-      }
-    }
-    setLoading(false);
-  };
-
-  initializeAuth();
-}, []);
 ```
 
 ---
 
 ## Summary
 
-**React Router Core Concepts:**
-- Client-side routing eliminates full page reloads
-- BrowserRouter provides routing context
-- Routes and Route define path-to-component mapping
-- Link and NavLink enable declarative navigation
-- useNavigate for programmatic navigation
-- useParams for URL parameters
-- useSearchParams for query strings
-- Nested routes with Outlet for shared layouts
+**Routing Fundamentals:**
+- React Router v6 provides declarative routing for SPAs
+- Use `BrowserRouter`, `Routes`, `Route` for basic routing
+- `Link` and `NavLink` for navigation
+- `useNavigate` for programmatic navigation
+- `useParams` and `useSearchParams` for dynamic routes
 
-**Authentication Essentials:**
-- JWT tokens for secure, stateless authentication
-- AuthContext for global auth state management
-- Protected routes to restrict access
-- Token storage (localStorage, sessionStorage, or HttpOnly cookies)
-- Login/logout flows with proper redirects
-- Token refresh for persistent sessions
+**Authentication Patterns:**
+- JWT tokens for stateless authentication
+- Context API for global auth state management
+- Protected routes with redirect logic
 - Role-based access control (RBAC)
+- Secure token storage and refresh
 
 **Security Best Practices:**
-- Always validate on server, not just client
+- Validate input on both frontend and backend
+- Use httpOnly cookies when possible
+- Implement proper CORS configuration
+- Handle token expiry gracefully
 - Use HTTPS in production
-- Sanitize user inputs to prevent XSS
-- Store tokens securely (HttpOnly cookies preferred)
-- Implement CSRF protection with SameSite cookies
-- Use strong password requirements
-- Add rate limiting to prevent brute force attacks
 
-**Advanced Patterns:**
-- Higher-Order Components (HOC) for reusable auth logic
-- Custom hooks (useAuth, useTokenRefresh) for encapsulation
-- API request interceptors for automatic token injection
-- Centralized error handling for 401/403 responses
+**Common Patterns:**
+- Higher-Order Components for route protection
+- Custom hooks for reusable auth logic
+- Centralized error handling
+- Automatic token refresh
+- Debug tools for development
 
+**Key Takeaways:**
+- Authentication is about verifying identity
+- Authorization controls access to resources
+- Always validate on the backend
+- Use secure storage methods
+- Handle edge cases and errors gracefully
+- Test authentication flows thoroughly
+
+---
+
+---
+
+---

@@ -62,7 +62,7 @@ Edit `.env`:
 ```env
 # For local MongoDB
 MONGODB_URI=mongodb://localhost:27017/taskdb
-PORT=3000
+PORT=3001
 
 # For MongoDB Atlas (cloud)
 # MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/taskdb
@@ -96,13 +96,13 @@ npm run dev
 npm start
 ```
 
-Server will start at: `http://localhost:3000`
+Server will start at: `http://localhost:3001`
 
 ---
 
 ## 🔌 API Endpoints
 
-### Base URL: `http://localhost:3000/api/tasks`
+### Base URL: `http://localhost:3001/api/tasks`
 
 ### 1. Get All Tasks
 **GET** `/api/tasks`
@@ -222,26 +222,26 @@ Server will start at: `http://localhost:3000`
 
 **Get all tasks:**
 ```bash
-curl http://localhost:3000/api/tasks
+curl http://localhost:3001/api/tasks
 ```
 
 **Create a task:**
 ```bash
-curl -X POST http://localhost:3000/api/tasks \
+curl -X POST http://localhost:3001/api/tasks \
   -H "Content-Type: application/json" \
   -d "{\"title\":\"Test Task\",\"description\":\"Testing the API\",\"priority\":\"high\"}"
 ```
 
 **Update a task:**
 ```bash
-curl -X PUT http://localhost:3000/api/tasks/YOUR_TASK_ID \
+curl -X PUT http://localhost:3001/api/tasks/YOUR_TASK_ID \
   -H "Content-Type: application/json" \
   -d "{\"completed\":true}"
 ```
 
 **Delete a task:**
 ```bash
-curl -X DELETE http://localhost:3000/api/tasks/YOUR_TASK_ID
+curl -X DELETE http://localhost:3001/api/tasks/YOUR_TASK_ID
 ```
 
 ### Using Thunder Client / Postman
@@ -249,7 +249,7 @@ curl -X DELETE http://localhost:3000/api/tasks/YOUR_TASK_ID
 1. Install Thunder Client extension in VS Code
 2. Create new request
 3. Set method (GET, POST, PUT, DELETE)
-4. Set URL: `http://localhost:3000/api/tasks`
+4. Set URL: `http://localhost:3001/api/tasks`
 5. For POST/PUT: Add JSON body
 6. Send request
 
@@ -259,13 +259,13 @@ Create `test.http` file:
 
 ```http
 ### Get all tasks
-GET http://localhost:3000/api/tasks
+GET http://localhost:3001/api/tasks
 
 ### Get single task
-GET http://localhost:3000/api/tasks/67012abc...
+GET http://localhost:3001/api/tasks/67012abc...
 
 ### Create task
-POST http://localhost:3000/api/tasks
+POST http://localhost:3001/api/tasks
 Content-Type: application/json
 
 {
@@ -275,7 +275,7 @@ Content-Type: application/json
 }
 
 ### Update task
-PUT http://localhost:3000/api/tasks/67012abc...
+PUT http://localhost:3001/api/tasks/67012abc...
 Content-Type: application/json
 
 {
@@ -284,7 +284,7 @@ Content-Type: application/json
 }
 
 ### Delete task
-DELETE http://localhost:3000/api/tasks/67012abc...
+DELETE http://localhost:3001/api/tasks/67012abc...
 ```
 
 ---
@@ -347,7 +347,7 @@ app.use(cors()); // Enable CORS for all routes
 ```
 
 **Why CORS?**
-- Allows frontend (localhost:5173) to call backend (localhost:3000)
+- Allows frontend (localhost:5173) to call backend (localhost:3001)
 - Without CORS: Browser blocks cross-origin requests
 - Security feature that must be explicitly enabled
 
@@ -410,18 +410,18 @@ mongo --eval "db.version()"
 
 ---
 
-### Issue: Port 3000 already in use
+### Issue: Port 3001 already in use
 
-**Cause:** Another process using port 3000
+**Cause:** Another process using port 3001
 
 **Solution:**
 ```bash
 # Windows - Find and kill process
-netstat -ano | findstr :3000
+netstat -ano | findstr :3001
 taskkill /PID <PID> /F
 
 # Mac/Linux
-lsof -ti:3000 | xargs kill -9
+lsof -ti:3001 | xargs kill -9
 
 # Or change port in .env
 PORT=3001

@@ -3,7 +3,7 @@
  * @property {string} _id
  * @property {string} title
  * @property {string} description
- * @property {boolean} completed
+ * @property {'pending' | 'completed'} status
  * @property {'low' | 'medium' | 'high'} priority
  * @property {string | null} [dueDate]
  * @property {string} createdAt
@@ -25,8 +25,8 @@
  * @property {string} [description]
  * @property {'low' | 'medium' | 'high'} [priority]
  * @property {string} [dueDate]
- * @property {boolean} [completed]
+ * @property {'pending' | 'completed'} [status]
  */
 
 // Export empty object to make this a valid ES module
-export {};
+export { };

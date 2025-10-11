@@ -432,9 +432,8 @@ function PreviousValue({ value }) {
 **Creating Context:**
 ```jsx
 import { createContext, useContext, useState } from 'react';
-import PropTypes from 'prop-types';
 
-const ThemeContext = createContext(undefined);
+const ThemeContext = createContext();
 
 function ThemeProvider({ children }) {
   const [isDark, setIsDark] = useState(false);
@@ -451,10 +450,6 @@ function ThemeProvider({ children }) {
     </ThemeContext.Provider>
   );
 }
-
-ThemeProvider.propTypes = {
-  children: PropTypes.node.isRequired
-};
 
 function useTheme() {
   const context = useContext(ThemeContext);
@@ -493,9 +488,6 @@ function App() {
 
 ```jsx
 import { useReducer } from 'react';
-
-// State shape: { count: number, step: number }
-// Actions: 'increment' | 'decrement' | 'reset' | { type: 'setStep', payload: number }
 
 function reducer(state, action) {
   switch (action.type) {
@@ -729,11 +721,6 @@ Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired
 };
-
-Button.defaultProps = {
-  size: 'md',
-  disabled: false
-};
 ```
 
 ### Conditional Rendering
@@ -902,7 +889,7 @@ function TodoList() {
 - Function components are the modern standard (use these)
 - Props pass data from parent to child (immutable)
 - Children prop allows flexible component composition
-- PropTypes define clear component contracts and runtime validation
+- PropTypes provide runtime type checking for JavaScript
 
 **Essential Hooks:**
 - `useState` - Manage component state
@@ -921,7 +908,7 @@ function TodoList() {
 
 **Best Practices:**
 - One component per file for maintainability
-- PropTypes for runtime type safety and validation
+- PropTypes for runtime type checking in JavaScript
 - Lift state to common parent when sharing
 - Use Context for deep prop drilling
 - Functional updates for state based on previous value
@@ -934,3 +921,9 @@ function TodoList() {
 - Stale closures (use functional updates)
 - Over-optimization with useMemo/useCallback
 - Prop drilling too many levels (use Context)
+
+---
+
+---
+
+---

@@ -51,7 +51,7 @@ interface Task {
   _id: string;
   title: string;
   description: string;
-  completed: boolean;
+  status: 'pending' | 'completed';
   priority: 'low' | 'medium' | 'high';
   createdAt: string;
   updatedAt: string;

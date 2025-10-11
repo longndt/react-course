@@ -90,7 +90,7 @@ export default function TaskManager() {
   const handleToggleComplete = (task) => {
     updateMutation.mutate({
       id: task._id,
-      completed: !task.completed,
+      status: task.status === 'pending' ? 'completed' : 'pending',
     });
   };
 
@@ -120,7 +120,7 @@ export default function TaskManager() {
         <div className="error">
           <h2> Error Loading Tasks</h2>
           <p>{error?.message || 'An error occurred'}</p>
-          <p>Make sure the backend server is running on http://localhost:3000</p>
+          <p>Make sure the backend server is running on http://localhost:3001</p>
         </div>
       </div>
     );
@@ -202,19 +202,19 @@ export default function TaskManager() {
             {tasks?.map((task) => (
               <div
                 key={task._id}
-                className={`task-card ${task.completed ? 'completed' : ''} priority-${task.priority}`}
+                className={`task-card ${task.status === 'completed' ? 'completed' : ''} priority-${task.priority}`}
               >
                 <div className="task-header">
                   <div className="task-checkbox">
                     <input
                       type="checkbox"
-                      checked={task.completed}
+                      checked={task.status === 'completed'}
                       onChange={() => handleToggleComplete(task)}
                       disabled={updateMutation.isPending}
                     />
                   </div>
                   <div className="task-content">
-                    <h3 className={task.completed ? 'strikethrough' : ''}>
+                    <h3 className={task.status === 'completed' ? 'strikethrough' : ''}>
                       {task.title}
                     </h3>
                     <p>{task.description}</p>
