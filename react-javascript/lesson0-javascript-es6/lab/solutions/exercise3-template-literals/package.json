@@ -1,0 +1,23 @@
+{
+    "name": "exercise3-template-literals",
+    "version": "1.0.0",
+    "description": "Exercise 3: Template Literals - JavaScript ES6+ Lab Solutions",
+    "main": "src/ex3-template-literals.js",
+    "scripts": {
+        "start": "node src/ex3-template-literals.js",
+        "test": "node src/ex3-tests.js",
+        "dev": "node --watch src/ex3-template-literals.js"
+    },
+    "keywords": [
+        "javascript",
+        "es6",
+        "template-literals",
+        "react",
+        "learning"
+    ],
+    "author": "React Course",
+    "license": "MIT",
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}

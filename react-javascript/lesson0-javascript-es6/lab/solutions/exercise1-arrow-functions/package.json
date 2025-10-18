@@ -1,0 +1,23 @@
+{
+    "name": "exercise1-arrow-functions",
+    "version": "1.0.0",
+    "description": "Exercise 1: Arrow Functions - JavaScript ES6+ Lab Solutions",
+    "main": "src/ex1-arrow-functions.js",
+    "scripts": {
+        "start": "node src/ex1-arrow-functions.js",
+        "test": "node src/ex1-tests.js",
+        "dev": "node --watch src/ex1-arrow-functions.js"
+    },
+    "keywords": [
+        "javascript",
+        "es6",
+        "arrow-functions",
+        "react",
+        "learning"
+    ],
+    "author": "React Course",
+    "license": "MIT",
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { LoadingSpinner } from '../components/LoadingSpinner';
 
 export function Register() {
     const [formData, setFormData] = useState({
@@ -44,9 +45,12 @@ export function Register() {
     };
 
     return (
-        <div className="auth-form">
-            <h2>Create Account</h2>
-            <form onSubmit={handleSubmit}>
+        <div className="login-container">
+            <form onSubmit={handleSubmit} className="login-form">
+                <h2>Create Account</h2>
+
+                {error && <div className="error-message">{error}</div>}
+
                 <div className="form-group">
                     <label htmlFor="name">Full Name</label>
                     <input
@@ -95,16 +99,19 @@ export function Register() {
                     />
                 </div>
 
-                {error && <div className="error-message">{error}</div>}
-
                 <button type="submit" disabled={loading} className="submit-button">
-                    {loading ? 'Creating Account...' : 'Create Account'}
+                    {loading ? (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <LoadingSpinner size="small" />
+                            Creating Account...
+                        </div>
+                    ) : 'Create Account'}
                 </button>
-            </form>
 
-            <p className="auth-link">
-                Already have an account? <a href="/login">Sign in</a>
-            </p>
+                <p className="auth-link">
+                    Already have an account? <a href="/login">Sign in</a>
+                </p>
+            </form>
         </div>
     );
 }

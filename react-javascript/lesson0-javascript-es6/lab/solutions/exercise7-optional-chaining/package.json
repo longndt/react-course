@@ -1,0 +1,24 @@
+{
+    "name": "exercise7-optional-chaining",
+    "version": "1.0.0",
+    "description": "Exercise 7: Optional Chaining & Nullish Coalescing - JavaScript ES6+ Lab Solutions",
+    "main": "src/ex7-optional-chaining.js",
+    "scripts": {
+        "start": "node src/ex7-optional-chaining.js",
+        "test": "node src/ex7-tests.js",
+        "dev": "node --watch src/ex7-optional-chaining.js"
+    },
+    "keywords": [
+        "javascript",
+        "es6",
+        "optional-chaining",
+        "nullish-coalescing",
+        "react",
+        "learning"
+    ],
+    "author": "React Course",
+    "license": "MIT",
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}

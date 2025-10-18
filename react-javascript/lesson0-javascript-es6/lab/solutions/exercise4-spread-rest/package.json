@@ -1,0 +1,24 @@
+{
+    "name": "exercise4-spread-rest",
+    "version": "1.0.0",
+    "description": "Exercise 4: Spread & Rest Operators - JavaScript ES6+ Lab Solutions",
+    "main": "src/ex4-spread-rest.js",
+    "scripts": {
+        "start": "node src/ex4-spread-rest.js",
+        "test": "node src/ex4-tests.js",
+        "dev": "node --watch src/ex4-spread-rest.js"
+    },
+    "keywords": [
+        "javascript",
+        "es6",
+        "spread-operator",
+        "rest-operator",
+        "react",
+        "learning"
+    ],
+    "author": "React Course",
+    "license": "MIT",
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}

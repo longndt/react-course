@@ -1,0 +1,23 @@
+{
+    "name": "exercise5-array-methods",
+    "version": "1.0.0",
+    "description": "Exercise 5: Array Methods - JavaScript ES6+ Lab Solutions",
+    "main": "src/ex5-array-methods.js",
+    "scripts": {
+        "start": "node src/ex5-array-methods.js",
+        "test": "node src/ex5-tests.js",
+        "dev": "node --watch src/ex5-array-methods.js"
+    },
+    "keywords": [
+        "javascript",
+        "es6",
+        "array-methods",
+        "react",
+        "learning"
+    ],
+    "author": "React Course",
+    "license": "MIT",
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}

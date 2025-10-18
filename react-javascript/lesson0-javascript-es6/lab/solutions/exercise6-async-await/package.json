@@ -1,0 +1,24 @@
+{
+    "name": "exercise6-async-await",
+    "version": "1.0.0",
+    "description": "Exercise 6: Async/Await - JavaScript ES6+ Lab Solutions",
+    "main": "src/ex6-async-await.js",
+    "scripts": {
+        "start": "node src/ex6-async-await.js",
+        "test": "node src/ex6-tests.js",
+        "dev": "node --watch src/ex6-async-await.js"
+    },
+    "keywords": [
+        "javascript",
+        "es6",
+        "async-await",
+        "promises",
+        "react",
+        "learning"
+    ],
+    "author": "React Course",
+    "license": "MIT",
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}

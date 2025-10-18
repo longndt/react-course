@@ -1,0 +1,24 @@
+{
+    "name": "bonus-user-manager",
+    "version": "1.0.0",
+    "description": "Bonus Challenge: UserManager - JavaScript ES6+ Lab Solutions",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "test": "node src/tests.js",
+        "dev": "node --watch src/index.js"
+    },
+    "keywords": [
+        "javascript",
+        "es6",
+        "class",
+        "user-manager",
+        "react",
+        "learning"
+    ],
+    "author": "React Course",
+    "license": "MIT",
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}

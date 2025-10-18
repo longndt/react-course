@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { Modal } from '../components/Modal';
+import { LoadingSpinner } from '../components/LoadingSpinner';
 
 interface Product {
    id: string;
@@ -24,6 +25,9 @@ export function Products() {
 
    const fetchProducts = async () => {
       try {
+         // Simulate slow network (3 seconds delay)
+         await new Promise(resolve => setTimeout(resolve, 3000));
+
          // Mock data for demo purposes
          // In a real app, this would be: const response = await fetch('/api/products');
          const mockProducts: Product[] = [
@@ -74,7 +78,7 @@ export function Products() {
    };
 
    if (loading) {
-      return <div>Loading products...</div>;
+      return <LoadingSpinner size="fullscreen" text="Loading products..." />;
    }
 
    if (error) {

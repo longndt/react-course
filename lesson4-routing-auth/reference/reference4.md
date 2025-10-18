@@ -9,9 +9,10 @@
 4. [Route Parameters & Query Strings](#route-parameters--query-strings)
 5. [Authentication Concepts](#authentication-concepts)
 6. [JWT Tokens](#jwt-tokens)
-7. [Protected Routes](#protected-routes)
-8. [Context API for Auth](#context-api-for-auth)
-9. [Common Patterns](#common-patterns)
+7. [Token Expiration Management](#token-expiration-management)
+8. [Protected Routes](#protected-routes)
+9. [Context API for Auth](#context-api-for-auth)
+10. [Common Patterns](#common-patterns)
 
 ---
 
@@ -301,6 +302,62 @@ api.interceptors.request.use((config) => {
   return config;
 });
 ```
+
+### Token Expiration Management
+
+**Why Token Expiration?**
+- **Security** - Prevents indefinite access
+- **Performance** - Reduces server load
+- **Compliance** - Meets security standards
+
+**Implementation with Expiration:**
+```tsx
+// Create token with expiration
+const createTokenWithExpiry = (hours: number = 24) => {
+  const now = new Date().getTime();
+  const expiry = now + (hours * 60 * 60 * 1000);
+  return {
+    token: "jwt-token-" + now,
+    expiry: expiry.toString()
+  };
+};
+
+// Check token expiration on app load
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  const tokenExpiry = localStorage.getItem("tokenExpiry");
+  
+  if (token && tokenExpiry) {
+    const now = new Date().getTime();
+    const expiry = parseInt(tokenExpiry);
+    
+    if (now < expiry) {
+      fetchUser(token);
+    } else {
+      // Token expired, clear it
+      localStorage.removeItem("token");
+      localStorage.removeItem("tokenExpiry");
+      setLoading(false);
+    }
+  } else {
+    setLoading(false);
+  }
+}, []);
+
+// Login with expiration
+const login = async (email: string, password: string) => {
+  const { token, expiry } = createTokenWithExpiry(24); // 24 hours
+  localStorage.setItem("token", token);
+  localStorage.setItem("tokenExpiry", expiry);
+  // ... rest of login logic
+};
+```
+
+**Token Expiration Benefits:**
+- **Automatic cleanup** - Expired tokens are removed
+- **Security** - Prevents long-term unauthorized access
+- **User experience** - Seamless re-authentication
+- **Configurable** - Easy to adjust expiration time
 
 ---
 

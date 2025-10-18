@@ -366,6 +366,63 @@ const validateToken = (token: string): boolean => {
 };
 ```
 
+### Token Expiration Management
+
+**Why Token Expiration?**
+- **Security** - Prevents indefinite access
+- **Performance** - Reduces server load
+- **Compliance** - Meets security standards
+
+**Implementation with Expiration:**
+
+```typescript
+// File: auth/AuthContext.tsx
+const createTokenWithExpiry = (hours: number = 24) => {
+  const now = new Date().getTime();
+  const expiry = now + (hours * 60 * 60 * 1000); // Convert hours to milliseconds
+  return {
+    token: "mock-jwt-token-" + now,
+    expiry: expiry.toString()
+  };
+};
+
+// Check token expiration on app load
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  const tokenExpiry = localStorage.getItem("tokenExpiry");
+  
+  if (token && tokenExpiry) {
+    const now = new Date().getTime();
+    const expiry = parseInt(tokenExpiry);
+    
+    if (now < expiry) {
+      fetchUser(token);
+    } else {
+      // Token expired, clear it
+      localStorage.removeItem("token");
+      localStorage.removeItem("tokenExpiry");
+      setLoading(false);
+    }
+  } else {
+    setLoading(false);
+  }
+}, []);
+
+// Login with expiration
+const login = async (email: string, password: string) => {
+  const { token, expiry } = createTokenWithExpiry(24); // 24 hours
+  localStorage.setItem("token", token);
+  localStorage.setItem("tokenExpiry", expiry);
+  // ... rest of login logic
+};
+```
+
+**Token Expiration Benefits:**
+- **Automatic cleanup** - Expired tokens are removed
+- **Security** - Prevents long-term unauthorized access
+- **User experience** - Seamless re-authentication
+- **Configurable** - Easy to adjust expiration time
+
 ### Axios with JWT
 
 ```typescript

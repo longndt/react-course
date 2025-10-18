@@ -45,14 +45,9 @@ export function Layout({ children }: LayoutProps) {
                         </button>
                      </>
                   ) : (
-                     <>
-                        <Link to="/login" className="nav-link">
-                           Login
-                        </Link>
-                        <Link to="/register" className="nav-button">
-                           Register
-                        </Link>
-                     </>
+                     <Link to="/login" className="nav-button">
+                        Login
+                     </Link>
                   )}
                </div>
             </nav>

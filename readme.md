@@ -105,13 +105,16 @@ lesson-topic/
 - **[Visual Learning Diagrams](./diagrams/readme.md)** - Complete guide to visual learning
 
 Quick links to key diagrams:
-- 📊 [Course Structure](./diagrams/course_structure_diagram.md) - Complete course organization and navigation
-- 🗺️ [Course Roadmap](./diagrams/course_roadmap.md) - Complete learning path visualization
-- 🔄 [Component Lifecycle](./diagrams/component_lifecycle.md) - How React components work
-- 📦 [State Management](./diagrams/state_management_flow.md) - State patterns and flows
-- 🌐 [API Integration](./diagrams/api_data_flow.md) - Data fetching and caching
-- 🔐 [Authentication](./diagrams/authentication_flow.md) - Auth system architecture
-- 🏗️ [Full-Stack Architecture](./diagrams/project_architecture.md) - Complete system design
+- 📊 [Course Structure](./diagrams/course_structure_diagram.md) - Complete TypeScript course organization and navigation
+- 🗺️ [Course Roadmap](./diagrams/course_roadmap.md) - Complete TypeScript learning path visualization
+- 🔄 [Component Lifecycle](./diagrams/component_lifecycle.md) - How React components work with TypeScript
+- 📦 [State Management](./diagrams/state_management_flow.md) - State patterns and flows with TypeScript
+- 🌐 [API Integration](./diagrams/api_data_flow.md) - Data fetching and caching with TypeScript
+- 🔐 [Authentication](./diagrams/authentication_flow.md) - TypeScript auth system architecture
+- 🏗️ [Full-Stack Architecture](./diagrams/project_architecture.md) - Complete TypeScript system design
+- 📁 [React Project Structure](./diagrams/react_project_structure.md) - TypeScript project organization
+- 🛣️ [Routing Flow](./diagrams/routing_flow.md) - React Router navigation with TypeScript
+- 🚀 [Deployment Flow](./diagrams/deployment_flow.md) - TypeScript deployment process
 
 ---
 

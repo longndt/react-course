@@ -29,12 +29,33 @@ export function AuthProvider({ children }: AuthProviderProps) {
    useEffect(() => {
       // Check for existing session
       const token = localStorage.getItem("token");
-      if (token) {
-         fetchUser(token);
+      const tokenExpiry = localStorage.getItem("tokenExpiry");
+
+      if (token && tokenExpiry) {
+         const now = new Date().getTime();
+         const expiry = parseInt(tokenExpiry);
+
+         if (now < expiry) {
+            fetchUser(token);
+         } else {
+            // Token expired, clear it
+            localStorage.removeItem("token");
+            localStorage.removeItem("tokenExpiry");
+            setLoading(false);
+         }
       } else {
          setLoading(false);
       }
    }, []);
+
+   const createTokenWithExpiry = (hours: number = 24) => {
+      const now = new Date().getTime();
+      const expiry = now + (hours * 60 * 60 * 1000); // Convert hours to milliseconds
+      return {
+         token: "mock-jwt-token-" + now,
+         expiry: expiry.toString()
+      };
+   };
 
    const fetchUser = async (_token: string) => {
       // token parameter is for future API integration
@@ -53,6 +74,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       } catch (err) {
          setError(err instanceof Error ? err : new Error("An error occurred"));
          localStorage.removeItem("token");
+         localStorage.removeItem("tokenExpiry");
       } finally {
          setLoading(false);
       }
@@ -66,7 +88,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
          // Mock authentication for demo purposes
          // In a real app, this would be: const response = await fetch("/api/login", {...});
          if (email === "demo@gmail.com" && password === "demo") {
-            const mockToken = "mock-jwt-token-" + Date.now();
+            const { token, expiry } = createTokenWithExpiry(24); // 24 hours expiration
             const mockUser: User = {
                id: "1",
                email: email,
@@ -76,7 +98,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
             // Simulate API delay
             await new Promise(resolve => setTimeout(resolve, 1000));
 
-            localStorage.setItem("token", mockToken);
+            localStorage.setItem("token", token);
+            localStorage.setItem("tokenExpiry", expiry);
             setUser(mockUser);
          } else {
             throw new Error("Invalid credentials. Use demo@gmail.com / demo");
@@ -91,6 +114,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
    const logout = () => {
       localStorage.removeItem("token");
+      localStorage.removeItem("tokenExpiry");
       setUser(null);
    };
 
@@ -102,7 +126,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
          // Mock registration for demo purposes
          // In a real app, this would be: const response = await fetch("/api/register", {...});
          if (email && password && name) {
-            const mockToken = "mock-jwt-token-" + Date.now();
+            const { token, expiry } = createTokenWithExpiry(24); // 24 hours expiration
             const mockUser: User = {
                id: Date.now().toString(),
                email: email,
@@ -112,7 +136,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
             // Simulate API delay
             await new Promise(resolve => setTimeout(resolve, 1000));
 
-            localStorage.setItem("token", mockToken);
+            localStorage.setItem("token", token);
+            localStorage.setItem("tokenExpiry", expiry);
             setUser(mockUser);
          } else {
             throw new Error("All fields are required");

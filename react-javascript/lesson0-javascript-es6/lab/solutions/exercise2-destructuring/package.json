@@ -1,0 +1,23 @@
+{
+    "name": "exercise2-destructuring",
+    "version": "1.0.0",
+    "description": "Exercise 2: Destructuring - JavaScript ES6+ Lab Solutions",
+    "main": "src/ex2-destructuring.js",
+    "scripts": {
+        "start": "node src/ex2-destructuring.js",
+        "test": "node src/ex2-tests.js",
+        "dev": "node --watch src/ex2-destructuring.js"
+    },
+    "keywords": [
+        "javascript",
+        "es6",
+        "destructuring",
+        "react",
+        "learning"
+    ],
+    "author": "React Course",
+    "license": "MIT",
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}

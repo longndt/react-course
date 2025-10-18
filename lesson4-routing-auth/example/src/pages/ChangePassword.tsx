@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { LoadingSpinner } from '../components/LoadingSpinner';
 
 export function ChangePassword() {
     const [formData, setFormData] = useState({
@@ -99,7 +100,12 @@ export function ChangePassword() {
                 {success && <div className="success-message">{success}</div>}
 
                 <button type="submit" disabled={loading} className="submit-button">
-                    {loading ? 'Changing Password...' : 'Change Password'}
+                    {loading ? (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <LoadingSpinner size="small" />
+                            Changing Password...
+                        </div>
+                    ) : 'Change Password'}
                 </button>
             </form>
 

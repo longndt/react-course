@@ -103,13 +103,16 @@ lesson-topic/
 - **[Visual Learning Diagrams](./diagrams/readme.md)** - Complete guide to visual learning
 
 Quick links to key diagrams:
-- 📊 [Course Structure](./diagrams/course_structure_diagram.md) - Complete course organization and navigation
-- 🗺️ [Course Roadmap](./diagrams/course_roadmap.md) - Complete learning path visualization
-- 🔄 [Component Lifecycle](./diagrams/component_lifecycle.md) - How React components work
-- 📦 [State Management](./diagrams/state_management_flow.md) - State patterns and flows
-- 🌐 [API Integration](./diagrams/api_data_flow.md) - Data fetching and caching
-- 🔐 [Authentication](./diagrams/authentication_flow.md) - Auth system architecture
-- 🏗️ [Full-Stack Architecture](./diagrams/project_architecture.md) - Complete system design
+- 📊 [Course Structure](./diagrams/course_structure_diagram.md) - Complete JavaScript course organization and navigation
+- 🗺️ [Course Roadmap](./diagrams/course_roadmap.md) - Complete JavaScript learning path visualization
+- 🔄 [Component Lifecycle](./diagrams/component_lifecycle.md) - How React components work with JavaScript
+- 📦 [State Management](./diagrams/state_management_flow.md) - State patterns and flows with JavaScript
+- 🌐 [API Integration](./diagrams/api_data_flow.md) - Data fetching and caching with JavaScript
+- 🔐 [Authentication](./diagrams/authentication_flow.md) - JavaScript auth system architecture
+- 🏗️ [Full-Stack Architecture](./diagrams/project_architecture.md) - Complete JavaScript system design
+- 📁 [React Project Structure](./diagrams/react_project_structure.md) - JavaScript project organization
+- 🛣️ [Routing Flow](./diagrams/routing_flow.md) - React Router navigation with JavaScript
+- 🚀 [Deployment Flow](./diagrams/deployment_flow.md) - JavaScript deployment process
 
 ---
 
@@ -235,7 +238,6 @@ cd react-course/react-javascript
 
 #### 3⃣ **Continue with Advanced Materials** (Optional)
 - **[Advanced Materials & Resources](./extras/readme.md)** - Complete guide to advanced topics
-
 - **[Advanced Patterns](./extras/advanced_patterns.md)**
 - **[State Management Guide](./extras/state_management.md)**
 - **[Performance Optimization](./extras/performance_optimization.md)**
