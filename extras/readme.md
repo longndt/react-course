@@ -8,6 +8,9 @@ Comprehensive collection of advanced materials, guides, and resources to deepen 
 - Performance optimization techniques
 - State management strategies
 - Environment setup and troubleshooting
+- Security best practices
+- Accessibility guidelines
+- Testing strategies
 - Production-ready practices
 
 **Best for**: Developers who want to go beyond basics, prepare for senior roles, and build production-quality applications
@@ -85,6 +88,74 @@ Comprehensive state management solutions:
 
 ---
 
+## 🔒 Security Best Practices
+
+**[security_guide.md](./security_guide.md)**
+
+Essential security practices for React applications:
+
+- **XSS Prevention** - Input sanitization, safe rendering
+- **CSRF Protection** - Token-based protection
+- **Secure Authentication** - JWT security, password handling
+- **Input Validation** - Client and server-side validation
+- **Environment Variables Security** - Secure configuration
+- **HTTPS Implementation** - SSL/TLS configuration
+- **Content Security Policy** - CSP headers and nonces
+- **Dependency Security** - Vulnerability scanning
+- **API Security** - Secure API communication
+- **Common Vulnerabilities** - OWASP Top 10 prevention
+
+**Best for**: Building secure applications, preventing common attacks, production security
+
+**Related Lessons**: Lesson 4 (Authentication), Lesson 5 (Deployment)
+
+---
+
+## ♿ Accessibility Guidelines
+
+**[accessibility_guide.md](./accessibility_guide.md)**
+
+Making React applications accessible to everyone:
+
+- **ARIA Attributes & Roles** - Proper semantic markup
+- **Keyboard Navigation** - Focus management, tab order
+- **Screen Reader Compatibility** - Proper labeling, announcements
+- **Focus Management** - Focus restoration, trap focus
+- **Color & Contrast** - WCAG compliance, visual accessibility
+- **Semantic HTML** - Proper document structure
+- **Testing Accessibility** - Automated and manual testing
+- **Common Patterns** - Accessible components and forms
+- **Tools & Resources** - Testing tools and guidelines
+
+**Best for**: Creating inclusive applications, WCAG compliance, user experience
+
+**Related Lessons**: All lessons (accessibility is cross-cutting)
+
+---
+
+## 🧪 Testing Strategies
+
+**[testing_strategies.md](./testing_strategies.md)**
+
+Comprehensive testing approaches for React applications:
+
+- **Testing Philosophy** - Testing pyramid, what to test
+- **Unit Testing Patterns** - Component and utility testing
+- **Integration Testing** - Component interactions, API testing
+- **End-to-End Testing** - Playwright, user journey testing
+- **Testing Custom Hooks** - Hook testing patterns
+- **Testing Context Providers** - Context testing strategies
+- **Mock Strategies** - API mocking, component mocking
+- **Test Coverage Best Practices** - Coverage analysis and goals
+- **CI/CD Testing** - Automated testing pipelines
+- **Testing Tools Setup** - Jest, Testing Library, Playwright
+
+**Best for**: Ensuring code quality, preventing regressions, confident deployments
+
+**Related Lessons**: All lessons (testing is essential)
+
+---
+
 ## 🛠️ Environment Setup & Troubleshooting
 
 **[environment_setup.md](./environment_setup.md)**
@@ -135,35 +206,48 @@ Common issues and solutions:
 Start with:
 1. **environment_setup.md** - Ensure proper development setup
 2. **troubleshooting_guide.md** - Solve common issues
-3. **performance_optimization.md** (sections 1-3) - Basic optimizations
+3. **accessibility_guide.md** (sections 1-4) - Basic accessibility
+4. **testing_strategies.md** (sections 1-3) - Unit testing basics
 
 #### Stage 2: Intermediate (After Lesson 3-4)
 Progress to:
 1. **state_management.md** (sections 1-5) - Advanced state patterns
-2. **performance_optimization.md** (sections 4-7) - Advanced optimizations
-3. **advanced_patterns.md** (sections 1-4) - Basic advanced patterns
+2. **performance_optimization.md** (sections 1-7) - Performance basics
+3. **testing_strategies.md** (sections 4-6) - Integration testing
+4. **security_guide.md** (sections 1-5) - Basic security practices
+5. **advanced_patterns.md** (sections 1-4) - Basic advanced patterns
 
 #### Stage 3: Advanced (After Lesson 5)
 Master:
 1. **advanced_patterns.md** (complete) - All enterprise patterns
 2. **state_management.md** (sections 6-10) - Complex state solutions
 3. **performance_optimization.md** (sections 8-10) - Production optimizations
+4. **security_guide.md** (sections 6-10) - Advanced security
+5. **testing_strategies.md** (sections 7-10) - E2E and CI/CD testing
+6. **accessibility_guide.md** (sections 5-9) - Advanced accessibility
 
 ### By Project Type
 
 #### Personal Projects
 - **environment_setup.md** - Quick setup
 - **troubleshooting_guide.md** - Solve issues
+- **accessibility_guide.md** (basic sections) - Inclusive design
+- **testing_strategies.md** (unit testing) - Code quality
 - **performance_optimization.md** (basic sections)
 
 #### Professional/Team Projects
 - **advanced_patterns.md** - Enterprise patterns
 - **state_management.md** - Scalable state
+- **testing_strategies.md** (complete) - Quality assurance
+- **security_guide.md** (sections 1-7) - Security basics
 - **performance_optimization.md** (complete)
 
 #### Production Applications
 - **performance_optimization.md** (complete)
 - **advanced_patterns.md** (complete)
+- **security_guide.md** (complete) - Production security
+- **accessibility_guide.md** (complete) - WCAG compliance
+- **testing_strategies.md** (complete) - Full test coverage
 - **troubleshooting_guide.md** (deployment sections)
 
 ---

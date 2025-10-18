@@ -235,7 +235,7 @@ cd react-course
 -  **[Lesson 1: React Fundamentals & Project Setup](./lesson1-fundamentals-setup/readme.md)**
 -  **[Lesson 2: Component Architecture & React Hook](./lesson2-component-hook/readme.md)**
 -  **[Lesson 3: API Integration & Data Management](./lesson3-api-data/readme.md)**
--  **[Lesson 4: Routing & Authentication ](./lesson4-routing-auth/readme.md)**
+-  **[Lesson 4: Routing & Authentication](./lesson4-routing-auth/readme.md)**
 -  **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack-deployment/readme.md)**
 
 #### 3⃣ **Continue with Advanced Materials** (Optional)
