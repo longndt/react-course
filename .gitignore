@@ -1,0 +1,49 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# Node modules (all levels)
+**/node_modules/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Cache directories
+.cache/
+.parcel-cache/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Log files
+*.log
+
+# Coverage reports
+coverage/
+
+# package lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Archives files
+archives/
+
+# Demo codes
+demo/

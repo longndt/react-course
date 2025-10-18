@@ -1,0 +1,110 @@
+.form {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.form-field {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.625rem;
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+}
+
+.required-mark {
+  color: #ef4444;
+  margin-left: 0.25rem;
+  font-weight: 700;
+}
+
+.text-input,
+.select-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  background-color: white;
+  color: #1f2937;
+  box-sizing: border-box;
+}
+
+.text-input:hover,
+.select-input:hover {
+  border-color: #d1d5db;
+}
+
+.text-input:focus,
+.select-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  transform: translateY(-1px);
+}
+
+.text-input::placeholder {
+  color: #9ca3af;
+}
+
+.text-input.has-error,
+.select-input.has-error {
+  border-color: #ef4444;
+}
+
+.text-input.has-error:focus,
+.select-input.has-error:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.error-message {
+  margin-top: 0.5rem;
+  color: #ef4444;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.select-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%236b7280' d='M4.5 6l3.5 3.5L11.5 6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.select-input:hover {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%234b5563' d='M4.5 6l3.5 3.5L11.5 6z'/%3E%3C/svg%3E");
+}
+
+/* Button inside form */
+.form button[type="submit"] {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+/* Input animations */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.text-input.has-error,
+.select-input.has-error {
+  animation: shake 0.3s ease;
+}
