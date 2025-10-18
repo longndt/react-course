@@ -21,7 +21,7 @@ This course teaches **React with JavaScript** development using industry-standar
 
 ---
 
-## What You Will Learn ?
+## What You Will Learn
 
 - Build modern React applications with **JavaScript** and functional components
 - Understand React fundamentals and component-based architecture
