@@ -66,10 +66,10 @@ getAllUsers().then(users => {
 });
 
 // ============================================
-// Additional Examples and Learning Points
+// Additional Example and Learning Points
 // ============================================
 
-console.log('\n=== Additional Examples ===');
+console.log('\n=== Additional Example ===');
 
 // Sequential vs Parallel execution
 async function sequentialRequests() {
@@ -207,10 +207,10 @@ setTimeout(() => {
 }, 7000);
 
 // ============================================
-// Practical Examples
+// Practical Example
 // ============================================
 
-console.log('\n=== Practical Examples ===');
+console.log('\n=== Practical Example ===');
 
 // API client with retry logic
 async function fetchWithRetry(url, maxRetries = 3) {

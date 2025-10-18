@@ -59,7 +59,7 @@ function runTests() {
     test('greet all none', greetAll('Hello') === 'Hello');
 
     // Test additional examples
-    console.log('\n--- Additional Examples ---');
+    console.log('\n--- Additional Example ---');
 
     // Array spreading
     const originalArray = [1, 2, 3];

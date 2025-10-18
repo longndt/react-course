@@ -372,7 +372,7 @@ export default defineConfig({
 });
 ```
 
-### E2E Test Examples
+### E2E Test Example
 
 ```typescript
 // e2e/auth.spec.ts

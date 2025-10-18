@@ -47,10 +47,10 @@ console.log(greetAll('Hello', 'Alice', 'Bob', 'Charlie'));
 // "Hello, Alice, Bob, and Charlie!"
 
 // ============================================
-// Additional Examples and Learning Points
+// Additional Example and Learning Points
 // ============================================
 
-console.log('\n=== Additional Examples ===');
+console.log('\n=== Additional Example ===');
 
 // Array spreading examples
 const originalArray = [1, 2, 3];
@@ -126,10 +126,10 @@ console.log('Second:', second);
 console.log('Remaining:', remaining);
 
 // ============================================
-// Practical Examples
+// Practical Example
 // ============================================
 
-console.log('\n=== Practical Examples ===');
+console.log('\n=== Practical Example ===');
 
 // State management pattern (React-like)
 function updateState(currentState, updates) {

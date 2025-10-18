@@ -292,7 +292,7 @@ export default App;
 
 You can embed any JavaScript expression inside JSX using curly braces `{}`.
 
-**Examples:**
+**Example:**
 
 ```javascript
 function Profile() {

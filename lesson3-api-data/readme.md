@@ -70,8 +70,8 @@ npm run dev
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 **Theory First**: Start with [Theory](./theory/theory3.md) → [Examples](./example/) → [Lab](./lab/lab3.md)
-- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Examples](./example/) → [Theory](./theory/theory3.md)
+- 📖 **Theory First**: Start with [Theory](./theory/theory3.md) → [Example](./example/) → [Lab](./lab/lab3.md)
+- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory3.md)
 - 🎯 **Quick Review**: [Reference](./reference/) → [Quiz](./quiz/quiz3.html) → Focus on weak areas
 
 ---
@@ -88,8 +88,8 @@ npm run dev
 
 ### Additional Resources
 - **Quiz yourself** → [quiz/](./quiz/) - Test your API knowledge
-- ❓ **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
-- 🔐 **Learn auth next** → Preview [Lesson 4](../lesson4-routing-auth/)
+- **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
+- **Learn auth next** → Preview [Lesson 4](../lesson4-routing-auth/)
 
 ---
 

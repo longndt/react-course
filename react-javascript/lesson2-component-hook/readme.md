@@ -67,8 +67,8 @@ npm run dev
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 **Theory First**: Start with [Theory](./theory/theory2.md) → [Examples](./example/) → [Lab](./lab/lab2.md)
-- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Examples](./example/) → [Theory](./theory/theory2.md)
+- 📖 **Theory First**: Start with [Theory](./theory/theory2.md) → [Example](./example/) → [Lab](./lab/lab2.md)
+- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory2.md)
 - 🎯 **Quick Review**: [Reference](./reference/) → [Quiz](./quiz/quiz2.html) → Focus on weak areas
 
 ---
@@ -85,7 +85,7 @@ npm run dev
 
 ### Additional Resources
 - **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
-- ❓ **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
+- **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
 - **Advanced patterns** → [Advanced Patterns](../extras/advanced_patterns.md)
 
 ---

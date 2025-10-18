@@ -24,8 +24,8 @@ graph TD
 
     %% Learning Styles
     I --> J{Choose Learning Style}
-    J -->|📖 Theory First| K[Theory → Examples → Lab]
-    J -->|⚡ Hands-On| L[Reference → Examples → Theory]
+    J -->|📖 Theory First| K[Theory → Example → Lab]
+    J -->|⚡ Hands-On| L[Reference → Example → Theory]
     J -->|🎯 Quick Review| M[Reference → Quiz → Focus Areas]
 
     K --> N[✅ Complete Lesson]
@@ -152,8 +152,8 @@ graph TD
     E --> K[⚡ Hands-On]
     E --> L[🎯 Quick Review]
 
-    J --> M[Theory → Examples → Lab]
-    K --> N[Reference → Examples → Theory]
+    J --> M[Theory → Example → Lab]
+    K --> N[Reference → Example → Theory]
     L --> O[Reference → Quiz → Focus Areas]
 
     %% Styling

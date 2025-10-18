@@ -59,7 +59,7 @@ function runTests() {
     test('rest colors extraction', JSON.stringify(rest) === JSON.stringify(['green', 'blue', 'yellow', 'orange']));
 
     // Test additional examples
-    console.log('\n--- Additional Examples ---');
+    console.log('\n--- Additional Example ---');
 
     // Function parameter destructuring
     function testFunction({ name, age = 0 }) {

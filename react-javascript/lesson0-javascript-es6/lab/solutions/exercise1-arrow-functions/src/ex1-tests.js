@@ -43,7 +43,7 @@ function runTests() {
     test('reduce with arrow function', sum === 15);
 
     // Test additional examples
-    console.log('\n--- Additional Examples ---');
+    console.log('\n--- Additional Example ---');
 
     const multiply = (a, b) => a * b;
     const getCurrentTime = () => new Date().toISOString();

@@ -51,8 +51,8 @@ tsc --version
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 **Theory First**: Start with [Theory](./theory/theory0.md) → [Examples](./example/) → [Lab](./lab/lab0.md)
-- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Examples](./example/) → [Theory](./theory/theory0.md)
+- 📖 **Theory First**: Start with [Theory](./theory/theory0.md) → [Example](./example/) → [Lab](./lab/lab0.md)
+- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory0.md)
 - 🎯 **Quick Review**: [Reference](./reference/) → [Quiz](./quiz/quiz0.html) → Focus on weak areas
 
 ---

@@ -38,10 +38,10 @@ console.log(displayUser({ name: 'Bob' }));
 console.log(displayUser({}));
 
 // ============================================
-// Additional Examples and Learning Points
+// Additional Example and Learning Points
 // ============================================
 
-console.log('\n=== Additional Examples ===');
+console.log('\n=== Additional Example ===');
 
 // Optional chaining with method calls
 const api = {
@@ -106,28 +106,28 @@ const company = {
 // Safe access to complex nested data
 company.departments?.forEach((dept, index) => {
   console.log(`\nDepartment ${index + 1}: ${dept.name}`);
-  
+
   // Safe access to manager
   const managerName = dept?.manager?.name ?? 'No manager assigned';
   const managerEmail = dept?.manager?.contact?.email ?? 'No email available';
-  
+
   console.log(`Manager: ${managerName}`);
   console.log(`Manager email: ${managerEmail}`);
-  
+
   // Safe access to employees
   const employeeCount = dept?.employees?.length ?? 0;
   console.log(`Employee count: ${employeeCount}`);
-  
+
   // Safe access to first employee's skills
   const firstEmployeeSkills = dept?.employees?.[0]?.skills?.join(', ') ?? 'No skills listed';
   console.log(`First employee skills: ${firstEmployeeSkills}`);
 });
 
 // ============================================
-// Practical Examples
+// Practical Example
 // ============================================
 
-console.log('\n=== Practical Examples ===');
+console.log('\n=== Practical Example ===');
 
 // API response handling
 function processApiResponse(response) {
@@ -135,13 +135,13 @@ function processApiResponse(response) {
   const users = response?.data?.users ?? [];
   const pagination = response?.pagination ?? { page: 1, total: 0 };
   const error = response?.error ?? null;
-  
+
   console.log('Processing API response:');
   console.log('Users count:', users.length);
   console.log('Current page:', pagination.page);
   console.log('Total items:', pagination.total);
   console.log('Error:', error);
-  
+
   return {
     users: users.map(user => ({
       id: user?.id ?? 'unknown',

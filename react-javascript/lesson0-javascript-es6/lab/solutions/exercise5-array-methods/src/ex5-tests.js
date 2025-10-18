@@ -64,7 +64,7 @@ function runTests() {
     test('summaries format', summaries[0] === 'Book x2: $25.98');
 
     // Test additional examples
-    console.log('\n--- Additional Examples ---');
+    console.log('\n--- Additional Example ---');
 
     // Array method chaining
     const products = [

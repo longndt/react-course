@@ -126,7 +126,7 @@ Quick links to key diagrams:
 - Focus on: "What concepts will I learn?"
 - Mental preparation for the lesson ahead
 
-### **Step 2: Explore Working Examples**
+### **Step 2: Explore Working Example**
 
 **Goal**: See concepts in action before diving into theory
 - Run the example project first
@@ -238,9 +238,17 @@ cd react-course/react-javascript
 
 #### 3⃣ **Continue with Advanced Materials** (Optional)
 - **[Advanced Materials & Resources](./extras/readme.md)** - Complete guide to advanced topics
-- **[Advanced Patterns](./extras/advanced_patterns.md)**
-- **[State Management Guide](./extras/state_management.md)**
-- **[Performance Optimization](./extras/performance_optimization.md)**
+
+**Quick links to key advanced topics:**
+
+- 🏗️ **[Advanced Patterns](./extras/advanced_patterns.md)** - Enterprise-level React patterns and architectural decisions
+- ⚡ **[Performance Optimization](./extras/performance_optimization.md)** - Complete performance optimization guide
+- 🔄 **[State Management](./extras/state_management.md)** - Comprehensive state management solutions
+- 🔒 **[Security Best Practices](./extras/security_guide.md)** - Essential security practices for React applications
+- ♿ **[Accessibility Guidelines](./extras/accessibility_guide.md)** - Making React applications accessible to everyone
+- 🧪 **[Testing Strategies](./extras/testing_strategies.md)** - Comprehensive testing approaches for React applications
+- 🛠️ **[Environment Setup](./extras/environment_setup.md)** - Complete development environment setup
+- 🔧 **[Troubleshooting Guide](./extras/troubleshooting_guide.md)** - Common issues and solutions
 
 ### Step 5: Start Learning
 

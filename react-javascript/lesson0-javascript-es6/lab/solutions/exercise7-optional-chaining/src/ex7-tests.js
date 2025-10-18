@@ -21,7 +21,7 @@ function runTests() {
 
   // Test 7.1: Safe Property Access
   console.log('--- Safe Property Access ---');
-  
+
   const data = {
     user: {
       name: 'John',
@@ -41,7 +41,7 @@ function runTests() {
 
   // Test 7.2: Default Values
   console.log('\n--- Default Values ---');
-  
+
   function displayUser(user) {
     const name = user?.name ?? 'Guest';
     const role = user?.role ?? 'User';
@@ -54,8 +54,8 @@ function runTests() {
   test('displayUser with empty object', displayUser({}) === 'Guest (User) - Offline');
 
   // Test additional examples
-  console.log('\n--- Additional Examples ---');
-  
+  console.log('\n--- Additional Example ---');
+
   // Optional chaining with method calls
   const api = {
     users: {
@@ -83,7 +83,7 @@ function runTests() {
 
   // Test edge cases
   console.log('\n--- Edge Cases ---');
-  
+
   // Null and undefined handling
   const nullObject = null;
   const undefinedObject = undefined;
@@ -130,7 +130,7 @@ function runTests() {
   console.log(`Passed: ${passed}`);
   console.log(`Failed: ${failed}`);
   console.log(`Total: ${passed + failed}`);
-  
+
   if (failed === 0) {
     console.log('🎉 All tests passed!');
   } else {

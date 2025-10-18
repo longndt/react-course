@@ -302,7 +302,7 @@ export default App;
 
 You can embed any TypeScript expression inside TSX using curly braces `{}`.
 
-**Examples:**
+**Example:**
 
 ```typescript
 function Profile() {

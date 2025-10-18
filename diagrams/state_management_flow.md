@@ -466,7 +466,7 @@ graph LR
     style D2 fill:#d4edda
 ```
 
-**Examples**:
+**Example**:
 
 ❌ **Wrong** (Mutation):
 ```typescript

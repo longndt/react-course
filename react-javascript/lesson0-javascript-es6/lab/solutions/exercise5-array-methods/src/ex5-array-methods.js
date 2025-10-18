@@ -61,10 +61,10 @@ console.log('Bulk items:', bulkItems.map(i => i.name));
 console.log('Summaries:', summaries);
 
 // ============================================
-// Additional Examples and Learning Points
+// Additional Example and Learning Points
 // ============================================
 
-console.log('\n=== Additional Examples ===');
+console.log('\n=== Additional Example ===');
 
 // Array method chaining
 const products = [
@@ -149,10 +149,10 @@ const endTime = performance.now();
 console.log(`Processed ${categoryAItems.length} items in ${(endTime - startTime).toFixed(2)}ms`);
 
 // ============================================
-// Practical Examples
+// Practical Example
 // ============================================
 
-console.log('\n=== Practical Examples ===');
+console.log('\n=== Practical Example ===');
 
 // Data transformation pipeline
 const rawData = [

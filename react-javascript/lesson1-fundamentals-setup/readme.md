@@ -67,8 +67,8 @@ npm run dev
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 **Theory First**: Start with [Theory](./theory/theory1.md) → [Examples](./example/) → [Lab](./lab/lab1.md)
-- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Examples](./example/) → [Theory](./theory/theory1.md)
+- 📖 **Theory First**: Start with [Theory](./theory/theory1.md) → [Example](./example/) → [Lab](./lab/lab1.md)
+- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory1.md)
 - 🎯 **Quick Review**: [Reference](./reference/) → [Quiz](./quiz/quiz1.html) → Focus on weak areas
 
 ---
@@ -85,7 +85,7 @@ npm run dev
 
 ### Additional Resources
 - **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
-- ❓ **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
+- **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
 - **Learn components** → Preview [Lesson 2](../lesson2-component-hook/)
 
 ---

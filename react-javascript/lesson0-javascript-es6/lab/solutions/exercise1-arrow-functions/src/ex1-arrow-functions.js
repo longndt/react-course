@@ -32,10 +32,10 @@ console.log('Evens:', evens); // [2, 4]
 console.log('Sum:', sum); // 15
 
 // ============================================
-// Additional Examples and Learning Points
+// Additional Example and Learning Points
 // ============================================
 
-console.log('\n=== Additional Examples ===');
+console.log('\n=== Additional Example ===');
 
 // Multiple parameters need parentheses
 const multiply = (a, b) => a * b;

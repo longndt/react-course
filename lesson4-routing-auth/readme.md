@@ -63,15 +63,15 @@ npm create vite@latest my-auth-app -- --template react-ts
 cd my-auth-app
 
 # 2. Install dependencies
-npm install react-router-dom axios
+npm install react-router-dom
 
 # 3. Start development server
 npm run dev
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 **Theory First**: Start with [Theory](./theory/theory4.md) → [Examples](./example/) → [Lab](./lab/lab4.md)
-- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Examples](./example/) → [Theory](./theory/theory4.md)
+- 📖 **Theory First**: Start with [Theory](./theory/theory4.md) → [Example](./example/) → [Lab](./lab/lab4.md)
+- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory4.md)
 - 🎯 **Quick Review**: [Reference](./reference/) → [Quiz](./quiz/quiz4.html) → Focus on weak areas
 
 ---
@@ -88,7 +88,7 @@ npm run dev
 
 ### Additional Resources
 - **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
-- ❓ **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
+- **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
 - **Learn deployment** → Preview [Lesson 5](../lesson5-fullstack-deployment/)
 
 ---

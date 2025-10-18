@@ -71,7 +71,7 @@ The Team`;
     test('multi-line email template', emailTemplate === expectedTemplate);
 
     // Test additional examples
-    console.log('\n--- Additional Examples ---');
+    console.log('\n--- Additional Example ---');
 
     // Basic interpolation
     const name = 'John';

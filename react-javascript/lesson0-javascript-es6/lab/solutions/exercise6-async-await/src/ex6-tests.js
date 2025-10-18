@@ -87,7 +87,7 @@ function runTests() {
     });
 
     // Test additional examples
-    console.log('\n--- Additional Examples ---');
+    console.log('\n--- Additional Example ---');
 
     // Sequential vs Parallel timing
     async function sequentialTest() {

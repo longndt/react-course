@@ -78,8 +78,8 @@ npm run dev  # Backend
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 **Theory First**: Start with [Theory](./theory/theory5.md) → [Examples](./example/) → [Lab](./lab/lab5.md)
-- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Examples](./example/) → [Theory](./theory/theory5.md)
+- 📖 **Theory First**: Start with [Theory](./theory/theory5.md) → [Example](./example/) → [Lab](./lab/lab5.md)
+- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory5.md)
 - 🎯 **Quick Review**: [Reference](./reference/) → [Quiz](./quiz/quiz5.html) → Focus on weak areas
 
 ---

@@ -51,10 +51,10 @@ console.log('Primary:', primary);
 console.log('Rest:', rest);
 
 // ============================================
-// Additional Examples and Learning Points
+// Additional Example and Learning Points
 // ============================================
 
-console.log('\n=== Additional Examples ===');
+console.log('\n=== Additional Example ===');
 
 // Object destructuring with multiple properties
 const { firstName: fName, lastName: lName, age } = user;
@@ -83,10 +83,10 @@ console.log('Head:', head);
 console.log('Tail:', tail);
 
 // ============================================
-// Practical Examples
+// Practical Example
 // ============================================
 
-console.log('\n=== Practical Examples ===');
+console.log('\n=== Practical Example ===');
 
 // API response destructuring
 const apiResponse = {

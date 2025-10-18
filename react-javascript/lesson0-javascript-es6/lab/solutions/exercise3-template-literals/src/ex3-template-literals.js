@@ -44,10 +44,10 @@ The Team`;
 console.log(emailTemplate);
 
 // ============================================
-// Additional Examples and Learning Points
+// Additional Example and Learning Points
 // ============================================
 
-console.log('\n=== Additional Examples ===');
+console.log('\n=== Additional Example ===');
 
 // Basic interpolation
 const name = 'John';
@@ -139,10 +139,10 @@ const query = sql`SELECT * FROM ${tableName} WHERE id = ${userId}`;
 console.log('SQL query:', query);
 
 // ============================================
-// Practical Examples
+// Practical Example
 // ============================================
 
-console.log('\n=== Practical Examples ===');
+console.log('\n=== Practical Example ===');
 
 // HTML template generation
 function createUserCard(user) {
