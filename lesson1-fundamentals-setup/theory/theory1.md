@@ -204,6 +204,7 @@ A component is a reusable piece of UI. Think of it as a function that returns HT
 **Functional Component (Modern React):**
 
 ```typescript
+// File: components/Greeting.tsx
 function Greeting() {
   return <h1>Hello, World!</h1>;
 }
@@ -237,6 +238,7 @@ export default Welcome;
 **Step 2:** Use it in `src/App.tsx`
 
 ```typescript
+// File: src/App.tsx
 import Welcome from './components/Welcome';
 
 function App() {
@@ -305,6 +307,7 @@ You can embed any TypeScript expression inside TSX using curly braces `{}`.
 **Example:**
 
 ```typescript
+// File: components/Profile.tsx
 function Profile() {
   const name = "John Doe";
   const age = 20;
@@ -351,7 +354,7 @@ function Profile() {
 ### 1. CSS Files (Recommended for beginners)
 
 ```typescript
-// App.tsx
+// File: src/App.tsx
 import './App.css';
 
 function App() {
@@ -360,7 +363,7 @@ function App() {
 ```
 
 ```css
-/* App.css */
+/* File: src/App.css */
 .container {
   padding: 20px;
   background-color: #f0f0f0;
@@ -370,6 +373,7 @@ function App() {
 ### 2. Inline Styles
 
 ```typescript
+// File: src/App.tsx
 function App() {
   const style = {
     padding: '20px',
@@ -383,6 +387,7 @@ function App() {
 ### 3. Direct Inline (for quick styling)
 
 ```typescript
+// File: src/App.tsx
 function App() {
   return (
     <div style={{ padding: '20px', backgroundColor: '#f0f0f0' }}>
@@ -401,6 +406,7 @@ In Lesson 1, we only cover simple event handling with alerts.
 **Common Events:**
 
 ```typescript
+// File: components/EventDemo.tsx
 function EventDemo() {
   // Event handler functions
   const handleClick = () => {
@@ -442,6 +448,7 @@ function EventDemo() {
 
 ### Mistake 1: Lowercase component names
 ```typescript
+// File: components/MyComponent.tsx
 // ❌ Wrong
 function myComponent() {
   return <div>Hello</div>;
@@ -455,6 +462,7 @@ function MyComponent() {
 
 ### Mistake 2: Multiple root elements
 ```typescript
+// File: src/App.tsx
 // ❌ Wrong
 function App() {
   return (
@@ -476,6 +484,7 @@ function App() {
 
 ### Mistake 3: Using `class` instead of `className`
 ```typescript
+// File: components/Container.tsx
 // ❌ Wrong
 <div class="container">Content</div>
 
@@ -485,6 +494,7 @@ function App() {
 
 ### Mistake 4: Forgetting to close tags
 ```typescript
+// File: components/ImageInput.tsx
 // ❌ Wrong
 <img src="logo.png">
 <input type="text">

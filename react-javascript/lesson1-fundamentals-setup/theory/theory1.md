@@ -194,6 +194,7 @@ A component is a reusable piece of UI. Think of it as a function that returns HT
 **Functional Component (Modern React):**
 
 ```javascript
+// File: components/Greeting.jsx
 function Greeting() {
   return <h1>Hello, World!</h1>;
 }
@@ -227,6 +228,7 @@ export default Welcome;
 **Step 2:** Use it in `src/App.jsx`
 
 ```javascript
+// File: src/App.jsx
 import Welcome from './components/Welcome';
 
 function App() {
@@ -295,6 +297,7 @@ You can embed any JavaScript expression inside JSX using curly braces `{}`.
 **Example:**
 
 ```javascript
+// File: components/Profile.jsx
 function Profile() {
   const name = "John Doe";
   const age = 20;
@@ -341,7 +344,7 @@ function Profile() {
 ### 1. CSS Files (Recommended for beginners)
 
 ```javascript
-// App.jsx
+// File: src/App.jsx
 import './App.css';
 
 function App() {
@@ -350,7 +353,7 @@ function App() {
 ```
 
 ```css
-/* App.css */
+/* File: src/App.css */
 .container {
   padding: 20px;
   background-color: #f0f0f0;
@@ -360,6 +363,7 @@ function App() {
 ### 2. Inline Styles
 
 ```javascript
+// File: src/App.jsx
 function App() {
   const style = {
     padding: '20px',
@@ -373,6 +377,7 @@ function App() {
 ### 3. Direct Inline (for quick styling)
 
 ```javascript
+// File: src/App.jsx
 function App() {
   return (
     <div style={{ padding: '20px', backgroundColor: '#f0f0f0' }}>
@@ -391,6 +396,7 @@ In Lesson 1, we only cover simple event handling with alerts.
 **Common Events:**
 
 ```javascript
+// File: components/EventDemo.jsx
 function EventDemo() {
   // Event handler functions
   const handleClick = () => {
@@ -432,6 +438,7 @@ function EventDemo() {
 
 ### Mistake 1: Lowercase component names
 ```javascript
+// File: components/MyComponent.jsx
 // ❌ Wrong
 function myComponent() {
   return <div>Hello</div>;
@@ -445,6 +452,7 @@ function MyComponent() {
 
 ### Mistake 2: Multiple root elements
 ```javascript
+// File: src/App.jsx
 // ❌ Wrong
 function App() {
   return (
@@ -466,6 +474,7 @@ function App() {
 
 ### Mistake 3: Using `class` instead of `className`
 ```javascript
+// File: components/Container.jsx
 // ❌ Wrong
 <div class="container">Content</div>
 
@@ -475,6 +484,7 @@ function App() {
 
 ### Mistake 4: Forgetting to close tags
 ```javascript
+// File: components/ImageInput.jsx
 // ❌ Wrong
 <img src="logo.png">
 <input type="text">
