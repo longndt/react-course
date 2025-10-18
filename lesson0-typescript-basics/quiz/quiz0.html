@@ -223,9 +223,23 @@
       background: #f8f9fa;
     }
 
-    .btn:disabled {
-      opacity: 0.5;
+    .btn:disabled,
+    .btn.disabled {
+      opacity: 0.4;
       cursor: not-allowed;
+      background-color: #e5e7eb;
+      color: #9ca3af;
+      border-color: #d1d5db;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn:disabled:hover,
+    .btn.disabled:hover {
+      transform: none;
+      box-shadow: none;
+      background-color: #e5e7eb;
+      color: #9ca3af;
     }
 
     .results-card {
@@ -863,6 +877,15 @@
         shortAnswerInput.oninput = () => {
           userAnswers[index] = shortAnswerInput.value.trim();
           updateProgress();
+
+          // Enable/disable Next button based on input content
+          if (userAnswers[index] && !answerChecked[index]) {
+            nextBtn.disabled = false;
+            nextBtn.classList.remove('disabled');
+          } else if (!userAnswers[index] && !answerChecked[index]) {
+            nextBtn.disabled = true;
+            nextBtn.classList.add('disabled');
+          }
         };
 
         shortAnswerInput.onblur = () => {
@@ -898,7 +921,19 @@
         index === quizData.length - 1 ? "Submit Quiz" : "Next →";
 
       // Enable/disable Next button based on answer status
-      nextBtn.disabled = !answerChecked[index];
+      if (question.type === "short") {
+        // For short answer, disable if not answered AND no text in input
+        nextBtn.disabled = !answerChecked[index] && (!userAnswers[index] || userAnswers[index].trim() === '');
+        if (nextBtn.disabled) {
+          nextBtn.classList.add('disabled');
+        } else {
+          nextBtn.classList.remove('disabled');
+        }
+      } else {
+        // For multiple choice, disable if not answered
+        nextBtn.disabled = !answerChecked[index];
+        nextBtn.classList.remove('disabled');
+      }
 
       // Reset skip button state
       skipBtn.disabled = answerChecked[index];
