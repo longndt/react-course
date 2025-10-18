@@ -35,14 +35,14 @@ function App() {
 
   return (
     <div className="app">
-      <header className="app-header">
+      <header className="app-header" role="banner">
         <h1>React Fundamentals Demo</h1>
         <p>TypeScript + React + Vite</p>
       </header>
 
-      <main className="app-main">
-        <section className="demo-section">
-          <h2>1. Welcome Component</h2>
+      <main className="app-main" role="main">
+        <section className="demo-section" aria-labelledby="welcome-heading">
+          <h2 id="welcome-heading">1. Welcome Component</h2>
           <Welcome
             name={user.name}
             age={25}
@@ -50,42 +50,65 @@ function App() {
           />
         </section>
 
-        <section className="demo-section">
-          <h2>2. Counter Component</h2>
+        <section className="demo-section" aria-labelledby="counter-heading">
+          <h2 id="counter-heading">2. Counter Component</h2>
           <Counter />
         </section>
 
-        <section className="demo-section">
-          <h2>3. User Profile Component</h2>
+        <section className="demo-section" aria-labelledby="profile-heading">
+          <h2 id="profile-heading">3. User Profile Component</h2>
           <UserProfile user={user} onUpdate={handleUpdate} />
         </section>
 
-        <section className="demo-section">
-          <h2>4. Button Component</h2>
-          <div className="button-demo">
-            <Button onClick={handleButtonClick}>
+        <section className="demo-section" aria-labelledby="button-heading">
+          <h2 id="button-heading">4. Button Component</h2>
+          <div className="button-demo" role="group" aria-label="Button examples">
+            <Button
+              onClick={handleButtonClick}
+              ariaLabel="Primary action button"
+            >
               Primary Button
             </Button>
-            <Button variant="secondary" onClick={handleButtonClick}>
+            <Button
+              variant="secondary"
+              onClick={handleButtonClick}
+              ariaLabel="Secondary action button"
+            >
               Secondary Button
             </Button>
-            <Button variant="danger" onClick={handleButtonClick}>
+            <Button
+              variant="danger"
+              onClick={handleButtonClick}
+              ariaLabel="Danger action button - use with caution"
+            >
               Danger Button
             </Button>
-            <Button size="sm" onClick={handleButtonClick}>
+            <Button
+              size="sm"
+              onClick={handleButtonClick}
+              ariaLabel="Small primary button"
+            >
               Small Button
             </Button>
-            <Button size="lg" onClick={handleButtonClick}>
+            <Button
+              size="lg"
+              onClick={handleButtonClick}
+              ariaLabel="Large primary button"
+            >
               Large Button
             </Button>
-            <Button disabled onClick={handleButtonClick}>
+            <Button
+              disabled
+              onClick={handleButtonClick}
+              ariaLabel="Disabled button - currently unavailable"
+            >
               Disabled Button
             </Button>
           </div>
         </section>
       </main>
 
-      <footer className="app-footer">
+      <footer className="app-footer" role="contentinfo">
         <p>Edit <code>src/App.tsx</code> and save to test HMR</p>
       </footer>
     </div>

@@ -12,6 +12,8 @@ This lab covers the following objectives:
 - Use JSX syntax to embed JavaScript in components
 - Apply CSS styling to React components
 - Build a multi-component landing page application
+- Implement accessibility best practices with ARIA attributes
+- Create accessible, semantic HTML structure
 
 ##  Pre-Lab Checklist
 
@@ -912,7 +914,92 @@ Before moving to Lesson 2, verify you can:
 - [ ] Display error messages
 - [ ] Reset forms after submission
 
-**Goal: Check at least 18/24 items before Lesson 2**
+### **Accessibility**
+- [ ] Use semantic HTML elements (header, main, section, footer)
+- [ ] Add ARIA labels and descriptions
+- [ ] Implement proper form labeling
+- [ ] Ensure keyboard navigation works
+- [ ] Test with screen readers
+- [ ] Maintain proper color contrast
+
+**Goal: Check at least 24/30 items before Lesson 2**
+
+---
+
+## 🎯 Accessibility Best Practices
+
+### Why Accessibility Matters
+
+Accessibility ensures your applications are usable by everyone, including users with disabilities. It's not just good practice—it's often legally required and improves the user experience for all users.
+
+### Key Accessibility Patterns
+
+#### 1. Semantic HTML Structure
+```tsx
+// ✅ Good: Use semantic elements
+<header role="banner">
+  <h1>Page Title</h1>
+</header>
+
+<main role="main">
+  <section aria-labelledby="section-title">
+    <h2 id="section-title">Section Title</h2>
+  </section>
+</main>
+
+<footer role="contentinfo">
+  <p>Footer content</p>
+</footer>
+```
+
+#### 2. Accessible Buttons
+```tsx
+// ✅ Good: Descriptive ARIA labels
+<Button 
+  onClick={handleClick}
+  ariaLabel="Close dialog"
+  ariaDescribedBy="close-help"
+>
+  <span aria-hidden="true">×</span>
+</Button>
+
+<div id="close-help">
+  Click to close this dialog
+</div>
+```
+
+#### 3. Form Accessibility
+```tsx
+// ✅ Good: Proper form labeling
+<div className="form-group">
+  <label htmlFor="email">Email Address:</label>
+  <input
+    type="email"
+    id="email"
+    name="email"
+    required
+    aria-describedby="email-help"
+  />
+  <div id="email-help">
+    We'll never share your email
+  </div>
+</div>
+```
+
+### Testing Accessibility
+
+1. **Keyboard Navigation**: Tab through all interactive elements
+2. **Screen Reader**: Use browser dev tools accessibility panel
+3. **Color Contrast**: Ensure sufficient contrast ratios
+4. **Focus Management**: Verify focus is visible and logical
+
+### Resources
+
+- [Accessibility Guide](./example/ACCESSIBILITY.md) - Detailed examples
+- [Web Content Accessibility Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+- [React Accessibility Docs](https://reactjs.org/docs/accessibility.html)
+
+**Goal: Check at least 24/30 items before Lesson 2**
 
 ---
 

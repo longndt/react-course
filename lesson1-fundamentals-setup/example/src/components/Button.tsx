@@ -6,6 +6,11 @@ interface ButtonProps {
   size?: 'sm' | 'md' | 'lg';
   onClick: () => void;
   disabled?: boolean;
+  // Accessibility props
+  ariaLabel?: string;
+  ariaDescribedBy?: string;
+  type?: 'button' | 'submit' | 'reset';
+  role?: string;
 }
 
 function Button({
@@ -13,7 +18,11 @@ function Button({
   variant = 'primary',
   size = 'md',
   onClick,
-  disabled = false
+  disabled = false,
+  ariaLabel,
+  ariaDescribedBy,
+  type = 'button',
+  role
 }: ButtonProps) {
   const className = `btn btn-${variant} btn-${size} ${disabled ? 'disabled' : ''}`;
 
@@ -22,6 +31,11 @@ function Button({
       className={className}
       onClick={onClick}
       disabled={disabled}
+      type={type}
+      role={role}
+      aria-label={ariaLabel}
+      aria-describedby={ariaDescribedBy}
+      aria-disabled={disabled}
     >
       {children}
     </button>
