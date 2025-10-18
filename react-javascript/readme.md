@@ -100,7 +100,7 @@ lesson-topic/
 
 ## 🗺️ Visual Diagrams
 
-📊 **[Visual Learning Diagrams](./diagrams/readme.md)** - Complete guide to visual learning
+- **[Visual Learning Diagrams](./diagrams/readme.md)** - Complete guide to visual learning
 
 Quick links to key diagrams:
 - 📊 [Course Structure](./diagrams/course_structure_diagram.md) - Complete course organization and navigation
@@ -113,7 +113,7 @@ Quick links to key diagrams:
 
 ---
 
-## 📚 How to Study This Course Effectively ?
+## 📚 How to Study This Course Effectively
 
 ### **Step 1: Start with Reference Guide**
 
@@ -234,7 +234,7 @@ cd react-course/react-javascript
 -  **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack-deployment/readme.md)**
 
 #### 3⃣ **Continue with Advanced Materials** (Optional)
-📚 **[Advanced Materials & Resources](./extras/readme.md)** - Complete guide to advanced topics
+- **[Advanced Materials & Resources](./extras/readme.md)** - Complete guide to advanced topics
 
 - **[Advanced Patterns](./extras/advanced_patterns.md)**
 - **[State Management Guide](./extras/state_management.md)**

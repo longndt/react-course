@@ -29,13 +29,13 @@ example/
 npm install
 ```
 
-### 2. Run Examples
+### 2. Run Example
 
 ```bash
 # Run with node
 npm start
 
-# Run individual examples
+# Run individual example
 node src/examples/01-arrow-functions.js
 node src/examples/02-destructuring.js
 node src/examples/03-template-literals.js
@@ -46,7 +46,7 @@ node src/examples/07-object-methods.js
 node src/examples/08-react-patterns.js
 ```
 
-## Examples
+## Example
 
 ### 01. Arrow Functions
 - Function syntax and this binding
@@ -110,7 +110,7 @@ node src/examples/08-react-patterns.js
 - Organize code with modules
 - Handle async operations properly
 
-## Running Individual Examples
+## Running Individual Example
 
 Each example can be run independently:
 

@@ -1,228 +1,150 @@
-## 📊 Course Structure Overview
+# 📊 React Course Diagrams
 
-**[course_structure_diagram.md](./course_structure_diagram.md)**
+## 🎯 Overview
 
-Visual overview of the complete course structure:
-- Course architecture and organization
-- File structure and naming conventions
-- Learning path visualization
-- Resource organization
-- Quick navigation guide
+This directory contains visual diagrams and flowcharts that illustrate key concepts in React development. These diagrams help visualize complex relationships, workflows, and architectural patterns.
 
-**Best for**: Understanding overall course structure, finding resources quickly, planning learning approach
+## 📚 Available Diagrams
 
----
+### **[course_roadmap.md](./course_roadmap.md)**
+Complete learning path and progression through the React course:
+- **Prerequisites** - What you need to know before starting
+- **Lesson Structure** - How each lesson builds upon the previous
+- **Learning Objectives** - What you'll achieve in each lesson
+- **Project Progression** - How your skills develop over time
+- **Career Paths** - Where this course can take you
 
-## 🗺️ Course Roadmap
-
-**[course_roadmap.md](./course_roadmap.md)**
-
-Complete visual learning path showing:
-- Full course progression (Lesson 0 → Lesson 5)
-- Dual-track system (TypeScript & JavaScript)
-- Difficulty progression chart
-- Practice percentage system (40% → 90%)
-- Learning outcomes timeline (Gantt chart)
-- Component structure per lesson
-- Support resources mindmap
-- Quick start guide flowchart
-
-**Best for**: Getting oriented, planning your learning path, understanding course structure
+**Best for**: Understanding the overall course structure and planning your learning journey
 
 ---
 
-## 🔄 Component Lifecycle & Hooks
+### **[project_architecture.md](./project_architecture.md)**
+Full-stack project architecture and design patterns:
+- **Frontend Architecture** - React component structure
+- **Backend Architecture** - Express.js server organization
+- **Database Design** - MongoDB schema and relationships
+- **API Design** - RESTful API patterns
+- **Deployment Strategy** - Production deployment patterns
 
-**[component_lifecycle.md](./component_lifecycle.md)**
-
-Visual diagrams covering:
-- Component lifecycle overview (mount, update, unmount)
-- Functional component render cycle
-- useState hook lifecycle
-- useEffect execution timeline
-- Multiple hooks execution order
-- useEffect dependency array behavior
-- Component re-render triggers
-- Batching and async updates
-- Custom hook lifecycle
-- Class vs Functional component comparison
-- Memory leak prevention
-- React.StrictMode double rendering
-
-**Best for**: Understanding React internals, debugging render issues, mastering hooks
-
-**Related Lessons**: Lesson 1 (React Fundamentals), Lesson 2 (Components & Hooks)
+**Best for**: Understanding how to organize and structure full-stack React projects
 
 ---
 
-## 📦 State Management Flow
+### **[component_lifecycle.md](./component_lifecycle.md)**
+Visual representation of React component lifecycle:
+- **Mounting Phase** - Component creation and initial render
+- **Updating Phase** - Re-rendering and state changes
+- **Unmounting Phase** - Component cleanup and removal
+- **Hook Lifecycle** - How hooks interact with component lifecycle
+- **Effect Dependencies** - When effects run and re-run
 
-**[state_management_flow.md](./state_management_flow.md)**
-
-Comprehensive state patterns:
-- State management levels overview
-- Local state (useState) flow
-- Lifted state (props drilling) vs Context API
-- Context API architecture
-- useReducer state flow
-- Zustand (external library) flow
-- Redux Toolkit complete flow
-- State management decision tree
-- Immutable update patterns
-- Async state updates (API calls)
-- State synchronization across tabs
-- Performance optimization (React.memo, useMemo)
-
-**Best for**: Choosing the right state solution, implementing global state, optimizing performance
-
-**Related Lessons**: Lesson 2 (Components & Hooks), Lesson 3 (API & Data)
-
-**Related Extra Material**: [State Management Guide](../extras/state_management.md)
+**Best for**: Understanding React component behavior and optimization
 
 ---
 
-## 🌐 API Integration & Data Flow
+### **[api_data_flow.md](./api_data_flow.md)**
+Complete API integration and data flow:
+- **Request Flow** - From user action to API call
+- **Response Handling** - Data processing and state updates
+- **Error Management** - Error handling and user feedback
+- **Loading States** - UI feedback during async operations
+- **Caching Strategy** - Data caching and optimization
 
-**[api_data_flow.md](./api_data_flow.md)**
-
-Complete API integration patterns:
-- Complete API request lifecycle
-- useState for data fetching
-- React Query/TanStack Query flow
-- CRUD operations flow
-- Optimistic updates pattern
-- Pagination flow
-- Infinite scroll flow
-- Error handling strategies
-- Loading states UI patterns
-- Caching strategy
-- Full-stack data flow (frontend → backend → DB)
-- WebSocket real-time updates
-- File upload flow with progress
-
-**Best for**: Implementing data fetching, handling errors, building real-time features
-
-**Related Lessons**: Lesson 3 (API & Data), Lesson 5 (Full-Stack)
+**Best for**: Understanding how data flows through React applications
 
 ---
 
-## 🔐 Authentication & Authorization
+### **[authentication_flow.md](./authentication_flow.md)**
+User authentication and authorization flow:
+- **Login Process** - User authentication steps
+- **Token Management** - JWT token handling
+- **Route Protection** - Protected route implementation
+- **State Management** - Authentication state handling
+- **Security Considerations** - Best practices and security
 
-**[authentication_flow.md](./authentication_flow.md)**
-
-Complete auth system diagrams:
-- Complete authentication flow (register, login, logout)
-- JWT token lifecycle
-- Protected route flow
-- Auth Context provider pattern
-- API requests with auth tokens
-- Role-based access control (RBAC)
-- Token refresh flow
-- Social OAuth flow (Google/GitHub)
-- Password reset flow
-- Session vs Token comparison
-
-**Best for**: Implementing authentication, protecting routes, managing user sessions
-
-**Related Lessons**: Lesson 4 (Routing & Auth)
+**Best for**: Understanding user authentication in React applications
 
 ---
 
-## 🏗️ Full-Stack Architecture
+### **[state_management_flow.md](./state_management_flow.md)**
+Application state management patterns:
+- **Local State** - Component-level state management
+- **Global State** - Application-wide state management
+- **Context API** - React Context usage patterns
+- **State Updates** - How state changes propagate
+- **Performance Optimization** - State management best practices
 
-**[project_architecture.md](./project_architecture.md)**
-
-Complete system architecture:
-- Full-stack architecture overview
-- Development environment setup
-- Folder structure architecture
-- HTTP request flow (detailed)
-- Database schema architecture (ERD)
-- Component-to-database data flow
-- Authentication integration architecture
-- Error handling architecture
-- Production deployment architecture
-- Environment configuration flow
-- State management integration
-- Real-time features (WebSocket)
-- Caching strategy architecture
-- Security layers
-
-**Best for**: Understanding the big picture, planning projects, deployment
-
-**Related Lessons**: Lesson 3 (API), Lesson 4 (Auth), Lesson 5 (Deployment)
+**Best for**: Understanding state management in React applications
 
 ---
 
-## 📚 How to Use These Diagrams ?
+## 🆕 New Diagrams
 
-### In GitHub
-All diagrams render automatically when viewing on GitHub. Simply click any diagram file to view.
+### **[react_project_structure.md](./react_project_structure.md)**
+React project structure and organization:
+- **File Organization** - Folder structure and naming conventions
+- **Component Hierarchy** - How components relate to each other
+- **Build Process** - Development and production builds
+- **Import/Export Patterns** - Module organization
+- **Best Practices** - Project structure guidelines
 
-### In VS Code
-Install the **Markdown Preview Mermaid Support** extension:
-```
-code --install-extension bierner.markdown-mermaid
-```
-
-Then preview any markdown file with `Ctrl+Shift+V` (Windows) or `Cmd+Shift+V` (Mac).
-
-### In Other Editors
-Most modern markdown editors support Mermaid. If not, copy the Mermaid code blocks and paste into:
-- [Mermaid Live Editor](https://mermaid.live/)
+**Best for**: Understanding how to organize React projects
 
 ---
 
-## 🎯 Diagram Usage by Learning Stage
+### **[routing_flow.md](./routing_flow.md)**
+React Router navigation and routing flow:
+- **Navigation Flow** - From user action to component render
+- **Route Structure** - Nested and dynamic routes
+- **Route Protection** - Authentication and authorization
+- **URL Management** - URL state and parameters
+- **Navigation Patterns** - Link and programmatic navigation
 
-### Stage 1: Beginner (Lesson 0-1)
-Start with:
-1. **course_roadmap.md** - Understand the learning path
-2. **component_lifecycle.md** (sections 1-4) - Basic lifecycle
-3. **state_management_flow.md** (sections 1-3) - Local state only
-
-### Stage 2: Intermediate (Lesson 2-3)
-Progress to:
-1. **component_lifecycle.md** (complete) - All hooks patterns
-2. **state_management_flow.md** (sections 4-8) - Context API, useReducer
-3. **api_data_flow.md** (sections 1-7) - Data fetching patterns
-
-### Stage 3: Advanced (Lesson 4-5)
-Master:
-1. **authentication_flow.md** (complete) - Full auth system
-2. **project_architecture.md** (complete) - System design
-3. **api_data_flow.md** (sections 8-13) - Advanced patterns
+**Best for**: Understanding routing in React applications
 
 ---
 
-## 📖 Diagram Legend
+### **[deployment_flow.md](./deployment_flow.md)**
+Complete deployment process and strategies:
+- **Build Process** - From source code to production
+- **CI/CD Pipeline** - Automated testing and deployment
+- **Deployment Strategies** - Static hosting and cloud platforms
+- **Environment Configuration** - Development, staging, production
+- **Performance Optimization** - Build and runtime optimization
 
-### Common Shapes
-- **Rectangle** `[ ]` - Process or component
-- **Rounded Rectangle** `( )` - Start/End point
-- **Diamond** `{ }` - Decision point
-- **Cylinder** `[( )]` - Database
-- **Circle** `(( ))` - Central concept
-
-### Common Colors
-- 🟢 **Green** - Success, correct path, recommended
-- 🟡 **Yellow** - Warning, optional, in-progress
-- 🔵 **Blue** - Information, reference, standard
-- 🔴 **Red** - Error, incorrect, deprecated
-
-### Arrow Types
-- `-->` Solid line - Main flow
-- `-.->` Dashed line - Optional/alternative flow
-- `==>` Thick line - Important/emphasized flow
+**Best for**: Understanding deployment and production processes
 
 ---
 
-## 🎓 Learning Tips
+## 🎯 How to Use These Diagrams
 
-1. **Start with the roadmap** to understand the big picture
-2. **Reference diagrams while coding** to reinforce concepts
-3. **Recreate diagrams from memory** to test understanding
-4. **Modify diagrams** for your own projects
-5. **Use diagrams in documentation** for your portfolio
+### **Learning Path**
+1. **Start with Course Roadmap** - Understand the overall structure
+2. **Follow Lesson Progression** - Use diagrams as you progress through lessons
+3. **Reference During Practice** - Use diagrams while coding
+4. **Review for Understanding** - Revisit diagrams to reinforce concepts
+
+### **Best Practices**
+- **Read Before Coding** - Review relevant diagrams before starting exercises
+- **Reference During Debugging** - Use diagrams to understand flow issues
+- **Share with Team** - Use diagrams for code reviews and discussions
+- **Update as You Learn** - Add your own notes and modifications
 
 ---
+
+## 🔗 Related Resources
+
+- **[Theory Lessons](../lesson*/theory/)** - Detailed explanations of concepts
+- **[Lab Exercises](../lesson*/lab/)** - Hands-on practice with concepts
+- **[Reference Guides](../lesson*/reference/)** - Quick reference materials
+- **[Advanced Patterns](../../extras/advanced_patterns.md)** - Advanced architectural patterns
+
+These diagrams are regularly updated to reflect:
+- **React Version Changes** - New features and deprecated functionality
+- **Best Practice Evolution** - Industry standard changes
+- **Course Content Updates** - New lessons and examples
+- **Community Feedback** - Improvements based on user input
+
+---
+
+**Ready to explore?** Start with the [course roadmap](./course_roadmap.md) to understand your learning journey!

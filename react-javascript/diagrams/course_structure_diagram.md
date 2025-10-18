@@ -1,51 +1,47 @@
-# React Course Structure Diagram
+# React Course Structure Diagram (JavaScript)
 
 ## Course Learning Path
 
 ```mermaid
 graph TD
-    A[🎯 Course Start] --> B{Choose Your Path}
+    A[🎯 Course Start] --> B[📚 Lesson 0: JavaScript ES6+ Prerequisites]
 
-    B -->|TypeScript Track| C[📚 Lesson 0: TypeScript Prerequisites]
-    B -->|JavaScript Track| D[📚 Lesson 0: JavaScript ES6+ Prerequisites]
+    B --> C[⚛️ Lesson 1: React Fundamentals & Setup]
 
-    C --> E[⚛️ Lesson 1: React Fundamentals & Setup]
-    D --> E
+    C --> D[🏗️ Lesson 2: Components & Hooks]
+    D --> E[🌐 Lesson 3: API Integration & Data Management]
+    E --> F[🔐 Lesson 4: Routing & Authentication]
+    F --> G[🚀 Lesson 5: Full-Stack & Production Deployment]
 
-    E --> F[🏗️ Lesson 2: Components & Hooks]
-    F --> G[🌐 Lesson 3: API Integration & Data Management]
-    G --> H[🔐 Lesson 4: Routing & Authentication]
-    H --> I[🚀 Lesson 5: Full-Stack & Production Deployment]
-
-    I --> J[🎓 Course Complete]
+    G --> H[🎓 Course Complete]
 
     %% Quick Start Paths
-    E --> K[⚡ Quick Start: 30-Second Setup]
-    F --> K
-    G --> K
-    H --> K
-    I --> K
+    C --> I[⚡ Quick Start: 30-Second Setup]
+    D --> I
+    E --> I
+    F --> I
+    G --> I
 
     %% Learning Styles
-    K --> L{Choose Learning Style}
-    L -->|📖 Theory First| M[Theory → Examples → Lab]
-    L -->|⚡ Hands-On| N[Reference → Examples → Theory]
-    L -->|🎯 Quick Review| O[Reference → Quiz → Focus Areas]
+    I --> J{Choose Learning Style}
+    J -->|📖 Theory First| K[Theory → Examples → Lab]
+    J -->|⚡ Hands-On| L[Reference → Examples → Theory]
+    J -->|🎯 Quick Review| M[Reference → Quiz → Focus Areas]
 
-    M --> P[✅ Complete Lesson]
-    N --> P
-    O --> P
+    K --> N[✅ Complete Lesson]
+    L --> N
+    M --> N
 
-    P --> Q[📝 Progress Checklist]
-    Q --> R[🧪 Take Quiz]
-    R --> S{Score ≥ 80%?}
-    S -->|Yes| T[🚀 Next Lesson]
-    S -->|No| U[📚 Review & Practice]
-    U --> R
+    N --> O[📝 Progress Checklist]
+    O --> P[🧪 Take Quiz]
+    P --> Q{Score ≥ 80%?}
+    Q -->|Yes| R[🚀 Next Lesson]
+    Q -->|No| S[📚 Review & Practice]
+    S --> P
 
-    T --> V{More Lessons?}
-    V -->|Yes| E
-    V -->|No| J
+    R --> T{More Lessons?}
+    T -->|Yes| C
+    T -->|No| H
 
     %% Styling
     classDef lesson fill:#e1f5fe,stroke:#01579b,stroke-width:2px
@@ -53,10 +49,10 @@ graph TD
     classDef decision fill:#fff3e0,stroke:#e65100,stroke-width:2px
     classDef complete fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
 
-    class C,D,E,F,G,H,I lesson
-    class K quickstart
-    class B,L,S,V decision
-    class J,P complete
+    class B,C,D,E,F,G lesson
+    class I quickstart
+    class J,Q,T decision
+    class H,N complete
 ```
 
 ## Lesson Structure Template
@@ -88,23 +84,18 @@ graph LR
     class D,G,H,I interactive
 ```
 
-## Technology Stack
+## JavaScript Technology Stack
 
 ```mermaid
 graph TB
-    A[🎯 React Course] --> B[TypeScript Track]
-    A --> C[JavaScript Track]
+    A[🎯 React Course - JavaScript Track] --> B[⚛️ React + JavaScript]
 
-    B --> D[⚛️ React + TypeScript]
-    C --> E[⚛️ React + JavaScript]
+    B --> C[🛠️ Vite + ESLint + Prettier + JavaScript]
 
-    D --> F[🛠️ Vite + ESLint + Prettier]
-    E --> F
-
-    F --> G[🌐 Axios + REST APIs]
-    G --> H[🔐 React Router + JWT Auth]
-    H --> I[🚀 Node.js + Express + MongoDB]
-    I --> J[☁️ Vercel + Netlify + Docker]
+    C --> D[🌐 Axios + REST APIs + JavaScript]
+    D --> E[🔐 React Router + JWT Auth + JavaScript]
+    E --> F[🚀 Node.js + Express + MongoDB + JavaScript]
+    F --> G[☁️ Vercel + Netlify + Docker + JavaScript]
 
     %% Styling
     classDef track fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
@@ -112,28 +103,28 @@ graph TB
     classDef tools fill:#fff3e0,stroke:#f57c00,stroke-width:2px
     classDef deploy fill:#fce4ec,stroke:#c2185b,stroke-width:2px
 
-    class B,C track
-    class D,E tech
-    class F,G,H tools
-    class I,J deploy
+    class A track
+    class B tech
+    class C,D,E tools
+    class F,G deploy
 ```
 
 ## Learning Objectives Progression
 
 ```mermaid
 graph LR
-    A[📚 Lesson 0<br/>Prerequisites] --> B[⚛️ Lesson 1<br/>React Fundamentals]
+    A[📚 Lesson 0<br/>JavaScript ES6+ Prerequisites] --> B[⚛️ Lesson 1<br/>React Fundamentals]
     B --> C[🏗️ Lesson 2<br/>Components & Hooks]
     C --> D[🌐 Lesson 3<br/>API Integration]
     D --> E[🔐 Lesson 4<br/>Routing & Auth]
     E --> F[🚀 Lesson 5<br/>Full-Stack & Deploy]
 
-    A1[TypeScript/JS ES6+<br/>Basics] --> A
-    B1[JSX, Components<br/>State Management] --> B
-    C1[Custom Hooks<br/>Performance] --> C
-    D1[REST APIs<br/>Error Handling] --> D
-    E1[React Router<br/>JWT Authentication] --> E
-    F1[Node.js, Express<br/>Production Deploy] --> F
+    A1[JavaScript ES6+<br/>Modern JavaScript] --> A
+    B1[JSX + JavaScript<br/>Component Patterns] --> B
+    C1[Custom Hooks<br/>JavaScript Hooks] --> C
+    D1[REST APIs<br/>JavaScript API Calls] --> D
+    E1[React Router<br/>JavaScript Auth] --> E
+    F1[Node.js + Express<br/>JavaScript Backend] --> F
 
     %% Styling
     classDef lesson fill:#e1f5fe,stroke:#01579b,stroke-width:2px
@@ -147,15 +138,15 @@ graph LR
 
 ```mermaid
 graph TD
-    A[🚀 Quick Start] --> B[⏱️ Time Estimate]
+    A[🚀 Quick Start - JavaScript] --> B[⏱️ Time Estimate]
     A --> C[🎯 Learning Goal]
     A --> D[30-Second Setup]
     A --> E[Learning Path Options]
 
-    D --> F[📋 Prerequisites Check]
-    D --> G[🛠️ Environment Setup]
-    D --> H[📦 Install Dependencies]
-    D --> I[▶️ Start Development]
+    D --> F[📋 JavaScript Prerequisites Check]
+    D --> G[🛠️ JavaScript Environment Setup]
+    D --> H[📦 Install Dependencies + JavaScript]
+    D --> I[▶️ Start Development with JavaScript]
 
     E --> J[📖 Theory First]
     E --> K[⚡ Hands-On]
@@ -175,19 +166,52 @@ graph TD
     class E,J,K,L,M,N,O path
 ```
 
+## JavaScript-Specific Features
+
+```mermaid
+graph TB
+    A[🎯 JavaScript React Course] --> B[📝 Modern JavaScript]
+    A --> C[🔧 Development Tools]
+    A --> D[🏗️ Architecture Patterns]
+
+    B --> B1[ES6+ Features]
+    B --> B2[Arrow Functions]
+    B --> B3[Destructuring]
+    B --> B4[Modules & Classes]
+
+    C --> C1[JavaScript Compiler]
+    C --> C2[ESLint + JavaScript]
+    C --> C3[Browser DevTools]
+    C --> C4[Error Handling]
+
+    D --> D1[Component Props]
+    D --> D2[Hook Patterns]
+    D --> D3[API Integration]
+    D --> D4[Context Usage]
+
+    %% Styling
+    classDef main fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    classDef category fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef feature fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+
+    class A main
+    class B,C,D category
+    class B1,B2,B3,B4,C1,C2,C3,C4,D1,D2,D3,D4 feature
+```
+
 ## Visual Elements Legend
 
 - 🎯 **Learning Objectives** - Clear goals for each lesson
-- 📋 **Prerequisites** - Required knowledge and setup
-- 🚀 **Quick Start** - Fast setup and learning paths
-- 📚 **What You'll Learn** - Detailed curriculum breakdown
-- ⚛️ **React Components** - Component architecture and patterns
-- 🎣 **Hooks** - State management and side effects
-- 🌐 **API Integration** - Backend communication
-- 🔐 **Authentication** - Security and user management
-- 🚀 **Deployment** - Production and scaling
-- ✅ **Best Practices** - Professional development standards
-- 🚨 **Common Challenges** - Troubleshooting and solutions
-- 📝 **Progress Tracking** - Checklists and assessments
-- 🧪 **Quizzes** - Knowledge validation
-- 📖 **Resources** - Additional learning materials
+- 📋 **Prerequisites** - Required JavaScript knowledge and setup
+- 🚀 **Quick Start** - Fast JavaScript setup and learning paths
+- 📚 **What You'll Learn** - Detailed JavaScript curriculum breakdown
+- ⚛️ **React Components** - JavaScript component architecture and patterns
+- 🎣 **Hooks** - JavaScript state management and side effects
+- 🌐 **API Integration** - JavaScript backend communication
+- 🔐 **Authentication** - JavaScript security and user management
+- 🚀 **Deployment** - JavaScript production and scaling
+- ✅ **Best Practices** - JavaScript professional development standards
+- 🚨 **Common Challenges** - JavaScript troubleshooting and solutions
+- 📝 **Progress Tracking** - JavaScript checklists and assessments
+- 🧪 **Quizzes** - JavaScript knowledge validation
+- 📖 **Resources** - Additional JavaScript learning materials

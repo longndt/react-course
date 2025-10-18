@@ -19,6 +19,8 @@
 
 ## Why Routing & Authentication?
 
+> 🔐 **Visual Learning**: For a comprehensive understanding of authentication flow, see [Authentication Flow Diagram](../../diagrams/authentication_flow.md)
+
 **Modern Web Applications Need:**
 
 - **Multi-page Navigation** - Users expect different pages/views
@@ -35,6 +37,8 @@
 ---
 
 ## React Router Fundamentals
+
+> 🛣️ **Visual Learning**: For a comprehensive understanding of routing flow, see [Routing Flow Diagram](../../diagrams/routing_flow.md)
 
 ### Setup React Router
 
@@ -114,6 +118,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 
 ```typescript
 // File: components/layout/Navigation.tsx
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Navigation() {
@@ -125,20 +130,28 @@ function Navigation() {
     </nav>
   );
 }
+
+export default Navigation;
 ```
 
 ### Programmatic Navigation
 
 ```typescript
 // File: components/auth/LoginForm.tsx
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
+interface Credentials {
+  email: string;
+  password: string;
+}
 
 function LoginForm() {
   const navigate = useNavigate();
 
-  const handleLogin = async (credentials) => {
+  const handleLogin = async (credentials: Credentials) => {
     try {
-      await login(credentials);
+      // await login(credentials);
       navigate('/dashboard'); // Navigate after successful login
     } catch (error) {
       console.error('Login failed:', error);
@@ -151,6 +164,8 @@ function LoginForm() {
     </form>
   );
 }
+
+export default LoginForm;
 ```
 
 ### Active Link Styling
@@ -676,6 +691,8 @@ useEffect(() => {
 - Global authentication state
 - Token storage and validation
 - Error handling and user feedback
+
+> 🔄 **Visual Learning**: For a comprehensive understanding of state management patterns, see [State Management Flow Diagram](../../diagrams/state_management_flow.md)
 
 ### What's Coming in Lesson 5
 

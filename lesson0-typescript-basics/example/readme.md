@@ -29,7 +29,7 @@ example/
 npm install
 ```
 
-### 2. Run Examples
+### 2. Run Example
 
 ```bash
 # Run with ts-node (recommended for development)
@@ -43,7 +43,7 @@ npm start
 npm run watch
 ```
 
-## Examples
+## Example
 
 ### 01. Basic Types & Type Inference
 - Primitive types (string, number, boolean)
@@ -81,7 +81,7 @@ npm run watch
 - Component prop types
 - Ref types
 
-### 07. Component Examples
+### 07. Component Example
 - TypeScript React components
 - Props interfaces
 - State typing
@@ -106,7 +106,7 @@ npm run watch
 - Use union types for variants
 - Leverage generics for reusability
 
-## Running Individual Examples
+## Running Individual Example
 
 ```bash
 # Run specific example

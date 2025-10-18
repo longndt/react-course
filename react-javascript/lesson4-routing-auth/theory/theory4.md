@@ -19,6 +19,8 @@
 
 ## Why Routing & Authentication?
 
+> 🔐 **Visual Learning**: For a comprehensive understanding of authentication flow, see [Authentication Flow Diagram](../../diagrams/authentication_flow.md)
+
 **Modern Web Applications Need:**
 
 - **Multi-page Navigation** - Users expect different pages/views
@@ -35,6 +37,8 @@
 ---
 
 ## React Router Fundamentals
+
+> 🛣️ **Visual Learning**: For a comprehensive understanding of routing flow, see [Routing Flow Diagram](../../diagrams/routing_flow.md)
 
 ### Setup React Router
 
@@ -637,6 +641,8 @@ useEffect(() => {
 - Global authentication state
 - Token storage and validation
 - Error handling and user feedback
+
+> 🔄 **Visual Learning**: For a comprehensive understanding of state management patterns, see [State Management Flow Diagram](../../diagrams/state_management_flow.md)
 
 ### What's Coming in Lesson 5
 

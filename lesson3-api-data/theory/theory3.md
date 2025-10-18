@@ -17,6 +17,8 @@
 
 ## Why API Integration Matters?
 
+> 📊 **Visual Learning**: For a comprehensive understanding of API data flow, see [API Data Flow Diagram](../../diagrams/api_data_flow.md)
+
 **Modern Full-Stack Architecture:**
 
 ```
@@ -78,8 +80,25 @@ DELETE /api/users/123   // Delete user with ID 123
 ### CRUD Operations
 
 ```typescript
+// File: services/api.ts
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+interface CreateUserData {
+  name: string;
+  email: string;
+}
+
+interface UpdateUserData {
+  name?: string;
+  email?: string;
+}
+
 // Create (POST)
-const createUser = async (userData: CreateUserData) => {
+const createUser = async (userData: CreateUserData): Promise<User> => {
   const response = await fetch('/api/users', {
     method: 'POST',
     headers: {
@@ -102,7 +121,7 @@ const getUser = async (id: string): Promise<User> => {
 };
 
 // Update (PUT)
-const updateUser = async (id: string, userData: UpdateUserData) => {
+const updateUser = async (id: string, userData: UpdateUserData): Promise<User> => {
   const response = await fetch(`/api/users/${id}`, {
     method: 'PUT',
     headers: {
@@ -114,12 +133,15 @@ const updateUser = async (id: string, userData: UpdateUserData) => {
 };
 
 // Delete (DELETE)
-const deleteUser = async (id: string) => {
+const deleteUser = async (id: string): Promise<void> => {
   const response = await fetch(`/api/users/${id}`, {
     method: 'DELETE',
   });
   return response.json();
 };
+
+export { createUser, getUsers, getUser, updateUser, deleteUser };
+export type { User, CreateUserData, UpdateUserData };
 ```
 
 ### HTTP Status Codes
@@ -186,7 +208,8 @@ const deleteUser = async (id: string): Promise<void> => {
 ### Axios with React
 
 ```typescript
-import { useState, useEffect } from 'react';
+// File: components/UserList.tsx
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 interface User {
@@ -228,6 +251,8 @@ function UserList() {
     </ul>
   );
 }
+
+export default UserList;
 ```
 
 ---

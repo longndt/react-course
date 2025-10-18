@@ -20,6 +20,8 @@
 
 ## What is React?
 
+> 🗺️ **Visual Learning**: For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
+
 **React** is a JavaScript library for building user interfaces, created and maintained by Meta (Facebook).
 
 ### Key Concepts
@@ -62,6 +64,8 @@ In this course, we use **JavaScript** for all React components (.jsx files).
 
 ```javascript
 // File: components/UserCard.jsx
+import React from 'react';
+
 // Component using props
 function UserCard({ name, email, age }) {
   return (
@@ -72,11 +76,16 @@ function UserCard({ name, email, age }) {
     </div>
   );
 }
+
+export default UserCard;
 ```
 
 **Event Handlers**
 
 ```javascript
+// File: components/auth/LoginForm.jsx
+import React from 'react';
+
 function LoginForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -94,6 +103,8 @@ function LoginForm() {
     </form>
   );
 }
+
+export default LoginForm;
 ```
 
 > **Complete JavaScript Guide**: For comprehensive JavaScript ES6+ review, see [Lesson 0: JavaScript Prerequisites](../lesson0-javascript-es6/)
@@ -121,6 +132,8 @@ npm run dev
 ```
 
 ### Project Structure
+
+> 📁 **Visual Learning**: For a comprehensive understanding of React project structure, see [React Project Structure Diagram](../../diagrams/react_project_structure.md)
 
 ```
 my-app/
@@ -156,6 +169,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 **`App.jsx` - Main Component**
 
 ```javascript
+// File: src/App.jsx
+import React from 'react';
+
 function App() {
   return (
     <div className="App">

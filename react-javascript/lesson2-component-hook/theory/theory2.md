@@ -6,20 +6,23 @@
 
 1. [Core Concepts](#core-concepts)
 2. [Function Components](#function-components)
-3. [React Hooks Overview](#react-hooks-overview)
-4. [useState Hook](#usestate-hook)
-5. [useEffect Hook](#useeffect-hook)
-6. [useRef Hook](#useref-hook)
-7. [useContext Hook](#usecontext-hook)
-8. [useReducer Hook](#usereducer-hook)
-9. [Custom Hooks](#custom-hooks)
-10. [Hook Rules & Best Practices](#hook-rules--best-practices)
-11. [Common Mistakes](#common-mistakes)
-12. [Next Steps](#next-steps)
+3. [Component Lifecycle & Props](#component-lifecycle--props)
+4. [React Hooks Overview](#react-hooks-overview)
+5. [useState Hook](#usestate-hook)
+6. [useEffect Hook](#useeffect-hook)
+7. [useRef Hook](#useref-hook)
+8. [useContext Hook](#usecontext-hook)
+9. [useReducer Hook](#usereducer-hook)
+10. [Custom Hooks](#custom-hooks)
+11. [Hook Rules & Best Practices](#hook-rules--best-practices)
+12. [Common Mistakes](#common-mistakes)
+13. [Next Steps](#next-steps)
 
 ---
 
 ## Core Concepts
+
+> 🔄 **Visual Learning**: For a comprehensive understanding of component lifecycle, see [Component Lifecycle Diagram](../../diagrams/component_lifecycle.md)
 
 ### Why Component Architecture?
 
@@ -54,6 +57,122 @@ E-commerce App
 ### Modern React Components
 
 **Function components** are the modern way to write React components. They're simpler, more readable, and work perfectly with hooks.
+
+### Component Design Patterns
+
+**1. Container vs Presentational Components**
+
+```javascript
+// File: components/UserList.jsx
+// Container Component - handles data and logic
+function UserList() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchUsers().then(data => {
+      setUsers(data);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) return <LoadingSpinner />;
+  
+  return (
+    <div>
+      <h2>Users</h2>
+      {users.map(user => (
+        <UserCard key={user.id} user={user} />
+      ))}
+    </div>
+  );
+}
+
+// File: components/UserCard.jsx
+// Presentational Component - handles display only
+function UserCard({ user }) {
+  return (
+    <div className="user-card">
+      <h3>{user.name}</h3>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+```
+
+**2. Compound Components Pattern**
+
+```javascript
+// File: components/Modal.jsx
+// Compound Component - multiple related components
+function Modal({ children, isOpen }) {
+  if (!isOpen) return null;
+  
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// Sub-components
+function ModalHeader({ children }) {
+  return <div className="modal-header">{children}</div>;
+}
+
+function ModalBody({ children }) {
+  return <div className="modal-body">{children}</div>;
+}
+
+function ModalFooter({ children }) {
+  return <div className="modal-footer">{children}</div>;
+}
+
+// Usage
+Modal.Header = ModalHeader;
+Modal.Body = ModalBody;
+Modal.Footer = ModalFooter;
+
+// In your app
+<Modal isOpen={showModal}>
+  <Modal.Header>
+    <h2>Confirm Action</h2>
+  </Modal.Header>
+  <Modal.Body>
+    <p>Are you sure you want to delete this item?</p>
+  </Modal.Body>
+  <Modal.Footer>
+    <button onClick={onCancel}>Cancel</button>
+    <button onClick={onConfirm}>Delete</button>
+  </Modal.Footer>
+</Modal>
+```
+
+**3. Higher-Order Components (HOCs)**
+
+```javascript
+// File: components/withLoading.jsx
+// HOC - adds loading functionality to any component
+function withLoading(WrappedComponent) {
+  return function WithLoadingComponent(props) {
+    const { isLoading, ...restProps } = props;
+    
+    if (isLoading) {
+      return <div className="loading">Loading...</div>;
+    }
+    
+    return <WrappedComponent {...restProps} />;
+  };
+}
+
+// Usage
+const UserListWithLoading = withLoading(UserList);
+
+// In your app
+<UserListWithLoading isLoading={loading} />
+```
 
 ```javascript
 // File: components/SimpleComponent.jsx
@@ -106,6 +225,158 @@ function MainContent() {
 
 function Footer() {
   return <footer>© 2025 My App</footer>;
+}
+```
+
+---
+
+## Component Lifecycle & Props
+
+### Component Lifecycle in Function Components
+
+**Function components don't have traditional lifecycle methods, but we can achieve the same functionality with hooks:**
+
+```javascript
+// File: components/LifecycleExample.jsx
+import { useState, useEffect, useRef } from 'react';
+
+function LifecycleExample() {
+  const [count, setCount] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const intervalRef = useRef(null);
+
+  // ComponentDidMount equivalent
+  useEffect(() => {
+    console.log('Component mounted');
+    setMounted(true);
+    
+    // ComponentWillUnmount equivalent
+    return () => {
+      console.log('Component will unmount');
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  // ComponentDidUpdate equivalent
+  useEffect(() => {
+    if (mounted) {
+      console.log('Component updated, count is:', count);
+    }
+  }, [count, mounted]);
+
+  return (
+    <div>
+      <h2>Lifecycle Example</h2>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </div>
+  );
+}
+```
+
+### Props and Prop Types
+
+**Props are the primary way to pass data between components:**
+
+```javascript
+// File: components/UserProfile.jsx
+function UserProfile({ 
+  user, 
+  showEmail = true, 
+  onEdit,
+  className = '' 
+}) {
+  return (
+    <div className={`user-profile ${className}`}>
+      {user.avatar && (
+        <img src={user.avatar} alt={user.name} />
+      )}
+      <h3>{user.name}</h3>
+      {showEmail && <p>{user.email}</p>}
+      {onEdit && (
+        <button onClick={() => onEdit(user.id)}>
+          Edit Profile
+        </button>
+      )}
+    </div>
+  );
+}
+
+// Usage with different prop combinations
+<UserProfile 
+  user={currentUser} 
+  showEmail={false}
+  onEdit={handleEdit}
+  className="highlighted"
+/>
+```
+
+### Children Props and Composition
+
+**Children props allow for flexible component composition:**
+
+```javascript
+// File: components/Card.jsx
+function Card({ title, children, className }) {
+  return (
+    <div className={`card ${className || ''}`}>
+      {title && <h3 className="card-title">{title}</h3>}
+      <div className="card-content">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// Usage with different content
+<Card title="User Information">
+  <UserProfile user={user} />
+  <button>Edit</button>
+</Card>
+
+<Card>
+  <h4>Custom Content</h4>
+  <p>Any content can go here</p>
+</Card>
+```
+
+### Event Handling in Components
+
+**Proper event handling patterns for components:**
+
+```javascript
+// File: components/Button.jsx
+function Button({ 
+  children, 
+  onClick, 
+  type = 'button',
+  disabled = false,
+  variant = 'primary'
+}) {
+  const handleClick = (event) => {
+    if (disabled) return;
+    
+    // Custom logic before calling parent handler
+    console.log('Button clicked');
+    
+    // Call parent handler if provided
+    onClick?.(event);
+  };
+
+  return (
+    <button
+      type={type}
+      onClick={handleClick}
+      disabled={disabled}
+      className={`btn btn-${variant}`}
+    >
+      {children}
+    </button>
+  );
 }
 ```
 

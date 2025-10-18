@@ -54,7 +54,7 @@ npm run dev
 npm test
 ```
 
-## Component Usage Examples
+## Component Usage Example
 
 ### DataTable
 

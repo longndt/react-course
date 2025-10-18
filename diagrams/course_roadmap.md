@@ -6,7 +6,7 @@
 
 ```mermaid
 graph TB
-    Start([👋 Start Here]) --> L0[Lesson 0<br/>TypeScript<br/>Prerequisites]
+    Start([👋 Start Here]) --> L0[Lesson 0<br/>TypeScript Basics<br/>Prerequisites]
 
     L0 --> L1[📘 Lesson 1<br/>React Fundamentals<br/>⭐ Beginner]
 
@@ -37,17 +37,17 @@ graph TB
 
 ## TypeScript Learning Path
 
-### 🎯 Lesson 0: TypeScript Prerequisites (Foundation)
+### 🎯 Lesson 0: TypeScript Basics (Foundation)
 **Difficulty**: ⭐ Beginner
 **Time**: 2-3 days
 **Requires**: HTML, CSS, Basic JavaScript
 
 ```mermaid
 flowchart TD
-    A[Lesson 0 Start] --> B[TypeScript Basics]
+    A[Lesson 0 Start] --> B[TypeScript Setup]
     B --> C[Types & Interfaces]
-    C --> D[Generics]
-    D --> E[Type Safety]
+    C --> D[Generics & Utility Types]
+    D --> E[Modules & Classes]
     E --> F[Lab: TypeScript Practice]
     F --> G{Quiz}
     G -->|Pass| H[✅ Lesson 0 Complete]
@@ -61,19 +61,21 @@ flowchart TD
 ```
 
 **Key Topics**:
-- TypeScript fundamentals (types, interfaces, generics)
-- Type annotations and type inference
-- Interface definitions for props and state
-- Union and intersection types
-- Utility types (Partial, Pick, Omit, etc.)
-- Type guards and type assertions
+- TypeScript fundamentals
+- Type annotations and inference
+- Interfaces and type aliases
+- Generics and utility types
+- Modules and namespaces
+- Classes and inheritance
+- Strict type checking
 
 **TypeScript Features**:
-- Basic type system
+- Static type checking
 - Interface definitions
 - Generic programming
-- Type safety patterns
-- Advanced type utilities
+- Advanced type system
+- Compile-time error detection
+- IntelliSense support
 
 **Lab Project**: TypeScript Practice Exercises
 
@@ -86,9 +88,9 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[Lesson 1 Start] --> B[React Setup]
+    A[Lesson 1 Start] --> B[React + TypeScript Setup]
     B --> C[Components & JSX]
-    C --> D[Props & State]
+    C --> D[Props & State Types]
     D --> E[Event Handling]
     E --> F[Lab: Welcome Page]
     F --> G{Quiz}
@@ -103,17 +105,18 @@ flowchart TD
 ```
 
 **Key Topics**:
-- TSX syntax and type-safe expressions
-- Functional components with TypeScript
-- Props with interfaces and types
-- Type-safe event handling
+- JSX with TypeScript
+- Typed functional components
+- Props and state typing
+- Event handling with types
 - Virtual DOM concepts
 - Vite setup with TypeScript
 
 **TypeScript Features**:
-- Component props interfaces
-- Event handler types
-- Type inference in JSX
+- Component type definitions
+- Props interface design
+- State type management
+- Event type handling
 - Generic components
 
 **Lab Project**: Welcome Page Application (TypeScript)
@@ -144,19 +147,20 @@ flowchart TD
 ```
 
 **Key Topics**:
-- useState with type parameters
-- useEffect with proper types
-- useRef and useContext (typed)
-- Custom hooks with TypeScript
+- useState with TypeScript
+- useEffect for side effects
+- useRef and useContext
+- Custom hooks with types
 - Component composition patterns
 - Higher-Order Components (HOC)
-- Render props with generics
+- Render props pattern
 
 **TypeScript Features**:
-- Typed state management
-- Generic custom hooks
-- Strict null checks
-- Type inference in hooks
+- Hook type definitions
+- Custom hook typing
+- Component pattern types
+- Context type safety
+- Ref type management
 
 **Lab Project**: Reusable Component Library (TypeScript)
 
@@ -170,7 +174,7 @@ flowchart TD
 ```mermaid
 flowchart TD
     A[Lesson 3 Start] --> B[HTTP Basics]
-    B --> C[Fetch API]
+    B --> C[Axios with Types]
     C --> D[React Query/TanStack]
     D --> E[Backend Integration]
     E --> F[MongoDB + Express]
@@ -187,19 +191,20 @@ flowchart TD
 ```
 
 **Key Topics**:
-- REST API with typed responses
-- HTTP methods with TypeScript
-- React Query with type safety
-- Loading and error state types
+- REST API with TypeScript
+- HTTP methods and responses
+- React Query for data fetching
+- Loading and error states
 - Backend with Express + TypeScript
-- MongoDB with Mongoose schemas
+- MongoDB with Mongoose
 - CORS configuration
 
 **TypeScript Features**:
-- API response types
-- Type-safe data fetching
-- Generic API hooks
-- Error type handling
+- API type definitions
+- Data fetching types
+- Error handling types
+- Backend type safety
+- Database schema types
 
 **Lab Project**: Full-Stack Task Manager (TypeScript)
 
@@ -231,19 +236,19 @@ flowchart TD
 
 **Key Topics**:
 - React Router v6 with TypeScript
-- Typed route configuration
-- Navigation with type safety
-- URL parameters (typed)
-- JWT authentication (typed tokens)
-- Login/Register with form types
-- Protected routes with type guards
-- Auth context with TypeScript
+- Navigation and routing
+- URL parameters and query strings
+- JWT authentication
+- Login/Register forms
+- Protected routes
+- Auth context management
 
 **TypeScript Features**:
-- Route parameter types
-- Auth context types
-- JWT payload interfaces
-- Protected route HOCs
+- Route type definitions
+- Authentication types
+- Context type safety
+- Form validation types
+- Route protection types
 
 **Lab Project**: Authentication System (TypeScript)
 
@@ -275,20 +280,21 @@ flowchart TD
 ```
 
 **Key Topics**:
-- Performance optimization with types
-- React.memo, useMemo, useCallback (typed)
+- Performance optimization
+- React.memo, useMemo, useCallback
 - Code splitting with lazy loading
 - Production builds
-- Environment variables (type-safe)
+- Environment variables
 - Deployment (Vercel, Netlify, Railway)
-- Docker with TypeScript
+- Docker configuration
 - CI/CD with GitHub Actions
 
 **TypeScript Features**:
-- Type-safe env variables
-- Build configuration types
-- Type checking in CI/CD
-- Production type safety
+- Performance type optimization
+- Build type checking
+- Deployment type safety
+- Environment type management
+- CI/CD type workflows
 
 **Lab Project**: Production Deployment (TypeScript)
 
@@ -314,4 +320,3 @@ graph TD
     style Solutions fill:#d4f4dd
 ```
 ---
-

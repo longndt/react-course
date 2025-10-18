@@ -19,6 +19,8 @@
 
 ## Why Full-Stack Development?
 
+> 🏗️ **Visual Learning**: For a comprehensive understanding of project architecture, see [Project Architecture Diagram](../../diagrams/project_architecture.md)
+
 **Complete Application Development:**
 
 - **Frontend** - React user interface
@@ -429,6 +431,8 @@ app.get('/api/users', cacheMiddleware(300), getUsers);
 ---
 
 ## Production Deployment
+
+> 🚀 **Visual Learning**: For a comprehensive understanding of deployment flow, see [Deployment Flow Diagram](../../diagrams/deployment_flow.md)
 
 ### Environment Configuration
 

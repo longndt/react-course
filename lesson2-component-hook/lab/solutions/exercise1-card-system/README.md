@@ -78,7 +78,7 @@ You can customize the Card by:
 4. **Responsive**: Works on all screen sizes
 5. **Reusable**: Can be used for products, profiles, articles, etc.
 
-##  Customization Examples
+##  Customization Example
 
 ### Different Button Styles
 ```tsx

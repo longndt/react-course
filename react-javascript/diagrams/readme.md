@@ -128,6 +128,25 @@ Complete auth system diagrams:
 
 ---
 
+## 🛣️ Routing Flow
+
+**[routing_flow.md](./routing_flow.md)**
+
+React Router navigation and routing flow:
+- Navigation flow from user action to component render
+- Route structure and nested routes
+- Route protection and authentication
+- URL management and parameters
+- Navigation patterns and programmatic navigation
+- Link components and useNavigate hook
+- Route matching and component rendering
+
+**Best for**: Understanding routing in React applications
+
+**Related Lessons**: Lesson 4 (Routing & Auth)
+
+---
+
 ## 🏗️ Full-Stack Architecture
 
 **[project_architecture.md](./project_architecture.md)**
@@ -151,6 +170,44 @@ Complete system architecture:
 **Best for**: Understanding the big picture, planning projects, deployment
 
 **Related Lessons**: Lesson 3 (API), Lesson 4 (Auth), Lesson 5 (Deployment)
+
+---
+
+## 📁 React Project Structure
+
+**[react_project_structure.md](./react_project_structure.md)**
+
+React project structure and organization:
+- File organization and folder structure
+- Component hierarchy and relationships
+- Build process and development workflow
+- Import/export patterns and module organization
+- Best practices and naming conventions
+- JavaScript-specific project setup
+- Vite configuration and build optimization
+
+**Best for**: Understanding how to organize React projects
+
+**Related Lessons**: Lesson 1 (React Fundamentals)
+
+---
+
+## 🚀 Deployment Flow
+
+**[deployment_flow.md](./deployment_flow.md)**
+
+Complete deployment process and strategies:
+- Build process from source code to production
+- CI/CD pipeline and automated deployment
+- Deployment strategies and cloud platforms
+- Environment configuration and variables
+- Performance optimization and monitoring
+- JavaScript-specific build configurations
+- Production deployment best practices
+
+**Best for**: Understanding deployment and production processes
+
+**Related Lessons**: Lesson 5 (Full-Stack & Deployment)
 
 ---
 

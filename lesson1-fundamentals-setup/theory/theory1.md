@@ -20,6 +20,8 @@
 
 ## What is React?
 
+> 🗺️ **Visual Learning**: For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
+
 **React** is a JavaScript library for building user interfaces, created and maintained by Meta (Facebook).
 
 ### Key Concepts
@@ -63,6 +65,8 @@ In this course, we use **TypeScript** for all React components (.tsx files).
 
 ```typescript
 // File: components/UserCard.tsx
+import React from 'react';
+
 // Define props type
 interface UserCardProps {
   name: string;
@@ -80,12 +84,16 @@ function UserCard({ name, email, age }: UserCardProps) {
     </div>
   );
 }
+
+export default UserCard;
 ```
 
 **Event Handlers with Types**
 
 ```typescript
 // File: components/auth/LoginForm.tsx
+import React from 'react';
+
 function LoginForm() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -103,6 +111,8 @@ function LoginForm() {
     </form>
   );
 }
+
+export default LoginForm;
 ```
 
 > **Complete TypeScript Guide**: For comprehensive TypeScript review, see [Lesson 0: TypeScript Prerequisites](../../lesson0-typescript-basics/)
@@ -130,6 +140,8 @@ npm run dev
 ```
 
 ### Project Structure
+
+> 📁 **Visual Learning**: For a comprehensive understanding of React project structure, see [React Project Structure Diagram](../../diagrams/react_project_structure.md)
 
 ```
 my-app/
@@ -167,6 +179,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 **`App.tsx` - Main Component**
 
 ```typescript
+// File: src/App.tsx
+import React from 'react';
+
 function App() {
   return (
     <div className="App">

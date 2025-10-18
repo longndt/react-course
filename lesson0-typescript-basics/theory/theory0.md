@@ -18,6 +18,8 @@
 
 ## Why TypeScript for React?
 
+> 🗺️ **Visual Learning**: For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
+
 **Building Better React Applications:**
 
 - TypeScript catches errors before runtime

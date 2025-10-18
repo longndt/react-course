@@ -17,6 +17,8 @@
 
 ## Why API Integration Matters?
 
+> 📊 **Visual Learning**: For a comprehensive understanding of API data flow, see [API Data Flow Diagram](../../diagrams/api_data_flow.md)
+
 **Modern Full-Stack Architecture:**
 
 ```

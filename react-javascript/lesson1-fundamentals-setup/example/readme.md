@@ -49,7 +49,7 @@ npm run build
 npm run preview
 ```
 
-## Examples Demonstrated
+## Example Demonstrated
 
 ### 1. Welcome Component
 **File:** `src/components/Welcome.jsx`
@@ -245,7 +245,7 @@ function Button({
 - JavaScript object handling
 - Event handling patterns
 
-## Running Individual Examples
+## Running Individual Example
 
 Each component can be imported and used independently:
 

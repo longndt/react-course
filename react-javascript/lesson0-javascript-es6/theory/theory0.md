@@ -20,6 +20,8 @@
 
 ## Why Modern JavaScript for React?
 
+> 🗺️ **Visual Learning**: For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
+
 **Building Better React Applications:**
 
 - Modern JavaScript features make React code cleaner and more readable
