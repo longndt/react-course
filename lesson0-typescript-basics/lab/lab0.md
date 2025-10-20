@@ -30,7 +30,7 @@ By completing this lab, you will be able to:
 - [ ] TypeScript installed globally (`npm install -g typescript`)
 - [ ] VS Code with TypeScript support
 - [ ] Basic understanding of JavaScript
-- [ ] **NEW**: Review [TypeScript Execution Guide](./solutions/execution_guide.md) for running TypeScript files
+- [ ] Review [TypeScript Execution Guide](./solutions/execution_guide.md) for running TypeScript files
 
 ---
 
@@ -887,7 +887,7 @@ Remaining students: 2
 
 ---
 
-## Bonus Challenges 
+## Bonus Challenges
 
 ### Challenge 1: Add Course Management
 
