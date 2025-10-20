@@ -140,7 +140,7 @@ lesson-topic/
 - **[Visual Learning Diagrams](./diagrams/readme.md)** - Complete guide to visual learning
 
 Quick links to key diagrams:
-- 📊 [Course Structure](./diagrams/course_structure_diagram.md) - Complete TypeScript course organization and navigation
+- 📊 [Course Structure](./diagrams/course_structure_diagram.md) - Complete TypeScript course organization & navigation
 - 🗺️ [Course Roadmap](./diagrams/course_roadmap.md) - Complete TypeScript learning path visualization
 - 🔄 [Component Lifecycle](./diagrams/component_lifecycle.md) - How React components work with TypeScript
 - 📦 [State Management](./diagrams/state_management_flow.md) - State patterns and flows with TypeScript
