@@ -30,6 +30,7 @@ By completing this lab, you will be able to:
 - [ ] TypeScript installed globally (`npm install -g typescript`)
 - [ ] VS Code with TypeScript support
 - [ ] Basic understanding of JavaScript
+- [ ] **NEW**: Review [TypeScript Execution Guide](./solutions/execution_guide.md) for running TypeScript files
 
 ---
 
@@ -921,6 +922,51 @@ Implement advanced search:
 - [ ] All code compiles without errors
 - [ ] All tests produce expected output
 - [ ] Bonus challenges attempted (optional)
+
+---
+
+## 🚀 Quick Reference: Running TypeScript Files
+
+### Method 1: Compile First (Traditional)
+```bash
+# Compile TypeScript to JavaScript
+tsc filename.ts
+
+# Run the compiled JavaScript
+node filename.js
+```
+
+### Method 2: Direct Execution (Modern)
+```bash
+# Using ts-node (recommended)
+ts-node filename.ts
+
+# Using tsx (faster alternative)
+tsx filename.ts
+
+# Using npx (no global installation)
+npx ts-node filename.ts
+```
+
+### Watch Mode (Auto-recompile)
+```bash
+# Watch mode with ts-node
+ts-node --watch filename.ts
+
+# Watch mode with tsc
+tsc --watch filename.ts
+```
+
+### Example Usage
+```bash
+# Try the example file
+cd solutions
+ts-node typescript-execution-example.ts
+# or
+tsc typescript-execution-example.ts && node typescript-execution-example.js
+```
+
+📖 **Detailed Guide**: See [execution_guide.md](./solutions/execution_guide.md) for comprehensive instructions.
 
 ---
 

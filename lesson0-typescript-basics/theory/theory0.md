@@ -33,6 +33,17 @@
 - Essential skill for professional development
 - Reduces bugs in production significantly
 
+### JavaScript vs TypeScript: Quick Comparison
+
+| Feature | JavaScript | TypeScript |
+|---------|------------|------------|
+| **Type Checking** | Runtime only | Compile time + Runtime |
+| **Error Detection** | After code runs | Before code runs |
+| **IDE Support** | Basic | Advanced (IntelliSense, autocomplete) |
+| **Refactoring** | Manual, error-prone | Safe, automated |
+| **Documentation** | Comments needed | Self-documenting with types |
+| **Learning Curve** | Easy to start | Steeper but more powerful |
+
 ---
 
 ## Basic Types & Type Inference
@@ -47,7 +58,7 @@ let isActive: boolean = true;
 let nothing: null = null;
 let notDefined: undefined = undefined;
 
-// Type inference (JavaScript guesses the type)
+// Type inference (TypeScript guesses the type)
 let name = "John";        // Type: string
 let age = 25;             // Type: number
 let isActive = true;      // Type: boolean
@@ -60,7 +71,7 @@ let isActive = true;      // Type: boolean
 let count: number = 0;
 
 // Type inference (preferred when obvious)
-let count = 0;  // JavaScript knows this is number
+let count = 0;  // TypeScript knows this is number
 
 // When to use explicit types
 let user: { name: string; age: number } = {
@@ -69,9 +80,76 @@ let user: { name: string; age: number } = {
 };
 ```
 
+### JavaScript vs TypeScript Comparison
+
+**JavaScript (No Type Safety):**
+```javascript
+// JavaScript - No type checking
+function greet(name) {
+  return "Hello, " + name;
+}
+
+let user = {
+  name: "John",
+  age: 25
+};
+
+// This would cause runtime error but JavaScript won't catch it
+let result = greet(user.age); // "Hello, 25" - unexpected result
+```
+
+**TypeScript (Type Safe):**
+```typescript
+// TypeScript - Type checking at compile time
+function greet(name: string): string {
+  return "Hello, " + name;
+}
+
+interface User {
+  name: string;
+  age: number;
+}
+
+let user: User = {
+  name: "John",
+  age: 25
+};
+
+// TypeScript catches this error before runtime
+// let result = greet(user.age); // Error: Argument of type 'number' is not assignable to parameter of type 'string'
+let result = greet(user.name); // Correct usage
+```
+
 ---
 
 ## Functions
+
+### JavaScript vs TypeScript Functions
+
+**JavaScript (No Type Safety):**
+```javascript
+// JavaScript - No type checking
+function greet(name) {
+  return "Hello, " + name;
+}
+
+// This would cause runtime error but JavaScript won't catch it
+let result = greet(123); // "Hello, 123" - unexpected result
+let result2 = greet(); // "Hello, undefined" - unexpected result
+```
+
+**TypeScript (Type Safe):**
+```typescript
+// TypeScript - Type checking at compile time
+function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+
+// TypeScript catches these errors before runtime
+// let result = greet(123); // Error: Argument of type 'number' is not assignable to parameter of type 'string'
+// let result2 = greet(); // Error: Expected 1 arguments, but got 0
+let result = greet("John"); // Correct usage
+```
 
 ### Function Types
 
@@ -118,6 +196,31 @@ function process(value: string | number): string | number {
 
 ## Arrays & Objects
 
+### JavaScript vs TypeScript Arrays
+
+**JavaScript (No Type Safety):**
+```javascript
+// JavaScript - No type checking
+let numbers = [1, 2, 3, 4, 5];
+let names = ["John", "Jane", "Bob"];
+
+// This would cause runtime error but JavaScript won't catch it
+let mixed = [1, "hello", true, null]; // Allowed but can cause issues
+let result = numbers[0].toUpperCase(); // Runtime error: numbers[0] is number, not string
+```
+
+**TypeScript (Type Safe):**
+```typescript
+// TypeScript - Type checking at compile time
+let numbers: number[] = [1, 2, 3, 4, 5];
+let names: string[] = ["John", "Jane", "Bob"];
+
+// TypeScript catches these errors before runtime
+// let mixed: number[] = [1, "hello", true, null]; // Error: Type 'string' is not assignable to type 'number'
+// let result = numbers[0].toUpperCase(); // Error: Property 'toUpperCase' does not exist on type 'number'
+let result = names[0].toUpperCase(); // Correct usage
+```
+
 ### Arrays
 
 ```typescript
@@ -134,6 +237,42 @@ let person: [string, number] = ["John", 25];
 // Array methods with types
 let doubled = numbers.map((n: number) => n * 2);
 let filtered = numbers.filter((n: number) => n > 2);
+```
+
+### JavaScript vs TypeScript Objects
+
+**JavaScript (No Type Safety):**
+```javascript
+// JavaScript - No type checking
+let user = {
+  name: "John",
+  age: 25
+};
+
+// This would cause runtime error but JavaScript won't catch it
+let result = user.name.toUpperCase(); // Works
+let result2 = user.email.toUpperCase(); // Runtime error: user.email is undefined
+let result3 = user.age.toUpperCase(); // Runtime error: user.age is number, not string
+```
+
+**TypeScript (Type Safe):**
+```typescript
+// TypeScript - Type checking at compile time
+interface User {
+  name: string;
+  age: number;
+  email?: string;  // Optional property
+}
+
+let user: User = {
+  name: "John",
+  age: 25
+};
+
+// TypeScript catches these errors before runtime
+let result = user.name.toUpperCase(); // Correct usage
+// let result2 = user.email.toUpperCase(); // Error: Object is possibly 'undefined'
+// let result3 = user.age.toUpperCase(); // Error: Property 'toUpperCase' does not exist on type 'number'
 ```
 
 ### Objects & Interfaces
