@@ -21,9 +21,9 @@ After completing this lesson, you will be able to:
 - ✅ Apply styling with CSS modules and modern CSS techniques
 - ✅ Debug React applications with browser DevTools
 - ✅ Structure React projects following best practices
-- ✅ **NEW**: Implement accessibility best practices with ARIA attributes
-- ✅ **NEW**: Use TypeScript strict mode for enhanced type safety
-- ✅ **NEW**: Create accessible, semantic HTML structure
+- ✅ Implement accessibility best practices with ARIA attributes
+- ✅ Use TypeScript strict mode for enhanced type safety
+- ✅ Create accessible, semantic HTML structure
 
 ---
 
