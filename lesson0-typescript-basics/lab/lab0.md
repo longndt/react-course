@@ -30,7 +30,7 @@ By completing this lab, you will be able to:
 - [ ] TypeScript installed globally (`npm install -g typescript`)
 - [ ] VS Code with TypeScript support
 - [ ] Basic understanding of JavaScript
-- [ ] Review [TypeScript Execution Guide](./solutions/execution_guide.md) for running TypeScript files
+- [ ] Review TypeScript execution methods below for running TypeScript files
 
 ---
 
@@ -925,48 +925,222 @@ Implement advanced search:
 
 ---
 
-## 🚀 Quick Reference: Running TypeScript Files
+## 🚀 TypeScript Execution Guide
 
-### Method 1: Compile First (Traditional)
+This guide demonstrates how to run TypeScript files using both traditional compilation and direct execution methods.
+
+### Prerequisites
+
+Make sure you have Node.js installed:
 ```bash
-# Compile TypeScript to JavaScript
-tsc filename.ts
+node --version  # Should be 18+ recommended
+npm --version   # Should be 9+
+```
 
-# Run the compiled JavaScript
+### Method 1: Compile to JavaScript First
+
+#### Step 1: Install TypeScript
+```bash
+# Install TypeScript globally
+npm install -g typescript
+
+# Verify installation
+tsc --version
+```
+
+#### Step 2: Compile the TypeScript File
+```bash
+# Compile the TypeScript file
+tsc filename.ts
+```
+
+This creates `filename.js`
+
+#### Step 3: Run the Compiled JavaScript
+```bash
+# Run the compiled JavaScript file
 node filename.js
 ```
 
-### Method 2: Direct Execution (Modern)
+### Method 2: Run TypeScript Directly
+
+#### Using tsx (Recommended)
 ```bash
-# Using ts-node (recommended)
-ts-node filename.ts
+# Install tsx globally
+npm install -g tsx
 
-# Using tsx (faster alternative)
+# Run TypeScript file directly
 tsx filename.ts
-
-# Using npx (no global installation)
-npx ts-node filename.ts
 ```
 
-### Watch Mode (Auto-recompile)
-```bash
-# Watch mode with ts-node
-ts-node --watch filename.ts
+### Advanced Usage
 
-# Watch mode with tsc
+#### Watch Mode (Auto-recompile on changes)
+```bash
+# Using tsx with watch mode
+tsx --watch filename.ts
+
+# Using tsc with watch mode
 tsc --watch filename.ts
 ```
 
-### Example Usage
+#### Compile with Specific Options
 ```bash
-# Try the example file
-cd solutions
-ts-node typescript-execution-example.ts
-# or
-tsc typescript-execution-example.ts && node typescript-execution-example.js
+# Compile with specific target and module
+tsc filename.ts --target ES2020 --module commonjs
+
+# Compile with source maps for debugging
+tsc filename.ts --sourceMap
 ```
 
-📖 **Detailed Guide**: See [execution_guide.md](./solutions/execution_guide.md) for comprehensive instructions.
+#### Using tsconfig.json
+```bash
+# Create tsconfig.json
+npx tsc --init
+
+# Compile using tsconfig.json
+tsc --project tsconfig.json
+```
+
+### Project Setup Example
+
+#### 1. Initialize a TypeScript Project
+```bash
+# Create new directory
+mkdir my-typescript-project
+cd my-typescript-project
+
+# Initialize npm project
+npm init -y
+
+# Install TypeScript and tsx
+npm install -D typescript tsx @types/node
+
+# Initialize TypeScript config
+npx tsc --init
+```
+
+#### 2. Configure package.json
+```json
+{
+  "name": "my-typescript-project",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "watch": "tsx --watch src/index.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "tsx": "^4.7.0",
+    "@types/node": "^24.6.2"
+  }
+}
+```
+
+#### 3. Create tsconfig.json
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+#### 4. Development Workflow
+```bash
+# For development (fast iteration)
+npm run dev
+
+# For production (optimized build)
+npm run build
+npm start
+
+# Watch mode for development
+npm run watch
+```
+
+### Troubleshooting
+
+#### Common Issues and Solutions
+
+**1. Module Resolution Errors**
+```bash
+# Error: Cannot find module
+# Solution: Check tsconfig.json
+{
+  "compilerOptions": {
+    "moduleResolution": "node"
+  }
+}
+```
+
+**2. Type Declaration Errors**
+```bash
+# Error: Cannot find type definitions
+# Solution: Install @types packages
+npm install -D @types/node
+```
+
+**3. ES Module Issues**
+```bash
+# Error: Cannot use import statement outside a module
+# Solution: Use tsx with ESM support
+tsx --esm filename.ts
+```
+
+**4. Permission Errors**
+```bash
+# Error: Permission denied
+# Solution: Use npx instead of global installation
+npx tsx filename.ts
+```
+
+### Performance Comparison
+
+| Method | Speed | Memory Usage | Best For |
+|--------|-------|--------------|----------|
+| **tsc + node** | Fastest execution | Lowest | Production, CI/CD |
+| **tsx** | Fast startup | Medium | Development, prototyping |
+
+### Best Practices
+
+1. **Use tsx for development** - Fast startup and execution
+2. **Compile for production** - Optimized output
+3. **Use watch mode** - Auto-recompile on changes
+4. **Configure tsconfig.json properly** - Consistent compilation
+5. **Use proper module resolution** - Avoid import issues
+6. **Install necessary @types packages** - Better type checking
+
+### Quick Reference
+
+```bash
+# Compile TypeScript
+tsc filename.ts
+
+# Run TypeScript directly
+tsx filename.ts
+
+# Watch mode
+tsc --watch filename.ts
+tsx --watch filename.ts
+
+# Compile project
+tsc --project tsconfig.json
+
+# Run with npx (no global install)
+npx tsx filename.ts
+```
 
 ---
 
