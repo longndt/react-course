@@ -38,9 +38,9 @@ This course teaches **React with Typescript** development using industry-standar
 - Use modern development tools
 - Write tests for React components
 - Deploy applications to production
-- **NEW**: Implement accessibility best practices with ARIA attributes
-- **NEW**: Use TypeScript strict mode for enhanced type safety
-- **NEW**: Follow modern React 19 patterns and best practices
+- Implement accessibility best practices with ARIA attributes
+- Use TypeScript strict mode for enhanced type safety
+- Follow modern React 19 patterns and best practices
 
 ---
 
