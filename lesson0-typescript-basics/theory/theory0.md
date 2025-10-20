@@ -47,7 +47,7 @@ let isActive: boolean = true;
 let nothing: null = null;
 let notDefined: undefined = undefined;
 
-// Type inference (TypeScript guesses the type)
+// Type inference (JavaScript guesses the type)
 let name = "John";        // Type: string
 let age = 25;             // Type: number
 let isActive = true;      // Type: boolean
@@ -60,7 +60,7 @@ let isActive = true;      // Type: boolean
 let count: number = 0;
 
 // Type inference (preferred when obvious)
-let count = 0;  // TypeScript knows this is number
+let count = 0;  // JavaScript knows this is number
 
 // When to use explicit types
 let user: { name: string; age: number } = {
