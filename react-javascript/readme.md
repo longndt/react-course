@@ -210,7 +210,7 @@ Make sure you have installed:
 2. Go to Extensions (Ctrl+Shift+X)
 3. Search and install: **"Markdown Preview Enhanced"**
 4. After installation, you can:
-   - Press `Ctrl+Shift+V` to open markdown preview
+   - Press `Ctrl+K V` to open markdown preview
    - Or click the "Open Preview to the Side" icon when viewing .md files
 
 ### Step 3: Clone Repository
