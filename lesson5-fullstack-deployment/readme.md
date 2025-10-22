@@ -104,7 +104,7 @@ npm run dev  # Backend
 ## Resources & References
 
 ### Course Guides
-- **[Performance Optimization Guide](../extras/performance_optimization.md)** - useMemo, useCallback, code splitting, bundle analysis, Core Web Vitals
+- [Performance Optimization Guide](../extras/performance_optimization.md) - useMemo, useCallback, code splitting, bundle analysis, Core Web Vitals
 - [State Management Guide](../extras/state_management.md) - Redux, Zustand, Jotai patterns for complex apps
 - [Troubleshooting Guide](../extras/troubleshooting_guide.md) - Common deployment issues and solutions
 
