@@ -4,7 +4,7 @@
 
 This diagram illustrates the typical structure and organization of a React project using JavaScript, showing how different parts work together.
 
-> 📁 **Related Theory**: For detailed explanations of React project structure, see [React Fundamentals Theory](../../lesson1-fundamentals-setup/theory/theory1.md)
+> 📁 **Related Theory** For detailed explanations of React project structure, see [React Fundamentals Theory](../../lesson1-fundamentals-setup/theory/theory1.md)
 
 ## Project Structure Flow
 
@@ -59,9 +59,9 @@ graph TB
 ## File Organization
 
 ### Core Files
-- **`index.html`** - HTML template
-- **`main.tsx`** - Application entry point
-- **`App.tsx`** - Root component
+- **`index.html`**- HTML template
+- **`main.tsx`**- Application entry point
+- **`App.tsx`**- Root component
 
 ### Source Structure
 ```
@@ -176,10 +176,10 @@ graph LR
 ## Best Practices
 
 ### File Naming
-- **Components**: PascalCase (e.g., `UserProfile.tsx`)
-- **Hooks**: camelCase with `use` prefix (e.g., `useAuth.ts`)
-- **Utils**: camelCase (e.g., `apiHelpers.ts`)
-- **Types**: PascalCase (e.g., `UserTypes.ts`)
+- **Components** PascalCase (e.g., `UserProfile.tsx`)
+- **Hooks** camelCase with `use` prefix (e.g., `useAuth.ts`)
+- **Utils** camelCase (e.g., `apiHelpers.ts`)
+- **Types** PascalCase (e.g., `UserTypes.ts`)
 
 ### Import Organization
 ```typescript

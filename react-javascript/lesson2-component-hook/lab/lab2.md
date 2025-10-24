@@ -4,7 +4,7 @@
 
 In this lab, you'll build a complete product showcase application using advanced React patterns. You'll implement reusable component systems, custom hooks, context for state management, and modern architectural patterns that professional developers use in production applications.
 
-##  Learning Objectives
+## Learning Objectives
 
 By completing this lab, you will be able to:
 - Build compound components using composition patterns
@@ -14,7 +14,7 @@ By completing this lab, you will be able to:
 - Apply PropTypes for type-safe component development
 - Structure a scalable React application architecture
 
-##  Pre-Lab Checklist
+## Pre-Lab Checklist
 
 - [ ] Lab 1 completed successfully (understand components, props, JSX)
 - [ ] Node.js v18+ and npm installed
@@ -26,9 +26,9 @@ By completing this lab, you will be able to:
 
 ## Exercise 1: Component Composition with Card System (Guided - 40% Practice)
 
-###  Concept Review
+### Concept Review
 
-**Compound Components** allow you to create flexible, composable UIs where parent and child components work together. Instead of passing many props, you compose components using `children`. This pattern is used by libraries like React Router (`<Routes><Route /></Routes>`) and Material-UI.
+**Compound Components**allow you to create flexible, composable UIs where parent and child components work together. Instead of passing many props, you compose components using `children`. This pattern is used by libraries like React Router (`<Routes><Route /></Routes>`) and Material-UI.
 
 **Example of Compound Pattern:**
 ```jsx
@@ -43,7 +43,7 @@ By completing this lab, you will be able to:
 </Card>
 ```
 
-###  Goals
+### Goals
 
 - Understand compound component pattern
 - Create flexible Card system with subcomponents
@@ -150,7 +150,7 @@ Create `src/components/Card/Card.css`:
 - Light gray footer
 - Clean, professional appearance
 
-**Solution:** See `solutions/exercise1-card-system/Card.css`
+**Solution:**See `solutions/exercise1-card-system/Card.css`
 
 ### Step 4: Use Card in App (Your Turn)
 
@@ -178,7 +178,7 @@ Update `src/App.jsx`:
 - Professional gradient header
 - Button visible in footer
 
-###  Testing
+### Testing
 
 1. Run `npm run dev`
 2. Check browser - should see product card
@@ -186,7 +186,7 @@ Update `src/App.jsx`:
 4. All three sections (header, body, footer) should be visible
 5. No console errors
 
-**Solution:** See `solutions/exercise1-card-system/`
+**Solution:**See `solutions/exercise1-card-system/`
 
 ---
 
@@ -194,9 +194,9 @@ Update `src/App.jsx`:
 
 ## Exercise 2: Higher-Order Components (Your Turn - 70% Practice)
 
-###  Concept Review
+### Concept Review
 
-**Higher-Order Components (HOCs)** are functions that take a component and return a new enhanced component. They're used for cross-cutting concerns like loading states, authentication, or logging.
+**Higher-Order Components (HOCs)**are functions that take a component and return a new enhanced component. They're used for cross-cutting concerns like loading states, authentication, or logging.
 
 **HOC Pattern:**
 ```jsx
@@ -211,7 +211,7 @@ function withFeature(WrappedComponent) {
 const EnhancedComponent = withFeature(MyComponent);
 ```
 
-###  Goals
+### Goals
 
 - Create a `withLoading` HOC
 - Build a LoadingSpinner component
@@ -262,7 +262,7 @@ Create `src/components/LoadingSpinner/LoadingSpinner.css`:
 - Purple accent color on top
 - Centered in container
 
-**Solution:** See `solutions/exercise2-hoc/LoadingSpinner.jsx`
+**Solution:**See `solutions/exercise2-hoc/LoadingSpinner.jsx`
 
 ### Task 2: Create withLoading HOC (Your Turn)
 
@@ -296,7 +296,7 @@ Create `src/hoc/withLoading.jsx`:
 - Shows wrapped component when not loading
 - TypeScript types work correctly
 
-**Solution:** See `solutions/exercise2-hoc/withLoading.jsx`
+**Solution:**See `solutions/exercise2-hoc/withLoading.jsx`
 
 ### Task 3: Create ProductList Component (Your Turn)
 
@@ -337,7 +337,7 @@ Create `src/components/ProductList/ProductList.jsx`:
 - Clicking "Add to Cart" shows alert
 - No key prop warnings
 
-**Solution:** See `solutions/exercise2-hoc/ProductList.jsx`
+**Solution:**See `solutions/exercise2-hoc/ProductList.jsx`
 
 ### Task 4: Apply HOC and Test (Your Turn)
 
@@ -373,7 +373,7 @@ Update `src/App.jsx`:
 - Smooth transition from loading to content
 - Products are clickable
 
-###  Testing
+### Testing
 
 1. Refresh page - should see spinner first
 2. After 2 seconds - products appear
@@ -381,7 +381,7 @@ Update `src/App.jsx`:
 4. No console errors
 5. Smooth loading experience
 
-**Solution:** See `solutions/exercise2-hoc/`
+**Solution:**See `solutions/exercise2-hoc/`
 
 ---
 
@@ -389,9 +389,9 @@ Update `src/App.jsx`:
 
 ## Exercise 3: Custom Hooks (Your Turn - 75% Practice)
 
-###  Concept Review
+### Concept Review
 
-**Custom Hooks** are JavaScript functions that use React hooks and can be reused across components. They start with "use" and help encapsulate complex logic.
+**Custom Hooks**are JavaScript functions that use React hooks and can be reused across components. They start with "use" and help encapsulate complex logic.
 
 **Custom Hook Pattern:**
 ```jsx
@@ -407,7 +407,7 @@ function useCustomLogic() {
 const { state, helper } = useCustomLogic();
 ```
 
-###  Goals
+### Goals
 
 - Create a `useForm` custom hook
 - Implement form validation logic
@@ -457,7 +457,7 @@ Create `src/hooks/useForm.ts`:
 - Provides submission handler
 - Reusable across different forms
 
-**Solution:** See `solutions/exercise3-custom-hooks/useForm.ts`
+**Solution:**See `solutions/exercise3-custom-hooks/useForm.ts`
 
 ### Task 2: Create Registration Form (Your Turn - 80% Practice)
 
@@ -523,7 +523,7 @@ Create `src/components/Form/RegistrationForm.jsx`:
 - Valid submission shows alert
 - Professional styling applied
 
-###  Testing
+### Testing
 
 1. Try submitting empty form - should see error messages
 2. Fill in fields - errors should disappear
@@ -531,7 +531,7 @@ Create `src/components/Form/RegistrationForm.jsx`:
 4. Check console - should log form data
 5. Inputs should be styled nicely
 
-**Solution:** See `solutions/exercise3-custom-hooks/`
+**Solution:**See `solutions/exercise3-custom-hooks/`
 
 ---
 
@@ -539,9 +539,9 @@ Create `src/components/Form/RegistrationForm.jsx`:
 
 ## Exercise 4: Context API & Theme System (Final Challenge - 85% Practice)
 
-###  Concept Review
+### Concept Review
 
-**Context API** provides a way to pass data through the component tree without prop drilling. Perfect for global state like themes, user auth, or language preferences.
+**Context API**provides a way to pass data through the component tree without prop drilling. Perfect for global state like themes, user auth, or language preferences.
 
 **Context Pattern:**
 ```jsx
@@ -558,7 +558,7 @@ function MyProvider({ children }) {
 const { value } = useContext(MyContext);
 ```
 
-###  Goals
+### Goals
 
 - Create ThemeContext for global theme state
 - Build ThemeProvider component
@@ -606,7 +606,7 @@ Create `src/context/ThemeContext.jsx`:
 - useTheme hook works in any component
 - Type-safe context usage
 
-**Solution:** See `solutions/exercise4-context/ThemeContext.jsx`
+**Solution:**See `solutions/exercise4-context/ThemeContext.jsx`
 
 ### Task 2: Create Themed Components (Your Turn - 90% Practice)
 
@@ -675,7 +675,7 @@ Create `src/components/ThemedComponents/ThemedComponents.css`:
 - Smooth color transitions
 - Fixed toggle button in corner
 
-**Solution:** See `solutions/exercise4-context/ThemedComponents.jsx`
+**Solution:**See `solutions/exercise4-context/ThemedComponents.jsx`
 
 ### Task 3: Apply Global Theme Styling (Your Turn)
 
@@ -746,7 +746,7 @@ Update `src/App.jsx`:
 - Cards have hover effects
 - Professional, polished UI
 
-###  Final Testing Checklist
+### Final Testing Checklist
 
 **Theme System:**
 - [ ] Click theme toggle - all components change color
@@ -772,7 +772,7 @@ Update `src/App.jsx`:
 - [ ] Professional appearance
 - [ ] All features work together
 
-**Complete Solution:** See `solutions/exercise4-context/`
+**Complete Solution:**See `solutions/exercise4-context/`
 
 ---
 
@@ -800,7 +800,7 @@ Error Boundaries catch JavaScript errors in component tree and display fallback 
 - componentDidCatch logs errors
 - Provides graceful error recovery
 
-**Solution:** See `solutions/bonus-challenges/ErrorBoundary.jsx`
+**Solution:**See `solutions/bonus-challenges/ErrorBoundary.jsx`
 
 ### Challenge 2: Modal with Portals
 
@@ -821,7 +821,7 @@ React Portals render children outside parent DOM hierarchy, perfect for modals.
 - `overflow: hidden` on body prevents scroll
 - ESC key to close (bonus)
 
-**Solution:** See `solutions/bonus-challenges/Modal.jsx`
+**Solution:**See `solutions/bonus-challenges/Modal.jsx`
 
 ### Challenge 3: useLocalStorage Hook
 
@@ -842,56 +842,56 @@ Custom hook that syncs state with localStorage.
 - Try/catch for parsing errors
 - useEffect to sync on changes
 
-**Solution:** See `solutions/bonus-challenges/useLocalStorage.ts`
+**Solution:**See `solutions/bonus-challenges/useLocalStorage.ts`
 
 ---
 
-##  Key Takeaways
+## Key Takeaways
 
 You've completed Lab 2! Here's what you've mastered:
 
 ### Component Architecture
--  **Compound Components**: Card system with subcomponents
--  **HOC Pattern**: withLoading for reusable functionality
--  **Composition**: Building complex UIs from simple parts
--  **Type Safety**: TypeScript interfaces for all components
+- **Compound Components** Card system with subcomponents
+- **HOC Pattern** withLoading for reusable functionality
+- **Composition** Building complex UIs from simple parts
+- **Type Safety** TypeScript interfaces for all components
 
 ### React Hooks
--  **Custom Hooks**: useForm for reusable form logic
--  **useState**: Managing local component state
--  **useEffect**: Side effects and data fetching
--  **useContext**: Consuming context values
+- **Custom Hooks** useForm for reusable form logic
+- **useState** Managing local component state
+- **useEffect** Side effects and data fetching
+- **useContext** Consuming context values
 
 ### State Management
--  **Context API**: Global theme state without prop drilling
--  **Provider Pattern**: ThemeProvider wrapping app
--  **Custom Context Hooks**: useTheme for easy access
--  **State Updates**: Toggling and updating global state
+- **Context API** Global theme state without prop drilling
+- **Provider Pattern** ThemeProvider wrapping app
+- **Custom Context Hooks** useTheme for easy access
+- **State Updates** Toggling and updating global state
 
 ### Advanced Patterns
--  **Loading States**: Spinner with HOC pattern
--  **Form Handling**: Validation and submission
--  **Theme Switching**: Complete dark mode implementation
--  **Code Organization**: Scalable folder structure
+- **Loading States** Spinner with HOC pattern
+- **Form Handling** Validation and submission
+- **Theme Switching** Complete dark mode implementation
+- **Code Organization** Scalable folder structure
 
 ### TypeScript Integration
--  **Generic Types**: HOC with type parameters
--  **Interface Definitions**: Props and context types
--  **Type Safety**: Compile-time error prevention
--  **Reusable Types**: Shared interfaces
+- **Generic Types** HOC with type parameters
+- **Interface Definitions** Props and context types
+- **Type Safety** Compile-time error prevention
+- **Reusable Types** Shared interfaces
 
 ---
 
-##  Next Steps
+## Next Steps
 
-**Ready for more?** Continue to [Lab 3 - API Integration & Data Management](../../lesson3-api-data/lab/lab3.md) to learn:
+**Ready for more?**Continue to [Lab 3 - API Integration & Data Management](../../lesson3-api-data/lab/lab3.md) to learn:
 
-- **API Calls:** Fetching real data from REST APIs
-- **React Query:** Advanced data fetching and caching
-- **State Management:** Managing server state
-- **Error Handling:** Graceful API error handling
-- **Loading States:** Professional loading UIs
-- **Full-Stack Integration:** Connecting React to backend
+- **API Calls:**Fetching real data from REST APIs
+- **React Query:**Advanced data fetching and caching
+- **State Management:**Managing server state
+- **Error Handling:**Graceful API error handling
+- **Loading States:**Professional loading UIs
+- **Full-Stack Integration:**Connecting React to backend
 
 **Before starting Lab 3:**
 - [ ] All Lab 2 exercises work correctly
@@ -904,7 +904,7 @@ You've completed Lab 2! Here's what you've mastered:
 
 ---
 
-##  Additional Resources
+## Additional Resources
 
 **Official Documentation:**
 - [React Hooks Reference](https://react.dev/reference/react) - All built-in hooks
@@ -923,7 +923,7 @@ You've completed Lab 2! Here's what you've mastered:
 
 ---
 
-##  Troubleshooting Guide
+## Troubleshooting Guide
 
 ### Context Errors
 
@@ -1004,7 +1004,7 @@ useEffect(() => {
 
 ---
 
-##  Self-Assessment Checklist
+## Self-Assessment Checklist
 
 Before moving to Lab 3, you should be able to:
 

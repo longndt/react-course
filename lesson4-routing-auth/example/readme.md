@@ -19,20 +19,20 @@ npm run dev
 
 ## ✨ Features
 
-- **React Router** for navigation
-- **Mock Authentication** with JWT simulation
-- **Protected Routes** with automatic redirects
-- **User Registration** and login forms
-- **Shopping Cart** with local state management
-- **Product Catalog** with mock data
-- **User Profile** with order history
-- **Responsive Design** for all devices
+- **React Router**for navigation
+- **Mock Authentication**with JWT simulation
+- **Protected Routes**with automatic redirects
+- **User Registration**and login forms
+- **Shopping Cart**with local state management
+- **Product Catalog**with mock data
+- **User Profile**with order history
+- **Responsive Design**for all devices
 
 ## 🔐 Demo Credentials
 
 ### Login
-- **Email:** `demo@example.com`
-- **Password:** `password`
+- **Email:**`demo@example.com`
+- **Password:**`password`
 
 ### Registration
 - Use any valid email, password, and name
@@ -145,12 +145,12 @@ npm run dev -- --port 3001
 
 ## Next Steps
 
-1. **Add Real API Integration** - Replace mock data with real API calls
-2. **Implement Form Validation** - Add proper form validation
-3. **Add Error Boundaries** - Implement error boundary components
-4. **Add Tests** - Write unit and integration tests
-5. **Add PWA Features** - Make it a Progressive Web App
+1. **Add Real API Integration**- Replace mock data with real API calls
+2. **Implement Form Validation**- Add proper form validation
+3. **Add Error Boundaries**- Implement error boundary components
+4. **Add Tests**- Write unit and integration tests
+5. **Add PWA Features**- Make it a Progressive Web App
 
 ---
 
-**Happy Coding!** 🚀
+**Happy Coding!**🚀

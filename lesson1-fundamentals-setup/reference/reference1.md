@@ -31,7 +31,7 @@ npm install
 npm run dev
 ```
 
-**Your app will open at:** `http://localhost:5173`
+**Your app will open at:**`http://localhost:5173`
 
 ### Verify Installation
 
@@ -61,7 +61,7 @@ my-first-react-app/
 └── vite.config.ts    # Vite config
 ```
 
-**Focus on `src/` folder** - this is where you'll write your code
+**Focus on `src/` folder**- this is where you'll write your code
 
 ---
 
@@ -91,7 +91,7 @@ export default App;
 
 ### Create Your First Custom Component
 
-**Step 1:** Create a new file `src/components/Welcome.tsx`
+**Step 1:**Create a new file `src/components/Welcome.tsx`
 
 ```tsx
 // src/components/Welcome.tsx
@@ -107,7 +107,7 @@ function Welcome() {
 export default Welcome;
 ```
 
-**Step 2:** Use it in `src/App.tsx`
+**Step 2:**Use it in `src/App.tsx`
 
 ```tsx
 import Welcome from './components/Welcome';
@@ -123,7 +123,7 @@ function App() {
 export default App;
 ```
 
-**Step 3:** Save and check your browser - you should see your Welcome component!
+**Step 3:**Save and check your browser - you should see your Welcome component!
 
 ---
 
@@ -194,7 +194,7 @@ function Greeting() {
 export default Greeting;
 ```
 
-**Key:** Use `{}` to embed TypeScript expressions in TSX.
+**Key:**Use `{}` to embed TypeScript expressions in TSX.
 
 ---
 
@@ -279,13 +279,13 @@ function ClickDemo() {
 export default ClickDemo;
 ```
 
->  **Note:** State management (making the UI update) is covered in Lesson 2 with `useState` hook.
+>  **Note:**State management (making the UI update) is covered in Lesson 2 with `useState` hook.
 
 ---
 
 ## Part 7: Complete Starter Example
 
-**src/App.tsx** - A simple landing page:
+**src/App.tsx**- A simple landing page:
 
 ```tsx
 import './App.css';
@@ -330,7 +330,7 @@ function App() {
 export default App;
 ```
 
-**src/App.css** - Basic styles:
+**src/App.css**- Basic styles:
 
 ```css
 .App {
@@ -401,16 +401,16 @@ npm install
 
 ## Next Steps
 
- **Completed setup?** Great! You now have:
+ **Completed setup?**Great! You now have:
 - A working React development environment
 - Understanding of basic TSX syntax
 - Your first custom component
 
- **Want deeper understanding?** Read [theory1.md](./theory/theory1.md)
+ **Want deeper understanding?**Read [theory1.md](./theory/theory1.md)
 
- **Ready to practice?** Try [lab1.md](./lab/lab1.md) exercises
+ **Ready to practice?**Try [lab1.md](./lab/lab1.md) exercises
 
- **Ready for more features?** Continue to [Lesson 2: Components & Hooks](../lesson2-component-hook/) to learn:
+ **Ready for more features?**Continue to [Lesson 2: Components & Hooks](../lesson2-component-hook/) to learn:
 - Props and component communication
 - State management with hooks
 - Building reusable component libraries

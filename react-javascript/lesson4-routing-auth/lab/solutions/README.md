@@ -4,7 +4,7 @@
 
 Complete solutions for routing and authentication exercises.
 
-###  Structure
+### Structure
 
 ```
 solutions/
@@ -18,7 +18,7 @@ solutions/
     └── Complete authentication system
 ```
 
-###  Running Solutions
+### Running Solutions
 
 ```bash
 cd exercise2-protected-routes
@@ -26,15 +26,15 @@ npm install
 npm run dev
 ```
 
-###  Key Concepts
+### Key Concepts
 
-- **React Router:** Client-side routing
-- **Protected Routes:** Authentication guards
-- **Context API:** Global state management
-- **JWT:** Token-based authentication
-- **Session Management:** Login/logout flow
+- **React Router:**Client-side routing
+- **Protected Routes:**Authentication guards
+- **Context API:**Global state management
+- **JWT:**Token-based authentication
+- **Session Management:**Login/logout flow
 
-###  Security Notes
+### Security Notes
 
 - Password hashing (bcrypt)
 - Secure token storage

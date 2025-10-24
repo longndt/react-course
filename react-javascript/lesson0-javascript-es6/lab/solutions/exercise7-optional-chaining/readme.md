@@ -43,11 +43,11 @@ function displayUser(user) {
 
 ## Key Learning Points
 
-1. **Optional Chaining (`?.`)**: Safely access nested properties
-2. **Nullish Coalescing (`??`)**: Provide default values for null/undefined
-3. **Safe Method Calls**: Use `?.()` for method calls
-4. **Array Access**: Use `?.[]` for array element access
-5. **Combined Usage**: Chain both operators for robust code
+1. **Optional Chaining (`?.`)** Safely access nested properties
+2. **Nullish Coalescing (`??`)** Provide default values for null/undefined
+3. **Safe Method Calls** Use `?.()` for method calls
+4. **Array Access** Use `?.[]` for array element access
+5. **Combined Usage** Chain both operators for robust code
 
 ## Running the Solution
 

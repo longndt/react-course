@@ -5,7 +5,7 @@ Complete solutions for all Lab 5 exercises demonstrating production-ready React 
 ## 📂 Exercises Overview
 
 ### Exercise 1: Code Splitting
-**Location:** `exercise1-code-splitting/`
+**Location:**`exercise1-code-splitting/`
 
 **What it demonstrates:**
 - React.lazy() for dynamic imports
@@ -35,7 +35,7 @@ npm run dev
 ---
 
 ### Exercise 2: Memoization
-**Location:** `exercise2-memoization/`
+**Location:**`exercise2-memoization/`
 
 **What it demonstrates:**
 - React.memo for component memoization
@@ -67,7 +67,7 @@ npm run dev
 ---
 
 ### Exercise 3: Virtual List 📜
-**Location:** `exercise3-virtual-list/`
+**Location:**`exercise3-virtual-list/`
 
 **What it demonstrates:**
 - Virtual scrolling / windowing technique
@@ -99,7 +99,7 @@ npm run dev
 ---
 
 ### Exercise 4: Production Deployment
-**Location:** `exercise4-deployment/`
+**Location:**`exercise4-deployment/`
 
 **What it demonstrates:**
 - Environment variable configuration (dev/prod)
@@ -140,74 +140,74 @@ npm run preview
 
 ---
 
-##  Learning Outcomes
+## Learning Outcomes
 
 After completing all exercises, you will understand:
 
 ### Performance Optimization
- **Code Splitting** - Reduce initial bundle size with lazy loading
- **Memoization** - Prevent unnecessary re-renders with React.memo, useCallback, useMemo
- **Virtual Lists** - Handle large datasets efficiently with windowing
- **Bundle Analysis** - Analyze and optimize bundle sizes
+ **Code Splitting**- Reduce initial bundle size with lazy loading
+ **Memoization**- Prevent unnecessary re-renders with React.memo, useCallback, useMemo
+ **Virtual Lists**- Handle large datasets efficiently with windowing
+ **Bundle Analysis**- Analyze and optimize bundle sizes
 
 ### Production Deployment
- **Environment Config** - Manage different configs for dev/staging/prod
- **Build Optimization** - Minification, tree shaking, chunk splitting
- **Cloud Deployment** - Deploy to Vercel, Netlify, AWS, Azure
- **SPA Routing** - Configure servers for client-side routing
- **CI/CD** - Automatic deployments from Git
+ **Environment Config**- Manage different configs for dev/staging/prod
+ **Build Optimization**- Minification, tree shaking, chunk splitting
+ **Cloud Deployment**- Deploy to Vercel, Netlify, AWS, Azure
+ **SPA Routing**- Configure servers for client-side routing
+ **CI/CD**- Automatic deployments from Git
 
 ### Best Practices
- **Performance Profiling** - Use Chrome DevTools and React DevTools
- **Type Safety** - TypeScript for better developer experience
- **Error Handling** - Error boundaries and fallback UI
- **Accessibility** - Semantic HTML and ARIA labels
- **Code Quality** - ESLint, Prettier, and TypeScript strict mode
+ **Performance Profiling**- Use Chrome DevTools and React DevTools
+ **Type Safety**- TypeScript for better developer experience
+ **Error Handling**- Error boundaries and fallback UI
+ **Accessibility**- Semantic HTML and ARIA labels
+ **Code Quality**- ESLint, Prettier, and TypeScript strict mode
 
 ---
 
-##  Prerequisites
+## Prerequisites
 
 All exercises require:
-- **Node.js**: 18.x or higher
-- **npm**: 9.x or higher
-- **Git**: For version control and deployment
+- **Node.js** 18.x or higher
+- **npm** 9.x or higher
+- **Git** For version control and deployment
 
 Recommended tools:
-- **VS Code** with React, TypeScript, and ESLint extensions
-- **Chrome DevTools** for performance profiling
-- **React DevTools** browser extension
+- **VS Code**with React, TypeScript, and ESLint extensions
+- **Chrome DevTools**for performance profiling
+- **React DevTools**browser extension
 
 ---
 
-##  Performance Comparison Summary
+## Performance Comparison Summary
 
 | Metric | Before Optimization | After Optimization | Improvement |
 |--------|---------------------|-------------------|-------------|
-| **Initial Bundle Size** | 500 KB | 150 KB | 70% smaller |
-| **Re-renders (1000 items)** | 1000 | 1 | 99.9% fewer |
-| **List Render (10k items)** | 2000 ms | 60 ms | 33x faster |
-| **DOM Nodes (10k items)** | 10,000 | 15 | 99.85% fewer |
-| **Memory Usage** | 150 MB | 2 MB | 75x less |
-| **Time to Interactive** | 3.5 s | 1.2 s | 66% faster |
+| **Initial Bundle Size**| 500 KB | 150 KB | 70% smaller |
+| **Re-renders (1000 items)**| 1000 | 1 | 99.9% fewer |
+| **List Render (10k items)**| 2000 ms | 60 ms | 33x faster |
+| **DOM Nodes (10k items)**| 10,000 | 15 | 99.85% fewer |
+| **Memory Usage**| 150 MB | 2 MB | 75x less |
+| **Time to Interactive**| 3.5 s | 1.2 s | 66% faster |
 
 ---
 
-##  Deployment Options
+## Deployment Options
 
 ### Option 1: Vercel (Recommended)
--  Zero configuration
--  Automatic HTTPS
--  Global CDN
--  Automatic deployments from Git
--  Preview deployments for PRs
+- Zero configuration
+- Automatic HTTPS
+- Global CDN
+- Automatic deployments from Git
+- Preview deployments for PRs
 
 ### Option 2: Netlify
--  Drag-and-drop deployment
--  Form handling
--  Serverless functions
--  Split testing
--  Branch deployments
+- Drag-and-drop deployment
+- Form handling
+- Serverless functions
+- Split testing
+- Branch deployments
 
 ### Option 3: Manual Hosting
 - AWS S3 + CloudFront
@@ -218,7 +218,7 @@ Recommended tools:
 
 ---
 
-##  Additional Resources
+## Additional Resources
 
 ### Performance
 - [Web Vitals](https://web.dev/vitals/)
@@ -239,18 +239,18 @@ Recommended tools:
 
 ---
 
-##  Next Steps
+## Next Steps
 
-1. **Combine Techniques** - Use code splitting + memoization + virtual lists together
-2. **Add Testing** - Unit tests with Vitest, E2E tests with Playwright
-3. **Add Monitoring** - Sentry for errors, Google Analytics for users
-4. **Add Database** - Firebase, Supabase, or PostgreSQL
-5. **Add Authentication** - Auth0, Clerk, or Firebase Auth
-6. **Add CI/CD** - GitHub Actions for automated testing and deployment
+1. **Combine Techniques**- Use code splitting + memoization + virtual lists together
+2. **Add Testing**- Unit tests with Vitest, E2E tests with Playwright
+3. **Add Monitoring**- Sentry for errors, Google Analytics for users
+4. **Add Database**- Firebase, Supabase, or PostgreSQL
+5. **Add Authentication**- Auth0, Clerk, or Firebase Auth
+6. **Add CI/CD**- GitHub Actions for automated testing and deployment
 
 ---
 
-##  Common Pitfalls
+## Common Pitfalls
 
 ### Code Splitting
  Over-splitting (too many tiny chunks)
@@ -275,31 +275,31 @@ Recommended tools:
 
 ---
 
-##  Challenge Exercises
+## Challenge Exercises
 
 ### Advanced Challenges
 
-1. **Hybrid Approach** - Combine all 3 optimization techniques:
+1. **Hybrid Approach**- Combine all 3 optimization techniques:
    - Lazy load routes
    - Memoize components
    - Virtual scroll for lists
 
-2. **Progressive Web App (PWA)**:
+2. **Progressive Web App (PWA)**
    - Add service worker
    - Enable offline mode
    - Add install prompt
 
-3. **Server-Side Rendering (SSR)**:
+3. **Server-Side Rendering (SSR)**
    - Migrate to Next.js
    - Implement SSG or SSR
    - Compare performance
 
-4. **Advanced Deployment**:
+4. **Advanced Deployment**
    - Set up staging environment
    - Add A/B testing
    - Implement blue-green deployment
 
-5. **Performance Monitoring**:
+5. **Performance Monitoring**
    - Integrate Lighthouse CI
    - Set up performance budgets
    - Track Core Web Vitals
@@ -307,17 +307,17 @@ Recommended tools:
 ---
 
 You've completed all Lab 5 exercises and learned production-ready React development practices!
-- **Production Build:** Optimization for deployment
-- **Deployment:** Vercel, Netlify, or custom hosting
+- **Production Build:**Optimization for deployment
+- **Deployment:**Vercel, Netlify, or custom hosting
 
-###  Production Checklist
+### Production Checklist
 
--  Environment variables configured
--  API endpoints updated
--  CORS properly configured
--  Build optimized
--  Error handling in place
--  Security best practices followed
+- Environment variables configured
+- API endpoints updated
+- CORS properly configured
+- Build optimized
+- Error handling in place
+- Security best practices followed
 
 ---
 

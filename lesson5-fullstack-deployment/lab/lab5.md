@@ -2,66 +2,66 @@
 
 ## 📋 Overview
 
-In this final lab, you'll learn **essential performance optimization techniques** and **production deployment strategies** for React applications. You'll implement code splitting, memoization, virtual lists, and prepare your application for production deployment with environment configuration and build optimization.
+In this final lab, you'll learn **essential performance optimization techniques**and **production deployment strategies**for React applications. You'll implement code splitting, memoization, virtual lists, and prepare your application for production deployment with environment configuration and build optimization.
 
 ### What You'll Build
 
 A performance-optimized React application featuring:
-- **Code Splitting** with React.lazy() and Suspense
-- **Component Memoization** with React.memo, useMemo, useCallback
-- **Virtual Lists** for rendering thousands of items efficiently
-- **Performance Monitoring** with React Profiler
-- **Production Build** configuration
-- **Environment Management** with different configs for dev/prod
-- **Deployment Ready** application for Vercel/Netlify
+- **Code Splitting**with React.lazy() and Suspense
+- **Component Memoization**with React.memo, useMemo, useCallback
+- **Virtual Lists**for rendering thousands of items efficiently
+- **Performance Monitoring**with React Profiler
+- **Production Build**configuration
+- **Environment Management**with different configs for dev/prod
+- **Deployment Ready**application for Vercel/Netlify
 
 ### Why This Matters
 
-- **User Experience**: Slow apps lose users - 53% leave if load takes >3 seconds
-- **Performance**: Optimized apps feel faster and use less resources
-- **Scalability**: Handle large datasets without freezing the browser
-- **Production Ready**: Deploy with confidence using best practices
-- **Professional Skills**: Performance optimization is crucial for senior developers
+- **User Experience** Slow apps lose users - 53% leave if load takes >3 seconds
+- **Performance** Optimized apps feel faster and use less resources
+- **Scalability** Handle large datasets without freezing the browser
+- **Production Ready** Deploy with confidence using best practices
+- **Professional Skills** Performance optimization is crucial for senior developers
 
 ---
 
-##  Learning Objectives
+## Learning Objectives
 
 By the end of this lab, you will:
 
 ### Performance Optimization Skills
--  Implement code splitting with React.lazy() and dynamic imports
--  Use Suspense for loading states
--  Apply React.memo to prevent unnecessary re-renders
--  Optimize expensive computations with useMemo
--  Prevent function recreation with useCallback
--  Build virtual lists for large datasets (10,000+ items)
--  Monitor performance with React Profiler API
+- Implement code splitting with React.lazy() and dynamic imports
+- Use Suspense for loading states
+- Apply React.memo to prevent unnecessary re-renders
+- Optimize expensive computations with useMemo
+- Prevent function recreation with useCallback
+- Build virtual lists for large datasets (10,000+ items)
+- Monitor performance with React Profiler API
 
 ### Production Deployment Skills
--  Create optimized production builds
--  Configure environment variables for different environments
--  Understand bundle size and optimization techniques
--  Deploy to Vercel or Netlify
--  Set up deployment workflows
--  Handle routing in production (SPA config)
+- Create optimized production builds
+- Configure environment variables for different environments
+- Understand bundle size and optimization techniques
+- Deploy to Vercel or Netlify
+- Set up deployment workflows
+- Handle routing in production (SPA config)
 
 ### Advanced Patterns
--  Lazy load components and routes
--  Create efficient custom hooks
--  Implement windowing/virtualization
--  Profile and measure performance improvements
+- Lazy load components and routes
+- Create efficient custom hooks
+- Implement windowing/virtualization
+- Profile and measure performance improvements
 
 ---
 
-##  Pre-Lab Checklist
+## Pre-Lab Checklist
 
 ### Required Software
-- [ ] **Node.js** (v18+) installed
-- [ ] **npm** or **yarn** package manager
-- [ ] **VS Code** with React DevTools extension
-- [ ] **Browser** with React DevTools (Chrome/Firefox)
-- [ ] **Git** for version control (deployment)
+- [ ] **Node.js**(v18+) installed
+- [ ] **npm**or **yarn**package manager
+- [ ] **VS Code**with React DevTools extension
+- [ ] **Browser**with React DevTools (Chrome/Firefox)
+- [ ] **Git**for version control (deployment)
 
 ### Verification Commands
 ```bash
@@ -87,13 +87,13 @@ npm install react-router-dom
 
 ---
 
-##  Exercises
+## Exercises
 
 ---
 
 ### Exercise 1: Code Splitting & Lazy Loading (40% Practice)
 
-**Goal**: Implement code splitting to reduce initial bundle size and improve load time.
+**Goal** Implement code splitting to reduce initial bundle size and improve load time.
 
 #### Task 1.1: Setup React Router with Lazy Loading (Guided)
 
@@ -216,7 +216,7 @@ function App() {
 export default App;
 ```
 
-**Test**:
+**Test**
 - Run `npm run dev`
 - Open browser DevTools → Network tab
 - Navigate between pages
@@ -226,9 +226,9 @@ export default App;
 
 #### Task 1.2: Add Error Boundary for Lazy Components (50% TODO)
 
-**🔨 TODO**: Create an Error Boundary to handle loading failures gracefully.
+**🔨 TODO** Create an Error Boundary to handle loading failures gracefully.
 
-**Requirements**:
+**Requirements**
 1. Create `src/components/ErrorBoundary.tsx` (class component)
 2. Implement `componentDidCatch` to log errors
 3. Implement `getDerivedStateFromError` to update state
@@ -236,7 +236,7 @@ export default App;
 5. Add a "Retry" button that reloads the page
 6. Wrap `<Suspense>` with `<ErrorBoundary>` in App.tsx
 
-**Hints**:
+**Hints**
 
 ```jsx
 import { Component } from 'react';
@@ -293,7 +293,7 @@ export default ErrorBoundary;
 </ErrorBoundary>
 ```
 
-**CSS Hint**:
+**CSS Hint**
 ```css
 .error-boundary {
   display: flex;
@@ -306,27 +306,27 @@ export default ErrorBoundary;
 }
 ```
 
-**Expected Outcome**:
+**Expected Outcome**
 - App handles lazy loading failures
 - Error message displayed if chunk fails to load
 - Retry button reloads the application
 - Console logs error details
 
-**Solution**: See `solutions/exercise1-code-splitting/`
+**Solution** See `solutions/exercise1-code-splitting/`
 
 ---
 
 #### Task 1.3: Measure Bundle Size Improvement (Testing)
 
-**🔨 TODO**: Build for production and analyze bundle size.
+**🔨 TODO** Build for production and analyze bundle size.
 
-**Requirements**:
+**Requirements**
 1. Run `npm run build`
 2. Check `dist/` folder for generated chunks
 3. Note the sizes of individual chunks
 4. Compare with non-lazy loaded version (optional)
 
-**Hints**:
+**Hints**
 
 ```bash
 # Build for production
@@ -337,7 +337,7 @@ dir dist\assets  # Windows
 ls -lh dist/assets  # Mac/Linux
 ```
 
-**Analyze with Rollup Visualizer** (Optional):
+**Analyze with Rollup Visualizer**(Optional):
 ```bash
 npm install --save-dev rollup-plugin-visualizer
 
@@ -352,19 +352,19 @@ export default defineConfig({
 });
 ```
 
-**Expected Outcome**:
+**Expected Outcome**
 - Production build creates separate chunks for each lazy-loaded component
 - Main bundle is smaller than if all components were bundled together
 - Each route loads its own JavaScript file on demand
 - Improved initial load time (especially noticeable with larger apps)
 
-**Solution**: See `solutions/exercise1-code-splitting/readme.md`
+**Solution** See `solutions/exercise1-code-splitting/readme.md`
 
 ---
 
 ### Exercise 2: Component Memoization (70% Practice)
 
-**Goal**: Optimize component rendering with React.memo, useMemo, and useCallback.
+**Goal** Optimize component rendering with React.memo, useMemo, and useCallback.
 
 #### Task 2.1: Create a Memoized List Component (Guided)
 
@@ -463,7 +463,7 @@ export default function Users() {
 }
 ```
 
-**Test**:
+**Test**
 - Click "Increment" button
 - Check console - UserItems should NOT re-render
 - Problem: They DO re-render because `handleSelect` is recreated each render!
@@ -472,16 +472,16 @@ export default function Users() {
 
 #### Task 2.2: Optimize with useCallback (70% TODO)
 
-**🔨 TODO**: Fix the unnecessary re-renders by memoizing the callback function.
+**🔨 TODO** Fix the unnecessary re-renders by memoizing the callback function.
 
-**Requirements**:
+**Requirements**
 1. Import `useCallback` from React
 2. Wrap `handleSelect` function with `useCallback`
 3. Add empty dependency array (no dependencies)
 4. Click "Increment" again and verify UserItems don't re-render
 5. Add console logs to track renders
 
-**Hints**:
+**Hints**
 
 ```tsx
 import { useState, useCallback } from 'react';
@@ -497,35 +497,35 @@ const handleSelect = useCallback((user: User) => {
 }, [count]); // Re-create only when count changes
 ```
 
-**Why This Works**:
+**Why This Works**
 - Without `useCallback`: New function created every render
 - `UserItem` receives "different" prop (even though it does the same thing)
 - `memo()` sees prop changed, re-renders component
 - With `useCallback`: Same function reference across renders
 - `memo()` sees no change, skips re-render
 
-**Expected Outcome**:
+**Expected Outcome**
 - Clicking "Increment" does NOT trigger UserItem re-renders
 - Console shows "Rendering UserList" but NOT "Rendering UserItem: X"
 - Selected user still updates correctly when clicking a user
 - Performance improves with larger lists
 
-**Solution**: See `solutions/exercise2-memoization/`
+**Solution** See `solutions/exercise2-memoization/`
 
 ---
 
 #### Task 2.3: Optimize Expensive Calculations with useMemo (80% TODO)
 
-**🔨 TODO**: Use `useMemo` to optimize a filtered and sorted user list.
+**🔨 TODO** Use `useMemo` to optimize a filtered and sorted user list.
 
-**Requirements**:
+**Requirements**
 1. Add a search input to filter users by name
 2. Add a "Sort by Name" button
 3. Use `useMemo` to memoize the filtered and sorted results
 4. Add console logs to see when filtering/sorting happens
 5. Verify it only recalculates when search term or sort order changes
 
-**Hints**:
+**Hints**
 
 ```tsx
 import { useState, useMemo, useCallback } from 'react';
@@ -568,28 +568,28 @@ export default function Users() {
 }
 ```
 
-**Without useMemo**: Filtering/sorting runs on EVERY render (even clicking increment!)
+**Without useMemo** Filtering/sorting runs on EVERY render (even clicking increment!)
 
-**With useMemo**: Only runs when `users`, `searchTerm`, or `sortAsc` changes
+**With useMemo** Only runs when `users`, `searchTerm`, or `sortAsc` changes
 
-**Expected Outcome**:
+**Expected Outcome**
 - Typing in search filters the list
 - Clicking sort button reverses order
 - Console shows "Filtering and sorting..." only when needed
 - Unrelated state changes (count) don't trigger recalculation
 - Smooth performance even with 1000+ users
 
-**Solution**: See `solutions/exercise2-memoization/`
+**Solution** See `solutions/exercise2-memoization/`
 
 ---
 
 ### Exercise 3: Virtual List for Large Datasets (85% Practice)
 
-**Goal**: Build a virtual list that efficiently renders 10,000+ items.
+**Goal** Build a virtual list that efficiently renders 10,000+ items.
 
 #### Task 3.1: Understand the Problem (Reading)
 
-**The Problem with Large Lists**:
+**The Problem with Large Lists**
 
 ```tsx
 // BAD: Renders all 10,000 items (DOM nodes)
@@ -608,7 +608,7 @@ function BadList() {
 // Result: 10,000 DOM nodes, slow scrolling, high memory usage
 ```
 
-**The Solution: Virtual List**:
+**The Solution: Virtual List**
 - Only render items currently visible in the viewport
 - Example: If viewport shows 10 items, only render ~15 items (10 visible + 5 buffer)
 - As user scrolls, swap out items
@@ -618,9 +618,9 @@ function BadList() {
 
 #### Task 3.2: Build a Simple Virtual List (85% TODO)
 
-**🔨 TODO**: Create a custom virtual list component.
+**🔨 TODO** Create a custom virtual list component.
 
-**Requirements**:
+**Requirements**
 1. Create `src/components/VirtualList.tsx`
 2. Accept props: `items`, `itemHeight`, `containerHeight`, `renderItem`
 3. Track scroll position with `onScroll` event
@@ -628,7 +628,7 @@ function BadList() {
 5. Only render visible items (+ small buffer)
 6. Use absolute positioning to create illusion of full list
 
-**Hints**:
+**Hints**
 
 ```tsx
 // src/components/VirtualList.tsx
@@ -706,7 +706,7 @@ function VirtualList<T>({
 export default VirtualList;
 ```
 
-**Usage Example**:
+**Usage Example**
 ```tsx
 // src/pages/VirtualListDemo.tsx
 import VirtualList from '../components/VirtualList';
@@ -746,31 +746,31 @@ export default function VirtualListDemo() {
 }
 ```
 
-**Expected Outcome**:
+**Expected Outcome**
 - Smooth scrolling through 10,000 items
 - Only ~10-15 items rendered in DOM at any time
 - Scroll bar reflects full list height
 - Items appear/disappear as you scroll
 - Performance much better than rendering all items
 
-**Solution**: See `solutions/exercise3-virtual-list/`
+**Solution** See `solutions/exercise3-virtual-list/`
 
 ---
 
 #### Task 3.3: Compare Performance (Testing - 90% TODO)
 
-**🔨 TODO**: Create a comparison page showing regular list vs virtual list performance.
+**🔨 TODO** Create a comparison page showing regular list vs virtual list performance.
 
-**Requirements**:
+**Requirements**
 1. Create a page with two tabs: "Regular List" and "Virtual List"
 2. Both render the same 10,000 items
 3. Use Chrome DevTools Performance tab to profile both
 4. Record FPS (frames per second) while scrolling
 5. Document the performance difference
 
-**Hints**:
+**Hints**
 
-**Profiling Steps**:
+**Profiling Steps**
 1. Open Chrome DevTools → Performance tab
 2. Click "Record" button
 3. Scroll through the list
@@ -778,36 +778,36 @@ export default function VirtualListDemo() {
 5. Check "FPS" graph - higher is better (60 FPS = smooth)
 6. Check "Main" timeline - less red = better performance
 
-**Expected Results**:
-- **Regular List**: Laggy scrolling, FPS drops to 20-30, janky animations
-- **Virtual List**: Smooth scrolling, FPS stays at 55-60, butter smooth
+**Expected Results**
+- **Regular List** Laggy scrolling, FPS drops to 20-30, janky animations
+- **Virtual List** Smooth scrolling, FPS stays at 55-60, butter smooth
 
-**Expected Outcome**:
+**Expected Outcome**
 - Clear performance difference visible
 - Virtual list maintains 60 FPS
 - Regular list struggles with large dataset
 - Understanding of when virtualization is needed
 
-**Solution**: See `solutions/exercise3-virtual-list/readme.md`
+**Solution** See `solutions/exercise3-virtual-list/readme.md`
 
 ---
 
 ### Exercise 4: Production Build & Deployment (90% Practice)
 
-**Goal**: Prepare app for production and deploy to a hosting platform.
+**Goal** Prepare app for production and deploy to a hosting platform.
 
 #### Task 4.1: Environment Variables (90% TODO)
 
-**🔨 TODO**: Set up environment variables for different environments.
+**🔨 TODO** Set up environment variables for different environments.
 
-**Requirements**:
+**Requirements**
 1. Create `.env.development` file for development config
 2. Create `.env.production` file for production config
 3. Add API URL as environment variable
 4. Create a config file that reads these variables
 5. Use different API URLs for dev and prod
 
-**Hints**:
+**Hints**
 
 ```bash
 # .env.development
@@ -821,7 +821,7 @@ VITE_APP_NAME=MyApp
 VITE_ENABLE_ANALYTICS=true
 ```
 
-**Important**: Vite requires `VITE_` prefix!
+**Important** Vite requires `VITE_` prefix!
 
 ```tsx
 // src/config/env.ts
@@ -840,28 +840,28 @@ fetch(`${ENV.apiUrl}/users`)
   .then(/* ... */);
 ```
 
-**Expected Outcome**:
+**Expected Outcome**
 - `npm run dev` uses development variables
 - `npm run build` uses production variables
 - API calls use correct URLs per environment
 - Analytics only enabled in production
 
-**Solution**: See `solutions/exercise4-deployment/`
+**Solution** See `solutions/exercise4-deployment/`
 
 ---
 
 #### Task 4.2: Production Build Optimization (95% TODO)
 
-**🔨 TODO**: Configure Vite for optimal production builds.
+**🔨 TODO** Configure Vite for optimal production builds.
 
-**Requirements**:
+**Requirements**
 1. Update `vite.config.ts` with production optimizations
 2. Configure chunk splitting strategy
 3. Enable minification and compression
 4. Build and analyze the bundle size
 5. Document bundle sizes before and after optimization
 
-**Hints**:
+**Hints**
 
 ```ts
 // vite.config.ts
@@ -902,7 +902,7 @@ export default defineConfig({
 });
 ```
 
-**Build and Analyze**:
+**Build and Analyze**
 ```bash
 npm run build
 
@@ -913,22 +913,22 @@ ls -lh dist/assets
 npm install --save-dev rollup-plugin-visualizer
 ```
 
-**Expected Outcome**:
+**Expected Outcome**
 - Production build completes successfully
 - Separate vendor chunks for React libraries
 - Minified JavaScript and CSS
 - No console.logs in production code
 - Bundle sizes documented and optimized
 
-**Solution**: See `solutions/exercise4-deployment/`
+**Solution** See `solutions/exercise4-deployment/`
 
 ---
 
 #### Task 4.3: Deploy to Vercel (100% TODO)
 
-**🔨 TODO**: Deploy your application to Vercel (or Netlify).
+**🔨 TODO** Deploy your application to Vercel (or Netlify).
 
-**Requirements**:
+**Requirements**
 1. Create a GitHub repository for your project
 2. Push your code to GitHub
 3. Sign up for Vercel account (free)
@@ -936,7 +936,7 @@ npm install --save-dev rollup-plugin-visualizer
 5. Configure build settings
 6. Deploy and verify the live URL
 
-**Hints**:
+**Hints**
 
 **Step 1: Prepare Git Repository**
 ```bash
@@ -987,24 +987,24 @@ Create `netlify.toml`:
   status = 200
 ```
 
-**Expected Outcome**:
+**Expected Outcome**
 - Live URL provided (e.g., `your-app.vercel.app`)
 - App loads and works correctly
 - Routing works (no 404 on refresh)
 - Environment variables applied
 - Auto-deploys on Git push
 
-**Solution**: See `solutions/exercise4-deployment/readme.md`
+**Solution** See `solutions/exercise4-deployment/readme.md`
 
 ---
 
-##  Bonus Challenges
+## Bonus Challenges
 
 ### Bonus 1: React Profiler Integration (Advanced)
 
-**Challenge**: Add React Profiler to measure render performance in production.
+**Challenge** Add React Profiler to measure render performance in production.
 
-**Hints**:
+**Hints**
 ```tsx
 import { Profiler, ProfilerOnRenderCallback } from 'react';
 
@@ -1020,29 +1020,29 @@ const onRenderCallback: ProfilerOnRenderCallback = (
 </Profiler>
 ```
 
-**Expected**: Performance metrics logged for each component tree
+**Expected** Performance metrics logged for each component tree
 
 ---
 
 ### Bonus 2: Service Worker for Caching (Advanced)
 
-**Challenge**: Add a service worker to cache assets and enable offline mode.
+**Challenge** Add a service worker to cache assets and enable offline mode.
 
-**Hints**: Use `vite-plugin-pwa`
+**Hints** Use `vite-plugin-pwa`
 
 ```bash
 npm install vite-plugin-pwa
 ```
 
-**Expected**: App works offline after first visit
+**Expected** App works offline after first visit
 
 ---
 
 ### Bonus 3: Image Lazy Loading (Medium)
 
-**Challenge**: Implement lazy loading for images using Intersection Observer.
+**Challenge** Implement lazy loading for images using Intersection Observer.
 
-**Hints**:
+**Hints**
 ```tsx
 const [isVisible, setIsVisible] = useState(false);
 const imgRef = useRef<HTMLImageElement>(null);
@@ -1061,15 +1061,15 @@ useEffect(() => {
 {isVisible ? <img src={src} /> : <div className="placeholder" />}
 ```
 
-**Expected**: Images load only when scrolled into view
+**Expected** Images load only when scrolled into view
 
 ---
 
 ### Bonus 4: Web Vitals Monitoring (Advanced)
 
-**Challenge**: Track Core Web Vitals (LCP, FID, CLS) and send to analytics.
+**Challenge** Track Core Web Vitals (LCP, FID, CLS) and send to analytics.
 
-**Hints**:
+**Hints**
 ```bash
 npm install web-vitals
 ```
@@ -1082,32 +1082,32 @@ getFID(console.log);
 getLCP(console.log);
 ```
 
-**Expected**: Real performance metrics captured and logged
+**Expected** Real performance metrics captured and logged
 
 ---
 
-##  Key Takeaways
+## Key Takeaways
 
 ### Performance Optimization
--  **Code Splitting**: Reduces initial bundle size, improves load time
--  **React.lazy()**: Dynamically import components only when needed
--  **Suspense**: Provides loading states during code splitting
--  **React.memo**: Prevents re-renders when props haven't changed
--  **useMemo**: Caches expensive computations
--  **useCallback**: Prevents function recreation across renders
--  **Virtual Lists**: Efficiently render large datasets
+- **Code Splitting** Reduces initial bundle size, improves load time
+- **React.lazy()** Dynamically import components only when needed
+- **Suspense** Provides loading states during code splitting
+- **React.memo** Prevents re-renders when props haven't changed
+- **useMemo** Caches expensive computations
+- **useCallback** Prevents function recreation across renders
+- **Virtual Lists** Efficiently render large datasets
 
 ### Production Deployment
--  **Environment Variables**: Different configs for dev/prod
--  **Build Optimization**: Minification, chunk splitting, tree shaking
--  **Hosting**: Deploy to Vercel/Netlify with CI/CD
--  **SPA Routing**: Configure server for client-side routing
+- **Environment Variables** Different configs for dev/prod
+- **Build Optimization** Minification, chunk splitting, tree shaking
+- **Hosting** Deploy to Vercel/Netlify with CI/CD
+- **SPA Routing** Configure server for client-side routing
 
 ### Best Practices
--  Measure before optimizing (use profiler)
--  Don't over-optimize - profile first!
--  Use production builds for performance testing
--  Monitor real user metrics (Web Vitals)
+- Measure before optimizing (use profiler)
+- Don't over-optimize - profile first!
+- Use production builds for performance testing
+- Monitor real user metrics (Web Vitals)
 
 ---
 
@@ -1115,9 +1115,9 @@ getLCP(console.log);
 
 ### Issue: Lazy loaded components show white screen
 
-**Cause**: Missing Suspense boundary or error in component
+**Cause** Missing Suspense boundary or error in component
 
-**Solution**:
+**Solution**
 - Wrap routes with `<Suspense fallback={<Loading />}>`
 - Add Error Boundary around Suspense
 - Check console for errors
@@ -1126,9 +1126,9 @@ getLCP(console.log);
 
 ### Issue: memo() not preventing re-renders
 
-**Cause**: Props reference changing every render
+**Cause** Props reference changing every render
 
-**Solution**:
+**Solution**
 - Use `useCallback` for function props
 - Use `useMemo` for object/array props
 - Check props with `console.log` or React DevTools
@@ -1137,9 +1137,9 @@ getLCP(console.log);
 
 ### Issue: Virtual list items jumping or flickering
 
-**Cause**: Incorrect height calculations or missing keys
+**Cause** Incorrect height calculations or missing keys
 
-**Solution**:
+**Solution**
 - Ensure `itemHeight` prop is accurate
 - Use stable keys (item.id, not index)
 - Add `will-change: transform` CSS for smoother scrolling
@@ -1148,9 +1148,9 @@ getLCP(console.log);
 
 ### Issue: Environment variables not working in production
 
-**Cause**: Forgot `VITE_` prefix or not rebuilding
+**Cause** Forgot `VITE_` prefix or not rebuilding
 
-**Solution**:
+**Solution**
 - All env vars must start with `VITE_`
 - Rebuild with `npm run build` after changing .env files
 - Don't access `process.env`, use `import.meta.env`
@@ -1159,15 +1159,15 @@ getLCP(console.log);
 
 ### Issue: 404 errors on page refresh in deployed app
 
-**Cause**: Server not configured for SPA routing
+**Cause** Server not configured for SPA routing
 
-**Solution**:
+**Solution**
 - Add `vercel.json` or `netlify.toml` with redirect rules
 - Configure server to serve `index.html` for all routes
 
 ---
 
-##  Self-Assessment Checklist
+## Self-Assessment Checklist
 
 Before completing this course, ensure you can:
 
@@ -1278,14 +1278,14 @@ You've completed the React Performance & Deployment course! You now have the ski
 
 ### Next Steps
 
-1. **Build a Portfolio Project**: Apply all 5 labs' concepts
-2. **Learn Advanced Topics**:
+1. **Build a Portfolio Project** Apply all 5 labs' concepts
+2. **Learn Advanced Topics**
    - Next.js for SSR and SSG
    - React Native for mobile apps
    - Advanced state management (Redux, Zustand)
    - Testing (Jest, React Testing Library)
-3. **Contribute to Open Source**: Practice your skills
-4. **Keep Learning**: React ecosystem is always evolving!
+3. **Contribute to Open Source** Practice your skills
+4. **Keep Learning** React ecosystem is always evolving!
 
 ---
 

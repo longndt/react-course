@@ -23,32 +23,32 @@
 
 Performance optimization ensures your React application is fast and responsive. This guide covers modern techniques to improve rendering speed, reduce bundle size, and enhance user experience.
 
-**Performance Metrics**:
--  **First Contentful Paint (FCP)**: < 1.8s
--  **Largest Contentful Paint (LCP)**: < 2.5s
--  **Time to Interactive (TTI)**: < 3.8s
--  **Cumulative Layout Shift (CLS)**: < 0.1
--  **First Input Delay (FID)**: < 100ms
+**Performance Metrics**
+- **First Contentful Paint (FCP)** < 1.8s
+- **Largest Contentful Paint (LCP)** < 2.5s
+- **Time to Interactive (TTI)** < 3.8s
+- **Cumulative Layout Shift (CLS)** < 0.1
+- **First Input Delay (FID)** < 100ms
 
 ---
 
 ## When to Optimize
 
-###  Don't Optimize Prematurely
+### Don't Optimize Prematurely
 
 > *"Premature optimization is the root of all evil."* - Donald Knuth
 
-**Optimize when you have**:
--  Measurable performance problems
--  User complaints about slowness
--  Profiler data showing bottlenecks
--  Lighthouse score < 90
+**Optimize when you have**
+- Measurable performance problems
+- User complaints about slowness
+- Profiler data showing bottlenecks
+- Lighthouse score < 90
 
-**Don't optimize when**:
--  "Just in case"
--  Without measuring first
--  Code works fine
--  No user impact
+**Don't optimize when**
+- "Just in case"
+- Without measuring first
+- Code works fine
+- No user impact
 
 ### Signs You Need Optimization
 
@@ -65,14 +65,14 @@ Performance optimization ensures your React application is fast and responsive. 
 
 ### React DevTools Profiler
 
-**Installation**:
+**Installation**
 ```bash
 # Browser extension
 # Chrome: https://chrome.google.com/webstore (React Developer Tools)
 # Firefox: https://addons.mozilla.org/firefox (React Developer Tools)
 ```
 
-**Using Profiler**:
+**Using Profiler**
 1. Open React DevTools
 2. Go to "Profiler" tab
 3. Click "Record"
@@ -80,7 +80,7 @@ Performance optimization ensures your React application is fast and responsive. 
 5. Click "Stop"
 6. Analyze flame graph
 
-**What to Look For**:
+**What to Look For**
 - Components that render too often
 - Components that take too long to render
 - Unnecessary re-renders
@@ -160,12 +160,12 @@ function ExpensiveList({ items, filter }) {
 }
 ```
 
-**Profiler shows**:
+**Profiler shows**
 - Component renders on every parent re-render
 - filteredItems calculated unnecessarily
 - 50ms+ render time
 
-**Solution**:
+**Solution**
 ```tsx
 import { useMemo } from 'react';
 
@@ -186,7 +186,7 @@ function ExpensiveList({ items, filter }) {
 }
 ```
 
-**Result**: 50ms → 2ms render time
+**Result** 50ms → 2ms render time
 
 ---
 
@@ -198,7 +198,7 @@ Memoizes expensive calculations.
 
 #### When to Use
 
- **Good Use Cases**:
+ **Good Use Cases**
 - Expensive calculations (sorting, filtering large arrays)
 - Complex object transformations
 - Derived data that doesn't change often
@@ -225,7 +225,7 @@ function ProductList({ products, sortBy }) {
 }
 ```
 
- **Bad Use Cases**:
+ **Bad Use Cases**
 ```tsx
 // Don't use for simple calculations
 const sum = useMemo(() => a + b, [a, b]); // Overkill!
@@ -240,7 +240,7 @@ Memoizes function references.
 
 #### When to Use
 
- **Good Use Cases**:
+ **Good Use Cases**
 - Passing callbacks to memoized child components
 - Dependencies in useEffect
 - Callbacks passed to React.memo components
@@ -271,7 +271,7 @@ const ExpensiveChild = memo(({ onClick }) => {
 });
 ```
 
- **Bad Use Cases**:
+ **Bad Use Cases**
 ```tsx
 // Don't use if not passed to memoized components
 function Component() {
@@ -355,7 +355,7 @@ function Loading() {
 }
 ```
 
-**Result**: Initial bundle 500KB → 150KB (70% reduction!)
+**Result** Initial bundle 500KB → 150KB (70% reduction!)
 
 #### Component-Level Splitting
 
@@ -436,7 +436,7 @@ function BadList({ items }) {
 }
 ```
 
-**Result**: Slow, janky scrolling
+**Result** Slow, janky scrolling
 
 ### Solution: react-window
 
@@ -465,7 +465,7 @@ function VirtualList({ items }) {
 }
 ```
 
-**Result**: 10,000 items scroll smoothly (only renders visible rows)
+**Result** 10,000 items scroll smoothly (only renders visible rows)
 
 ### Variable Size Lists
 
@@ -560,14 +560,14 @@ function LazyImage({ src, alt }) {
 npm install --save-dev webpack-bundle-analyzer
 ```
 
-**Create React App**:
+**Create React App**
 ```bash
 npm install --save-dev cra-bundle-analyzer
 npm run build
 npx cra-bundle-analyzer
 ```
 
-**Vite**:
+**Vite**
 ```bash
 npm install --save-dev rollup-plugin-visualizer
 ```
@@ -588,7 +588,7 @@ export default {
 
 ### What to Look For
 
-- **Large dependencies** (> 100KB)
+- **Large dependencies**(> 100KB)
 - **Duplicate dependencies**
 - **Unused code**
 
@@ -630,17 +630,17 @@ async function handleExport() {
 
 ### Core Web Vitals
 
-**LCP (Largest Contentful Paint)**:
+**LCP (Largest Contentful Paint)**
 - Measures: Loading performance
 - Good: < 2.5s
 - Tips: Optimize images, reduce JS, use CDN
 
-**FID (First Input Delay)**:
+**FID (First Input Delay)**
 - Measures: Interactivity
 - Good: < 100ms
 - Tips: Code splitting, reduce JS execution
 
-**CLS (Cumulative Layout Shift)**:
+**CLS (Cumulative Layout Shift)**
 - Measures: Visual stability
 - Good: < 0.1
 - Tips: Reserve space for images, avoid dynamic content
@@ -933,12 +933,12 @@ const fullName = `${firstName} ${lastName}`;
 
 ### Performance Budget
 
-- **Initial JS**: < 170KB (gzipped)
-- **Total JS**: < 350KB (gzipped)
-- **Images**: < 500KB total per page
-- **FCP**: < 1.8s
-- **LCP**: < 2.5s
-- **TTI**: < 3.8s
+- **Initial JS** < 170KB (gzipped)
+- **Total JS** < 350KB (gzipped)
+- **Images** < 500KB total per page
+- **FCP** < 1.8s
+- **LCP** < 2.5s
+- **TTI** < 3.8s
 
 ---
 
@@ -965,4 +965,4 @@ const fullName = `${firstName} ${lastName}`;
 
 ---
 
-**Remember**: Profile first, optimize second. Don't optimize without measuring. Focus on user-perceived performance, not just metrics.
+**Remember** Profile first, optimize second. Don't optimize without measuring. Focus on user-perceived performance, not just metrics.

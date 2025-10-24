@@ -1,10 +1,26 @@
-import Dashboard from "./pages/Dashboard";
+import React from 'react';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
+import LoadingSpinner from './components/LoadingSpinner';
 
-const App = () => {
+const AppContent: React.FC = () => {
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  return isAuthenticated ? <Dashboard /> : <Login />;
+};
+
+const App: React.FC = () => {
   return (
-    <div>
-      <Dashboard />
-    </div>
+    <AuthProvider>
+      <div className="app">
+        <AppContent />
+      </div>
+    </AuthProvider>
   );
 };
 

@@ -1,6 +1,6 @@
 # Development Environment Setup Guide
 
-> 📋 **Purpose**: This comprehensive guide provides detailed instructions for setting up your complete React development environment. Complete this setup **before** starting Lesson 1, as the lessons focus on React concepts rather than tool installation.
+> 📋 **Purpose** This comprehensive guide provides detailed instructions for setting up your complete React development environment. Complete this setup **before**starting Lesson 1, as the lessons focus on React concepts rather than tool installation.
 
 This guide provides comprehensive instructions for setting up your React development environment. We'll focus on using Visual Studio Code as our primary IDE and establish a complete professional workflow.
 
@@ -13,7 +13,7 @@ This guide provides comprehensive instructions for setting up your React develop
    - Visit [nodejs.org](https://nodejs.org)
    - Download the LTS (Long Term Support) version
    - Follow the installation wizard
-   -  Make sure to check the option to install necessary tools and chocolatey (Windows)
+   - Make sure to check the option to install necessary tools and chocolatey (Windows)
 
 2. **Verify Installation**
 
@@ -37,8 +37,8 @@ This guide provides comprehensive instructions for setting up your React develop
 
 1. **Install Git**
 
-   - **Windows**: Download from [git-scm.com](https://git-scm.com/download/win)
-   - **macOS**:
+   - **Windows** Download from [git-scm.com](https://git-scm.com/download/win)
+   - **macOS**
 
      ```bash
      # Install Homebrew first if you haven't
@@ -97,7 +97,7 @@ This guide provides comprehensive instructions for setting up your React develop
    - Auto Rename Tag
    - Path Intellisense
    - Thunder Client
-   - **Live Server** (Required for running quiz files)
+   - **Live Server**(Required for running quiz files)
 
    **Install Live Server Extension:**
 
@@ -116,7 +116,7 @@ This guide provides comprehensive instructions for setting up your React develop
    5. Click "Port: 5500" in status bar to stop the server when done
    ```
 
-   >  **Why Live Server?** The quizzes use modern JavaScript features that require a proper web server to run. Simply double-clicking the HTML file won't work due to CORS restrictions and module imports. Live Server provides a local development server with automatic browser refresh.
+   >  **Why Live Server?**The quizzes use modern JavaScript features that require a proper web server to run. Simply double-clicking the HTML file won't work due to CORS restrictions and module imports. Live Server provides a local development server with automatic browser refresh.
 
 3. **Configure Git in VS Code**
 
@@ -179,19 +179,19 @@ This guide provides comprehensive instructions for setting up your React develop
 
 1. **MongoDB (Required for this course)**
 
-   - **Local Installation**:
+   - **Local Installation**
 
      - Download MongoDB Community Server from [mongodb.com](https://www.mongodb.com/try/download/community)
      - Install MongoDB Compass (GUI) for database management
      - Or use MongoDB Shell (mongosh) for command-line access
 
-   - **Cloud Alternative - MongoDB Atlas**:
+   - **Cloud Alternative - MongoDB Atlas**
 
      - Create free account at [mongodb.com/atlas](https://www.mongodb.com/atlas)
      - Create a free cluster (512MB)
      - Get connection string for your applications
 
-   - **Verification**:
+   - **Verification**
      ```bash
      mongod --version  # For local installation
      mongosh --version # For MongoDB Shell

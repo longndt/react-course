@@ -2,8 +2,8 @@
 
 ## Overview
 
-**Difficulty**: Beginner
-**Prerequisites**: Basic JavaScript/TypeScript knowledge, HTML/CSS basics
+**Difficulty** Beginner
+**Prerequisites** Basic JavaScript/TypeScript knowledge, HTML/CSS basics
 
 This lesson covers React fundamentals and modern development setup. You'll learn TSX (TypeScript JSX) syntax, component basics, state management with hooks, and how to set up a professional React development environment with Vite, TypeScript, and essential tooling.
 
@@ -70,26 +70,26 @@ npm run dev
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 **Theory First**: Start with [Theory](./theory/theory1.md) → [Example](./example/) → [Lab](./lab/lab1.md)
-- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory1.md)
-- 🎯 **Quick Review**: [Reference](./reference/) → [Quiz](./quiz/quiz1.html) → Focus on weak areas
+- 📖 **Theory First** Start with [Theory](./theory/theory1.md) → [Example](./example/) → [Lab](./lab/lab1.md)
+- ⚡ **Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory1.md)
+- 🎯 **Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz1.html) → Focus on weak areas
 
 ---
 
 ## What's Next
 
 ### Ready to Continue?
-- **Completed this lesson?** → Proceed to [Lesson 2: React Components & Hooks](../lesson2-component-hook/)
+- **Completed this lesson?**→ Proceed to [Lesson 2: React Components & Hooks](../lesson2-component-hook/)
 
 ### Need More Practice?
-- **Study theory** → [theory1.md](./theory/theory1.md) - Deep dive into React concepts
-- **View examples** → [example/](./example/) - Follow-along tutorials
-- **Practice exercises** → [lab1.md](./lab/lab1.md) - Hands-on challenges
+- **Study theory**→ [theory1.md](./theory/theory1.md) - Deep dive into React concepts
+- **View examples**→ [example/](./example/) - Follow-along tutorials
+- **Practice exercises**→ [lab1.md](./lab/lab1.md) - Hands-on challenges
 
 ### Additional Resources
-- **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
-- **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
-- **Learn components** → Preview [Lesson 2](../lesson2-component-hook/)
+- **Quiz yourself**→ [quiz/](./quiz/) - Test your knowledge
+- **Having issues?**→ [Troubleshooting Guide](../extras/troubleshooting_guide.md)
+- **Learn components**→ Preview [Lesson 2](../lesson2-component-hook/)
 
 ---
 

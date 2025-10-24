@@ -4,7 +4,7 @@
 
 Complete full-stack solutions for Lab 3 exercises.
 
-###  Structure
+### Structure
 
 ```
 solutions/
@@ -26,7 +26,7 @@ solutions/
     └── readme.md
 ```
 
-###  Running Solutions
+### Running Solutions
 
 **Backend:**
 ```bash
@@ -42,15 +42,15 @@ npm install
 npm run dev
 ```
 
-###  Key Concepts
+### Key Concepts
 
-- **REST API:** CRUD operations with Express
-- **MongoDB:** Database integration
-- **React Query:** Data fetching and caching
-- **Error Handling:** Proper error management
-- **TypeScript:** Full-stack type safety
+- **REST API:**CRUD operations with Express
+- **MongoDB:**Database integration
+- **React Query:**Data fetching and caching
+- **Error Handling:**Proper error management
+- **TypeScript:**Full-stack type safety
 
-###  What You'll Learn
+### What You'll Learn
 
 - Building RESTful APIs
 - Database operations

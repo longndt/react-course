@@ -121,9 +121,9 @@ npx ts-node src/example/07-component-examples.ts
 
 ## Next Steps
 
-1. **Practice**: Modify the examples and experiment with different types
-2. **Learn More**: Check [Reference Guide](./reference/reference0.md) for quick lookup
-3. **Theory**: Read [Theory Guide](./theory/theory0.md) for detailed explanations
-4. **Continue**: Move to [Lesson 1](../lesson1-fundamentals-setup/) for React fundamentals
+1. **Practice** Modify the examples and experiment with different types
+2. **Learn More** Check [Reference Guide](./reference/reference0.md) for quick lookup
+3. **Theory** Read [Theory Guide](./theory/theory0.md) for detailed explanations
+4. **Continue** Move to [Lesson 1](../lesson1-fundamentals-setup/) for React fundamentals
 
-> **💡 Tip**: Open this project in VS Code for the best TypeScript experience with IntelliSense and error checking!
+> **💡 Tip** Open this project in VS Code for the best TypeScript experience with IntelliSense and error checking!

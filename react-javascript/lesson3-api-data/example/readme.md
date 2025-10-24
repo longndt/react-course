@@ -1,6 +1,6 @@
 # Lesson 3 Demo: Product Catalog with Axios
 
-This demo shows how to integrate a React frontend with a Node.js/Express backend and MongoDB database using **Axios** - the most popular HTTP client for React applications.
+This demo shows how to integrate a React frontend with a Node.js/Express backend and MongoDB database using **Axios**- the most popular HTTP client for React applications.
 
 **Learning Focus:**
 - Axios for HTTP requests
@@ -32,28 +32,28 @@ Navigate to `http://localhost:5173` (or the port shown in terminal)
 
 ## 🚀 **Server Requirements**
 
-### **Backend Server** (Required)
-- **Runs on**: `http://localhost:3001`
-- **Uses**: Real HTTP requests to your backend API
-- **Database**: MongoDB for data persistence
-- **Setup**: Run `npm run server` in one terminal, `npm run dev` in another
-- **Error Handling**: Shows proper error messages if server is unavailable
+### **Backend Server**(Required)
+- **Runs on** `http://localhost:3001`
+- **Uses** Real HTTP requests to your backend API
+- **Database** MongoDB for data persistence
+- **Setup** Run `npm run server` in one terminal, `npm run dev` in another
+- **Error Handling** Shows proper error messages if server is unavailable
 
 ## What You'll Learn
 
 ### 🛍️ **Product Catalog Features:**
-- **View Products** - Browse all products with details
-- **Add Products** - Create new products with form validation
-- **Update Stock** - Toggle product availability
-- **Delete Products** - Remove products from catalog
-- **Real-time Updates** - See changes immediately
+- **View Products**- Browse all products with details
+- **Add Products**- Create new products with form validation
+- **Update Stock**- Toggle product availability
+- **Delete Products**- Remove products from catalog
+- **Real-time Updates**- See changes immediately
 
 ### 🔧 **Technical Skills:**
-- **Axios Integration** - HTTP client setup and usage
-- **Error Handling** - Professional error states and retry logic
-- **Loading States** - User feedback during API calls
-- **Form Management** - Controlled components and validation
-- **State Management** - Local state with React hooks
+- **Axios Integration**- HTTP client setup and usage
+- **Error Handling**- Professional error states and retry logic
+- **Loading States**- User feedback during API calls
+- **Form Management**- Controlled components and validation
+- **State Management**- Local state with React hooks
 
 ### 📊 **API Endpoints Used:**
 - `GET /api/products` - Fetch all products
@@ -114,27 +114,27 @@ if (!formData.name.trim() || formData.price <= 0) {
 ## Mock Data
 
 The demo includes realistic product data:
-- **Electronics** - iPhones, MacBooks, etc.
-- **Books** - Classic novels and textbooks
-- **Sports** - Athletic shoes and equipment
-- **Home** - Kitchen appliances and furniture
+- **Electronics**- iPhones, MacBooks, etc.
+- **Books**- Classic novels and textbooks
+- **Sports**- Athletic shoes and equipment
+- **Home**- Kitchen appliances and furniture
 
 ## Next Steps
 
-1. **Try the Features** - Add, edit, and delete products
-2. **Check the Code** - Examine how Axios is used
-3. **Modify the UI** - Customize the styling
-4. **Add Features** - Implement search, filtering, or pagination
+1. **Try the Features**- Add, edit, and delete products
+2. **Check the Code**- Examine how Axios is used
+3. **Modify the UI**- Customize the styling
+4. **Add Features**- Implement search, filtering, or pagination
 
 ## Troubleshooting
 
 ### Common Issues:
 
-1. **"Failed to fetch products"** - Make sure backend server is running on port 3001
-2. **"Connection refused"** - Run `npm run server` in another terminal first
-3. **CORS errors** - Backend should handle CORS, check server configuration
-4. **Empty page** - Check that both frontend and backend servers are running
-5. **Port conflicts** - Vite will automatically use the next available port
+1. **"Failed to fetch products"**- Make sure backend server is running on port 3001
+2. **"Connection refused"**- Run `npm run server` in another terminal first
+3. **CORS errors**- Backend should handle CORS, check server configuration
+4. **Empty page**- Check that both frontend and backend servers are running
+5. **Port conflicts**- Vite will automatically use the next available port
 
 ### Debug Mode:
 - Open browser DevTools to see console logs
@@ -143,4 +143,4 @@ The demo includes realistic product data:
 
 ---
 
-**Ready to build your own API-integrated React app?** This demo provides the foundation for any e-commerce or catalog application! 🚀
+**Ready to build your own API-integrated React app?**This demo provides the foundation for any e-commerce or catalog application! 🚀

@@ -19,13 +19,13 @@
 ## Core Concepts
 
 ### What are Components?
-- **Reusable UI pieces** that return JSX
-- **Function components** (modern approach)
-- **Class components** (legacy, not covered here)
+- **Reusable UI pieces**that return JSX
+- **Function components**(modern approach)
+- **Class components**(legacy, not covered here)
 
 ### What are Hooks?
-- **Functions** that let you use state and lifecycle features
-- **Start with "use"** (useState, useEffect, etc.)
+- **Functions**that let you use state and lifecycle features
+- **Start with "use"**(useState, useEffect, etc.)
 - **Only work in function components**
 
 ---
@@ -78,17 +78,17 @@ function Counter() {
 ## React Hooks Overview
 
 ### Built-in Hooks
-- **useState** - Manage component state
-- **useEffect** - Handle side effects
-- **useRef** - Access DOM elements
-- **useContext** - Consume context
-- **useReducer** - Complex state management
+- **useState**- Manage component state
+- **useEffect**- Handle side effects
+- **useRef**- Access DOM elements
+- **useContext**- Consume context
+- **useReducer**- Complex state management
 
 ### Custom Hooks
-- **useLocalStorage** - Persist state
-- **useFetch** - Data fetching
-- **useToggle** - Boolean state
-- **useDebounce** - Delay execution
+- **useLocalStorage**- Persist state
+- **useFetch**- Data fetching
+- **useToggle**- Boolean state
+- **useDebounce**- Delay execution
 
 ---
 
@@ -528,8 +528,8 @@ function UserList() {
 ## Hook Rules & Best Practices
 
 ### Rules of Hooks
-1. **Only call hooks at the top level** - Don't call inside loops, conditions, or nested functions
-2. **Only call hooks from React functions** - Not from regular JavaScript functions
+1. **Only call hooks at the top level**- Don't call inside loops, conditions, or nested functions
+2. **Only call hooks from React functions**- Not from regular JavaScript functions
 
 ### Best Practices
 ```tsx
@@ -599,9 +599,9 @@ function ExpensiveComponent({ items, filter }) {
 
 ## Next Steps
 
-1. **Practice**: Build components using different hooks
-2. **Learn More**: Check [Theory Guide](./theory/theory2.md) for detailed explanations
-3. **Continue**: Move to [Lesson 3](../lesson3-api-data/) for API integration
-4. **Resources**: Explore [Advanced Patterns](../../extras/advanced_patterns.md) for complex patterns
+1. **Practice** Build components using different hooks
+2. **Learn More** Check [Theory Guide](./theory/theory2.md) for detailed explanations
+3. **Continue** Move to [Lesson 3](../lesson3-api-data/) for API integration
+4. **Resources** Explore [Advanced Patterns](../../extras/advanced_patterns.md) for complex patterns
 
-> **💡 Tip**: Start with useState and useEffect, then gradually learn other hooks. Custom hooks are powerful for reusing logic!
+> **💡 Tip** Start with useState and useEffect, then gradually learn other hooks. Custom hooks are powerful for reusing logic!

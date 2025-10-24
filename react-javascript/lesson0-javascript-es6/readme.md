@@ -2,10 +2,10 @@
 
 ## Overview
 
-**Difficulty**: Beginner to Intermediate
-**Status**: Optional but Recommended
+**Difficulty** Beginner to Intermediate
+**Status** Optional but Recommended
 
-This course teaches **React with JavaScript**. Before starting Lesson 1, you should be comfortable with modern JavaScript (ES6+) features. This lesson provides a quick review of essential JavaScript concepts you'll use throughout the course.
+This course teaches **React with JavaScript** Before starting Lesson 1, you should be comfortable with modern JavaScript (ES6+) features. This lesson provides a quick review of essential JavaScript concepts you'll use throughout the course.
 
 ---
 
@@ -49,26 +49,26 @@ npm init -y
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 **Theory First**: Start with [Theory](./theory/theory0.md) → [Example](./example/) → [Lab](./lab/lab0.md)
-- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory0.md)
-- 🎯 **Quick Review**: [Reference](./reference/) → [Quiz](./quiz/index.html) → Focus on weak areas
+- 📖 **Theory First** Start with [Theory](./theory/theory0.md) → [Example](./example/) → [Lab](./lab/lab0.md)
+- ⚡ **Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory0.md)
+- 🎯 **Quick Review** [Reference](./reference/) → [Quiz](./quiz/index.html) → Focus on weak areas
 
 ---
 
 ## What's Next
 
 ### Ready to Continue?
-- **Completed this lesson?** → Proceed to [Lesson 1: React Fundamentals](../lesson1-fundamentals-setup/)
+- **Completed this lesson?**→ Proceed to [Lesson 1: React Fundamentals](../lesson1-fundamentals-setup/)
 
 ### Need More Practice?
-- **Study theory** → [theory0.md](./theory/theory0.md) - Deep dive into JavaScript concepts
-- **View examples** → [example/](./example/) - Interactive JavaScript examples
-- **Practice exercises** → [lab0.md](./lab/lab0.md) - Hands-on JavaScript challenges
+- **Study theory**→ [theory0.md](./theory/theory0.md) - Deep dive into JavaScript concepts
+- **View examples**→ [example/](./example/) - Interactive JavaScript examples
+- **Practice exercises**→ [lab0.md](./lab/lab0.md) - Hands-on JavaScript challenges
 
 ### Additional Resources
-- **Quiz yourself** → [index.html](./quiz/index.html) - Test your JavaScript knowledge
-- **General questions?** → Review the reference guide
-- **Still confused?** → [Check Troubleshooting Guide](../../extras/troubleshooting_guide.md)
+- **Quiz yourself**→ [index.html](./quiz/index.html) - Test your JavaScript knowledge
+- **General questions?**→ Review the reference guide
+- **Still confused?**→ [Check Troubleshooting Guide](../../extras/troubleshooting_guide.md)
 
 ---
 

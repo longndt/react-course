@@ -19,16 +19,16 @@
 ## Why Routing & Authentication?
 
 ### Single Page Applications (SPAs)
-- **Client-side routing** - No page refreshes
-- **Multiple views** in one application
-- **URL-based navigation** - Bookmarkable pages
-- **Better user experience** - Faster navigation
+- **Client-side routing**- No page refreshes
+- **Multiple views**in one application
+- **URL-based navigation**- Bookmarkable pages
+- **Better user experience**- Faster navigation
 
 ### Authentication in SPAs
-- **User sessions** - Login/logout functionality
-- **Protected content** - User-specific data
-- **Security** - Prevent unauthorized access
-- **State management** - User context across routes
+- **User sessions**- Login/logout functionality
+- **Protected content**- User-specific data
+- **Security**- Prevent unauthorized access
+- **State management**- User context across routes
 
 ---
 
@@ -221,14 +221,14 @@ function Layout() {
 ## Authentication Concepts
 
 ### Authentication vs Authorization
-- **Authentication**: "Who are you?" (Login)
-- **Authorization**: "What can you do?" (Permissions)
+- **Authentication** "Who are you?" (Login)
+- **Authorization** "What can you do?" (Permissions)
 
 ### Common Auth Methods
-- **JWT Tokens** - Stateless, scalable
-- **Session Cookies** - Server-side sessions
-- **OAuth** - Third-party authentication
-- **API Keys** - Simple authentication
+- **JWT Tokens**- Stateless, scalable
+- **Session Cookies**- Server-side sessions
+- **OAuth**- Third-party authentication
+- **API Keys**- Simple authentication
 
 ### Auth Flow
 ```tsx
@@ -258,10 +258,10 @@ const handleLogin = async (email: string, password: string) => {
 ## JWT Tokens
 
 ### What is JWT?
-- **JSON Web Token** - Compact, URL-safe token
-- **Self-contained** - Contains user info
-- **Stateless** - No server-side storage needed
-- **Signed** - Tamper-proof
+- **JSON Web Token**- Compact, URL-safe token
+- **Self-contained**- Contains user info
+- **Stateless**- No server-side storage needed
+- **Signed**- Tamper-proof
 
 ### JWT Structure
 ```
@@ -306,9 +306,9 @@ api.interceptors.request.use((config) => {
 ### Token Expiration Management
 
 **Why Token Expiration?**
-- **Security** - Prevents indefinite access
-- **Performance** - Reduces server load
-- **Compliance** - Meets security standards
+- **Security**- Prevents indefinite access
+- **Performance**- Reduces server load
+- **Compliance**- Meets security standards
 
 **Implementation with Expiration:**
 ```tsx
@@ -354,10 +354,10 @@ const login = async (email: string, password: string) => {
 ```
 
 **Token Expiration Benefits:**
-- **Automatic cleanup** - Expired tokens are removed
-- **Security** - Prevents long-term unauthorized access
-- **User experience** - Seamless re-authentication
-- **Configurable** - Easy to adjust expiration time
+- **Automatic cleanup**- Expired tokens are removed
+- **Security**- Prevents long-term unauthorized access
+- **User experience**- Seamless re-authentication
+- **Configurable**- Easy to adjust expiration time
 
 ---
 
@@ -625,9 +625,9 @@ function App() {
 
 ## Next Steps
 
-1. **Practice**: Build protected routes and authentication flows
-2. **Learn More**: Check [Theory Guide](./theory/theory4.md) for detailed explanations
-3. **Continue**: Move to [Lesson 5](../lesson5-fullstack-deployment/) for full-stack development
-4. **Resources**: Explore [Advanced Patterns](../../extras/advanced_patterns.md) for complex patterns
+1. **Practice** Build protected routes and authentication flows
+2. **Learn More** Check [Theory Guide](./theory/theory4.md) for detailed explanations
+3. **Continue** Move to [Lesson 5](../lesson5-fullstack-deployment/) for full-stack development
+4. **Resources** Explore [Advanced Patterns](../../extras/advanced_patterns.md) for complex patterns
 
-> **💡 Tip**: Start with simple routing, then add authentication. Always handle loading states and error cases!
+> **💡 Tip** Start with simple routing, then add authentication. Always handle loading states and error cases!

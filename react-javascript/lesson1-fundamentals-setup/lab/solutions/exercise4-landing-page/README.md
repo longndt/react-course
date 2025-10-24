@@ -97,7 +97,7 @@ my-welcome-page/
 2. **Update App.jsx:**
    - Copy `App.jsx` to `src/App.jsx`
 
-3. **Make sure Welcome component is complete** (from Exercise 2 & 3)
+3. **Make sure Welcome component is complete**(from Exercise 2 & 3)
 
 4. **Run the app:**
    ```bash

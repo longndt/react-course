@@ -2,21 +2,21 @@
 
 ## 📋 Overview
 
-Complete frontend solution demonstrating **React Query** (TanStack Query) for server state management with the Task Manager API.
+Complete frontend solution demonstrating **React Query**(TanStack Query) for server state management with the Task Manager API.
 
 This solution showcases:
--  React Query setup and configuration
--  Data fetching with `useQuery`
--  Data mutations with `useMutation` (Create, Update, Delete)
--  Automatic cache invalidation and refetching
--  Loading and error states
--  Optimistic UI updates
--  React Query DevTools integration
--  PropTypes validation throughout
+- React Query setup and configuration
+- Data fetching with `useQuery`
+- Data mutations with `useMutation` (Create, Update, Delete)
+- Automatic cache invalidation and refetching
+- Loading and error states
+- Optimistic UI updates
+- React Query DevTools integration
+- PropTypes validation throughout
 
 ---
 
-##  Project Structure
+## Project Structure
 
 ```
 exercise2-frontend/
@@ -38,10 +38,10 @@ exercise2-frontend/
 
 ---
 
-##  Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
-- **Backend API** running on `http://localhost:3000`
+- **Backend API**running on `http://localhost:3000`
 - Complete Exercise 1 (Backend) first
 
 ### Step 1: Install Dependencies
@@ -73,11 +73,11 @@ App will start at: `http://localhost:5173`
 
 ---
 
-##  Key Concepts Explained
+## Key Concepts Explained
 
 ### 1. React Query Setup
 
-**main.jsx** - QueryClient configuration:
+**main.jsx**- QueryClient configuration:
 
 ```jsx
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -218,7 +218,7 @@ onSuccess: () => {
 }
 ```
 
-**Alternative: Optimistic Updates** (Bonus Challenge):
+**Alternative: Optimistic Updates**(Bonus Challenge):
 
 ```jsx
 onMutate: async (newTask) => {
@@ -270,7 +270,7 @@ return <TaskList tasks={data} />;
 
 ## 🔌 API Service Layer
 
-**services/api.ts** - Axios client:
+**services/api.ts**- Axios client:
 
 ```javascript
 import axios from 'axios';
@@ -303,7 +303,7 @@ export const taskApi = {
 
 ---
 
-##  Component Structure
+## Component Structure
 
 ### TaskManager Component
 
@@ -332,9 +332,9 @@ const [newTask, setNewTask] = useState({
 
 ---
 
-##  Features Implemented
+## Features Implemented
 
-###  Core Features
+### Core Features
 - [x] Fetch and display all tasks
 - [x] Create new tasks with form
 - [x] Toggle task completion (checkbox)
@@ -344,7 +344,7 @@ const [newTask, setNewTask] = useState({
 - [x] Automatic refetching on success
 - [x] Form validation and reset
 
-###  UX Enhancements
+### UX Enhancements
 - [x] Priority badges (high/medium/low)
 - [x] Strikethrough completed tasks
 - [x] Disabled buttons during mutations
@@ -352,7 +352,7 @@ const [newTask, setNewTask] = useState({
 - [x] Responsive design
 - [x] Smooth animations and transitions
 
-###  Developer Experience
+### Developer Experience
 - [x] PropTypes for runtime validation
 - [x] React Query DevTools
 - [x] Organized file structure
@@ -365,7 +365,7 @@ const [newTask, setNewTask] = useState({
 
 ### Issue: "Network Error" or CORS error
 
-**Cause:** Backend not running or CORS not enabled
+**Cause:**Backend not running or CORS not enabled
 
 **Solution:**
 1. Start backend: `cd exercise1-backend && npm run dev`
@@ -376,9 +376,9 @@ const [newTask, setNewTask] = useState({
 
 ### Issue: Tasks not updating after create/delete
 
-**Cause:** Query not being invalidated
+**Cause:**Query not being invalidated
 
-**Solution:** Ensure `onSuccess` calls `invalidateQueries`:
+**Solution:**Ensure `onSuccess` calls `invalidateQueries`:
 ```jsx
 onSuccess: () => {
   queryClient.invalidateQueries({ queryKey: ['tasks'] });
@@ -389,7 +389,7 @@ onSuccess: () => {
 
 ### Issue: React Query DevTools not showing
 
-**Cause:** DevTools only work in development mode
+**Cause:**DevTools only work in development mode
 
 **Solution:**
 - Run `npm run dev` (not `npm run build`)
@@ -400,9 +400,9 @@ onSuccess: () => {
 
 ### Issue: Missing PropTypes validation
 
-**Cause:** Missing PropTypes definitions
+**Cause:**Missing PropTypes definitions
 
-**Solution:** Import PropTypes from 'prop-types':
+**Solution:**Import PropTypes from 'prop-types':
 ```javascript
 import PropTypes from 'prop-types';
 
@@ -413,22 +413,22 @@ getAllTasks: async (): Promise<Task[]> => {
 
 ---
 
-##  React Query Concepts Summary
+## React Query Concepts Summary
 
 ### Query States
-- **Fresh:** Data is up-to-date (within `staleTime`)
-- **Stale:** Data might be outdated, will refetch in background
-- **Fetching:** Currently fetching data
-- **Idle:** Not fetching
+- **Fresh:**Data is up-to-date (within `staleTime`)
+- **Stale:**Data might be outdated, will refetch in background
+- **Fetching:**Currently fetching data
+- **Idle:**Not fetching
 
 ### Key Features
-- **Automatic Caching:** Queries cached by query key
-- **Background Refetching:** Updates data when stale
-- **Deduplication:** Prevents duplicate requests
-- **Retry Logic:** Automatically retries failed requests
-- **Garbage Collection:** Removes unused cache entries
-- **Pagination & Infinite Scroll:** Built-in support
-- **Optimistic Updates:** Update UI before server response
+- **Automatic Caching:**Queries cached by query key
+- **Background Refetching:**Updates data when stale
+- **Deduplication:**Prevents duplicate requests
+- **Retry Logic:**Automatically retries failed requests
+- **Garbage Collection:**Removes unused cache entries
+- **Pagination & Infinite Scroll:**Built-in support
+- **Optimistic Updates:**Update UI before server response
 
 ### useQuery vs useMutation
 
@@ -442,7 +442,7 @@ getAllTasks: async (): Promise<Task[]> => {
 
 ---
 
-##  Learning Objectives Achieved
+## Learning Objectives Achieved
 
 After completing this exercise, you should understand:
 
@@ -472,16 +472,16 @@ After completing this exercise, you should understand:
 
 ---
 
-##  Next Steps
+## Next Steps
 
 ### Completed
--  Basic CRUD with React Query
--  Loading and error states
--  Cache invalidation
+- Basic CRUD with React Query
+- Loading and error states
+- Cache invalidation
 
 ### Bonus Challenges (Try These!)
 
-1. **Priority Filter** - Add buttons to filter by priority
+1. **Priority Filter**- Add buttons to filter by priority
 ```jsx
 const { data } = useQuery({
   queryKey: ['tasks', { priority: selectedPriority }],
@@ -489,7 +489,7 @@ const { data } = useQuery({
 });
 ```
 
-2. **Optimistic Updates** - Update UI before server responds
+2. **Optimistic Updates**- Update UI before server responds
 ```jsx
 onMutate: async (newTask) => {
   await queryClient.cancelQueries({ queryKey: ['tasks'] });
@@ -499,9 +499,9 @@ onMutate: async (newTask) => {
 },
 ```
 
-3. **Search Functionality** - Search tasks by title
-4. **Task Statistics** - Count total, completed, pending tasks
-5. **Edit Task** - Inline editing instead of just toggle completion
+3. **Search Functionality**- Search tasks by title
+4. **Task Statistics**- Count total, completed, pending tasks
+5. **Edit Task**- Inline editing instead of just toggle completion
 
 ---
 
@@ -523,4 +523,4 @@ onMutate: async (newTask) => {
 
 ---
 
-** Frontend Solution Complete!** You've mastered React Query for server state management. This pattern is used in production apps by companies like Google, Microsoft, and Netflix!
+** Frontend Solution Complete!**You've mastered React Query for server state management. This pattern is used in production apps by companies like Google, Microsoft, and Netflix!

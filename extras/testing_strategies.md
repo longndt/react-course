@@ -753,11 +753,11 @@ open coverage/lcov-report/index.html
 
 ### Coverage Best Practices
 
-1. **Aim for 80%+ coverage** on critical paths
-2. **Focus on business logic** over implementation details
-3. **Test edge cases** and error conditions
-4. **Don't test third-party libraries** unless you're extending them
-5. **Use coverage to find untested code**, not as a goal
+1. **Aim for 80%+ coverage**on critical paths
+2. **Focus on business logic**over implementation details
+3. **Test edge cases**and error conditions
+4. **Don't test third-party libraries**unless you're extending them
+5. **Use coverage to find untested code** not as a goal
 
 ---
 
@@ -843,7 +843,7 @@ module.exports = {
     '^.+\\.(ts|tsx)$': 'ts-jest'
   },
   testMatch: [
-    '<rootDir>/src/**/__tests__/**/*.(ts|tsx)',
+    '<rootDir>/src/**/__tests__/***.(ts|tsx)',
     '<rootDir>/src/**/*.(test|spec).(ts|tsx)'
   ],
   collectCoverageFrom: [
@@ -933,4 +933,4 @@ export default globalSetup;
 
 ---
 
-**Remember**: Good tests are fast, reliable, and provide confidence in your code. Focus on testing behavior, not implementation details.
+**Remember** Good tests are fast, reliable, and provide confidence in your code. Focus on testing behavior, not implementation details.

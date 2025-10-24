@@ -1,6 +1,6 @@
 # Theory - React Fundamentals & Project Setup
 
-> **Prerequisites**: Make sure you have basic JavaScript ES6+ knowledge before starting this lesson.
+> **Prerequisites** Make sure you have basic JavaScript ES6+ knowledge before starting this lesson.
 
 ---
 
@@ -20,15 +20,15 @@
 
 ## What is React?
 
-> 🗺️ **Visual Learning**: For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
+> 🗺️ **Visual Learning** For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
 
-**React** is a JavaScript library for building user interfaces, created and maintained by Meta (Facebook).
+**React**is a JavaScript library for building user interfaces, created and maintained by Meta (Facebook).
 
 ### Key Concepts
 
-- **Component-Based**: Build encapsulated components that manage their own state
-- **Declarative**: Design views for each state, React efficiently updates the right components
-- **Learn Once, Write Anywhere**: Can be used for web, mobile (React Native), desktop, and more
+- **Component-Based** Build encapsulated components that manage their own state
+- **Declarative** Design views for each state, React efficiently updates the right components
+- **Learn Once, Write Anywhere** Can be used for web, mobile (React Native), desktop, and more
 
 ### Why React?
 
@@ -41,13 +41,13 @@
 
 ## JavaScript with React (JSX)
 
-In this course, we use **JavaScript** for all React components (.jsx files).
+In this course, we use **JavaScript**for all React components (.jsx files).
 
 ### What is JSX?
 
 **JSX = JavaScript + XML**
 
-- **JSX**: JavaScript XML - HTML-like syntax in JavaScript
+- **JSX** JavaScript XML - HTML-like syntax in JavaScript
 - File extension: `.jsx` (not `.js`)
 - Allows you to write HTML-like code in JavaScript
 
@@ -107,13 +107,13 @@ function LoginForm() {
 export default LoginForm;
 ```
 
-> **Complete JavaScript Guide**: For comprehensive JavaScript ES6+ review, see [Lesson 0: JavaScript Prerequisites](../lesson0-javascript-es6/)
+> **Complete JavaScript Guide** For comprehensive JavaScript ES6+ review, see [Lesson 0: JavaScript Prerequisites](../lesson0-javascript-es6/)
 
 ---
 
 ## Project Setup with Vite
 
-**Vite** is the modern, fast build tool we use for React projects.
+**Vite**is the modern, fast build tool we use for React projects.
 
 ### Create New Project
 
@@ -133,7 +133,7 @@ npm run dev
 
 ### Project Structure
 
-> 📁 **Visual Learning**: For a comprehensive understanding of React project structure, see [React Project Structure Diagram](../../diagrams/react_project_structure.md)
+> 📁 **Visual Learning** For a comprehensive understanding of React project structure, see [React Project Structure Diagram](../../diagrams/react_project_structure.md)
 
 ```
 my-app/
@@ -209,7 +209,7 @@ function Greeting() {
 
 ### Creating Custom Components
 
-**Step 1:** Create a new file `src/components/Welcome.jsx`
+**Step 1:**Create a new file `src/components/Welcome.jsx`
 
 ```javascript
 // src/components/Welcome.jsx
@@ -225,7 +225,7 @@ function Welcome() {
 export default Welcome;
 ```
 
-**Step 2:** Use it in `src/App.jsx`
+**Step 2:**Use it in `src/App.jsx`
 
 ```javascript
 // File: src/App.jsx
@@ -246,7 +246,7 @@ export default App;
 
 ## JSX Syntax Rules
 
-**JSX** (JavaScript XML) allows you to write HTML-like code in JavaScript.
+**JSX**(JavaScript XML) allows you to write HTML-like code in JavaScript.
 
 ### Basic Rules
 
@@ -430,7 +430,7 @@ function EventDemo() {
 }
 ```
 
-> **Note**: Advanced event handling with state will be covered in Lesson 2
+> **Note** Advanced event handling with state will be covered in Lesson 2
 
 ---
 
@@ -522,10 +522,10 @@ function App() {
 
 ### What's Coming in Lesson 2
 
-🔜 **Props** - Passing data between components
-🔜 **State** - Managing dynamic data with useState
-🔜 **Hooks** - useEffect, custom hooks
-🔜 **Forms** - Controlled components and validation
-🔜 **Component Patterns** - Composition and reusability
+🔜 **Props**- Passing data between components
+🔜 **State**- Managing dynamic data with useState
+🔜 **Hooks**- useEffect, custom hooks
+🔜 **Forms**- Controlled components and validation
+🔜 **Component Patterns**- Composition and reusability
 
-> **Advanced Topics**: For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)
+> **Advanced Topics** For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)

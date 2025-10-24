@@ -4,7 +4,7 @@
 
 This diagram illustrates how React Router handles navigation and routing in a React application using JavaScript, showing the flow from user interaction to component rendering.
 
-> 🛣️ **Related Theory**: For detailed explanations of React Router, see [Routing & Authentication Theory](../../lesson4-routing-auth/theory/theory4.md)
+> 🛣️ **Related Theory** For detailed explanations of React Router, see [Routing & Authentication Theory](../../lesson4-routing-auth/theory/theory4.md)
 
 ## Router Flow
 

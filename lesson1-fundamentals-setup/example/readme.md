@@ -41,7 +41,7 @@ npm install
 npm run dev
 ```
 
-**Your app will open at:** `http://localhost:5173`
+**Your app will open at:**`http://localhost:5173`
 
 ### 3. Build for Production
 
@@ -53,7 +53,7 @@ npm run preview
 ## Example Demonstrated
 
 ### 1. Welcome Component
-**File:** `src/components/Welcome.tsx`
+**File:**`src/components/Welcome.tsx`
 
 - Basic component structure
 - Props with TypeScript interfaces
@@ -83,7 +83,7 @@ function Welcome({ name, age, onGreet }: WelcomeProps) {
 ```
 
 ### 2. Counter Component
-**File:** `src/components/Counter.tsx`
+**File:**`src/components/Counter.tsx`
 
 - State management with `useState`
 - Event handlers
@@ -113,7 +113,7 @@ function Counter() {
 ```
 
 ### 3. User Profile Component
-**File:** `src/components/UserProfile.tsx`
+**File:**`src/components/UserProfile.tsx`
 
 - Complex component with multiple props
 - Form handling
@@ -177,7 +177,7 @@ function UserProfile({ user, onUpdate }: UserProfileProps) {
 ```
 
 ### 4. Reusable Button Component
-**File:** `src/components/Button.tsx`
+**File:**`src/components/Button.tsx`
 
 - Reusable component with variants
 - TypeScript props interface
@@ -269,9 +269,9 @@ function App() {
 
 ## Next Steps
 
-1. **Practice**: Modify the components and experiment with different props
-2. **Learn More**: Check [Reference Guide](./reference/reference1.md) for quick lookup
-3. **Theory**: Read [Theory Guide](./theory/theory1.md) for detailed explanations
-4. **Continue**: Move to [Lesson 2](../lesson2-component-hook/) for advanced components and hooks
+1. **Practice** Modify the components and experiment with different props
+2. **Learn More** Check [Reference Guide](./reference/reference1.md) for quick lookup
+3. **Theory** Read [Theory Guide](./theory/theory1.md) for detailed explanations
+4. **Continue** Move to [Lesson 2](../lesson2-component-hook/) for advanced components and hooks
 
-> **💡 Tip**: Open this project in VS Code for the best TypeScript and React experience with IntelliSense and error checking!
+> **💡 Tip** Open this project in VS Code for the best TypeScript and React experience with IntelliSense and error checking!

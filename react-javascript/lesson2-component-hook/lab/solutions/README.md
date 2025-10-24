@@ -4,7 +4,7 @@
 
 Complete working solutions for all Lab 2 exercises.
 
-###  Structure
+### Structure
 
 ```
 solutions/
@@ -18,7 +18,7 @@ solutions/
     └── Complete reusable component library
 ```
 
-###  Running Solutions
+### Running Solutions
 
 ```bash
 cd exercise1-card-composition
@@ -26,14 +26,14 @@ npm install
 npm run dev
 ```
 
-###  Key Concepts
+### Key Concepts
 
-- **Component Composition:** Building complex UIs from simple components
-- **HOCs:** Reusable component logic
-- **Custom Hooks:** Extracting stateful logic
-- **PropTypes Validation:** Proper typing for advanced patterns
+- **Component Composition:**Building complex UIs from simple components
+- **HOCs:**Reusable component logic
+- **Custom Hooks:**Extracting stateful logic
+- **PropTypes Validation:**Proper typing for advanced patterns
 
-###  Learning Focus
+### Learning Focus
 
 Each solution demonstrates:
 - Clean component architecture

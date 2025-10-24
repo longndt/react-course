@@ -4,7 +4,7 @@
 
 This diagram illustrates the complete deployment process from development to production using JavaScript, including build process, CI/CD pipeline, and deployment strategies.
 
-> 🚀 **Related Theory**: For detailed explanations of deployment, see [Full-Stack & Deployment Theory](../../lesson5-fullstack-deployment/theory/theory5.md)
+> 🚀 **Related Theory** For detailed explanations of deployment, see [Full-Stack & Deployment Theory](../../lesson5-fullstack-deployment/theory/theory5.md)
 
 ## Build Process Flow
 

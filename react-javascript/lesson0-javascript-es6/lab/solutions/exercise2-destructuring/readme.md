@@ -54,12 +54,12 @@ const [primary, ...rest] = colors;
 
 ## Key Learning Points
 
-1. **Object Destructuring**: Extract properties from objects using `{ }`
-2. **Array Destructuring**: Extract elements from arrays using `[ ]`
-3. **Nested Destructuring**: Access nested properties/arrays
-4. **Renaming**: Use `oldName: newName` syntax
-5. **Default Values**: Use `= defaultValue` syntax
-6. **Rest Pattern**: Use `...rest` to collect remaining items
+1. **Object Destructuring** Extract properties from objects using `{ }`
+2. **Array Destructuring** Extract elements from arrays using `[ ]`
+3. **Nested Destructuring** Access nested properties/arrays
+4. **Renaming** Use `oldName: newName` syntax
+5. **Default Values** Use `= defaultValue` syntax
+6. **Rest Pattern** Use `...rest` to collect remaining items
 
 ## Running the Solution
 

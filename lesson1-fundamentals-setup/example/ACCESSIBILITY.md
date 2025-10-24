@@ -223,4 +223,4 @@ test('should not have accessibility violations', async () => {
 4. Consider users with different abilities
 5. Make accessibility a habit, not an afterthought
 
-Remember: **Accessibility is not optional** - it's a fundamental requirement for creating inclusive web applications.
+Remember: **Accessibility is not optional**- it's a fundamental requirement for creating inclusive web applications.

@@ -63,12 +63,12 @@ const summaries = cart.map(item =>
 
 ## Key Learning Points
 
-1. **`map`**: Transform each element, returns new array
-2. **`filter`**: Keep elements that match condition
-3. **`reduce`**: Accumulate values into single result
-4. **`find`**: Find first element that matches condition
-5. **`some`**: Check if any element matches condition
-6. **`every`**: Check if all elements match condition
+1. **`map`** Transform each element, returns new array
+2. **`filter`** Keep elements that match condition
+3. **`reduce`** Accumulate values into single result
+4. **`find`** Find first element that matches condition
+5. **`some`** Check if any element matches condition
+6. **`every`** Check if all elements match condition
 
 ## Running the Solution
 

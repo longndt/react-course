@@ -57,9 +57,9 @@ graph TB
 ## File Organization
 
 ### Core Files
-- **`index.html`** - HTML template
-- **`main.tsx`** - Application entry point
-- **`App.tsx`** - Root component
+- **`index.html`**- HTML template
+- **`main.tsx`**- Application entry point
+- **`App.tsx`**- Root component
 
 ### Source Structure
 ```
@@ -174,10 +174,10 @@ graph LR
 ## Best Practices
 
 ### File Naming
-- **Components**: PascalCase (e.g., `UserProfile.tsx`)
-- **Hooks**: camelCase with `use` prefix (e.g., `useAuth.ts`)
-- **Utils**: camelCase (e.g., `apiHelpers.ts`)
-- **Types**: PascalCase (e.g., `UserTypes.ts`)
+- **Components** PascalCase (e.g., `UserProfile.tsx`)
+- **Hooks** camelCase with `use` prefix (e.g., `useAuth.ts`)
+- **Utils** camelCase (e.g., `apiHelpers.ts`)
+- **Types** PascalCase (e.g., `UserTypes.ts`)
 
 ### Import Organization
 ```typescript

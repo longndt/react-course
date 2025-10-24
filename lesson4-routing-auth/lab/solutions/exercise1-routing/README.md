@@ -2,21 +2,21 @@
 
 ## 📋 Overview
 
-Complete solution demonstrating **React Router v6** with basic routing, navigation, route parameters, and programmatic navigation.
+Complete solution demonstrating **React Router v6**with basic routing, navigation, route parameters, and programmatic navigation.
 
 This solution showcases:
--  BrowserRouter setup
--  Multiple routes configuration
--  Navigation with Link and NavLink components
--  Active link highlighting
--  Route parameters with useParams hook
--  Programmatic navigation with useNavigate hook
--  404 Not Found page
--  Professional UI with responsive design
+- BrowserRouter setup
+- Multiple routes configuration
+- Navigation with Link and NavLink components
+- Active link highlighting
+- Route parameters with useParams hook
+- Programmatic navigation with useNavigate hook
+- 404 Not Found page
+- Professional UI with responsive design
 
 ---
 
-##  Project Structure
+## Project Structure
 
 ```
 exercise1-routing/
@@ -41,7 +41,7 @@ exercise1-routing/
 
 ---
 
-##  Installation & Setup
+## Installation & Setup
 
 ### Step 1: Install Dependencies
 
@@ -64,11 +64,11 @@ App will start at: `http://localhost:5173`
 
 ---
 
-##  Key Concepts Explained
+## Key Concepts Explained
 
 ### 1. BrowserRouter Setup
 
-**App.tsx** - Wrapping the application with BrowserRouter:
+**App.tsx**- Wrapping the application with BrowserRouter:
 
 ```tsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -105,7 +105,7 @@ function App() {
 
 ### 2. Navigation with Link and NavLink
 
-**Link Component** - Basic navigation without active state:
+**Link Component**- Basic navigation without active state:
 
 ```tsx
 import { Link } from 'react-router-dom';
@@ -115,7 +115,7 @@ import { Link } from 'react-router-dom';
 </Link>
 ```
 
-**NavLink Component** - Navigation with active state tracking:
+**NavLink Component**- Navigation with active state tracking:
 
 ```tsx
 import { NavLink } from 'react-router-dom';
@@ -149,14 +149,14 @@ import { NavLink } from 'react-router-dom';
 
 ### 3. Route Parameters with useParams
 
-**Dynamic Routes** - Define route with parameter:
+**Dynamic Routes**- Define route with parameter:
 
 ```tsx
 // In App.tsx
 <Route path="/products/:id" element={<ProductDetail />} />
 ```
 
-**Extract Parameter** - Use `useParams` hook:
+**Extract Parameter**- Use `useParams` hook:
 
 ```tsx
 import { useParams } from 'react-router-dom';
@@ -175,7 +175,7 @@ function ProductDetail() {
 }
 ```
 
-**Multiple Parameters** - You can have multiple params:
+**Multiple Parameters**- You can have multiple params:
 
 ```tsx
 // Route definition
@@ -189,7 +189,7 @@ const { category, id } = useParams<{ category: string; id: string }>();
 
 ### 4. Programmatic Navigation with useNavigate
 
-**useNavigate Hook** - Navigate programmatically in code:
+**useNavigate Hook**- Navigate programmatically in code:
 
 ```tsx
 import { useNavigate } from 'react-router-dom';
@@ -238,7 +238,7 @@ navigate('/search?q=react');
 
 ### 5. Linking to Dynamic Routes
 
-**Products Page** - Create links to dynamic routes:
+**Products Page**- Create links to dynamic routes:
 
 ```tsx
 const products = [
@@ -270,18 +270,18 @@ function Products() {
 
 ---
 
-##  Features Implemented
+## Features Implemented
 
-###  Page Components
+### Page Components
 
-1. **Home** - Hero section with feature cards
-2. **About** - Information about the application
-3. **Contact** - Contact information and form
-4. **Products** - Grid of product cards
-5. **ProductDetail** - Detailed product view with parameters
-6. **NotFound** - 404 error page for invalid routes
+1. **Home**- Hero section with feature cards
+2. **About**- Information about the application
+3. **Contact**- Contact information and form
+4. **Products**- Grid of product cards
+5. **ProductDetail**- Detailed product view with parameters
+6. **NotFound**- 404 error page for invalid routes
 
-###  Navigation Features
+### Navigation Features
 
 - [x] Navbar component with Logo
 - [x] Navigation links (Home, Products, About, Contact)
@@ -290,7 +290,7 @@ function Products() {
 - [x] Sticky navbar positioning
 - [x] Responsive navigation
 
-###  Routing Features
+### Routing Features
 
 - [x] BrowserRouter configuration
 - [x] Multiple static routes (/, /about, /contact, /products)
@@ -300,7 +300,7 @@ function Products() {
 - [x] Back button with useNavigate(-1)
 - [x] Navigation buttons with useNavigate
 
-###  UI/UX Enhancements
+### UI/UX Enhancements
 
 - [x] Gradient backgrounds and modern design
 - [x] Hover effects on cards and buttons
@@ -312,7 +312,7 @@ function Products() {
 
 ---
 
-##  Routing Patterns Demonstrated
+## Routing Patterns Demonstrated
 
 ### Pattern 1: Basic Static Routes
 
@@ -349,7 +349,7 @@ function Products() {
 
 ### Issue: Links don't work / page reloads
 
-**Cause:** Using `<a>` tags instead of `<Link>` components
+**Cause:**Using `<a>` tags instead of `<Link>` components
 
 **Solution:**
 ```tsx
@@ -364,7 +364,7 @@ function Products() {
 
 ### Issue: Active class not applying
 
-**Cause:** Using `Link` instead of `NavLink`
+**Cause:**Using `Link` instead of `NavLink`
 
 **Solution:**
 ```tsx
@@ -384,9 +384,9 @@ function Products() {
 
 ### Issue: Home link always active
 
-**Cause:** Path "/" matches all routes starting with "/"
+**Cause:**Path "/" matches all routes starting with "/"
 
-**Solution:** Add `end` prop to Home NavLink:
+**Solution:**Add `end` prop to Home NavLink:
 ```tsx
 <NavLink to="/" end className={...}>Home</NavLink>
 ```
@@ -395,7 +395,7 @@ function Products() {
 
 ### Issue: useParams returns undefined
 
-**Cause:** Using wrong parameter name or component not in route
+**Cause:**Using wrong parameter name or component not in route
 
 **Solution:**
 ```tsx
@@ -409,7 +409,7 @@ const { productId } = useParams();  //  Wrong - mismatch
 
 ---
 
-##  React Router v6 Hooks Summary
+## React Router v6 Hooks Summary
 
 | Hook | Purpose | Return Value |
 |------|---------|--------------|
@@ -421,7 +421,7 @@ const { productId } = useParams();  //  Wrong - mismatch
 
 ---
 
-##  Learning Objectives Achieved
+## Learning Objectives Achieved
 
 After reviewing this solution, you should understand:
 
@@ -451,13 +451,13 @@ After reviewing this solution, you should understand:
 
 ---
 
-##  Next Steps
+## Next Steps
 
 ### Completed in This Exercise
--  Basic routing with multiple pages
--  Navigation bar with active links
--  Dynamic routes with parameters
--  Programmatic navigation
+- Basic routing with multiple pages
+- Navigation bar with active links
+- Dynamic routes with parameters
+- Programmatic navigation
 
 ### Next Exercise (Exercise 2)
 - ⏭ Authentication Context
@@ -504,4 +504,4 @@ After reviewing this solution, you should understand:
 
 ---
 
-** Exercise 1 Complete!** You've mastered React Router basics. Move on to Exercise 2 to learn authentication and protected routes!
+** Exercise 1 Complete!**You've mastered React Router basics. Move on to Exercise 2 to learn authentication and protected routes!

@@ -2,8 +2,8 @@
 
 ## Overview
 
-**Difficulty**: Intermediate
-**Prerequisites**: Lesson 2 completed, React hooks knowledge
+**Difficulty** Intermediate
+**Prerequisites** Lesson 2 completed, React hooks knowledge
 
 This lesson covers API integration and data management in React applications. You'll learn to fetch data from REST APIs, handle loading states, manage errors, and implement modern data fetching patterns with React Query.
 
@@ -48,7 +48,7 @@ node --version  # Should be 18+
 npm --version   # Should be 9+
 ```
 
-> **⚠️ Not ready?** → Review [Lesson 2](../lesson2-component-hook/) first
+> **⚠️ Not ready?**→ Review [Lesson 2](../lesson2-component-hook/) first
 
 ---
 
@@ -70,26 +70,26 @@ npm run dev
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 **Theory First**: Start with [Theory](./theory/theory3.md) → [Example](./example/) → [Lab](./lab/lab3.md)
-- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory3.md)
-- 🎯 **Quick Review**: [Reference](./reference/) → [Quiz](./quiz/quiz3.html) → Focus on weak areas
+- 📖 **Theory First** Start with [Theory](./theory/theory3.md) → [Example](./example/) → [Lab](./lab/lab3.md)
+- ⚡ **Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory3.md)
+- 🎯 **Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz3.html) → Focus on weak areas
 
 ---
 
 ## What's Next
 
 ### Ready to Continue?
-- **Completed this lesson?** → Proceed to [Lesson 4: Routing & Authentication](../lesson4-routing-auth/)
+- **Completed this lesson?**→ Proceed to [Lesson 4: Routing & Authentication](../lesson4-routing-auth/)
 
 ### Need More Practice?
-- **Study theory** → [theory3.md](./theory/theory3.md) - Deep dive into API integration
-- **View examples** → [example/](./example/) - Follow-along tutorials
-- **Practice exercises** → [lab3.md](./lab/lab3.md) - CRUD challenges
+- **Study theory**→ [theory3.md](./theory/theory3.md) - Deep dive into API integration
+- **View examples**→ [example/](./example/) - Follow-along tutorials
+- **Practice exercises**→ [lab3.md](./lab/lab3.md) - CRUD challenges
 
 ### Additional Resources
-- **Quiz yourself** → [quiz/](./quiz/) - Test your API knowledge
-- **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
-- **Learn auth next** → Preview [Lesson 4](../lesson4-routing-auth/)
+- **Quiz yourself**→ [quiz/](./quiz/) - Test your API knowledge
+- **Having issues?**→ [Troubleshooting Guide](../extras/troubleshooting_guide.md)
+- **Learn auth next**→ Preview [Lesson 4](../lesson4-routing-auth/)
 
 ---
 

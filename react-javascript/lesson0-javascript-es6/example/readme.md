@@ -91,17 +91,17 @@ node src/examples/08-react-patterns.js
 ## Key Learning Points
 
 ### Modern JavaScript Features
-- **Arrow Functions**: Concise function syntax
-- **Destructuring**: Extract values from objects/arrays
-- **Template Literals**: String interpolation with backticks
-- **Modules**: Import/export for code organization
-- **Async/Await**: Modern promise handling
+- **Arrow Functions** Concise function syntax
+- **Destructuring** Extract values from objects/arrays
+- **Template Literals** String interpolation with backticks
+- **Modules** Import/export for code organization
+- **Async/Await** Modern promise handling
 
 ### React Integration
-- **JSX Syntax**: JavaScript XML for React components
-- **Event Handling**: onClick, onChange, onSubmit patterns
-- **State Management**: useState and useEffect hooks
-- **Props**: Passing data between components
+- **JSX Syntax** JavaScript XML for React components
+- **Event Handling** onClick, onChange, onSubmit patterns
+- **State Management** useState and useEffect hooks
+- **Props** Passing data between components
 
 ### Best Practices
 - Use arrow functions for event handlers
@@ -142,9 +142,9 @@ node src/examples/08-react-patterns.js
 
 ## Next Steps
 
-1. **Practice**: Modify the examples and experiment with different patterns
-2. **Learn More**: Check [Reference Guide](./reference/reference0.md) for quick lookup
-3. **Theory**: Read [Theory Guide](./theory/theory0.md) for detailed explanations
-4. **Continue**: Move to [Lesson 1](../lesson1-fundamentals-setup/) for React fundamentals
+1. **Practice** Modify the examples and experiment with different patterns
+2. **Learn More** Check [Reference Guide](./reference/reference0.md) for quick lookup
+3. **Theory** Read [Theory Guide](./theory/theory0.md) for detailed explanations
+4. **Continue** Move to [Lesson 1](../lesson1-fundamentals-setup/) for React fundamentals
 
-> **💡 Tip**: Open this project in VS Code for the best JavaScript experience with IntelliSense and error checking!
+> **💡 Tip** Open this project in VS Code for the best JavaScript experience with IntelliSense and error checking!

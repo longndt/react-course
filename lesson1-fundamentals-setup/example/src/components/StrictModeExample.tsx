@@ -19,14 +19,6 @@ interface User {
 type UserUpdateHandler = (user: User) => void;
 type UserFilter = (user: User) => boolean;
 
-// Generic interface with constraints
-interface Repository<T extends { id: number }> {
-    items: T[];
-    add: (item: Omit<T, 'id'>) => T;
-    update: (id: number, updates: Partial<T>) => T | undefined;
-    remove: (id: number) => boolean;
-    find: (id: number) => T | undefined;
-}
 
 // Strict component props with exact optional properties
 interface StrictModeExampleProps {

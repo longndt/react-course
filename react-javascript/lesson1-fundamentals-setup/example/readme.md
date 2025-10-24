@@ -40,7 +40,7 @@ npm install
 npm run dev
 ```
 
-**Your app will open at:** `http://localhost:5173`
+**Your app will open at:**`http://localhost:5173`
 
 ### 3. Build for Production
 
@@ -52,7 +52,7 @@ npm run preview
 ## Example Demonstrated
 
 ### 1. Welcome Component
-**File:** `src/components/Welcome.jsx`
+**File:**`src/components/Welcome.jsx`
 
 - Basic component structure
 - Props with JavaScript objects
@@ -76,7 +76,7 @@ function Welcome({ name, age, onGreet }) {
 ```
 
 ### 2. Counter Component
-**File:** `src/components/Counter.jsx`
+**File:**`src/components/Counter.jsx`
 
 - State management with `useState`
 - Event handlers
@@ -112,7 +112,7 @@ function Counter() {
 ```
 
 ### 3. User Profile Component
-**File:** `src/components/UserProfile.jsx`
+**File:**`src/components/UserProfile.jsx`
 
 - Complex component with multiple props
 - Form handling
@@ -191,7 +191,7 @@ function UserProfile({ user, onUpdate }) {
 ```
 
 ### 4. Reusable Button Component
-**File:** `src/components/Button.jsx`
+**File:**`src/components/Button.jsx`
 
 - Reusable component with variants
 - JavaScript props handling
@@ -275,9 +275,9 @@ function App() {
 
 ## Next Steps
 
-1. **Practice**: Modify the components and experiment with different props
-2. **Learn More**: Check [Reference Guide](./reference/reference1.md) for quick lookup
-3. **Theory**: Read [Theory Guide](./theory/theory1.md) for detailed explanations
-4. **Continue**: Move to [Lesson 2](../lesson2-component-hook/) for advanced components and hooks
+1. **Practice** Modify the components and experiment with different props
+2. **Learn More** Check [Reference Guide](./reference/reference1.md) for quick lookup
+3. **Theory** Read [Theory Guide](./theory/theory1.md) for detailed explanations
+4. **Continue** Move to [Lesson 2](../lesson2-component-hook/) for advanced components and hooks
 
-> **💡 Tip**: Open this project in VS Code for the best JavaScript and React experience with IntelliSense and error checking!
+> **💡 Tip** Open this project in VS Code for the best JavaScript and React experience with IntelliSense and error checking!

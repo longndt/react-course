@@ -17,14 +17,14 @@
 ## Why API Integration Matters?
 
 ### Real-World Applications
-- **Dynamic Content**: Data from databases, external services
-- **User Interactions**: Forms, real-time updates
-- **Third-Party Services**: Payment, maps, social media
+- **Dynamic Content** Data from databases, external services
+- **User Interactions** Forms, real-time updates
+- **Third-Party Services** Payment, maps, social media
 
 ### Common Use Cases
-- **E-commerce**: Product catalogs, user accounts, orders
-- **Social Media**: Posts, comments, user profiles
-- **Dashboard**: Analytics, reports, real-time data
+- **E-commerce** Product catalogs, user accounts, orders
+- **Social Media** Posts, comments, user profiles
+- **Dashboard** Analytics, reports, real-time data
 
 ---
 
@@ -32,9 +32,9 @@
 
 ### What is REST?
 - **Representational State Transfer**
-- **Stateless** communication
-- **HTTP methods** for different operations
-- **JSON** as data format
+- **Stateless**communication
+- **HTTP methods**for different operations
+- **JSON**as data format
 
 ### API Endpoints
 ```javascript
@@ -526,9 +526,9 @@ const fetchUser = async (id) => {
 
 ## Next Steps
 
-1. **Practice**: Build components that fetch and display data
-2. **Learn More**: Check [Theory Guide](./theory/theory3.md) for detailed explanations
-3. **Continue**: Move to [Lesson 4](../lesson4-routing-auth/) for routing and authentication
-4. **Resources**: Explore [Advanced Patterns](../../extras/advanced_patterns.md) for complex patterns
+1. **Practice** Build components that fetch and display data
+2. **Learn More** Check [Theory Guide](./theory/theory3.md) for detailed explanations
+3. **Continue** Move to [Lesson 4](../lesson4-routing-auth/) for routing and authentication
+4. **Resources** Explore [Advanced Patterns](../../extras/advanced_patterns.md) for complex patterns
 
-> **💡 Tip**: Start with simple GET requests, then gradually add POST, PUT, DELETE operations. Always handle loading and error states!
+> **💡 Tip** Start with simple GET requests, then gradually add POST, PUT, DELETE operations. Always handle loading and error states!

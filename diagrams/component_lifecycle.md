@@ -177,10 +177,10 @@ flowchart TD
     style Effect2 fill:#ffd4d4
 ```
 
-**Rules**:
-1. ✅ Hooks must be called in the **same order** every render
-2. ✅ Hooks must be at the **top level** (not in conditions/loops)
-3. ✅ `useEffect` runs **after** render and DOM commit
+**Rules**
+1. ✅ Hooks must be called in the **same order**every render
+2. ✅ Hooks must be at the **top level**(not in conditions/loops)
+3. ✅ `useEffect` runs **after**render and DOM commit
 4. ✅ Multiple `useEffect` hooks run in **order of declaration**
 
 ---
@@ -301,7 +301,7 @@ flowchart TD
     style Logic fill:#fff3cd
 ```
 
-**Example**:
+**Example**
 ```typescript
 function useCustomData() {
   const [data, setData] = useState(null);
@@ -386,7 +386,7 @@ flowchart TD
     style Safe fill:#d4edda
 ```
 
-**Example with Cleanup**:
+**Example with Cleanup**
 ```typescript
 useEffect(() => {
   const timer = setInterval(() => {
@@ -426,11 +426,11 @@ sequenceDiagram
     Note over React,Component: This helps detect:<br/>- Side effects in render<br/>- Missing cleanup functions<br/>- State initialization issues
 ```
 
-**Why?**: React 18+ runs components twice in development to help you catch bugs early.
+**Why?** React 18+ runs components twice in development to help you catch bugs early.
 
 ---
 
-**Created**: October 6, 2025
-**For**: React Course - LongNDT
-**Topic**: Component Lifecycle & Hooks
-**Related Lessons**: Lesson 1, Lesson 2
+**Created** October 6, 2025
+**For** React Course - LongNDT
+**Topic** Component Lifecycle & Hooks
+**Related Lessons** Lesson 1, Lesson 2

@@ -19,7 +19,7 @@
 
 ### Problem: "npm command not found"
 
-**Cause:** Node.js is not installed or not in PATH
+**Cause:**Node.js is not installed or not in PATH
 
 **Solution:**
 
@@ -44,7 +44,7 @@ C:\> node --version
 
 1. **Check installation:**
    - Download Node.js LTS from [nodejs.org](https://nodejs.org)
-   - Run installer and **check** "Automatically install necessary tools"
+   - Run installer and **check**"Automatically install necessary tools"
 
 2. **Restart terminal:**
    - Close all terminal windows
@@ -63,7 +63,7 @@ C:\> node --version
 
 ### Problem: Project won't start - "Port 3000 already in use"
 
-**Cause:** Another application is using the same port
+**Cause:**Another application is using the same port
 
 **Solution:**
 
@@ -474,7 +474,7 @@ function UserList({ users }) {
 
 ### Problem: "Component is not defined" error
 
-**Cause:** Forgot to import the component
+**Cause:**Forgot to import the component
 
 **Solution:**
 
@@ -496,7 +496,7 @@ function App() {
 
 ### Problem: Components not re-rendering when data changes
 
-**Cause:** Mutating state directly instead of creating new state
+**Cause:**Mutating state directly instead of creating new state
 
 **Solution:**
 
@@ -690,7 +690,7 @@ async function fetchUsers() {
 
 ### Problem: Data not showing up from API
 
-**Cause:** Not handling async operations properly
+**Cause:**Not handling async operations properly
 
 **Solution:**
 
@@ -787,7 +787,7 @@ console.log(import.meta.env.VITE_API_URL); // undefined in production
 
 **Solution:**
 
-1. **Check naming:** Must start with `VITE_`
+1. **Check naming:**Must start with `VITE_`
    ```env
    # Wrong
    API_URL=http://localhost:5000
@@ -801,7 +801,7 @@ console.log(import.meta.env.VITE_API_URL); // undefined in production
    - Vercel: Project settings → Environment Variables
    - Railway: Variables tab
 
-3. **Rebuild app** after adding env vars
+3. **Rebuild app**after adding env vars
 
 ---
 
@@ -809,7 +809,7 @@ console.log(import.meta.env.VITE_API_URL); // undefined in production
 
 ### Problem: CSS classes not applying
 
-**Cause:** Using `class` instead of `className` or incorrect CSS import
+**Cause:**Using `class` instead of `className` or incorrect CSS import
 
 **Solution:**
 
@@ -834,7 +834,7 @@ function MyComponent() {
 
 ### Problem: Styles not loading
 
-**Cause:** CSS file not imported or incorrect path
+**Cause:**CSS file not imported or incorrect path
 
 **Solution:**
 
@@ -854,7 +854,7 @@ import "./index.css";
 
 ### Problem: App is slow when typing in forms
 
-**Cause:** Re-rendering entire component tree on every keystroke
+**Cause:**Re-rendering entire component tree on every keystroke
 
 **Solution:**
 
@@ -889,7 +889,7 @@ function SearchForm() {
 
 ### Problem: Components are getting too large and complex
 
-**Cause:** Trying to do too much in one component
+**Cause:**Trying to do too much in one component
 
 **Solution:**
 
@@ -921,7 +921,7 @@ function StudentDashboard() {
 
 ### Problem: Hard to manage data between components
 
-**Cause:** Passing props through too many levels
+**Cause:**Passing props through too many levels
 
 **Solution:**
 
@@ -959,18 +959,18 @@ function UserProfile() {
 
 ### Debugging Steps:
 
-1. **Check the browser console** for error messages
-2. **Read the error message carefully** - it usually tells you what's wrong
-3. **Use console.log()** to check if your data is what you expect
-4. **Check your component props** with React Developer Tools
-5. **Search the exact error message** on Google or Stack Overflow
-6. **Ask for help** - show your code and the error message
+1. **Check the browser console**for error messages
+2. **Read the error message carefully**- it usually tells you what's wrong
+3. **Use console.log()**to check if your data is what you expect
+4. **Check your component props**with React Developer Tools
+5. **Search the exact error message**on Google or Stack Overflow
+6. **Ask for help**- show your code and the error message
 
 ### Helpful Browser Extensions:
 
-- **React Developer Tools** - Inspect React components
-- **Redux DevTools** - Debug state management
-- **JSON Formatter** - View API responses nicely
+- **React Developer Tools**- Inspect React components
+- **Redux DevTools**- Debug state management
+- **JSON Formatter**- View API responses nicely
 
 ### Online Resources:
 
@@ -1030,13 +1030,13 @@ function UserList({ users }) {
 
 ### Remember:
 
-- **Always use `key` props** when rendering lists
+- **Always use `key` props**when rendering lists
 - **Start component names with capital letters**
 - **Use `className` not `class`**
 - **Import components before using them**
-- **Use `useEffect` for side effects** (API calls, subscriptions)
-- **Don't mutate state directly** - always create new objects/arrays
-- **Use optional chaining (`?.`)** to safely access object properties
-- **Always check for null/undefined** before calling array methods
+- **Use `useEffect` for side effects**(API calls, subscriptions)
+- **Don't mutate state directly**- always create new objects/arrays
+- **Use optional chaining (`?.`)**to safely access object properties
+- **Always check for null/undefined**before calling array methods
 
 ---

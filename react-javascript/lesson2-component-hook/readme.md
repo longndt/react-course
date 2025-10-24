@@ -2,8 +2,8 @@
 
 ## Overview
 
-**Difficulty**: Intermediate
-**Prerequisites**: Lesson 1 completed, JavaScript ES6+ knowledge
+**Difficulty** Intermediate
+**Prerequisites** Lesson 1 completed, JavaScript ES6+ knowledge
 
 This lesson covers React component architecture and hooks - the foundation of modern React development. You'll learn to build reusable components, manage state effectively, and create custom hooks for shared logic.
 
@@ -45,7 +45,7 @@ node --version  # Should be 18+
 npm --version   # Should be 9+
 ```
 
-> **⚠️ Not ready?** → Review [Lesson 1](../lesson1-fundamentals-setup/) first
+> **⚠️ Not ready?**→ Review [Lesson 1](../lesson1-fundamentals-setup/) first
 
 ---
 
@@ -67,26 +67,26 @@ npm run dev
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 **Theory First**: Start with [Theory](./theory/theory2.md) → [Example](./example/) → [Lab](./lab/lab2.md)
-- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory2.md)
-- 🎯 **Quick Review**: [Reference](./reference/) → [Quiz](./quiz/quiz2.html) → Focus on weak areas
+- 📖 **Theory First** Start with [Theory](./theory/theory2.md) → [Example](./example/) → [Lab](./lab/lab2.md)
+- ⚡ **Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory2.md)
+- 🎯 **Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz2.html) → Focus on weak areas
 
 ---
 
 ## What's Next
 
 ### Ready to Continue?
-- **Completed this lesson?** → Proceed to [Lesson 3: API & Data Management](../lesson3-api-data/)
+- **Completed this lesson?**→ Proceed to [Lesson 3: API & Data Management](../lesson3-api-data/)
 
 ### Need More Practice?
-- **Study theory** → [theory2.md](./theory/theory2.md) - Deep dive into components and hooks
-- **View examples** → [example/](./example/) - Follow-along tutorials
-- **Practice exercises** → [lab2.md](./lab/lab2.md) - Hands-on challenges
+- **Study theory**→ [theory2.md](./theory/theory2.md) - Deep dive into components and hooks
+- **View examples**→ [example/](./example/) - Follow-along tutorials
+- **Practice exercises**→ [lab2.md](./lab/lab2.md) - Hands-on challenges
 
 ### Additional Resources
-- **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
-- **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
-- **Advanced patterns** → [Advanced Patterns](../extras/advanced_patterns.md)
+- **Quiz yourself**→ [quiz/](./quiz/) - Test your knowledge
+- **Having issues?**→ [Troubleshooting Guide](../extras/troubleshooting_guide.md)
+- **Advanced patterns**→ [Advanced Patterns](../extras/advanced_patterns.md)
 
 ---
 

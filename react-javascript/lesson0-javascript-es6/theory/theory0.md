@@ -20,7 +20,7 @@
 
 ## Why Modern JavaScript for React?
 
-> 🗺️ **Visual Learning**: For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
+> 🗺️ **Visual Learning** For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
 
 **Building Better React Applications:**
 
@@ -619,7 +619,7 @@ useEffect(() => {
 
 ### What's Coming in Lesson 1
 
-🔜 **React Fundamentals** - Components, JSX, and basic patterns
-🔜 **JSX Syntax** - JavaScript with JSX
-🔜 **Component Architecture** - Building reusable components
-🔜 **Styling** - CSS integration with React
+🔜 **React Fundamentals**- Components, JSX, and basic patterns
+🔜 **JSX Syntax**- JavaScript with JSX
+🔜 **Component Architecture**- Building reusable components
+🔜 **Styling**- CSS integration with React

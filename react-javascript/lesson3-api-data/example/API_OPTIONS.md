@@ -60,7 +60,7 @@ const task = {
 
 ## Switching Between Options
 
-- **Mock Mode**: `npm run dev:mock`
-- **Real Backend**: `npm run dev:full`
+- **Mock Mode** `npm run dev:mock`
+- **Real Backend** `npm run dev:full`
 
 Both options provide the same learning experience for React API integration!

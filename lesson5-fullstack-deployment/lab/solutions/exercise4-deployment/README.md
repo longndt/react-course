@@ -2,7 +2,7 @@
 
 A complete production-ready React application demonstrating environment configuration, build optimization, and cloud deployment.
 
-##  Project Structure
+## Project Structure
 
 ```
 exercise4-deployment/
@@ -31,17 +31,17 @@ exercise4-deployment/
 └── .gitignore                  # Git ignore rules
 ```
 
-##  Learning Objectives
+## Learning Objectives
 
 After completing this exercise, you will understand:
 
-1. **Environment Variables** - Managing different configs for dev/prod
-2. **Build Optimization** - Minification, code splitting, tree shaking
-3. **Production Deployment** - Deploying to Vercel, Netlify, or other platforms
-4. **SPA Routing** - Configuring servers for client-side routing
-5. **Performance** - Bundle analysis and optimization techniques
+1. **Environment Variables**- Managing different configs for dev/prod
+2. **Build Optimization**- Minification, code splitting, tree shaking
+3. **Production Deployment**- Deploying to Vercel, Netlify, or other platforms
+4. **SPA Routing**- Configuring servers for client-side routing
+5. **Performance**- Bundle analysis and optimization techniques
 
-##  Setup Instructions
+## Setup Instructions
 
 ### 1. Install Dependencies
 
@@ -54,7 +54,7 @@ npm install
 
 The project includes three environment files:
 
-**`.env.development`** - Used during development (`npm run dev`)
+**`.env.development`**- Used during development (`npm run dev`)
 ```bash
 VITE_API_URL=http://localhost:3000/api
 VITE_APP_NAME=MyApp (Development)
@@ -62,7 +62,7 @@ VITE_ENABLE_ANALYTICS=false
 VITE_ENABLE_LOGGING=true
 ```
 
-**`.env.production`** - Used for production builds (`npm run build`)
+**`.env.production`**- Used for production builds (`npm run build`)
 ```bash
 VITE_API_URL=https://api.myapp.com
 VITE_APP_NAME=MyApp
@@ -70,7 +70,7 @@ VITE_ENABLE_ANALYTICS=true
 VITE_ENABLE_LOGGING=false
 ```
 
-**`.env.example`** - Template for local overrides
+**`.env.example`**- Template for local overrides
 - Copy to `.env.local` for custom local settings
 - `.env.local` is gitignored and overrides other env files
 
@@ -89,11 +89,11 @@ npm run build
 ```
 
 This creates an optimized production build in the `dist/` folder:
--  Minified JavaScript and CSS
--  Console.logs removed
--  Code split into chunks
--  Tree shaking applied
--  Assets hashed for cache busting
+- Minified JavaScript and CSS
+- Console.logs removed
+- Code split into chunks
+- Tree shaking applied
+- Assets hashed for cache busting
 
 ### 5. Preview Production Build Locally
 
@@ -105,7 +105,7 @@ Visit: http://localhost:4173
 
 This lets you test the production build before deploying.
 
-##  Build Optimization Features
+## Build Optimization Features
 
 ### 1. **Code Minification**
 
@@ -178,9 +178,9 @@ dist/assets/main-ghi789.js             12.34 kB │ gzip:   4.56 kB
 
 ### How Vite Environment Variables Work
 
-1. **VITE_ Prefix Required** - Only vars with `VITE_` prefix are exposed to client
-2. **import.meta.env** - Access vars via `import.meta.env.VITE_YOUR_VAR`
-3. **Built-in Vars**:
+1. **VITE_ Prefix Required**- Only vars with `VITE_` prefix are exposed to client
+2. **import.meta.env**- Access vars via `import.meta.env.VITE_YOUR_VAR`
+3. **Built-in Vars**
    - `import.meta.env.DEV` - `true` in development
    - `import.meta.env.PROD` - `true` in production
    - `import.meta.env.MODE` - Current mode (`development` or `production`)
@@ -215,7 +215,7 @@ function MyComponent() {
 }
 ```
 
-###  Security Warning
+### Security Warning
 
 **Never put secret API keys in frontend environment variables!**
 
@@ -249,14 +249,14 @@ git push -u origin main
 
 1. Go to [vercel.com](https://vercel.com) and sign up
 2. Click **"New Project"**
-3. **Import Git Repository** → Select your GitHub repo
-4. **Configure Project**:
+3. **Import Git Repository**→ Select your GitHub repo
+4. **Configure Project**
    - Framework Preset: `Vite`
    - Build Command: `npm run build`
    - Output Directory: `dist`
    - Install Command: `npm install`
 
-5. **Add Environment Variables**:
+5. **Add Environment Variables**
    ```
    VITE_API_URL = https://api.myapp.com
    VITE_APP_NAME = MyApp
@@ -303,13 +303,13 @@ This ensures that `/about`, `/dashboard`, etc. all return `index.html`.
 #### Step 2: Deploy to Netlify
 
 1. Go to [netlify.com](https://netlify.com) and sign up
-2. Click **"Add new site"** → **"Import an existing project"**
-3. **Connect to GitHub** → Select your repository
-4. **Build settings**:
+2. Click **"Add new site"**→ **"Import an existing project"**
+3. **Connect to GitHub**→ Select your repository
+4. **Build settings**
    - Build command: `npm run build`
    - Publish directory: `dist`
 
-5. **Environment Variables** → Add production environment variables
+5. **Environment Variables**→ Add production environment variables
 
 6. Click **Deploy site**
 
@@ -376,7 +376,7 @@ location / {
 </IfModule>
 ```
 
-##  Performance Optimization Tips
+## Performance Optimization Tips
 
 ### 1. **Lazy Load Routes**
 
@@ -443,7 +443,7 @@ gzip on;
 gzip_types text/css application/javascript application/json;
 ```
 
-##  Testing Production Build Locally
+## Testing Production Build Locally
 
 ### Method 1: Preview Command
 
@@ -465,7 +465,7 @@ cd dist
 python -m http.server 8000
 ```
 
-##  Debugging Production Issues
+## Debugging Production Issues
 
 ### 1. **Enable Source Maps**
 
@@ -477,7 +477,7 @@ build: {
 }
 ```
 
-** Warning:** Source maps expose your source code. Only enable for debugging.
+** Warning:**Source maps expose your source code. Only enable for debugging.
 
 ### 2. **Test Environment Variables**
 
@@ -498,7 +498,7 @@ Open DevTools → Network tab:
 - Check chunk sizes
 - Ensure assets are cached (304 responses)
 
-##  Production Deployment Checklist
+## Production Deployment Checklist
 
 Before deploying to production, verify:
 
@@ -518,7 +518,7 @@ Before deploying to production, verify:
 - [x] Mobile responsive
 - [x] Accessibility (a11y) tested
 
-##  Additional Resources
+## Additional Resources
 
 - [Vite Build Guide](https://vitejs.dev/guide/build.html)
 - [Vercel Deployment Docs](https://vercel.com/docs)
@@ -526,17 +526,17 @@ Before deploying to production, verify:
 - [Web Vitals](https://web.dev/vitals/)
 - [Lighthouse Performance Audit](https://developers.google.com/web/tools/lighthouse)
 
-##  Next Steps
+## Next Steps
 
-1. **Add Monitoring**: Integrate Sentry for error tracking
-2. **Add Analytics**: Set up Google Analytics or Plausible
-3. **Add CI/CD**: Set up GitHub Actions for testing before deploy
-4. **Add E2E Tests**: Use Playwright or Cypress
-5. **Add CDN**: Use CloudFlare or AWS CloudFront
-6. **Add Database**: Connect to Firebase, Supabase, or PostgreSQL
-7. **Add Authentication**: Implement Auth0, Clerk, or Firebase Auth
+1. **Add Monitoring** Integrate Sentry for error tracking
+2. **Add Analytics** Set up Google Analytics or Plausible
+3. **Add CI/CD** Set up GitHub Actions for testing before deploy
+4. **Add E2E Tests** Use Playwright or Cypress
+5. **Add CDN** Use CloudFlare or AWS CloudFront
+6. **Add Database** Connect to Firebase, Supabase, or PostgreSQL
+7. **Add Authentication** Implement Auth0, Clerk, or Firebase Auth
 
-##  What You Learned
+## What You Learned
 
  How to configure environment variables for different environments
  How to optimize production builds (minification, code splitting)

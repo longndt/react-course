@@ -133,7 +133,7 @@ flowchart TD
     style Forbidden fill:#fff3cd
 ```
 
-**Code Example**:
+**Code Example**
 ```typescript
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
@@ -192,7 +192,7 @@ graph TD
     style Profile fill:#cce5ff
 ```
 
-**Code Example**:
+**Code Example**
 ```typescript
 interface AuthContextType {
   user: User | null;
@@ -311,7 +311,7 @@ sequenceDiagram
     end
 ```
 
-**Code Example**:
+**Code Example**
 ```typescript
 async function fetchWithAuth(url: string, options: RequestInit = {}) {
   const token = localStorage.getItem('token');
@@ -374,7 +374,7 @@ graph TD
     style Deny fill:#ffe1e1
 ```
 
-**Code Example**:
+**Code Example**
 ```typescript
 // Backend: Middleware to check roles
 function requireRole(...allowedRoles: string[]) {
@@ -401,7 +401,7 @@ app.post('/api/posts', requireRole('admin', 'editor'), createPost);
 app.get('/api/posts', requireRole('admin', 'editor', 'viewer'), getPosts);
 ```
 
-**Frontend: Role-based component**:
+**Frontend: Role-based component**
 ```typescript
 function RequireRole({
   roles,
@@ -469,7 +469,7 @@ sequenceDiagram
     end
 ```
 
-**Code Example**:
+**Code Example**
 ```typescript
 let isRefreshing = false;
 let failedQueue: Array<{
@@ -567,7 +567,7 @@ sequenceDiagram
     App->>User: Redirect to dashboard
 ```
 
-**Code Example**:
+**Code Example**
 ```typescript
 // Frontend: Initiate OAuth
 function GoogleLoginButton() {
@@ -739,7 +739,7 @@ graph LR
     style B3 fill:#d4edda
 ```
 
-**Comparison**:
+**Comparison**
 
 | Feature | Cookie Sessions | JWT Tokens |
 |---------|----------------|------------|
@@ -752,7 +752,7 @@ graph LR
 
 ---
 
-**Created**: October 6, 2025
-**For**: React Course - LongNDT
-**Topic**: Authentication & Authorization
-**Related Lessons**: Lesson 4
+**Created** October 6, 2025
+**For** React Course - LongNDT
+**Topic** Authentication & Authorization
+**Related Lessons** Lesson 4

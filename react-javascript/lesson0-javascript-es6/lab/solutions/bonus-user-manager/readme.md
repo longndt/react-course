@@ -54,11 +54,11 @@ class UserManager {
 
 ## Key Learning Points
 
-1. **Class Syntax**: Modern JavaScript class syntax
-2. **Method Implementation**: Using ES6+ features in methods
-3. **Data Manipulation**: Immutable operations with spread operator
-4. **Integration**: Combining all learned concepts
-5. **Best Practices**: Clean, maintainable code
+1. **Class Syntax** Modern JavaScript class syntax
+2. **Method Implementation** Using ES6+ features in methods
+3. **Data Manipulation** Immutable operations with spread operator
+4. **Integration** Combining all learned concepts
+5. **Best Practices** Clean, maintainable code
 
 ## Running the Solution
 

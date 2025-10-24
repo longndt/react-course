@@ -2,15 +2,15 @@
 
 Complete solution demonstrating React performance optimization with React.memo, useCallback, and useMemo.
 
-##  Features Implemented
+## Features Implemented
 
--  **React.memo** - Prevent unnecessary component re-renders
--  **useCallback** - Memoize callback functions
--  **useMemo** - Memoize expensive computations
--  **Performance Comparison** - Side-by-side memoized vs non-memoized
--  **Real-world example** - 1000 user list with filtering and sorting
+- **React.memo**- Prevent unnecessary component re-renders
+- **useCallback**- Memoize callback functions
+- **useMemo**- Memoize expensive computations
+- **Performance Comparison**- Side-by-side memoized vs non-memoized
+- **Real-world example**- 1000 user list with filtering and sorting
 
-##  Project Structure
+## Project Structure
 
 ```
 exercise2-memoization/
@@ -29,7 +29,7 @@ exercise2-memoization/
 └── readme.md
 ```
 
-##  Getting Started
+## Getting Started
 
 ### Installation
 
@@ -43,7 +43,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) and **press F12 to open Console**.
+Open [http://localhost:5173](http://localhost:5173) and **press F12 to open Console**
 
 ### Build
 
@@ -51,35 +51,35 @@ Open [http://localhost:5173](http://localhost:5173) and **press F12 to open Cons
 npm run build
 ```
 
-##  How to Test Memoization
+## How to Test Memoization
 
 ### Test 1: React.memo with useCallback
 
-1. **Open Console** (F12)
-2. **Click "Increment (Test Re-render)" button** multiple times
-3. **Observe Console Output**:
-   -  See: `" Rendering UserList (parent component)"`
-   -  Don't see: `"Rendering UserItem: X"` messages
+1. **Open Console**(F12)
+2. **Click "Increment (Test Re-render)" button**multiple times
+3. **Observe Console Output**
+   - See: `" Rendering UserList (parent component)"`
+   - Don't see: `"Rendering UserItem: X"` messages
 
-4. **What This Proves**:
+4. **What This Proves**
    - Parent component re-renders
    - Child components (UserItems) DO NOT re-render
    - React.memo + useCallback working!
 
 ### Test 2: useMemo for Expensive Calculations
 
-1. **Type in Search Box** (e.g., "User 5")
-2. **Observe Console**:
+1. **Type in Search Box**(e.g., "User 5")
+2. **Observe Console**
    - See: `" Filtering and sorting users..."`
    - See: `" Calculating stats..."`
 
-3. **Click "Increment" button** (unrelated state)
-4. **Observe Console**:
+3. **Click "Increment" button**(unrelated state)
+4. **Observe Console**
    - Do NOT see filtering/sorting messages
    - useMemo prevents recalculation!
 
-5. **Change Sort Order** (A→Z / Z→A)
-6. **Observe Console**:
+5. **Change Sort Order**(A→Z / Z→A)
+6. **Observe Console**
    - See: `" Filtering and sorting users..."`
    - useMemo recalculates only when dependencies change
 
@@ -87,15 +87,15 @@ npm run build
 
 Scroll down to the " React.memo Performance Comparison" section.
 
-1. **Click "Increment Parent"**:
-   -  Left (No Memo): Logs `" ExpensiveComponentNoMemo rendering..."`
-   -  Right (With Memo): Does NOT log anything (skipped render)
+1. **Click "Increment Parent"**
+   - Left (No Memo): Logs `" ExpensiveComponentNoMemo rendering..."`
+   - Right (With Memo): Does NOT log anything (skipped render)
 
-2. **Click "Increment Child"**:
-   -  Left (No Memo): Logs rendering
-   -  Right (With Memo): Logs rendering (prop changed, so it should render)
+2. **Click "Increment Child"**
+   - Left (No Memo): Logs rendering
+   - Right (With Memo): Logs rendering (prop changed, so it should render)
 
-##  Key Concepts Demonstrated
+## Key Concepts Demonstrated
 
 ### 1. React.memo
 
@@ -166,7 +166,7 @@ function UsersPage() {
 }
 ```
 
-##  Performance Impact
+## Performance Impact
 
 ### Scenario: 1000 User List
 
@@ -184,11 +184,11 @@ function UsersPage() {
 
 | Action | Without Memo | With Memo | Improvement |
 |--------|--------------|-----------|-------------|
-| Click Increment | ~1000 renders | 1 render | **99.9%** faster |
-| Type in Search | ~1000 renders | ~500 renders (filtered) | **50%** faster |
+| Click Increment | ~1000 renders | 1 render | **99.9%**faster |
+| Type in Search | ~1000 renders | ~500 renders (filtered) | **50%**faster |
 | Change Sort | ~1000 renders | ~1000 renders (all need update) | Same (expected) |
 
-##  When to Use Each Hook
+## When to Use Each Hook
 
 ### React.memo
 
@@ -227,7 +227,7 @@ function UsersPage() {
 - Only used once
 - Premature optimization
 
-##  Advanced Patterns
+## Advanced Patterns
 
 ### Custom Comparison Function
 
@@ -294,7 +294,7 @@ function UsersPage() {
 }
 ```
 
-##  Common Pitfalls
+## Common Pitfalls
 
 ### 1. Object/Array Props Break Memoization
 
@@ -330,7 +330,7 @@ function SimpleText({ text }: { text: string }) {
 }
 ```
 
-##  Learning Outcomes
+## Learning Outcomes
 
 After completing this exercise, you understand:
 
@@ -341,13 +341,13 @@ After completing this exercise, you understand:
  How to measure performance impact
  Common pitfalls and how to avoid them
 
-##  Related Exercises
+## Related Exercises
 
-- **Exercise 1**: Code Splitting & Lazy Loading
-- **Exercise 3**: Virtual Lists for Large Datasets
-- **Exercise 4**: Production Build & Deployment
+- **Exercise 1** Code Splitting & Lazy Loading
+- **Exercise 3** Virtual Lists for Large Datasets
+- **Exercise 4** Production Build & Deployment
 
-##  Additional Resources
+## Additional Resources
 
 - [React.memo API](https://react.dev/reference/react/memo)
 - [useCallback Hook](https://react.dev/reference/react/useCallback)
@@ -355,7 +355,7 @@ After completing this exercise, you understand:
 - [React Performance Optimization](https://react.dev/learn/render-and-commit)
 - [Profiling Components](https://react.dev/learn/react-developer-tools)
 
-##  Performance Profiling
+## Performance Profiling
 
 ### Using React DevTools
 
@@ -379,8 +379,8 @@ console.timeEnd('filter'); // Logs: "filter: 12.34ms"
 
 ## 💪 Challenge Exercises
 
-1. **Add pagination**: Implement pagination with useMemo
-2. **Add multi-select**: Allow selecting multiple users with useCallback
-3. **Add custom comparator**: Implement custom memo comparison for UserItem
-4. **Profile optimization**: Measure before/after using React Profiler
-5. **Add debounce**: Debounce search input for better performance
+1. **Add pagination** Implement pagination with useMemo
+2. **Add multi-select** Allow selecting multiple users with useCallback
+3. **Add custom comparator** Implement custom memo comparison for UserItem
+4. **Profile optimization** Measure before/after using React Profiler
+5. **Add debounce** Debounce search input for better performance

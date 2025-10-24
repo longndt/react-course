@@ -2,21 +2,21 @@
 
 ## 📋 Overview
 
-Complete solution demonstrating **React Router authentication** with **Context API**, **Protected Routes**, and **session management**.
+Complete solution demonstrating **React Router authentication**with **Context API** **Protected Routes** and **session management**
 
 This solution showcases:
--  AuthContext with React Context API
--  Protected Route wrapper component
--  Login page with form handling
--  Session persistence with localStorage
--  Protected pages (Dashboard, Profile, Settings)
--  Conditional navigation based on auth state
--  Redirect after login to intended page
--  Mock authentication system
+- AuthContext with React Context API
+- Protected Route wrapper component
+- Login page with form handling
+- Session persistence with localStorage
+- Protected pages (Dashboard, Profile, Settings)
+- Conditional navigation based on auth state
+- Redirect after login to intended page
+- Mock authentication system
 
 ---
 
-##  Project Structure
+## Project Structure
 
 ```
 exercise2-auth/
@@ -44,7 +44,7 @@ exercise2-auth/
 
 ---
 
-##  Installation & Setup
+## Installation & Setup
 
 ### Step 1: Install Dependencies
 
@@ -62,11 +62,11 @@ App will start at: `http://localhost:5173`
 
 ---
 
-##  Key Concepts Explained
+## Key Concepts Explained
 
 ### 1. Authentication Context
 
-**AuthContext.tsx** - Global authentication state:
+**AuthContext.tsx**- Global authentication state:
 
 ```tsx
 interface User {
@@ -136,7 +136,7 @@ export function useAuth() {
 
 ### 2. Protected Route Component
 
-**ProtectedRoute.tsx** - Wrapper to protect routes:
+**ProtectedRoute.tsx**- Wrapper to protect routes:
 
 ```tsx
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
@@ -168,7 +168,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
 
 ### 3. Using Protected Routes
 
-**App.tsx** - Wrap routes with ProtectedRoute:
+**App.tsx**- Wrap routes with ProtectedRoute:
 
 ```tsx
 <Routes>
@@ -199,7 +199,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
 
 ### 4. Login Page with Redirect
 
-**Login.tsx** - Handle login and redirect:
+**Login.tsx**- Handle login and redirect:
 
 ```tsx
 export default function Login() {
@@ -239,7 +239,7 @@ export default function Login() {
 
 ### 5. Conditional Navigation
 
-**Navbar.tsx** - Show/hide links based on auth:
+**Navbar.tsx**- Show/hide links based on auth:
 
 ```tsx
 export default function Navbar() {
@@ -289,9 +289,9 @@ Password: user123
 
 ---
 
-##  Features Implemented
+## Features Implemented
 
-###  Authentication
+### Authentication
 - [x] Login form with validation
 - [x] Mock authentication system
 - [x] Error handling for failed login
@@ -300,7 +300,7 @@ Password: user123
 - [x] Logout functionality
 - [x] Auto-login from saved session
 
-###  Route Protection
+### Route Protection
 - [x] ProtectedRoute component
 - [x] Redirect to login when not authenticated
 - [x] Save intended destination
@@ -308,7 +308,7 @@ Password: user123
 - [x] Loading state during auth check
 - [x] Prevent access to protected pages
 
-###  UI/UX
+### UI/UX
 - [x] Conditional navigation menu
 - [x] User greeting in navbar
 - [x] Login/Logout button states
@@ -324,9 +324,9 @@ Password: user123
 
 ### Issue: Redirects to login on refresh
 
-**Cause:** localStorage not being read properly
+**Cause:**localStorage not being read properly
 
-**Solution:** Check AuthContext useEffect runs on mount:
+**Solution:**Check AuthContext useEffect runs on mount:
 ```tsx
 useEffect(() => {
   const savedUser = localStorage.getItem('user');
@@ -341,7 +341,7 @@ useEffect(() => {
 
 ### Issue: Can't access protected routes after login
 
-**Cause:** Not wrapping routes with ProtectedRoute
+**Cause:**Not wrapping routes with ProtectedRoute
 
 **Solution:**
 ```tsx
@@ -359,9 +359,9 @@ useEffect(() => {
 
 ### Issue: useAuth() throws error
 
-**Cause:** Component not wrapped in AuthProvider
+**Cause:**Component not wrapped in AuthProvider
 
-**Solution:** Wrap App with AuthProvider in main.tsx:
+**Solution:**Wrap App with AuthProvider in main.tsx:
 ```tsx
 <AuthProvider>
   <App />
@@ -370,7 +370,7 @@ useEffect(() => {
 
 ---
 
-##  Learning Objectives Achieved
+## Learning Objectives Achieved
 
  **Context API**
 - Creating authentication context
@@ -398,22 +398,22 @@ useEffect(() => {
 
 ---
 
-##  Next Steps
+## Next Steps
 
 ### Completed
--  Authentication Context
--  Protected Routes
--  Login/Logout
--  Session Persistence
+- Authentication Context
+- Protected Routes
+- Login/Logout
+- Session Persistence
 
 ### Bonus Challenges
 
-1. **Remember Me** - Add checkbox to persist login longer
-2. **Token Expiration** - Implement auto-logout after timeout
-3. **Role-Based Access** - Different routes for admin vs user
-4. **Password Reset** - Add forgot password flow
-5. **Real API** - Connect to actual backend authentication
+1. **Remember Me**- Add checkbox to persist login longer
+2. **Token Expiration**- Implement auto-logout after timeout
+3. **Role-Based Access**- Different routes for admin vs user
+4. **Password Reset**- Add forgot password flow
+5. **Real API**- Connect to actual backend authentication
 
 ---
 
-** Exercise 2 Complete!** You've mastered React Router authentication patterns used in production applications!
+** Exercise 2 Complete!**You've mastered React Router authentication patterns used in production applications!

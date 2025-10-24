@@ -38,9 +38,9 @@ graph TB
 ## TypeScript Learning Path
 
 ### 🎯 Lesson 0: TypeScript Basics (Foundation)
-**Difficulty**: ⭐ Beginner
-**Time**: 2-3 days
-**Requires**: HTML, CSS, Basic JavaScript
+**Difficulty** ⭐ Beginner
+**Time** 2-3 days
+**Requires** HTML, CSS, Basic JavaScript
 
 ```mermaid
 flowchart TD
@@ -60,7 +60,7 @@ flowchart TD
     style E fill:#ffe1e1
 ```
 
-**Key Topics**:
+**Key Topics**
 - TypeScript fundamentals
 - Type annotations and inference
 - Interfaces and type aliases
@@ -69,7 +69,7 @@ flowchart TD
 - Classes and inheritance
 - Strict type checking
 
-**TypeScript Features**:
+**TypeScript Features**
 - Static type checking
 - Interface definitions
 - Generic programming
@@ -77,14 +77,14 @@ flowchart TD
 - Compile-time error detection
 - IntelliSense support
 
-**Lab Project**: TypeScript Practice Exercises
+**Lab Project** TypeScript Practice Exercises
 
 ---
 
 ### 📘 Lesson 1: React Fundamentals with TypeScript
-**Difficulty**: ⭐ Beginner
-**Time**: 1 week
-**Requires**: Lesson 0
+**Difficulty** ⭐ Beginner
+**Time** 1 week
+**Requires** Lesson 0
 
 ```mermaid
 flowchart TD
@@ -104,7 +104,7 @@ flowchart TD
     style E fill:#ffe1e1
 ```
 
-**Key Topics**:
+**Key Topics**
 - JSX with TypeScript
 - Typed functional components
 - Props and state typing
@@ -112,21 +112,21 @@ flowchart TD
 - Virtual DOM concepts
 - Vite setup with TypeScript
 
-**TypeScript Features**:
+**TypeScript Features**
 - Component type definitions
 - Props interface design
 - State type management
 - Event type handling
 - Generic components
 
-**Lab Project**: Welcome Page Application (TypeScript)
+**Lab Project** Welcome Page Application (TypeScript)
 
 ---
 
 ### 📘 Lesson 2: Components & Hooks
-**Difficulty**: ⭐⭐ Intermediate
-**Time**: 1-2 weeks
-**Requires**: Lesson 1
+**Difficulty** ⭐⭐ Intermediate
+**Time** 1-2 weeks
+**Requires** Lesson 1
 
 ```mermaid
 flowchart TD
@@ -146,7 +146,7 @@ flowchart TD
     style F fill:#ffe1e1
 ```
 
-**Key Topics**:
+**Key Topics**
 - useState with TypeScript
 - useEffect for side effects
 - useRef and useContext
@@ -155,21 +155,21 @@ flowchart TD
 - Higher-Order Components (HOC)
 - Render props pattern
 
-**TypeScript Features**:
+**TypeScript Features**
 - Hook type definitions
 - Custom hook typing
 - Component pattern types
 - Context type safety
 - Ref type management
 
-**Lab Project**: Reusable Component Library (TypeScript)
+**Lab Project** Reusable Component Library (TypeScript)
 
 ---
 
 ### 📘 Lesson 3: API Integration & Data
-**Difficulty**: ⭐⭐⭐ Intermediate-Advanced
-**Time**: 2 weeks
-**Requires**: Lessons 1-2
+**Difficulty** ⭐⭐⭐ Intermediate-Advanced
+**Time** 2 weeks
+**Requires** Lessons 1-2
 
 ```mermaid
 flowchart TD
@@ -190,7 +190,7 @@ flowchart TD
     style F fill:#ffe1e1
 ```
 
-**Key Topics**:
+**Key Topics**
 - REST API with TypeScript
 - HTTP methods and responses
 - React Query for data fetching
@@ -199,21 +199,21 @@ flowchart TD
 - MongoDB with Mongoose
 - CORS configuration
 
-**TypeScript Features**:
+**TypeScript Features**
 - API type definitions
 - Data fetching types
 - Error handling types
 - Backend type safety
 - Database schema types
 
-**Lab Project**: Full-Stack Task Manager (TypeScript)
+**Lab Project** Full-Stack Task Manager (TypeScript)
 
 ---
 
 ### 📘 Lesson 4: Routing & Authentication
-**Difficulty**: ⭐⭐⭐⭐ Advanced
-**Time**: 2 weeks
-**Requires**: Lessons 1-3
+**Difficulty** ⭐⭐⭐⭐ Advanced
+**Time** 2 weeks
+**Requires** Lessons 1-3
 
 ```mermaid
 flowchart TD
@@ -234,7 +234,7 @@ flowchart TD
     style F fill:#ffe1e1
 ```
 
-**Key Topics**:
+**Key Topics**
 - React Router v6 with TypeScript
 - Navigation and routing
 - URL parameters and query strings
@@ -243,21 +243,21 @@ flowchart TD
 - Protected routes
 - Auth context management
 
-**TypeScript Features**:
+**TypeScript Features**
 - Route type definitions
 - Authentication types
 - Context type safety
 - Form validation types
 - Route protection types
 
-**Lab Project**: Authentication System (TypeScript)
+**Lab Project** Authentication System (TypeScript)
 
 ---
 
 ### 📘 Lesson 5: Full-Stack & Deployment
-**Difficulty**: ⭐⭐⭐⭐⭐ Advanced
-**Time**: 2-3 weeks
-**Requires**: Lessons 1-4
+**Difficulty** ⭐⭐⭐⭐⭐ Advanced
+**Time** 2-3 weeks
+**Requires** Lessons 1-4
 
 ```mermaid
 flowchart TD
@@ -279,7 +279,7 @@ flowchart TD
     style G fill:#ffe1e1
 ```
 
-**Key Topics**:
+**Key Topics**
 - Performance optimization
 - React.memo, useMemo, useCallback
 - Code splitting with lazy loading
@@ -289,14 +289,14 @@ flowchart TD
 - Docker configuration
 - CI/CD with GitHub Actions
 
-**TypeScript Features**:
+**TypeScript Features**
 - Performance type optimization
 - Build type checking
 - Deployment type safety
 - Environment type management
 - CI/CD type workflows
 
-**Lab Project**: Production Deployment (TypeScript)
+**Lab Project** Production Deployment (TypeScript)
 
 ---
 

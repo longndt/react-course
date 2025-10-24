@@ -17,10 +17,10 @@
 ## Why TypeScript for React?
 
 ### Benefits
-- **Type Safety**: Catch errors at compile time
-- **Better IDE Support**: Autocomplete, refactoring, navigation
-- **Self-Documenting Code**: Types serve as documentation
-- **Easier Refactoring**: Safe code changes across large codebases
+- **Type Safety** Catch errors at compile time
+- **Better IDE Support** Autocomplete, refactoring, navigation
+- **Self-Documenting Code** Types serve as documentation
+- **Easier Refactoring** Safe code changes across large codebases
 
 ### React + TypeScript = TSX
 ```tsx
@@ -401,9 +401,9 @@ type UserRoles = Record<string, string[]>;
 
 ## Next Steps
 
-1. **Practice**: Build small React components with TypeScript
-2. **Learn More**: Advanced TypeScript patterns and utility types
-3. **Continue**: Move to [Lesson 1](../lesson1-fundamentals-setup/) for React fundamentals
-4. **Resources**: Check [Theory Guide](./theory/theory0.md) for detailed explanations
+1. **Practice** Build small React components with TypeScript
+2. **Learn More** Advanced TypeScript patterns and utility types
+3. **Continue** Move to [Lesson 1](../lesson1-fundamentals-setup/) for React fundamentals
+4. **Resources** Check [Theory Guide](./theory/theory0.md) for detailed explanations
 
-> **💡 Tip**: Start with simple types and gradually add complexity. TypeScript is most valuable when it catches real bugs!
+> **💡 Tip** Start with simple types and gradually add complexity. TypeScript is most valuable when it catches real bugs!

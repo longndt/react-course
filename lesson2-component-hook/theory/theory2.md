@@ -22,16 +22,16 @@
 
 ## Core Concepts
 
-> 🔄 **Visual Learning**: For a comprehensive understanding of component lifecycle, see [Component Lifecycle Diagram](../../diagrams/component_lifecycle.md)
+> 🔄 **Visual Learning** For a comprehensive understanding of component lifecycle, see [Component Lifecycle Diagram](../../diagrams/component_lifecycle.md)
 
 ### Why Component Architecture?
 
 Modern applications require modular, reusable UI building blocks. Components enable:
 
-- **Reusability** - Write once, use everywhere
-- **Maintainability** - Isolated, testable code units
-- **Scalability** - Compose complex UIs from simple pieces
-- **Collaboration** - Teams work on independent components
+- **Reusability**- Write once, use everywhere
+- **Maintainability**- Isolated, testable code units
+- **Scalability**- Compose complex UIs from simple pieces
+- **Collaboration**- Teams work on independent components
 
 ### Component Hierarchy Example
 
@@ -56,7 +56,7 @@ E-commerce App
 
 ### Modern React Components
 
-**Function components** are the modern way to write React components. They're simpler, more readable, and work perfectly with hooks.
+**Function components**are the modern way to write React components. They're simpler, more readable, and work perfectly with hooks.
 
 ### Component Design Patterns
 
@@ -425,25 +425,25 @@ function Button({
 
 ## React Hooks Overview
 
-**Hooks** are functions that let you use state and other React features in function components.
+**Hooks**are functions that let you use state and other React features in function components.
 
 ### Why Hooks?
 
-- **Simpler Logic**: No need for class components
-- **Reusable State Logic**: Custom hooks for shared logic
-- **Better Performance**: Optimized re-rendering
-- **Easier Testing**: Function components are easier to test
+- **Simpler Logic** No need for class components
+- **Reusable State Logic** Custom hooks for shared logic
+- **Better Performance** Optimized re-rendering
+- **Easier Testing** Function components are easier to test
 
 ### Hook Rules
 
-1. **Only call hooks at the top level** - Don't call hooks inside loops, conditions, or nested functions
-2. **Only call hooks from React functions** - Call hooks from React function components or custom hooks
+1. **Only call hooks at the top level**- Don't call hooks inside loops, conditions, or nested functions
+2. **Only call hooks from React functions**- Call hooks from React function components or custom hooks
 
 ---
 
 ## useState Hook
 
-**useState** lets you add state to function components.
+**useState**lets you add state to function components.
 
 ### Basic Usage
 
@@ -539,7 +539,7 @@ function UserForm() {
 
 ## useEffect Hook
 
-**useEffect** lets you perform side effects in function components.
+**useEffect**lets you perform side effects in function components.
 
 ### Basic Usage
 
@@ -605,7 +605,7 @@ function Timer() {
 
 ## useRef Hook
 
-**useRef** lets you access DOM elements and persist values across renders.
+**useRef**lets you access DOM elements and persist values across renders.
 
 ### DOM Reference
 
@@ -653,7 +653,7 @@ function Counter() {
 
 ## useContext Hook
 
-**useContext** lets you consume context values without prop drilling.
+**useContext**lets you consume context values without prop drilling.
 
 ### Creating Context
 
@@ -715,7 +715,7 @@ function ThemedButton() {
 
 ## useReducer Hook
 
-**useReducer** is an alternative to useState for complex state logic.
+**useReducer**is an alternative to useState for complex state logic.
 
 ### Basic Usage
 
@@ -768,7 +768,7 @@ function Counter() {
 
 ## Custom Hooks
 
-**Custom hooks** let you extract component logic into reusable functions.
+**Custom hooks**let you extract component logic into reusable functions.
 
 ### Basic Custom Hook
 
@@ -1047,9 +1047,9 @@ function GoodComponent() {
 
 ### What's Coming in Lesson 3
 
-🔜 **API Integration** - Fetching data from servers
-🔜 **Data Management** - Handling loading states and errors
-🔜 **React Query** - Advanced data fetching and caching
-🔜 **CRUD Operations** - Create, Read, Update, Delete
+🔜 **API Integration**- Fetching data from servers
+🔜 **Data Management**- Handling loading states and errors
+🔜 **React Query**- Advanced data fetching and caching
+🔜 **CRUD Operations**- Create, Read, Update, Delete
 
-> **Advanced Topics**: For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)
+> **Advanced Topics** For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)

@@ -40,11 +40,11 @@ const sum = numbers.reduce((total, n) => total + n, 0);
 
 ## Key Learning Points
 
-1. **Syntax**: Arrow functions use `=>` instead of `function` keyword
-2. **Implicit Return**: Single expressions can omit `return` and `{}`
-3. **Parameters**: Single parameters don't need parentheses
-4. **Array Methods**: Arrow functions work great with `map`, `filter`, `reduce`
-5. **`this` Binding**: Arrow functions don't have their own `this` context
+1. **Syntax** Arrow functions use `=>` instead of `function` keyword
+2. **Implicit Return** Single expressions can omit `return` and `{}`
+3. **Parameters** Single parameters don't need parentheses
+4. **Array Methods** Arrow functions work great with `map`, `filter`, `reduce`
+5. **`this` Binding** Arrow functions don't have their own `this` context
 
 ## Running the Solution
 

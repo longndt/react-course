@@ -18,16 +18,16 @@
 ## Why Full-Stack Development?
 
 ### What is Full-Stack?
-- **Frontend** - User interface (React, HTML, CSS, JavaScript)
-- **Backend** - Server logic (Node.js, Express.js, APIs)
-- **Database** - Data storage (MongoDB, PostgreSQL, MySQL)
-- **Deployment** - Production hosting (Vercel, Railway, AWS)
+- **Frontend**- User interface (React, HTML, CSS, JavaScript)
+- **Backend**- Server logic (Node.js, Express.js, APIs)
+- **Database**- Data storage (MongoDB, PostgreSQL, MySQL)
+- **Deployment**- Production hosting (Vercel, Railway, AWS)
 
 ### Benefits
-- **Complete Control** - End-to-end application development
-- **Better Integration** - Seamless frontend-backend communication
-- **Performance** - Optimized for your specific needs
-- **Scalability** - Can handle growth and traffic
+- **Complete Control**- End-to-end application development
+- **Better Integration**- Seamless frontend-backend communication
+- **Performance**- Optimized for your specific needs
+- **Scalability**- Can handle growth and traffic
 
 ---
 
@@ -620,9 +620,9 @@ module.exports = { authenticateToken };
 
 ## Next Steps
 
-1. **Practice**: Build a complete full-stack application
-2. **Learn More**: Check [Theory Guide](./theory/theory5.md) for detailed explanations
-3. **Deploy**: Try deploying to different platforms
-4. **Resources**: Explore [Advanced Patterns](../../extras/advanced_patterns.md) for complex patterns
+1. **Practice** Build a complete full-stack application
+2. **Learn More** Check [Theory Guide](./theory/theory5.md) for detailed explanations
+3. **Deploy** Try deploying to different platforms
+4. **Resources** Explore [Advanced Patterns](../../extras/advanced_patterns.md) for complex patterns
 
-> **💡 Tip**: Start with a simple full-stack app, then gradually add complexity. Always test thoroughly before deploying to production!
+> **💡 Tip** Start with a simple full-stack app, then gradually add complexity. Always test thoroughly before deploying to production!

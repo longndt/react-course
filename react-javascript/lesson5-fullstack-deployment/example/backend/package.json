@@ -1,0 +1,38 @@
+{
+  "name": "react-course-backend-js",
+  "version": "1.0.0",
+  "description": "Backend API for React Course Lesson 5 - Full Stack Demo (JavaScript)",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5",
+    "multer": "^1.4.5-lts.1",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "joi": "^17.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "jest": "^29.7.0"
+  },
+  "keywords": [
+    "express",
+    "javascript",
+    "mongodb",
+    "api",
+    "react",
+    "fullstack"
+  ],
+  "author": "React Course",
+  "license": "MIT"
+}

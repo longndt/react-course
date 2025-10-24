@@ -52,11 +52,11 @@ The Team`;
 
 ## Key Learning Points
 
-1. **Template Literals**: Use backticks (`) instead of quotes
-2. **Interpolation**: Use `${expression}` to embed expressions
-3. **Multi-line**: Natural line breaks without `\n`
-4. **Expressions**: Any valid JavaScript expression can be used
-5. **Tagged Templates**: Advanced feature for custom processing
+1. **Template Literals** Use backticks (`) instead of quotes
+2. **Interpolation** Use `${expression}` to embed expressions
+3. **Multi-line** Natural line breaks without `\n`
+4. **Expressions** Any valid JavaScript expression can be used
+5. **Tagged Templates** Advanced feature for custom processing
 
 ## Running the Solution
 

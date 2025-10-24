@@ -2,11 +2,11 @@
 
 This folder contains complete solution code for all exercises in Lab 1.
 
->  **Important:** Try completing each exercise on your own first before checking solutions. Learning by doing!
+>  **Important:**Try completing each exercise on your own first before checking solutions. Learning by doing!
 
 ---
 
-##  Solution Structure
+## Solution Structure
 
 ```
 solutions/
@@ -37,7 +37,7 @@ solutions/
 
 ---
 
-##  How to Use These Solutions
+## How to Use These Solutions
 
 ### When to Check Solutions
 
@@ -71,11 +71,11 @@ solutions/
 
 ---
 
-##  Exercise Solutions Overview
+## Exercise Solutions Overview
 
 ### Exercise 2: Welcome Component
 
-**Location:** `exercise2-welcome/`
+**Location:**`exercise2-welcome/`
 
 **What you'll learn:**
 - Creating functional components
@@ -90,7 +90,7 @@ solutions/
 
 ### Exercise 3: Component Styling
 
-**Location:** `exercise3-styling/`
+**Location:**`exercise3-styling/`
 
 **What you'll learn:**
 - Importing CSS in React components
@@ -105,7 +105,7 @@ solutions/
 
 ### Exercise 4: Landing Page
 
-**Location:** `exercise4-landing-page/`
+**Location:**`exercise4-landing-page/`
 
 **What you'll learn:**
 - Array mapping with `.map()`
@@ -122,7 +122,7 @@ solutions/
 
 ### Bonus Challenges
 
-**Location:** `bonus-challenges/`
+**Location:**`bonus-challenges/`
 
 **What you'll learn:**
 - Creating additional components
@@ -137,7 +137,7 @@ solutions/
 
 ---
 
-##  Common Patterns in Solutions
+## Common Patterns in Solutions
 
 ### Pattern 1: Component Structure
 
@@ -225,17 +225,17 @@ import './Component.css';  // Must be at top
 - Verify import syntax
 ---
 
-##  Tips for Success
+## Tips for Success
 
-1. **Type code manually** - Don't copy-paste. Typing helps you learn
-2. **Read README files** - Each solution has detailed explanations
-3. **Experiment** - Change values, see what happens
-4. **Ask questions** - If confused, ask for help
-5. **Build from scratch** - After seeing solution, recreate without looking
+1. **Type code manually**- Don't copy-paste. Typing helps you learn
+2. **Read README files**- Each solution has detailed explanations
+3. **Experiment**- Change values, see what happens
+4. **Ask questions**- If confused, ask for help
+5. **Build from scratch**- After seeing solution, recreate without looking
 
 ---
 
-##  Learning Objectives
+## Learning Objectives
 
 After studying these solutions, you should understand:
 
@@ -266,7 +266,7 @@ After studying these solutions, you should understand:
 
 ---
 
-##  Next Steps
+## Next Steps
 
 **After reviewing these solutions:**
 
@@ -291,7 +291,7 @@ After studying these solutions, you should understand:
 
 ---
 
-##  Self-Assessment
+## Self-Assessment
 
 Before moving to Lab 2, you should be able to:
 
@@ -310,7 +310,7 @@ Before moving to Lab 2, you should be able to:
 
 ---
 
-**Need more help?** Each solution folder has its own detailed README with explanations and examples.
+**Need more help?**Each solution folder has its own detailed README with explanations and examples.
 }
 ```
 
@@ -354,10 +354,10 @@ p {
 ### Explanation
 
 **CSS Concepts:**
-- **`.App`** - Class selector (matches `className="App"`)
-- **`margin: 0 auto`** - Center the container
-- **`max-width: 800px`** - Limit width for readability
-- **`rem`** - Relative font size (1rem = 16px default)
+- **`.App`**- Class selector (matches `className="App"`)
+- **`margin: 0 auto`**- Center the container
+- **`max-width: 800px`**- Limit width for readability
+- **`rem`**- Relative font size (1rem = 16px default)
 
 **Result:**
 - Content centered on page
@@ -565,7 +565,7 @@ export default App;
 
 ---
 
-##  Key Learning Points
+## Key Learning Points
 
 ### 1. Component Composition
 ```
@@ -590,9 +590,9 @@ import Header from './components/Header';
 ```
 
 ### 3. Component Naming
--  PascalCase: `Header`, `Hero`, `Footer`
--  Descriptive names
--  File name matches component name
+- PascalCase: `Header`, `Hero`, `Footer`
+- Descriptive names
+- File name matches component name
 
 ### 4. CSS Organization
 - One CSS file per component
@@ -620,7 +620,7 @@ import Header from './components/Header';
 
 ---
 
-##  Bonus Challenges
+## Bonus Challenges
 
 ### Challenge 1: Add More Sections
 Create `About`, `Projects`, `Contact` components
@@ -669,4 +669,4 @@ A: No! Focus on: flexbox, basic layout, colors. Advanced CSS comes with practice
 
 ---
 
-**Next:** [Lab 2 - Components & Hooks](../../lesson2-component-hook/lab/lab2.md)
+**Next:**[Lab 2 - Components & Hooks](../../lesson2-component-hook/lab/lab2.md)

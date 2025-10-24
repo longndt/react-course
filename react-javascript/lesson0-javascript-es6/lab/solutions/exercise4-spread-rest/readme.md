@@ -52,11 +52,11 @@ function greetAll(greeting, ...names) {
 
 ## Key Learning Points
 
-1. **Spread Operator**: Use `...` to expand arrays/objects
-2. **Array Spreading**: Combine arrays, add elements
-3. **Object Spreading**: Merge objects, override properties
-4. **Rest Parameters**: Collect remaining arguments into array
-5. **Function Arguments**: Handle variable number of parameters
+1. **Spread Operator** Use `...` to expand arrays/objects
+2. **Array Spreading** Combine arrays, add elements
+3. **Object Spreading** Merge objects, override properties
+4. **Rest Parameters** Collect remaining arguments into array
+5. **Function Arguments** Handle variable number of parameters
 
 ## Running the Solution
 

@@ -2,20 +2,20 @@
 
 ## 📋 Overview
 
-Complete backend solution for the Task Manager API using **Express.js**, **MongoDB**, and **Mongoose**.
+Complete backend solution for the Task Manager API using **Express.js** **MongoDB** and **Mongoose**
 
 This solution demonstrates:
--  RESTful API design
--  MongoDB database integration
--  Mongoose schema and validation
--  CRUD operations (Create, Read, Update, Delete)
--  Error handling and validation
--  CORS configuration
--  Environment variables
+- RESTful API design
+- MongoDB database integration
+- Mongoose schema and validation
+- CRUD operations (Create, Read, Update, Delete)
+- Error handling and validation
+- CORS configuration
+- Environment variables
 
 ---
 
-##  Project Structure
+## Project Structure
 
 ```
 exercise1-backend/
@@ -30,11 +30,11 @@ exercise1-backend/
 
 ---
 
-##  Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
-- **Node.js** (v18+)
-- **MongoDB** running locally or MongoDB Atlas account
+- **Node.js**(v18+)
+- **MongoDB**running locally or MongoDB Atlas account
 
 ### Step 1: Install Dependencies
 
@@ -86,7 +86,7 @@ sudo systemctl start mongod
 
 ### Step 4: Run the Server
 
-**Development mode** (auto-restart on changes):
+**Development mode**(auto-restart on changes):
 ```bash
 npm run dev
 ```
@@ -105,7 +105,7 @@ Server will start at: `http://localhost:3001`
 ### Base URL: `http://localhost:3001/api/tasks`
 
 ### 1. Get All Tasks
-**GET** `/api/tasks`
+**GET**`/api/tasks`
 
 **Response:**
 ```json
@@ -128,7 +128,7 @@ Server will start at: `http://localhost:3001`
 ```
 
 ### 2. Get Single Task
-**GET** `/api/tasks/:id`
+**GET**`/api/tasks/:id`
 
 **Response:**
 ```json
@@ -145,7 +145,7 @@ Server will start at: `http://localhost:3001`
 ```
 
 ### 3. Create Task
-**POST** `/api/tasks`
+**POST**`/api/tasks`
 
 **Request Body:**
 ```json
@@ -173,7 +173,7 @@ Server will start at: `http://localhost:3001`
 ```
 
 ### 4. Update Task
-**PUT** `/api/tasks/:id`
+**PUT**`/api/tasks/:id`
 
 **Request Body:**
 ```json
@@ -200,7 +200,7 @@ Server will start at: `http://localhost:3001`
 ```
 
 ### 5. Delete Task
-**DELETE** `/api/tasks/:id`
+**DELETE**`/api/tasks/:id`
 
 **Response:**
 ```json
@@ -216,7 +216,7 @@ Server will start at: `http://localhost:3001`
 
 ---
 
-##  Testing the API
+## Testing the API
 
 ### Using cURL
 
@@ -289,7 +289,7 @@ DELETE http://localhost:3001/api/tasks/67012abc...
 
 ---
 
-##  Key Concepts Explained
+## Key Concepts Explained
 
 ### 1. Mongoose Schema
 
@@ -373,7 +373,7 @@ app.use(cors()); // Enable CORS for all routes
 
 ### Issue: "MongooseServerSelectionError: connect ECONNREFUSED"
 
-**Cause:** MongoDB is not running
+**Cause:**MongoDB is not running
 
 **Solution:**
 ```bash
@@ -388,9 +388,9 @@ mongo --eval "db.version()"
 
 ### Issue: "ValidationError: title: Task title is required"
 
-**Cause:** Missing required field in request
+**Cause:**Missing required field in request
 
-**Solution:** Ensure POST/PUT requests include all required fields:
+**Solution:**Ensure POST/PUT requests include all required fields:
 ```json
 {
   "title": "Required field",
@@ -402,17 +402,17 @@ mongo --eval "db.version()"
 
 ### Issue: "CastError: Cast to ObjectId failed"
 
-**Cause:** Invalid MongoDB ObjectId format
+**Cause:**Invalid MongoDB ObjectId format
 
-**Solution:** MongoDB IDs must be 24 hex characters:
--  Valid: `67012abc123456789abcdef0`
--  Invalid: `123`, `abc`
+**Solution:**MongoDB IDs must be 24 hex characters:
+- Valid: `67012abc123456789abcdef0`
+- Invalid: `123`, `abc`
 
 ---
 
 ### Issue: Port 3001 already in use
 
-**Cause:** Another process using port 3001
+**Cause:**Another process using port 3001
 
 **Solution:**
 ```bash
@@ -429,7 +429,7 @@ PORT=3001
 
 ---
 
-##  Learning Objectives Achieved
+## Learning Objectives Achieved
 
 After completing this exercise, you should understand:
 
@@ -466,17 +466,17 @@ After completing this exercise, you should understand:
 
 ---
 
-##  Next Steps
+## Next Steps
 
-1. **Test All Endpoints**: Use Thunder Client or cURL to test each endpoint
-2. **Add More Fields**: Extend Task model with tags, assignee, etc.
-3. **Add Filtering**: Implement query parameters (e.g., `?completed=true`)
-4. **Add Pagination**: Limit results and add pagination
-5. **Move to Exercise 2**: Connect this API to a React frontend with React Query
+1. **Test All Endpoints** Use Thunder Client or cURL to test each endpoint
+2. **Add More Fields** Extend Task model with tags, assignee, etc.
+3. **Add Filtering** Implement query parameters (e.g., `?completed=true`)
+4. **Add Pagination** Limit results and add pagination
+5. **Move to Exercise 2** Connect this API to a React frontend with React Query
 
 ---
 
-##  Additional Resources
+## Additional Resources
 
 ### Official Documentation
 - [Express.js Guide](https://expressjs.com/en/guide/routing.html)
@@ -490,4 +490,4 @@ After completing this exercise, you should understand:
 
 ---
 
-** Backend Solution Complete!** Now move on to Exercise 2 to connect this API to a React frontend with React Query.
+** Backend Solution Complete!**Now move on to Exercise 2 to connect this API to a React frontend with React Query.

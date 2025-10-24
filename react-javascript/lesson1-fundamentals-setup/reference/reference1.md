@@ -17,16 +17,16 @@
 ## What is React?
 
 ### Key Concepts
-- **Component-based** - Build UI with reusable components
-- **Declarative** - Describe what you want, not how to get it
-- **Virtual DOM** - Efficient updates and rendering
-- **Unidirectional Data Flow** - Data flows down, events flow up
+- **Component-based**- Build UI with reusable components
+- **Declarative**- Describe what you want, not how to get it
+- **Virtual DOM**- Efficient updates and rendering
+- **Unidirectional Data Flow**- Data flows down, events flow up
 
 ### Why React?
-- **Reusable Components** - Build once, use anywhere
-- **Efficient Updates** - Only re-render what changed
-- **Rich Ecosystem** - Huge community and tooling
-- **Industry Standard** - Used by major companies
+- **Reusable Components**- Build once, use anywhere
+- **Efficient Updates**- Only re-render what changed
+- **Rich Ecosystem**- Huge community and tooling
+- **Industry Standard**- Used by major companies
 
 ---
 
@@ -539,9 +539,9 @@ function App() {
 
 ## Next Steps
 
-1. **Practice**: Build simple React components
-2. **Learn More**: Check [Theory Guide](./theory/theory1.md) for detailed explanations
-3. **Continue**: Move to [Lesson 2](../lesson2-component-hook/) for advanced components and hooks
-4. **Resources**: Explore [Advanced Patterns](../../extras/advanced_patterns.md) for complex patterns
+1. **Practice** Build simple React components
+2. **Learn More** Check [Theory Guide](./theory/theory1.md) for detailed explanations
+3. **Continue** Move to [Lesson 2](../lesson2-component-hook/) for advanced components and hooks
+4. **Resources** Explore [Advanced Patterns](../../extras/advanced_patterns.md) for complex patterns
 
-> **💡 Tip**: Start with simple components, then gradually add interactivity. JSX is just JavaScript, so you can use all your JavaScript knowledge!
+> **💡 Tip** Start with simple components, then gradually add interactivity. JSX is just JavaScript, so you can use all your JavaScript knowledge!

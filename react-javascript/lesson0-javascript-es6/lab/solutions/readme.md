@@ -4,7 +4,7 @@
 
 This folder contains complete, working solutions for all exercises in Lab 0.
 
-###  Folder Structure
+### Folder Structure
 
 ```
 solutions/
@@ -59,7 +59,7 @@ solutions/
     └── readme.md
 ```
 
-###  How to Use Solutions
+### How to Use Solutions
 
 **Option 1: Reference Only**
 - Read through solutions to understand the approach
@@ -86,14 +86,14 @@ npm test
 - Experiment with modifications
 - Break it and fix it to learn
 
-###  Important Notes
+### Important Notes
 
-1. **Try First, Then Check:** Attempt the exercises yourself before looking at solutions
-2. **Understand, Don't Copy:** Solutions are for learning, not copy-pasting
-3. **Multiple Approaches:** Solutions show one way - there may be other valid approaches
-4. **Modern JavaScript:** All solutions use ES6+ features and best practices
+1. **Try First, Then Check:**Attempt the exercises yourself before looking at solutions
+2. **Understand, Don't Copy:**Solutions are for learning, not copy-pasting
+3. **Multiple Approaches:**Solutions show one way - there may be other valid approaches
+4. **Modern JavaScript:**All solutions use ES6+ features and best practices
 
-###  What Each Solution Demonstrates
+### What Each Solution Demonstrates
 
 #### Exercise 1: Arrow Functions
 - Arrow function syntax
@@ -143,7 +143,7 @@ npm test
 - Data manipulation
 - Integration of all concepts
 
-###  Solution Quality Standards
+### Solution Quality Standards
 
 All solutions follow these standards:
 - Modern ES6+ syntax
@@ -153,14 +153,14 @@ All solutions follow these standards:
 - Comments explaining complex logic
 - Following best practices from theory section
 
-###  Learning Tips
+### Learning Tips
 
-1. **Compare Approaches:** Check how your solution differs from the provided one
-2. **Ask Questions:** If you don't understand something, revisit the theory
-3. **Experiment:** Modify the solutions and see what happens
-4. **Build Upon:** Use these as starting points for your own projects
+1. **Compare Approaches:**Check how your solution differs from the provided one
+2. **Ask Questions:**If you don't understand something, revisit the theory
+3. **Experiment:**Modify the solutions and see what happens
+4. **Build Upon:**Use these as starting points for your own projects
 
-###  Next Steps
+### Next Steps
 
 After completing all exercises and reviewing solutions:
 1. Ensure you understand all concepts
@@ -178,4 +178,4 @@ After completing all exercises and reviewing solutions:
 
 ---
 
-**Note:** Solutions will be added progressively. If a solution folder is empty, check back later or contact your instructor.
+**Note:**Solutions will be added progressively. If a solution folder is empty, check back later or contact your instructor.

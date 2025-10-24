@@ -4,7 +4,7 @@
 
 In this lab session, you'll create a simple Welcome Page application using JavaScript and React. This hands-on lab focuses on practical application of React fundamentals through guided exercises and independent practice sections.
 
-##  Learning Objectives
+## Learning Objectives
 
 By completing this lab, you will be able to:
 - Set up a React + JavaScript project using Vite
@@ -13,7 +13,7 @@ By completing this lab, you will be able to:
 - Apply CSS styling to React components
 - Build a multi-component landing page application
 
-##  Pre-Lab Checklist
+## Pre-Lab Checklist
 
 - [ ] Node.js v18+ installed (`node --version` to verify)
 - [ ] VS Code with React extensions installed
@@ -25,11 +25,11 @@ By completing this lab, you will be able to:
 
 ## Exercise 1: Project Setup & First Component (Guided)
 
-###  Concept Review
+### Concept Review
 
-React is a JavaScript library for building user interfaces using **components** - reusable, self-contained pieces of UI. Vite is a modern build tool that provides fast development experience with hot module replacement (HMR).
+React is a JavaScript library for building user interfaces using **components**- reusable, self-contained pieces of UI. Vite is a modern build tool that provides fast development experience with hot module replacement (HMR).
 
-###  Goals
+### Goals
 
 - Create a React + JavaScript project
 - Understand project structure
@@ -56,7 +56,7 @@ npm install prop-types
 npm run dev
 ```
 
-**Verify:** Browser should open at `http://localhost:5173` showing default Vite + React page.
+**Verify:**Browser should open at `http://localhost:5173` showing default Vite + React page.
 
 ### Step 2: Understand Project Structure
 
@@ -126,9 +126,9 @@ p {
 }
 ```
 
-**Checkpoint:** Save files and check browser - you should see "My First React App" heading with clean styling.
+**Checkpoint:**Save files and check browser - you should see "My First React App" heading with clean styling.
 
-###  Testing
+### Testing
 
 1. Open browser to `http://localhost:5173`
 2. You should see centered heading and paragraph
@@ -138,9 +138,9 @@ p {
 
 ## Exercise 2: Create Your First Component (Your Turn - 60% Practice)
 
-###  Concept Review
+### Concept Review
 
-A **React component** is a JavaScript function that returns JSX (HTML-like syntax). Components let you split the UI into independent, reusable pieces. You can embed JavaScript expressions in JSX using curly braces `{}`.
+A **React component**is a JavaScript function that returns JSX (HTML-like syntax). Components let you split the UI into independent, reusable pieces. You can embed JavaScript expressions in JSX using curly braces `{}`.
 
 **Example component structure:**
 ```jsx
@@ -157,7 +157,7 @@ function ComponentName() {
 export default ComponentName;
 ```
 
-###  Goals
+### Goals
 
 - Create a `components` folder for organization
 - Build a `Welcome` component with JavaScript variables
@@ -206,7 +206,7 @@ Create a new file `src/components/Welcome.jsx` and implement:
 - JSX displays all variables correctly
 - No syntax errors in VS Code
 
-**Solution:** See `solutions/exercise2-welcome/Welcome.jsx`
+**Solution:**See `solutions/exercise2-welcome/Welcome.jsx`
 
 ### Step 3: Use Component in App (Your Turn)
 
@@ -229,20 +229,20 @@ Update `src/App.jsx`:
 - Shows course name and current year
 - No console errors
 
-###  Testing
+### Testing
 
 1. Open `http://localhost:5173`
 2. You should see your welcome message with your name
 3. Current year should display correctly (e.g., 2024)
 4. Open DevTools Console (F12) - should be no errors
 
-**Solution:** See `solutions/exercise2-welcome/` for complete code
+**Solution:**See `solutions/exercise2-welcome/` for complete code
 
 ---
 
 ## Exercise 3: Add Styling to Components (Your Turn - 70% Practice)
 
-###  Concept Review
+### Concept Review
 
 React components can have their own CSS files. Import CSS files at the top of the component file using `import './ComponentName.css'`. This keeps styles organized and scoped to each component.
 
@@ -255,7 +255,7 @@ function MyComponent() {
 }
 ```
 
-###  Goals
+### Goals
 
 - Create a CSS file for the Welcome component
 - Apply gradient background and modern styling
@@ -321,20 +321,20 @@ Update `src/components/Welcome.jsx`:
 - All styling from CSS file is applied
 - No console errors
 
-###  Testing
+### Testing
 
 1. Refresh browser - Welcome component should have gradient background
 2. Text should be white and clearly readable
 3. Hover might show shadow effect
 4. Check DevTools → Elements → Inspect the `.welcome` div to verify CSS is applied
 
-**Solution:** See `solutions/exercise3-styling/`
+**Solution:**See `solutions/exercise3-styling/`
 
 ---
 
 ## Exercise 4: Build Multi-Component Landing Page (Your Turn - 80% Practice)
 
-###  Concept Review
+### Concept Review
 
 Real applications are built from many components working together. The `.map()` method is commonly used to render lists in React. Each item in a list needs a unique `key` prop.
 
@@ -351,7 +351,7 @@ return (
 );
 ```
 
-###  Goals
+### Goals
 
 - Create Feature component with list rendering
 - Create Footer component with links
@@ -515,7 +515,7 @@ Update `src/App.jsx`:
 - All sections styled correctly
 - No console errors
 
-###  Testing Your Landing Page
+### Testing Your Landing Page
 
 **Visual Check:**
 1.  Purple gradient Welcome section with your name
@@ -532,13 +532,13 @@ Update `src/App.jsx`:
 2. Check Elements tab - all CSS classes applied correctly
 3. Verify all components are properly imported
 
-**Solution:** See `solutions/exercise4-landing-page/` for complete implementation
+**Solution:**See `solutions/exercise4-landing-page/` for complete implementation
 
 ---
 
 ## Bonus Challenge: Add Interactivity (Optional - 90% Practice)
 
-###  Challenge Goals
+### Challenge Goals
 
 Add interactive elements to your landing page to get a preview of React's event handling. This is optional but will give you a head start on Lesson 2!
 
@@ -602,56 +602,56 @@ This is an advanced challenge that previews state management from Lesson 2!
 2. Clicking it should change the page background color
 3. (Note: This will require useState from Lesson 2 to work properly)
 
-**Solutions:** See `solutions/bonus-challenges/` for all challenge solutions
+**Solutions:**See `solutions/bonus-challenges/` for all challenge solutions
 
 ---
 
-##  Key Takeaways
+## Key Takeaways
 
 You've completed Lab 1. Here's what you've mastered:
 
 ### Project Setup
--  Created React + JavaScript project with Vite
--  Understood project folder structure and key files
--  Installed dependencies and ran development server
--  Experienced Hot Module Replacement (HMR)
+- Created React + JavaScript project with Vite
+- Understood project folder structure and key files
+- Installed dependencies and ran development server
+- Experienced Hot Module Replacement (HMR)
 
 ### Component Fundamentals
--  Created functional components using function syntax
--  Organized components in separate files and folders
--  Used `export default` and `import` for component modules
--  Composed multiple components into a complete application
+- Created functional components using function syntax
+- Organized components in separate files and folders
+- Used `export default` and `import` for component modules
+- Composed multiple components into a complete application
 
 ### JSX & JavaScript
--  Embedded JavaScript in JSX using `{}`
--  Rendered lists with `.map()` and `key` prop
--  Applied `className` for styling (not `class`)
--  Wrote clean React components with JavaScript ES6+
+- Embedded JavaScript in JSX using `{}`
+- Rendered lists with `.map()` and `key` prop
+- Applied `className` for styling (not `class`)
+- Wrote clean React components with JavaScript ES6+
 
 ### Styling
--  Created CSS files for individual components
--  Imported CSS in component files
--  Applied modern CSS (flexbox, gradients, transitions)
--  Built responsive, centered layouts
+- Created CSS files for individual components
+- Imported CSS in component files
+- Applied modern CSS (flexbox, gradients, transitions)
+- Built responsive, centered layouts
 
 ### Project Organization
--  Separated concerns (components vs styles vs logic)
--  Followed React conventions and best practices
--  Built maintainable, modular code structure
+- Separated concerns (components vs styles vs logic)
+- Followed React conventions and best practices
+- Built maintainable, modular code structure
 
 ---
 
-##  Next Steps
+## Next Steps
 
 You're now ready for more advanced React concepts!
 
-**Continue to [Lab 2 - Component Architecture & React Hooks](../../lesson2-component-hook/lab/lab2.md)** to learn:
+**Continue to [Lab 2 - Component Architecture & React Hooks](../../lesson2-component-hook/lab/lab2.md)**to learn:
 
-- **Props:** Pass data from parent to child components
-- **State:** Manage interactive UI with `useState` hook
-- **Effects:** Handle side effects with `useEffect` hook
-- **Custom Hooks:** Create reusable logic
-- **Component Patterns:** Build professional component libraries
+- **Props:**Pass data from parent to child components
+- **State:**Manage interactive UI with `useState` hook
+- **Effects:**Handle side effects with `useEffect` hook
+- **Custom Hooks:**Create reusable logic
+- **Component Patterns:**Build professional component libraries
 
 **Before starting Lab 2:**
 - [ ] Make sure all exercises in this lab work correctly
@@ -661,7 +661,7 @@ You're now ready for more advanced React concepts!
 
 ---
 
-##  Additional Resources
+## Additional Resources
 
 **Official Documentation:**
 - [React Documentation](https://react.dev) - Official React docs
@@ -679,7 +679,7 @@ You're now ready for more advanced React concepts!
 
 ---
 
-##  Troubleshooting
+## Troubleshooting
 
 ### Common Issues and Solutions
 
@@ -698,22 +698,22 @@ npm install
 ```
 
 #### CSS not applying
--  Verify CSS file is imported: `import './Component.css'`
--  Check `className` spelling matches CSS file exactly
--  Clear browser cache: `Ctrl+Shift+R` (Windows) or `Cmd+Shift+R` (Mac)
--  Check browser DevTools → Elements → See if CSS is loaded
+- Verify CSS file is imported: `import './Component.css'`
+- Check `className` spelling matches CSS file exactly
+- Clear browser cache: `Ctrl+Shift+R` (Windows) or `Cmd+Shift+R` (Mac)
+- Check browser DevTools → Elements → See if CSS is loaded
 
 #### JSX syntax errors
--  Verify all imports have correct file paths
--  Check file extensions (`.jsx` for components with JSX, `.js` for utilities)
--  Restart VS Code language server: `Ctrl+Shift+P` → "Developer: Restart Extension Host"
--  Make sure all components are properly formatted
+- Verify all imports have correct file paths
+- Check file extensions (`.jsx` for components with JSX, `.js` for utilities)
+- Restart VS Code language server: `Ctrl+Shift+P` → "Developer: Restart Extension Host"
+- Make sure all components are properly formatted
 
 #### Component not rendering
--  Check if component is imported correctly
--  Verify component is used in JSX: `<ComponentName />`
--  Make sure component has `export default`
--  Check browser console for error messages
+- Check if component is imported correctly
+- Verify component is used in JSX: `<ComponentName />`
+- Make sure component has `export default`
+- Check browser console for error messages
 
 #### Development server issues
 ```bash
@@ -733,7 +733,7 @@ npm run dev
 
 ---
 
-##  Submission Checklist
+## Submission Checklist
 
 Before moving to Lab 2, verify:
 
@@ -759,7 +759,7 @@ Before moving to Lab 2, verify:
 
 ---
 
-##  Bonus Challenges
+## Bonus Challenges
 
 Ready to take your skills to the next level? Try these optional challenges:
 
@@ -856,11 +856,11 @@ Create an image gallery with click-to-enlarge functionality.
 - Previous/Next navigation
 - Close button
 
-**Advanced:** Add keyboard navigation (arrow keys, ESC to close)
+**Advanced:**Add keyboard navigation (arrow keys, ESC to close)
 
 ---
 
-##  Additional Resources for Challenges
+## Additional Resources for Challenges
 
 - [React useState Hook](https://react.dev/reference/react/useState)
 - [CSS Media Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries)

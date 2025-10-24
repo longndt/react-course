@@ -571,7 +571,7 @@
           "Makes code run faster",
           "Handles asynchronous operations more readably",
           "Creates new threads",
-          "Compiles TypeScript",
+          "Creates new variables",
         ],
         correct: 1,
       },
@@ -888,7 +888,7 @@
         shortAnswerInput.oninput = () => {
           userAnswers[index] = shortAnswerInput.value.trim();
           updateProgress();
-          
+
           // Enable/disable Next button based on input content
           if (userAnswers[index] && !answerChecked[index]) {
             nextBtn.disabled = false;
@@ -944,7 +944,7 @@
         nextBtn.disabled = !answerChecked[index];
         nextBtn.classList.remove('disabled');
       }
-        
+
         // Reset skip button state
         skipBtn.disabled = answerChecked[index];
     }
@@ -967,7 +967,7 @@
     nextBtn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        
+
         // Only proceed if current question is answered/checked
         if (answerChecked[currentQuestion]) {
           if (currentQuestion < quizData.length - 1) {
@@ -983,7 +983,7 @@
     prevBtn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        
+
         if (currentQuestion > 0) {
           currentQuestion--;
           showQuestion(currentQuestion);

@@ -69,11 +69,11 @@ async function getAllUsers() {
 
 ## Key Learning Points
 
-1. **`async`**: Mark function as asynchronous
-2. **`await`**: Wait for Promise to resolve
-3. **Error Handling**: Use try/catch with async/await
-4. **Parallel Execution**: Use `Promise.all()` for concurrent requests
-5. **Sequential vs Parallel**: Understand when to use each approach
+1. **`async`** Mark function as asynchronous
+2. **`await`** Wait for Promise to resolve
+3. **Error Handling** Use try/catch with async/await
+4. **Parallel Execution** Use `Promise.all()` for concurrent requests
+5. **Sequential vs Parallel** Understand when to use each approach
 
 ## Running the Solution
 

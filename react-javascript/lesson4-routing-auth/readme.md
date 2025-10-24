@@ -2,8 +2,8 @@
 
 ## Overview
 
-**Difficulty**: Intermediate to Advanced
-**Prerequisites**: Lesson 3 completed, API integration knowledge
+**Difficulty** Intermediate to Advanced
+**Prerequisites** Lesson 3 completed, API integration knowledge
 
 This lesson covers client-side routing with React Router and authentication patterns. You'll learn to build multi-page applications, implement protected routes, handle user authentication with JWT tokens, and create secure user experiences.
 
@@ -48,7 +48,7 @@ node --version  # Should be 18+
 npm --version   # Should be 9+
 ```
 
-> **⚠️ Not ready?** → Review [Lesson 3](../lesson3-api-data/) first
+> **⚠️ Not ready?**→ Review [Lesson 3](../lesson3-api-data/) first
 
 ---
 
@@ -70,26 +70,26 @@ npm run dev
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 **Theory First**: Start with [Theory](./theory/theory4.md) → [Example](./example/) → [Lab](./lab/lab4.md)
-- ⚡ **Hands-On**: Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory4.md)
-- 🎯 **Quick Review**: [Reference](./reference/) → [Quiz](./quiz/quiz4.html) → Focus on weak areas
+- 📖 **Theory First** Start with [Theory](./theory/theory4.md) → [Example](./example/) → [Lab](./lab/lab4.md)
+- ⚡ **Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory4.md)
+- 🎯 **Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz4.html) → Focus on weak areas
 
 ---
 
 ## What's Next
 
 ### Ready to Continue?
-- **Completed this lesson?** → Proceed to [Lesson 5: Full-Stack & Deployment](../lesson5-fullstack-deployment/)
+- **Completed this lesson?**→ Proceed to [Lesson 5: Full-Stack & Deployment](../lesson5-fullstack-deployment/)
 
 ### Need More Practice?
-- **Study theory** → [theory4.md](./theory/theory4.md) - Deep dive into routing and auth
-- **View examples** → [example/](./example/) - Follow-along tutorials
-- **Practice exercises** → [lab4.md](./lab/lab4.md) - Auth challenges
+- **Study theory**→ [theory4.md](./theory/theory4.md) - Deep dive into routing and auth
+- **View examples**→ [example/](./example/) - Follow-along tutorials
+- **Practice exercises**→ [lab4.md](./lab/lab4.md) - Auth challenges
 
 ### Additional Resources
-- **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
-- **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
-- **Learn deployment** → Preview [Lesson 5](../lesson5-fullstack-deployment/)
+- **Quiz yourself**→ [quiz/](./quiz/) - Test your knowledge
+- **Having issues?**→ [Troubleshooting Guide](../extras/troubleshooting_guide.md)
+- **Learn deployment**→ Preview [Lesson 5](../lesson5-fullstack-deployment/)
 
 ---
 

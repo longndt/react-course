@@ -4,9 +4,9 @@
 
 In this lab session, you'll practice TypeScript fundamentals through hands-on exercises. You'll work with types, interfaces, generics, and utility types to build a solid foundation for React development.
 
-> **Scope:** This lab focuses on TypeScript basics - the foundation you need before diving into React with TypeScript.
+> **Scope:**This lab focuses on TypeScript basics - the foundation you need before diving into React with TypeScript.
 
-##  Learning Objectives
+## Learning Objectives
 
 By completing this lab, you will be able to:
 - Master TypeScript type annotations and primitive types
@@ -16,7 +16,7 @@ By completing this lab, you will be able to:
 - Use type guards for type narrowing
 - Build type-safe data management systems
 
-##  Exercises
+## Exercises
 
 - Exercise 1: Basic Types and Type Annotations
 - Exercise 2: Interfaces and Type Aliases
@@ -24,7 +24,7 @@ By completing this lab, you will be able to:
 - Exercise 4: Utility Types and Type Guards
 - Exercise 5: Build a Type-Safe Data Manager
 
-##  Pre-Lab Checklist
+## Pre-Lab Checklist
 
 - [ ] Node.js v18+ installed
 - [ ] TypeScript installed globally (`npm install -g typescript`)
@@ -1110,17 +1110,17 @@ npx tsx filename.ts
 
 | Method | Speed | Memory Usage | Best For |
 |--------|-------|--------------|----------|
-| **tsc + node** | Fastest execution | Lowest | Production, CI/CD |
-| **tsx** | Fast startup | Medium | Development, prototyping |
+| **tsc + node**| Fastest execution | Lowest | Production, CI/CD |
+| **tsx**| Fast startup | Medium | Development, prototyping |
 
 ### Best Practices
 
-1. **Use tsx for development** - Fast startup and execution
-2. **Compile for production** - Optimized output
-3. **Use watch mode** - Auto-recompile on changes
-4. **Configure tsconfig.json properly** - Consistent compilation
-5. **Use proper module resolution** - Avoid import issues
-6. **Install necessary @types packages** - Better type checking
+1. **Use tsx for development**- Fast startup and execution
+2. **Compile for production**- Optimized output
+3. **Use watch mode**- Auto-recompile on changes
+4. **Configure tsconfig.json properly**- Consistent compilation
+5. **Use proper module resolution**- Avoid import issues
+6. **Install necessary @types packages**- Better type checking
 
 ### Quick Reference
 
@@ -1146,20 +1146,20 @@ npx tsx filename.ts
 
 ## Key Takeaways
 
-1.  **Type Safety**: TypeScript catches errors at compile time
-2.  **IntelliSense**: Better IDE support and autocomplete
-3.  **Interfaces**: Define clear contracts for objects
-4.  **Generics**: Write reusable, type-safe code
-5.  **Utility Types**: Transform types efficiently
-6.  **Type Guards**: Safely narrow types at runtime
+1.  **Type Safety** TypeScript catches errors at compile time
+2.  **IntelliSense** Better IDE support and autocomplete
+3.  **Interfaces** Define clear contracts for objects
+4.  **Generics** Write reusable, type-safe code
+5.  **Utility Types** Transform types efficiently
+6.  **Type Guards** Safely narrow types at runtime
 
 ---
 
 ## Next Steps
 
-1.  Review **Theory 0** for concepts you found challenging
-2.  Take the **Quiz** to test your understanding
-3.  Check out **Demo** examples for more patterns
-4.  Move to **Lesson 1** - React with TypeScript
+1.  Review **Theory 0**for concepts you found challenging
+2.  Take the **Quiz**to test your understanding
+3.  Check out **Demo**examples for more patterns
+4.  Move to **Lesson 1**- React with TypeScript
 
 ---

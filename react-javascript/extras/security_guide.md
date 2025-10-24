@@ -748,4 +748,4 @@ function GoodErrorBoundary({ children }) {
 
 ---
 
-**Remember**: Security is an ongoing process, not a one-time implementation. Regular audits, updates, and monitoring are essential for maintaining a secure React application.
+**Remember** Security is an ongoing process, not a one-time implementation. Regular audits, updates, and monitoring are essential for maintaining a secure React application.

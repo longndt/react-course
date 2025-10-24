@@ -2,15 +2,15 @@
 
 Complete solution demonstrating virtual scrolling (windowing) for efficiently rendering large lists.
 
-##  Features Implemented
+## Features Implemented
 
--  **Virtual Scrolling** - Only renders visible items
--  **10,000+ Items** - Handles massive datasets smoothly
--  **Performance Comparison** - Side-by-side regular vs virtual list
--  **Smooth 60 FPS** - Buttery smooth scrolling
--  **Constant Memory** - Memory usage doesn't grow with list size
+- **Virtual Scrolling**- Only renders visible items
+- **10,000+ Items**- Handles massive datasets smoothly
+- **Performance Comparison**- Side-by-side regular vs virtual list
+- **Smooth 60 FPS**- Buttery smooth scrolling
+- **Constant Memory**- Memory usage doesn't grow with list size
 
-##  Project Structure
+## Project Structure
 
 ```
 exercise3-virtual-list/
@@ -27,7 +27,7 @@ exercise3-virtual-list/
 └── readme.md
 ```
 
-##  Getting Started
+## Getting Started
 
 ### Installation
 
@@ -43,11 +43,11 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173)
 
-##  How to Test Performance
+## How to Test Performance
 
 ### Visual Test (Easiest)
 
-1. **Start with Virtual List tab** (default)
+1. **Start with Virtual List tab**(default)
    - Scroll through 10,000 items
    - Notice: Smooth, buttery 60 FPS scrolling
 
@@ -62,32 +62,32 @@ Open [http://localhost:5173](http://localhost:5173)
 
 ### Chrome DevTools Performance Profiling
 
-1. **Open Chrome DevTools**: Press `F12`
+1. **Open Chrome DevTools** Press `F12`
 2. **Go to Performance tab**
-3. **Record Virtual List**:
+3. **Record Virtual List**
    - Switch to Virtual List tab
    - Click **Record ⏺**
    - Scroll for ~3 seconds
    - Click **Stop ⏹**
    - Observe:
-     - **FPS**: Steady at **60 FPS** 
-     - **Main thread**: Mostly green (fast)
-     - **Memory**: Constant
+     - **FPS** Steady at **60 FPS**
+     - **Main thread** Mostly green (fast)
+     - **Memory** Constant
 
-4. **Record Regular List**:
+4. **Record Regular List**
    - Switch to Regular List tab
    - Click **Record ⏺**
    - Scroll for ~3 seconds
    - Click **Stop ⏹**
    - Observe:
-     - **FPS**: Drops to **20-40 FPS** 
-     - **Main thread**: Lots of red (slow)
-     - **Memory**: High
+     - **FPS** Drops to **20-40 FPS**
+     - **Main thread** Lots of red (slow)
+     - **Memory** High
 
 ### React DevTools Profiler
 
 1. Install [React DevTools](https://react.dev/learn/react-developer-tools)
-2. Open **Profiler** tab
+2. Open **Profiler**tab
 3. Click **Record**
 4. Switch tabs and scroll
 5. Stop recording
@@ -95,7 +95,7 @@ Open [http://localhost:5173](http://localhost:5173)
    - Virtual List: Only ~15 components rendered
    - Regular List: All 10,000 components rendered
 
-##  How Virtual Lists Work
+## How Virtual Lists Work
 
 ### The Problem
 
@@ -112,7 +112,7 @@ function RegularList({ items }: { items: Item[] }) {
 }
 ```
 
-**Result**: 10,000 DOM nodes = slow, laggy, high memory
+**Result** 10,000 DOM nodes = slow, laggy, high memory
 
 ### The Solution
 
@@ -142,25 +142,25 @@ function VirtualList({ items, itemHeight, containerHeight }) {
 }
 ```
 
-**Result**: ~15 DOM nodes (constant) = fast, smooth, low memory
+**Result** ~15 DOM nodes (constant) = fast, smooth, low memory
 
-##  Performance Comparison
+## Performance Comparison
 
 | Metric | Regular List (10K items) | Virtual List (10K items) | Improvement |
 |--------|--------------------------|--------------------------|-------------|
-| **DOM Nodes** | 10,000 | ~15 | **99.85%** fewer |
-| **Initial Render** | 500-1000ms | 10-20ms | **50x** faster |
-| **Scroll FPS** | 20-40 FPS | 60 FPS | **3x** smoother |
-| **Memory Usage** | High (grows with items) | Low (constant) | Constant |
-| **Battery Impact** | High CPU usage | Minimal CPU | Better battery |
+| **DOM Nodes**| 10,000 | ~15 | **99.85%**fewer |
+| **Initial Render**| 500-1000ms | 10-20ms | **50x**faster |
+| **Scroll FPS**| 20-40 FPS | 60 FPS | **3x**smoother |
+| **Memory Usage**| High (grows with items) | Low (constant) | Constant |
+| **Battery Impact**| High CPU usage | Minimal CPU | Better battery |
 
 ### Real-World Numbers
 
-With **100,000 items**:
-- **Regular List**: Browser freezes, may crash
-- **Virtual List**: Still smooth 60 FPS 
+With **100,000 items**
+- **Regular List** Browser freezes, may crash
+- **Virtual List** Still smooth 60 FPS 
 
-##  Key Concepts
+## Key Concepts
 
 ### 1. Viewport Calculation
 
@@ -196,7 +196,7 @@ const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - buffer);
 const endIndex = Math.min(items.length, startIndex + itemsPerPage + buffer * 2);
 ```
 
-##  Limitations & Considerations
+## Limitations & Considerations
 
 ### When to Use Virtual Lists
 
@@ -223,7 +223,7 @@ const startOffset = itemHeights.slice(0, startIndex).reduce((a, b) => a + b, 0);
 
 Libraries like `react-window` and `react-virtualized` handle this!
 
-##  Production-Ready Libraries
+## Production-Ready Libraries
 
 For production, consider these battle-tested libraries:
 
@@ -248,7 +248,7 @@ import { FixedSizeList } from 'react-window';
 </FixedSizeList>
 ```
 
-**Pros**: Lightweight, modern, actively maintained
+**Pros** Lightweight, modern, actively maintained
 
 ### react-virtualized
 
@@ -256,9 +256,9 @@ import { FixedSizeList } from 'react-window';
 npm install react-virtualized
 ```
 
-**Pros**: More features, supports grids, variable heights
+**Pros** More features, supports grids, variable heights
 
-**Cons**: Heavier, less modern API
+**Cons** Heavier, less modern API
 
 ### TanStack Virtual
 
@@ -266,9 +266,9 @@ npm install react-virtualized
 npm install @tanstack/react-virtual
 ```
 
-**Pros**: Modern, headless, very flexible
+**Pros** Modern, headless, very flexible
 
-##  Learning Outcomes
+## Learning Outcomes
 
 After completing this exercise, you understand:
 
@@ -281,19 +281,19 @@ After completing this exercise, you understand:
 
 ## 💪 Challenge Exercises
 
-1. **Variable Height Items**: Modify VirtualList to support items of different heights
-2. **Horizontal Scrolling**: Create a virtual list that scrolls horizontally
-3. **Infinite Scroll**: Add infinite scrolling with data fetching
-4. **Grid Layout**: Create a virtual grid (rows and columns)
-5. **Smooth Scroll**: Add smooth scrolling to specific items
+1. **Variable Height Items** Modify VirtualList to support items of different heights
+2. **Horizontal Scrolling** Create a virtual list that scrolls horizontally
+3. **Infinite Scroll** Add infinite scrolling with data fetching
+4. **Grid Layout** Create a virtual grid (rows and columns)
+5. **Smooth Scroll** Add smooth scrolling to specific items
 
-##  Related Exercises
+## Related Exercises
 
-- **Exercise 1**: Code Splitting & Lazy Loading
-- **Exercise 2**: Component Memoization
-- **Exercise 4**: Production Build & Deployment
+- **Exercise 1** Code Splitting & Lazy Loading
+- **Exercise 2** Component Memoization
+- **Exercise 4** Production Build & Deployment
 
-##  Additional Resources
+## Additional Resources
 
 - [react-window Documentation](https://react-window.vercel.app/)
 - [Virtual Scrolling Guide](https://developer.mozilla.org/en-US/docs/Web/Performance/Virtual_scrolling)
@@ -305,13 +305,13 @@ After completing this exercise, you understand:
 **Rendering 10,000 items:**
 
 **Regular List:**
-- 10,000 div elements × 100 bytes = **1 MB** DOM
+- 10,000 div elements × 100 bytes = **1 MB**DOM
 - Initial render: **500ms**
-- Scroll frame: **50ms** (= 20 FPS)
+- Scroll frame: **50ms**(= 20 FPS)
 
 **Virtual List:**
-- 15 div elements × 100 bytes = **1.5 KB** DOM
+- 15 div elements × 100 bytes = **1.5 KB**DOM
 - Initial render: **15ms**
-- Scroll frame: **16ms** (= 60 FPS)
+- Scroll frame: **16ms**(= 60 FPS)
 
-**Improvement**: **667x** less memory, **33x** faster initial render!
+**Improvement** **667x**less memory, **33x**faster initial render!
