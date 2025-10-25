@@ -851,8 +851,7 @@
 
                     div.innerHTML = `
               <label>
-                <input type="radio" name="answer" value="${i}" ${userAnswers[index] === i ? "checked" : ""
-                        } ${answerChecked[index] ? "disabled" : ""}>
+                <input type="radio" name="answer" value="${i}" ${userAnswers[index] === i ? "checked" : ""} ${answerChecked[index] ? "disabled" : ""}>
                 <span>${option}</span>
                 ${answerChecked[index] && i === question.correct ? '<span class="feedback-icon">✓</span>' : ''}
                 ${answerChecked[index] && userAnswers[index] === i && i !== question.correct ? '<span class="feedback-icon">✗</span>' : ''}

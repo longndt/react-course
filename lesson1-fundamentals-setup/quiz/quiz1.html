@@ -178,14 +178,14 @@
     }
 
     .short-answer-input:focus {
-        outline: none;
-        border-color: #667eea;
-      }
+      outline: none;
+      border-color: #667eea;
+    }
 
-      .short-answer-actions {
-        margin-top: 15px;
-        text-align: center;
-      }
+    .short-answer-actions {
+      margin-top: 15px;
+      text-align: center;
+    }
 
     .buttons {
       display: flex;
@@ -725,8 +725,8 @@
     );
     const shortAnswerInput = document.getElementById("shortAnswerInput");
     const shortAnswerFeedback = document.getElementById("shortAnswerFeedback");
-      const skipBtn = document.getElementById("skipBtn");
-      const prevBtn = document.getElementById("prevBtn");
+    const skipBtn = document.getElementById("skipBtn");
+    const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const quizCard = document.getElementById("quizCard");
     const resultsCard = document.getElementById("resultsCard");
@@ -853,8 +853,7 @@
 
           div.innerHTML = `
               <label>
-                <input type="radio" name="answer" value="${i}" ${userAnswers[index] === i ? "checked" : ""
-            } ${answerChecked[index] ? "disabled" : ""}>
+                <input type="radio" name="answer" value="${i}" ${userAnswers[index] === i ? "checked" : ""} ${answerChecked[index] ? "disabled" : ""}>
                 <span>${option}</span>
                 ${answerChecked[index] && i === question.correct ? '<span class="feedback-icon">✓</span>' : ''}
                 ${answerChecked[index] && userAnswers[index] === i && i !== question.correct ? '<span class="feedback-icon">✗</span>' : ''}
@@ -910,29 +909,29 @@
         };
 
         shortAnswerInput.onblur = () => {
-            if (userAnswers[index] && !answerChecked[index]) {
-              checkShortAnswer(index, userAnswers[index]);
-            }
-          };
+          if (userAnswers[index] && !answerChecked[index]) {
+            checkShortAnswer(index, userAnswers[index]);
+          }
+        };
 
         // Enter key to check answer
         shortAnswerInput.onkeypress = (e) => {
-            if (e.key === 'Enter' && userAnswers[index] && !answerChecked[index]) {
-              checkShortAnswer(index, userAnswers[index]);
-              shortAnswerInput.blur();
-            }
-          };
-          // Skip button functionality
-          skipBtn.onclick = () => {
-            if (!answerChecked[index]) {
-              userAnswers[index] = ""; // Mark as skipped
-              answerChecked[index] = true;
-              shortAnswerInput.disabled = true;
-              skipBtn.disabled = true;
-              nextBtn.disabled = false;
-              updateProgress();
-            }
-          };
+          if (e.key === 'Enter' && userAnswers[index] && !answerChecked[index]) {
+            checkShortAnswer(index, userAnswers[index]);
+            shortAnswerInput.blur();
+          }
+        };
+        // Skip button functionality
+        skipBtn.onclick = () => {
+          if (!answerChecked[index]) {
+            userAnswers[index] = ""; // Mark as skipped
+            answerChecked[index] = true;
+            shortAnswerInput.disabled = true;
+            skipBtn.disabled = true;
+            nextBtn.disabled = false;
+            updateProgress();
+          }
+        };
       }
 
       // Update buttons
@@ -955,8 +954,8 @@
         nextBtn.classList.remove('disabled');
       }
 
-        // Reset skip button state
-        skipBtn.disabled = answerChecked[index];
+      // Reset skip button state
+      skipBtn.disabled = answerChecked[index];
     }
 
     // Update Progress
@@ -975,30 +974,30 @@
 
     // Next Question
     nextBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
 
-        // Only proceed if current question is answered/checked
-        if (answerChecked[currentQuestion]) {
-          if (currentQuestion < quizData.length - 1) {
-            currentQuestion++;
-            showQuestion(currentQuestion);
-          } else {
-            showResults();
-          }
+      // Only proceed if current question is answered/checked
+      if (answerChecked[currentQuestion]) {
+        if (currentQuestion < quizData.length - 1) {
+          currentQuestion++;
+          showQuestion(currentQuestion);
+        } else {
+          showResults();
         }
-      });
+      }
+    });
 
     // Previous Question
     prevBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
 
-        if (currentQuestion > 0) {
-          currentQuestion--;
-          showQuestion(currentQuestion);
-        }
-      });
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        showQuestion(currentQuestion);
+      }
+    });
 
     // Show Results
     function showResults() {

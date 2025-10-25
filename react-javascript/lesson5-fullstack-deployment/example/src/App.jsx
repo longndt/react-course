@@ -15,39 +15,39 @@ const AppContent = () => {
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/login"
-          element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login />}
-        />
-        <Route
-          path="/dashboard"
-          element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/file-manager"
-          element={isAuthenticated ? <FileManager /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/performance"
-          element={isAuthenticated ? <PerformanceDemo /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/"
-          element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} />}
-        />
-      </Routes>
-    </BrowserRouter>
+    <div className={isAuthenticated ? 'authenticated-page' : 'app'}>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/login"
+            element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login />}
+          />
+          <Route
+            path="/dashboard"
+            element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/file-manager"
+            element={isAuthenticated ? <FileManager /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/performance"
+            element={isAuthenticated ? <PerformanceDemo /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/"
+            element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 };
 
 const App = () => {
   return (
     <AuthProvider>
-      <div className="app">
-        <AppContent />
-      </div>
+      <AppContent />
     </AuthProvider>
   );
 };

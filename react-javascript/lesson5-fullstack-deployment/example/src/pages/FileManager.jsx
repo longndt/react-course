@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import FileUpload from '../components/FileUpload';
 import LoadingSpinner from '../components/LoadingSpinner';
+import Toast from '../components/Toast';
+import api from '../services/api';
 import './FileManager.css';
 
 const FileManager = () => {
@@ -9,6 +11,7 @@ const FileManager = () => {
     const [files, setFiles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
 
     useEffect(() => {
         fetchFiles();
@@ -17,20 +20,10 @@ const FileManager = () => {
     const fetchFiles = async () => {
         try {
             setIsLoading(true);
-            const response = await fetch('/api/upload/files', {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch files');
-            }
-
-            const data = await response.json();
-            setFiles(data.data.files || []);
+            const response = await api.get('/upload/files');
+            setFiles(response.data.data.files || []);
         } catch (err) {
-            setError(err.message);
+            setError(err.response?.data?.error || err.message);
         } finally {
             setIsLoading(false);
         }
@@ -41,77 +34,60 @@ const FileManager = () => {
             const formData = new FormData();
             formData.append('file', file);
 
-            const response = await fetch('/api/upload', {
-                method: 'POST',
+            const response = await api.post('/upload', formData, {
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    'Content-Type': 'multipart/form-data',
                 },
-                body: formData
             });
 
-            if (!response.ok) {
-                throw new Error('Upload failed');
-            }
-
-            const data = await response.json();
-            console.log('Upload successful:', data);
+            console.log('Upload successful:', response.data);
+            setSuccess('File uploaded successfully!');
+            setError(null);
 
             // Refresh files list
             await fetchFiles();
         } catch (err) {
             console.error('Upload error:', err);
-            setError(err.message);
+            setError(err.response?.data?.error || err.message);
         }
     };
 
-    const handleMultipleUpload = async (files) => {
+    const handleMultipleUpload = async (uploadFiles) => {
         try {
             const formData = new FormData();
-            files.forEach(file => {
+            uploadFiles.forEach(file => {
                 formData.append('files', file);
             });
 
-            const response = await fetch('/api/upload/multiple', {
-                method: 'POST',
+            const response = await api.post('/upload/multiple', formData, {
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    'Content-Type': 'multipart/form-data',
                 },
-                body: formData
             });
 
-            if (!response.ok) {
-                throw new Error('Upload failed');
-            }
-
-            const data = await response.json();
-            console.log('Multiple upload successful:', data);
+            console.log('Multiple upload successful:', response.data);
+            setSuccess(`${uploadFiles.length} files uploaded successfully!`);
+            setError(null);
 
             // Refresh files list
             await fetchFiles();
         } catch (err) {
             console.error('Upload error:', err);
-            setError(err.message);
+            setError(err.response?.data?.error || err.message);
         }
     };
 
     const handleDeleteFile = async (filename) => {
         try {
-            const response = await fetch(`/api/upload/${filename}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Delete failed');
-            }
+            await api.delete(`/upload/${filename}`);
+            setSuccess('File deleted successfully!');
+            setError(null);
 
             // Refresh files list
             await fetchFiles();
         } catch (err) {
             console.error('Delete error:', err);
-            setError(err.message);
+            setError(err.response?.data?.error || err.message);
         }
     };
 
@@ -133,6 +109,16 @@ const FileManager = () => {
 
     return (
         <div className="file-manager">
+            {success && (
+                <Toast
+                    message={success}
+                    type="success"
+                    isVisible={!!success}
+                    onClose={() => setSuccess(null)}
+                    duration={3000}
+                />
+            )}
+
             <div className="file-manager-header">
                 <h1>File Manager</h1>
                 <p>Upload and manage your files</p>
