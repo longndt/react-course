@@ -1,4 +1,4 @@
-# Theory - Full-Stack Development & Deployment
+# Theory - Full Stack Development & Deployment
 
 ---
 
@@ -6,12 +6,12 @@
 
 1. [Why Full-Stack Development?](#why-full-stack-development)
 2. [Backend with Express.js](#backend-with-expressjs)
-3. [Clean Architecture & Code Organization](#clean-architecture--code-organization)
-4. [Database with MongoDB](#database-with-mongodb)
+3. [Database with MongoDB](#database-with-mongodb)
+4. [Authentication & Authorization](#authentication--authorization)
 5. [File Upload & Media Management](#file-upload--media-management)
 6. [Performance Optimization](#performance-optimization)
 7. [Production Deployment](#production-deployment)
-8. [CI/CD Pipeline - Complete Flow](#cicd-pipeline---complete-flow)
+8. [CI/CD Pipeline - Complete Workflow](#cicd-pipeline---complete-workflow)
 9. [Common Mistakes](#common-mistakes)
 10. [Next Steps](#next-steps)
 
@@ -26,125 +26,114 @@
 - **Frontend** - React user interface
 - **Backend** - Express.js API server
 - **Database** - MongoDB data storage
-- **Deployment** - Production hosting with CI/CD
+- **Deployment** - Production hosting
 
 **Key Benefits:**
-- **Full Control** - End-to-end application ownership
-- **Better Performance** - Optimized for specific needs
-- **Scalability** - Handle growth and traffic
-- **Professional** - Industry-standard full-stack skills
+- Full control over entire application
+- Better performance optimization
+- Industry-standard professional skills
+- Production-ready deployment
 
 ---
 
 ## Backend with Express.js
 
-### Quick Setup
+### Setup Express Server
 
 ```bash
-# Create and initialize backend
+# Create backend directory
 mkdir backend && cd backend
 npm init -y
 
 # Install dependencies
-npm install express mongoose cors dotenv bcryptjs jsonwebtoken multer
+npm install express mongoose cors dotenv bcryptjs jsonwebtoken
+npm install multer express-rate-limit helmet
 npm install -D nodemon typescript @types/node @types/express
 ```
-
-### Basic Server Structure
-
-```typescript
-// src/server.ts
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-
-dotenv.config();
-
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// Database connection
-mongoose.connect(process.env.MONGODB_URI!)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB error:', err));
-
-// Routes
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date() });
-});
-
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-```
-
----
-
-## Clean Architecture & Code Organization
-
-### Why Separate Routes and Controllers?
-
-**Benefits:**
-- **Separation of Concerns** - Routes handle HTTP, controllers handle business logic
-- **Maintainability** - Easier to modify and test
-- **Reusability** - Controllers can be reused
-- **Scalability** - Better organization as app grows
 
 ### Project Structure
 
 ```
 backend/
 ├── src/
-│   ├── controllers/       # Business logic
+│   ├── controllers/          # Business logic
 │   │   ├── authController.ts
 │   │   ├── dashboardController.ts
 │   │   └── uploadController.ts
-│   ├── routes/           # HTTP routing
+│   ├── routes/              # HTTP routing
 │   │   ├── auth.ts
 │   │   ├── dashboard.ts
 │   │   └── upload.ts
-│   ├── models/           # Database schemas
-│   ├── middleware/       # Auth, error handling
-│   ├── config/          # Configuration
-│   └── utils/           # Helper functions
+│   ├── models/              # Database schemas
+│   │   ├── User.ts
+│   │   └── Dashboard.ts
+│   ├── middleware/          # Custom middleware
+│   │   ├── auth.ts
+│   │   └── errorHandler.ts
+│   ├── config/             # Configuration
+│   │   └── upload.ts
+│   └── server.ts           # Entry point
 └── package.json
 ```
 
-### Controller Example
+### Basic Express Server
 
 ```typescript
-// controllers/authController.ts
-import { Request, Response } from 'express';
-import User from '../models/User';
-import { generateToken } from '../utils/generateToken';
+// src/server.ts
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
-export const register = async (req: Request, res: Response) => {
-  try {
-    const { name, email, password } = req.body;
+import { errorHandler } from './middleware/errorHandler';
+import authRoutes from './routes/auth';
+import dashboardRoutes from './routes/dashboard';
+import uploadRoutes from './routes/upload';
 
-    const userExists = await User.findOne({ email });
-    if (userExists) {
-      return res.status(400).json({ error: 'User already exists' });
-    }
+dotenv.config();
 
-    const user = await User.create({ name, email, password });
-    const token = generateToken(user._id);
+const app = express();
+const PORT = process.env.PORT || 5000;
 
-    res.status(201).json({
-      success: true,
-      token,
-      user: { id: user._id, name: user.name, email: user.email }
+// Security middleware
+app.use(helmet());
+app.use(cors());
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+app.use('/api/', limiter);
+
+// Body parsing
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true }));
+
+// Static files
+app.use('/uploads', express.static('uploads'));
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/upload', uploadRoutes);
+
+// Error handler
+app.use(errorHandler);
+
+// Database connection
+mongoose.connect(process.env.MONGODB_URI!)
+  .then(() => {
+    console.log('Connected to MongoDB');
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
     });
-  } catch (error) {
-    res.status(500).json({ error: 'Registration failed' });
-  }
-};
+  })
+  .catch((error) => {
+    console.error('MongoDB connection error:', error);
+});
 ```
 
 ### Routes Example
@@ -162,11 +151,81 @@ router.post('/login', login);
 export default router;
 ```
 
+### Controller Example
+
+```typescript
+// controllers/authController.ts
+import { Request, Response } from 'express';
+import User from '../models/User';
+import jwt from 'jsonwebtoken';
+
+export const register = async (req: Request, res: Response) => {
+  try {
+    const { name, email, password } = req.body;
+
+    // Check if user exists
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      return res.status(400).json({ error: 'User already exists' });
+    }
+
+    // Create user
+    const user = await User.create({ name, email, password });
+
+    // Generate token
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET!,
+      { expiresIn: '7d' }
+    );
+
+    res.status(201).json({
+      success: true,
+      data: { user: { id: user._id, name, email }, token }
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+export const login = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    // Find user
+    const user = await User.findOne({ email }).select('+password');
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Check password
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Generate token
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET!,
+      { expiresIn: '7d' }
+    );
+
+    res.json({
+      success: true,
+      data: { user: { id: user._id, name: user.name, email }, token }
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+```
+
 ---
 
 ## Database with MongoDB
 
-### MongoDB Schema Example
+### User Model
 
 ```typescript
 // models/User.ts
@@ -177,32 +236,118 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  createdAt: Date;
+  role: 'user' | 'admin';
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
 const userSchema = new Schema<IUser>({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-}, { timestamps: true });
+  name: {
+    type: String,
+    required: [true, 'Name is required'],
+    trim: true,
+    maxlength: [50, 'Name cannot be more than 50 characters']
+  },
+  email: {
+    type: String,
+    required: [true, 'Email is required'],
+    unique: true,
+    lowercase: true,
+    match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email']
+  },
+  password: {
+    type: String,
+    required: [true, 'Password is required'],
+    minlength: [6, 'Password must be at least 6 characters'],
+    select: false
+  },
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user'
+  }
+}, {
+  timestamps: true
+});
 
 // Hash password before saving
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
+
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error as Error);
+  }
 });
 
 // Compare password method
-userSchema.methods.comparePassword = async function(candidatePassword: string) {
+userSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
 export default mongoose.model<IUser>('User', userSchema);
 ```
 
-### Authentication Middleware
+### Dashboard Model
+
+```typescript
+// models/Dashboard.ts
+import mongoose, { Document, Schema } from 'mongoose';
+
+export interface IDashboard extends Document {
+  userId: mongoose.Types.ObjectId;
+  totalUsers: number;
+  totalRevenue: number;
+  totalOrders: number;
+  monthlyGrowth: number;
+  topProducts: Array<{
+    name: string;
+    sales: number;
+    revenue: number;
+  }>;
+  recentActivity: Array<{
+    type: string;
+    description: string;
+    timestamp: Date;
+  }>;
+}
+
+const dashboardSchema = new Schema<IDashboard>({
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  totalUsers: { type: Number, default: 0 },
+  totalRevenue: { type: Number, default: 0 },
+  totalOrders: { type: Number, default: 0 },
+  monthlyGrowth: { type: Number, default: 0 },
+  topProducts: [{
+    name: String,
+    sales: Number,
+    revenue: Number
+  }],
+  recentActivity: [{
+    type: String,
+    description: String,
+    timestamp: { type: Date, default: Date.now }
+  }]
+}, {
+  timestamps: true
+});
+
+dashboardSchema.index({ userId: 1 });
+
+export default mongoose.model<IDashboard>('Dashboard', dashboardSchema);
+```
+
+---
+
+## Authentication & Authorization
+
+### Auth Middleware
 
 ```typescript
 // middleware/auth.ts
@@ -212,19 +357,38 @@ import User from '../models/User';
 
 export const protect = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const token = req.headers.authorization?.split(' ')[1];
+    let token;
+
+    // Get token from header
+    if (req.headers.authorization?.startsWith('Bearer')) {
+      token = req.headers.authorization.split(' ')[1];
+    }
 
     if (!token) {
       return res.status(401).json({ error: 'Not authorized' });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { id: string };
-    req.user = await User.findById(decoded.id).select('-password');
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string };
 
+    // Get user from token
+    const user = await User.findById(decoded.userId).select('-password');
+    if (!user) {
+      return res.status(401).json({ error: 'User not found' });
+    }
+
+    req.user = user;
     next();
   } catch (error) {
-    res.status(401).json({ error: 'Token invalid' });
+    res.status(401).json({ error: 'Not authorized' });
   }
+};
+
+export const adminOnly = (req: Request, res: Response, next: NextFunction) => {
+  if (req.user?.role !== 'admin') {
+    return res.status(403).json({ error: 'Admin access required' });
+  }
+  next();
 };
 ```
 
@@ -232,7 +396,7 @@ export const protect = async (req: Request, res: Response, next: NextFunction) =
 
 ## File Upload & Media Management
 
-### Multer Configuration
+### Upload Configuration
 
 ```typescript
 // config/upload.ts
@@ -245,7 +409,7 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+    cb(null, uniqueSuffix + path.extname(file.originalname));
   }
 });
 
@@ -260,11 +424,30 @@ const fileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCa
   cb(new Error('Invalid file type'));
 };
 
-export const uploadConfig = multer({
+const upload = multer({
   storage,
   limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
   fileFilter
 });
+
+export const uploadConfig = upload;
+```
+
+### Upload Routes
+
+```typescript
+// routes/upload.ts
+import express from 'express';
+import { protect } from '../middleware/auth';
+import { uploadConfig } from '../config/upload';
+import { uploadFile, uploadMultipleFiles } from '../controllers/uploadController';
+
+const router = express.Router();
+
+router.post('/single', protect, uploadConfig.single('file'), uploadFile);
+router.post('/multiple', protect, uploadConfig.array('files', 10), uploadMultipleFiles);
+
+export default router;
 ```
 
 ### Upload Controller
@@ -281,12 +464,32 @@ export const uploadFile = async (req: Request, res: Response) => {
 
     res.json({
       success: true,
-      file: {
-        filename: req.file.filename,
-        originalName: req.file.originalname,
-        size: req.file.size,
-        url: `/uploads/${req.file.filename}`
+      data: {
+      filename: req.file.filename,
+        path: `/uploads/${req.file.filename}`,
+        size: req.file.size
       }
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Upload failed' });
+  }
+};
+
+export const uploadMultipleFiles = async (req: Request, res: Response) => {
+  try {
+    if (!req.files || !Array.isArray(req.files)) {
+      return res.status(400).json({ error: 'No files uploaded' });
+    }
+
+    const files = req.files.map(file => ({
+        filename: file.filename,
+      path: `/uploads/${file.filename}`,
+      size: file.size
+    }));
+
+    res.json({
+      success: true,
+      data: { files }
     });
   } catch (error) {
     res.status(500).json({ error: 'Upload failed' });
@@ -298,59 +501,13 @@ export const uploadFile = async (req: Request, res: Response) => {
 
 ## Performance Optimization
 
-### 1. Virtual Lists (Large Data Sets)
+### Frontend Optimization
 
-```typescript
-// components/VirtualList.tsx
-import React, { useState, useRef, useEffect } from 'react';
-
-interface VirtualListProps {
-  items: any[];
-  itemHeight: number;
-  containerHeight: number;
-  renderItem: (item: any, index: number) => React.ReactNode;
-}
-
-const VirtualList: React.FC<VirtualListProps> = ({
-  items,
-  itemHeight,
-  containerHeight,
-  renderItem
-}) => {
-  const [scrollTop, setScrollTop] = useState(0);
-
-  const startIndex = Math.floor(scrollTop / itemHeight);
-  const endIndex = Math.min(
-    startIndex + Math.ceil(containerHeight / itemHeight),
-    items.length
-  );
-
-  const visibleItems = items.slice(startIndex, endIndex);
-  const totalHeight = items.length * itemHeight;
-  const offsetY = startIndex * itemHeight;
-
-  return (
-    <div
-      style={{ height: containerHeight, overflow: 'auto' }}
-      onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}
-    >
-      <div style={{ height: totalHeight, position: 'relative' }}>
-        <div style={{ transform: `translateY(${offsetY}px)` }}>
-          {visibleItems.map((item, index) => renderItem(item, startIndex + index))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default VirtualList;
-```
-
-### 2. Code Splitting & Lazy Loading
+#### 1. Code Splitting & Lazy Loading
 
 ```typescript
 // App.tsx
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoadingSpinner from './components/LoadingSpinner';
 
@@ -363,55 +520,117 @@ function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingSpinner />}>
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/files" element={<FileManager />} />
           <Route path="/performance" element={<PerformanceDemo />} />
-        </Routes>
-      </Suspense>
+      </Routes>
+    </Suspense>
     </BrowserRouter>
   );
 }
 ```
 
-### 3. Memoization
+#### 2. React.memo & useMemo
 
 ```typescript
-import React, { useMemo, useCallback } from 'react';
-
-const ExpensiveComponent = ({ data, onItemClick }) => {
-  // Memoize expensive calculations
-  const processedData = useMemo(() => {
-    return data.map(item => ({
-      ...item,
-      computed: expensiveOperation(item)
-    }));
-  }, [data]);
-
-  // Memoize callbacks
-  const handleClick = useCallback((id) => {
-    onItemClick(id);
-  }, [onItemClick]);
-
+// Memoize expensive components
+const ExpensiveComponent = React.memo(({ data }: { data: string[] }) => {
   return (
     <div>
-      {processedData.map(item => (
-        <div key={item.id} onClick={() => handleClick(item.id)}>
-          {item.computed}
-        </div>
+      {data.map((item, index) => (
+        <div key={index}>{item}</div>
       ))}
     </div>
   );
-};
+});
 
-export default React.memo(ExpensiveComponent);
+// Memoize expensive calculations
+function DataList({ items }: { items: Item[] }) {
+  const sortedItems = useMemo(() => {
+    return items.sort((a, b) => a.name.localeCompare(b.name));
+  }, [items]);
+
+  return <div>{/* render sortedItems */}</div>;
+}
+```
+
+#### 3. Virtual Lists
+
+```typescript
+// components/VirtualList.tsx
+import { useRef, useState, useEffect } from 'react';
+
+interface VirtualListProps {
+  items: any[];
+  itemHeight: number;
+  containerHeight: number;
+  renderItem: (item: any, index: number) => React.ReactNode;
+}
+
+export default function VirtualList({ items, itemHeight, containerHeight, renderItem }: VirtualListProps) {
+  const [scrollTop, setScrollTop] = useState(0);
+
+  const startIndex = Math.floor(scrollTop / itemHeight);
+  const endIndex = Math.min(
+    startIndex + Math.ceil(containerHeight / itemHeight) + 1,
+    items.length
+  );
+
+  const visibleItems = items.slice(startIndex, endIndex);
+  const offsetY = startIndex * itemHeight;
+
+  return (
+    <div
+      style={{ height: containerHeight, overflow: 'auto' }}
+      onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}
+    >
+      <div style={{ height: items.length * itemHeight, position: 'relative' }}>
+        <div style={{ transform: `translateY(${offsetY}px)` }}>
+          {visibleItems.map((item, index) => renderItem(item, startIndex + index))}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### Backend Optimization
+
+```typescript
+// Add indexes to frequently queried fields
+userSchema.index({ email: 1 });
+dashboardSchema.index({ userId: 1 });
+
+// Use lean() for read-only queries
+const users = await User.find().lean();
+
+// Use select() to limit fields
+const users = await User.find().select('name email');
+
+// Use pagination
+const page = 1;
+const limit = 10;
+const users = await User.find()
+  .skip((page - 1) * limit)
+  .limit(limit);
 ```
 
 ---
 
 ## Production Deployment
 
-### Frontend Build Optimization
+### Environment Variables
+
+```bash
+# .env
+NODE_ENV=production
+PORT=5000
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/dbname
+JWT_SECRET=your-super-secret-jwt-key-change-this
+```
+
+### Frontend Build Configuration
 
 ```typescript
 // vite.config.ts
@@ -421,57 +640,66 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   build: {
-    minify: 'terser',
+    outDir: 'dist',
     sourcemap: false,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+      },
+    },
     rollupOptions: {
       output: {
         manualChunks: {
-          'vendor': ['react', 'react-dom', 'react-router-dom'],
-        }
-      }
-    }
-  }
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
+    },
+  },
 });
-```
-
-### Environment Variables
-
-```typescript
-// Frontend: .env
-VITE_API_URL=https://api.yourdomain.com
-VITE_APP_NAME=MyApp
-
-// Backend: .env
-PORT=5000
-MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/mydb
-JWT_SECRET=your-secret-key-here
-NODE_ENV=production
 ```
 
 ### Deployment Platforms
 
-**Frontend (Vercel):**
+#### Vercel (Frontend)
+
 ```json
 // vercel.json
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "devCommand": "npm run dev",
-  "installCommand": "npm install",
-  "framework": "vite"
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "https://your-backend-api.com/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }
 ```
 
-**Backend (PM2):**
-```json
+#### PM2 (Backend on VPS)
+
+```javascript
 // ecosystem.config.js
 module.exports = {
   apps: [{
     name: 'backend',
-    script: './dist/server.js',
-    instances: 2,
+    script: 'dist/server.js',
+    instances: 'max',
     exec_mode: 'cluster',
-    env: {
+    env_production: {
       NODE_ENV: 'production',
       PORT: 5000
     }
@@ -479,34 +707,45 @@ module.exports = {
 };
 ```
 
+```bash
+# Deploy commands
+npm run build
+pm2 start ecosystem.config.js --env production
+pm2 save
+pm2 startup
+```
+
 ---
 
-## CI/CD Pipeline - Complete Flow
+## CI/CD Pipeline - Complete Workflow
 
-### Overview: From Code to Production
+### Complete Step-by-Step Guide
 
-```
-Code Complete → Create Workflow → Push to GitHub → Check Actions → Deploy
-```
+#### **Step 1: Code Your Application**
 
-### Step-by-Step Implementation
+Hoàn thành code frontend và backend của bạn trong local environment.
 
-#### Step 1: Write Your Code
-
-Complete your feature with tests:
 ```bash
-# Make sure your code works locally
-npm run dev         # Test development
-npm run build      # Test production build
-npm test          # Run tests (if any)
+# Test locally
+cd frontend && npm run dev
+cd backend && npm run dev
 ```
 
-#### Step 2: Create GitHub Actions Workflow
+#### **Step 2: Create GitHub Actions Workflow**
 
-Create `.github/workflows/deploy.yml`:
+Tạo file workflow để tự động test và build code khi push lên GitHub:
+
+```bash
+# Create workflow directory
+mkdir -p .github/workflows
+```
+
+#### **Step 3: Frontend CI/CD Configuration**
+
+Tạo file `.github/workflows/frontend-deploy.yml`:
 
 ```yaml
-name: CI/CD Pipeline
+name: Frontend CI/CD
 
 on:
   push:
@@ -515,90 +754,96 @@ on:
     branches: [main]
 
 jobs:
-  # Job 1: Test and Build
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
 
-      # Frontend build
-      - name: Install frontend dependencies
+      # 3. Install dependencies
+      - name: Install dependencies
         working-directory: ./frontend
         run: npm ci
 
-      - name: Build frontend
+      # 4. Build application
+      - name: Build application
         working-directory: ./frontend
         run: npm run build
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
 
-      - name: Upload frontend build
-        uses: actions/upload-artifact@v4
-        with:
-          name: frontend-dist
-          path: frontend/dist
-
-      # Backend build
-      - name: Install backend dependencies
-        working-directory: ./backend
-        run: npm ci
-
-      - name: Build backend
-        working-directory: ./backend
-        run: npm run build
-
-      - name: Upload backend build
-        uses: actions/upload-artifact@v4
-        with:
-          name: backend-dist
-          path: backend/dist
-
-  # Job 2: Deploy Frontend to Vercel
-  deploy-frontend:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Download build
-        uses: actions/download-artifact@v4
-        with:
-          name: frontend-dist
-          path: frontend/dist
-
+      # 5. Deploy to Vercel (on main branch)
       - name: Deploy to Vercel
+        if: github.ref == 'refs/heads/main'
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
           working-directory: ./frontend
+          vercel-args: '--prod'
+```
 
-  # Job 3: Deploy Backend to Server
-  deploy-backend:
-    needs: build
+#### **Step 4: Backend CI/CD Configuration**
+
+Tạo file `.github/workflows/backend-deploy.yml`:
+
+```yaml
+name: Backend CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
 
     steps:
+      # 1. Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      # 4. Build TypeScript
+      - name: Build application
+        working-directory: ./backend
+        run: npm run build
+
+      # 5. Deploy to VPS via SSH (on main branch)
       - name: Deploy to Production Server
+        if: github.ref == 'refs/heads/main'
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /var/www/myapp
+            cd /var/www/your-app
             git pull origin main
             cd backend
             npm ci --production
@@ -606,276 +851,324 @@ jobs:
             pm2 restart backend
 ```
 
-#### Step 3: Configure GitHub Secrets
+#### **Step 5: Setup GitHub Secrets**
 
-Go to your GitHub repository → Settings → Secrets and variables → Actions
+Vào GitHub repository → Settings → Secrets and variables → Actions, thêm các secrets:
 
-Add these secrets:
-
-**For Vercel (Frontend):**
+**Frontend Secrets:**
 ```
-VERCEL_TOKEN          → Get from https://vercel.com/account/tokens
-VERCEL_ORG_ID         → Run: vercel link (in your project)
-VERCEL_PROJECT_ID     → Run: vercel link (in your project)
-```
-
-**For Server (Backend):**
-```
-SERVER_HOST          → Your server IP or domain
-SERVER_USERNAME      → SSH username (usually: ubuntu, root, or deploy)
-SSH_PRIVATE_KEY      → Your SSH private key content
+VERCEL_TOKEN=your_vercel_token_here
+VERCEL_ORG_ID=your_org_id_here
+VERCEL_PROJECT_ID=your_project_id_here
+VITE_API_URL=https://api.yourdomain.com
 ```
 
-#### Step 4: Push Code to GitHub
-
-```bash
-# Add workflow file
-git add .github/workflows/deploy.yml
-
-# Commit and push
-git add .
-git commit -m "Add CI/CD pipeline"
-git push origin main
+**Backend Secrets:**
+```
+SERVER_HOST=your-server-ip
+SERVER_USERNAME=deploy
+SERVER_SSH_KEY=your_private_ssh_key_content
 ```
 
-#### Step 5: Monitor Deployment
-
-1. Go to your GitHub repository
-2. Click "Actions" tab
-3. You'll see your workflow running
-4. Click on the workflow to see detailed logs
-
-**What happens:**
-- ✅ Code is checked out
-- ✅ Dependencies installed
-- ✅ Build created
-- ✅ Tests run (if configured)
-- ✅ Deployed to Vercel (frontend)
-- ✅ Deployed to server (backend)
-
-#### Step 6: Verify Deployment
-
-**Frontend:**
-- Visit your Vercel URL
-- Check console for errors
-- Test all features
-
-**Backend:**
-- Test API endpoints
-- Check server logs: `pm2 logs backend`
-- Monitor: `pm2 status`
-
-### Quick Vercel Setup
-
+**How to get Vercel credentials:**
 ```bash
 # Install Vercel CLI
-npm install -g vercel
+npm i -g vercel
 
-# Login
-vercel login
-
-# Link project (in frontend directory)
+# Login and link project
 cd frontend
 vercel link
 
-# This creates .vercel folder with project.json
-# Copy org_id and project_id to GitHub Secrets
+# Get token from: https://vercel.com/account/tokens
+# Get ORG_ID and PROJECT_ID from: .vercel/project.json
 ```
 
-### Quick Server Setup (Backend)
+#### **Step 6: Push Code to GitHub**
 
 ```bash
+# Add all files
+git add .
+
+# Commit changes
+git commit -m "Add CI/CD workflows"
+
+# Push to GitHub
+git push origin main
+```
+
+#### **Step 7: Monitor Deployment**
+
+1. Vào GitHub repository → **Actions** tab
+2. Xem workflow đang chạy (màu vàng = đang chạy, xanh = thành công, đỏ = lỗi)
+3. Click vào workflow để xem chi tiết từng step
+4. Nếu có lỗi, xem logs để debug
+
+#### **Step 8: Verify Deployment**
+
+**Frontend (Vercel):**
+1. Vào https://vercel.com/dashboard
+2. Click vào project của bạn
+3. Xem deployment URL (ví dụ: https://your-app.vercel.app)
+4. Test application trên production URL
+
+**Backend (VPS with PM2):**
+```bash
 # SSH to your server
-ssh user@your-server.com
+ssh deploy@your-server-ip
 
-# Install Node.js
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt-get install -y nodejs
+# Check PM2 status
+pm2 status
 
-# Install PM2
-sudo npm install -g pm2
+# View logs
+pm2 logs backend
 
-# Clone your repository
-cd /var/www
-git clone https://github.com/yourusername/your-repo.git myapp
-cd myapp/backend
+# Monitor in real-time
+pm2 monit
+```
 
-# Install and build
-npm ci --production
-npm run build
+#### **Step 9: Setup Custom Domain (Optional)**
 
-# Start with PM2
-pm2 start dist/server.js --name backend
-pm2 save
-pm2 startup  # Follow instructions
+**Vercel:**
+1. Vào project Settings → Domains
+2. Add custom domain (ví dụ: www.yourdomain.com)
+3. Update DNS records theo hướng dẫn
 
-# Setup MongoDB (if not using Atlas)
-# Or configure MongoDB Atlas connection string in .env
+**Backend:**
+```bash
+# Install nginx
+sudo apt install nginx
+
+# Configure nginx
+sudo nano /etc/nginx/sites-available/your-app
+
+# Add configuration:
+server {
+    listen 80;
+    server_name api.yourdomain.com;
+
+    location / {
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+# Enable site and restart nginx
+sudo ln -s /etc/nginx/sites-available/your-app /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
+
+# Setup SSL with Let's Encrypt
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d api.yourdomain.com
+```
+
+### Flow Diagram
+
+```
+┌─────────────────┐
+│  Developer      │
+│  writes code    │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│  git add .      │
+│  git commit     │
+│  git push       │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────────────┐
+│  GitHub                 │
+│  Triggers Workflow      │
+└────────┬────────────────┘
+         │
+    ┌────┴────┐
+    │         │
+    ▼         ▼
+┌────────┐ ┌────────┐
+│Frontend│ │Backend │
+│ Build  │ │ Build  │
+└───┬────┘ └───┬────┘
+    │          │
+    ▼          ▼
+┌────────┐ ┌────────┐
+│ Vercel │ │  VPS   │
+│ Deploy │ │ Deploy │
+└───┬────┘ └───┬────┘
+    │          │
+    ▼          ▼
+┌────────────────────┐
+│   Production       │
+│   Live ✅          │
+└────────────────────┘
 ```
 
 ### Troubleshooting CI/CD
 
-**Build Fails:**
-```bash
-# Check logs in GitHub Actions
-# Common fixes:
-- Ensure all dependencies in package.json
-- Check Node.js version matches
-- Verify environment variables
-```
+**Common Issues:**
 
-**Deployment Fails:**
-```bash
-# Vercel: Check build command and output directory
-# Server: Check SSH key and permissions
-# Both: Verify all secrets are set correctly
-```
+1. **Build fails on GitHub Actions:**
+   ```bash
+   # Check package-lock.json is committed
+   git add package-lock.json
+   git commit -m "Add package-lock.json"
+   ```
 
-**Server Not Starting:**
-```bash
-# SSH to server and check:
-pm2 logs backend
-pm2 status
+2. **Deployment fails:**
+   - Verify all secrets are correctly set
+   - Check environment variables
+   - Review workflow logs in GitHub Actions
 
-# Common issues:
-- Port already in use: pm2 delete backend && pm2 start ...
-- Environment variables: Check .env file
-- MongoDB connection: Verify MONGODB_URI
-```
+3. **Backend not starting after deployment:**
+   ```bash
+   # SSH to server and check logs
+   pm2 logs backend --lines 100
 
-### Best Practices
-
-1. **Test Locally First** - Never push untested code
-2. **Use Environment Variables** - Never commit secrets
-3. **Monitor Deployments** - Always check Actions tab after push
-4. **Staged Rollouts** - Test on staging before production
-5. **Keep Logs** - Enable logging for debugging
+   # Restart if needed
+   pm2 restart backend
+   ```
 
 ---
 
 ## Common Mistakes
 
-### 1. Security Issues
+### Backend Mistakes
 
-❌ **Bad:**
+**1. Not validating input:**
 ```typescript
-// Exposing sensitive data
-const user = await User.findById(id);
-res.json(user); // Includes password!
-```
+// ❌ Bad
+export const createUser = async (req: Request, res: Response) => {
+  const user = await User.create(req.body); // No validation!
+};
 
-✅ **Good:**
-```typescript
-const user = await User.findById(id).select('-password');
-res.json(user);
-```
+// ✅ Good
+export const createUser = async (req: Request, res: Response) => {
+  const { name, email, password } = req.body;
 
-### 2. Missing Error Handling
-
-❌ **Bad:**
-```typescript
-app.get('/api/users/:id', async (req, res) => {
-  const user = await User.findById(req.params.id);
-  res.json(user); // What if user doesn't exist?
-});
-```
-
-✅ **Good:**
-```typescript
-app.get('/api/users/:id', async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ error: 'Server error' });
+  if (!name || !email || !password) {
+    return res.status(400).json({ error: 'All fields required' });
   }
-});
+
+  const user = await User.create({ name, email, password });
+};
 ```
 
-### 3. Not Using Environment Variables
-
-❌ **Bad:**
+**2. Exposing sensitive data:**
 ```typescript
-mongoose.connect('mongodb://localhost:27017/mydb');
-const token = jwt.sign({ id }, 'hardcoded-secret');
+// ❌ Bad
+const user = await User.findById(id); // Returns password!
+
+// ✅ Good
+const user = await User.findById(id).select('-password');
 ```
 
-✅ **Good:**
+**3. Not handling errors:**
 ```typescript
-mongoose.connect(process.env.MONGODB_URI!);
-const token = jwt.sign({ id }, process.env.JWT_SECRET!);
+// ❌ Bad
+const users = await User.find(); // Will crash if database error
+
+// ✅ Good
+  try {
+    const users = await User.find();
+  res.json({ success: true, data: users });
+  } catch (error) {
+  res.status(500).json({ error: 'Server error' });
+  }
 ```
 
-### 4. Inefficient Database Queries
+### Frontend Mistakes
 
-❌ **Bad:**
+**1. Not handling loading states:**
 ```typescript
-// N+1 query problem
-const users = await User.find();
-for (const user of users) {
-  user.posts = await Post.find({ userId: user._id });
+// ❌ Bad
+function DataList() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/data').then(res => res.json()).then(setData);
+  }, []);
+
+  return <div>{data.map(...)}</div>; // Empty until loaded!
+}
+
+// ✅ Good
+function DataList() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/data')
+      .then(res => res.json())
+      .then(data => {
+        setData(data);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <LoadingSpinner />;
+  return <div>{data.map(...)}</div>;
 }
 ```
 
-✅ **Good:**
+**2. Memory leaks:**
 ```typescript
-// Use populate
-const users = await User.find().populate('posts');
-```
+// ❌ Bad
+useEffect(() => {
+  const interval = setInterval(() => {
+    fetchData();
+  }, 1000);
+  // Never cleaned up!
+}, []);
 
-### 5. No Input Validation
+// ✅ Good
+useEffect(() => {
+  const interval = setInterval(() => {
+    fetchData();
+  }, 1000);
 
-❌ **Bad:**
-```typescript
-const user = await User.create(req.body); // Dangerous!
-```
-
-✅ **Good:**
-```typescript
-const { name, email, password } = req.body;
-if (!name || !email || !password) {
-  return res.status(400).json({ error: 'Missing required fields' });
-}
-const user = await User.create({ name, email, password });
+  return () => clearInterval(interval);
+}, []);
 ```
 
 ---
 
 ## Next Steps
 
-### You've Mastered
+### What You've Learned
 
-✅ **Full-Stack Development** - Frontend + Backend + Database
-✅ **Clean Architecture** - Separation of routes and controllers
-✅ **Authentication & Security** - JWT, password hashing
-✅ **File Upload** - Multer configuration and handling
-✅ **Performance Optimization** - Virtual lists, code splitting, memoization
-✅ **Production Deployment** - Vercel, PM2, environment config
-✅ **CI/CD** - Automated testing and deployment
+✅ **Backend Development:**
+- Express.js server setup and configuration
+- RESTful API design with routes and controllers
+- MongoDB integration and schema design
+- Authentication with JWT
+- File upload handling
 
-### Career Paths
+✅ **Performance:**
+- Code splitting and lazy loading
+- React.memo and useMemo optimization
+- Virtual lists for large datasets
+- Database indexing and query optimization
 
-🚀 **Frontend Developer** - Specialize in React and user interfaces
-🚀 **Backend Developer** - Focus on APIs and server-side development
-🚀 **Full-Stack Developer** - End-to-end application development
-🚀 **DevOps Engineer** - Infrastructure and deployment automation
+✅ **Deployment:**
+- Environment configuration
+- Production build optimization
+- Vercel deployment for frontend
+- VPS deployment with PM2 for backend
+- **Complete CI/CD workflow from code to production**
 
-### Continue Learning
+### Advanced Topics to Explore
 
-📚 **Advanced Topics:**
-- GraphQL as alternative to REST
-- WebSockets for real-time features
-- Microservices architecture
-- Docker & Kubernetes
-- Cloud platforms (AWS, Azure, GCP)
-
-📚 **Resources:**
-- [Advanced Patterns](../../extras/advanced_patterns.md)
-- [Performance Optimization](../../extras/performance_optimization.md)
-- [Security Guide](../../extras/security_guide.md)
-- [Testing Strategies](../../extras/testing_strategies.md)
+🚀 **Next Level:**
+- **GraphQL** - Alternative to REST APIs
+- **WebSockets** - Real-time communication
+- **Docker & Kubernetes** - Container orchestration
+- **Microservices** - Distributed architecture
+- **AWS/Azure/GCP** - Cloud platforms
+- **Testing** - Unit, integration, and E2E tests
 
 ---
