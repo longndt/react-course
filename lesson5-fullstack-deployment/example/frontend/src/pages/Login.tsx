@@ -1,42 +1,78 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import LoadingSpinner from '../components/LoadingSpinner';
+import './Login.css';
 
 const Login: React.FC = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login, error, clearError } = useAuth();
+  const { login, register, error, clearError, isLoading } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     clearError();
+
     try {
-      await login(email, password);
+      if (isLogin) {
+        await login(email, password);
+      } else {
+        await register(name, email, password);
+      }
     } catch (err) {
       // Error is handled by context
     }
   };
 
+  const switchMode = () => {
+    setIsLogin(!isLogin);
+    clearError();
+    setName('');
+    setEmail('');
+    setPassword('');
+  };
 
   return (
-    <div className="app">
-      <div style={{ background: 'white', padding: '2rem', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', width: '100%', maxWidth: '400px' }}>
-        <h1 style={{ textAlign: 'center', marginBottom: '2rem', color: '#1f2937' }}>Login</h1>
+    <div className="login-page">
+      <div className="login-container">
+        <div className="login-header">
+          <h1>{isLogin ? 'Welcome Back' : 'Create Account'}</h1>
+          <p>{isLogin ? 'Sign in to your account' : 'Sign up for a new account'}</p>
+        </div>
 
         {error && (
-          <div style={{ background: '#fee2e2', color: '#dc2626', padding: '0.75rem', borderRadius: '4px', marginBottom: '1rem' }}>
+          <div className="alert alert-error">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="login-form">
+          {!isLogin && (
+            <div className="form-group">
+              <label htmlFor="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter your full name"
+                required
+                disabled={isLoading}
+              />
+            </div>
+          )}
+
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email Address</label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
               required
+              disabled={isLoading}
             />
           </div>
 
@@ -47,15 +83,37 @@ const Login: React.FC = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
               required
+              minLength={6}
+              disabled={isLoading}
             />
+            {!isLogin && (
+              <small className="form-hint">Password must be at least 6 characters</small>
+            )}
           </div>
 
-          <button type="submit" className="btn btn-primary" style={{ width: '100%', marginBottom: '1rem' }}>
-            Login
+          <button
+            type="submit"
+            className="btn btn-primary btn-block"
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <LoadingSpinner size="small" />
+            ) : (
+              isLogin ? 'Sign In' : 'Sign Up'
+            )}
           </button>
         </form>
 
+        <div className="login-footer">
+          <p>
+            {isLogin ? "Don't have an account? " : "Already have an account? "}
+            <button onClick={switchMode} className="link-button" disabled={isLoading}>
+              {isLogin ? 'Sign up' : 'Sign in'}
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );

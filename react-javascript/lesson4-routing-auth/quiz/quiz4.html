@@ -425,7 +425,7 @@
   <div class="container">
     <!-- Header -->
     <header class="header" role="banner">
-      <h1> Quiz - Routing & Authentication</h1>
+      <h1>📝 Quiz - Routing & Authentication</h1>
     </header>
 
     <!-- Main Content -->
@@ -521,26 +521,20 @@
       // Multiple Choice Questions (1-15)
       {
         type: "multiple",
-        question: "What is the main advantage of client-side routing in React?",
+        question: "What is React Router?",
         options: [
-          "Faster server responses",
-          "No page reloads, instant navigation with state persistence",
-          "Better SEO",
-          "Smaller bundle size",
+          "A state management library",
+          "A library for handling routing in React applications",
+          "A CSS framework",
+          "A testing library",
         ],
         correct: 1,
       },
       {
         type: "multiple",
-        question: "Which library is the standard for routing in React?",
-        options: ["React Navigation", "React Router", "Next Router", "Express Router"],
-        correct: 1,
-      },
-      {
-        type: "multiple",
-        question: "What component wraps the entire app to enable routing?",
-        options: ["Router", "BrowserRouter", "Routes", "Route"],
-        correct: 1,
+        question: "Which component is used to define a single route in React Router?",
+        options: ["<Router>", "<Routes>", "<Route>", "<Link>"],
+        correct: 2,
       },
       {
         type: "multiple",
@@ -555,112 +549,133 @@
       },
       {
         type: "multiple",
+        question: "How do you navigate programmatically in React Router v6?",
+        options: [
+          "Using history.push()",
+          "Using the useNavigate hook",
+          "Using window.location",
+          "Using <Redirect>",
+        ],
+        correct: 1,
+      },
+      {
+        type: "multiple",
+        question: "What is the purpose of the Navigate component?",
+        options: [
+          "To create navigation links",
+          "To redirect users to a different route",
+          "To define routes",
+          "To handle 404 errors",
+        ],
+        correct: 1,
+      },
+      {
+        type: "multiple",
+        question: "What does authentication mean?",
+        options: [
+          "Checking what actions a user can perform",
+          "Verifying the identity of a user",
+          "Encrypting user data",
+          "Storing user passwords",
+        ],
+        correct: 1,
+      },
+      {
+        type: "multiple",
+        question: "What does authorization mean?",
+        options: [
+          "Logging in a user",
+          "Determining what an authenticated user is allowed to do",
+          "Creating user accounts",
+          "Encrypting passwords",
+        ],
+        correct: 1,
+      },
+      {
+        type: "multiple",
+        question: "What is JWT?",
+        options: [
+          "JavaScript Web Technology",
+          "JSON Web Token - a compact way to securely transmit information",
+          "Java Web Tool",
+          "JavaScript Web Template",
+        ],
+        correct: 1,
+      },
+      {
+        type: "multiple",
+        question: "Where should you store JWT tokens in a React application?",
+        options: [
+          "In cookies or localStorage/sessionStorage",
+          "In component state only",
+          "In CSS files",
+          "In public folder",
+        ],
+        correct: 0,
+      },
+      {
+        type: "multiple",
         question: "What is a protected route?",
         options: [
           "A route that loads faster",
           "A route that requires authentication to access",
-          "A route with HTTPS",
+          "A route with better SEO",
           "A route without parameters",
         ],
         correct: 1,
       },
       {
         type: "multiple",
-        question: "What does JWT stand for?",
+        question: "How do you implement a protected route in React?",
         options: [
-          "JavaScript Web Token",
-          "JSON Web Token",
-          "Java Web Technology",
-          "Just Working Token",
+          "By using CSS",
+          "By checking authentication status and redirecting if not authenticated",
+          "By using inline styles",
+          "By adding passwords to routes",
         ],
         correct: 1,
       },
       {
         type: "multiple",
-        question: "Where should you store JWT tokens in the browser?",
+        question: "What is the Context API used for in authentication?",
         options: [
-          "In global variables",
-          "In localStorage or httpOnly cookies",
-          "In the URL",
-          "In CSS files",
+          "To style components",
+          "To share authentication state across components without prop drilling",
+          "To create routes",
+          "To handle errors",
         ],
         correct: 1,
       },
       {
         type: "multiple",
-        question: "What is the purpose of useNavigate hook?",
+        question: "What should you do when a user logs out?",
         options: [
-          "To create navigation menus",
-          "To programmatically navigate between routes",
-          "To fetch navigation data",
-          "To style navigation components",
+          "Just close the browser",
+          "Clear authentication tokens and redirect to login page",
+          "Refresh the page",
+          "Delete all user data",
         ],
         correct: 1,
       },
       {
         type: "multiple",
-        question: "What hook is used to access URL parameters?",
-        options: ["useState", "useEffect", "useParams", "useRouter"],
-        correct: 2,
-      },
-      {
-        type: "multiple",
-        question: "What is Role-Based Access Control (RBAC)?",
+        question: "What is the purpose of useParams hook in React Router?",
         options: [
-          "A routing pattern",
-          "Restricting access based on user roles/permissions",
-          "A database design pattern",
-          "A CSS methodology",
+          "To navigate between pages",
+          "To access URL parameters",
+          "To create links",
+          "To handle authentication",
         ],
         correct: 1,
       },
       {
         type: "multiple",
-        question: "What component is used as a placeholder for nested routes?",
-        options: ["<Children>", "<Outlet>", "<Nested>", "<Slot>"],
-        correct: 1,
-      },
-      {
-        type: "multiple",
-        question: "What is the purpose of authentication?",
+        question: "Why should passwords be hashed before storing?",
         options: [
-          "To make apps faster",
-          "To verify user identity and control access",
-          "To improve SEO",
-          "To reduce bundle size",
-        ],
-        correct: 1,
-      },
-      {
-        type: "multiple",
-        question: "What should you do when a JWT token expires?",
-        options: [
-          "Ignore it",
-          "Refresh the token or redirect to login",
-          "Delete the app",
-          "Change the password",
-        ],
-        correct: 1,
-      },
-      {
-        type: "multiple",
-        question: "What is the difference between authentication and authorization?",
-        options: [
-          "No difference",
-          "Authentication verifies identity, authorization checks permissions",
-          "Authorization is faster",
-          "Authentication is only for admins",
-        ],
-        correct: 1,
-      },
-      {
-        type: "multiple",
-        question: "What is a common security practice for storing passwords?",
-        options: [
-          "Store in plain text",
-          "Hash with bcrypt or similar algorithms",
-          "Encrypt with base64",
-          "Store in localStorage",
+          "To make them longer",
+          "To protect user passwords even if the database is compromised",
+          "To reduce storage space",
+          "To improve performance",
         ],
         correct: 1,
       },
@@ -668,28 +683,28 @@
       // Short Answer Questions (16-20)
       {
         type: "short",
-        question: "What React Router component defines individual routes?",
-        answer: "Route",
+        question: "What component is used for declarative navigation in React Router?",
+        answer: "Link",
       },
       {
         type: "short",
-        question: "What hook returns the current location object in React Router?",
-        answer: "useLocation",
+        question: "What hook is used to access URL parameters in React Router?",
+        answer: "useParams",
       },
       {
         type: "short",
-        question: "What component should render when no routes match (404 page)?",
-        answer: "NotFound",
+        question: "What does JWT stand for?",
+        answer: "JSON Web Token",
       },
       {
         type: "short",
-        question: "What HTTP status code indicates unauthorized access?",
-        answer: "401",
+        question: "What React hook is commonly used for programmatic navigation?",
+        answer: "useNavigate",
       },
       {
         type: "short",
-        question: "What React pattern is commonly used to share auth state across components?",
-        answer: "Context",
+        question: "What library is commonly used for hashing passwords in Node.js?",
+        answer: "bcrypt",
       },
     ];
 
@@ -1020,19 +1035,19 @@
       if (percentage >= 90) {
         feedback.className = "feedback excellent";
         feedback.textContent =
-          " Excellent! You have a strong grasp of React Router and authentication fundamentals!";
+          "🎉 Excellent! You have a strong grasp of routing and authentication concepts!";
       } else if (percentage >= 70) {
         feedback.className = "feedback good";
         feedback.textContent =
-          "👍 Good job! You understand most React Router and authentication concepts well!";
+          "👍 Good job! You understand most routing and authentication concepts well!";
       } else if (percentage >= 50) {
         feedback.className = "feedback average";
         feedback.textContent =
-          " Not bad! Review the materials to improve your understanding.";
+          "📚 Not bad! Review the routing and authentication materials to improve your understanding.";
       } else {
         feedback.className = "feedback needs-improvement";
         feedback.textContent =
-          "💪 Keep studying! Practice more to master React Router and authentication fundamentals.";
+          "💪 Keep studying! Practice more to master routing and authentication.";
       }
 
       // Show results

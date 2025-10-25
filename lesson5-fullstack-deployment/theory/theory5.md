@@ -136,7 +136,7 @@ app.listen(PORT, () => {
 });
 ```
 
-### Routes Example
+### Route Example
 
 ```typescript
 // routes/auth.ts

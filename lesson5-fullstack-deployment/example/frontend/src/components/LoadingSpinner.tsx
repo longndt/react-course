@@ -1,9 +1,23 @@
 import React from 'react';
+import './LoadingSpinner.css';
 
-const LoadingSpinner: React.FC = () => {
+interface LoadingSpinnerProps {
+  size?: 'small' | 'medium' | 'large';
+  fullScreen?: boolean;
+}
+
+const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size = 'medium', fullScreen = false }) => {
+  if (fullScreen) {
+    return (
+      <div className="loading-spinner-fullscreen">
+        <div className={`spinner spinner-${size}`}></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="loading-spinner">
-      <div className="spinner"></div>
+    <div className="loading-spinner-inline">
+      <div className={`spinner spinner-${size}`}></div>
     </div>
   );
 };

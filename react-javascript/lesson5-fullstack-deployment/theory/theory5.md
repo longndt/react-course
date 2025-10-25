@@ -1,4 +1,4 @@
-# Theory - Full-Stack Development & Deployment
+# Theory - Full Stack Development & Deployment
 
 ---
 
@@ -136,7 +136,7 @@ mongoose.connect(process.env.MONGODB_URI)
   });
 ```
 
-### Routes Example
+### Route Example
 
 ```javascript
 // routes/auth.js
@@ -166,23 +166,23 @@ import jwt from 'jsonwebtoken';
 export const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    
+
     // Check if user exists
     const userExists = await User.findOne({ email });
     if (userExists) {
       return res.status(400).json({ error: 'User already exists' });
     }
-    
+
     // Create user
     const user = await User.create({ name, email, password });
-    
+
     // Generate token
     const token = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
-    
+
     res.status(201).json({
       success: true,
       data: { user: { id: user._id, name, email }, token }
@@ -200,26 +200,26 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    
+
     // Find user
     const user = await User.findOne({ email }).select('+password');
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    
+
     // Check password
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    
+
     // Generate token
     const token = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
-    
+
     res.json({
       success: true,
       data: { user: { id: user._id, name: user.name, email }, token }
@@ -281,7 +281,7 @@ const userSchema = new mongoose.Schema({
 // Hash password before saving
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
-  
+
   try {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
@@ -360,25 +360,25 @@ import User from '../models/User.js';
 export const protect = async (req, res, next) => {
   try {
     let token;
-    
+
     // Get token from header
     if (req.headers.authorization?.startsWith('Bearer')) {
       token = req.headers.authorization.split(' ')[1];
     }
-    
+
     if (!token) {
       return res.status(401).json({ error: 'Not authorized' });
     }
-    
+
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
+
     // Get user from token
     const user = await User.findById(decoded.userId).select('-password');
     if (!user) {
       return res.status(401).json({ error: 'User not found' });
     }
-    
+
     req.user = user;
     next();
   } catch (error) {
@@ -422,7 +422,7 @@ const fileFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png|gif|pdf/;
   const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype = allowedTypes.test(file.mimetype);
-  
+
   if (mimetype && extname) {
     return cb(null, true);
   }
@@ -470,7 +470,7 @@ export const uploadFile = async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded' });
     }
-    
+
     res.json({
       success: true,
       data: {
@@ -494,13 +494,13 @@ export const uploadMultipleFiles = async (req, res) => {
     if (!req.files || !Array.isArray(req.files)) {
       return res.status(400).json({ error: 'No files uploaded' });
     }
-    
+
     const files = req.files.map(file => ({
       filename: file.filename,
       path: `/uploads/${file.filename}`,
       size: file.size
     }));
-    
+
     res.json({
       success: true,
       data: { files }
@@ -564,7 +564,7 @@ function DataList({ items }) {
   const sortedItems = useMemo(() => {
     return items.sort((a, b) => a.name.localeCompare(b.name));
   }, [items]);
-  
+
   return <div>{/* render sortedItems */}</div>;
 }
 ```
@@ -585,16 +585,16 @@ import { useRef, useState, useEffect } from 'react';
  */
 export default function VirtualList({ items, itemHeight, containerHeight, renderItem }) {
   const [scrollTop, setScrollTop] = useState(0);
-  
+
   const startIndex = Math.floor(scrollTop / itemHeight);
   const endIndex = Math.min(
     startIndex + Math.ceil(containerHeight / itemHeight) + 1,
     items.length
   );
-  
+
   const visibleItems = items.slice(startIndex, endIndex);
   const offsetY = startIndex * itemHeight;
-  
+
   return (
     <div
       style={{ height: containerHeight, overflow: 'auto' }}
@@ -770,12 +770,12 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
       # 1. Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -783,19 +783,19 @@ jobs:
           node-version: '18'
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
-      
+
       # 3. Install dependencies
       - name: Install dependencies
         working-directory: ./frontend
         run: npm ci
-      
+
       # 4. Build application
       - name: Build application
         working-directory: ./frontend
         run: npm run build
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
-      
+
       # 5. Deploy to Vercel (on main branch)
       - name: Deploy to Vercel
         if: github.ref == 'refs/heads/main'
@@ -824,12 +824,12 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
       # 1. Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -837,12 +837,12 @@ jobs:
           node-version: '18'
           cache: 'npm'
           cache-dependency-path: backend/package-lock.json
-      
+
       # 3. Install dependencies
       - name: Install dependencies
         working-directory: ./backend
         run: npm ci
-      
+
       # 4. Deploy to VPS via SSH (on main branch)
       - name: Deploy to Production Server
         if: github.ref == 'refs/heads/main'
@@ -953,7 +953,7 @@ sudo nano /etc/nginx/sites-available/your-app
 server {
     listen 80;
     server_name api.yourdomain.com;
-    
+
     location / {
         proxy_pass http://localhost:5000;
         proxy_http_version 1.1;
@@ -1036,7 +1036,7 @@ sudo certbot --nginx -d api.yourdomain.com
    ```bash
    # SSH to server and check logs
    pm2 logs backend --lines 100
-   
+
    # Restart if needed
    pm2 restart backend
    ```
@@ -1057,11 +1057,11 @@ export const createUser = async (req, res) => {
 // ✅ Good
 export const createUser = async (req, res) => {
   const { name, email, password } = req.body;
-  
+
   if (!name || !email || !password) {
     return res.status(400).json({ error: 'All fields required' });
   }
-  
+
   const user = await User.create({ name, email, password });
 };
 ```
@@ -1096,11 +1096,11 @@ try {
 // ❌ Bad
 function DataList() {
   const [data, setData] = useState([]);
-  
+
   useEffect(() => {
     fetch('/api/data').then(res => res.json()).then(setData);
   }, []);
-  
+
   return <div>{data.map(...)}</div>; // Empty until loaded!
 }
 
@@ -1108,7 +1108,7 @@ function DataList() {
 function DataList() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     fetch('/api/data')
       .then(res => res.json())
@@ -1117,7 +1117,7 @@ function DataList() {
         setLoading(false);
       });
   }, []);
-  
+
   if (loading) return <LoadingSpinner />;
   return <div>{data.map(...)}</div>;
 }
@@ -1138,7 +1138,7 @@ useEffect(() => {
   const interval = setInterval(() => {
     fetchData();
   }, 1000);
-  
+
   return () => clearInterval(interval);
 }, []);
 ```

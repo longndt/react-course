@@ -1,86 +1,78 @@
 import { Request, Response } from 'express';
-import Dashboard from '../models/Dashboard';
+import User from '../models/User';
+import Product from '../models/Product';
 
 // @desc    Get dashboard data
 // @route   GET /api/dashboard
 // @access  Private
 export const getDashboard = async (req: Request, res: Response) => {
     try {
-        const userId = (req.user as any)?._id;
+        // Total users
+        const totalUsers = await User.countDocuments();
 
-        // Get or create dashboard for user
-        let dashboard = await Dashboard.findOne({ userId });
+        // Total products
+        const totalProducts = await Product.countDocuments();
 
-        if (!dashboard) {
-            // Create default dashboard
-            dashboard = await Dashboard.create({
-                userId,
-                totalUsers: 0,
-                totalRevenue: 0,
-                totalOrders: 0,
-                monthlyGrowth: 0,
-                topProducts: [],
-                recentActivity: []
-            });
-        }
+        // Total inventory value
+        const inventoryResult = await Product.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    totalValue: { $sum: { $multiply: ['$price', '$stock'] } }
+                }
+            }
+        ]);
+        const totalRevenue = inventoryResult[0]?.totalValue || 0;
+
+        // Calculate monthly growth (mock for now, need order history for real calculation)
+        const monthlyGrowth = 12.5;
+
+        // Top products by value
+        const topProducts = await Product.aggregate([
+            {
+                $project: {
+                    name: 1,
+                    price: 1,
+                    stock: 1,
+                    totalValue: { $multiply: ['$price', '$stock'] }
+                }
+            },
+            { $sort: { totalValue: -1 } },
+            { $limit: 5 },
+            {
+                $project: {
+                    name: 1,
+                    sales: '$stock',
+                    revenue: '$totalValue'
+                }
+            }
+        ]);
+
+        // Recent activity (last 10 products)
+        const recentProducts = await Product.find()
+            .sort({ createdAt: -1 })
+            .limit(10)
+            .select('name createdAt');
+
+        const recentActivity = recentProducts.map(product => ({
+            type: 'product_added',
+            description: `Product "${product.name}" was added`,
+            timestamp: product.createdAt
+        }));
 
         res.json({
             success: true,
             data: {
-                dashboard: {
-                    id: dashboard._id,
-                    userId: dashboard.userId,
-                    totalUsers: dashboard.totalUsers,
-                    totalRevenue: dashboard.totalRevenue,
-                    totalOrders: dashboard.totalOrders,
-                    monthlyGrowth: dashboard.monthlyGrowth,
-                    topProducts: dashboard.topProducts,
-                    recentActivity: dashboard.recentActivity,
-                },
-            },
+                totalUsers,
+                totalProducts,
+                totalRevenue: Math.round(totalRevenue),
+                monthlyGrowth,
+                topProducts,
+                recentActivity
+            }
         });
     } catch (error: any) {
         console.error('Get dashboard error:', error);
-        res.status(500).json({ error: 'Server error' });
-    }
-};
-
-// @desc    Update dashboard data
-// @route   PUT /api/dashboard/data
-// @access  Private
-export const updateDashboardData = async (req: Request, res: Response) => {
-    try {
-        const { totalUsers, totalRevenue, totalOrders, monthlyGrowth } = req.body;
-        const userId = (req.user as any)?._id;
-
-        const dashboard = await Dashboard.findOneAndUpdate(
-            { userId },
-            {
-                totalUsers: totalUsers || 0,
-                totalRevenue: totalRevenue || 0,
-                totalOrders: totalOrders || 0,
-                monthlyGrowth: monthlyGrowth || 0
-            },
-            { new: true, upsert: true }
-        );
-
-        res.json({
-            success: true,
-            data: {
-                dashboard: {
-                    id: dashboard._id,
-                    userId: dashboard.userId,
-                    totalUsers: dashboard.totalUsers,
-                    totalRevenue: dashboard.totalRevenue,
-                    totalOrders: dashboard.totalOrders,
-                    monthlyGrowth: dashboard.monthlyGrowth,
-                    topProducts: dashboard.topProducts,
-                    recentActivity: dashboard.recentActivity,
-                },
-            },
-        });
-    } catch (error: any) {
-        console.error('Update dashboard data error:', error);
         res.status(500).json({ error: 'Server error' });
     }
 };

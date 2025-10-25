@@ -1,12 +1,24 @@
-import "./LoadingSpinner.css";
+import './LoadingSpinner.css';
 
-export function LoadingSpinner() {
+/**
+ * @param {Object} props
+ * @param {'small'|'medium'|'large'} [props.size='medium']
+ * @param {boolean} [props.fullScreen=false]
+ */
+const LoadingSpinner = ({ size = 'medium', fullScreen = false }) => {
+  if (fullScreen) {
+    return (
+      <div className="loading-spinner-fullscreen">
+        <div className={`spinner spinner-${size}`}></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="loading-spinner-container">
-      <div className="loading-spinner"></div>
-      <p>Loading...</p>
+    <div className="loading-spinner-inline">
+      <div className={`spinner spinner-${size}`}></div>
     </div>
   );
-}
+};
 
 export default LoadingSpinner;
