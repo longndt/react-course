@@ -2,12 +2,12 @@ import express from 'express';
 import { protect } from '../middleware/auth.js';
 import { uploadConfig } from '../config/upload.js';
 import {
-  getProducts,
-  getProduct,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-  getProductStats
+    getProducts,
+    getProduct,
+    createProduct,
+    updateProduct,
+    deleteProduct,
+    getProductStats
 } from '../controllers/productController.js';
 
 const router = express.Router();

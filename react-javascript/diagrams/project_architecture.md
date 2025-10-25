@@ -17,7 +17,7 @@ graph TB
     end
 
     subgraph Backend Server
-        Express[Express.js<br/>Port 3001]
+        Express[Express.js<br/>Port 3000]
         Routes[API Routes<br/>/api/*]
         Middleware[Middleware<br/>Auth, CORS, etc.]
         Controllers[Controllers<br/>Business Logic]
@@ -65,7 +65,7 @@ graph LR
     Developer[Developer<br/>VS Code] --> Git[Git Repository]
 
     Developer --> Frontend[Frontend Dev Server<br/>localhost:5173]
-    Developer --> Backend[Backend Dev Server<br/>localhost:3001]
+    Developer --> Backend[Backend Dev Server<br/>localhost:3000]
 
     Frontend --> Vite[Vite<br/>Hot Module Reload]
     Backend --> Nodemon[Nodemon<br/>Auto-restart]
@@ -91,7 +91,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',
+        target: 'http://localhost:3000',
         changeOrigin: true,
       },
     },
@@ -147,7 +147,7 @@ sequenceDiagram
     Browser->>React: User clicks button
     React->>React: Event handler triggered
     React->>Vite: fetch('/api/tasks')
-    Vite->>Express: Proxy to localhost:3001/api/tasks
+    Vite->>Express: Proxy to localhost:3000/api/tasks
 
     Express->>Express: CORS middleware
     Express->>Express: Body parser middleware
@@ -503,12 +503,12 @@ graph LR
 **Environment Variables**
 ```bash
 # Frontend (.env)
-VITE_API_URL=http://localhost:3001
+VITE_API_URL=http://localhost:3000
 VITE_GOOGLE_CLIENT_ID=xxx
 
 # Backend (.env)
 NODE_ENV=development
-PORT=3001
+PORT=3000
 MONGODB_URI=mongodb://localhost:27017/taskmanager
 JWT_SECRET=your-secret-key
 CORS_ORIGIN=http://localhost:5173
@@ -690,8 +690,3 @@ graph TB
 ```
 
 ---
-
-**Created** October 6, 2025
-**For** React Course - LongNDT
-**Topic** Full-Stack Architecture
-**Related Lessons** Lesson 3, Lesson 4, Lesson 5
