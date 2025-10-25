@@ -1,199 +1,93 @@
-import React, { useState, useRef } from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import { LoadingSpinner } from './LoadingSpinner';
-import './FileUpload.css';
+import React, { useState, useCallback } from 'react';
+import LoadingSpinner from './LoadingSpinner';
 
 interface FileUploadProps {
-    onUploadSuccess?: (files: any[]) => void;
-    multiple?: boolean;
-    maxFiles?: number;
-    acceptedTypes?: string;
+    onSingleUpload: (file: File) => Promise<void>;
+    onMultipleUpload: (files: File[]) => Promise<void>;
+    isLoading: boolean;
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({
-    onUploadSuccess,
-    multiple = false,
-    maxFiles = 5,
-    acceptedTypes = "image/*,.pdf,.doc,.docx,.txt"
+    onSingleUpload,
+    onMultipleUpload,
+    isLoading,
 }) => {
-    const [isUploading, setIsUploading] = useState(false);
     const [dragActive, setDragActive] = useState(false);
-    const [uploadedFiles, setUploadedFiles] = useState<any[]>([]);
-    const [error, setError] = useState<string | null>(null);
-    const fileInputRef = useRef<HTMLInputElement>(null);
-    const { token } = useAuth();
 
-    const handleFiles = async (files: FileList) => {
-        if (!files || files.length === 0) return;
-
-        const fileArray = Array.from(files);
-
-        if (fileArray.length > maxFiles) {
-            setError(`Maximum ${maxFiles} files allowed`);
-            return;
-        }
-
-        setIsUploading(true);
-        setError(null);
-
-        try {
-            const formData = new FormData();
-
-            if (multiple) {
-                fileArray.forEach(file => {
-                    formData.append('files', file);
-                });
-            } else {
-                formData.append('file', fileArray[0]);
-            }
-
-            const endpoint = multiple ? '/api/upload/multiple' : '/api/upload';
-
-            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}${endpoint}`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: formData,
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                const newFiles = multiple ? result.data.files : [result.data];
-                setUploadedFiles(prev => [...prev, ...newFiles]);
-                onUploadSuccess?.(newFiles);
-            } else {
-                setError(result.error || 'Upload failed');
-            }
-        } catch (err) {
-            setError('Upload failed. Please try again.');
-        } finally {
-            setIsUploading(false);
-        }
-    };
-
-    const handleDrag = (e: React.DragEvent) => {
+    const handleDrag = useCallback((e: React.DragEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        if (e.type === "dragenter" || e.type === "dragover") {
+        if (e.type === 'dragenter' || e.type === 'dragover') {
             setDragActive(true);
-        } else if (e.type === "dragleave") {
+        } else if (e.type === 'dragleave') {
             setDragActive(false);
         }
-    };
+    }, []);
 
-    const handleDrop = (e: React.DragEvent) => {
+    const handleDrop = useCallback((e: React.DragEvent) => {
         e.preventDefault();
         e.stopPropagation();
         setDragActive(false);
 
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-            handleFiles(e.dataTransfer.files);
+            const files = Array.from(e.dataTransfer.files);
+            if (files.length === 1) {
+                onSingleUpload(files[0]);
+            } else {
+                onMultipleUpload(files);
+            }
         }
-    };
+    }, [onSingleUpload, onMultipleUpload]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
+    const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
-            handleFiles(e.target.files);
+            const files = Array.from(e.target.files);
+            if (files.length === 1) {
+                onSingleUpload(files[0]);
+            } else {
+                onMultipleUpload(files);
+            }
         }
-    };
-
-    const onButtonClick = () => {
-        fileInputRef.current?.click();
-    };
-
-    const removeFile = (index: number) => {
-        setUploadedFiles(prev => prev.filter((_, i) => i !== index));
     };
 
     return (
-        <div className="file-upload-container">
-            <div
-                className={`file-upload-dropzone ${dragActive ? 'drag-active' : ''}`}
-                onDragEnter={handleDrag}
-                onDragLeave={handleDrag}
-                onDragOver={handleDrag}
-                onDrop={handleDrop}
-            >
-                <input
-                    ref={fileInputRef}
-                    type="file"
-                    multiple={multiple}
-                    accept={acceptedTypes}
-                    onChange={handleChange}
-                    className="file-input"
-                />
-
-                <div className="file-upload-content">
-                    {isUploading ? (
-                        <LoadingSpinner size="medium" variant="circular" text="Uploading..." />
-                    ) : (
-                        <>
-                            <div className="upload-icon">📁</div>
-                            <p className="upload-text">
-                                {dragActive
-                                    ? 'Drop files here'
-                                    : multiple
-                                        ? 'Drag & drop files here or click to select'
-                                        : 'Drag & drop a file here or click to select'
-                                }
-                            </p>
-                            <p className="upload-hint">
-                                {multiple ? `Up to ${maxFiles} files` : 'Single file only'} • Max 5MB each
-                            </p>
-                            <button
-                                type="button"
-                                onClick={onButtonClick}
-                                className="upload-button"
-                                disabled={isUploading}
-                            >
-                                Choose Files
-                            </button>
-                        </>
-                    )}
-                </div>
-            </div>
-
-            {error && (
-                <div className="upload-error">
-                    {error}
-                </div>
-            )}
-
-            {uploadedFiles.length > 0 && (
-                <div className="uploaded-files">
-                    <h4>Uploaded Files:</h4>
-                    <div className="file-list">
-                        {uploadedFiles.map((file, index) => (
-                            <div key={index} className="file-item">
-                                <div className="file-info">
-                                    <span className="file-name">{file.originalName}</span>
-                                    <span className="file-size">
-                                        {(file.size / 1024 / 1024).toFixed(2)} MB
-                                    </span>
-                                </div>
-                                <div className="file-actions">
-                                    <a
-                                        href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}${file.url}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="view-link"
-                                    >
-                                        View
-                                    </a>
-                                    <button
-                                        onClick={() => removeFile(index)}
-                                        className="remove-button"
-                                    >
-                                        Remove
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
+        <div
+            className={`upload-area ${dragActive ? 'dragover' : ''}`}
+            onDragEnter={handleDrag}
+            onDragLeave={handleDrag}
+            onDragOver={handleDrag}
+            onDrop={handleDrop}
+        >
+            {isLoading ? (
+                <LoadingSpinner />
+            ) : (
+                <>
+                    <div style={{ marginBottom: '1rem' }}>
+                        <h3>Upload Files</h3>
+                        <p>Drag and drop files here, or click to select files</p>
                     </div>
-                </div>
+
+                    <input
+                        type="file"
+                        multiple
+                        onChange={handleFileInput}
+                        style={{ display: 'none' }}
+                        id="file-upload"
+                    />
+                    <label
+                        htmlFor="file-upload"
+                        style={{
+                            display: 'inline-block',
+                            padding: '0.75rem 1.5rem',
+                            background: '#3b82f6',
+                            color: 'white',
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                        }}
+                    >
+                        Choose Files
+                    </label>
+                </>
             )}
         </div>
     );

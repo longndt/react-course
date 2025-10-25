@@ -43,7 +43,7 @@ const uploadSingle = upload.single('file');
 const uploadMultiple = upload.array('files', 5); // Max 5 files
 
 export {
-    upload,
+    upload as uploadConfig,
     uploadSingle,
     uploadMultiple
 };

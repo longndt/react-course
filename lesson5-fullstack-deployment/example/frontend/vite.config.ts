@@ -1,37 +1,41 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
     open: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+      },
+    },
   },
   build: {
-    outDir: "dist",
-    sourcemap: false, // Disable sourcemap in production for smaller bundle
-    target: 'esnext', // Target modern browsers
-    minify: 'terser', // Use terser for better minification
+    outDir: 'dist',
+    sourcemap: false,
+    target: 'es2015',
+    minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true, // Remove console.logs in production
+        drop_console: true,
         drop_debugger: true,
       },
     },
     rollupOptions: {
       output: {
         manualChunks: {
-          // Vendor chunks for better caching
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'ui-vendor': ['react-router-dom'],
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
         },
       },
     },
-    // Chunk size warnings
-    chunkSizeWarningLimit: 1000, // KB
+    chunkSizeWarningLimit: 1000,
   },
-  // Environment variables
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
   },
-});
+})
