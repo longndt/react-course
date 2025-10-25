@@ -85,7 +85,7 @@ src/
 │   ├── api.ts
 │   ├── helpers.ts
 │   └── constants.ts
-├── types/              # TypeScript type definitions
+├── types/              # Type definitions (JSDoc)
 │   └── index.ts
 ├── styles/             # CSS files
 │   ├── App.css
@@ -182,7 +182,7 @@ graph LR
 - **Types** PascalCase (e.g., `UserTypes.ts`)
 
 ### Import Organization
-```typescript
+```javascript
 // 1. React imports
 import React, { useState, useEffect } from 'react';
 
@@ -196,11 +196,11 @@ import { Footer } from './components/Footer';
 
 // 4. Utils and types
 import { apiClient } from '../utils/api';
-import { User } from '../types/User';
+// Note: In JavaScript, we don't need explicit type imports
 ```
 
 ### Component Structure
-```typescript
+```javascript
 // 1. Imports
 // 2. Types/Interfaces
 // 3. Component definition

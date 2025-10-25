@@ -46,7 +46,7 @@ sequenceDiagram
 ```
 
 **Code Example**
-```typescript
+```javascript
 function Counter() {
   const [count, setCount] = useState(0);
 
@@ -81,7 +81,7 @@ graph TD
 ```
 
 **Code Example**
-```typescript
+```javascript
 function GrandParent() {
   const [user, setUser] = useState({ name: 'Alice' });
 
@@ -140,12 +140,12 @@ graph TD
 ```
 
 **Code Example**
-```typescript
+```javascript
 // 1. Create Context
-const UserContext = createContext<UserContextType | null>(null);
+const UserContext = createContext(null);
 
 // 2. Provider Component
-function UserProvider({ children }: { children: React.ReactNode }) {
+function UserProvider({ children }) {
   const [user, setUser] = useState({ name: 'Alice' });
 
   return (
@@ -226,7 +226,7 @@ graph TD
 ```
 
 **Code Example**
-```typescript
+```javascript
 function App() {
   return (
     <ThemeProvider>
@@ -266,11 +266,19 @@ sequenceDiagram
 ```
 
 **Code Example**
-```typescript
-type State = { count: number };
-type Action = { type: 'INCREMENT' } | { type: 'DECREMENT' };
+```javascript
+// State and Action types (JSDoc comments for JavaScript)
+/**
+ * @typedef {Object} State
+ * @property {number} count - Current count value
+ */
 
-function reducer(state: State, action: Action): State {
+/**
+ * @typedef {Object} Action
+ * @property {string} type - Action type ('INCREMENT' or 'DECREMENT')
+ */
+
+function reducer(state, action) {
   switch (action.type) {
     case 'INCREMENT':
       return { count: state.count + 1 };
@@ -318,9 +326,9 @@ graph TD
 ```
 
 **Code Example**
-```typescript
+```javascript
 // 1. Create Store (outside component)
-const useStore = create<StoreState>((set) => ({
+const useStore = create((set) => ({
   count: 0,
   increment: () => set((state) => ({ count: state.count + 1 })),
   decrement: () => set((state) => ({ count: state.count - 1 })),
@@ -371,7 +379,7 @@ flowchart TD
 ```
 
 **Code Example**
-```typescript
+```javascript
 // 1. Create Slice
 const counterSlice = createSlice({
   name: 'counter',
@@ -469,7 +477,7 @@ graph LR
 **Example**
 
 ❌ **Wrong**(Mutation):
-```typescript
+```javascript
 const [user, setUser] = useState({ name: 'Alice', age: 25 });
 
 // DON'T DO THIS
@@ -478,7 +486,7 @@ setUser(user); // Same reference, may not re-render
 ```
 
 ✅ **Correct**(Immutable):
-```typescript
+```javascript
 const [user, setUser] = useState({ name: 'Alice', age: 25 });
 
 // DO THIS
@@ -522,7 +530,7 @@ sequenceDiagram
 ```
 
 **Code Example**
-```typescript
+```javascript
 function DataFetcher() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -575,8 +583,8 @@ graph TD
 ```
 
 **Code Example**
-```typescript
-function useSyncedState(key: string, initialValue: any) {
+```javascript
+function useSyncedState(key, initialValue) {
   const [state, setState] = useState(() => {
     const stored = localStorage.getItem(key);
     return stored ? JSON.parse(stored) : initialValue;
@@ -629,7 +637,7 @@ graph TD
 ```
 
 **Code Example**
-```typescript
+```javascript
 // Without memo: re-renders on every parent update
 function ChildA({ name }) {
   return <p>{name}</p>;

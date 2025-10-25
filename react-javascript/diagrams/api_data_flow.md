@@ -87,11 +87,11 @@ stateDiagram-v2
 ```
 
 **Code Example**
-```typescript
+```javascript
 function UserList() {
-  const [data, setData] = useState<User[]>([]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -151,7 +151,7 @@ flowchart TD
 ```
 
 **Code Example**
-```typescript
+```javascript
 import { useQuery } from '@tanstack/react-query';
 
 function UserList() {
@@ -248,7 +248,7 @@ sequenceDiagram
 ```
 
 **Code Example with React Query**
-```typescript
+```javascript
 const { mutate: likePost } = useMutation({
   mutationFn: (postId: string) =>
     fetch(`/api/posts/${postId}/like`, { method: 'POST' }),
@@ -311,7 +311,7 @@ stateDiagram-v2
 ```
 
 **Code Example**
-```typescript
+```javascript
 function PaginatedList() {
   const [page, setPage] = useState(1);
   const limit = 10;
@@ -367,7 +367,7 @@ flowchart TD
 ```
 
 **Code Example**
-```typescript
+```javascript
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 function InfiniteUserList() {
@@ -436,7 +436,7 @@ graph TD
 ```
 
 **Code Example**
-```typescript
+```javascript
 async function fetchWithErrorHandling(url: string) {
   try {
     const response = await fetch(url);
@@ -513,7 +513,7 @@ stateDiagram-v2
 ```
 
 **UI Components**
-```typescript
+```javascript
 function DataView() {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['data'],
@@ -574,7 +574,7 @@ graph TD
 ```
 
 **React Query Cache Configuration**
-```typescript
+```javascript
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -661,10 +661,10 @@ sequenceDiagram
 ```
 
 **Code Example**
-```typescript
+```javascript
 function useChatMessages() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const ws = useRef<WebSocket>();
+  const [messages, setMessages] = useState([]);
+  const ws = useRef();
 
   useEffect(() => {
     ws.current = new WebSocket('ws://localhost:3001');
@@ -717,7 +717,7 @@ flowchart TD
 ```
 
 **Code Example**
-```typescript
+```javascript
 function FileUpload() {
   const [progress, setProgress] = useState(0);
 

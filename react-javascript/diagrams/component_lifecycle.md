@@ -302,7 +302,7 @@ flowchart TD
 ```
 
 **Example**
-```typescript
+```javascript
 function useCustomData() {
   const [data, setData] = useState(null);
 
@@ -387,7 +387,7 @@ flowchart TD
 ```
 
 **Example with Cleanup**
-```typescript
+```javascript
 useEffect(() => {
   const timer = setInterval(() => {
     console.log('tick');

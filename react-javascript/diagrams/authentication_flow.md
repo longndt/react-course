@@ -134,8 +134,8 @@ flowchart TD
 ```
 
 **Code Example**
-```typescript
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
+```javascript
+function ProtectedRoute({ children }) {
   const { user, isLoading } = useAuth();
   const location = useLocation();
 
@@ -193,21 +193,22 @@ graph TD
 ```
 
 **Code Example**
-```typescript
-interface AuthContextType {
-  user: User | null;
-  token: string | null;
-  login: (email: string, password: string) => Promise<void>;
-  register: (data: RegisterData) => Promise<void>;
-  logout: () => void;
-  isLoading: boolean;
-}
+```javascript
+/**
+ * @typedef {Object} AuthContextType
+ * @property {User|null} user - Current user object
+ * @property {string|null} token - JWT token
+ * @property {function(string, string): Promise<void>} login - Login function
+ * @property {function(RegisterData): Promise<void>} register - Register function
+ * @property {function(): void} logout - Logout function
+ * @property {boolean} isLoading - Loading state
+ */
 
-const AuthContext = createContext<AuthContextType | null>(null);
+const AuthContext = createContext(null);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(
     () => localStorage.getItem('token')
   );
   const [isLoading, setIsLoading] = useState(true);
@@ -312,7 +313,7 @@ sequenceDiagram
 ```
 
 **Code Example**
-```typescript
+```javascript
 async function fetchWithAuth(url: string, options: RequestInit = {}) {
   const token = localStorage.getItem('token');
 
@@ -375,7 +376,7 @@ graph TD
 ```
 
 **Code Example**
-```typescript
+```javascript
 // Backend: Middleware to check roles
 function requireRole(...allowedRoles: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -402,15 +403,15 @@ app.get('/api/posts', requireRole('admin', 'editor', 'viewer'), getPosts);
 ```
 
 **Frontend: Role-based component**
-```typescript
+```javascript
 function RequireRole({
   roles,
   children,
   fallback = null
 }: {
   roles: string[];
-  children: React.ReactNode;
-  fallback?: React.ReactNode;
+  children: any;
+  fallback?: any;
 }) {
   const { user } = useAuth();
 
@@ -470,7 +471,7 @@ sequenceDiagram
 ```
 
 **Code Example**
-```typescript
+```javascript
 let isRefreshing = false;
 let failedQueue: Array<{
   resolve: (token: string) => void;
@@ -568,7 +569,7 @@ sequenceDiagram
 ```
 
 **Code Example**
-```typescript
+```javascript
 // Frontend: Initiate OAuth
 function GoogleLoginButton() {
   const handleGoogleLogin = () => {

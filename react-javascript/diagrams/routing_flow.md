@@ -210,7 +210,7 @@ graph LR
 ## Best Practices
 
 ### Route Organization
-```typescript
+```javascript
 // Route structure
 <Routes>
   <Route path="/" element={<Home />} />
@@ -231,7 +231,7 @@ graph LR
 ```
 
 ### Navigation Components
-```typescript
+```javascript
 // Link component
 <Link to="/about">About</Link>
 
@@ -244,7 +244,7 @@ navigate('/profile', { state: { from: 'home' } });
 ```
 
 ### Route Parameters
-```typescript
+```javascript
 // Access route parameters
 const { id } = useParams();
 

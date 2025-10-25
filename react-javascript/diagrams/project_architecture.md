@@ -84,8 +84,8 @@ graph LR
     style MongoDB fill:#d4edda
 ```
 
-**vite.config.ts**
-```typescript
+**vite.config.js**
+```javascript
 export default defineConfig({
   server: {
     port: 5173,
@@ -114,8 +114,7 @@ graph TD
     ClientSrc --> Pages[pages/<br/>Route components]
     ClientSrc --> Hooks[hooks/<br/>Custom hooks]
     ClientSrc --> Context[context/<br/>Global state]
-    ClientSrc --> Utils[utils/<br/>Helpers]
-    ClientSrc --> Types[types/<br/>TypeScript types]
+    ClientSrc --> Utils[utils/<br/>Helper functions]
 
     Server --> ServerSrc[src/]
     ServerSrc --> Routes[routes/<br/>API endpoints]
@@ -124,7 +123,7 @@ graph TD
     ServerSrc --> Middleware[middleware/<br/>Auth, validation]
     ServerSrc --> Config[config/<br/>Environment]
 
-    Shared --> SharedTypes[types/<br/>Shared interfaces]
+    Shared --> SharedTypes[types/<br/>Shared types]
 
     style Client fill:#e1f5e1
     style Server fill:#fff3cd
@@ -222,7 +221,7 @@ erDiagram
 ```
 
 **Mongoose Models**
-```typescript
+```javascript
 // User Model
 const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
@@ -393,9 +392,9 @@ flowchart TD
 ```
 
 **Backend Error Handler**
-```typescript
+```javascript
 // Global error handler middleware
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err, req, res, next) => {
   console.error('Error:', err);
 
   if (err.name === 'ValidationError') {

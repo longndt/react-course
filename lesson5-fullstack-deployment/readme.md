@@ -69,7 +69,7 @@ npm init -y
 npm install express mongoose cors dotenv
 
 # 3. Initialize frontend
-cd .. && npx create-vite@latest frontend -- --template react-ts
+cd .. && npm create vite@latest frontend -- --template react-ts
 cd frontend && npm install
 
 # 4. Start both servers

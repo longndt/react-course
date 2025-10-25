@@ -266,7 +266,7 @@ graph TB
 ## Best Practices
 
 ### Environment Configuration
-```typescript
+```javascript
 // Environment variables
 const config = {
   apiUrl: process.env.REACT_APP_API_URL || 'http://localhost:3001',
@@ -276,7 +276,7 @@ const config = {
 ```
 
 ### Build Optimization
-```typescript
+```javascript
 // Vite configuration
 export default defineConfig({
   build: {
