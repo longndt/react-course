@@ -222,23 +222,23 @@
         }
 
         .btn:disabled,
-    .btn.disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-      background-color: #e5e7eb;
-      color: #9ca3af;
-      border-color: #d1d5db;
-      transform: none;
-      box-shadow: none;
-    }
+        .btn.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: #e5e7eb;
+            color: #9ca3af;
+            border-color: #d1d5db;
+            transform: none;
+            box-shadow: none;
+        }
 
-    .btn:disabled:hover,
-    .btn.disabled:hover {
-      transform: none;
-      box-shadow: none;
-      background-color: #e5e7eb;
-      color: #9ca3af;
-    }
+        .btn:disabled:hover,
+        .btn.disabled:hover {
+            transform: none;
+            box-shadow: none;
+            background-color: #e5e7eb;
+            color: #9ca3af;
+        }
 
         .results-card {
             background: white;
@@ -849,14 +849,7 @@
                         div.classList.add("selected");
                     }
 
-                    div.innerHTML = `
-              <label>
-                <input type="radio" name="answer" value="${i}" ${userAnswers[index] === i ? "checked" : ""} ${answerChecked[index] ? "disabled" : ""}>
-                <span>${option}</span>
-                ${answerChecked[index] && i === question.correct ? '<span class="feedback-icon">✓</span>' : ''}
-                ${answerChecked[index] && userAnswers[index] === i && i !== question.correct ? '<span class="feedback-icon">✗</span>' : ''}
-              </label>
-            `;
+                    div.innerHTML = `<label><input type="radio" name="answer" value="${i}" ${userAnswers[index] === i ? "checked" : ""} ${answerChecked[index] ? "disabled" : ""}><span>${option}</span>${answerChecked[index] && i === question.correct ? '<span class="feedback-icon">✓</span>' : ''}${answerChecked[index] && userAnswers[index] === i && i !== question.correct ? '<span class="feedback-icon">✗</span>' : ''}</label>`;
 
                     if (!answerChecked[index]) {
                         div.addEventListener("click", (e) => {
@@ -897,18 +890,18 @@
                 shortAnswerInput.disabled = answerChecked[index];
 
                 shortAnswerInput.oninput = () => {
-          userAnswers[index] = shortAnswerInput.value.trim();
-          updateProgress();
-          
-          // Enable/disable Next button based on input content
-          if (userAnswers[index] && !answerChecked[index]) {
-            nextBtn.disabled = false;
-            nextBtn.classList.remove('disabled');
-          } else if (!userAnswers[index] && !answerChecked[index]) {
-            nextBtn.disabled = true;
-            nextBtn.classList.add('disabled');
-          }
-        };
+                    userAnswers[index] = shortAnswerInput.value.trim();
+                    updateProgress();
+
+                    // Enable/disable Next button based on input content
+                    if (userAnswers[index] && !answerChecked[index]) {
+                        nextBtn.disabled = false;
+                        nextBtn.classList.remove('disabled');
+                    } else if (!userAnswers[index] && !answerChecked[index]) {
+                        nextBtn.disabled = true;
+                        nextBtn.classList.add('disabled');
+                    }
+                };
 
                 shortAnswerInput.onblur = () => {
                     if (userAnswers[index] && !answerChecked[index]) {
@@ -943,19 +936,19 @@
                 index === quizData.length - 1 ? "Submit Quiz" : "Next →";
 
             // Enable/disable Next button based on answer status
-      if (question.type === "short") {
-        // For short answer, disable if not answered AND no text in input
-        nextBtn.disabled = !answerChecked[index] && (!userAnswers[index] || userAnswers[index].trim() === '');
-        if (nextBtn.disabled) {
-          nextBtn.classList.add('disabled');
-        } else {
-          nextBtn.classList.remove('disabled');
-        }
-      } else {
-        // For multiple choice, disable if not answered
-        nextBtn.disabled = !answerChecked[index];
-        nextBtn.classList.remove('disabled');
-      }
+            if (question.type === "short") {
+                // For short answer, disable if not answered AND no text in input
+                nextBtn.disabled = !answerChecked[index] && (!userAnswers[index] || userAnswers[index].trim() === '');
+                if (nextBtn.disabled) {
+                    nextBtn.classList.add('disabled');
+                } else {
+                    nextBtn.classList.remove('disabled');
+                }
+            } else {
+                // For multiple choice, disable if not answered
+                nextBtn.disabled = !answerChecked[index];
+                nextBtn.classList.remove('disabled');
+            }
 
             // Reset skip button state
             skipBtn.disabled = answerChecked[index];
