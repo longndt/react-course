@@ -11,6 +11,7 @@ Comprehensive collection of advanced materials, guides, and resources to deepen 
 - Security best practices
 - Accessibility guidelines
 - Testing strategies
+- Cloud deployment strategies
 - Production-ready practices
 
 **Best for** Developers who want to go beyond basics, prepare for senior roles, and build production-quality applications
@@ -156,6 +157,28 @@ Comprehensive testing approaches for React applications:
 
 ---
 
+## ☁️ Cloud Deployment Guide
+
+**[cloud_deployment.md](./cloud_deployment.md)**
+
+Complete step-by-step guide for deploying MERN stack applications to the cloud:
+
+- **MongoDB Atlas Setup**- Cloud database configuration and connection
+- **GitHub Repository**- Code version control and CI/CD setup
+- **Frontend Deployment**- Vercel deployment for React applications
+- **Backend Deployment**- Render deployment for Node.js/Express APIs
+- **Environment Variables**- Secure configuration management across environments
+- **Domain & SSL**- Custom domains and HTTPS certificate setup
+- **Production Monitoring**- Logging, analytics, and performance tracking
+- **Troubleshooting**- Common deployment issues and solutions
+- **Best Practices**- Security, performance, and maintenance guidelines
+
+**Best for** Deploying full-stack applications, production-ready setups, cloud infrastructure management
+
+**Related Lessons** Lesson 5 (Full-Stack Deployment)
+
+---
+
 ## 🛠️ Environment Setup & Troubleshooting
 
 **[environment_setup.md](./environment_setup.md)**
@@ -225,6 +248,7 @@ Master:
 4. **security_guide.md**(sections 6-10) - Advanced security
 5. **testing_strategies.md**(sections 7-10) - E2E and CI/CD testing
 6. **accessibility_guide.md**(sections 5-9) - Advanced accessibility
+7. **cloud_deployment.md**(complete) - Production deployment strategies
 
 ### By Project Type
 
@@ -243,6 +267,7 @@ Master:
 - **performance_optimization.md**(complete)
 
 #### Production Applications
+- **cloud_deployment.md**(complete) - Complete deployment strategy
 - **performance_optimization.md**(complete)
 - **advanced_patterns.md**(complete)
 - **security_guide.md**(complete) - Production security
@@ -325,18 +350,21 @@ Master:
 2. **Master performance_optimization.md**- Essential for interviews
 3. **Learn advanced_patterns.md**- Senior developer skills
 4. **Understand state_management.md**- Scalable applications
+5. **Master cloud_deployment.md**- Production deployment expertise
 
 ### For Project Success
 1. **Use troubleshooting_guide.md**- Solve issues quickly
 2. **Apply performance_optimization.md**- Fast applications
 3. **Implement advanced_patterns.md**- Maintainable code
 4. **Choose state_management.md**- Right tool for the job
+5. **Follow cloud_deployment.md**- Successful production deployment
 
 ### For Team Leadership
 1. **Share environment_setup.md**- Team standards
 2. **Establish patterns from advanced_patterns.md**- Code consistency
 3. **Set performance standards**- Quality metrics
 4. **Create troubleshooting procedures**- Support processes
+5. **Implement cloud_deployment.md**- Standardized deployment processes
 
 ---
 
@@ -376,5 +404,15 @@ After completing the core lessons and exploring these advanced materials:
 - **@types packages**- Type definitions for popular libraries
 - **tsconfig.json**- TypeScript configuration
 - **ESLint TypeScript**- TypeScript-specific linting rules
+
+---
+
+## 🔗 Related Guides
+
+- [Environment Setup](./environment_setup.md) - Development environment
+- [Cloud Deployment](./cloud_deployment.md) - Production deployment
+- [Security Guide](./security_guide.md) - Production security
+- [Performance Optimization](./performance_optimization.md) - App performance
+- [Troubleshooting Guide](./troubleshooting_guide.md) - Common issues
 
 ---

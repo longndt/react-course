@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Products from './pages/Products';
+import PerformanceDemo from './pages/PerformanceDemo';
 import LoadingSpinner from './components/LoadingSpinner';
 
 const AppContent = () => {
@@ -27,6 +28,10 @@ const AppContent = () => {
                     <Route
                         path="/products"
                         element={isAuthenticated ? <Products /> : <Navigate to="/login" />}
+                    />
+                    <Route
+                        path="/performance"
+                        element={isAuthenticated ? <PerformanceDemo /> : <Navigate to="/login" />}
                     />
                     <Route
                         path="/"

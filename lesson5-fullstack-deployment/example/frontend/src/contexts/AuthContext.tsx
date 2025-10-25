@@ -100,22 +100,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         localStorage.removeItem('token');
         localStorage.removeItem('user');
       }
+    } else {
+      dispatch({ type: 'AUTH_FAILURE', payload: '' });
     }
-    dispatch({ type: 'AUTH_START' });
-    setTimeout(() => {
-      dispatch({ type: 'AUTH_SUCCESS', payload: { user: { id: '1', name: 'Test User', email: 'test@example.com' }, token: 'test-token' } });
-    }, 1000);
   }, []);
 
-  const login = async (email: string, _password: string) => {
+  const login = async (email: string, password: string) => {
     try {
       dispatch({ type: 'AUTH_START' });
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-      const user = { id: '1', name: 'Test User', email };
-      const token = 'test-token';
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Login failed');
+      }
+
+      const { user, token } = data.data;
 
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
@@ -125,20 +134,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         payload: { user, token },
       });
     } catch (error: any) {
-      dispatch({ type: 'AUTH_FAILURE', payload: 'Login failed' });
-      throw new Error('Login failed');
+      dispatch({ type: 'AUTH_FAILURE', payload: error.message || 'Login failed' });
+      throw new Error(error.message || 'Login failed');
     }
   };
 
-  const register = async (name: string, email: string, _password: string) => {
+  const register = async (name: string, email: string, password: string) => {
     try {
       dispatch({ type: 'AUTH_START' });
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
 
-      const user = { id: '1', name, email };
-      const token = 'test-token';
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Registration failed');
+      }
+
+      const { user, token } = data.data;
 
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
@@ -148,8 +168,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         payload: { user, token, message: `Welcome ${name}! Your account has been created successfully.` },
       });
     } catch (error: any) {
-      dispatch({ type: 'AUTH_FAILURE', payload: 'Registration failed' });
-      throw new Error('Registration failed');
+      dispatch({ type: 'AUTH_FAILURE', payload: error.message || 'Registration failed' });
+      throw new Error(error.message || 'Registration failed');
     }
   };
 

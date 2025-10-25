@@ -3,19 +3,19 @@ import './VirtualList.css';
 
 interface VirtualListProps<T> {
     items: T[];
-    itemHeight: number;
-    containerHeight: number;
+    itemHeight?: number;
+    containerHeight?: number;
     renderItem: (item: T, index: number) => React.ReactNode;
     className?: string;
 }
 
-function VirtualList<T>({
+const VirtualList = <T extends { id: number | string }>({
     items,
-    itemHeight,
-    containerHeight,
+    itemHeight = 50,
+    containerHeight = 400,
     renderItem,
     className = ''
-}: VirtualListProps<T>) {
+}: VirtualListProps<T>) => {
     const [scrollTop, setScrollTop] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -24,20 +24,25 @@ function VirtualList<T>({
         const startIndex = Math.floor(scrollTop / itemHeight);
         const endIndex = Math.min(
             startIndex + Math.ceil(containerHeight / itemHeight) + 1,
-            items.length
+            items.length - 1
         );
+
         return { startIndex, endIndex };
     }, [scrollTop, itemHeight, containerHeight, items.length]);
 
     // Get visible items
     const visibleItems = useMemo(() => {
-        return items.slice(visibleRange.startIndex, visibleRange.endIndex);
-    }, [items, visibleRange.startIndex, visibleRange.endIndex]);
+        const { startIndex, endIndex } = visibleRange;
+        return items.slice(startIndex, endIndex + 1).map((item, index) => ({
+            ...item,
+            index: startIndex + index
+        }));
+    }, [items, visibleRange]);
 
-    // Total height of all items
+    // Calculate total height
     const totalHeight = items.length * itemHeight;
 
-    // Offset to position visible items correctly
+    // Calculate offset for visible items
     const offsetY = visibleRange.startIndex * itemHeight;
 
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
@@ -48,39 +53,32 @@ function VirtualList<T>({
         <div
             ref={containerRef}
             className={`virtual-list ${className}`}
+            style={{ height: containerHeight, overflow: 'auto' }}
             onScroll={handleScroll}
-            style={{
-                height: containerHeight,
-                overflow: 'auto',
-                position: 'relative',
-            }}
         >
-            {/* Spacer to create scrollbar */}
-            <div style={{ height: totalHeight, width: '100%' }} />
-
-            {/* Visible items */}
-            <div
-                className="virtual-list-items"
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    transform: `translateY(${offsetY}px)`,
-                }}
-            >
-                {visibleItems.map((item, index) => (
-                    <div
-                        key={visibleRange.startIndex + index}
-                        className="virtual-list-item"
-                        style={{ height: itemHeight }}
-                    >
-                        {renderItem(item, visibleRange.startIndex + index)}
-                    </div>
-                ))}
+            <div style={{ height: totalHeight, position: 'relative' }}>
+                <div
+                    style={{
+                        transform: `translateY(${offsetY}px)`,
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0
+                    }}
+                >
+                    {visibleItems.map((item) => (
+                        <div
+                            key={item.id || item.index}
+                            style={{ height: itemHeight }}
+                            className="virtual-list-item"
+                        >
+                            {renderItem(item, item.index)}
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
-}
+};
 
 export default VirtualList;

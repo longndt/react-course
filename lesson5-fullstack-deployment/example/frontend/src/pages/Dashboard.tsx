@@ -148,6 +148,16 @@ const Dashboard: React.FC = () => {
               <h3>Manage Products</h3>
               <p>Add, edit, and manage your product inventory</p>
             </Link>
+
+            <Link to="/performance" className="action-card">
+              <div className="action-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+              </div>
+              <h3>Performance Demo</h3>
+              <p>Test performance optimizations and virtual scrolling</p>
+            </Link>
           </div>
         </div>
 

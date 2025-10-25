@@ -7,12 +7,14 @@ import './Dashboard.css';
 /**
  * @typedef {Object} DashboardData
  * @property {number} totalUsers
+ * @property {number} totalProducts
  * @property {number} totalRevenue
- * @property {number} totalOrders
  * @property {number} monthlyGrowth
  * @property {Array<{name: string, sales: number, revenue: number}>} topProducts
  * @property {Array<{type: string, description: string, timestamp: string}>} recentActivity
  */
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const Dashboard = () => {
   const { user, logout, success, clearSuccess } = useAuth();
@@ -20,27 +22,28 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate API call
-    setTimeout(() => {
-      setDashboardData({
-        totalUsers: 1234,
-        totalRevenue: 45678,
-        totalOrders: 567,
-        monthlyGrowth: 12.5,
-        topProducts: [
-          { name: 'Product A', sales: 123, revenue: 12345 },
-          { name: 'Product B', sales: 98, revenue: 9876 },
-          { name: 'Product C', sales: 76, revenue: 7654 }
-        ],
-        recentActivity: [
-          { type: 'user_registration', description: 'New user registered', timestamp: new Date().toISOString() },
-          { type: 'order_placed', description: 'Order #1234 placed', timestamp: new Date().toISOString() },
-          { type: 'payment_received', description: 'Payment of $123.45 received', timestamp: new Date().toISOString() }
-        ]
-      });
-      setLoading(false);
-    }, 500);
+    fetchDashboardData();
   }, []);
+
+  const fetchDashboardData = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${API_URL}/api/dashboard`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) throw new Error('Failed to fetch dashboard data');
+
+      const data = await response.json();
+      setDashboardData(data.data);
+    } catch (error) {
+      console.error('Error fetching dashboard data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return <LoadingSpinner fullScreen />;
@@ -104,8 +107,8 @@ const Dashboard = () => {
               </svg>
             </div>
             <div className="stat-content">
-              <h3>Total Orders</h3>
-              <p className="stat-value">{dashboardData?.totalOrders}</p>
+              <h3>Total Products</h3>
+              <p className="stat-value">{dashboardData?.totalProducts}</p>
             </div>
           </div>
 
@@ -127,25 +130,16 @@ const Dashboard = () => {
         <div className="quick-actions">
           <h2>Quick Actions</h2>
           <div className="action-cards">
-            <Link to="/file-manager" className="action-card">
+            <Link to="/products" className="action-card">
               <div className="action-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
-                  <polyline points="13 2 13 9 20 9"></polyline>
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
                 </svg>
               </div>
-              <h3>File Manager</h3>
-              <p>Upload and manage your files</p>
-            </Link>
-
-            <Link to="/performance" className="action-card">
-              <div className="action-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                </svg>
-              </div>
-              <h3>Performance Demo</h3>
-              <p>Test performance optimizations</p>
+              <h3>Manage Products</h3>
+              <p>Add, edit, and manage your product inventory</p>
             </Link>
           </div>
         </div>

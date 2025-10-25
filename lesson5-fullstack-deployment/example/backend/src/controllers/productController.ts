@@ -84,24 +84,38 @@ export const getProduct = async (req: Request, res: Response) => {
 // @access  Private
 export const createProduct = async (req: Request, res: Response) => {
     try {
+        console.log('Create product request received');
+        console.log('Request body:', req.body);
+        console.log('Request file:', req.file);
+        console.log('Request user:', req.user);
+
         const { name, description, price, category, stock } = req.body;
         const userId = (req.user as any)?._id;
+
+        console.log('Extracted data:', { name, description, price, category, stock, userId });
 
         // Handle image upload
         let image = '';
         if (req.file) {
             image = `/uploads/${req.file.filename}`;
+            console.log('Image uploaded:', image);
         }
 
-        const product = await Product.create({
+        const productData = {
             name,
             description,
-            price,
+            price: parseFloat(price),
             category,
-            stock,
+            stock: parseInt(stock),
             image,
             userId
-        });
+        };
+
+        console.log('Product data to create:', productData);
+
+        const product = await Product.create(productData);
+
+        console.log('Product created successfully:', product);
 
         res.status(201).json({
             success: true,

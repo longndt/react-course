@@ -77,6 +77,12 @@ const Products = () => {
 
         try {
             const token = localStorage.getItem('token');
+
+            if (!token) {
+                alert('Please log in to add products');
+                return;
+            }
+
             const formDataToSend = new FormData();
 
             formDataToSend.append('name', formData.name);
@@ -93,6 +99,9 @@ const Products = () => {
                 ? `${API_URL}/api/products/${editingProduct._id}`
                 : `${API_URL}/api/products`;
 
+            console.log('Sending request to:', url);
+            console.log('Form data:', Object.fromEntries(formDataToSend.entries()));
+
             const response = await fetch(url, {
                 method: editingProduct ? 'PUT' : 'POST',
                 headers: {
@@ -101,7 +110,9 @@ const Products = () => {
                 body: formDataToSend
             });
 
+            console.log('Response status:', response.status);
             const data = await response.json();
+            console.log('Response data:', data);
 
             if (!response.ok) {
                 throw new Error(data.error || 'Failed to save product');

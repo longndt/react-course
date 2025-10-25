@@ -1,19 +1,18 @@
-import { Request, Response } from 'express';
-import Product from '../models/Product';
+import Product from '../models/Product.js';
 
 // @desc    Get all products with search, filter, sort
 // @route   GET /api/products
 // @access  Private
-export const getProducts = async (req: Request, res: Response) => {
+export const getProducts = async (req, res) => {
     try {
         const { search, category, sortBy = 'createdAt', order = 'desc', page = 1, limit = 10 } = req.query;
 
         // Build query
-        const query: any = {};
+        const query = {};
 
         // Search by name or description
         if (search) {
-            query.$text = { $search: search as string };
+            query.$text = { $search: search };
         }
 
         // Filter by category
@@ -22,12 +21,12 @@ export const getProducts = async (req: Request, res: Response) => {
         }
 
         // Sort options
-        const sortOptions: any = {};
-        sortOptions[sortBy as string] = order === 'asc' ? 1 : -1;
+        const sortOptions = {};
+        sortOptions[sortBy] = order === 'asc' ? 1 : -1;
 
         // Pagination
-        const pageNum = parseInt(page as string);
-        const limitNum = parseInt(limit as string);
+        const pageNum = parseInt(page);
+        const limitNum = parseInt(limit);
         const skip = (pageNum - 1) * limitNum;
 
         // Execute query
@@ -61,7 +60,7 @@ export const getProducts = async (req: Request, res: Response) => {
 // @desc    Get single product
 // @route   GET /api/products/:id
 // @access  Private
-export const getProduct = async (req: Request, res: Response) => {
+export const getProduct = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id).populate('userId', 'name email');
 
@@ -82,33 +81,47 @@ export const getProduct = async (req: Request, res: Response) => {
 // @desc    Create product
 // @route   POST /api/products
 // @access  Private
-export const createProduct = async (req: Request, res: Response) => {
+export const createProduct = async (req, res) => {
     try {
+        console.log('Create product request received');
+        console.log('Request body:', req.body);
+        console.log('Request file:', req.file);
+        console.log('Request user:', req.user);
+
         const { name, description, price, category, stock } = req.body;
-        const userId = (req.user as any)?._id;
+        const userId = req.user?._id;
+
+        console.log('Extracted data:', { name, description, price, category, stock, userId });
 
         // Handle image upload
         let image = '';
         if (req.file) {
             image = `/uploads/${req.file.filename}`;
+            console.log('Image uploaded:', image);
         }
 
-        const product = await Product.create({
+        const productData = {
             name,
             description,
-            price,
+            price: parseFloat(price),
             category,
-            stock,
+            stock: parseInt(stock),
             image,
             userId
-        });
+        };
+
+        console.log('Product data to create:', productData);
+
+        const product = await Product.create(productData);
+
+        console.log('Product created successfully:', product);
 
         res.status(201).json({
             success: true,
             message: 'Product created successfully',
             data: product
         });
-    } catch (error: any) {
+    } catch (error) {
         console.error('Create product error:', error);
         res.status(400).json({ error: error.message || 'Failed to create product' });
     }
@@ -117,7 +130,7 @@ export const createProduct = async (req: Request, res: Response) => {
 // @desc    Update product
 // @route   PUT /api/products/:id
 // @access  Private
-export const updateProduct = async (req: Request, res: Response) => {
+export const updateProduct = async (req, res) => {
     try {
         const { name, description, price, category, stock } = req.body;
 
@@ -146,7 +159,7 @@ export const updateProduct = async (req: Request, res: Response) => {
             message: 'Product updated successfully',
             data: product
         });
-    } catch (error: any) {
+    } catch (error) {
         console.error('Update product error:', error);
         res.status(400).json({ error: error.message || 'Failed to update product' });
     }
@@ -155,7 +168,7 @@ export const updateProduct = async (req: Request, res: Response) => {
 // @desc    Delete product
 // @route   DELETE /api/products/:id
 // @access  Private
-export const deleteProduct = async (req: Request, res: Response) => {
+export const deleteProduct = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
 
@@ -178,7 +191,7 @@ export const deleteProduct = async (req: Request, res: Response) => {
 // @desc    Get product statistics
 // @route   GET /api/products/stats/overview
 // @access  Private
-export const getProductStats = async (req: Request, res: Response) => {
+export const getProductStats = async (req, res) => {
     try {
         // Total products
         const totalProducts = await Product.countDocuments();

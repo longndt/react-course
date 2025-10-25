@@ -11,6 +11,7 @@ Comprehensive collection of advanced materials, guides, and resources to deepen 
 - Security best practices
 - Accessibility guidelines
 - Testing strategies
+- Cloud deployment strategies
 - Production-ready practices
 
 **Best for** Developers who want to go beyond basics, prepare for senior roles, and build production-quality applications
@@ -156,6 +157,28 @@ Comprehensive testing approaches for React applications:
 
 ---
 
+## ☁️ Cloud Deployment Guide
+
+**[cloud_deployment.md](./cloud_deployment.md)**
+
+Complete step-by-step guide for deploying MERN stack applications to the cloud:
+
+- **MongoDB Atlas Setup**- Cloud database configuration and connection
+- **GitHub Repository**- Code version control and CI/CD setup
+- **Frontend Deployment**- Vercel deployment for React applications
+- **Backend Deployment**- Render deployment for Node.js/Express APIs
+- **Environment Variables**- Secure configuration management across environments
+- **Domain & SSL**- Custom domains and HTTPS certificate setup
+- **Production Monitoring**- Logging, analytics, and performance tracking
+- **Troubleshooting**- Common deployment issues and solutions
+- **Best Practices**- Security, performance, and maintenance guidelines
+
+**Best for** Deploying full-stack applications, production-ready setups, cloud infrastructure management
+
+**Related Lessons** [Lesson 5 (Full-Stack Deployment)](../lesson5-fullstack-deployment/readme.md)
+
+---
+
 ## 🛠️ Environment Setup & Troubleshooting
 
 **[environment_setup.md](./environment_setup.md)**
@@ -225,6 +248,7 @@ Master:
 4. **security_guide.md**(sections 6-10) - Advanced security
 5. **testing_strategies.md**(sections 7-10) - E2E and CI/CD testing
 6. **accessibility_guide.md**(sections 5-9) - Advanced accessibility
+7. **cloud_deployment.md**(complete) - Production deployment strategies
 
 ### By Project Type
 
@@ -243,6 +267,7 @@ Master:
 - **performance_optimization.md**(complete)
 
 #### Production Applications
+- **cloud_deployment.md**(complete) - Complete deployment strategy
 - **performance_optimization.md**(complete)
 - **advanced_patterns.md**(complete)
 - **security_guide.md**(complete) - Production security
