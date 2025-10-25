@@ -20,6 +20,7 @@ const authReducer = (state, action) => {
         isAuthenticated: true,
         isLoading: false,
         error: null,
+        success: action.payload.message || null,
       };
     case 'AUTH_FAILURE':
       return {
@@ -38,11 +39,17 @@ const authReducer = (state, action) => {
         isAuthenticated: false,
         isLoading: false,
         error: null,
+        success: null,
       };
     case 'CLEAR_ERROR':
       return {
         ...state,
         error: null,
+      };
+    case 'CLEAR_SUCCESS':
+      return {
+        ...state,
+        success: null,
       };
     case 'SET_LOADING':
       return {
@@ -60,6 +67,7 @@ const initialState = {
   isAuthenticated: false,
   isLoading: true,
   error: null,
+  success: null,
 };
 
 export const useAuth = () => {
@@ -128,7 +136,11 @@ export const AuthProvider = ({ children }) => {
 
       dispatch({
         type: 'AUTH_SUCCESS',
-        payload: { user, token },
+        payload: {
+          user,
+          token,
+          message: `Welcome ${user.name}! Your account has been created successfully.`
+        },
       });
     } catch (error) {
       const errorMessage = error.response?.data?.error || 'Registration failed';
@@ -147,12 +159,17 @@ export const AuthProvider = ({ children }) => {
     dispatch({ type: 'CLEAR_ERROR' });
   };
 
+  const clearSuccess = () => {
+    dispatch({ type: 'CLEAR_SUCCESS' });
+  };
+
   const value = {
     ...state,
     login,
     register,
     logout,
     clearError,
+    clearSuccess,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

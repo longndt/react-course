@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { LoadingSpinner } from './LoadingSpinner';
 
 interface LoginFormProps {
   onSwitchToRegister: () => void;
@@ -71,8 +72,17 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
           </div>
         )}
 
-        <button type="submit" disabled={isLoading} className="btn btn-primary">
-          {isLoading ? 'Logging in...' : 'Login'}
+        <button type="submit" disabled={isLoading} className={`btn btn-primary ${isLoading ? 'btn-loading' : ''}`}>
+          {isLoading ? (
+            <LoadingSpinner
+              size="small"
+              variant="circular-fast"
+              text="Logging in..."
+              inline={true}
+            />
+          ) : (
+            'Login'
+          )}
         </button>
       </form>
 

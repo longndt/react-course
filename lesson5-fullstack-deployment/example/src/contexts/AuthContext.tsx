@@ -17,6 +17,7 @@ interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
+  success: string | null;
 }
 
 interface AuthContextType extends AuthState {
@@ -24,14 +25,16 @@ interface AuthContextType extends AuthState {
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   clearError: () => void;
+  clearSuccess: () => void;
 }
 
 type AuthAction =
   | { type: 'AUTH_START' }
-  | { type: 'AUTH_SUCCESS'; payload: { user: User; token: string } }
+  | { type: 'AUTH_SUCCESS'; payload: { user: User; token: string; message?: string } }
   | { type: 'AUTH_FAILURE'; payload: string }
   | { type: 'LOGOUT' }
   | { type: 'CLEAR_ERROR' }
+  | { type: 'CLEAR_SUCCESS' }
   | { type: 'SET_LOADING'; payload: boolean };
 
 const initialState: AuthState = {
@@ -40,6 +43,7 @@ const initialState: AuthState = {
   isAuthenticated: false,
   isLoading: true,
   error: null,
+  success: null,
 };
 
 const authReducer = (state: AuthState, action: AuthAction): AuthState => {
@@ -58,6 +62,7 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
         isAuthenticated: true,
         isLoading: false,
         error: null,
+        success: action.payload.message || null,
       };
     case 'AUTH_FAILURE':
       return {
@@ -76,11 +81,17 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
         isAuthenticated: false,
         isLoading: false,
         error: null,
+        success: null,
       };
     case 'CLEAR_ERROR':
       return {
         ...state,
         error: null,
+      };
+    case 'CLEAR_SUCCESS':
+      return {
+        ...state,
+        success: null,
       };
     case 'SET_LOADING':
       return {
@@ -164,7 +175,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       dispatch({
         type: 'AUTH_SUCCESS',
-        payload: { user, token },
+        payload: {
+          user,
+          token,
+          message: `Welcome ${user.name}! Your account has been created successfully.`
+        },
       });
     } catch (error: any) {
       const errorMessage = error.response?.data?.error || 'Registration failed';
@@ -183,12 +198,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     dispatch({ type: 'CLEAR_ERROR' });
   };
 
+  const clearSuccess = () => {
+    dispatch({ type: 'CLEAR_SUCCESS' });
+  };
+
   const value: AuthContextType = {
     ...state,
     login,
     register,
     logout,
     clearError,
+    clearSuccess,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

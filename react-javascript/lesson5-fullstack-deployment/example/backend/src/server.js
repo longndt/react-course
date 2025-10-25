@@ -10,6 +10,7 @@ import { notFound } from './middleware/notFound.js';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/users.js';
 import dashboardRoutes from './routes/dashboard.js';
+import uploadRoutes from './routes/upload.js';
 
 // Load environment variables
 dotenv.config();
@@ -45,6 +46,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

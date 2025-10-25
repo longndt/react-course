@@ -56,7 +56,7 @@ const userSchema = new Schema<IUser>({
 }, {
   timestamps: true,
   toJSON: {
-    transform: function(doc, ret) {
+    transform: function (doc, ret) {
       delete (ret as any).password;
       delete (ret as any).__v;
       return ret;
@@ -65,7 +65,7 @@ const userSchema = new Schema<IUser>({
 });
 
 // Hash password before saving
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
 
   try {
@@ -78,12 +78,12 @@ userSchema.pre('save', async function(next) {
 });
 
 // Compare password method
-userSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
+userSchema.methods.comparePassword = async function (candidatePassword: string): Promise<boolean> {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
 // Index for better query performance
-userSchema.index({ email: 1 });
+// Note: email index is already created by unique: true, so we don't need to add it again
 userSchema.index({ createdAt: -1 });
 
 export default mongoose.model<IUser>('User', userSchema);

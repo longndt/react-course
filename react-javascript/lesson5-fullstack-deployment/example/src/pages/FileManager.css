@@ -1,0 +1,165 @@
+.file-manager {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.file-manager-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.file-manager-header h1 {
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.file-manager-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.upload-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.upload-section h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.upload-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.upload-option h3 {
+    color: #555;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.files-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.files-section h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.no-files {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+}
+
+.files-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.file-card {
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.file-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.file-info h4 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    word-break: break-all;
+}
+
+.file-info p {
+    color: #666;
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+}
+
+.file-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.error-message button {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.error-message button:hover {
+    background: #c82333;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .file-manager {
+        padding: 1rem;
+    }
+
+    .upload-options {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .files-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .file-actions {
+        flex-direction: column;
+    }
+}

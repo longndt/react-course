@@ -175,6 +175,12 @@ body {
   border-bottom: 2px solid #f1f3f4;
 }
 
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
 .dashboard-header h1 {
   color: #333;
   margin: 0;
@@ -367,8 +373,13 @@ body {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Responsive Design */

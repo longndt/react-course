@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: #5a6fd8;
+        }
+    </style>
+    <link rel="stylesheet" href="src/components/Toast.css">
+</head>
+
+<body>
+    <div class="test-container">
+        <h1>Toast Notification Test</h1>
+        <p>Click the buttons below to test different toast notifications:</p>
+
+        <button class="btn" onclick="showToast('success', 'Registration successful! Welcome to our platform.')">
+            Test Success Toast
+        </button>
+
+        <button class="btn" onclick="showToast('error', 'Registration failed. Please try again.')">
+            Test Error Toast
+        </button>
+
+        <button class="btn" onclick="showToast('info', 'Please check your email for verification.')">
+            Test Info Toast
+        </button>
+    </div>
+
+    <script>
+        function showToast(type, message) {
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type} toast-show`;
+
+            toast.innerHTML = `
+                <div class="toast-content">
+                    <div class="toast-icon">
+                        ${type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ'}
+                    </div>
+                    <div class="toast-message">${message}</div>
+                    <button class="toast-close" onclick="this.parentElement.parentElement.remove()">
+                        ×
+                    </button>
+                </div>
+            `;
+
+            // Add to page
+            document.body.appendChild(toast);
+
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.remove();
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+
+</html>

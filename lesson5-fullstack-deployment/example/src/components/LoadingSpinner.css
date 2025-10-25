@@ -19,6 +19,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -28,4 +29,118 @@
   margin-top: 20px;
   color: #666;
   font-size: 1.2rem;
+}
+
+/* Circular Progress Spinner */
+.circular-progress {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+}
+
+.circular-progress svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.circular-progress circle {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.circular-progress .background {
+  stroke: #e1e5e9;
+}
+
+.circular-progress .progress {
+  stroke: #667eea;
+  stroke-dasharray: 157;
+  stroke-dashoffset: 157;
+  animation: circular-progress 2s ease-in-out infinite;
+}
+
+.circular-progress .progress-fast {
+  stroke: #667eea;
+  stroke-dasharray: 157;
+  stroke-dashoffset: 157;
+  animation: circular-progress-fast 1.5s ease-in-out infinite;
+}
+
+@keyframes circular-progress {
+  0% {
+    stroke-dashoffset: 157;
+  }
+
+  50% {
+    stroke-dashoffset: 39.25;
+  }
+
+  100% {
+    stroke-dashoffset: 157;
+  }
+}
+
+@keyframes circular-progress-fast {
+  0% {
+    stroke-dashoffset: 157;
+  }
+
+  50% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: 157;
+  }
+}
+
+/* Button Loading State */
+.btn-loading {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-loading .circular-progress {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+
+.btn-loading .circular-progress .progress {
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.btn-loading .circular-progress .background {
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 2;
+}
+
+/* Inline Loading Spinner */
+.inline-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inline-loading .circular-progress {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.inline-loading .circular-progress .progress {
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.inline-loading .circular-progress .background {
+  stroke: rgba(0, 0, 0, 0.1);
+  stroke-width: 2;
 }

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { dashboardAPI } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
+import Toast from '../components/Toast';
+import { Link } from 'react-router-dom';
 
 interface DashboardStats {
   totalUsers: number;
@@ -29,7 +31,7 @@ interface DashboardData {
 }
 
 export function Dashboard() {
-  const { user, logout } = useAuth();
+  const { user, logout, success, clearSuccess } = useAuth();
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -85,14 +87,32 @@ export function Dashboard() {
 
   return (
     <div className="dashboard">
+      {success && (
+        <Toast
+          message={success}
+          type="success"
+          isVisible={!!success}
+          onClose={clearSuccess}
+          duration={5000}
+        />
+      )}
+
       <div className="dashboard-header">
         <div>
           <h1>Dashboard</h1>
           <p>Welcome back, {user?.name}!</p>
         </div>
-        <button onClick={logout} className="btn btn-secondary">
-          Logout
-        </button>
+        <div className="header-actions">
+          <Link to="/file-manager" className="btn btn-primary">
+            File Manager
+          </Link>
+          <Link to="/performance" className="btn btn-primary">
+            Performance Demo
+          </Link>
+          <button onClick={logout} className="btn btn-secondary">
+            Logout
+          </button>
+        </div>
       </div>
 
       {dashboardData && (
