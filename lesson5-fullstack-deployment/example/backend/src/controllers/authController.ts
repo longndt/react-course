@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import { User } from '../models/User';
+import User from '../models/User';
 import { generateToken } from '../utils/generateToken';
 
 // @desc    Register user

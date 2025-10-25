@@ -4,7 +4,6 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import FileManager from './pages/FileManager';
 import PerformanceDemo from './pages/PerformanceDemo';
-import AuthCallback from './pages/AuthCallback';
 import LoadingSpinner from './components/LoadingSpinner';
 
 const AppContent = () => {
@@ -33,10 +32,6 @@ const AppContent = () => {
                     <Route
                         path="/performance"
                         element={isAuthenticated ? <PerformanceDemo /> : <Navigate to="/login" />}
-                    />
-                    <Route
-                        path="/auth/callback"
-                        element={<AuthCallback />}
                     />
                     <Route
                         path="/"

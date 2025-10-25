@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Dashboard } from '../models/Dashboard';
+import Dashboard from '../models/Dashboard';
 
 // @desc    Get dashboard data
 // @route   GET /api/dashboard
@@ -12,12 +12,15 @@ export const getDashboard = async (req: Request, res: Response) => {
         let dashboard = await Dashboard.findOne({ userId });
 
         if (!dashboard) {
+            // Create default dashboard
             dashboard = await Dashboard.create({
                 userId,
-                widgets: [
-                    { id: 'welcome', type: 'welcome', position: { x: 0, y: 0 } },
-                    { id: 'stats', type: 'stats', position: { x: 1, y: 0 } },
-                ],
+                totalUsers: 0,
+                totalRevenue: 0,
+                totalOrders: 0,
+                monthlyGrowth: 0,
+                topProducts: [],
+                recentActivity: []
             });
         }
 
@@ -27,9 +30,12 @@ export const getDashboard = async (req: Request, res: Response) => {
                 dashboard: {
                     id: dashboard._id,
                     userId: dashboard.userId,
-                    widgets: dashboard.widgets,
-                    layout: dashboard.layout,
-                    settings: dashboard.settings,
+                    totalUsers: dashboard.totalUsers,
+                    totalRevenue: dashboard.totalRevenue,
+                    totalOrders: dashboard.totalOrders,
+                    monthlyGrowth: dashboard.monthlyGrowth,
+                    topProducts: dashboard.topProducts,
+                    recentActivity: dashboard.recentActivity,
                 },
             },
         });
@@ -39,17 +45,22 @@ export const getDashboard = async (req: Request, res: Response) => {
     }
 };
 
-// @desc    Update dashboard layout
-// @route   PUT /api/dashboard/layout
+// @desc    Update dashboard data
+// @route   PUT /api/dashboard/data
 // @access  Private
-export const updateLayout = async (req: Request, res: Response) => {
+export const updateDashboardData = async (req: Request, res: Response) => {
     try {
-        const { layout } = req.body;
+        const { totalUsers, totalRevenue, totalOrders, monthlyGrowth } = req.body;
         const userId = (req.user as any)?._id;
 
         const dashboard = await Dashboard.findOneAndUpdate(
             { userId },
-            { layout },
+            {
+                totalUsers: totalUsers || 0,
+                totalRevenue: totalRevenue || 0,
+                totalOrders: totalOrders || 0,
+                monthlyGrowth: monthlyGrowth || 0
+            },
             { new: true, upsert: true }
         );
 
@@ -59,86 +70,17 @@ export const updateLayout = async (req: Request, res: Response) => {
                 dashboard: {
                     id: dashboard._id,
                     userId: dashboard.userId,
-                    widgets: dashboard.widgets,
-                    layout: dashboard.layout,
-                    settings: dashboard.settings,
+                    totalUsers: dashboard.totalUsers,
+                    totalRevenue: dashboard.totalRevenue,
+                    totalOrders: dashboard.totalOrders,
+                    monthlyGrowth: dashboard.monthlyGrowth,
+                    topProducts: dashboard.topProducts,
+                    recentActivity: dashboard.recentActivity,
                 },
             },
         });
     } catch (error: any) {
-        console.error('Update layout error:', error);
-        res.status(500).json({ error: 'Server error' });
-    }
-};
-
-// @desc    Add widget to dashboard
-// @route   POST /api/dashboard/widgets
-// @access  Private
-export const addWidget = async (req: Request, res: Response) => {
-    try {
-        const { widget } = req.body;
-        const userId = (req.user as any)?._id;
-
-        const dashboard = await Dashboard.findOne({ userId });
-
-        if (!dashboard) {
-            return res.status(404).json({ error: 'Dashboard not found' });
-        }
-
-        dashboard.widgets.push(widget);
-        await dashboard.save();
-
-        res.json({
-            success: true,
-            data: {
-                dashboard: {
-                    id: dashboard._id,
-                    userId: dashboard.userId,
-                    widgets: dashboard.widgets,
-                    layout: dashboard.layout,
-                    settings: dashboard.settings,
-                },
-            },
-        });
-    } catch (error: any) {
-        console.error('Add widget error:', error);
-        res.status(500).json({ error: 'Server error' });
-    }
-};
-
-// @desc    Remove widget from dashboard
-// @route   DELETE /api/dashboard/widgets/:widgetId
-// @access  Private
-export const removeWidget = async (req: Request, res: Response) => {
-    try {
-        const { widgetId } = req.params;
-        const userId = (req.user as any)?._id;
-
-        const dashboard = await Dashboard.findOne({ userId });
-
-        if (!dashboard) {
-            return res.status(404).json({ error: 'Dashboard not found' });
-        }
-
-        dashboard.widgets = dashboard.widgets.filter(
-            (widget: any) => widget.id !== widgetId
-        );
-        await dashboard.save();
-
-        res.json({
-            success: true,
-            data: {
-                dashboard: {
-                    id: dashboard._id,
-                    userId: dashboard.userId,
-                    widgets: dashboard.widgets,
-                    layout: dashboard.layout,
-                    settings: dashboard.settings,
-                },
-            },
-        });
-    } catch (error: any) {
-        console.error('Remove widget error:', error);
+        console.error('Update dashboard data error:', error);
         res.status(500).json({ error: 'Server error' });
     }
 };
