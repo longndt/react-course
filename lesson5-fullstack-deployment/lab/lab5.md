@@ -194,7 +194,7 @@ const userSchema = new Schema<IUser>({
 // Hash password before saving
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
-  
+
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   next();
@@ -220,23 +220,23 @@ import jwt from 'jsonwebtoken';
 export const register = async (req: Request, res: Response) => {
   try {
     const { name, email, password } = req.body;
-    
+
     // Check if user exists
     const userExists = await User.findOne({ email });
     if (userExists) {
       return res.status(400).json({ error: 'User already exists' });
     }
-    
+
     // Create user
     const user = await User.create({ name, email, password });
-    
+
     // Generate token
     const token = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET!,
       { expiresIn: '7d' }
     );
-    
+
     res.status(201).json({
       success: true,
       data: { user: { id: user._id, name, email }, token }
@@ -249,26 +249,26 @@ export const register = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
-    
+
     // Find user
     const user = await User.findOne({ email }).select('+password');
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    
+
     // Check password
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    
+
     // Generate token
     const token = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET!,
       { expiresIn: '7d' }
     );
-    
+
     res.json({
       success: true,
       data: { user: { id: user._id, name: user.name, email }, token }
@@ -291,22 +291,22 @@ import User from '../models/User';
 export const protect = async (req: Request, res: Response, next: NextFunction) => {
   try {
     let token;
-    
+
     if (req.headers.authorization?.startsWith('Bearer')) {
       token = req.headers.authorization.split(' ')[1];
     }
-    
+
     if (!token) {
       return res.status(401).json({ error: 'Not authorized' });
     }
-    
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string };
     const user = await User.findById(decoded.userId).select('-password');
-    
+
     if (!user) {
       return res.status(401).json({ error: 'User not found' });
     }
-    
+
     req.user = user;
     next();
   } catch (error) {
@@ -413,7 +413,7 @@ const fileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCa
   const allowedTypes = /jpeg|jpg|png|gif/;
   const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype = allowedTypes.test(file.mimetype);
-  
+
   if (mimetype && extname) {
     return cb(null, true);
   }
@@ -650,4 +650,3 @@ After completing this lab:
 4. Add admin panel
 5. Build mobile app with React Native
 
-**Congratulations!** 🎉 You've built a complete full-stack application!

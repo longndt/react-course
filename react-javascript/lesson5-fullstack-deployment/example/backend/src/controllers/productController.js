@@ -1,20 +1,19 @@
-import Product from '../models/Product.js';
+import { Request, Response } from 'express';
+import Product from '../models/Product';
 
-/**
- * Get all products with search, filter, sort
- * @route GET /api/products
- * @access Private
- */
-export const getProducts = async (req, res) => {
+// @desc    Get all products with search, filter, sort
+// @route   GET /api/products
+// @access  Private
+export const getProducts = async (req: Request, res: Response) => {
     try {
         const { search, category, sortBy = 'createdAt', order = 'desc', page = 1, limit = 10 } = req.query;
 
         // Build query
-        const query = {};
+        const query: any = {};
 
         // Search by name or description
         if (search) {
-            query.$text = { $search: search };
+            query.$text = { $search: search as string };
         }
 
         // Filter by category
@@ -23,12 +22,12 @@ export const getProducts = async (req, res) => {
         }
 
         // Sort options
-        const sortOptions = {};
-        sortOptions[sortBy] = order === 'asc' ? 1 : -1;
+        const sortOptions: any = {};
+        sortOptions[sortBy as string] = order === 'asc' ? 1 : -1;
 
         // Pagination
-        const pageNum = parseInt(page);
-        const limitNum = parseInt(limit);
+        const pageNum = parseInt(page as string);
+        const limitNum = parseInt(limit as string);
         const skip = (pageNum - 1) * limitNum;
 
         // Execute query
@@ -59,12 +58,10 @@ export const getProducts = async (req, res) => {
     }
 };
 
-/**
- * Get single product
- * @route GET /api/products/:id
- * @access Private
- */
-export const getProduct = async (req, res) => {
+// @desc    Get single product
+// @route   GET /api/products/:id
+// @access  Private
+export const getProduct = async (req: Request, res: Response) => {
     try {
         const product = await Product.findById(req.params.id).populate('userId', 'name email');
 
@@ -82,15 +79,13 @@ export const getProduct = async (req, res) => {
     }
 };
 
-/**
- * Create product
- * @route POST /api/products
- * @access Private
- */
-export const createProduct = async (req, res) => {
+// @desc    Create product
+// @route   POST /api/products
+// @access  Private
+export const createProduct = async (req: Request, res: Response) => {
     try {
         const { name, description, price, category, stock } = req.body;
-        const userId = req.user?._id;
+        const userId = (req.user as any)?._id;
 
         // Handle image upload
         let image = '';
@@ -113,18 +108,16 @@ export const createProduct = async (req, res) => {
             message: 'Product created successfully',
             data: product
         });
-    } catch (error) {
+    } catch (error: any) {
         console.error('Create product error:', error);
         res.status(400).json({ error: error.message || 'Failed to create product' });
     }
 };
 
-/**
- * Update product
- * @route PUT /api/products/:id
- * @access Private
- */
-export const updateProduct = async (req, res) => {
+// @desc    Update product
+// @route   PUT /api/products/:id
+// @access  Private
+export const updateProduct = async (req: Request, res: Response) => {
     try {
         const { name, description, price, category, stock } = req.body;
 
@@ -153,18 +146,16 @@ export const updateProduct = async (req, res) => {
             message: 'Product updated successfully',
             data: product
         });
-    } catch (error) {
+    } catch (error: any) {
         console.error('Update product error:', error);
         res.status(400).json({ error: error.message || 'Failed to update product' });
     }
 };
 
-/**
- * Delete product
- * @route DELETE /api/products/:id
- * @access Private
- */
-export const deleteProduct = async (req, res) => {
+// @desc    Delete product
+// @route   DELETE /api/products/:id
+// @access  Private
+export const deleteProduct = async (req: Request, res: Response) => {
     try {
         const product = await Product.findById(req.params.id);
 
@@ -184,12 +175,10 @@ export const deleteProduct = async (req, res) => {
     }
 };
 
-/**
- * Get product statistics
- * @route GET /api/products/stats/overview
- * @access Private
- */
-export const getProductStats = async (req, res) => {
+// @desc    Get product statistics
+// @route   GET /api/products/stats/overview
+// @access  Private
+export const getProductStats = async (req: Request, res: Response) => {
     try {
         // Total products
         const totalProducts = await Product.countDocuments();

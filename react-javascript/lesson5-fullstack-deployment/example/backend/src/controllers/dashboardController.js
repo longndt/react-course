@@ -1,12 +1,11 @@
-import User from '../models/User.js';
-import Product from '../models/Product.js';
+import { Request, Response } from 'express';
+import User from '../models/User';
+import Product from '../models/Product';
 
-/**
- * Get dashboard data
- * @route GET /api/dashboard
- * @access Private
- */
-export const getDashboard = async (req, res) => {
+// @desc    Get dashboard data
+// @route   GET /api/dashboard
+// @access  Private
+export const getDashboard = async (req: Request, res: Response) => {
     try {
         // Total users
         const totalUsers = await User.countDocuments();
@@ -72,9 +71,8 @@ export const getDashboard = async (req, res) => {
                 recentActivity
             }
         });
-    } catch (error) {
+    } catch (error: any) {
         console.error('Get dashboard error:', error);
         res.status(500).json({ error: 'Server error' });
     }
 };
-

@@ -11,6 +11,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size = 'medium', fullSc
     return (
       <div className="loading-spinner-fullscreen">
         <div className={`spinner spinner-${size}`}></div>
+        <p className="loading-text">Loading...</p>
       </div>
     );
   }

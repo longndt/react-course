@@ -1,27 +1,27 @@
-# Lab 5 - Performance Optimization & Production Deployment
+# Lab 5 - Full-Stack Product Management System
 
 ## 📋 Overview
 
-In this final lab, you'll learn **essential performance optimization techniques**and **production deployment strategies**for React applications. You'll implement code splitting, memoization, virtual lists, and prepare your application for production deployment with environment configuration and build optimization.
+In this comprehensive lab, you'll build a **complete full-stack application** with React frontend and Express.js backend. You'll implement authentication, CRUD operations for products with image upload, and a real-time dashboard displaying data from MongoDB.
 
 ### What You'll Build
 
-A performance-optimized React application featuring:
-- **Code Splitting**with React.lazy() and Suspense
-- **Component Memoization**with React.memo, useMemo, useCallback
-- **Virtual Lists**for rendering thousands of items efficiently
-- **Performance Monitoring**with React Profiler
-- **Production Build**configuration
-- **Environment Management**with different configs for dev/prod
-- **Deployment Ready**application for Vercel/Netlify
+A complete Product Management System featuring:
+- **User Authentication** - Register, login with JWT
+- **Product CRUD** - Create, Read, Update, Delete products
+- **Image Upload** - Upload product images
+- **Search & Filter** - Find products by name, category
+- **Sort & Pagination** - Organize product listings
+- **Real Dashboard** - Display statistics from database
+- **Clean UI** - Professional, responsive design
 
 ### Why This Matters
 
-- **User Experience** Slow apps lose users - 53% leave if load takes >3 seconds
-- **Performance** Optimized apps feel faster and use less resources
-- **Scalability** Handle large datasets without freezing the browser
-- **Production Ready** Deploy with confidence using best practices
-- **Professional Skills** Performance optimization is crucial for senior developers
+- **Full-Stack Skills** - Learn both frontend and backend development
+- **Real-World Application** - Build production-ready features
+- **Database Integration** - Work with MongoDB and Mongoose
+- **File Handling** - Implement image upload functionality
+- **Professional Development** - Follow industry best practices
 
 ---
 
@@ -29,60 +29,113 @@ A performance-optimized React application featuring:
 
 By the end of this lab, you will:
 
-### Performance Optimization Skills
-- Implement code splitting with React.lazy() and dynamic imports
-- Use Suspense for loading states
-- Apply React.memo to prevent unnecessary re-renders
-- Optimize expensive computations with useMemo
-- Prevent function recreation with useCallback
-- Build virtual lists for large datasets (10,000+ items)
-- Monitor performance with React Profiler API
+### Backend Development
+- Set up Express.js server with proper structure
+- Create RESTful API endpoints
+- Implement JWT authentication
+- Handle file uploads with Multer
+- Design MongoDB schemas with Mongoose
+- Write controllers following MVC pattern
 
-### Production Deployment Skills
-- Create optimized production builds
-- Configure environment variables for different environments
-- Understand bundle size and optimization techniques
-- Deploy to Vercel or Netlify
-- Set up deployment workflows
-- Handle routing in production (SPA config)
+### Frontend Development
+- Build protected routes with authentication
+- Create forms with validation and file upload
+- Implement search, filter, and sort functionality
+- Display data from API with loading states
+- Handle errors gracefully
+- Create a responsive dashboard
 
-### Advanced Patterns
-- Lazy load components and routes
-- Create efficient custom hooks
-- Implement windowing/virtualization
-- Profile and measure performance improvements
+### Database & Integration
+- Design database schemas
+- Write efficient queries with indexes
+- Aggregate data for statistics
+- Handle relationships between models
+- Implement pagination
 
 ---
 
 ## Pre-Lab Checklist
 
 ### Required Software
-- [ ] **Node.js**(v18+) installed
-- [ ] **npm**or **yarn**package manager
-- [ ] **VS Code**with React DevTools extension
-- [ ] **Browser**with React DevTools (Chrome/Firefox)
-- [ ] **Git**for version control (deployment)
+- [ ] **Node.js** (v18+) installed
+- [ ] **MongoDB** installed locally or MongoDB Atlas account
+- [ ] **VS Code** with recommended extensions
+- [ ] **Postman** or similar API testing tool
+- [ ] **Git** for version control
 
 ### Verification Commands
 ```bash
 node --version    # Should show v18.0.0 or higher
 npm --version     # Should show 9.0.0 or higher
-git --version     # Should show 2.0.0 or higher
+mongo --version   # Or check MongoDB Atlas connection
 ```
 
 ### Required Knowledge
 - [ ] React fundamentals (components, hooks, state)
-- [ ] React Hooks (useState, useEffect, useContext, useMemo, useCallback)
 - [ ] TypeScript basics
+- [ ] REST API concepts
+- [ ] Basic MongoDB knowledge
 - [ ] Completion of Labs 1-4
 
-### Project Setup
+---
+
+## Project Setup
+
+### Step 1: Create Project Structure
+
 ```bash
-# Create Vite + React + TypeScript project
-npm create vite@latest lab5-performance -- --template react-ts
-cd lab5-performance
+# Create main directory
+mkdir lab5-fullstack
+cd lab5-fullstack
+
+# Create backend
+mkdir backend
+cd backend
+npm init -y
+npm install express mongoose cors dotenv bcryptjs jsonwebtoken multer express-rate-limit helmet
+npm install -D nodemon typescript @types/node @types/express
+npx tsc --init
+
+# Create frontend
+cd ..
+npm create vite@latest frontend -- --template react-ts
+cd frontend
 npm install
 npm install react-router-dom
+```
+
+### Step 2: Project Structure
+
+```
+lab5-fullstack/
+├── backend/
+│   ├── src/
+│   │   ├── models/
+│   │   │   ├── User.ts
+│   │   │   └── Product.ts
+│   │   ├── controllers/
+│   │   │   ├── authController.ts
+│   │   │   ├── productController.ts
+│   │   │   └── dashboardController.ts
+│   │   ├── routes/
+│   │   │   ├── auth.ts
+│   │   │   ├── products.ts
+│   │   │   └── dashboard.ts
+│   │   ├── middleware/
+│   │   │   └── auth.ts
+│   │   ├── config/
+│   │   │   └── upload.ts
+│   │   └── server.ts
+│   ├── uploads/
+│   ├── .env
+│   └── package.json
+└── frontend/
+    ├── src/
+    │   ├── components/
+    │   ├── pages/
+    │   ├── contexts/
+    │   └── App.tsx
+    └── package.json
 ```
 
 ---
@@ -91,1198 +144,509 @@ npm install react-router-dom
 
 ---
 
-### Exercise 1: Code Splitting & Lazy Loading (40% Practice)
+### Exercise 1: Backend Setup & User Authentication (30%)
 
-**Goal** Implement code splitting to reduce initial bundle size and improve load time.
+**Goal**: Set up Express.js backend with user authentication using JWT.
 
-#### Task 1.1: Setup React Router with Lazy Loading (Guided)
+#### Task 1.1: Create User Model
 
-**Step 1: Install Dependencies**
-```bash
-npm install react-router-dom
-```
+Create `backend/src/models/User.ts`:
 
-**Step 2: Create Basic Page Components**
+```typescript
+import mongoose, { Document, Schema } from 'mongoose';
+import bcrypt from 'bcryptjs';
 
-Create three page components (we'll lazy load them next):
-
-```jsx
-// src/pages/Home.jsx
-export default function Home() {
-  return (
-    <div className="page">
-      <h1>Home Page</h1>
-      <p>Welcome to the performance-optimized app!</p>
-    </div>
-  );
-}
-
-// src/pages/About.jsx
-export default function About() {
-  return (
-    <div className="page">
-      <h1>About Page</h1>
-      <p>This app demonstrates performance optimization techniques.</p>
-    </div>
-  );
-}
-
-// src/pages/Dashboard.jsx
-export default function Dashboard() {
-  return (
-    <div className="page">
-      <h1>Dashboard</h1>
-      <p>This is a heavy dashboard component.</p>
-    </div>
-  );
-}
-```
-
-**Step 3: Create LoadingSpinner Component**
-
-```jsx
-// src/components/LoadingSpinner.jsx
-import './LoadingSpinner.css';
-
-export default function LoadingSpinner() {
-  return (
-    <div className="loading-spinner">
-      <div className="spinner"></div>
-      <p>Loading...</p>
-    </div>
-  );
-}
-```
-
-```css
-/* src/components/LoadingSpinner.css */
-.loading-spinner {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-  gap: 1rem;
-}
-
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #3498db;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-```
-
-**Step 4: Implement Lazy Loading in App.jsx**
-
-```jsx
-// src/App.jsx
-import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import LoadingSpinner from './components/LoadingSpinner';
-
-// Lazy load page components
-const Home = lazy(() => import('./pages/Home'));
-const About = lazy(() => import('./pages/About'));
-const Dashboard = lazy(() => import('./pages/Dashboard'));
-
-function App() {
-  return (
-    <BrowserRouter>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/dashboard">Dashboard</Link>
-      </nav>
-
-      <Suspense fallback={<LoadingSpinner />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
-  );
-}
-
-export default App;
-```
-
-**Test**
-- Run `npm run dev`
-- Open browser DevTools → Network tab
-- Navigate between pages
-- Notice separate chunks loading for each page (e.g., `About-xxxxx.js`)
-
----
-
-#### Task 1.2: Add Error Boundary for Lazy Components (50% TODO)
-
-**🔨 TODO** Create an Error Boundary to handle loading failures gracefully.
-
-**Requirements**
-1. Create `src/components/ErrorBoundary.jsx` (class component)
-2. Implement `componentDidCatch` to log errors
-3. Implement `getDerivedStateFromError` to update state
-4. Render error UI when lazy loading fails
-5. Add a "Retry" button that reloads the page
-6. Wrap `<Suspense>` with `<ErrorBoundary>` in App.jsx
-
-**Hints**
-
-```jsx
-import { Component, ReactNode, ErrorInfo } from 'react';
-
-interface Props {
-  children: ReactNode;
-}
-
-interface State {
-  hasError: boolean;
-  error: Error | null;
-}
-
-class ErrorBoundary extends Component<Props, State> {
-  state: State = {
-    hasError: false,
-    error: null,
-  };
-
-  static getDerivedStateFromError(error: Error): State {
-    // Update state so next render shows fallback UI
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // Log error to console or error reporting service
-    console.error('Error caught by boundary:', error, errorInfo);
-  }
-
-  handleRetry = () => {
-    // Reset state and reload
-    this.setState({ hasError: false, error: null });
-    window.location.reload();
-  };
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div className="error-boundary">
-          <h1>Oops! Something went wrong</h1>
-          <p>{this.state.error?.message}</p>
-          <button onClick={this.handleRetry}>Retry</button>
-        </div>
-      );
-    }
-
-    return this.props.children;
-  }
-}
-
-export default ErrorBoundary;
-
-// Wrap in App.jsx
-<ErrorBoundary>
-  <Suspense fallback={<LoadingSpinner />}>
-    <Routes>...</Routes>
-  </Suspense>
-</ErrorBoundary>
-```
-
-**CSS Hint**
-```css
-.error-boundary {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 400px;
-  padding: 2rem;
-  text-align: center;
-}
-```
-
-**Expected Outcome**
-- App handles lazy loading failures
-- Error message displayed if chunk fails to load
-- Retry button reloads the application
-- Console logs error details
-
-**Solution** See `solutions/exercise1-code-splitting/`
-
----
-
-#### Task 1.3: Measure Bundle Size Improvement (Testing)
-
-**🔨 TODO** Build for production and analyze bundle size.
-
-**Requirements**
-1. Run `npm run build`
-2. Check `dist/` folder for generated chunks
-3. Note the sizes of individual chunks
-4. Compare with non-lazy loaded version (optional)
-
-**Hints**
-
-```bash
-# Build for production
-npm run build
-
-# Check generated files
-dir dist\assets  # Windows
-ls -lh dist/assets  # Mac/Linux
-```
-
-**Analyze with Rollup Visualizer**(Optional):
-```bash
-npm install --save-dev rollup-plugin-visualizer
-
-# Add to vite.config.ts
-import { visualizer } from 'rollup-plugin-visualizer';
-
-export default defineConfig({
-  plugins: [
-    react(),
-    visualizer({ open: true }),
-  ],
-});
-```
-
-**Expected Outcome**
-- Production build creates separate chunks for each lazy-loaded component
-- Main bundle is smaller than if all components were bundled together
-- Each route loads its own JavaScript file on demand
-- Improved initial load time (especially noticeable with larger apps)
-
-**Solution** See `solutions/exercise1-code-splitting/readme.md`
-
----
-
-### Exercise 2: Component Memoization (70% Practice)
-
-**Goal** Optimize component rendering with React.memo, useMemo, and useCallback.
-
-#### Task 2.1: Create a Memoized List Component (Guided)
-
-**Step 1: Create a UserList Component**
-
-```jsx
-// src/components/UserList.jsx
-import { memo } from 'react';
-
-interface User {
-  id: number;
+export interface IUser extends Document {
   name: string;
   email: string;
+  password: string;
+  role: 'user' | 'admin';
+  comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
-interface UserItemProps {
-  user: User;
-  onSelect: (user: User) => void;
-}
-
-// Memoized UserItem - only re-renders if props change
-const UserItem = memo(function UserItem({ user, onSelect }: UserItemProps) {
-  console.log(`Rendering UserItem: ${user.id}`);
-
-  return (
-    <div className="user-item" onClick={() => onSelect(user)}>
-      <h3>{user.name}</h3>
-      <p>{user.email}</p>
-    </div>
-  );
+const userSchema = new Schema<IUser>({
+  name: {
+    type: String,
+    required: [true, 'Name is required'],
+    trim: true
+  },
+  email: {
+    type: String,
+    required: [true, 'Email is required'],
+    unique: true,
+    lowercase: true
+  },
+  password: {
+    type: String,
+    required: [true, 'Password is required'],
+    minlength: 6,
+    select: false
+  },
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user'
+  }
+}, {
+  timestamps: true
 });
 
-interface UserListProps {
-  users: User[];
-  onSelect: (user: User) => void;
-}
+// Hash password before saving
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
 
-function UserList({ users, onSelect }: UserListProps) {
-  console.log('Rendering UserList');
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
 
-  return (
-    <div className="user-list">
-      {users.map(user => (
-        <UserItem key={user.id} user={user} onSelect={onSelect} />
-      ))}
-    </div>
-  );
-}
-
-export default memo(UserList);
-```
-
-**Step 2: Use UserList in a Page**
-
-```jsx
-// src/pages/Users.jsx
-import { useState } from 'react';
-import UserList from '../components/UserList';
-
-// Generate mock users
-const generateUsers = (count: number) => {
-  return Array.from({ length: count }, (_, i) => ({
-    id: i + 1,
-    name: `User ${i + 1}`,
-    email: `user${i + 1}@example.com`,
-  }));
+// Compare password method
+userSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
+  return bcrypt.compare(candidatePassword, this.password);
 };
 
-export default function Users() {
-  const [users] = useState(() => generateUsers(100));
-  const [selectedUser, setSelectedUser] = useState<number | null>(null);
-  const [count, setCount] = useState(0);
-
-  const handleSelect = (user: any) => {
-    setSelectedUser(user.id);
-  };
-
-  return (
-    <div>
-      <h1>Users Page</h1>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment (Test Re-render)</button>
-      <UserList users={users} onSelect={handleSelect} />
-    </div>
-  );
-}
+export default mongoose.model<IUser>('User', userSchema);
 ```
 
-**Test**
-- Click "Increment" button
-- Check console - UserItems should NOT re-render
-- Problem: They DO re-render because `handleSelect` is recreated each render!
+#### Task 1.2: Create Auth Controller
 
----
+Create `backend/src/controllers/authController.ts`:
 
-#### Task 2.2: Optimize with useCallback (70% TODO)
+```typescript
+import { Request, Response } from 'express';
+import User from '../models/User';
+import jwt from 'jsonwebtoken';
 
-**🔨 TODO** Fix the unnecessary re-renders by memoizing the callback function.
+export const register = async (req: Request, res: Response) => {
+  try {
+    const { name, email, password } = req.body;
 
-**Requirements**
-1. Import `useCallback` from React
-2. Wrap `handleSelect` function with `useCallback`
-3. Add empty dependency array (no dependencies)
-4. Click "Increment" again and verify UserItems don't re-render
-5. Add console logs to track renders
+    // Check if user exists
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      return res.status(400).json({ error: 'User already exists' });
+    }
 
-**Hints**
+    // Create user
+    const user = await User.create({ name, email, password });
 
-```jsx
-import { useState, useCallback } from 'react';
-
-const handleSelect = useCallback((user: User) => {
-  setSelectedUser(user.id);
-}, []); // Empty array - function never recreated
-
-// Alternative: if you need dependencies
-const handleSelect = useCallback((user: User) => {
-  console.log('Current count:', count);
-  setSelectedUser(user.id);
-}, [count]); // Re-create only when count changes
-```
-
-**Why This Works**
-- Without `useCallback`: New function created every render
-- `UserItem` receives "different" prop (even though it does the same thing)
-- `memo()` sees prop changed, re-renders component
-- With `useCallback`: Same function reference across renders
-- `memo()` sees no change, skips re-render
-
-**Expected Outcome**
-- Clicking "Increment" does NOT trigger UserItem re-renders
-- Console shows "Rendering UserList" but NOT "Rendering UserItem: X"
-- Selected user still updates correctly when clicking a user
-- Performance improves with larger lists
-
-**Solution** See `solutions/exercise2-memoization/`
-
----
-
-#### Task 2.3: Optimize Expensive Calculations with useMemo (80% TODO)
-
-**🔨 TODO** Use `useMemo` to optimize a filtered and sorted user list.
-
-**Requirements**
-1. Add a search input to filter users by name
-2. Add a "Sort by Name" button
-3. Use `useMemo` to memoize the filtered and sorted results
-4. Add console logs to see when filtering/sorting happens
-5. Verify it only recalculates when search term or sort order changes
-
-**Hints**
-
-```jsx
-import { useState, useMemo, useCallback } from 'react';
-
-export default function Users() {
-  const [users] = useState(() => generateUsers(1000)); // More users!
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortAsc, setSortAsc] = useState(true);
-
-  // Expensive computation - only runs when dependencies change
-  const filteredAndSortedUsers = useMemo(() => {
-    console.log('Filtering and sorting users...');
-
-    let result = users.filter(user =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    // Generate token
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET!,
+      { expiresIn: '7d' }
     );
 
-    result.sort((a, b) => {
-      const comparison = a.name.localeCompare(b.name);
-      return sortAsc ? comparison : -comparison;
+    res.status(201).json({
+      success: true,
+      data: { user: { id: user._id, name, email }, token }
     });
-
-    return result;
-  }, [users, searchTerm, sortAsc]); // Only recalculate when these change
-
-  return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search users..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <button onClick={() => setSortAsc(!sortAsc)}>
-        Sort: {sortAsc ? 'A→Z' : 'Z→A'}
-      </button>
-      <UserList users={filteredAndSortedUsers} onSelect={handleSelect} />
-    </div>
-  );
-}
-```
-
-**Without useMemo** Filtering/sorting runs on EVERY render (even clicking increment!)
-
-**With useMemo** Only runs when `users`, `searchTerm`, or `sortAsc` changes
-
-**Expected Outcome**
-- Typing in search filters the list
-- Clicking sort button reverses order
-- Console shows "Filtering and sorting..." only when needed
-- Unrelated state changes (count) don't trigger recalculation
-- Smooth performance even with 1000+ users
-
-**Solution** See `solutions/exercise2-memoization/`
-
----
-
-### Exercise 3: Virtual List for Large Datasets (85% Practice)
-
-**Goal** Build a virtual list that efficiently renders 10,000+ items.
-
-#### Task 3.1: Understand the Problem (Reading)
-
-**The Problem with Large Lists**
-
-```jsx
-// BAD: Renders all 10,000 items (DOM nodes)
-function BadList() {
-  const items = Array.from({ length: 10000 }, (_, i) => i);
-  return (
-    <div style={{ height: '600px', overflow: 'auto' }}>
-      {items.map(i => (
-        <div key={i} style={{ height: '50px', border: '1px solid #ccc' }}>
-          Item {i}
-        </div>
-      ))}
-    </div>
-  );
-}
-// Result: 10,000 DOM nodes, slow scrolling, high memory usage
-```
-
-**The Solution: Virtual List**
-- Only render items currently visible in the viewport
-- Example: If viewport shows 10 items, only render ~15 items (10 visible + 5 buffer)
-- As user scrolls, swap out items
-- Result: Constant DOM size regardless of data size
-
----
-
-#### Task 3.2: Build a Simple Virtual List (85% TODO)
-
-**🔨 TODO** Create a custom virtual list component.
-
-**Requirements**
-1. Create `src/components/VirtualList.jsx`
-2. Accept props: `items`, `itemHeight`, `containerHeight`, `renderItem`
-3. Track scroll position with `onScroll` event
-4. Calculate which items are visible based on scroll position
-5. Only render visible items (+ small buffer)
-6. Use absolute positioning to create illusion of full list
-
-**Hints**
-
-```jsx
-// src/components/VirtualList.jsx
-import { useState, useRef, UIEvent } from 'react';
-
-interface VirtualListProps<T> {
-  items: T[];
-  itemHeight: number;
-  containerHeight: number;
-  renderItem: (item: T, index: number) => React.ReactNode;
-}
-
-function VirtualList<T>({
-  items,
-  itemHeight,
-  containerHeight,
-  renderItem
-}: VirtualListProps<T>) {
-  const [scrollTop, setScrollTop] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Calculate visible range
-  const startIndex = Math.floor(scrollTop / itemHeight);
-  const endIndex = Math.min(
-    startIndex + Math.ceil(containerHeight / itemHeight) + 1,
-    items.length
-  );
-
-  // Get visible items
-  const visibleItems = items.slice(startIndex, endIndex);
-
-  // Total height of all items
-  const totalHeight = items.length * itemHeight;
-
-  // Offset to position visible items correctly
-  const offsetY = startIndex * itemHeight;
-
-  const handleScroll = (e: UIEvent<HTMLDivElement>) => {
-    setScrollTop(e.currentTarget.scrollTop);
-  };
-
-  return (
-    <div
-      ref={containerRef}
-      onScroll={handleScroll}
-      style={{
-        height: containerHeight,
-        overflow: 'auto',
-        position: 'relative',
-      }}
-    >
-      {/* Spacer to create scrollbar */}
-      <div style={{ height: totalHeight, width: '100%' }} />
-
-      {/* Visible items */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          transform: `translateY(${offsetY}px)`,
-        }}
-      >
-        {visibleItems.map((item, index) => (
-          <div key={startIndex + index}>
-            {renderItem(item, startIndex + index)}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export default VirtualList;
-```
-
-**Usage Example**
-```jsx
-// src/pages/VirtualListDemo.jsx
-import VirtualList from '../components/VirtualList';
-
-export default function VirtualListDemo() {
-  const items = Array.from({ length: 10000 }, (_, i) => ({
-    id: i,
-    title: `Item ${i}`,
-    description: `Description for item ${i}`,
-  }));
-
-  return (
-    <div>
-      <h1>Virtual List Demo (10,000 items)</h1>
-      <VirtualList
-        items={items}
-        itemHeight={60}
-        containerHeight={600}
-        renderItem={(item, index) => (
-          <div
-            style={{
-              height: '60px',
-              padding: '10px',
-              borderBottom: '1px solid #eee',
-              backgroundColor: index % 2 === 0 ? '#f9f9f9' : 'white',
-            }}
-          >
-            <strong>{item.title}</strong>
-            <p style={{ margin: 0, fontSize: '14px', color: '#666' }}>
-              {item.description}
-            </p>
-          </div>
-        )}
-      />
-    </div>
-  );
-}
-```
-
-**Expected Outcome**
-- Smooth scrolling through 10,000 items
-- Only ~10-15 items rendered in DOM at any time
-- Scroll bar reflects full list height
-- Items appear/disappear as you scroll
-- Performance much better than rendering all items
-
-**Solution** See `solutions/exercise3-virtual-list/`
-
----
-
-#### Task 3.3: Compare Performance (Testing - 90% TODO)
-
-**🔨 TODO** Create a comparison page showing regular list vs virtual list performance.
-
-**Requirements**
-1. Create a page with two tabs: "Regular List" and "Virtual List"
-2. Both render the same 10,000 items
-3. Use Chrome DevTools Performance tab to profile both
-4. Record FPS (frames per second) while scrolling
-5. Document the performance difference
-
-**Hints**
-
-**Profiling Steps**
-1. Open Chrome DevTools → Performance tab
-2. Click "Record" button
-3. Scroll through the list
-4. Stop recording
-5. Check "FPS" graph - higher is better (60 FPS = smooth)
-6. Check "Main" timeline - less red = better performance
-
-**Expected Results**
-- **Regular List** Laggy scrolling, FPS drops to 20-30, janky animations
-- **Virtual List** Smooth scrolling, FPS stays at 55-60, butter smooth
-
-**Expected Outcome**
-- Clear performance difference visible
-- Virtual list maintains 60 FPS
-- Regular list struggles with large dataset
-- Understanding of when virtualization is needed
-
-**Solution** See `solutions/exercise3-virtual-list/readme.md`
-
----
-
-### Exercise 4: Production Build & Deployment (90% Practice)
-
-**Goal** Prepare app for production and deploy to a hosting platform.
-
-#### Task 4.1: Environment Variables (90% TODO)
-
-**🔨 TODO** Set up environment variables for different environments.
-
-**Requirements**
-1. Create `.env.development` file for development config
-2. Create `.env.production` file for production config
-3. Add API URL as environment variable
-4. Create a config file that reads these variables
-5. Use different API URLs for dev and prod
-
-**Hints**
-
-```bash
-# .env.development
-VITE_API_URL=http://localhost:3000/api
-VITE_APP_NAME=MyApp (Dev)
-VITE_ENABLE_ANALYTICS=false
-
-# .env.production
-VITE_API_URL=https://api.myapp.com
-VITE_APP_NAME=MyApp
-VITE_ENABLE_ANALYTICS=true
-```
-
-**Important** Vite requires `VITE_` prefix!
-
-```jsx
-// src/config/env.ts
-export const ENV = {
-  apiUrl: import.meta.env.VITE_API_URL,
-  appName: import.meta.env.VITE_APP_NAME,
-  enableAnalytics: import.meta.env.VITE_ENABLE_ANALYTICS === 'true',
-  isDevelopment: import.meta.env.DEV,
-  isProduction: import.meta.env.PROD,
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
 };
 
-// Usage
-import { ENV } from './config/env';
+export const login = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
 
-fetch(`${ENV.apiUrl}/users`)
-  .then(/* ... */);
+    // Find user
+    const user = await User.findOne({ email }).select('+password');
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Check password
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Generate token
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET!,
+      { expiresIn: '7d' }
+    );
+
+    res.json({
+      success: true,
+      data: { user: { id: user._id, name: user.name, email }, token }
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
 ```
 
-**Expected Outcome**
-- `npm run dev` uses development variables
-- `npm run build` uses production variables
-- API calls use correct URLs per environment
-- Analytics only enabled in production
+#### Task 1.3: Create Auth Middleware
 
-**Solution** See `solutions/exercise4-deployment/`
+Create `backend/src/middleware/auth.ts`:
+
+```typescript
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+import User from '../models/User';
+
+export const protect = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    let token;
+
+    if (req.headers.authorization?.startsWith('Bearer')) {
+      token = req.headers.authorization.split(' ')[1];
+    }
+
+    if (!token) {
+      return res.status(401).json({ error: 'Not authorized' });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string };
+    const user = await User.findById(decoded.userId).select('-password');
+
+    if (!user) {
+      return res.status(401).json({ error: 'User not found' });
+    }
+
+    req.user = user;
+    next();
+  } catch (error) {
+    res.status(401).json({ error: 'Not authorized' });
+  }
+};
+```
+
+**✅ Checkpoint 1**: Test authentication endpoints with Postman
+- POST `/api/auth/register` - Create new user
+- POST `/api/auth/login` - Login and get token
 
 ---
 
-#### Task 4.2: Production Build Optimization (95% TODO)
+### Exercise 2: Product Model & CRUD Operations (40%)
 
-**🔨 TODO** Configure Vite for optimal production builds.
+**Goal**: Implement complete CRUD operations for products with image upload.
 
-**Requirements**
-1. Update `vite.config.ts` with production optimizations
-2. Configure chunk splitting strategy
-3. Enable minification and compression
-4. Build and analyze the bundle size
-5. Document bundle sizes before and after optimization
+#### Task 2.1: Create Product Model
 
-**Hints**
+Create `backend/src/models/Product.ts`:
 
-```ts
-// vite.config.ts
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+```typescript
+import mongoose, { Document, Schema } from 'mongoose';
 
-export default defineConfig({
-  plugins: [react()],
-
-  build: {
-    // Target modern browsers
-    target: 'esnext',
-
-    // Minification
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remove console.logs in production
-        drop_debugger: true,
-      },
-    },
-
-    // Chunk splitting strategy
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          // Vendor chunks
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          // UI library if you have one
-          // 'ui-vendor': ['@mui/material'],
-        },
-      },
-    },
-
-    // Chunk size warnings
-    chunkSizeWarningLimit: 1000, // KB
-  },
-});
-```
-
-**Build and Analyze**
-```bash
-npm run build
-
-# Check sizes
-ls -lh dist/assets
-
-# Optional: Install and use bundle analyzer
-npm install --save-dev rollup-plugin-visualizer
-```
-
-**Expected Outcome**
-- Production build completes successfully
-- Separate vendor chunks for React libraries
-- Minified JavaScript and CSS
-- No console.logs in production code
-- Bundle sizes documented and optimized
-
-**Solution** See `solutions/exercise4-deployment/`
-
----
-
-#### Task 4.3: Deploy to Vercel (100% TODO)
-
-**🔨 TODO** Deploy your application to Vercel (or Netlify).
-
-**Requirements**
-1. Create a GitHub repository for your project
-2. Push your code to GitHub
-3. Sign up for Vercel account (free)
-4. Connect your GitHub repository
-5. Configure build settings
-6. Deploy and verify the live URL
-
-**Hints**
-
-**Step 1: Prepare Git Repository**
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin <your-repo-url>
-git push -u origin main
-```
-
-**Step 2: Deploy to Vercel**
-1. Go to [vercel.com](https://vercel.com)
-2. Sign up with GitHub
-3. Click "New Project"
-4. Import your repository
-5. Configure:
-   - Framework Preset: Vite
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-6. Add environment variables (if any)
-7. Click "Deploy"
-
-**Step 3: Configure SPA Routing**
-
-Create `vercel.json`:
-```json
-{
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ]
+export interface IProduct extends Document {
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  stock: number;
+  image: string;
+  userId: mongoose.Types.ObjectId;
 }
+
+const productSchema = new Schema<IProduct>({
+  name: {
+    type: String,
+    required: [true, 'Product name is required'],
+    trim: true,
+    maxlength: 100
+  },
+  description: {
+    type: String,
+    required: [true, 'Description is required'],
+    maxlength: 500
+  },
+  price: {
+    type: Number,
+    required: [true, 'Price is required'],
+    min: 0
+  },
+  category: {
+    type: String,
+    required: [true, 'Category is required'],
+    enum: ['Electronics', 'Clothing', 'Food', 'Books', 'Toys', 'Other']
+  },
+  stock: {
+    type: Number,
+    required: [true, 'Stock is required'],
+    min: 0,
+    default: 0
+  },
+  image: {
+    type: String,
+    default: ''
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  }
+}, {
+  timestamps: true
+});
+
+// Indexes for search and filter
+productSchema.index({ name: 'text', description: 'text' });
+productSchema.index({ category: 1 });
+productSchema.index({ price: 1 });
+
+export default mongoose.model<IProduct>('Product', productSchema);
 ```
 
-This ensures all routes redirect to `index.html` for client-side routing.
+#### Task 2.2: Configure File Upload
 
-**Alternative: Netlify**
+Create `backend/src/config/upload.ts`:
 
-Create `netlify.toml`:
-```toml
-[build]
-  command = "npm run build"
-  publish = "dist"
+```typescript
+import multer from 'multer';
+import path from 'path';
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  }
+});
+
+const fileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+  const allowedTypes = /jpeg|jpg|png|gif/;
+  const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype = allowedTypes.test(file.mimetype);
+
+  if (mimetype && extname) {
+    return cb(null, true);
+  }
+  cb(new Error('Invalid file type'));
+};
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  fileFilter
+});
+
+export const uploadConfig = upload;
 ```
 
-**Expected Outcome**
-- Live URL provided (e.g., `your-app.vercel.app`)
-- App loads and works correctly
-- Routing works (no 404 on refresh)
-- Environment variables applied
-- Auto-deploys on Git push
+#### Task 2.3: Create Product Controller
 
-**Solution** See `solutions/exercise4-deployment/readme.md`
+Create `backend/src/controllers/productController.ts` with:
+- `getProducts` - Get all products with search, filter, sort
+- `getProduct` - Get single product by ID
+- `createProduct` - Create new product with image
+- `updateProduct` - Update product details
+- `deleteProduct` - Delete product
+
+**Challenge**: Implement search functionality using MongoDB text search.
+
+**✅ Checkpoint 2**: Test all CRUD endpoints
+- GET `/api/products` - List products with filters
+- POST `/api/products` - Create product with image
+- PUT `/api/products/:id` - Update product
+- DELETE `/api/products/:id` - Delete product
+
+---
+
+### Exercise 3: Frontend - Authentication & Routing (30%)
+
+**Goal**: Create frontend with authentication and protected routes.
+
+#### Task 3.1: Create Auth Context
+
+Create `frontend/src/contexts/AuthContext.tsx` with:
+- Login function
+- Register function
+- Logout function
+- Auth state management
+- Token storage
+
+#### Task 3.2: Create Login/Register Page
+
+Create `frontend/src/pages/Login.tsx` with:
+- Toggle between login/register
+- Form validation
+- Loading states
+- Error handling
+- Clean UI design
+
+#### Task 3.3: Create Protected Routes
+
+Update `frontend/src/App.tsx`:
+- Public routes (login)
+- Protected routes (dashboard, products)
+- Redirect logic
+
+**✅ Checkpoint 3**: Test authentication flow
+- Register new user
+- Login with credentials
+- Access protected routes
+- Logout functionality
+
+---
+
+### Exercise 4: Product Management UI (40%)
+
+**Goal**: Build complete product management interface.
+
+#### Task 4.1: Create Products Page
+
+Create `frontend/src/pages/Products.tsx` with:
+- Products grid/list view
+- Search bar
+- Category filter dropdown
+- Sort options (name, price, date)
+- Add product button
+
+#### Task 4.2: Create Product Form Modal
+
+Implement modal for add/edit with:
+- Name input
+- Description textarea
+- Price and stock inputs
+- Category select
+- Image file upload
+- Form validation
+
+#### Task 4.3: Implement CRUD Operations
+
+- Fetch products from API
+- Create new product
+- Update existing product
+- Delete with confirmation
+- Error handling
+
+**✅ Checkpoint 4**: Test full product lifecycle
+- Add new product with image
+- Edit product details
+- Delete product
+- Search and filter products
+
+---
+
+### Exercise 5: Dashboard with Real Data (30%)
+
+**Goal**: Create dashboard displaying statistics from database.
+
+#### Task 5.1: Create Dashboard Controller
+
+In `backend/src/controllers/dashboardController.ts`:
+- Count total users
+- Count total products
+- Calculate total inventory value
+- Get top products
+- Recent activity log
+
+#### Task 5.2: Create Dashboard UI
+
+Create `frontend/src/pages/Dashboard.tsx` with:
+- Stats cards (users, products, revenue)
+- Top products table
+- Recent activity feed
+- Quick action cards
+- Clean, modern design
+
+**✅ Final Checkpoint**: Complete application test
+- Full authentication flow
+- Complete CRUD operations
+- Dashboard shows real data
+- Image upload works
+- Search and filters work
 
 ---
 
 ## Bonus Challenges
 
-### Bonus 1: React Profiler Integration (Advanced)
+### Challenge 1: Advanced Search (20 points)
+- Implement multi-field search
+- Add price range filter
+- Stock level indicators
 
-**Challenge** Add React Profiler to measure render performance in production.
+### Challenge 2: Performance (15 points)
+- Add pagination to products list
+- Implement infinite scroll
+- Lazy load images
 
-**Hints**
-```jsx
-import { Profiler, ProfilerOnRenderCallback } from 'react';
-
-const onRenderCallback: ProfilerOnRenderCallback = (
-  id, phase, actualDuration, baseDuration
-) => {
-  console.log({ id, phase, actualDuration, baseDuration });
-  // Send to analytics service
-};
-
-<Profiler id="App" onRender={onRenderCallback}>
-  <App />
-</Profiler>
-```
-
-**Expected** Performance metrics logged for each component tree
+### Challenge 3: User Experience (15 points)
+- Add loading skeletons
+- Toast notifications
+- Smooth animations
 
 ---
 
-### Bonus 2: Service Worker for Caching (Advanced)
+## Submission Guidelines
 
-**Challenge** Add a service worker to cache assets and enable offline mode.
+### Required Deliverables
+1. **Source Code** - Complete backend and frontend code
+2. **README.md** - Setup instructions and API documentation
+3. **Screenshots** - Working application screenshots
+4. **Demo Video** (optional) - 2-3 minute walkthrough
 
-**Hints** Use `vite-plugin-pwa`
+### Code Quality Requirements
+- ✅ Clean, readable code with comments
+- ✅ Proper error handling
+- ✅ TypeScript types for all functions
+- ✅ No console errors
+- ✅ Responsive design
 
+### Testing Checklist
+- [ ] Register and login work
+- [ ] Protected routes redirect correctly
+- [ ] All CRUD operations work
+- [ ] Image upload succeeds
+- [ ] Search and filters work
+- [ ] Dashboard shows real data
+- [ ] Application is responsive
+
+---
+
+## Troubleshooting Guide
+
+### Common Issues
+
+**Backend won't start**
 ```bash
-npm install vite-plugin-pwa
+# Check MongoDB connection
+# Verify .env file exists
+# Check port 5000 is not in use
 ```
 
-**Expected** App works offline after first visit
-
----
-
-### Bonus 3: Image Lazy Loading (Medium)
-
-**Challenge** Implement lazy loading for images using Intersection Observer.
-
-**Hints**
-```jsx
-const [isVisible, setIsVisible] = useState(false);
-const imgRef = useRef<HTMLImageElement>(null);
-
-useEffect(() => {
-  const observer = new IntersectionObserver(([entry]) => {
-    if (entry.isIntersecting) {
-      setIsVisible(true);
-      observer.disconnect();
-    }
-  });
-
-  if (imgRef.current) observer.observe(imgRef.current);
-}, []);
-
-{isVisible ? <img src={src} /> : <div className="placeholder" />}
-```
-
-**Expected** Images load only when scrolled into view
-
----
-
-### Bonus 4: Web Vitals Monitoring (Advanced)
-
-**Challenge** Track Core Web Vitals (LCP, FID, CLS) and send to analytics.
-
-**Hints**
+**Image upload fails**
 ```bash
-npm install web-vitals
+# Create uploads/ directory
+mkdir uploads
+# Check file permissions
 ```
 
-```jsx
-import { getCLS, getFID, getLCP } from 'web-vitals';
-
-getCLS(console.log);
-getFID(console.log);
-getLCP(console.log);
+**Frontend can't connect to backend**
+```bash
+# Check CORS configuration
+# Verify API_URL in frontend
+# Check backend is running
 ```
 
-**Expected** Real performance metrics captured and logged
+---
+
+## Resources
+
+### Documentation
+- [Express.js Guide](https://expressjs.com/)
+- [Mongoose Docs](https://mongoosejs.com/)
+- [JWT Introduction](https://jwt.io/)
+- [Multer Guide](https://github.com/expressjs/multer)
+
+### Example Code
+- See `example/` folder for reference implementation
+- Check `solutions/` for step-by-step solutions
 
 ---
 
-## Key Takeaways
+## Next Steps
 
-### Performance Optimization
-- **Code Splitting** Reduces initial bundle size, improves load time
-- **React.lazy()** Dynamically import components only when needed
-- **Suspense** Provides loading states during code splitting
-- **React.memo** Prevents re-renders when props haven't changed
-- **useMemo** Caches expensive computations
-- **useCallback** Prevents function recreation across renders
-- **Virtual Lists** Efficiently render large datasets
+After completing this lab:
+1. Deploy to production (Vercel + Railway/Render)
+2. Add more features (reviews, ratings, categories)
+3. Implement real-time updates with WebSockets
+4. Add admin panel
+5. Build mobile app with React Native
 
-### Production Deployment
-- **Environment Variables** Different configs for dev/prod
-- **Build Optimization** Minification, chunk splitting, tree shaking
-- **Hosting** Deploy to Vercel/Netlify with CI/CD
-- **SPA Routing** Configure server for client-side routing
-
-### Best Practices
-- Measure before optimizing (use profiler)
-- Don't over-optimize - profile first!
-- Use production builds for performance testing
-- Monitor real user metrics (Web Vitals)
-
----
-
-## 🐛 Troubleshooting Guide
-
-### Issue: Lazy loaded components show white screen
-
-**Cause** Missing Suspense boundary or error in component
-
-**Solution**
-- Wrap routes with `<Suspense fallback={<Loading />}>`
-- Add Error Boundary around Suspense
-- Check console for errors
-
----
-
-### Issue: memo() not preventing re-renders
-
-**Cause** Props reference changing every render
-
-**Solution**
-- Use `useCallback` for function props
-- Use `useMemo` for object/array props
-- Check props with `console.log` or React DevTools
-
----
-
-### Issue: Virtual list items jumping or flickering
-
-**Cause** Incorrect height calculations or missing keys
-
-**Solution**
-- Ensure `itemHeight` prop is accurate
-- Use stable keys (item.id, not index)
-- Add `will-change: transform` CSS for smoother scrolling
-
----
-
-### Issue: Environment variables not working in production
-
-**Cause** Forgot `VITE_` prefix or not rebuilding
-
-**Solution**
-- All env vars must start with `VITE_`
-- Rebuild with `npm run build` after changing .env files
-- Don't access `process.env`, use `import.meta.env`
-
----
-
-### Issue: 404 errors on page refresh in deployed app
-
-**Cause** Server not configured for SPA routing
-
-**Solution**
-- Add `vercel.json` or `netlify.toml` with redirect rules
-- Configure server to serve `index.html` for all routes
-
----
-
-## Self-Assessment Checklist
-
-Before completing this course, ensure you can:
-
-### Performance Optimization
-- [ ] Implement code splitting with React.lazy()
-- [ ] Add Suspense boundaries with loading states
-- [ ] Create error boundaries for lazy components
-- [ ] Use React.memo to prevent unnecessary re-renders
-- [ ] Apply useMemo for expensive calculations
-- [ ] Use useCallback to memoize functions
-- [ ] Build a virtual list component
-- [ ] Profile component performance
-
-### Production Deployment
-- [ ] Configure environment variables
-- [ ] Create optimized production builds
-- [ ] Analyze bundle sizes
-- [ ] Deploy to hosting platform (Vercel/Netlify)
-- [ ] Configure SPA routing in production
-- [ ] Set up automatic deployments from Git
-
-### Advanced Techniques
-- [ ] Understand when to optimize (profile first!)
-- [ ] Measure performance improvements
-- [ ] Handle large datasets efficiently
-- [ ] Implement loading and error states
-
----
-
-## 📖 Additional Resources
-
-### Official Documentation
-- [React Performance Optimization](https://react.dev/learn/render-and-commit)
-- [React.lazy Reference](https://react.dev/reference/react/lazy)
-- [React Profiler API](https://react.dev/reference/react/Profiler)
-- [Vite Production Build](https://vitejs.dev/guide/build.html)
-
-### Performance Tools
-- [React DevTools Profiler](https://react.dev/learn/react-developer-tools)
-- [Chrome DevTools Performance](https://developer.chrome.com/docs/devtools/performance/)
-- [Lighthouse](https://developers.google.com/web/tools/lighthouse)
-- [Web Vitals](https://web.dev/vitals/)
-
-### Deployment Guides
-- [Vercel Documentation](https://vercel.com/docs)
-- [Netlify Documentation](https://docs.netlify.com/)
-- [SPA Routing Configuration](https://router.vuejs.org/guide/essentials/history-mode.html#example-server-configurations)
-
-### Advanced Topics
-- Progressive Web Apps (PWA)
-- Service Workers
-- Server-Side Rendering (SSR) with Next.js
-- Static Site Generation (SSG)
-
----
-
-## Course Completion
-
-You've completed the React Performance & Deployment course! You now have the skills to:
-
- Build performant React applications
- Optimize rendering and bundle sizes
- Handle large datasets efficiently
- Deploy production-ready applications
- Configure professional development workflows
-
-### Next Steps
-
-1. **Build a Portfolio Project** Apply all 5 labs' concepts
-2. **Learn Advanced Topics**
-   - Next.js for SSR and SSG
-   - React Native for mobile apps
-   - Advanced state management (Redux, Zustand)
-   - Testing (Jest, React Testing Library)
-3. **Contribute to Open Source** Practice your skills
-4. **Keep Learning** React ecosystem is always evolving!
-
----
-
----
-
-## ✅ Success Criteria Checklist
-
-Before completing this course, verify you can:
-
-### **Performance Optimization**
-- [ ] Implement code splitting with React.lazy()
-- [ ] Add Suspense boundaries with loading states
-- [ ] Create error boundaries for lazy components
-- [ ] Use React.memo to prevent unnecessary re-renders
-- [ ] Apply useMemo for expensive calculations
-- [ ] Use useCallback to memoize functions
-- [ ] Build a virtual list component
-- [ ] Profile component performance with DevTools
-
-### **Production Deployment**
-- [ ] Configure environment variables for different environments
-- [ ] Create optimized production builds
-- [ ] Analyze bundle sizes and optimize them
-- [ ] Deploy to hosting platform (Vercel/Netlify)
-- [ ] Configure SPA routing in production
-- [ ] Set up automatic deployments from Git
-- [ ] Handle environment-specific configurations
-
-### **Advanced Techniques**
-- [ ] Understand when to optimize (profile first!)
-- [ ] Measure performance improvements accurately
-- [ ] Handle large datasets efficiently
-- [ ] Implement proper loading and error states
-- [ ] Use production builds for performance testing
-- [ ] Monitor real user metrics (Web Vitals)
-
-### **Full-Stack Integration**
-- [ ] Connect React frontend to backend APIs
-- [ ] Handle authentication in production
-- [ ] Manage environment variables securely
-- [ ] Implement proper error handling
-- [ ] Set up monitoring and logging
-
-**Goal: Check at least 20/25 items to complete the course**
-
----
-
-**You're now ready to build professional React applications!**

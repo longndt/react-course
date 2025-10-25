@@ -9,7 +9,7 @@ const AppContent = () => {
     const { isAuthenticated, isLoading } = useAuth();
 
     if (isLoading) {
-        return <LoadingSpinner />;
+        return <LoadingSpinner size="large" fullScreen />;
     }
 
     return (

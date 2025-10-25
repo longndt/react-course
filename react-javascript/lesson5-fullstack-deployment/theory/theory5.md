@@ -48,7 +48,7 @@ npm init -y
 # Install dependencies
 npm install express mongoose cors dotenv bcryptjs jsonwebtoken
 npm install multer express-rate-limit helmet
-npm install -D nodemon
+npm install -D nodemon typescript @types/node @types/express
 ```
 
 ### Project Structure
@@ -57,29 +57,29 @@ npm install -D nodemon
 backend/
 ├── src/
 │   ├── controllers/          # Business logic
-│   │   ├── authController.js
-│   │   ├── dashboardController.js
-│   │   └── uploadController.js
+│   │   ├── authController.ts
+│   │   ├── dashboardController.ts
+│   │   └── uploadController.ts
 │   ├── routes/              # HTTP routing
-│   │   ├── auth.js
-│   │   ├── dashboard.js
-│   │   └── upload.js
+│   │   ├── auth.ts
+│   │   ├── dashboard.ts
+│   │   └── upload.ts
 │   ├── models/              # Database schemas
-│   │   ├── User.js
-│   │   └── Dashboard.js
+│   │   ├── User.ts
+│   │   └── Dashboard.ts
 │   ├── middleware/          # Custom middleware
-│   │   ├── auth.js
-│   │   └── errorHandler.js
+│   │   ├── auth.ts
+│   │   └── errorHandler.ts
 │   ├── config/             # Configuration
-│   │   └── upload.js
-│   └── server.js           # Entry point
+│   │   └── upload.ts
+│   └── server.ts           # Entry point
 └── package.json
 ```
 
 ### Basic Express Server
 
-```javascript
-// src/server.js
+```typescript
+// src/server.ts
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -87,10 +87,10 @@ import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
-import { errorHandler } from './middleware/errorHandler.js';
-import authRoutes from './routes/auth.js';
-import dashboardRoutes from './routes/dashboard.js';
-import uploadRoutes from './routes/upload.js';
+import { errorHandler } from './middleware/errorHandler';
+import authRoutes from './routes/auth';
+import dashboardRoutes from './routes/dashboard';
+import uploadRoutes from './routes/upload';
 
 dotenv.config();
 
@@ -124,24 +124,24 @@ app.use('/api/upload', uploadRoutes);
 app.use(errorHandler);
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI!)
   .then(() => {
     console.log('Connected to MongoDB');
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
     });
   })
   .catch((error) => {
     console.error('MongoDB connection error:', error);
-  });
+});
 ```
 
 ### Route Example
 
-```javascript
-// routes/auth.js
+```typescript
+// routes/auth.ts
 import express from 'express';
-import { register, login } from '../controllers/authController.js';
+import { register, login } from '../controllers/authController';
 
 const router = express.Router();
 
@@ -153,17 +153,13 @@ export default router;
 
 ### Controller Example
 
-```javascript
-// controllers/authController.js
-import User from '../models/User.js';
+```typescript
+// controllers/authController.ts
+import { Request, Response } from 'express';
+import User from '../models/User';
 import jwt from 'jsonwebtoken';
 
-/**
- * Register a new user
- * @route POST /api/auth/register
- * @access Public
- */
-export const register = async (req, res) => {
+export const register = async (req: Request, res: Response) => {
   try {
     const { name, email, password } = req.body;
 
@@ -179,7 +175,7 @@ export const register = async (req, res) => {
     // Generate token
     const token = jwt.sign(
       { userId: user._id },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET!,
       { expiresIn: '7d' }
     );
 
@@ -192,12 +188,7 @@ export const register = async (req, res) => {
   }
 };
 
-/**
- * Login user
- * @route POST /api/auth/login
- * @access Public
- */
-export const login = async (req, res) => {
+export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
@@ -216,7 +207,7 @@ export const login = async (req, res) => {
     // Generate token
     const token = jwt.sign(
       { userId: user._id },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET!,
       { expiresIn: '7d' }
     );
 
@@ -236,20 +227,20 @@ export const login = async (req, res) => {
 
 ### User Model
 
-```javascript
-// models/User.js
-import mongoose from 'mongoose';
+```typescript
+// models/User.ts
+import mongoose, { Document, Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-/**
- * @typedef {Object} IUser
- * @property {string} name - User's full name
- * @property {string} email - User's email address
- * @property {string} password - User's hashed password
- * @property {'user'|'admin'} role - User's role
- */
+export interface IUser extends Document {
+  name: string;
+  email: string;
+  password: string;
+  role: 'user' | 'admin';
+  comparePassword(candidatePassword: string): Promise<boolean>;
+}
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema<IUser>({
   name: {
     type: String,
     required: [true, 'Name is required'],
@@ -287,36 +278,45 @@ userSchema.pre('save', async function(next) {
     this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (error) {
-    next(error);
+    next(error as Error);
   }
 });
 
 // Compare password method
-userSchema.methods.comparePassword = async function(candidatePassword) {
+userSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model<IUser>('User', userSchema);
 ```
 
 ### Dashboard Model
 
-```javascript
-// models/Dashboard.js
-import mongoose from 'mongoose';
+```typescript
+// models/Dashboard.ts
+import mongoose, { Document, Schema } from 'mongoose';
 
-/**
- * @typedef {Object} IDashboard
- * @property {mongoose.Types.ObjectId} userId - Reference to User
- * @property {number} totalUsers - Total number of users
- * @property {number} totalRevenue - Total revenue amount
- * @property {number} totalOrders - Total number of orders
- * @property {number} monthlyGrowth - Monthly growth percentage
- */
+export interface IDashboard extends Document {
+  userId: mongoose.Types.ObjectId;
+  totalUsers: number;
+  totalRevenue: number;
+  totalOrders: number;
+  monthlyGrowth: number;
+  topProducts: Array<{
+    name: string;
+    sales: number;
+    revenue: number;
+  }>;
+  recentActivity: Array<{
+    type: string;
+    description: string;
+    timestamp: Date;
+  }>;
+}
 
-const dashboardSchema = new mongoose.Schema({
+const dashboardSchema = new Schema<IDashboard>({
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
@@ -340,7 +340,7 @@ const dashboardSchema = new mongoose.Schema({
 
 dashboardSchema.index({ userId: 1 });
 
-export default mongoose.model('Dashboard', dashboardSchema);
+export default mongoose.model<IDashboard>('Dashboard', dashboardSchema);
 ```
 
 ---
@@ -349,15 +349,13 @@ export default mongoose.model('Dashboard', dashboardSchema);
 
 ### Auth Middleware
 
-```javascript
-// middleware/auth.js
+```typescript
+// middleware/auth.ts
+import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+import User from '../models/User';
 
-/**
- * Protect routes - verify JWT token
- */
-export const protect = async (req, res, next) => {
+export const protect = async (req: Request, res: Response, next: NextFunction) => {
   try {
     let token;
 
@@ -371,7 +369,7 @@ export const protect = async (req, res, next) => {
     }
 
     // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string };
 
     // Get user from token
     const user = await User.findById(decoded.userId).select('-password');
@@ -386,10 +384,7 @@ export const protect = async (req, res, next) => {
   }
 };
 
-/**
- * Admin only middleware
- */
-export const adminOnly = (req, res, next) => {
+export const adminOnly = (req: Request, res: Response, next: NextFunction) => {
   if (req.user?.role !== 'admin') {
     return res.status(403).json({ error: 'Admin access required' });
   }
@@ -403,8 +398,8 @@ export const adminOnly = (req, res, next) => {
 
 ### Upload Configuration
 
-```javascript
-// config/upload.js
+```typescript
+// config/upload.ts
 import multer from 'multer';
 import path from 'path';
 
@@ -418,7 +413,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const fileFilter = (req, file, cb) => {
+const fileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
   const allowedTypes = /jpeg|jpg|png|gif|pdf/;
   const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype = allowedTypes.test(file.mimetype);
@@ -440,12 +435,12 @@ export const uploadConfig = upload;
 
 ### Upload Routes
 
-```javascript
-// routes/upload.js
+```typescript
+// routes/upload.ts
 import express from 'express';
-import { protect } from '../middleware/auth.js';
-import { uploadConfig } from '../config/upload.js';
-import { uploadFile, uploadMultipleFiles } from '../controllers/uploadController.js';
+import { protect } from '../middleware/auth';
+import { uploadConfig } from '../config/upload';
+import { uploadFile, uploadMultipleFiles } from '../controllers/uploadController';
 
 const router = express.Router();
 
@@ -457,15 +452,11 @@ export default router;
 
 ### Upload Controller
 
-```javascript
-// controllers/uploadController.js
+```typescript
+// controllers/uploadController.ts
+import { Request, Response } from 'express';
 
-/**
- * Upload single file
- * @route POST /api/upload/single
- * @access Private
- */
-export const uploadFile = async (req, res) => {
+export const uploadFile = async (req: Request, res: Response) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded' });
@@ -474,7 +465,7 @@ export const uploadFile = async (req, res) => {
     res.json({
       success: true,
       data: {
-        filename: req.file.filename,
+      filename: req.file.filename,
         path: `/uploads/${req.file.filename}`,
         size: req.file.size
       }
@@ -484,19 +475,14 @@ export const uploadFile = async (req, res) => {
   }
 };
 
-/**
- * Upload multiple files
- * @route POST /api/upload/multiple
- * @access Private
- */
-export const uploadMultipleFiles = async (req, res) => {
+export const uploadMultipleFiles = async (req: Request, res: Response) => {
   try {
     if (!req.files || !Array.isArray(req.files)) {
       return res.status(400).json({ error: 'No files uploaded' });
     }
 
     const files = req.files.map(file => ({
-      filename: file.filename,
+        filename: file.filename,
       path: `/uploads/${file.filename}`,
       size: file.size
     }));
@@ -519,8 +505,8 @@ export const uploadMultipleFiles = async (req, res) => {
 
 #### 1. Code Splitting & Lazy Loading
 
-```javascript
-// App.jsx
+```typescript
+// App.tsx
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -534,12 +520,12 @@ function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingSpinner />}>
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/files" element={<FileManager />} />
           <Route path="/performance" element={<PerformanceDemo />} />
-        </Routes>
-      </Suspense>
+      </Routes>
+    </Suspense>
     </BrowserRouter>
   );
 }
@@ -547,9 +533,9 @@ function App() {
 
 #### 2. React.memo & useMemo
 
-```javascript
+```typescript
 // Memoize expensive components
-const ExpensiveComponent = React.memo(({ data }) => {
+const ExpensiveComponent = React.memo(({ data }: { data: string[] }) => {
   return (
     <div>
       {data.map((item, index) => (
@@ -560,7 +546,7 @@ const ExpensiveComponent = React.memo(({ data }) => {
 });
 
 // Memoize expensive calculations
-function DataList({ items }) {
+function DataList({ items }: { items: Item[] }) {
   const sortedItems = useMemo(() => {
     return items.sort((a, b) => a.name.localeCompare(b.name));
   }, [items]);
@@ -571,19 +557,18 @@ function DataList({ items }) {
 
 #### 3. Virtual Lists
 
-```javascript
-// components/VirtualList.jsx
+```typescript
+// components/VirtualList.tsx
 import { useRef, useState, useEffect } from 'react';
 
-/**
- * Virtual list component for rendering large lists efficiently
- * @param {Object} props
- * @param {Array} props.items - Array of items to render
- * @param {number} props.itemHeight - Height of each item in pixels
- * @param {number} props.containerHeight - Height of container in pixels
- * @param {Function} props.renderItem - Function to render each item
- */
-export default function VirtualList({ items, itemHeight, containerHeight, renderItem }) {
+interface VirtualListProps {
+  items: any[];
+  itemHeight: number;
+  containerHeight: number;
+  renderItem: (item: any, index: number) => React.ReactNode;
+}
+
+export default function VirtualList({ items, itemHeight, containerHeight, renderItem }: VirtualListProps) {
   const [scrollTop, setScrollTop] = useState(0);
 
   const startIndex = Math.floor(scrollTop / itemHeight);
@@ -612,7 +597,7 @@ export default function VirtualList({ items, itemHeight, containerHeight, render
 
 ### Backend Optimization
 
-```javascript
+```typescript
 // Add indexes to frequently queried fields
 userSchema.index({ email: 1 });
 dashboardSchema.index({ userId: 1 });
@@ -647,8 +632,8 @@ JWT_SECRET=your-super-secret-jwt-key-change-this
 
 ### Frontend Build Configuration
 
-```javascript
-// vite.config.js
+```typescript
+// vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -711,7 +696,7 @@ export default defineConfig({
 module.exports = {
   apps: [{
     name: 'backend',
-    script: 'src/server.js',
+    script: 'dist/server.js',
     instances: 'max',
     exec_mode: 'cluster',
     env_production: {
@@ -724,6 +709,7 @@ module.exports = {
 
 ```bash
 # Deploy commands
+npm run build
 pm2 start ecosystem.config.js --env production
 pm2 save
 pm2 startup
@@ -737,7 +723,7 @@ pm2 startup
 
 #### **Step 1: Code Your Application**
 
-Hoàn thành code frontend và backend của bạn trong local environment.
+Complete your frontend and backend code in your local environment.
 
 ```bash
 # Test locally
@@ -747,7 +733,7 @@ cd backend && npm run dev
 
 #### **Step 2: Create GitHub Actions Workflow**
 
-Tạo file workflow để tự động test và build code khi push lên GitHub:
+Create a workflow file to automatically test and build code when pushing to GitHub:
 
 ```bash
 # Create workflow directory
@@ -756,7 +742,7 @@ mkdir -p .github/workflows
 
 #### **Step 3: Frontend CI/CD Configuration**
 
-Tạo file `.github/workflows/frontend-deploy.yml`:
+Create file `.github/workflows/frontend-deploy.yml`:
 
 ```yaml
 name: Frontend CI/CD
@@ -810,7 +796,7 @@ jobs:
 
 #### **Step 4: Backend CI/CD Configuration**
 
-Tạo file `.github/workflows/backend-deploy.yml`:
+Create file `.github/workflows/backend-deploy.yml`:
 
 ```yaml
 name: Backend CI/CD
@@ -843,7 +829,12 @@ jobs:
         working-directory: ./backend
         run: npm ci
 
-      # 4. Deploy to VPS via SSH (on main branch)
+      # 4. Build TypeScript
+      - name: Build application
+        working-directory: ./backend
+        run: npm run build
+
+      # 5. Deploy to VPS via SSH (on main branch)
       - name: Deploy to Production Server
         if: github.ref == 'refs/heads/main'
         uses: appleboy/ssh-action@v1.0.0
@@ -856,12 +847,13 @@ jobs:
             git pull origin main
             cd backend
             npm ci --production
+            npm run build
             pm2 restart backend
 ```
 
 #### **Step 5: Setup GitHub Secrets**
 
-Vào GitHub repository → Settings → Secrets and variables → Actions, thêm các secrets:
+Go to GitHub repository → Settings → Secrets and variables → Actions, add the following secrets:
 
 **Frontend Secrets:**
 ```
@@ -906,18 +898,18 @@ git push origin main
 
 #### **Step 7: Monitor Deployment**
 
-1. Vào GitHub repository → **Actions** tab
-2. Xem workflow đang chạy (màu vàng = đang chạy, xanh = thành công, đỏ = lỗi)
-3. Click vào workflow để xem chi tiết từng step
-4. Nếu có lỗi, xem logs để debug
+1. Go to GitHub repository → **Actions** tab
+2. View running workflow (yellow = running, green = success, red = failed)
+3. Click on workflow to see detailed logs for each step
+4. If there are errors, check logs for debugging
 
 #### **Step 8: Verify Deployment**
 
 **Frontend (Vercel):**
-1. Vào https://vercel.com/dashboard
-2. Click vào project của bạn
-3. Xem deployment URL (ví dụ: https://your-app.vercel.app)
-4. Test application trên production URL
+1. Go to https://vercel.com/dashboard
+2. Click on your project
+3. View deployment URL (example: https://your-app.vercel.app)
+4. Test application on production URL
 
 **Backend (VPS with PM2):**
 ```bash
@@ -937,9 +929,9 @@ pm2 monit
 #### **Step 9: Setup Custom Domain (Optional)**
 
 **Vercel:**
-1. Vào project Settings → Domains
-2. Add custom domain (ví dụ: www.yourdomain.com)
-3. Update DNS records theo hướng dẫn
+1. Go to project Settings → Domains
+2. Add custom domain (example: www.yourdomain.com)
+3. Update DNS records according to instructions
 
 **Backend:**
 ```bash
@@ -1000,13 +992,13 @@ sudo certbot --nginx -d api.yourdomain.com
     ▼         ▼
 ┌────────┐ ┌────────┐
 │Frontend│ │Backend │
-│ Build  │ │ Deploy │
+│ Build  │ │ Build  │
 └───┬────┘ └───┬────┘
     │          │
     ▼          ▼
 ┌────────┐ ┌────────┐
 │ Vercel │ │  VPS   │
-│ Deploy │ │  PM2   │
+│ Deploy │ │ Deploy │
 └───┬────┘ └───┬────┘
     │          │
     ▼          ▼
@@ -1048,14 +1040,14 @@ sudo certbot --nginx -d api.yourdomain.com
 ### Backend Mistakes
 
 **1. Not validating input:**
-```javascript
+```typescript
 // ❌ Bad
-export const createUser = async (req, res) => {
+export const createUser = async (req: Request, res: Response) => {
   const user = await User.create(req.body); // No validation!
 };
 
 // ✅ Good
-export const createUser = async (req, res) => {
+export const createUser = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
@@ -1067,7 +1059,7 @@ export const createUser = async (req, res) => {
 ```
 
 **2. Exposing sensitive data:**
-```javascript
+```typescript
 // ❌ Bad
 const user = await User.findById(id); // Returns password!
 
@@ -1076,23 +1068,23 @@ const user = await User.findById(id).select('-password');
 ```
 
 **3. Not handling errors:**
-```javascript
+```typescript
 // ❌ Bad
 const users = await User.find(); // Will crash if database error
 
 // ✅ Good
-try {
-  const users = await User.find();
+  try {
+    const users = await User.find();
   res.json({ success: true, data: users });
-} catch (error) {
+  } catch (error) {
   res.status(500).json({ error: 'Server error' });
-}
+  }
 ```
 
 ### Frontend Mistakes
 
 **1. Not handling loading states:**
-```javascript
+```typescript
 // ❌ Bad
 function DataList() {
   const [data, setData] = useState([]);
@@ -1124,7 +1116,7 @@ function DataList() {
 ```
 
 **2. Memory leaks:**
-```javascript
+```typescript
 // ❌ Bad
 useEffect(() => {
   const interval = setInterval(() => {
@@ -1179,12 +1171,4 @@ useEffect(() => {
 - **AWS/Azure/GCP** - Cloud platforms
 - **Testing** - Unit, integration, and E2E tests
 
-### Career Paths
-
-💼 **Opportunities:**
-- Full-Stack Developer
-- Frontend Specialist
-- Backend Engineer
-- DevOps Engineer
-
-> **Keep Learning!** Practice building real projects, contribute to open source, and stay updated with the React and Node.js ecosystems.
+---

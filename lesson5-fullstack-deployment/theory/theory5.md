@@ -723,7 +723,7 @@ pm2 startup
 
 #### **Step 1: Code Your Application**
 
-Hoàn thành code frontend và backend của bạn trong local environment.
+Complete your frontend and backend code in your local environment.
 
 ```bash
 # Test locally
@@ -733,7 +733,7 @@ cd backend && npm run dev
 
 #### **Step 2: Create GitHub Actions Workflow**
 
-Tạo file workflow để tự động test và build code khi push lên GitHub:
+Create a workflow file to automatically test and build code when pushing to GitHub:
 
 ```bash
 # Create workflow directory
@@ -742,7 +742,7 @@ mkdir -p .github/workflows
 
 #### **Step 3: Frontend CI/CD Configuration**
 
-Tạo file `.github/workflows/frontend-deploy.yml`:
+Create file `.github/workflows/frontend-deploy.yml`:
 
 ```yaml
 name: Frontend CI/CD
@@ -796,7 +796,7 @@ jobs:
 
 #### **Step 4: Backend CI/CD Configuration**
 
-Tạo file `.github/workflows/backend-deploy.yml`:
+Create file `.github/workflows/backend-deploy.yml`:
 
 ```yaml
 name: Backend CI/CD
@@ -853,7 +853,7 @@ jobs:
 
 #### **Step 5: Setup GitHub Secrets**
 
-Vào GitHub repository → Settings → Secrets and variables → Actions, thêm các secrets:
+Go to GitHub repository → Settings → Secrets and variables → Actions, add the following secrets:
 
 **Frontend Secrets:**
 ```
@@ -898,18 +898,18 @@ git push origin main
 
 #### **Step 7: Monitor Deployment**
 
-1. Vào GitHub repository → **Actions** tab
-2. Xem workflow đang chạy (màu vàng = đang chạy, xanh = thành công, đỏ = lỗi)
-3. Click vào workflow để xem chi tiết từng step
-4. Nếu có lỗi, xem logs để debug
+1. Go to GitHub repository → **Actions** tab
+2. View running workflow (yellow = running, green = success, red = failed)
+3. Click on workflow to see detailed logs for each step
+4. If there are errors, check logs for debugging
 
 #### **Step 8: Verify Deployment**
 
 **Frontend (Vercel):**
-1. Vào https://vercel.com/dashboard
-2. Click vào project của bạn
-3. Xem deployment URL (ví dụ: https://your-app.vercel.app)
-4. Test application trên production URL
+1. Go to https://vercel.com/dashboard
+2. Click on your project
+3. View deployment URL (example: https://your-app.vercel.app)
+4. Test application on production URL
 
 **Backend (VPS with PM2):**
 ```bash
@@ -929,9 +929,9 @@ pm2 monit
 #### **Step 9: Setup Custom Domain (Optional)**
 
 **Vercel:**
-1. Vào project Settings → Domains
-2. Add custom domain (ví dụ: www.yourdomain.com)
-3. Update DNS records theo hướng dẫn
+1. Go to project Settings → Domains
+2. Add custom domain (example: www.yourdomain.com)
+3. Update DNS records according to instructions
 
 **Backend:**
 ```bash

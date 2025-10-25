@@ -4,36 +4,37 @@ import { useAuth } from '../contexts/AuthContext';
 import LoadingSpinner from '../components/LoadingSpinner';
 import './Products.css';
 
-interface Product {
-    _id: string;
-    name: string;
-    description: string;
-    price: number;
-    category: string;
-    stock: number;
-    image: string;
-    createdAt: string;
-}
+/**
+ * @typedef {Object} Product
+ * @property {string} _id
+ * @property {string} name
+ * @property {string} description
+ * @property {number} price
+ * @property {string} category
+ * @property {number} stock
+ * @property {string} image
+ * @property {string} createdAt
+ */
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const Products = () => {
     const { logout } = useAuth();
-    const [products, setProducts] = useState<Product[]>([]);
+    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
     const [category, setCategory] = useState('all');
     const [sortBy, setSortBy] = useState('createdAt');
     const [order, setOrder] = useState('desc');
     const [showModal, setShowModal] = useState(false);
-    const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+    const [editingProduct, setEditingProduct] = useState(null);
     const [formData, setFormData] = useState({
         name: '',
         description: '',
         price: '',
         category: 'Electronics',
         stock: '',
-        image: null as File | null
+        image: null
     });
 
     const categories = ['Electronics', 'Clothing', 'Food', 'Books', 'Toys', 'Other'];
@@ -71,7 +72,7 @@ const Products = () => {
         }
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
@@ -111,13 +112,13 @@ const Products = () => {
             resetForm();
             fetchProducts();
             alert('Product saved successfully!');
-        } catch (error: any) {
+        } catch (error) {
             console.error('Error saving product:', error);
             alert(error.message || 'Failed to save product');
         }
     };
 
-    const handleDelete = async (id: string) => {
+    const handleDelete = async (id) => {
         if (!confirm('Are you sure you want to delete this product?')) return;
 
         try {
@@ -138,7 +139,7 @@ const Products = () => {
         }
     };
 
-    const handleEdit = (product: Product) => {
+    const handleEdit = (product) => {
         setEditingProduct(product);
         setFormData({
             name: product.name,
@@ -162,7 +163,7 @@ const Products = () => {
         });
     };
 
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageChange = (e) => {
         if (e.target.files && e.target.files[0]) {
             setFormData({ ...formData, image: e.target.files[0] });
         }

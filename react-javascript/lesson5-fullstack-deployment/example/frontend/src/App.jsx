@@ -3,15 +3,14 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
-import FileManager from './pages/FileManager';
-import PerformanceDemo from './pages/PerformanceDemo';
+import Products from './pages/Products';
 import LoadingSpinner from './components/LoadingSpinner';
 
 const AppContent = () => {
   const { isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner size="large" fullScreen />;
   }
 
   return (
@@ -27,12 +26,8 @@ const AppContent = () => {
             element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
           />
           <Route
-            path="/file-manager"
-            element={isAuthenticated ? <FileManager /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/performance"
-            element={isAuthenticated ? <PerformanceDemo /> : <Navigate to="/login" />}
+            path="/products"
+            element={isAuthenticated ? <Products /> : <Navigate to="/login" />}
           />
           <Route
             path="/"

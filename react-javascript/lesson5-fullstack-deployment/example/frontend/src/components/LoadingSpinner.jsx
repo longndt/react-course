@@ -1,15 +1,21 @@
+import React from 'react';
 import './LoadingSpinner.css';
 
 /**
- * @param {Object} props
- * @param {'small'|'medium'|'large'} [props.size='medium']
- * @param {boolean} [props.fullScreen=false]
+ * @typedef {Object} LoadingSpinnerProps
+ * @property {'small' | 'medium' | 'large'} [size]
+ * @property {boolean} [fullScreen]
+ */
+
+/**
+ * @param {LoadingSpinnerProps} props
  */
 const LoadingSpinner = ({ size = 'medium', fullScreen = false }) => {
   if (fullScreen) {
     return (
       <div className="loading-spinner-fullscreen">
         <div className={`spinner spinner-${size}`}></div>
+        <p className="loading-text">Loading...</p>
       </div>
     );
   }
