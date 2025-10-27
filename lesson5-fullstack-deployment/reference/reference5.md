@@ -48,7 +48,7 @@ npm install -D @types/express @types/cors @types/morgan
 
 ### Basic Server
 ```typescript
-// server/index.ts
+// File: server/index.ts
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -76,7 +76,7 @@ app.listen(PORT, () => {
 
 ### API Routes
 ```typescript
-// server/routes/users.ts
+// File: server/routes/users.ts
 import express from 'express';
 import { User } from '../models/User';
 
@@ -140,7 +140,7 @@ npm install -D @types/mongoose
 
 ### Connection
 ```typescript
-// server/database/connection.ts
+// File: server/database/connection.ts
 import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/myapp';
@@ -158,7 +158,7 @@ export const connectDB = async () => {
 
 ### Models
 ```typescript
-// server/models/User.ts
+// File: server/models/User.ts
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IUser extends Document {
@@ -202,7 +202,7 @@ export const User = mongoose.model<IUser>('User', UserSchema);
 
 ### Queries
 ```typescript
-// server/services/userService.ts
+// File: server/services/userService.ts
 import { User, IUser } from '../models/User';
 
 export class UserService {

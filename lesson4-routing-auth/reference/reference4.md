@@ -48,7 +48,11 @@ npm install @types/react-router-dom  # TypeScript
 
 ### Basic Setup
 ```tsx
+// File: src/App.tsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
 
 function App() {
   return (
@@ -61,11 +65,16 @@ function App() {
     </BrowserRouter>
   );
 }
+
+export default App;
 ```
 
 ### Router Types
 ```tsx
-// BrowserRouter - Uses HTML5 history API
+// File: src/App.tsx
+import { BrowserRouter, HashRouter, MemoryRouter } from 'react-router-dom';
+
+// BrowserRouter - Uses HTML5 history API (Recommended)
 <BrowserRouter>
   <App />
 </BrowserRouter>
@@ -341,11 +350,11 @@ const createTokenWithExpiry = (hours: number = 24) => {
 useEffect(() => {
   const token = localStorage.getItem("token");
   const tokenExpiry = localStorage.getItem("tokenExpiry");
-  
+
   if (token && tokenExpiry) {
     const now = new Date().getTime();
     const expiry = parseInt(tokenExpiry);
-    
+
     if (now < expiry) {
       fetchUser(token);
     } else {

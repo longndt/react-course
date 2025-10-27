@@ -38,6 +38,7 @@
 
 ### Basic Component
 ```tsx
+// File: components/Welcome.tsx
 // Simple component
 function Welcome() {
   return <h1>Hello, World!</h1>;
@@ -57,10 +58,13 @@ function Welcome({ name, age }: WelcomeProps) {
     </div>
   );
 }
+
+export default Welcome;
 ```
 
 ### Component with State
 ```tsx
+// File: components/Counter.tsx
 import { useState } from 'react';
 
 function Counter() {
@@ -75,6 +79,8 @@ function Counter() {
     </div>
   );
 }
+
+export default Counter;
 ```
 
 ---
@@ -100,6 +106,7 @@ function Counter() {
 
 ### Basic Usage
 ```tsx
+// File: components/Counter.tsx
 import { useState } from 'react';
 
 function Counter() {
@@ -117,10 +124,15 @@ function Counter() {
     </div>
   );
 }
+
+export default Counter;
 ```
 
 ### Multiple State Variables
 ```tsx
+// File: components/UserProfile.tsx
+import { useState } from 'react';
+
 function UserProfile() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
