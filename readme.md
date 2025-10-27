@@ -104,7 +104,7 @@ lesson-topic/
 └──  quiz/               # Knowledge assessment
 ```
 
-** How to run quizzes** Use **Live Server** extension in VS Code
+**How to run quizzes** Use **Live Server** extension in VS Code
 - Right-click quiz file → "Open with Live Server"
 - Or click "Go Live" button in bottom status bar
 - Quiz opens in browser with interactive features

@@ -115,7 +115,7 @@ import { Link } from 'react-router-dom';
 </Link>
 ```
 
-** NavLink Component** - Navigation with active state tracking:
+**NavLink Component** - Navigation with active state tracking:
 
 ```tsx
 import { NavLink } from 'react-router-dom';
@@ -156,7 +156,7 @@ import { NavLink } from 'react-router-dom';
 <Route path="/products/:id" element={<ProductDetail />} />
 ```
 
-** Extract Parameter** - Use `useParams` hook:
+**Extract Parameter** - Use `useParams` hook:
 
 ```tsx
 import { useParams } from 'react-router-dom';
@@ -175,7 +175,7 @@ function ProductDetail() {
 }
 ```
 
-** Multiple Parameters** - You can have multiple params:
+**Multiple Parameters** - You can have multiple params:
 
 ```tsx
 // Route definition
@@ -421,7 +421,7 @@ const { productId } = useParams();  //  Wrong - mismatch
 
 After reviewing this solution, you should understand:
 
- ** Routing Setup**
+**Routing Setup**
 - How to configure BrowserRouter
 - How to define routes with `<Route>`
 - How to organize routes in Routes component
@@ -435,7 +435,7 @@ After reviewing this solution, you should understand:
 - How to create dynamic page content
 - How to handle missing data (404)
 
- ** Programmatic Navigation**
+**Programmatic Navigation**
 - How to use useNavigate hook
 - How to navigate to specific routes
 - How to go back in history
@@ -496,4 +496,4 @@ After reviewing this solution, you should understand:
 
 ---
 
-** Exercise 1 Complete!** You've mastered React Router basics. Move on to Exercise 2 to learn authentication and protected routes!
+**Exercise 1 Complete!** You've mastered React Router basics. Move on to Exercise 2 to learn authentication and protected routes!

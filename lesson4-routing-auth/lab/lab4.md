@@ -168,7 +168,7 @@ function App() {
 export default App;
 ```
 
-** Test** Run `npm run dev`, manually navigate to:
+**Test** Run `npm run dev`, manually navigate to:
 - `http://localhost:5173/` → Home page
 - `http://localhost:5173/about` → About page
 - `http://localhost:5173/contact` → Contact page
@@ -179,14 +179,14 @@ export default App;
 
 **🔨 TODO** Create a navigation component with route links.
 
-** Requirements**
+**Requirements**
 1. Create `src/components/Navbar.tsx`
 2. Use `Link` component for the logo/brand
 3. Use `NavLink` components for navigation items (Home, About, Contact)
 4. Apply `active` class to currently active links
 5. Add the Navbar to `App.tsx` above the `<Routes>`
 
-** Hints**
+**Hints**
 
 ```tsx
 // Import the routing components
@@ -236,7 +236,7 @@ function Navbar() {
 
 **🔨 TODO** Create a products page with dynamic routing using URL parameters.
 
-** Requirements**
+**Requirements**
 1. Create `src/pages/Products.tsx` - displays list of products
 2. Create `src/pages/ProductDetail.tsx` - displays single product details
 3. Each product in the list should link to `/products/:id`
@@ -296,7 +296,7 @@ function ProductDetail() {
 
 #### Task 2.1: Create Auth Context (Guided)
 
-** Step 1: Create AuthContext File**
+**Step 1: Create AuthContext File**
 
 ```tsx
 // src/context/AuthContext.tsx
@@ -376,7 +376,7 @@ export function useAuth() {
 }
 ```
 
-** Step 2: Wrap App with AuthProvider**
+**Step 2: Wrap App with AuthProvider**
 
 ```tsx
 // src/main.tsx
@@ -395,7 +395,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 );
 ```
 
-** Test** No visible changes yet, but AuthContext is ready to use!
+**Test** No visible changes yet, but AuthContext is ready to use!
 
 ---
 
@@ -403,7 +403,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 **🔨 TODO** Build a login form that uses the AuthContext.
 
-** Requirements**
+**Requirements**
 1. Create `src/pages/Login.tsx`
 2. Create a form with username and password fields
 3. Use `useAuth()` hook to access the `login` function
@@ -413,7 +413,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 7. If user is already logged in, redirect to dashboard automatically
 8. Add Login link to Navbar (show only when NOT logged in)
 
-** Hints**
+**Hints**
 
 ```tsx
 import { useState } from 'react';
@@ -497,7 +497,7 @@ const { isAuthenticated, user, logout } = useAuth();
 - Navbar shows username and "Logout" when logged in
 - Test credentials: any username/password works (simulated auth)
 
-** Solution** See `solutions/exercise2-auth/`
+**Solution** See `solutions/exercise2-auth/`
 
 ---
 
@@ -505,7 +505,7 @@ const { isAuthenticated, user, logout } = useAuth();
 
 **🔨 TODO** Build a wrapper component that protects routes from unauthenticated users.
 
-** Requirements**
+**Requirements**
 1. Create `src/components/ProtectedRoute.tsx`
 2. Use `useAuth()` to check if user is authenticated
 3. If authenticated, render the `children` components
@@ -560,7 +560,7 @@ navigate(from, { replace: true });
 
 **🔨 TODO** Create Dashboard, Profile, and Settings pages, then protect them with authentication.
 
-** Requirements**
+**Requirements**
 1. Create `src/pages/Dashboard.tsx` - welcome message with user's name
 2. Create `src/pages/Profile.tsx` - display user profile information
 3. Create `src/pages/Settings.tsx` - user settings page
@@ -568,7 +568,7 @@ navigate(from, { replace: true });
 5. Add navigation links to these pages in Navbar (only when authenticated)
 6. Each page should display the current user's information from `useAuth()`
 
-** Hints**
+**Hints**
 
 ```tsx
 // Example Dashboard page
@@ -628,14 +628,14 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 **🔨 TODO** Convert Dashboard into a layout with nested routes.
 
-** Requirements**
+**Requirements**
 1. Update Dashboard to use `<Outlet />` for nested content
 2. Create nested routes: `/dashboard/overview`, `/dashboard/stats`, `/dashboard/activity`
 3. Create three sub-components: Overview, Stats, Activity
 4. Add sidebar navigation within Dashboard
 5. Default to Overview when visiting `/dashboard`
 
-** Hints**
+**Hints**
 
 ```tsx
 // Dashboard as layout
@@ -691,9 +691,9 @@ function Overview() {
 
 ### Bonus 1: Remember Me Functionality (Advanced)
 
-** Challenge** Add "Remember Me" checkbox to login that persists authentication for 7 days.
+**Challenge** Add "Remember Me" checkbox to login that persists authentication for 7 days.
 
-** Hints**
+**Hints**
 - Add checkbox to login form
 - Store timestamp along with user data
 - Check timestamp on app load
@@ -703,9 +703,9 @@ function Overview() {
 
 ### Bonus 2: User Role-Based Access (Advanced)
 
-** Challenge** Add user roles (admin, user) and restrict certain routes based on role.
+**Challenge** Add user roles (admin, user) and restrict certain routes based on role.
 
-** Hints**
+**Hints**
 - Add `role` property to User interface
 - Create `AdminRoute` component similar to `ProtectedRoute`
 - Check `user.role === 'admin'` before rendering
@@ -715,9 +715,9 @@ function Overview() {
 
 ### Bonus 3: 404 Not Found Page (Medium)
 
-** Challenge** Create a custom 404 page for invalid routes.
+**Challenge** Create a custom 404 page for invalid routes.
 
-** Hints**
+**Hints**
 ```tsx
 // Add as last route in App.tsx
 <Route path="*" element={<NotFound />} />
@@ -729,9 +729,9 @@ function Overview() {
 
 ### Bonus 4: Loading Bar During Navigation (Advanced)
 
-** Challenge** Show a loading bar at the top when navigating between routes.
+**Challenge** Show a loading bar at the top when navigating between routes.
 
-** Hints**
+**Hints**
 - Use `useNavigation()` hook from React Router
 - Create a `<NavigationBar />` component
 - Show progress bar when `navigation.state === 'loading'`
@@ -773,7 +773,7 @@ function Overview() {
 
 **Cause** Component not wrapped in `AuthProvider`
 
-** Solution** Ensure `<AuthProvider>` wraps your `<App />` in `main.tsx`
+**Solution** Ensure `<AuthProvider>` wraps your `<App />` in `main.tsx`
 
 ```tsx
 <AuthProvider>

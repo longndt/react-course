@@ -2,7 +2,7 @@
 
 ## 📋 Overview
 
-Complete solution demonstrating **React Router authentication** with **Context API** ** Protected Routes** and **session management**
+Complete solution demonstrating **React Router authentication** with **Context API** **Protected Routes** and **session management**
 
 This solution showcases:
 - AuthContext with React Context API
@@ -404,4 +404,4 @@ useEffect(() => {
 
 ---
 
-** Exercise 2 Complete!** You've mastered React Router authentication patterns used in production applications!
+**Exercise 2 Complete!** You've mastered React Router authentication patterns used in production applications!
