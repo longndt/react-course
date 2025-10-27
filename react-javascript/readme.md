@@ -6,7 +6,7 @@
 
 This course teaches **React with JavaScript** development using industry-standard practices through hands-on examples.
 
-**Format** Theory, hands-on practice, and project-based learning
+**Format:** Theory, hands-on practice, and project-based learning
 
 ---
 
@@ -17,9 +17,9 @@ This course teaches **React with JavaScript** development using industry-standar
 - Basic programming concepts (variables, functions, loops, objects)
 - Command line operations
 
-- **Optional but helpful** Basic understanding of HTTP and APIs (will be taught in Lesson 3)
+- **Optional but helpful:** Basic understanding of HTTP and APIs (will be taught in Lesson 3)
 
-- **Optional but helpful** Familiarity with backend concepts (covered in Lessons 3-5)
+- **Optional but helpful:** Familiarity with backend concepts (covered in Lessons 3-5)
 
 ---
 
@@ -99,7 +99,7 @@ lesson-topic/
 └──  quiz/               # Knowledge assessment
 ```
 
-**How to run quizzes** Use **Live Server** extension in VS Code
+**How to run quizzes:** Use **Live Server** extension in VS Code
 - Right-click quiz file → "Open with Live Server"
 - Or click "Go Live" button in bottom status bar
 - Quiz opens in browser with interactive features

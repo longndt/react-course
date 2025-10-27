@@ -1,4 +1,6 @@
-# Exercise 3: Virtual List for Large Datasets
+# Exercise 3: Virtual List for Large Datasets (OPTIONAL)
+
+> ⚠️ **Advanced/Optional Topic** Virtual Lists are powerful for performance but require advanced React knowledge. This exercise is optional - you can skip it if you're focusing on full-stack fundamentals.
 
 Complete solution demonstrating virtual scrolling (windowing) for efficiently rendering large lists.
 
@@ -61,7 +63,7 @@ Open [http://localhost:5173](http://localhost:5173)
 3. **Increase to 100,000 items**
    - Select "100,000 items" from dropdown
    - Virtual List: Still smooth!
-   - Regular List: Browser may freeze 
+   - Regular List: Browser may freeze
 
 ### Chrome DevTools Performance Profiling
 
@@ -162,7 +164,7 @@ function VirtualList({ items, itemHeight, containerHeight }) {
 With **100,000 items**
 - **Regular List** Browser freezes, may crash
 
-- **Virtual List** Still smooth 60 FPS 
+- **Virtual List** Still smooth 60 FPS
 
 ## Key Concepts
 

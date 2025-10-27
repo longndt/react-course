@@ -2,7 +2,8 @@
 
 ## Overview
 
-**Difficulty** Advanced **Prerequisites** Lesson 4 completed, routing and authentication knowledge
+**Difficulty:** Advanced
+**Prerequisites:** Lesson 4 completed, routing and authentication knowledge
 
 This lesson covers full-stack development and production deployment. You'll learn to build a complete backend with Express.js and MongoDB, implement file uploads, optimize performance, and deploy your application to production platforms.
 
@@ -77,9 +78,9 @@ npm run dev  # Backend
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 ** Theory First** Start with [Theory](./theory/theory5.md) → [Example](./example/) → [Lab](./lab/lab5.md)
-- ⚡ ** Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory5.md)
-- 🎯 ** Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz5.html) → Focus on weak areas
+- 📖 **Theory First** Start with [Theory](./theory/theory5.md) → [Example](./example/) → [Lab](./lab/lab5.md)
+- ⚡ **Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory5.md)
+- 🎯 **Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz5.html) → Focus on weak areas
 
 ---
 
@@ -97,7 +98,7 @@ npm run dev  # Backend
 
 ### Additional Resources
 - **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
-- ❓ ** Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
+- ❓ **Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
 
 - **Advanced topics** → Explore [Extra Materials](../extras/)
 

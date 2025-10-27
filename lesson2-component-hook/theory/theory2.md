@@ -109,6 +109,8 @@ function UserCard({ user }: UserCardProps) {
 
 **2. Compound Components Pattern**
 
+> ⚠️ **Advanced Topic** Compound Components provide flexible composition but have a steeper learning curve. This section is optional for beginners - you can skip it and come back later.
+
 ```typescript
 // File: components/Modal.tsx
 // Compound Component - multiple related components
@@ -163,6 +165,8 @@ Modal.Footer = ModalFooter;
 ```
 
 **3. Higher-Order Components (HOCs)**
+
+> ⚠️ **Advanced Topic** HOCs are powerful but can be complex. This section is optional - you can skip it and come back later if you're just starting with React.
 
 ```typescript
 // File: components/withLoading.tsx
