@@ -1053,9 +1053,9 @@ function GoodComponent() {
 
 ### What's Coming in Lesson 3
 
-🔜 ** API Integration** - Fetching data from servers
-🔜 ** Data Management** - Handling loading states and errors
-🔜 ** React Query** - Advanced data fetching and caching
-🔜 ** CRUD Operations** - Create, Read, Update, Delete
+🔜 **API Integration** - Fetching data from servers
+🔜 **Data Management** - Handling loading states and errors
+🔜 **React Query** - Advanced data fetching and caching
+🔜 **CRUD Operations** - Create, Read, Update, Delete
 
 > **Advanced Topics** For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)

@@ -37,12 +37,12 @@
 
 | Feature | JavaScript | TypeScript |
 |---------|------------|------------|
-| ** Type Checking**| Runtime only | Compile time + Runtime |
-| ** Error Detection**| After code runs | Before code runs |
-| ** IDE Support**| Basic | Advanced (IntelliSense, autocomplete) |
-| ** Refactoring**| Manual, error-prone | Safe, automated |
-| ** Documentation**| Comments needed | Self-documenting with types |
-| ** Learning Curve**| Easy to start | Steeper but more powerful |
+| **Type Checking**| Runtime only | Compile time + Runtime |
+| **Error Detection**| After code runs | Before code runs |
+| **IDE Support**| Basic | Advanced (IntelliSense, autocomplete) |
+| **Refactoring**| Manual, error-prone | Safe, automated |
+| **Documentation**| Comments needed | Self-documenting with types |
+| **Learning Curve**| Easy to start | Steeper but more powerful |
 
 ---
 
@@ -609,7 +609,7 @@ function formatId(id: string | number) {
 
 ### What's Coming in Lesson 1
 
-🔜 ** React Fundamentals** - Components, JSX, and basic patterns
-🔜 ** TSX Syntax** - TypeScript with JSX
-🔜 ** Component Architecture** - Building reusable components
-🔜 ** Styling** - CSS integration with React
+🔜 **React Fundamentals** - Components, JSX, and basic patterns
+🔜 **TSX Syntax** - TypeScript with JSX
+🔜 **Component Architecture** - Building reusable components
+🔜 **Styling** - CSS integration with React

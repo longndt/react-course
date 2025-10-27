@@ -44,7 +44,7 @@
 
 ## React Router Fundamentals
 
-> 🛣️ ** Visual Learning** For a comprehensive understanding of routing flow, see [Routing Flow Diagram](../../diagrams/routing_flow.md)
+> 🛣️ **Visual Learning** For a comprehensive understanding of routing flow, see [Routing Flow Diagram](../../diagrams/routing_flow.md)
 
 ### Setup React Router
 
@@ -401,11 +401,11 @@ const createTokenWithExpiry = (hours: number = 24) => {
 useEffect(() => {
   const token = localStorage.getItem("token");
   const tokenExpiry = localStorage.getItem("tokenExpiry");
-  
+
   if (token && tokenExpiry) {
     const now = new Date().getTime();
     const expiry = parseInt(tokenExpiry);
-    
+
     if (now < expiry) {
       fetchUser(token);
     } else {
@@ -763,13 +763,13 @@ useEffect(() => {
 - Token storage and validation
 - Error handling and user feedback
 
-> 🔄 ** Visual Learning** For a comprehensive understanding of state management patterns, see [State Management Flow Diagram](../../diagrams/state_management_flow.md)
+> 🔄 **Visual Learning** For a comprehensive understanding of state management patterns, see [State Management Flow Diagram](../../diagrams/state_management_flow.md)
 
 ### What's Coming in Lesson 5
 
-🔜 ** Full-Stack Development** - Backend integration with Express.js
-🔜 ** Database Operations** - MongoDB with Mongoose
-🔜 ** File Uploads** - Media management and cloud storage
-🔜 ** Deployment** - Production deployment and CI/CD
+🔜 **Full-Stack Development** - Backend integration with Express.js
+🔜 **Database Operations** - MongoDB with Mongoose
+🔜 **File Uploads** - Media management and cloud storage
+🔜 **Deployment** - Production deployment and CI/CD
 
-> ** Advanced Topics** For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)
+> **Advanced Topics** For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)

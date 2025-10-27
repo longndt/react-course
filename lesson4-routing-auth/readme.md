@@ -2,7 +2,8 @@
 
 ## Overview
 
-**Difficulty** Intermediate to Advanced **Prerequisites** Lesson 3 completed, API integration knowledge
+**Difficulty:** Intermediate to Advanced
+**Prerequisites:** Lesson 3 completed, API integration knowledge
 
 This lesson covers client-side routing with React Router and authentication patterns. You'll learn to build multi-page applications, implement protected routes, handle user authentication with JWT tokens, and create secure user experiences.
 
@@ -69,9 +70,9 @@ npm run dev
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 ** Theory First** Start with [Theory](./theory/theory4.md) → [Example](./example/) → [Lab](./lab/lab4.md)
-- ⚡ ** Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory4.md)
-- 🎯 ** Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz4.html) → Focus on weak areas
+- 📖 **Theory First** Start with [Theory](./theory/theory4.md) → [Example](./example/) → [Lab](./lab/lab4.md)
+- ⚡ **Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory4.md)
+- 🎯 **Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz4.html) → Focus on weak areas
 
 ---
 

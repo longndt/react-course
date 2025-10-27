@@ -2,7 +2,8 @@
 
 ## Overview
 
-**Difficulty** Beginner to Intermediate **Status** Optional but Recommended
+**Difficulty:** Beginner to Intermediate
+**Status:** Optional but Recommended
 
 This course teaches **React with TypeScript**. Before starting Lesson 1, you should be comfortable with TypeScript fundamentals. This lesson provides a quick review of essential TypeScript concepts you'll use throughout the course.
 
@@ -50,9 +51,9 @@ tsc --version
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 ** Theory First** Start with [Theory](./theory/theory0.md) → [Example](./example/) → [Lab](./lab/lab0.md)
-- ⚡ ** Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory0.md)
-- 🎯 ** Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz0.html) → Focus on weak areas
+- 📖 **Theory First** Start with [Theory](./theory/theory0.md) → [Example](./example/) → [Lab](./lab/lab0.md)
+- ⚡ **Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory0.md)
+- 🎯 **Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz0.html) → Focus on weak areas
 
 ---
 

@@ -20,9 +20,9 @@
 
 ## What is React?
 
-> 🗺️ ** Visual Learning** For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
+> 🗺️ **Visual Learning** For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
 
-** React** is a JavaScript library for building user interfaces, created and maintained by Meta (Facebook).
+**React** is a JavaScript library for building user interfaces, created and maintained by Meta (Facebook).
 
 ### Key Concepts
 
@@ -47,7 +47,7 @@ In this course, we use **TypeScript** for all React components (.tsx files).
 
 ### What is TSX?
 
-** TSX = TypeScript + JSX**
+**TSX = TypeScript + JSX**
 
 - **JSX** JavaScript XML - HTML-like syntax in JavaScript
 
@@ -91,7 +91,7 @@ function UserCard({ name, email, age }: UserCardProps) {
 export default UserCard;
 ```
 
-** Event Handlers with Types**
+**Event Handlers with Types**
 
 ```typescript
 // File: components/auth/LoginForm.tsx
@@ -118,7 +118,7 @@ function LoginForm() {
 export default LoginForm;
 ```
 
-> ** Complete TypeScript Guide** For comprehensive TypeScript review, see [Lesson 0: TypeScript Prerequisites](../../lesson0-typescript-basics/)
+> **Complete TypeScript Guide** For comprehensive TypeScript review, see [Lesson 0: TypeScript Prerequisites](../../lesson0-typescript-basics/)
 
 ---
 
@@ -144,7 +144,7 @@ npm run dev
 
 ### Project Structure
 
-> 📁 ** Visual Learning** For a comprehensive understanding of React project structure, see [React Project Structure Diagram](../../diagrams/react_project_structure.md)
+> 📁 **Visual Learning** For a comprehensive understanding of React project structure, see [React Project Structure Diagram](../../diagrams/react_project_structure.md)
 
 ```
 my-app/
@@ -535,10 +535,10 @@ function App() {
 
 ### What's Coming in Lesson 2
 
-🔜 ** Props** - Passing data between components
-🔜 ** State** - Managing dynamic data with useState
-🔜 ** Hooks** - useEffect, custom hooks
-🔜 ** Forms** - Controlled components and validation
-🔜 ** Component Patterns** - Composition and reusability
+🔜 **Props** - Passing data between components
+🔜 **State** - Managing dynamic data with useState
+🔜 **Hooks** - useEffect, custom hooks
+🔜 **Forms** - Controlled components and validation
+🔜 **Component Patterns** - Composition and reusability
 
-> ** Advanced Topics** For advanced TypeScript patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)
+> **Advanced Topics** For advanced TypeScript patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)

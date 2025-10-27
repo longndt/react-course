@@ -97,16 +97,16 @@ npm install react-router-dom
 
 ### Exercise 1: Basic Routing Setup (40% Practice)
 
-** Goal** Set up React Router with basic navigation and multiple pages.
+**Goal** Set up React Router with basic navigation and multiple pages.
 
 #### Task 1.1: Install and Configure React Router (Guided)
 
-** Step 1: Install React Router**
+**Step 1: Install React Router**
 ```bash
 npm install react-router-dom
 ```
 
-** Step 2: Create Basic Page Components**
+**Step 2: Create Basic Page Components**
 
 Create three simple page components first:
 
@@ -142,7 +142,7 @@ export default function Contact() {
 }
 ```
 
-** Step 3: Setup Router in App.tsx**
+**Step 3: Setup Router in App.tsx**
 
 ```tsx
 // src/App.tsx
@@ -292,7 +292,7 @@ function ProductDetail() {
 
 ### Exercise 2: Authentication Context (70% Practice)
 
-** Goal** Build a complete authentication system using React Context API.
+**Goal** Build a complete authentication system using React Context API.
 
 #### Task 2.1: Create Auth Context (Guided)
 
@@ -622,7 +622,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 ### Exercise 3: Advanced Routing Patterns (85% Practice)
 
-** Goal** Implement nested routes and programmatic navigation patterns.
+**Goal** Implement nested routes and programmatic navigation patterns.
 
 #### Task 3.1: Nested Routes with Outlet (85% TODO)
 

@@ -61,7 +61,7 @@ my-first-react-app/
 └── vite.config.ts    # Vite config
 ```
 
-** Focus on `src/` folder** - this is where you'll write your code
+**Focus on `src/` folder** - this is where you'll write your code
 
 ---
 
@@ -406,7 +406,9 @@ npm install
 - Understanding of basic TSX syntax
 - Your first custom component **Want deeper understanding?** Read [theory1.md](./theory/theory1.md)
 
- ** Ready to practice?** Try [lab1.md](./lab/lab1.md) exercises **Ready for more features?** Continue to [Lesson 2: Components & Hooks](../lesson2-component-hook/) to learn:
+**Ready to practice?** Try [lab1.md](./lab/lab1.md) exercises
+
+**Ready for more features?** Continue to [Lesson 2: Components & Hooks](../lesson2-component-hook/) to learn:
 - Props and component communication
 - State management with hooks
 - Building reusable component libraries

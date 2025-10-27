@@ -4,9 +4,9 @@
 
 This course teaches **React with Typescript** development using industry-standard practices through hands-on examples.
 
-** Format** Theory, hands-on practice, and project-based learning
+**Format** Theory, hands-on practice, and project-based learning
 
-> ** If you are not familiar with TypeScript or prefer to learn React with JavaScript**
+> **If you are not familiar with TypeScript or prefer to learn React with JavaScript**
 >
 > ➡️ **[Switch to JavaScript](./react-javascript/)**⬅️
 
@@ -19,9 +19,9 @@ This course teaches **React with Typescript** development using industry-standar
 - Basic programming concepts (variables, functions, loops, objects)
 - Command line operations
 
-- **Optional but helpful** Basic understanding of HTTP and APIs (will be taught in Lesson 3)
+- **Optional but helpful:** Basic understanding of HTTP and APIs (will be taught in Lesson 3)
 
-- **Optional but helpful** Familiarity with backend concepts (covered in Lessons 3-5)
+- **Optional but helpful:** Familiarity with backend concepts (covered in Lessons 3-5)
 
 ---
 
@@ -133,7 +133,7 @@ Quick links to key diagrams:
 
 ### **Step 1: Start with Reference Guide**
 
-** Goal** Get a quick overview of what you'll learn
+**Goal** Get a quick overview of what you'll learn
 - Skim through main topics and code examples
 - Don't try to understand everything deeply yet
 - Focus on: "What concepts will I learn?"
@@ -141,7 +141,7 @@ Quick links to key diagrams:
 
 ### **Step 2: Explore Working Example**
 
-** Goal** See concepts in action before diving into theory
+**Goal** See concepts in action before diving into theory
 - Run the example project first
 - Play with the UI, test different features
 - Open browser DevTools to inspect components
@@ -150,7 +150,7 @@ Quick links to key diagrams:
 
 ### **Step 3: Read Theory as Reference**
 
-** Goal** Understand concepts deeply when needed
+**Goal** Understand concepts deeply when needed
 - **DON'T** read cover-to-cover like a novel
 
 - **DO** read sections related to what you're coding
@@ -160,16 +160,16 @@ Quick links to key diagrams:
 
 ### **Step 4: Code Along with Reference**
 
-** Goal** Build muscle memory and understanding
+**Goal** Build muscle memory and understanding
 - Create a new project or use example as base
 - Type every line yourself (even if you don't understand yet)
 - Run code frequently to see results
 - Make small changes to experiment
 - Compare your code with example/ when stuck
 
-### **Step 5: Complete Lab:**
+### **Step 5: Complete Lab**
 
-** Goal** Apply knowledge to real-world scenarios
+**Goal** Apply knowledge to real-world scenarios
 - Read requirements carefully
 - Plan before coding (sketch components, data flow)
 - Code incrementally (one feature at a time)
@@ -182,7 +182,7 @@ Quick links to key diagrams:
 
 ### **Step 6: Take the Quiz**
 
-** Goal** Verify you're ready for next lesson
+**Goal** Verify you're ready for next lesson
 - Answer all questions honestly (no peeking!)
 - Score below 70%? → Review weak areas → Retake quiz
 - Score above 80%? → You're ready for next lesson!
@@ -190,7 +190,7 @@ Quick links to key diagrams:
 
 ### **Step 7: Review and Reflect**
 
-** Goal** Solidify learning before moving forward
+**Goal** Solidify learning before moving forward
 - Review your lab code vs. example code
 - What did you learn?
 - What was challenging?
@@ -212,7 +212,9 @@ Make sure you have installed:
 - Node.js (version 18 or higher)
 - Visual Studio Code
 - Git
-- Required VS Code extensions **Having installation or setup issues?**
+- Required VS Code extensions
+
+**Having installation or setup issues?**
 
 **[Check Troubleshooting Guide](./extras/troubleshooting_guide.md)** for common problems and solutions
 
@@ -238,19 +240,19 @@ cd react-course
 
 **Follow this exact order for the best learning experience:**
 
-#### 1⃣ ** Start with Prerequisites** (If needed)
+#### 1⃣ **Start with Prerequisites** (If needed)
 - **[Lesson 0: TypeScript Prerequisites](./lesson0-typescript-basics/readme.md)**
 - Review TypeScript fundamentals
 - Master types, interfaces, and generics used in React
 
-#### 2⃣ ** Learn Lessons 1-5** (In sequence)
+#### 2⃣ **Learn Lessons 1-5** (In sequence)
 - **[Lesson 1: React Fundamentals & Project Setup](./lesson1-fundamentals-setup/readme.md)**
 - **[Lesson 2: Component Architecture & React Hook](./lesson2-component-hook/readme.md)**
 - **[Lesson 3: API Integration & Data Management](./lesson3-api-data/readme.md)**
 - **[Lesson 4: Routing & Authentication](./lesson4-routing-auth/readme.md)**
 - **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack-deployment/readme.md)**
 
-#### 3⃣ ** Continue with Advanced Materials** (Optional)
+#### 3⃣ **Continue with Advanced Materials** (Optional)
 - **[Advanced Materials & Resources](./extras/readme.md)** - Complete guide to advanced topics
 
 **Quick links to key advanced topics:**
@@ -278,14 +280,14 @@ cd lesson1-fundamentals-setup
 
 ## 💡 Learning Tips
 
-- **Use *Markdown Preview Enhanced*** for better reading experience
+- **Use Markdown Preview Enhanced** for better reading experience
 
-- **Read the *readme***  of each lesson carefully before starting
+- **Read the readme** of each lesson carefully before starting
 
 - **Complete all labs** to solidify your understanding
 
-- **Follow the *example* folder** to see complete example
+- **Follow the example folder** to see complete example
 
-- **Check the *Troubleshooting Guide*** for quick solutions
+- **Check the Troubleshooting Guide** for quick solutions
 
 ---

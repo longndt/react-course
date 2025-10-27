@@ -901,7 +901,7 @@ git push origin main
 
 #### **Step 7: Monitor Deployment**
 
-1. Go to GitHub repository → ** Actions** tab
+1. Go to GitHub repository → **Actions** tab
 2. View running workflow (yellow = running, green = success, red = failed)
 3. Click on workflow to see detailed logs for each step
 4. If there are errors, check logs for debugging

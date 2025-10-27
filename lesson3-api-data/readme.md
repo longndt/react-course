@@ -2,7 +2,8 @@
 
 ## Overview
 
-**Difficulty** Intermediate **Prerequisites** Lesson 2 completed, React hooks knowledge
+**Difficulty:** Intermediate
+**Prerequisites:** Lesson 2 completed, React hooks knowledge
 
 This lesson covers API integration and data management in React applications. You'll learn to fetch data from REST APIs, handle loading states, manage errors, and implement modern data fetching patterns with React Query.
 
@@ -69,9 +70,9 @@ npm run dev
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 ** Theory First** Start with [Theory](./theory/theory3.md) → [Example](./example/) → [Lab](./lab/lab3.md)
-- ⚡ ** Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory3.md)
-- 🎯 ** Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz3.html) → Focus on weak areas
+- 📖 **Theory First** Start with [Theory](./theory/theory3.md) → [Example](./example/) → [Lab](./lab/lab3.md)
+- ⚡ **Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory3.md)
+- 🎯 **Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz3.html) → Focus on weak areas
 
 ---
 

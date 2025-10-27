@@ -80,7 +80,7 @@ function UserList() {
   }, []);
 
   if (loading) return <LoadingSpinner />;
-  
+
   return (
     <div>
       <h2>Users</h2>
@@ -110,7 +110,7 @@ function UserCard({ user }) {
 // Compound Component - multiple related components
 function Modal({ children, isOpen }) {
   if (!isOpen) return null;
-  
+
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -161,11 +161,11 @@ Modal.Footer = ModalFooter;
 function withLoading(WrappedComponent) {
   return function WithLoadingComponent(props) {
     const { isLoading, ...restProps } = props;
-    
+
     if (isLoading) {
       return <div className="loading">Loading...</div>;
     }
-    
+
     return <WrappedComponent {...restProps} />;
   };
 }
@@ -252,7 +252,7 @@ function LifecycleExample() {
   useEffect(() => {
     console.log('Component mounted');
     setMounted(true);
-    
+
     // ComponentWillUnmount equivalent
     return () => {
       console.log('Component will unmount');
@@ -287,11 +287,11 @@ function LifecycleExample() {
 
 ```javascript
 // File: components/UserProfile.jsx
-function UserProfile({ 
-  user, 
-  showEmail = true, 
+function UserProfile({
+  user,
+  showEmail = true,
   onEdit,
-  className = '' 
+  className = ''
 }) {
   return (
     <div className={`user-profile ${className}`}>
@@ -310,8 +310,8 @@ function UserProfile({
 }
 
 // Usage with different prop combinations
-<UserProfile 
-  user={currentUser} 
+<UserProfile
+  user={currentUser}
   showEmail={false}
   onEdit={handleEdit}
   className="highlighted"
@@ -353,19 +353,19 @@ function Card({ title, children, className }) {
 
 ```javascript
 // File: components/Button.jsx
-function Button({ 
-  children, 
-  onClick, 
+function Button({
+  children,
+  onClick,
   type = 'button',
   disabled = false,
   variant = 'primary'
 }) {
   const handleClick = (event) => {
     if (disabled) return;
-    
+
     // Custom logic before calling parent handler
     console.log('Button clicked');
-    
+
     // Call parent handler if provided
     onClick?.(event);
   };
@@ -998,9 +998,9 @@ function GoodComponent() {
 
 ### What's Coming in Lesson 3
 
-🔜 ** API Integration** - Fetching data from servers
-🔜 ** Data Management** - Handling loading states and errors
-🔜 ** React Query** - Advanced data fetching and caching
-🔜 ** CRUD Operations** - Create, Read, Update, Delete
+🔜 **API Integration** - Fetching data from servers
+🔜 **Data Management** - Handling loading states and errors
+🔜 **React Query** - Advanced data fetching and caching
+🔜 **CRUD Operations** - Create, Read, Update, Delete
 
-> ** Advanced Topics** For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)
+> **Advanced Topics** For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)
