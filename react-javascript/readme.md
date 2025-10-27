@@ -4,7 +4,7 @@
 
 ## Course Overview
 
-This course teaches **React with JavaScript**development using industry-standard practices through hands-on examples.
+This course teaches **React with JavaScript** development using industry-standard practices through hands-on examples.
 
 **Format** Theory, hands-on practice, and project-based learning
 
@@ -23,7 +23,7 @@ This course teaches **React with JavaScript**development using industry-standard
 
 ## What You Will Learn
 
-- Build modern React applications with **JavaScript**and functional components
+- Build modern React applications with **JavaScript** and functional components
 - Understand React fundamentals and component-based architecture
 - Master JSX syntax for UI components
 - Create reusable component libraries with props
@@ -44,14 +44,14 @@ This course teaches **React with JavaScript**development using industry-standard
 ### Lesson 0: JavaScript Prerequisites
 - JavaScript ES6+ essentials for React development
 - Arrow functions, destructuring, modules, and async/await
-- **Lab Project** JavaScript practical exercises
+- **Lab:** JavaScript practical exercises
 
 ### Lesson 1: React Fundamentals & Project Setup
 - Setting up development environment with Vite
 - Understanding React basics and JSX syntax
 - Creating your first functional components
 - Basic styling and project structure
-- **Lab Project** Build a simple welcome page with components
+- **Lab:** Build a simple welcome page with components
 
 ### Lesson 2: Component Architecture & React Hook
 - Component composition and props
@@ -59,22 +59,22 @@ This course teaches **React with JavaScript**development using industry-standard
 - Custom hooks and advanced patterns
 - Form handling and validation
 - Building reusable component libraries
-- **Lab Project** Build a data management interface with CRUD operations
+- **Lab:** Build a data management interface with CRUD operations
 
 ### Lesson 3: API Integration & Data Management
 - Connecting React to Node.js/Express backend & MongoDB database
 - RESTful API consumption and error handling
-- **Lab Project** CRUD application with API integration
+- **Lab:** CRUD application with API integration
 
 ### Lesson 4: Routing & Authentication
 - React Router and JWT authentication
 - Protected routes and advanced React patterns
-- **Lab Project** Authentication system with protected routes
+- **Lab:** Authentication system with protected routes
 
 ### Lesson 5: Full-Stack Integration & Production Deployment
 - Full-stack architecture with MERN stack
 - File uploads, WebSockets, and deployment
-- **Lab Project** Complete application deployment
+- **Lab:** Complete application deployment
 
 ---
 
@@ -153,7 +153,7 @@ Quick links to key diagrams:
 - Make small changes to experiment
 - Compare your code with example/ when stuck
 
-### **Step 5: Complete Lab Project**
+### **Step 5: Complete Lab:**
 
 **Goal** Apply knowledge to real-world scenarios
 - Read requirements carefully

@@ -2,7 +2,7 @@
 
 ## Course Overview
 
-This course teaches **React with Typescript**development using industry-standard practices through hands-on examples.
+This course teaches **React with Typescript** development using industry-standard practices through hands-on examples.
 
 **Format** Theory, hands-on practice, and project-based learning
 
@@ -25,7 +25,7 @@ This course teaches **React with Typescript**development using industry-standard
 
 ## What You Will Learn
 
-- Build modern React applications with **TypeScript**and functional components
+- Build modern React applications with **TypeScript** and functional components
 - Understand React fundamentals and component-based architecture
 - Master TypeScript syntax for type-safe UI components
 - Create strongly-typed, reusable component libraries with props and interfaces
@@ -49,14 +49,14 @@ This course teaches **React with Typescript**development using industry-standard
 ### Lesson 0: TypeScript Prerequisites
 - TypeScript essentials for React development
 - Interfaces, generics, and utility types
-- **Lab Project** TypeScript practical exercises
+- **Lab:** TypeScript practical exercises
 
 ### Lesson 1: React Fundamentals & Project Setup
 - Setting up development environment with Vite
 - Understanding React basics and TSX syntax
 - Creating your first functional components
 - Basic styling and project structure
-- **Lab Project** Build a simple welcome page with components
+- **Lab:** Build a simple welcome page with components
 
 ### Lesson 2: Component Architecture & React Hook
 - Component composition and props with TypeScript
@@ -64,22 +64,22 @@ This course teaches **React with Typescript**development using industry-standard
 - Custom hooks with proper typing
 - Form handling with type safety
 - Building reusable component libraries
-- **Lab Project** Build a data management interface with CRUD operations
+- **Lab:** Build a data management interface with CRUD operations
 
 ### Lesson 3: API Integration & Data Management
 - Connecting React to Node.js/Express backend & MongoDB database
 - RESTful API consumption and error handling
-- **Lab Project** CRUD application with API integration
+- **Lab:** CRUD application with API integration
 
 ### Lesson 4: Routing & Authentication
 - React Router and JWT authentication
 - Protected routes and advanced React patterns
-- **Lab Project** Authentication system with protected routes
+- **Lab:** Authentication system with protected routes
 
 ### Lesson 5: Full-Stack Integration & Production Deployment
 - Full-stack architecture with MERN stack
 - File uploads, WebSockets, and deployment
-- **Lab Project** Complete application deployment
+- **Lab:** Complete application deployment
 
 ---
 
@@ -158,7 +158,7 @@ Quick links to key diagrams:
 - Make small changes to experiment
 - Compare your code with example/ when stuck
 
-### **Step 5: Complete Lab Project**
+### **Step 5: Complete Lab:**
 
 **Goal** Apply knowledge to real-world scenarios
 - Read requirements carefully
