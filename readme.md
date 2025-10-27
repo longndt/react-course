@@ -229,19 +229,19 @@ cd react-course
 
 **Follow this exact order for the best learning experience:**
 
-#### 1⃣ **Start with Prerequisites**(If needed)
+#### 1⃣ **Start with Prerequisites** (If needed)
 - **[Lesson 0: TypeScript Prerequisites](./lesson0-typescript-basics/readme.md)**
 - Review TypeScript fundamentals
 - Master types, interfaces, and generics used in React
 
-#### 2⃣ **Learn Lessons 1-5**(In sequence)
+#### 2⃣ **Learn Lessons 1-5** (In sequence)
 - **[Lesson 1: React Fundamentals & Project Setup](./lesson1-fundamentals-setup/readme.md)**
 - **[Lesson 2: Component Architecture & React Hook](./lesson2-component-hook/readme.md)**
 - **[Lesson 3: API Integration & Data Management](./lesson3-api-data/readme.md)**
 - **[Lesson 4: Routing & Authentication](./lesson4-routing-auth/readme.md)**
 - **[Lesson 5: Full-Stack Integration & Production Deployment](./lesson5-fullstack-deployment/readme.md)**
 
-#### 3⃣ **Continue with Advanced Materials**(Optional)
+#### 3⃣ **Continue with Advanced Materials** (Optional)
 - **[Advanced Materials & Resources](./extras/readme.md)**- Complete guide to advanced topics
 
 **Quick links to key advanced topics:**
