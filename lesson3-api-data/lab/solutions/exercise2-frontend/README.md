@@ -2,7 +2,7 @@
 
 ## 📋 Overview
 
-Complete frontend solution demonstrating **React Query**(TanStack Query) for server state management with the Task Manager API.
+Complete frontend solution demonstrating **React Query** (TanStack Query) for server state management with the Task Manager API.
 
 This solution showcases:
 - React Query setup and configuration
@@ -41,7 +41,7 @@ exercise2-frontend/
 ## Installation & Setup
 
 ### Prerequisites
-- **Backend API**running on `http://localhost:3000`
+- **Backend API** running on `http://localhost:3000`
 - Complete Exercise 1 (Backend) first
 
 ### Step 1: Install Dependencies
@@ -75,9 +75,7 @@ App will start at: `http://localhost:5173`
 
 ## Key Concepts Explained
 
-### 1. React Query Setup
-
-**main.tsx**- QueryClient configuration:
+### 1. React Query Setup **main.tsx** - QueryClient configuration:
 
 ```tsx
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -129,9 +127,7 @@ const {
    - Component mount
    - Window focus
    - Network reconnect
-   - Manual invalidation
-
-**Query Key:**
+   - Manual invalidation **Query Key:**
 - `['tasks']` - unique identifier for this query
 - Used for caching and invalidation
 - Can include parameters: `['tasks', { filter: 'completed' }]`
@@ -218,7 +214,7 @@ onSuccess: () => {
 }
 ```
 
-**Alternative: Optimistic Updates**(Bonus Challenge):
+** Alternative: Optimistic Updates** (Bonus Challenge):
 
 ```tsx
 onMutate: async (newTask) => {
@@ -268,9 +264,7 @@ return <TaskList tasks={data} />;
 
 ---
 
-## 🔌 API Service Layer
-
-**services/api.ts**- Axios client:
+## 🔌 API Service Layer **services/api.ts** - Axios client:
 
 ```typescript
 import axios from 'axios';
@@ -365,9 +359,7 @@ const [newTask, setNewTask] = useState({
 
 ### Issue: "Network Error" or CORS error
 
-**Cause:**Backend not running or CORS not enabled
-
-**Solution:**
+**Cause:** Backend not running or CORS not enabled **Solution:**
 1. Start backend: `cd exercise1-backend && npm run dev`
 2. Verify CORS enabled: `app.use(cors())` in `index.js`
 3. Check backend URL in `api.ts` matches your backend port
@@ -376,9 +368,7 @@ const [newTask, setNewTask] = useState({
 
 ### Issue: Tasks not updating after create/delete
 
-**Cause:**Query not being invalidated
-
-**Solution:**Ensure `onSuccess` calls `invalidateQueries`:
+**Cause:** Query not being invalidated **Solution:** Ensure `onSuccess` calls `invalidateQueries`:
 ```tsx
 onSuccess: () => {
   queryClient.invalidateQueries({ queryKey: ['tasks'] });
@@ -389,9 +379,7 @@ onSuccess: () => {
 
 ### Issue: React Query DevTools not showing
 
-**Cause:**DevTools only work in development mode
-
-**Solution:**
+**Cause:** DevTools only work in development mode **Solution:**
 - Run `npm run dev` (not `npm run build`)
 - Look for floating icon in bottom-right corner
 - Click icon to open DevTools panel
@@ -400,9 +388,7 @@ onSuccess: () => {
 
 ### Issue: TypeScript errors in api.ts
 
-**Cause:**Missing type annotations
-
-**Solution:**Import types from `types/task.ts`:
+**Cause:** Missing type annotations **Solution:** Import types from `types/task.ts`:
 ```typescript
 import type { Task, CreateTaskInput, UpdateTaskInput } from '../types/task';
 
@@ -416,19 +402,28 @@ getAllTasks: async (): Promise<Task[]> => {
 ## React Query Concepts Summary
 
 ### Query States
-- **Fresh:**Data is up-to-date (within `staleTime`)
-- **Stale:**Data might be outdated, will refetch in background
-- **Fetching:**Currently fetching data
-- **Idle:**Not fetching
+- **Fresh:** Data is up-to-date (within `staleTime`)
+
+- **Stale:** Data might be outdated, will refetch in background
+
+- **Fetching:** Currently fetching data
+
+- **Idle:** Not fetching
 
 ### Key Features
-- **Automatic Caching:**Queries cached by query key
-- **Background Refetching:**Updates data when stale
-- **Deduplication:**Prevents duplicate requests
-- **Retry Logic:**Automatically retries failed requests
-- **Garbage Collection:**Removes unused cache entries
-- **Pagination & Infinite Scroll:**Built-in support
-- **Optimistic Updates:**Update UI before server response
+- **Automatic Caching:** Queries cached by query key
+
+- **Background Refetching:** Updates data when stale
+
+- **Deduplication:** Prevents duplicate requests
+
+- **Retry Logic:** Automatically retries failed requests
+
+- **Garbage Collection:** Removes unused cache entries
+
+- **Pagination & Infinite Scroll:** Built-in support
+
+- **Optimistic Updates:** Update UI before server response
 
 ### useQuery vs useMutation
 
@@ -446,25 +441,21 @@ getAllTasks: async (): Promise<Task[]> => {
 
 After completing this exercise, you should understand:
 
- **React Query Basics**
+ ** React Query Basics**
 - Setting up QueryClient and Provider
 - Using useQuery for data fetching
 - Using useMutation for data modifications
-- Query keys and caching
-
- **State Management**
+- Query keys and caching **State Management**
 - Server state vs client state
 - Automatic cache management
 - Cache invalidation strategies
 - Optimistic updates (bonus)
 
- **Best Practices**
+ ** Best Practices**
 - Separation of concerns (API layer)
 - TypeScript for type safety
 - Error handling patterns
-- Loading states and UX
-
- **Advanced Patterns**
+- Loading states and UX **Advanced Patterns**
 - Query invalidation
 - Mutation side effects
 - DevTools for debugging
@@ -481,7 +472,7 @@ After completing this exercise, you should understand:
 
 ### Bonus Challenges (Try These!)
 
-1. **Priority Filter**- Add buttons to filter by priority
+1. **Priority Filter** - Add buttons to filter by priority
 ```tsx
 const { data } = useQuery({
   queryKey: ['tasks', { priority: selectedPriority }],
@@ -489,7 +480,7 @@ const { data } = useQuery({
 });
 ```
 
-2. **Optimistic Updates**- Update UI before server responds
+2. **Optimistic Updates** - Update UI before server responds
 ```tsx
 onMutate: async (newTask) => {
   await queryClient.cancelQueries({ queryKey: ['tasks'] });
@@ -499,9 +490,9 @@ onMutate: async (newTask) => {
 },
 ```
 
-3. **Search Functionality**- Search tasks by title
-4. **Task Statistics**- Count total, completed, pending tasks
-5. **Edit Task**- Inline editing instead of just toggle completion
+3. **Search Functionality** - Search tasks by title
+4. **Task Statistics** - Count total, completed, pending tasks
+5. **Edit Task** - Inline editing instead of just toggle completion
 
 ---
 
@@ -523,4 +514,4 @@ onMutate: async (newTask) => {
 
 ---
 
-** Frontend Solution Complete!**You've mastered React Query for server state management. This pattern is used in production apps by companies like Google, Microsoft, and Netflix!
+** Frontend Solution Complete!** You've mastered React Query for server state management. This pattern is used in production apps by companies like Google, Microsoft, and Netflix!

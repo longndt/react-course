@@ -20,16 +20,23 @@
 
 ### Benefits
 - **Cleaner Syntax** More concise and readable code
+
 - **Better Performance** Modern features are optimized
+
 - **React Compatibility** JSX and React work best with ES6+
+
 - **Industry Standard** What you'll see in production code
 
 ### ES6+ Features Used in React
-- **Arrow Functions**- Event handlers, array methods
-- **Destructuring**- Props, state, and object properties
-- **Template Literals**- Dynamic strings and JSX
-- **Modules**- Import/export components and utilities
-- **Async/Await**- Data fetching and side effects
+- **Arrow Functions** - Event handlers, array methods
+
+- **Destructuring** - Props, state, and object properties
+
+- **Template Literals** - Dynamic strings and JSX
+
+- **Modules** - Import/export components and utilities
+
+- **Async/Await** - Data fetching and side effects
 
 ---
 
@@ -642,11 +649,17 @@ useEffect(() => {
 
 ### ES6+ Features Summary
 - **Arrow Functions** `() => {}` for concise function syntax
+
 - **Destructuring** `{ name, age } = user` for extracting values
+
 - **Spread** `...array` and `...object` for copying/merging
+
 - **Template Literals** `` `Hello ${name}!` `` for string interpolation
+
 - **Modules** `import/export` for code organization
+
 - **Async/Await** `async/await` for handling promises
+
 - **Array Methods** `map`, `filter`, `reduce`, `find` for data manipulation
 
 ---

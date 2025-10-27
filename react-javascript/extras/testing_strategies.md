@@ -39,14 +39,19 @@ Comprehensive testing strategies for React applications, covering unit testing, 
 ```
 
 - **Unit Tests** Fast, isolated, test small pieces of code.
+
 - **Integration Tests** Verify interactions between multiple units, closer to user behavior.
+
 - **End-to-End (E2E) Tests** Simulate real user scenarios across the entire application, including UI and backend.
 
 ### Guiding Principles
 
 - **Test what the user sees and interacts with** Focus on behavior, not implementation details.
+
 - **Write maintainable tests** Keep tests clean, readable, and independent.
+
 - **Fast feedback** Prioritize faster tests (unit) for quick development cycles.
+
 - **High confidence** E2E tests provide the highest confidence but are slower and more brittle.
 
 ---
@@ -428,16 +433,19 @@ jobs:
 ### Jest
 
 - **Installation** `npm install --save-dev jest @testing-library/react @testing-library/jest-dom`
+
 - **Configuration** `jest.config.js`
 
 ### React Testing Library
 
 - **Installation** Included with `@testing-library/react`
+
 - **Setup** `setupTests.js` (for `@testing-library/jest-dom` matchers)
 
 ### Cypress / Playwright
 
 - **Installation** `npm install --save-dev cypress` or `npm install --save-dev playwright`
+
 - **Configuration** `cypress.config.js` or `playwright.config.js`
 
 ---
@@ -476,4 +484,4 @@ jobs:
 
 ---
 
-**Remember** Good tests are fast, reliable, and provide confidence in your code. Focus on testing behavior, not implementation details.
+** Remember** Good tests are fast, reliable, and provide confidence in your code. Focus on testing behavior, not implementation details.

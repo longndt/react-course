@@ -2,24 +2,33 @@
 
 ## 📋 Overview
 
-In this lab, you'll build a **complete authentication system**with **React Router**and **protected routes** You'll learn how to implement user login, session management, route protection, and navigation patterns used in production web applications.
+In this lab, you'll build a **complete authentication system** with **React Router** and **protected routes** You'll learn how to implement user login, session management, route protection, and navigation patterns used in production web applications.
 
 ### What You'll Build
 
 A multi-page React application with:
-- **Public pages**(Home, About, Contact) - accessible to everyone
-- **Protected pages**(Dashboard, Profile, Settings) - requires authentication
-- **Login system**with session management
-- **Route guards**to protect authenticated content
-- **Navigation**with active link highlighting
-- **Auth Context**for global authentication state
+- **Public pages** (Home, About, Contact) - accessible to everyone
+
+- **Protected pages** (Dashboard, Profile, Settings) - requires authentication
+
+- **Login system** with session management
+
+- **Route guards** to protect authenticated content
+
+- **Navigation** with active link highlighting
+
+- **Auth Context** for global authentication state
 
 ### Why This Matters
 
 - **Essential Pattern** 90% of web applications require authentication
+
 - **Route Protection** Learn to control access based on user state
+
 - **State Management** Share authentication state across components
+
 - **Professional Navigation** Implement navigation patterns users expect
+
 - **Security Best Practices** Understand client-side authentication patterns
 
 ---
@@ -53,10 +62,10 @@ By the end of this lab, you will:
 ## Pre-Lab Checklist
 
 ### Required Software
-- [ ] **Node.js**(v18+) installed
-- [ ] **npm**or **yarn**package manager
-- [ ] **VS Code**or preferred code editor
-- [ ] **Browser**(Chrome, Firefox, Safari, Edge)
+- [ ] ** Node.js** (v18+) installed
+- [ ] ** npm** or **yarn** package manager
+- [ ] ** VS Code** or preferred code editor
+- [ ] ** Browser** (Chrome, Firefox, Safari, Edge)
 
 ### Verification Commands
 ```bash
@@ -88,16 +97,16 @@ npm install react-router-dom
 
 ### Exercise 1: Basic Routing Setup (40% Practice)
 
-**Goal** Set up React Router with basic navigation and multiple pages.
+** Goal** Set up React Router with basic navigation and multiple pages.
 
 #### Task 1.1: Install and Configure React Router (Guided)
 
-**Step 1: Install React Router**
+** Step 1: Install React Router**
 ```bash
 npm install react-router-dom
 ```
 
-**Step 2: Create Basic Page Components**
+** Step 2: Create Basic Page Components**
 
 Create three simple page components first:
 
@@ -133,7 +142,7 @@ export default function Contact() {
 }
 ```
 
-**Step 3: Setup Router in App.jsx**
+** Step 3: Setup Router in App.jsx**
 
 ```jsx
 // src/App.jsx
@@ -159,7 +168,7 @@ function App() {
 export default App;
 ```
 
-**Test** Run `npm run dev`, manually navigate to:
+** Test** Run `npm run dev`, manually navigate to:
 - `http://localhost:5173/` → Home page
 - `http://localhost:5173/about` → About page
 - `http://localhost:5173/contact` → Contact page
@@ -170,14 +179,14 @@ export default App;
 
 **🔨 TODO** Create a navigation component with route links.
 
-**Requirements**
+** Requirements**
 1. Create `src/components/Navbar.jsx`
 2. Use `Link` component for the logo/brand
 3. Use `NavLink` components for navigation items (Home, About, Contact)
 4. Apply `active` class to currently active links
 5. Add the Navbar to `App.jsx` above the `<Routes>`
 
-**Hints**
+** Hints**
 
 ```jsx
 // Import the routing components
@@ -219,9 +228,7 @@ function Navbar() {
 - Navigation bar appears on all pages
 - Logo/brand links to home page
 - Nav links highlight when active
-- Clicking links changes pages without full reload
-
-**Solution** See `solutions/exercise1-routing/`
+- Clicking links changes pages without full reload **Solution** See `solutions/exercise1-routing/`
 
 ---
 
@@ -229,15 +236,13 @@ function Navbar() {
 
 **🔨 TODO** Create a products page with dynamic routing using URL parameters.
 
-**Requirements**
+** Requirements**
 1. Create `src/pages/Products.jsx` - displays list of products
 2. Create `src/pages/ProductDetail.jsx` - displays single product details
 3. Each product in the list should link to `/products/:id`
 4. Use `useParams()` hook to get the `id` from URL
 5. Use `useNavigate()` hook to add a "Back" button
-6. Add Products link to Navbar
-
-**Hints**
+6. Add Products link to Navbar **Hints**
 
 ```jsx
 // Products page with links
@@ -276,26 +281,22 @@ function ProductDetail() {
 <Route path="/products/:id" element={<ProductDetail />} />
 ```
 
-**Product Data Hint** Use the array provided above or create your own
-
-**Expected Outcome**
+**Product Data Hint** Use the array provided above or create your own **Expected Outcome**
 - Products page shows list of clickable products
 - Clicking a product navigates to `/products/1` (or 2, 3)
 - Product detail page displays the correct product info
 - Back button navigates to previous page
-- URL changes reflect the current product
-
-**Solution** See `solutions/exercise1-routing/`
+- URL changes reflect the current product **Solution** See `solutions/exercise1-routing/`
 
 ---
 
 ### Exercise 2: Authentication Context (70% Practice)
 
-**Goal** Build a complete authentication system using React Context API.
+** Goal** Build a complete authentication system using React Context API.
 
 #### Task 2.1: Create Auth Context (Guided)
 
-**Step 1: Create AuthContext File**
+** Step 1: Create AuthContext File**
 
 ```jsx
 // src/context/AuthContext.jsx
@@ -383,7 +384,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 );
 ```
 
-**Test** No visible changes yet, but AuthContext is ready to use!
+** Test** No visible changes yet, but AuthContext is ready to use!
 
 ---
 
@@ -391,7 +392,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 **🔨 TODO** Build a login form that uses the AuthContext.
 
-**Requirements**
+** Requirements**
 1. Create `src/pages/Login.jsx`
 2. Create a form with username and password fields
 3. Use `useAuth()` hook to access the `login` function
@@ -401,7 +402,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 7. If user is already logged in, redirect to dashboard automatically
 8. Add Login link to Navbar (show only when NOT logged in)
 
-**Hints**
+** Hints**
 
 ```jsx
 import { useState } from 'react';
@@ -462,7 +463,7 @@ function Login() {
 }
 ```
 
-**Conditional Navbar Hint**
+** Conditional Navbar Hint**
 ```jsx
 // In Navbar component
 const { isAuthenticated, user, logout } = useAuth();
@@ -477,7 +478,7 @@ const { isAuthenticated, user, logout } = useAuth();
 )}
 ```
 
-**Expected Outcome**
+** Expected Outcome**
 - Login form displays with username and password fields
 - Submitting form shows loading state
 - After login, redirects to dashboard
@@ -485,7 +486,7 @@ const { isAuthenticated, user, logout } = useAuth();
 - Navbar shows username and "Logout" when logged in
 - Test credentials: any username/password works (simulated auth)
 
-**Solution** See `solutions/exercise2-auth/`
+** Solution** See `solutions/exercise2-auth/`
 
 ---
 
@@ -493,15 +494,13 @@ const { isAuthenticated, user, logout } = useAuth();
 
 **🔨 TODO** Build a wrapper component that protects routes from unauthenticated users.
 
-**Requirements**
+** Requirements**
 1. Create `src/components/ProtectedRoute.jsx`
 2. Use `useAuth()` to check if user is authenticated
 3. If authenticated, render the `children` components
 4. If NOT authenticated, redirect to `/login` page
 5. Use `useLocation()` to save the attempted URL
-6. Pass the location to Login so it can redirect back after login
-
-**Hints**
+6. Pass the location to Login so it can redirect back after login **Hints**
 
 ```jsx
 import { Navigate, useLocation } from 'react-router-dom';
@@ -524,7 +523,7 @@ function ProtectedRoute({ children }) {
 export default ProtectedRoute;
 ```
 
-**Using Location State in Login**(Update Login component):
+** Using Location State in Login** (Update Login component):
 ```jsx
 // In Login.jsx
 const location = useLocation();
@@ -534,13 +533,11 @@ const from = location.state?.from?.pathname || '/dashboard';
 navigate(from, { replace: true });
 ```
 
-**Expected Outcome**
+** Expected Outcome**
 - Protected routes are inaccessible without login
 - Attempting to access redirects to login
 - After login, redirects back to attempted page
-- Logged-in users can access protected routes
-
-**Solution** See `solutions/exercise2-auth/`
+- Logged-in users can access protected routes **Solution** See `solutions/exercise2-auth/`
 
 ---
 
@@ -548,7 +545,7 @@ navigate(from, { replace: true });
 
 **🔨 TODO** Create Dashboard, Profile, and Settings pages, then protect them with authentication.
 
-**Requirements**
+** Requirements**
 1. Create `src/pages/Dashboard.jsx` - welcome message with user's name
 2. Create `src/pages/Profile.jsx` - display user profile information
 3. Create `src/pages/Settings.jsx` - user settings page
@@ -556,7 +553,7 @@ navigate(from, { replace: true });
 5. Add navigation links to these pages in Navbar (only when authenticated)
 6. Each page should display the current user's information from `useAuth()`
 
-**Hints**
+** Hints**
 
 ```jsx
 // Example Dashboard page
@@ -596,38 +593,34 @@ import ProtectedRoute from './components/ProtectedRoute';
 )}
 ```
 
-**Profile Page Hint** Display user's id, username, email, and a sample bio
+** Profile Page Hint** Display user's id, username, email, and a sample bio **Settings Page Hint** Create a form to "update" username (just update state, no backend)
 
-**Settings Page Hint** Create a form to "update" username (just update state, no backend)
-
-**Expected Outcome**
+** Expected Outcome**
 - Dashboard, Profile, Settings pages created
 - All three pages require authentication
 - Trying to access while logged out redirects to login
 - Pages display current user's information
 - Navbar shows these links only when logged in
-- Logout clears user and redirects to home
-
-**Solution** See `solutions/exercise2-auth/`
+- Logout clears user and redirects to home **Solution** See `solutions/exercise2-auth/`
 
 ---
 
 ### Exercise 3: Advanced Routing Patterns (85% Practice)
 
-**Goal** Implement nested routes and programmatic navigation patterns.
+** Goal** Implement nested routes and programmatic navigation patterns.
 
 #### Task 3.1: Nested Routes with Outlet (85% TODO)
 
 **🔨 TODO** Convert Dashboard into a layout with nested routes.
 
-**Requirements**
+** Requirements**
 1. Update Dashboard to use `<Outlet />` for nested content
 2. Create nested routes: `/dashboard/overview`, `/dashboard/stats`, `/dashboard/activity`
 3. Create three sub-components: Overview, Stats, Activity
 4. Add sidebar navigation within Dashboard
 5. Default to Overview when visiting `/dashboard`
 
-**Hints**
+** Hints**
 
 ```jsx
 // Dashboard as layout
@@ -670,14 +663,12 @@ function Overview() {
 }
 ```
 
-**Expected Outcome**
+** Expected Outcome**
 - Dashboard has sidebar with sub-navigation
 - Clicking sidebar links changes content area
 - URL changes to `/dashboard/overview`, `/dashboard/stats`, etc.
 - Default shows Overview when visiting `/dashboard`
-- Main navbar still visible
-
-**Solution** See `solutions/exercise3-advanced/`
+- Main navbar still visible **Solution** See `solutions/exercise3-advanced/`
 
 ---
 
@@ -685,37 +676,33 @@ function Overview() {
 
 ### Bonus 1: Remember Me Functionality (Advanced)
 
-**Challenge** Add "Remember Me" checkbox to login that persists authentication for 7 days.
+** Challenge** Add "Remember Me" checkbox to login that persists authentication for 7 days.
 
-**Hints**
+** Hints**
 - Add checkbox to login form
 - Store timestamp along with user data
 - Check timestamp on app load
-- Auto-logout if expired
-
-**Expected** Login persists across browser sessions when "Remember Me" is checked
+- Auto-logout if expired **Expected** Login persists across browser sessions when "Remember Me" is checked
 
 ---
 
 ### Bonus 2: User Role-Based Access (Advanced)
 
-**Challenge** Add user roles (admin, user) and restrict certain routes based on role.
+** Challenge** Add user roles (admin, user) and restrict certain routes based on role.
 
-**Hints**
+** Hints**
 - Add `role` property to User interface
 - Create `AdminRoute` component similar to `ProtectedRoute`
 - Check `user.role === 'admin'` before rendering
-- Create an Admin page accessible only to admins
-
-**Expected** Admin routes only accessible to users with admin role
+- Create an Admin page accessible only to admins **Expected** Admin routes only accessible to users with admin role
 
 ---
 
 ### Bonus 3: 404 Not Found Page (Medium)
 
-**Challenge** Create a custom 404 page for invalid routes.
+** Challenge** Create a custom 404 page for invalid routes.
 
-**Hints**
+** Hints**
 ```jsx
 // Add as last route in App.jsx
 <Route path="*" element={<NotFound />} />
@@ -727,14 +714,14 @@ function Overview() {
 
 ### Bonus 4: Loading Bar During Navigation (Advanced)
 
-**Challenge** Show a loading bar at the top when navigating between routes.
+** Challenge** Show a loading bar at the top when navigating between routes.
 
-**Hints**
+** Hints**
 - Use `useNavigation()` hook from React Router
 - Create a `<NavigationBar />` component
 - Show progress bar when `navigation.state === 'loading'`
 
-**Expected** Visual feedback during route transitions
+** Expected** Visual feedback during route transitions
 
 ---
 
@@ -771,7 +758,7 @@ function Overview() {
 
 **Cause** Component not wrapped in `AuthProvider`
 
-**Solution** Ensure `<AuthProvider>` wraps your `<App />` in `main.jsx`
+** Solution** Ensure `<AuthProvider>` wraps your `<App />` in `main.jsx`
 
 ```jsx
 <AuthProvider>
@@ -783,9 +770,7 @@ function Overview() {
 
 ### Issue: Protected routes redirect even when logged in
 
-**Cause** User state not persisting or localStorage not loading
-
-**Solution** Check `useEffect` in AuthContext is restoring user from localStorage
+**Cause** User state not persisting or localStorage not loading **Solution** Check `useEffect` in AuthContext is restoring user from localStorage
 
 ```jsx
 useEffect(() => {
@@ -800,9 +785,7 @@ useEffect(() => {
 
 ### Issue: NavLink active class not working
 
-**Cause** Using `className` as string instead of function
-
-**Solution** Use function form:
+**Cause** Using `className` as string instead of function **Solution** Use function form:
 ```jsx
 <NavLink
   to="/about"
@@ -814,9 +797,7 @@ useEffect(() => {
 
 ### Issue: Outlet not rendering nested routes
 
-**Cause** Forgot to add child routes or missing `index` route
-
-**Solution** Check route structure:
+**Cause** Forgot to add child routes or missing `index` route **Solution** Check route structure:
 ```jsx
 <Route path="/dashboard" element={<Dashboard />}>
   <Route index element={<Overview />} />  {/* Add index! */}
@@ -939,9 +920,7 @@ Before moving to Lesson 5, verify you can:
 - [ ] Add password strength validation
 - [ ] Create user profile management
 - [ ] Handle authentication errors gracefully
-- [ ] Implement remember me functionality
-
-**Goal: Check at least 18/20 items before Lesson 5**
+- [ ] Implement remember me functionality **Goal: Check at least 18/20 items before Lesson 5**
 
 ---
 

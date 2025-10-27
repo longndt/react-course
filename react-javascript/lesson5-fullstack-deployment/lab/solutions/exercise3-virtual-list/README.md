@@ -4,11 +4,14 @@ Complete solution demonstrating virtual scrolling (windowing) for efficiently re
 
 ## Features Implemented
 
-- **Virtual Scrolling**- Only renders visible items
-- **10,000+ Items**- Handles massive datasets smoothly
-- **Performance Comparison**- Side-by-side regular vs virtual list
-- **Smooth 60 FPS**- Buttery smooth scrolling
-- **Constant Memory**- Memory usage doesn't grow with list size
+- **Virtual Scrolling** - Only renders visible items
+- **10,000+ Items** - Handles massive datasets smoothly
+
+- **Performance Comparison** - Side-by-side regular vs virtual list
+
+- **Smooth 60 FPS** - Buttery smooth scrolling
+
+- **Constant Memory** - Memory usage doesn't grow with list size
 
 ## Project Structure
 
@@ -47,7 +50,7 @@ Open [http://localhost:5173](http://localhost:5173)
 
 ### Visual Test (Easiest)
 
-1. **Start with Virtual List tab**(default)
+1. **Start with Virtual List tab** (default)
    - Scroll through 10,000 items
    - Notice: Smooth, buttery 60 FPS scrolling
 
@@ -87,7 +90,7 @@ Open [http://localhost:5173](http://localhost:5173)
 ### React DevTools Profiler
 
 1. Install [React DevTools](https://react.dev/learn/react-developer-tools)
-2. Open **Profiler**tab
+2. Open **Profiler** tab
 3. Click **Record**
 4. Switch tabs and scroll
 5. Stop recording
@@ -112,7 +115,7 @@ function RegularList({ items }: { items: Item[] }) {
 }
 ```
 
-**Result** 10,000 DOM nodes = slow, laggy, high memory
+** Result** 10,000 DOM nodes = slow, laggy, high memory
 
 ### The Solution
 
@@ -148,16 +151,17 @@ function VirtualList({ items, itemHeight, containerHeight }) {
 
 | Metric | Regular List (10K items) | Virtual List (10K items) | Improvement |
 |--------|--------------------------|--------------------------|-------------|
-| **DOM Nodes**| 10,000 | ~15 | **99.85%**fewer |
-| **Initial Render**| 500-1000ms | 10-20ms | **50x**faster |
-| **Scroll FPS**| 20-40 FPS | 60 FPS | **3x**smoother |
-| **Memory Usage**| High (grows with items) | Low (constant) | Constant |
-| **Battery Impact**| High CPU usage | Minimal CPU | Better battery |
+| ** DOM Nodes**| 10,000 | ~15 | **99.85%** fewer |
+| ** Initial Render**| 500-1000ms | 10-20ms | **50x** faster |
+| ** Scroll FPS**| 20-40 FPS | 60 FPS | **3x** smoother |
+| ** Memory Usage**| High (grows with items) | Low (constant) | Constant |
+| ** Battery Impact**| High CPU usage | Minimal CPU | Better battery |
 
 ### Real-World Numbers
 
 With **100,000 items**
 - **Regular List** Browser freezes, may crash
+
 - **Virtual List** Still smooth 60 FPS 
 
 ## Key Concepts
@@ -248,7 +252,7 @@ import { FixedSizeList } from 'react-window';
 </FixedSizeList>
 ```
 
-**Pros** Lightweight, modern, actively maintained
+** Pros** Lightweight, modern, actively maintained
 
 ### react-virtualized
 
@@ -256,9 +260,7 @@ import { FixedSizeList } from 'react-window';
 npm install react-virtualized
 ```
 
-**Pros** More features, supports grids, variable heights
-
-**Cons** Heavier, less modern API
+** Pros** More features, supports grids, variable heights **Cons** Heavier, less modern API
 
 ### TanStack Virtual
 
@@ -266,7 +268,7 @@ npm install react-virtualized
 npm install @tanstack/react-virtual
 ```
 
-**Pros** Modern, headless, very flexible
+** Pros** Modern, headless, very flexible
 
 ## Learning Outcomes
 
@@ -290,7 +292,9 @@ After completing this exercise, you understand:
 ## Related Exercises
 
 - **Exercise 1** Code Splitting & Lazy Loading
+
 - **Exercise 2** Component Memoization
+
 - **Exercise 4** Production Build & Deployment
 
 ## Additional Resources
@@ -305,13 +309,13 @@ After completing this exercise, you understand:
 **Rendering 10,000 items:**
 
 **Regular List:**
-- 10,000 div elements × 100 bytes = **1 MB**DOM
+- 10,000 div elements × 100 bytes = **1 MB** DOM
 - Initial render: **500ms**
 - Scroll frame: **50ms**(= 20 FPS)
 
 **Virtual List:**
-- 15 div elements × 100 bytes = **1.5 KB**DOM
+- 15 div elements × 100 bytes = **1.5 KB** DOM
 - Initial render: **15ms**
 - Scroll frame: **16ms**(= 60 FPS)
 
-**Improvement** **667x**less memory, **33x**faster initial render!
+** Improvement** **667x** less memory, **33x** faster initial render!

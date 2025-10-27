@@ -4,21 +4,24 @@
 
 ### Welcome.css
 Complete CSS styling for the Welcome component with:
-- **Gradient Background:**Purple gradient from #667eea to #764ba2
-- **Typography:**White text with different opacities for hierarchy
-- **Spacing:**Proper padding and margins for visual balance
-- **Effects:**Border radius, box shadow for depth
+- **Gradient Background:** Purple gradient from #667eea to #764ba2
+
+- **Typography:** White text with different opacities for hierarchy
+
+- **Spacing:** Proper padding and margins for visual balance
+
+- **Effects:** Border radius, box shadow for depth
 
 ### Welcome.tsx
 Updated Welcome component that imports the CSS file
 
 ## Key Concepts Demonstrated
 
-1. **CSS Imports:**Import CSS in component files
-2. **Gradient Backgrounds:**Using `linear-gradient()`
-3. **RGBA Colors:**Transparent colors with `rgba()`
-4. **CSS Selectors:**Nested selectors (`.welcome h2`)
-5. **Modern CSS:**Box shadow, border radius
+1. **CSS Imports:** Import CSS in component files
+2. **Gradient Backgrounds:** Using `linear-gradient()`
+3. **RGBA Colors:** Transparent colors with `rgba()`
+4. **CSS Selectors:** Nested selectors (`.welcome h2`)
+5. **Modern CSS:** Box shadow, border radius
 
 ## CSS Breakdown
 

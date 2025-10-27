@@ -17,16 +17,22 @@
 ## What is React?
 
 ### Key Concepts
-- **Component-based**- Build UI with reusable components
-- **Declarative**- Describe what you want, not how to get it
-- **Virtual DOM**- Efficient updates and rendering
-- **Unidirectional Data Flow**- Data flows down, events flow up
+- **Component-based** - Build UI with reusable components
+
+- **Declarative** - Describe what you want, not how to get it
+
+- **Virtual DOM** - Efficient updates and rendering
+
+- **Unidirectional Data Flow** - Data flows down, events flow up
 
 ### Why React?
-- **Reusable Components**- Build once, use anywhere
-- **Efficient Updates**- Only re-render what changed
-- **Rich Ecosystem**- Huge community and tooling
-- **Industry Standard**- Used by major companies
+- **Reusable Components** - Build once, use anywhere
+
+- **Efficient Updates** - Only re-render what changed
+
+- **Rich Ecosystem** - Huge community and tooling
+
+- **Industry Standard** - Used by major companies
 
 ---
 

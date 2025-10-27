@@ -146,10 +146,15 @@ function AnyComponent() {
 ## Learning Points
 
 - **Context API** Global state without prop drilling
+
 - **Provider Pattern** Wrap app with data provider
+
 - **Custom Hooks** Simplify context consumption
+
 - **CSS Variables** Dynamic theming technique
+
 - **Error Boundaries** Validate hook usage
+
 - **TypeScript Context** Type-safe global state
 
 ## Code Highlights

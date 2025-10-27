@@ -129,9 +129,13 @@ const EnhancedComponent = withLoading(
 ## Learning Points
 
 - **HOC Pattern** Function that enhances components
+
 - **Generic Types** TypeScript generics for flexibility
+
 - **Prop Spreading** Passing props to wrapped component
+
 - **CSS Animations** Keyframe animations for spinner
+
 - **Async State** Managing loading states
 
 ## Code Highlights
@@ -193,6 +197,7 @@ function ProductList({ products, isLoading }: Props) {
 
 ### When to Use HOC vs Hooks
 - **HOC** Cross-cutting concerns, multiple components
+
 - **Hooks** Component-specific logic, state management
 
 ## Next Steps

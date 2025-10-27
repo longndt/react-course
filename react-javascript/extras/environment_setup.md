@@ -1,6 +1,6 @@
 # Development Environment Setup Guide
 
-> 📋 **Purpose** This comprehensive guide provides detailed instructions for setting up your complete React development environment. Complete this setup **before**starting Lesson 1, as the lessons focus on React concepts rather than tool installation.
+> 📋 **Purpose** This comprehensive guide provides detailed instructions for setting up your complete React development environment. Complete this setup **before** starting Lesson 1, as the lessons focus on React concepts rather than tool installation.
 
 This guide provides comprehensive instructions for setting up your React development environment. We'll focus on using Visual Studio Code as our primary IDE and establish a complete professional workflow.
 
@@ -97,16 +97,14 @@ This guide provides comprehensive instructions for setting up your React develop
    - Auto Rename Tag
    - Path Intellisense
    - Thunder Client
-   - **Live Server**(Required for running quiz files)
+   - **Live Server** (Required for running quiz files)
 
    **Install Live Server Extension:**
 
    1. Open VS Code Extensions panel (Ctrl+Shift+X or Cmd+Shift+X)
    2. Search for "Live Server" by Ritwick Dey
    3. Click Install
-   4. After installation, you'll see "Go Live" button in the status bar
-
-   **Using Live Server for Quizzes:**
+   4. After installation, you'll see "Go Live" button in the status bar **Using Live Server for Quizzes:**
 
    ```
    1. Open any quiz file (e.g., lesson0-typescript-basics/quiz/quiz0.html)
@@ -116,7 +114,7 @@ This guide provides comprehensive instructions for setting up your React develop
    5. Click "Port: 5500" in status bar to stop the server when done
    ```
 
-   >  **Why Live Server?**The quizzes use modern JavaScript features that require a proper web server to run. Simply double-clicking the HTML file won't work due to CORS restrictions and module imports. Live Server provides a local development server with automatic browser refresh.
+   >  ** Why Live Server?** The quizzes use modern JavaScript features that require a proper web server to run. Simply double-clicking the HTML file won't work due to CORS restrictions and module imports. Live Server provides a local development server with automatic browser refresh.
 
 3. **Configure Git in VS Code**
 
@@ -340,9 +338,7 @@ yarn-error.log
 **Windows:**
 
 - Install Windows Terminal from Microsoft Store
-- Consider using WSL2 for Linux environment
-
-**macOS:**
+- Consider using WSL2 for Linux environment **macOS:**
 
 - Consider using iTerm2
 - Install Oh My Zsh:

@@ -29,7 +29,7 @@ This lab covers the following objectives:
 
 ### Concept Review
 
-React is a JavaScript library for building user interfaces using **components**- reusable, self-contained pieces of UI. Vite is a modern build tool that provides fast development experience with hot module replacement (HMR).
+React is a JavaScript library for building user interfaces using **components** - reusable, self-contained pieces of UI. Vite is a modern build tool that provides fast development experience with hot module replacement (HMR).
 
 ### Goals
 
@@ -55,7 +55,7 @@ npm install
 npm run dev
 ```
 
-**Verify:**Browser should open at `http://localhost:5173` showing default Vite + React page.
+**Verify:** Browser should open at `http://localhost:5173` showing default Vite + React page.
 
 ### Step 2: Understand Project Structure
 
@@ -126,7 +126,7 @@ p {
 }
 ```
 
-**Checkpoint:**Save files and check browser - the "My First React App" heading with clean styling should be visible.
+**Checkpoint:** Save files and check browser - the "My First React App" heading with clean styling should be visible.
 
 ### Testing
 
@@ -140,7 +140,7 @@ p {
 
 ### Concept Review
 
-A **React component**is a JavaScript function that returns JSX (HTML-like syntax). Components split the UI into independent, reusable pieces. JavaScript expressions can be embedded in JSX using curly braces `{}`.
+A **React component** is a JavaScript function that returns JSX (HTML-like syntax). Components split the UI into independent, reusable pieces. JavaScript expressions can be embedded in JSX using curly braces `{}`.
 
 **Example component structure:**
 ```tsx
@@ -206,7 +206,7 @@ Create a new file `src/components/Welcome.tsx` and implement:
 - JSX displays all variables correctly
 - No TypeScript errors in VS Code
 
-**Solution:**See `solutions/exercise2-welcome/Welcome.tsx`
+**Solution:** See `solutions/exercise2-welcome/Welcome.tsx`
 
 ### Step 3: Use Component in App (Independent Practice)
 
@@ -236,7 +236,7 @@ Update `src/App.tsx`:
 3. Current year should display correctly (e.g., 2024)
 4. Open DevTools Console (F12) - should be no errors
 
-**Solution:**See `solutions/exercise2-welcome/` for complete code
+**Solution:** See `solutions/exercise2-welcome/` for complete code
 
 ---
 
@@ -328,7 +328,7 @@ Update `src/components/Welcome.tsx`:
 3. Hover might show shadow effect
 4. Check DevTools → Elements → Inspect the `.welcome` div to verify CSS is applied
 
-**Solution:**See `solutions/exercise3-styling/`
+**Solution:** See `solutions/exercise3-styling/`
 
 ---
 
@@ -471,9 +471,7 @@ Create `src/components/Footer.tsx` and `src/components/Footer.css`:
 
 5. `.footer a:hover`:
    - Color: #764ba2
-   - Text decoration: underline
-
-**Hints:**
+   - Text decoration: underline **Hints:**
 - Object array: `[{ name: "...", url: "..." }, ...]`
 - Access object properties: `link.name`, `link.url`
 - `target="_blank"` opens link in new tab
@@ -532,7 +530,7 @@ Update `src/App.tsx`:
 2. Check Elements tab - all CSS classes applied correctly
 3. Verify all components are properly imported
 
-**Solution:**See `solutions/exercise4-landing-page/` for complete implementation
+**Solution:** See `solutions/exercise4-landing-page/` for complete implementation
 
 ---
 
@@ -578,9 +576,7 @@ Add interactive elements to your landing page to get a preview of React's event 
    - Background color matching the gradient
    - White text
    - Padding and border radius
-   - Hover effect
-
-**Hints:**
+   - Hover effect **Hints:**
 - Function syntax: `const handleClick = () => { alert('...'); };`
 - Button syntax: `<button onClick={handleClick}>Click Me!</button>`
 - Place function before the return statement
@@ -602,7 +598,7 @@ This is an advanced challenge that previews state management from Lesson 2!
 2. Clicking it should change the page background color
 3. (Note: This will require useState from Lesson 2 to work properly)
 
-**Solutions:**See `solutions/bonus-challenges/` for all challenge solutions
+**Solutions:** See `solutions/bonus-challenges/` for all challenge solutions
 
 ---
 
@@ -645,13 +641,17 @@ You've completed Lab 1. Here's what you've mastered:
 
 You're now ready for more advanced React concepts!
 
-**Continue to [Lab 2 - Component Architecture & React Hooks](../../lesson2-component-hook/lab/lab2.md)**to learn:
+** Continue to [Lab 2 - Component Architecture & React Hooks](../../lesson2-component-hook/lab/lab2.md)** to learn:
 
-- **Props:**Pass data from parent to child components
-- **State:**Manage interactive UI with `useState` hook
-- **Effects:**Handle side effects with `useEffect` hook
-- **Custom Hooks:**Create reusable logic
-- **Component Patterns:**Build professional component libraries
+- **Props:** Pass data from parent to child components
+
+- **State:** Manage interactive UI with `useState` hook
+
+- **Effects:** Handle side effects with `useEffect` hook
+
+- **Custom Hooks:** Create reusable logic
+
+- **Component Patterns:** Build professional component libraries
 
 **Before starting Lab 2:**
 - [ ] Make sure all exercises in this lab work correctly
@@ -725,7 +725,7 @@ rm -rf node_modules/.vite
 npm run dev
 ```
 
-**Still stuck?**
+** Still stuck?**
 - Check the solutions folder: `solutions/`
 - Review the error message carefully
 - Search the error on Google or Stack Overflow
@@ -856,7 +856,7 @@ Create an image gallery with click-to-enlarge functionality.
 - Previous/Next navigation
 - Close button
 
-**Advanced:**Add keyboard navigation (arrow keys, ESC to close)
+**Advanced:** Add keyboard navigation (arrow keys, ESC to close)
 
 ---
 
@@ -920,9 +920,7 @@ Before moving to Lesson 2, verify you can:
 - [ ] Implement proper form labeling
 - [ ] Ensure keyboard navigation works
 - [ ] Test with screen readers
-- [ ] Maintain proper color contrast
-
-**Goal: Check at least 24/30 items before Lesson 2**
+- [ ] Maintain proper color contrast **Goal: Check at least 24/30 items before Lesson 2**
 
 ---
 
@@ -999,7 +997,7 @@ Accessibility ensures your applications are usable by everyone, including users 
 - [Web Content Accessibility Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 - [React Accessibility Docs](https://reactjs.org/docs/accessibility.html)
 
-**Goal: Check at least 24/30 items before Lesson 2**
+** Goal: Check at least 24/30 items before Lesson 2**
 
 ---
 

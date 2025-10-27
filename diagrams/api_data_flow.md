@@ -150,7 +150,7 @@ flowchart TD
     style Return1 fill:#d4edda
 ```
 
-**Code Example**
+** Code Example**
 ```typescript
 import { useQuery } from '@tanstack/react-query';
 
@@ -366,7 +366,7 @@ flowchart TD
     style End fill:#fff3cd
 ```
 
-**Code Example**
+** Code Example**
 ```typescript
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -435,7 +435,7 @@ graph TD
     style Network fill:#ffe1e1
 ```
 
-**Code Example**
+** Code Example**
 ```typescript
 async function fetchWithErrorHandling(url: string) {
   try {
@@ -573,7 +573,7 @@ graph TD
     style Both fill:#fff3cd
 ```
 
-**React Query Cache Configuration**
+** React Query Cache Configuration**
 ```typescript
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -660,7 +660,7 @@ sequenceDiagram
     Client2->>Client2: Update UI
 ```
 
-**Code Example**
+** Code Example**
 ```typescript
 function useChatMessages() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -716,7 +716,7 @@ flowchart TD
     style Error2 fill:#ffe1e1
 ```
 
-**Code Example**
+** Code Example**
 ```typescript
 function FileUpload() {
   const [progress, setProgress] = useState(0);
@@ -756,6 +756,4 @@ function FileUpload() {
 ---
 
 **Created** October 6, 2025
-**For** React Course - LongNDT
-**Topic** API Integration & Data Flow
-**Related Lessons** Lesson 3, Lesson 5
+** For** React Course - LongNDT **Topic** API Integration & Data Flow **Related Lessons** Lesson 3, Lesson 5

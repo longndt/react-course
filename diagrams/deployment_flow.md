@@ -237,25 +237,27 @@ graph TB
 
 ## Key Concepts
 
-### 1. **Build Process**
+### 1.
+
+**Build Process**
 - TypeScript compilation
 - Module bundling
 - Asset optimization
 - Code splitting
 
-### 2. **Deployment Strategies**
+### 2. ** Deployment Strategies**
 - Static hosting
 - CDN distribution
 - Environment configuration
 - Domain management
 
-### 3. **CI/CD Pipeline**
+### 3. ** CI/CD Pipeline**
 - Automated testing
 - Code quality checks
 - Build automation
 - Deployment automation
 
-### 4. **Performance Optimization**
+### 4. ** Performance Optimization**
 - Bundle optimization
 - Caching strategies
 - Image optimization

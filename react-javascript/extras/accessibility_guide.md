@@ -542,11 +542,11 @@ function AccessibleForm() {
 
 ### Development Tools
 
-1. **axe DevTools**- Browser extension for accessibility testing
-2. **WAVE**- Web accessibility evaluation tool
-3. **Lighthouse**- Built-in Chrome accessibility audit
-4. **React Testing Library**- Accessible testing utilities
-5. **jest-axe**- Automated accessibility testing
+1. **axe DevTools** - Browser extension for accessibility testing
+2. **WAVE** - Web accessibility evaluation tool
+3. **Lighthouse** - Built-in Chrome accessibility audit
+4. **React Testing Library** - Accessible testing utilities
+5. **jest-axe** - Automated accessibility testing
 
 ### Resources
 
@@ -570,4 +570,4 @@ function AccessibleForm() {
 
 ---
 
-**Remember** Accessibility is not optional - it's a fundamental requirement for creating inclusive web applications that everyone can use.
+** Remember** Accessibility is not optional - it's a fundamental requirement for creating inclusive web applications that everyone can use.

@@ -221,7 +221,7 @@ erDiagram
     }
 ```
 
-**Mongoose Models**
+** Mongoose Models**
 ```typescript
 // User Model
 const userSchema = new Schema({
@@ -392,7 +392,7 @@ flowchart TD
     style DB fill:#ffe1e1
 ```
 
-**Backend Error Handler**
+** Backend Error Handler**
 ```typescript
 // Global error handler middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
@@ -501,7 +501,7 @@ graph LR
     style ProdEnv fill:#ffe1e1
 ```
 
-**Environment Variables**
+** Environment Variables**
 ```bash
 # Frontend (.env)
 VITE_API_URL=http://localhost:3000

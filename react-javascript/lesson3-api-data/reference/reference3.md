@@ -18,12 +18,16 @@
 
 ### Real-World Applications
 - **Dynamic Content** Data from databases, external services
+
 - **User Interactions** Forms, real-time updates
+
 - **Third-Party Services** Payment, maps, social media
 
 ### Common Use Cases
 - **E-commerce** Product catalogs, user accounts, orders
+
 - **Social Media** Posts, comments, user profiles
+
 - **Dashboard** Analytics, reports, real-time data
 
 ---
@@ -32,9 +36,12 @@
 
 ### What is REST?
 - **Representational State Transfer**
-- **Stateless**communication
-- **HTTP methods**for different operations
-- **JSON**as data format
+
+- **Stateless** communication
+
+- **HTTP methods** for different operations
+
+- **JSON** as data format
 
 ### API Endpoints
 ```javascript

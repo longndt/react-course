@@ -20,14 +20,16 @@
 
 ## What is React?
 
-> 🗺️ **Visual Learning** For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
+> 🗺️ ** Visual Learning** For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
 
-**React**is a JavaScript library for building user interfaces, created and maintained by Meta (Facebook).
+** React** is a JavaScript library for building user interfaces, created and maintained by Meta (Facebook).
 
 ### Key Concepts
 
 - **Component-Based** Build encapsulated components that manage their own state
+
 - **Declarative** Design views for each state, React efficiently updates the right components
+
 - **Learn Once, Write Anywhere** Can be used for web, mobile (React Native), desktop, and more
 
 ### Why React?
@@ -41,13 +43,14 @@
 
 ## TypeScript with React (TSX)
 
-In this course, we use **TypeScript**for all React components (.tsx files).
+In this course, we use **TypeScript** for all React components (.tsx files).
 
 ### What is TSX?
 
-**TSX = TypeScript + JSX**
+** TSX = TypeScript + JSX**
 
 - **JSX** JavaScript XML - HTML-like syntax in JavaScript
+
 - **TSX** TypeScript XML - HTML-like syntax in TypeScript with type safety
 - File extension: `.tsx` (not `.ts` or `.jsx`)
 
@@ -88,7 +91,7 @@ function UserCard({ name, email, age }: UserCardProps) {
 export default UserCard;
 ```
 
-**Event Handlers with Types**
+** Event Handlers with Types**
 
 ```typescript
 // File: components/auth/LoginForm.tsx
@@ -115,13 +118,13 @@ function LoginForm() {
 export default LoginForm;
 ```
 
-> **Complete TypeScript Guide** For comprehensive TypeScript review, see [Lesson 0: TypeScript Prerequisites](../../lesson0-typescript-basics/)
+> ** Complete TypeScript Guide** For comprehensive TypeScript review, see [Lesson 0: TypeScript Prerequisites](../../lesson0-typescript-basics/)
 
 ---
 
 ## Project Setup with Vite
 
-**Vite**is the modern, fast build tool we use for React projects.
+**Vite** is the modern, fast build tool we use for React projects.
 
 ### Create New Project
 
@@ -141,7 +144,7 @@ npm run dev
 
 ### Project Structure
 
-> 📁 **Visual Learning** For a comprehensive understanding of React project structure, see [React Project Structure Diagram](../../diagrams/react_project_structure.md)
+> 📁 ** Visual Learning** For a comprehensive understanding of React project structure, see [React Project Structure Diagram](../../diagrams/react_project_structure.md)
 
 ```
 my-app/
@@ -219,7 +222,7 @@ function Greeting() {
 
 ### Creating Custom Components
 
-**Step 1:**Create a new file `src/components/Welcome.tsx`
+**Step 1:** Create a new file `src/components/Welcome.tsx`
 
 ```typescript
 // src/components/Welcome.tsx
@@ -235,7 +238,7 @@ function Welcome() {
 export default Welcome;
 ```
 
-**Step 2:**Use it in `src/App.tsx`
+**Step 2:** Use it in `src/App.tsx`
 
 ```typescript
 // File: src/App.tsx
@@ -256,7 +259,7 @@ export default App;
 
 ## TSX Syntax Rules
 
-**TSX**(TypeScript XML) allows you to write HTML-like code in TypeScript.
+**TSX** (TypeScript XML) allows you to write HTML-like code in TypeScript.
 
 ### Basic Rules
 
@@ -532,10 +535,10 @@ function App() {
 
 ### What's Coming in Lesson 2
 
-🔜 **Props**- Passing data between components
-🔜 **State**- Managing dynamic data with useState
-🔜 **Hooks**- useEffect, custom hooks
-🔜 **Forms**- Controlled components and validation
-🔜 **Component Patterns**- Composition and reusability
+🔜 ** Props** - Passing data between components
+🔜 ** State** - Managing dynamic data with useState
+🔜 ** Hooks** - useEffect, custom hooks
+🔜 ** Forms** - Controlled components and validation
+🔜 ** Component Patterns** - Composition and reusability
 
-> **Advanced Topics** For advanced TypeScript patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)
+> ** Advanced Topics** For advanced TypeScript patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)

@@ -43,15 +43,11 @@ Comprehensive testing strategies for React applications, covering unit testing, 
 - Individual functions and utilities
 - Component rendering
 - Hook behavior
-- Pure functions
-
-**Integration Tests (20%)**
+- Pure functions **Integration Tests (20%)**
 - Component interactions
 - API integration
 - Context providers
-- Form submissions
-
-**E2E Tests (10%)**
+- Form submissions **E2E Tests (10%)**
 - Critical user journeys
 - Authentication flows
 - Payment processes
@@ -753,10 +749,10 @@ open coverage/lcov-report/index.html
 
 ### Coverage Best Practices
 
-1. **Aim for 80%+ coverage**on critical paths
-2. **Focus on business logic**over implementation details
-3. **Test edge cases**and error conditions
-4. **Don't test third-party libraries**unless you're extending them
+1. **Aim for 80%+ coverage** on critical paths
+2. **Focus on business logic** over implementation details
+3. **Test edge cases** and error conditions
+4. **Don't test third-party libraries** unless you're extending them
 5. **Use coverage to find untested code** not as a goal
 
 ---

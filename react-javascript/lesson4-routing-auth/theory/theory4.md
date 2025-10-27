@@ -23,22 +23,28 @@
 
 **Modern Web Applications Need:**
 
-- **Multi-page Navigation**- Users expect different pages/views
-- **User Authentication**- Secure access to protected content
-- **State Management**- Global user state across components
-- **Security**- Protect sensitive routes and data
+- **Multi-page Navigation** - Users expect different pages/views
+
+- **User Authentication** - Secure access to protected content
+
+- **State Management** - Global user state across components
+
+- **Security** - Protect sensitive routes and data
 
 **Key Benefits:**
-- **Better UX**- Smooth navigation without page refreshes
-- **Security**- Protected routes and user sessions
-- **Scalability**- Organized code structure
-- **Professional**- Industry-standard patterns
+- **Better UX** - Smooth navigation without page refreshes
+
+- **Security** - Protected routes and user sessions
+
+- **Scalability** - Organized code structure
+
+- **Professional** - Industry-standard patterns
 
 ---
 
 ## React Router Fundamentals
 
-> 🛣️ **Visual Learning** For a comprehensive understanding of routing flow, see [Routing Flow Diagram](../../diagrams/routing_flow.md)
+> 🛣️ ** Visual Learning** For a comprehensive understanding of routing flow, see [Routing Flow Diagram](../../diagrams/routing_flow.md)
 
 ### Setup React Router
 
@@ -279,10 +285,13 @@ function Layout() {
 Authentication is the process of verifying who a user is, while authorization is the process of verifying what they have access to.
 
 **Common Authentication Methods:**
-- **Username/Password**- Traditional login
-- **JWT Tokens**- Stateless authentication
-- **OAuth**- Third-party authentication
-- **Session-based**- Server-side sessions
+- **Username/Password** - Traditional login
+
+- **JWT Tokens** - Stateless authentication
+
+- **OAuth** - Third-party authentication
+
+- **Session-based** - Server-side sessions
 
 ### Authentication Flow
 
@@ -348,9 +357,11 @@ const validateToken = (token) => {
 ### Token Expiration Management
 
 **Why Token Expiration?**
-- **Security**- Prevents indefinite access
-- **Performance**- Reduces server load
-- **Compliance**- Meets security standards
+- **Security** - Prevents indefinite access
+
+- **Performance** - Reduces server load
+
+- **Compliance** - Meets security standards
 
 **Implementation with Expiration:**
 
@@ -397,10 +408,13 @@ const login = async (email, password) => {
 ```
 
 **Token Expiration Benefits:**
-- **Automatic cleanup**- Expired tokens are removed
-- **Security**- Prevents long-term unauthorized access
-- **User experience**- Seamless re-authentication
-- **Configurable**- Easy to adjust expiration time
+- **Automatic cleanup** - Expired tokens are removed
+
+- **Security** - Prevents long-term unauthorized access
+
+- **User experience** - Seamless re-authentication
+
+- **Configurable** - Easy to adjust expiration time
 
 ### Axios with JWT
 
@@ -699,13 +713,13 @@ useEffect(() => {
 - Token storage and validation
 - Error handling and user feedback
 
-> 🔄 **Visual Learning** For a comprehensive understanding of state management patterns, see [State Management Flow Diagram](../../diagrams/state_management_flow.md)
+> 🔄 ** Visual Learning** For a comprehensive understanding of state management patterns, see [State Management Flow Diagram](../../diagrams/state_management_flow.md)
 
 ### What's Coming in Lesson 5
 
-🔜 **Full-Stack Development**- Backend integration with Express.js
-🔜 **Database Operations**- MongoDB with Mongoose
-🔜 **File Uploads**- Media management and cloud storage
-🔜 **Deployment**- Production deployment and CI/CD
+🔜 ** Full-Stack Development** - Backend integration with Express.js
+🔜 ** Database Operations** - MongoDB with Mongoose
+🔜 ** File Uploads** - Media management and cloud storage
+🔜 ** Deployment** - Production deployment and CI/CD
 
-> **Advanced Topics** For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)
+> ** Advanced Topics** For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)

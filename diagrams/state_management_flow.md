@@ -80,7 +80,7 @@ graph TD
     style Child1 fill:#ffe1e1
 ```
 
-**Code Example**
+** Code Example**
 ```typescript
 function GrandParent() {
   const [user, setUser] = useState({ name: 'Alice' });
@@ -107,7 +107,7 @@ function ChildA1({ user, setUser }) {
 }
 ```
 
-**Problems**
+** Problems**
 - 🔴 Props drilling through multiple levels
 - 🔴 All intermediate components need props
 - 🔴 Difficult to maintain
@@ -139,7 +139,7 @@ graph TD
     style Comp3 fill:#d4edda
 ```
 
-**Code Example**
+** Code Example**
 ```typescript
 // 1. Create Context
 const UserContext = createContext<UserContextType | null>(null);
@@ -265,7 +265,7 @@ sequenceDiagram
     Component->>DOM: Update UI
 ```
 
-**Code Example**
+** Code Example**
 ```typescript
 type State = { count: number };
 type Action = { type: 'INCREMENT' } | { type: 'DECREMENT' };
@@ -317,7 +317,7 @@ graph TD
     style Hook3 fill:#d4edda
 ```
 
-**Code Example**
+** Code Example**
 ```typescript
 // 1. Create Store (outside component)
 const useStore = create<StoreState>((set) => ({
@@ -338,7 +338,7 @@ function Display() {
 }
 ```
 
-**Benefits**
+** Benefits**
 - ✅ No Provider needed
 - ✅ Minimal boilerplate
 - ✅ Selective subscriptions (performance)
@@ -370,7 +370,7 @@ flowchart TD
     style Thunk fill:#ffe1e1
 ```
 
-**Code Example**
+** Code Example**
 ```typescript
 // 1. Create Slice
 const counterSlice = createSlice({
@@ -466,9 +466,9 @@ graph LR
     style D2 fill:#d4edda
 ```
 
-**Example**
+** Example**
 
-❌ **Wrong**(Mutation):
+❌ ** Wrong** (Mutation):
 ```typescript
 const [user, setUser] = useState({ name: 'Alice', age: 25 });
 
@@ -477,7 +477,7 @@ user.name = 'Bob'; // Mutation!
 setUser(user); // Same reference, may not re-render
 ```
 
-✅ **Correct**(Immutable):
+✅ ** Correct** (Immutable):
 ```typescript
 const [user, setUser] = useState({ name: 'Alice', age: 25 });
 
@@ -521,7 +521,7 @@ sequenceDiagram
     end
 ```
 
-**Code Example**
+** Code Example**
 ```typescript
 function DataFetcher() {
   const [data, setData] = useState(null);
@@ -574,7 +574,7 @@ graph TD
     style LocalStorage fill:#e1f5e1
 ```
 
-**Code Example**
+** Code Example**
 ```typescript
 function useSyncedState(key: string, initialValue: any) {
   const [state, setState] = useState(() => {
@@ -628,7 +628,7 @@ graph TD
     style Skip3 fill:#d4edda
 ```
 
-**Code Example**
+** Code Example**
 ```typescript
 // Without memo: re-renders on every parent update
 function ChildA({ name }) {
@@ -652,8 +652,6 @@ const ChildC = React.memo(({ items }) => {
 
 ---
 
-**Created** October 6, 2025
-**For** React Course - LongNDT
-**Topic** State Management
-**Related Lessons** Lesson 2, Lesson 3
-**Extra Material** [State Management Guide](../extras/state_management.md)
+** Created** October 6, 2025
+** For** React Course - LongNDT **Topic** State Management **Related Lessons** Lesson 2, Lesson 3
+** Extra Material** [State Management Guide](../extras/state_management.md)

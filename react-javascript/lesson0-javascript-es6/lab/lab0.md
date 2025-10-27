@@ -2,17 +2,18 @@
 
 ## Overview
 
-**Duration** 60-90 minutes
-**Difficulty** Beginner to Intermediate
-**Goal** Practice essential JavaScript ES6+ features used in React development
+**Duration** 60-90 minutes **Difficulty** Beginner to Intermediate **Goal** Practice essential JavaScript ES6+ features used in React development
 
 ## Prerequisites
 
 Before starting this lab, make sure you have:
 
-- **Node.js v18+**installed ([Download here](https://nodejs.org/))
-- **A modern web browser**(Chrome, Firefox, Safari, Edge)
-- **A code editor**(VS Code recommended)
+- **Node.js v18+** installed ([Download here](https://nodejs.org/))
+
+- **A modern web browser** (Chrome, Firefox, Safari, Edge)
+
+- **A code editor** (VS Code recommended)
+
 - **Basic understanding of JavaScript fundamentals**
 
 Check your setup:
@@ -71,7 +72,7 @@ node exercises.js
 npx nodemon exercises.js
 ```
 
-📖 **For detailed execution instructions, see the [JavaScript Execution Guide](#-javascript-execution-guide) below.**
+📖 ** For detailed execution instructions, see the [JavaScript Execution Guide](#-javascript-execution-guide) below.**
 
 ---
 
@@ -624,10 +625,10 @@ console.log('Summaries:', manager.getUserSummaries());
 ## Submission Checklist
 
 ✅ **Completed all 7 exercises**
-✅ **All console outputs match expected results**
-✅ **Code uses ES6+ features (no var, no traditional functions where arrow functions are better)**
-✅ **Bonus challenge completed**(optional)
-✅ **Code is clean and well-commented**
+✅ ** All console outputs match expected results**
+✅ ** Code uses ES6+ features (no var, no traditional functions where arrow functions are better)**
+✅ ** Bonus challenge completed** (optional)
+✅ ** Code is clean and well-commented**
 
 ---
 
@@ -655,8 +656,7 @@ This guide demonstrates different ways to run JavaScript files for development a
 // Or use the exercises.js file loaded in your HTML
 ```
 
-**Pros** Immediate feedback, no setup required
-**Cons** Limited for complex projects, no file system access
+** Pros** Immediate feedback, no setup required **Cons** Limited for complex projects, no file system access
 
 ### Method 2: Node.js (Recommended for Development)
 
@@ -820,19 +820,19 @@ ls   # List files
 
 | Method | Speed | Setup | Best For |
 |--------|-------|-------|----------|
-| **Browser Console**| Instant | None | Learning, quick tests |
-| **Node.js**| Fast | Minimal | Development, scripts |
-| **Nodemon**| Fast | Easy | Development with auto-reload |
-| **Online IDEs**| Medium | None | Sharing, demos |
+| ** Browser Console**| Instant | None | Learning, quick tests |
+| ** Node.js**| Fast | Minimal | Development, scripts |
+| ** Nodemon**| Fast | Easy | Development with auto-reload |
+| ** Online IDEs**| Medium | None | Sharing, demos |
 
 ### Best Practices
 
-1. **Use Node.js for development**- Better tooling and debugging
-2. **Use nodemon for active development**- Auto-reload saves time
-3. **Use browser console for quick tests**- Immediate feedback
-4. **Use online IDEs for sharing**- Easy to share with others
-5. **Enable ES modules**- Modern JavaScript features
-6. **Use proper error handling**- Better debugging experience
+1. **Use Node.js for development** - Better tooling and debugging
+2. **Use nodemon for active development** - Auto-reload saves time
+3. **Use browser console for quick tests** - Immediate feedback
+4. **Use online IDEs for sharing** - Easy to share with others
+5. **Enable ES modules** - Modern JavaScript features
+6. **Use proper error handling** - Better debugging experience
 
 ### Quick Reference
 

@@ -2,7 +2,7 @@
 
 This guide covers advanced React patterns, architectural decisions, and enterprise-level practices that will set your capstone project apart and prepare you for senior developer roles.
 
-**Prerequisites:**Complete Lessons 1-5 and feel confident with React fundamentals.
+**Prerequisites:** Complete Lessons 1-5 and feel confident with React fundamentals.
 
 ---
 
@@ -189,7 +189,7 @@ const SecureUserDashboard = withAuth(
 
 ---
 
-## 🏛 **Advanced Architecture Patterns**
+## 🏛 ** Advanced Architecture Patterns**
 
 ### 1. Feature-Based Folder Structure
 
@@ -783,7 +783,9 @@ const AdminPanel = lazy(() =>
 
 ---
 
-## 🛡 **Security Best Practices**
+## 🛡
+
+**Security Best Practices**
 
 ### 1. XSS Prevention
 
@@ -872,9 +874,13 @@ function AdminPanel() {
 
 These patterns demonstrate:
 - **Senior-level thinking**
+
 - **Scalability awareness**
+
 - **Performance optimization**
+
 - **Maintainable code architecture**
+
 - **Enterprise development experience**
 
 ---

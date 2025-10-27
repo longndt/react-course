@@ -80,7 +80,7 @@ graph TD
     style Child1 fill:#ffe1e1
 ```
 
-**Code Example**
+** Code Example**
 ```javascript
 function GrandParent() {
   const [user, setUser] = useState({ name: 'Alice' });
@@ -107,7 +107,7 @@ function ChildA1({ user, setUser }) {
 }
 ```
 
-**Problems**
+** Problems**
 - 🔴 Props drilling through multiple levels
 - 🔴 All intermediate components need props
 - 🔴 Difficult to maintain
@@ -139,7 +139,7 @@ graph TD
     style Comp3 fill:#d4edda
 ```
 
-**Code Example**
+** Code Example**
 ```javascript
 // 1. Create Context
 const UserContext = createContext(null);
@@ -265,7 +265,7 @@ sequenceDiagram
     Component->>DOM: Update UI
 ```
 
-**Code Example**
+** Code Example**
 ```javascript
 // State and Action types (JSDoc comments for JavaScript)
 /**
@@ -346,7 +346,7 @@ function Display() {
 }
 ```
 
-**Benefits**
+** Benefits**
 - ✅ No Provider needed
 - ✅ Minimal boilerplate
 - ✅ Selective subscriptions (performance)
@@ -378,7 +378,7 @@ flowchart TD
     style Thunk fill:#ffe1e1
 ```
 
-**Code Example**
+** Code Example**
 ```javascript
 // 1. Create Slice
 const counterSlice = createSlice({
@@ -474,9 +474,9 @@ graph LR
     style D2 fill:#d4edda
 ```
 
-**Example**
+** Example**
 
-❌ **Wrong**(Mutation):
+❌ ** Wrong** (Mutation):
 ```javascript
 const [user, setUser] = useState({ name: 'Alice', age: 25 });
 
@@ -485,7 +485,7 @@ user.name = 'Bob'; // Mutation!
 setUser(user); // Same reference, may not re-render
 ```
 
-✅ **Correct**(Immutable):
+✅ ** Correct** (Immutable):
 ```javascript
 const [user, setUser] = useState({ name: 'Alice', age: 25 });
 
@@ -529,7 +529,7 @@ sequenceDiagram
     end
 ```
 
-**Code Example**
+** Code Example**
 ```javascript
 function DataFetcher() {
   const [data, setData] = useState(null);
@@ -582,7 +582,7 @@ graph TD
     style LocalStorage fill:#e1f5e1
 ```
 
-**Code Example**
+** Code Example**
 ```javascript
 function useSyncedState(key, initialValue) {
   const [state, setState] = useState(() => {
@@ -636,7 +636,7 @@ graph TD
     style Skip3 fill:#d4edda
 ```
 
-**Code Example**
+** Code Example**
 ```javascript
 // Without memo: re-renders on every parent update
 function ChildA({ name }) {
@@ -660,8 +660,6 @@ const ChildC = React.memo(({ items }) => {
 
 ---
 
-**Created** October 6, 2025
-**For** React Course - LongNDT
-**Topic** State Management
-**Related Lessons** Lesson 2, Lesson 3
-**Extra Material** [State Management Guide](../extras/state_management.md)
+** Created** October 6, 2025
+** For** React Course - LongNDT **Topic** State Management **Related Lessons** Lesson 2, Lesson 3
+** Extra Material** [State Management Guide](../extras/state_management.md)

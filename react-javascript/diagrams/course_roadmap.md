@@ -38,9 +38,7 @@ graph TB
 ## JavaScript Learning Path
 
 ### 🎯 Lesson 0: JavaScript ES6 Prerequisites (Foundation)
-**Difficulty** ⭐ Beginner
-**Time** 2-3 days
-**Requires** HTML, CSS, Basic JavaScript
+**Difficulty** ⭐ Beginner **Time** 2-3 days **Requires** HTML, CSS, Basic JavaScript
 
 ```mermaid
 flowchart TD
@@ -60,29 +58,24 @@ flowchart TD
     style E fill:#ffe1e1
 ```
 
-**Key Topics**
+** Key Topics**
 - JavaScript ES6+ fundamentals
 - Arrow functions and template literals
 - Destructuring and spread operator
 - Modules (import/export)
 - Classes and inheritance
-- Promises and async/await
-
-**JavaScript Features**
+- Promises and async/await **JavaScript Features**
 - Modern ES6+ syntax
 - Module system
 - Class-based programming
 - Asynchronous programming
-- Array methods and functional programming
-
-**Lab Project** JavaScript Practice Exercises
+- Array methods and functional programming **Lab Project** JavaScript Practice Exercises
 
 ---
 
 ### 📘 Lesson 1: React Fundamentals with JavaScript
-**Difficulty** ⭐ Beginner
-**Time** 1 week
-**Requires** Lesson 0
+
+**Difficulty** ⭐ Beginner **Time** 1 week **Requires** Lesson 0
 
 ```mermaid
 flowchart TD
@@ -102,29 +95,24 @@ flowchart TD
     style E fill:#ffe1e1
 ```
 
-**Key Topics**
+** Key Topics**
 - JSX syntax and expressions
 - Functional components
 - Props and state management
 - Event handling
 - Virtual DOM concepts
-- Vite setup with JavaScript
-
-**JavaScript Features**
+- Vite setup with JavaScript **JavaScript Features**
 - Component composition
 - Props passing
 - State management
 - Event handling
-- Lifecycle methods
-
-**Lab Project** Welcome Page Application (JavaScript)
+- Lifecycle methods **Lab Project** Welcome Page Application (JavaScript)
 
 ---
 
 ### 📘 Lesson 2: Components & Hooks
-**Difficulty** ⭐⭐ Intermediate
-**Time** 1-2 weeks
-**Requires** Lesson 1
+
+**Difficulty** ⭐⭐ Intermediate **Time** 1-2 weeks **Requires** Lesson 1
 
 ```mermaid
 flowchart TD
@@ -144,30 +132,25 @@ flowchart TD
     style F fill:#ffe1e1
 ```
 
-**Key Topics**
+** Key Topics**
 - useState with JavaScript
 - useEffect for side effects
 - useRef and useContext
 - Custom hooks
 - Component composition patterns
 - Higher-Order Components (HOC)
-- Render props pattern
-
-**JavaScript Features**
+- Render props pattern **JavaScript Features**
 - Hook-based state management
 - Custom hook creation
 - Component patterns
 - Context API
-- Ref management
-
-**Lab Project** Reusable Component Library (JavaScript)
+- Ref management **Lab Project** Reusable Component Library (JavaScript)
 
 ---
 
 ### 📘 Lesson 3: API Integration & Data
-**Difficulty** ⭐⭐⭐ Intermediate-Advanced
-**Time** 2 weeks
-**Requires** Lessons 1-2
+
+**Difficulty** ⭐⭐⭐ Intermediate-Advanced **Time** 2 weeks **Requires** Lessons 1-2
 
 ```mermaid
 flowchart TD
@@ -188,30 +171,25 @@ flowchart TD
     style F fill:#ffe1e1
 ```
 
-**Key Topics**
+** Key Topics**
 - REST API with JavaScript
 - HTTP methods and responses
 - React Query for data fetching
 - Loading and error states
 - Backend with Express + JavaScript
 - MongoDB with Mongoose
-- CORS configuration
-
-**JavaScript Features**
+- CORS configuration **JavaScript Features**
 - API integration
 - Data fetching patterns
 - Error handling
 - State management for API data
-- Backend development
-
-**Lab Project** Full-Stack Task Manager (JavaScript)
+- Backend development **Lab Project** Full-Stack Task Manager (JavaScript)
 
 ---
 
 ### 📘 Lesson 4: Routing & Authentication
-**Difficulty** ⭐⭐⭐⭐ Advanced
-**Time** 2 weeks
-**Requires** Lessons 1-3
+
+**Difficulty** ⭐⭐⭐⭐ Advanced **Time** 2 weeks **Requires** Lessons 1-3
 
 ```mermaid
 flowchart TD
@@ -232,30 +210,25 @@ flowchart TD
     style F fill:#ffe1e1
 ```
 
-**Key Topics**
+** Key Topics**
 - React Router v6 with JavaScript
 - Navigation and routing
 - URL parameters and query strings
 - JWT authentication
 - Login/Register forms
 - Protected routes
-- Auth context management
-
-**JavaScript Features**
+- Auth context management **JavaScript Features**
 - Client-side routing
 - Authentication patterns
 - Context API for auth
 - Form handling
-- Route protection
-
-**Lab Project** Authentication System (JavaScript)
+- Route protection **Lab Project** Authentication System (JavaScript)
 
 ---
 
 ### 📘 Lesson 5: Full-Stack & Deployment
-**Difficulty** ⭐⭐⭐⭐⭐ Advanced
-**Time** 2-3 weeks
-**Requires** Lessons 1-4
+
+**Difficulty** ⭐⭐⭐⭐⭐ Advanced **Time** 2-3 weeks **Requires** Lessons 1-4
 
 ```mermaid
 flowchart TD
@@ -277,7 +250,7 @@ flowchart TD
     style G fill:#ffe1e1
 ```
 
-**Key Topics**
+** Key Topics**
 - Performance optimization
 - React.memo, useMemo, useCallback
 - Code splitting with lazy loading
@@ -285,16 +258,12 @@ flowchart TD
 - Environment variables
 - Deployment (Vercel, Netlify, Railway)
 - Docker configuration
-- CI/CD with GitHub Actions
-
-**JavaScript Features**
+- CI/CD with GitHub Actions **JavaScript Features**
 - Performance optimization
 - Build optimization
 - Deployment strategies
 - Environment management
-- CI/CD workflows
-
-**Lab Project** Production Deployment (JavaScript)
+- CI/CD workflows **Lab Project** Production Deployment (JavaScript)
 
 ---
 

@@ -2,7 +2,7 @@
 
 ## 📋 Overview
 
-Complete backend solution for the Task Manager API using **Express.js** **MongoDB** and **Mongoose**
+Complete backend solution for the Task Manager API using **Express.js**, **MongoDB**, and **Mongoose**
 
 This solution demonstrates:
 - RESTful API design
@@ -33,8 +33,9 @@ exercise1-backend/
 ## Installation & Setup
 
 ### Prerequisites
-- **Node.js**(v18+)
-- **MongoDB**running locally or MongoDB Atlas account
+- **Node.js** (v18+)
+
+- **MongoDB** running locally or MongoDB Atlas account
 
 ### Step 1: Install Dependencies
 
@@ -86,7 +87,7 @@ sudo systemctl start mongod
 
 ### Step 4: Run the Server
 
-**Development mode**(auto-restart on changes):
+**Development mode** (auto-restart on changes):
 ```bash
 npm run dev
 ```
@@ -105,6 +106,7 @@ Server will start at: `http://localhost:3001`
 ### Base URL: `http://localhost:3001/api/tasks`
 
 ### 1. Get All Tasks
+
 **GET**`/api/tasks`
 
 **Response:**
@@ -128,6 +130,7 @@ Server will start at: `http://localhost:3001`
 ```
 
 ### 2. Get Single Task
+
 **GET**`/api/tasks/:id`
 
 **Response:**
@@ -145,6 +148,7 @@ Server will start at: `http://localhost:3001`
 ```
 
 ### 3. Create Task
+
 **POST**`/api/tasks`
 
 **Request Body:**
@@ -173,6 +177,7 @@ Server will start at: `http://localhost:3001`
 ```
 
 ### 4. Update Task
+
 **PUT**`/api/tasks/:id`
 
 **Request Body:**
@@ -200,6 +205,7 @@ Server will start at: `http://localhost:3001`
 ```
 
 ### 5. Delete Task
+
 **DELETE**`/api/tasks/:id`
 
 **Response:**
@@ -346,7 +352,7 @@ try {
 app.use(cors()); // Enable CORS for all routes
 ```
 
-**Why CORS?**
+** Why CORS?**
 - Allows frontend (localhost:5173) to call backend (localhost:3001)
 - Without CORS: Browser blocks cross-origin requests
 - Security feature that must be explicitly enabled
@@ -373,9 +379,7 @@ app.use(cors()); // Enable CORS for all routes
 
 ### Issue: "MongooseServerSelectionError: connect ECONNREFUSED"
 
-**Cause:**MongoDB is not running
-
-**Solution:**
+**Cause:** MongoDB is not running **Solution:**
 ```bash
 # Start MongoDB service
 mongod
@@ -388,9 +392,7 @@ mongo --eval "db.version()"
 
 ### Issue: "ValidationError: title: Task title is required"
 
-**Cause:**Missing required field in request
-
-**Solution:**Ensure POST/PUT requests include all required fields:
+**Cause:** Missing required field in request **Solution:** Ensure POST/PUT requests include all required fields:
 ```json
 {
   "title": "Required field",
@@ -402,9 +404,7 @@ mongo --eval "db.version()"
 
 ### Issue: "CastError: Cast to ObjectId failed"
 
-**Cause:**Invalid MongoDB ObjectId format
-
-**Solution:**MongoDB IDs must be 24 hex characters:
+**Cause:** Invalid MongoDB ObjectId format **Solution:** MongoDB IDs must be 24 hex characters:
 - Valid: `67012abc123456789abcdef0`
 - Invalid: `123`, `abc`
 
@@ -412,7 +412,7 @@ mongo --eval "db.version()"
 
 ### Issue: Port 3001 already in use
 
-**Cause:**Another process using port 3001
+**Cause:** Another process using port 3001
 
 **Solution:**
 ```bash
@@ -433,32 +433,24 @@ PORT=3001
 
 After completing this exercise, you should understand:
 
- **Express.js Basics**
+ ** Express.js Basics**
 - Setting up Express server
 - Middleware (cors, express.json)
 - Route handlers (GET, POST, PUT, DELETE)
-- Error handling
-
- **MongoDB & Mongoose**
+- Error handling **MongoDB & Mongoose**
 - Connecting to MongoDB
 - Defining schemas with validation
 - Creating models
 - CRUD operations (find, create, update, delete)
-- Query methods
-
- **RESTful API Design**
+- Query methods **RESTful API Design**
 - Resource-based URLs
 - HTTP methods and status codes
 - Request/response patterns
-- Consistent API structure
-
- **Error Handling**
+- Consistent API structure **Error Handling**
 - Try-catch blocks
 - Different error types
 - Appropriate status codes
-- User-friendly error messages
-
- **Best Practices**
+- User-friendly error messages **Best Practices**
 - Environment variables (.env)
 - Input validation
 - CORS security
@@ -490,4 +482,4 @@ After completing this exercise, you should understand:
 
 ---
 
-** Backend Solution Complete!**Now move on to Exercise 2 to connect this API to a React frontend with React Query.
+** Backend Solution Complete!** Now move on to Exercise 2 to connect this API to a React frontend with React Query.

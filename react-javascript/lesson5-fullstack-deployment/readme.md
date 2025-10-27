@@ -2,8 +2,7 @@
 
 ## Overview
 
-**Difficulty** Advanced
-**Prerequisites** Lesson 4 completed, routing and authentication knowledge
+**Difficulty** Advanced **Prerequisites** Lesson 4 completed, routing and authentication knowledge
 
 This lesson covers full-stack development and production deployment. You'll learn to build a complete backend with Express.js and MongoDB, implement file uploads, optimize performance, and deploy your application to production platforms.
 
@@ -49,7 +48,7 @@ npm --version   # Should be 9+
 mongod --version  # MongoDB daemon
 ```
 
-> **⚠️ Not ready?**→ Review [Lesson 4](../lesson4-routing-auth/) first
+> **⚠️ Not ready?** → Review [Lesson 4](../lesson4-routing-auth/) first
 
 ---
 
@@ -78,33 +77,36 @@ npm run dev  # Backend
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 **Theory First** Start with [Theory](./theory/theory5.md) → [Example](./example/) → [Lab](./lab/lab5.md)
-- ⚡ **Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory5.md)
-- 🎯 **Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz5.html) → Focus on weak areas
+- 📖 ** Theory First** Start with [Theory](./theory/theory5.md) → [Example](./example/) → [Lab](./lab/lab5.md)
+- ⚡ ** Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory5.md)
+- 🎯 ** Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz5.html) → Focus on weak areas
 
 ---
 
 ## What's Next
 
 ### Ready to Continue?
-- **Completed this lesson?**→ You've finished the React course! 🎉
+- **Completed this lesson?** → You've finished the React course! 🎉
 
 ### Need More Practice?
-- **Study theory**→ [theory5.md](./theory/theory5.md) - Deep dive into full-stack development
-- **View examples**→ [example/](./example/) - Follow-along tutorials
-- **Practice exercises**→ [lab5.md](./lab/lab5.md) - Production challenges
+- **Study theory** → [theory5.md](./theory/theory5.md) - Deep dive into full-stack development
+
+- **View examples** → [example/](./example/) - Follow-along tutorials
+
+- **Practice exercises** → [lab5.md](./lab/lab5.md) - Production challenges
 
 ### Additional Resources
-- **Quiz yourself**→ [quiz/](./quiz/) - Test your knowledge
-- ❓ **Having issues?**→ [Troubleshooting Guide](../extras/troubleshooting_guide.md)
-- **Advanced topics**→ Explore [Extra Materials](../extras/)
+- **Quiz yourself** → [quiz/](./quiz/) - Test your knowledge
+- ❓ ** Having issues?** → [Troubleshooting Guide](../extras/troubleshooting_guide.md)
+
+- **Advanced topics** → Explore [Extra Materials](../extras/)
 
 ---
 
 ## Resources & References
 
 ### Course Guides
-- **[Performance Optimization Guide](../extras/performance_optimization.md)**- useMemo, useCallback, code splitting, bundle analysis, Core Web Vitals
+- **[Performance Optimization Guide](../extras/performance_optimization.md)** - useMemo, useCallback, code splitting, bundle analysis, Core Web Vitals
 - [State Management Guide](../extras/state_management.md) - Redux, Zustand, Jotai patterns for complex apps
 - [Troubleshooting Guide](../extras/troubleshooting_guide.md) - Common deployment issues and solutions
 

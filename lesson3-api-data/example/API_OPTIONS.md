@@ -24,7 +24,7 @@ npm run dev:full
 
 ## Option 2: Mock API (MSW - No Database Required)
 
-**Perfect for learners without MongoDB setup!**
+** Perfect for learners without MongoDB setup!**
 
 **Setup:**
 1. Install dependencies: `npm install`
@@ -61,6 +61,7 @@ interface Task {
 ## Switching Between Options
 
 - **Mock Mode** `npm run dev:mock`
+
 - **Real Backend** `npm run dev:full`
 
 Both options provide the same learning experience for React API integration!

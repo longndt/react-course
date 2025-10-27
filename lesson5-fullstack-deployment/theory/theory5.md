@@ -24,8 +24,11 @@
 **Complete Application Stack:**
 
 - **Frontend** - React user interface
+
 - **Backend** - Express.js API server
+
 - **Database** - MongoDB data storage
+
 - **Deployment** - Production hosting
 
 **Key Benefits:**
@@ -898,7 +901,7 @@ git push origin main
 
 #### **Step 7: Monitor Deployment**
 
-1. Go to GitHub repository → **Actions** tab
+1. Go to GitHub repository → ** Actions** tab
 2. View running workflow (yellow = running, green = success, red = failed)
 3. Click on workflow to see detailed logs for each step
 4. If there are errors, check logs for debugging
@@ -1159,16 +1162,22 @@ useEffect(() => {
 - Production build optimization
 - Vercel deployment for frontend
 - VPS deployment with PM2 for backend
+
 - **Complete CI/CD workflow from code to production**
 
 ### Advanced Topics to Explore
 
 🚀 **Next Level:**
 - **GraphQL** - Alternative to REST APIs
+
 - **WebSockets** - Real-time communication
+
 - **Docker & Kubernetes** - Container orchestration
+
 - **Microservices** - Distributed architecture
+
 - **AWS/Azure/GCP** - Cloud platforms
+
 - **Testing** - Unit, integration, and E2E tests
 
 ---

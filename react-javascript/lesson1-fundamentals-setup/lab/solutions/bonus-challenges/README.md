@@ -104,7 +104,7 @@ const handleClick = () => {
 ## Challenge 3: Theme Toggle (Preview)
 
 ### Note
-This challenge requires **state management**with `useState` hook, which is covered in Lesson 2. Here's a preview of what you'll learn:
+This challenge requires **state management** with `useState` hook, which is covered in Lesson 2. Here's a preview of what you'll learn:
 
 ```jsx
 import { useState } from 'react';
@@ -182,19 +182,17 @@ function App() {
 
 These challenges give you a preview of what's coming:
 
-1. **State Management**(Lesson 2)
+1. **State Management** (Lesson 2)
    - useState hook
    - Interactive UIs
    - Re-rendering on state change
 
-2. **Event Handling**(Lesson 2)
+2. **Event Handling** (Lesson 2)
    - Different event types
    - Event objects
    - Preventing default behavior
 
-3. **Conditional Rendering**(Lesson 2)
+3. **Conditional Rendering** (Lesson 2)
    - Show/hide elements
    - Ternary operators
-   - Logical AND operator
-
-**Continue to Lesson 2 to master these concepts!**
+   - Logical AND operator **Continue to Lesson 2 to master these concepts!**

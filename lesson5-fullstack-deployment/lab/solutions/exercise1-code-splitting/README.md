@@ -4,11 +4,15 @@ Complete solution for Exercise 1 demonstrating React code splitting with lazy lo
 
 ## Features Implemented
 
-- **React.lazy()**- Dynamic component imports
-- **Suspense**- Loading states with custom spinner
-- **ErrorBoundary**- Error handling for lazy-loaded components
-- **Route-based code splitting**- Each page is a separate bundle
-- **Manual chunking**- Vendor libraries in separate chunk
+- **React.lazy()** - Dynamic component imports
+
+- **Suspense** - Loading states with custom spinner
+
+- **ErrorBoundary** - Error handling for lazy-loaded components
+
+- **Route-based code splitting** - Each page is a separate bundle
+
+- **Manual chunking** - Vendor libraries in separate chunk
 
 ## Project Structure
 
@@ -66,9 +70,9 @@ npm run preview
 
 1. **Open DevTools**
    - Press `F12` or right-click → Inspect
-   - Go to the **Network**tab
+   - Go to the **Network** tab
 
-2. **Enable Network Throttling**(Optional)
+2. **Enable Network Throttling** (Optional)
    - Select "Slow 3G" to simulate slower connections
    - This makes the loading spinner more visible
 
@@ -281,7 +285,9 @@ After completing this exercise, you understand:
 ## Related Exercises
 
 - **Exercise 2** Component Memoization
+
 - **Exercise 3** Virtual Lists
+
 - **Exercise 4** Production Deployment
 
 ## Additional Resources

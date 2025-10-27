@@ -120,7 +120,7 @@ graph LR
     E --> F[🚀 Lesson 5<br/>Full-Stack & Deploy]
 
     A1[TypeScript Basics<br/>Types & Interfaces] --> A
-    B1[JSX + TypeScript<br/>Component Types] --> B
+    B1[TSX Syntax<br/>Component Types] --> B
     C1[Custom Hooks<br/>TypeScript Hooks] --> C
     D1[REST APIs<br/>TypeScript API Types] --> D
     E1[React Router<br/>TypeScript Auth] --> E
@@ -201,17 +201,17 @@ graph TB
 
 ## Visual Elements Legend
 
-- 🎯 **Learning Objectives**- Clear goals for each lesson
-- 📋 **Prerequisites**- Required TypeScript knowledge and setup
-- 🚀 **Quick Start**- Fast TypeScript setup and learning paths
-- 📚 **What You'll Learn**- Detailed TypeScript curriculum breakdown
-- ⚛️ **React Components**- TypeScript component architecture and patterns
-- 🎣 **Hooks**- TypeScript state management and side effects
-- 🌐 **API Integration**- TypeScript backend communication
-- 🔐 **Authentication**- TypeScript security and user management
-- 🚀 **Deployment**- TypeScript production and scaling
-- ✅ **Best Practices**- TypeScript professional development standards
-- 🚨 **Common Challenges**- TypeScript troubleshooting and solutions
-- 📝 **Progress Tracking**- TypeScript checklists and assessments
-- 🧪 **Quizzes**- TypeScript knowledge validation
-- 📖 **Resources**- Additional TypeScript learning materials
+- 🎯 **Learning Objectives** - Clear goals for each lesson
+- 📋 ** Prerequisites** - Required TypeScript knowledge and setup
+- 🚀 ** Quick Start** - Fast TypeScript setup and learning paths
+- 📚 ** What You'll Learn** - Detailed TypeScript curriculum breakdown
+- ⚛️ ** React Components** - TypeScript component architecture and patterns
+- 🎣 ** Hooks** - TypeScript state management and side effects
+- 🌐 ** API Integration** - TypeScript backend communication
+- 🔐 ** Authentication** - TypeScript security and user management
+- 🚀 ** Deployment** - TypeScript production and scaling
+- ✅ ** Best Practices** - TypeScript professional development standards
+- 🚨 ** Common Challenges** - TypeScript troubleshooting and solutions
+- 📝 ** Progress Tracking** - TypeScript checklists and assessments
+- 🧪 ** Quizzes** - TypeScript knowledge validation
+- 📖 ** Resources** - Additional TypeScript learning materials

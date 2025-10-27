@@ -14,9 +14,9 @@
 
 ## Key Concepts Demonstrated
 
-1. **Component Creation:**Function component syntax
-2. **Variables in JSX:**Embedding JavaScript with `{variableName}`
-3. **Dynamic Data:**Using `new Date().getFullYear()` for current year
+1. **Component Creation:** Function component syntax
+2. **Variables in JSX:** Embedding JavaScript with `{variableName}`
+3. **Dynamic Data:** Using `new Date().getFullYear()` for current year
 4. **Module System:**`export default` and `import`
 
 ## How to Use

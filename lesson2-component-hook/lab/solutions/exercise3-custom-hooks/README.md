@@ -31,9 +31,13 @@ The hook is generic, so it works with any form structure.
 
 ### Form Management Features
 - **State Management** Values and errors
+
 - **Real-time Validation** On input change
+
 - **Submit Validation** Check all fields on submit
+
 - **Form Reset** Clear all fields
+
 - **Type Safety** Full TypeScript support
 
 ## How to Use
@@ -128,9 +132,13 @@ useForm<T>(initialValues: T, validationRules: ValidationRules<T>)
 ## Learning Points
 
 - **Custom Hooks** Extract reusable stateful logic
+
 - **Generics** Make hooks work with any data structure
+
 - **Validation Pattern** Declarative validation rules
+
 - **Event Handling** Type-safe event handlers
+
 - **State Management** Managing related state together
 
 ## Code Highlights
@@ -264,7 +272,9 @@ const validateUsername = async (username: string) => {
 ### Form Libraries
 For complex forms, consider:
 - **React Hook Form** Performance-focused
+
 - **Formik** Full-featured form management
+
 - **Final Form** Framework-agnostic
 
 ### When to Use Custom Hook

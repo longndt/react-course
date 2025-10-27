@@ -17,7 +17,7 @@ sequenceDiagram
     rect rgb(200, 255, 200)
         Note over Component: MOUNTING PHASE
         Component->>Component: Constructor/Initialize
-        Component->>Component: Render (return JSX)
+        Component->>Component: Render (return TSX)
         Component->>DOM: Commit to DOM
         Component->>Component: useEffect (mount)
     end
@@ -51,7 +51,7 @@ flowchart TD
     Check -->|Yes| Init[Initialize State<br/>useState initial value]
     Check -->|No| Reuse[Reuse State<br/>from previous render]
 
-    Init --> Render[Execute Component Function<br/>JSX Creation]
+    Init --> Render[Execute Component Function<br/>TSX Creation]
     Reuse --> Render
 
     Render --> Virtual[Create Virtual DOM]
@@ -92,7 +92,7 @@ stateDiagram-v2
 
     Stored --> Reading: Component Reads State<br/>const [value, setValue]
 
-    Reading --> Rendering: Use value in JSX<br/>{value}
+    Reading --> Rendering: Use value in TSX<br/>{value}
 
     Rendering --> Displayed: DOM Shows Value
 
@@ -127,7 +127,7 @@ gantt
 
     section First Render
     Component Function Runs        :a1, 0, 10
-    JSX Creation                   :a2, 10, 20
+    TSX Creation                   :a2, 10, 20
     DOM Commit                     :a3, 20, 30
     useEffect (mount) Runs         :crit, a4, 30, 40
     Browser Paint                  :a5, 40, 50
@@ -135,7 +135,7 @@ gantt
     section State Update
     setState Called                :b1, 50, 55
     Component Re-runs              :b2, 55, 65
-    JSX Re-creation                :b3, 65, 75
+    TSX Re-creation                :b3, 65, 75
     DOM Update                     :b4, 75, 85
     useEffect (update) Runs        :crit, b5, 85, 95
     Browser Repaint                :b6, 95, 105
@@ -160,9 +160,9 @@ flowchart TD
     H5 --> H6[Hook 6: useRef]
     H6 --> H7[Hook 7: useMemo]
     H7 --> H8[Hook 8: useCallback]
-    H8 --> JSX[Return JSX]
-
-    JSX --> DOM[Commit to DOM]
+    H8 --> TSX[Return TSX]
+    
+    TSX --> DOM[Commit to DOM]
 
     DOM --> Effect1[Run useEffect #91;#93;<br/>mount only]
     Effect1 --> Effect2[Run useEffect #91;deps#93;<br/>if deps changed]
@@ -178,9 +178,9 @@ flowchart TD
 ```
 
 **Rules**
-1. ✅ Hooks must be called in the **same order**every render
-2. ✅ Hooks must be at the **top level**(not in conditions/loops)
-3. ✅ `useEffect` runs **after**render and DOM commit
+1. ✅ Hooks must be called in the **same order** every render
+2. ✅ Hooks must be at the **top level** (not in conditions/loops)
+3. ✅ `useEffect` runs **after** render and DOM commit
 4. ✅ Multiple `useEffect` hooks run in **order of declaration**
 
 ---
@@ -301,7 +301,7 @@ flowchart TD
     style Logic fill:#fff3cd
 ```
 
-**Example**
+** Example**
 ```typescript
 function useCustomData() {
   const [data, setData] = useState(null);
@@ -330,7 +330,7 @@ graph LR
 
     subgraph Functional Component Modern
         B1[Component Function] --> B2[useState initialization]
-        B2 --> B3[Render JSX]
+        B2 --> B3[Render TSX]
         B3 --> B4[useEffect mount]
         B4 --> B5[useEffect deps]
         B5 --> B6[useEffect cleanup]
@@ -386,7 +386,7 @@ flowchart TD
     style Safe fill:#d4edda
 ```
 
-**Example with Cleanup**
+** Example with Cleanup**
 ```typescript
 useEffect(() => {
   const timer = setInterval(() => {
@@ -426,11 +426,9 @@ sequenceDiagram
     Note over React,Component: This helps detect:<br/>- Side effects in render<br/>- Missing cleanup functions<br/>- State initialization issues
 ```
 
-**Why?** React 18+ runs components twice in development to help you catch bugs early.
+** Why?** React 18+ runs components twice in development to help you catch bugs early.
 
 ---
 
-**Created** October 6, 2025
-**For** React Course - LongNDT
-**Topic** Component Lifecycle & Hooks
-**Related Lessons** Lesson 1, Lesson 2
+** Created** October 6, 2025
+** For** React Course - LongNDT **Topic** Component Lifecycle & Hooks **Related Lessons** Lesson 1, Lesson 2

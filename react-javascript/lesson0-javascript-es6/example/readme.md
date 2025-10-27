@@ -92,15 +92,22 @@ node src/examples/08-react-patterns.js
 
 ### Modern JavaScript Features
 - **Arrow Functions** Concise function syntax
+
 - **Destructuring** Extract values from objects/arrays
+
 - **Template Literals** String interpolation with backticks
+
 - **Modules** Import/export for code organization
+
 - **Async/Await** Modern promise handling
 
 ### React Integration
 - **JSX Syntax** JavaScript XML for React components
+
 - **Event Handling** onClick, onChange, onSubmit patterns
+
 - **State Management** useState and useEffect hooks
+
 - **Props** Passing data between components
 
 ### Best Practices

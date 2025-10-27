@@ -28,7 +28,7 @@ By completing this lab, you will be able to:
 
 ### Concept Review
 
-**Compound Components**allow you to create flexible, composable UIs where parent and child components work together. Instead of passing many props, you compose components using `children`. This pattern is used by libraries like React Router (`<Routes><Route /></Routes>`) and Material-UI.
+**Compound Components** allow you to create flexible, composable UIs where parent and child components work together. Instead of passing many props, you compose components using `children`. This pattern is used by libraries like React Router (`<Routes><Route /></Routes>`) and Material-UI.
 
 **Example of Compound Pattern:**
 ```jsx
@@ -135,9 +135,7 @@ Create `src/components/Card/Card.css`:
 5. Style `.card-footer`:
    - Padding: 1.5rem
    - Background: #f8f9fa
-   - Border top: 1px solid #e9ecef
-
-**Hints:**
+   - Border top: 1px solid #e9ecef **Hints:**
 - Use `cubic-bezier` for smooth animations
 - Gradients use `linear-gradient(angle, color1, color2)`
 - Transform creates lift effect on hover
@@ -150,7 +148,7 @@ Create `src/components/Card/Card.css`:
 - Light gray footer
 - Clean, professional appearance
 
-**Solution:**See `solutions/exercise1-card-system/Card.css`
+**Solution:** See `solutions/exercise1-card-system/Card.css`
 
 ### Step 4: Use Card in App (Your Turn)
 
@@ -186,7 +184,7 @@ Update `src/App.jsx`:
 4. All three sections (header, body, footer) should be visible
 5. No console errors
 
-**Solution:**See `solutions/exercise1-card-system/`
+**Solution:** See `solutions/exercise1-card-system/`
 
 ---
 
@@ -196,7 +194,7 @@ Update `src/App.jsx`:
 
 ### Concept Review
 
-**Higher-Order Components (HOCs)**are functions that take a component and return a new enhanced component. They're used for cross-cutting concerns like loading states, authentication, or logging.
+**Higher-Order Components (HOCs)** are functions that take a component and return a new enhanced component. They're used for cross-cutting concerns like loading states, authentication, or logging.
 
 **HOC Pattern:**
 ```jsx
@@ -262,7 +260,7 @@ Create `src/components/LoadingSpinner/LoadingSpinner.css`:
 - Purple accent color on top
 - Centered in container
 
-**Solution:**See `solutions/exercise2-hoc/LoadingSpinner.jsx`
+**Solution:** See `solutions/exercise2-hoc/LoadingSpinner.jsx`
 
 ### Task 2: Create withLoading HOC (Your Turn)
 
@@ -296,7 +294,7 @@ Create `src/hoc/withLoading.jsx`:
 - Shows wrapped component when not loading
 - TypeScript types work correctly
 
-**Solution:**See `solutions/exercise2-hoc/withLoading.jsx`
+**Solution:** See `solutions/exercise2-hoc/withLoading.jsx`
 
 ### Task 3: Create ProductList Component (Your Turn)
 
@@ -337,7 +335,7 @@ Create `src/components/ProductList/ProductList.jsx`:
 - Clicking "Add to Cart" shows alert
 - No key prop warnings
 
-**Solution:**See `solutions/exercise2-hoc/ProductList.jsx`
+**Solution:** See `solutions/exercise2-hoc/ProductList.jsx`
 
 ### Task 4: Apply HOC and Test (Your Turn)
 
@@ -381,7 +379,7 @@ Update `src/App.jsx`:
 4. No console errors
 5. Smooth loading experience
 
-**Solution:**See `solutions/exercise2-hoc/`
+**Solution:** See `solutions/exercise2-hoc/`
 
 ---
 
@@ -391,7 +389,7 @@ Update `src/App.jsx`:
 
 ### Concept Review
 
-**Custom Hooks**are JavaScript functions that use React hooks and can be reused across components. They start with "use" and help encapsulate complex logic.
+**Custom Hooks** are JavaScript functions that use React hooks and can be reused across components. They start with "use" and help encapsulate complex logic.
 
 **Custom Hook Pattern:**
 ```jsx
@@ -457,7 +455,7 @@ Create `src/hooks/useForm.ts`:
 - Provides submission handler
 - Reusable across different forms
 
-**Solution:**See `solutions/exercise3-custom-hooks/useForm.ts`
+**Solution:** See `solutions/exercise3-custom-hooks/useForm.ts`
 
 ### Task 2: Create Registration Form (Your Turn - 80% Practice)
 
@@ -507,9 +505,7 @@ Create `src/components/Form/RegistrationForm.jsx`:
    - Color: white
    - Border: none
    - Border radius: 8px
-   - Cursor: pointer
-
-**Hints:**
+   - Cursor: pointer **Hints:**
 - Input `name` attribute must match initial values keys
 - Conditional rendering: `{errors.username && <span>{errors.username}</span>}`
 - `type="email"` for email input
@@ -531,7 +527,7 @@ Create `src/components/Form/RegistrationForm.jsx`:
 4. Check console - should log form data
 5. Inputs should be styled nicely
 
-**Solution:**See `solutions/exercise3-custom-hooks/`
+**Solution:** See `solutions/exercise3-custom-hooks/`
 
 ---
 
@@ -541,7 +537,7 @@ Create `src/components/Form/RegistrationForm.jsx`:
 
 ### Concept Review
 
-**Context API**provides a way to pass data through the component tree without prop drilling. Perfect for global state like themes, user auth, or language preferences.
+**Context API** provides a way to pass data through the component tree without prop drilling. Perfect for global state like themes, user auth, or language preferences.
 
 **Context Pattern:**
 ```jsx
@@ -606,7 +602,7 @@ Create `src/context/ThemeContext.jsx`:
 - useTheme hook works in any component
 - Type-safe context usage
 
-**Solution:**See `solutions/exercise4-context/ThemeContext.jsx`
+**Solution:** See `solutions/exercise4-context/ThemeContext.jsx`
 
 ### Task 2: Create Themed Components (Your Turn - 90% Practice)
 
@@ -661,9 +657,7 @@ Create `src/components/ThemedComponents/ThemedComponents.css`:
    - Border: 2px solid current color
    - Border radius: 25px
    - Cursor: pointer
-   - Font size: 1rem
-
-**Hints:**
+   - Font size: 1rem **Hints:**
 - Template string for className: `theme-button ${theme}`
 - Conditional rendering: `{theme === 'light' ? ' Dark' : ' Light'}`
 - Fixed position keeps toggle visible
@@ -675,7 +669,7 @@ Create `src/components/ThemedComponents/ThemedComponents.css`:
 - Smooth color transitions
 - Fixed toggle button in corner
 
-**Solution:**See `solutions/exercise4-context/ThemedComponents.jsx`
+**Solution:** See `solutions/exercise4-context/ThemedComponents.jsx`
 
 ### Task 3: Apply Global Theme Styling (Your Turn)
 
@@ -772,7 +766,7 @@ Update `src/App.jsx`:
 - [ ] Professional appearance
 - [ ] All features work together
 
-**Complete Solution:**See `solutions/exercise4-context/`
+**Complete Solution:** See `solutions/exercise4-context/`
 
 ---
 
@@ -800,7 +794,7 @@ Error Boundaries catch JavaScript errors in component tree and display fallback 
 - componentDidCatch logs errors
 - Provides graceful error recovery
 
-**Solution:**See `solutions/bonus-challenges/ErrorBoundary.jsx`
+**Solution:** See `solutions/bonus-challenges/ErrorBoundary.jsx`
 
 ### Challenge 2: Modal with Portals
 
@@ -821,7 +815,7 @@ React Portals render children outside parent DOM hierarchy, perfect for modals.
 - `overflow: hidden` on body prevents scroll
 - ESC key to close (bonus)
 
-**Solution:**See `solutions/bonus-challenges/Modal.jsx`
+**Solution:** See `solutions/bonus-challenges/Modal.jsx`
 
 ### Challenge 3: useLocalStorage Hook
 
@@ -842,7 +836,7 @@ Custom hook that syncs state with localStorage.
 - Try/catch for parsing errors
 - useEffect to sync on changes
 
-**Solution:**See `solutions/bonus-challenges/useLocalStorage.ts`
+**Solution:** See `solutions/bonus-challenges/useLocalStorage.ts`
 
 ---
 
@@ -852,8 +846,11 @@ You've completed Lab 2! Here's what you've mastered:
 
 ### Component Architecture
 - **Compound Components** Card system with subcomponents
+
 - **HOC Pattern** withLoading for reusable functionality
+
 - **Composition** Building complex UIs from simple parts
+
 - **Type Safety** TypeScript interfaces for all components
 
 ### React Hooks
@@ -864,34 +861,48 @@ You've completed Lab 2! Here's what you've mastered:
 
 ### State Management
 - **Context API** Global theme state without prop drilling
+
 - **Provider Pattern** ThemeProvider wrapping app
+
 - **Custom Context Hooks** useTheme for easy access
+
 - **State Updates** Toggling and updating global state
 
 ### Advanced Patterns
 - **Loading States** Spinner with HOC pattern
+
 - **Form Handling** Validation and submission
+
 - **Theme Switching** Complete dark mode implementation
+
 - **Code Organization** Scalable folder structure
 
 ### TypeScript Integration
 - **Generic Types** HOC with type parameters
+
 - **Interface Definitions** Props and context types
+
 - **Type Safety** Compile-time error prevention
+
 - **Reusable Types** Shared interfaces
 
 ---
 
 ## Next Steps
 
-**Ready for more?**Continue to [Lab 3 - API Integration & Data Management](../../lesson3-api-data/lab/lab3.md) to learn:
+**Ready for more?** Continue to [Lab 3 - API Integration & Data Management](../../lesson3-api-data/lab/lab3.md) to learn:
 
-- **API Calls:**Fetching real data from REST APIs
-- **React Query:**Advanced data fetching and caching
-- **State Management:**Managing server state
-- **Error Handling:**Graceful API error handling
-- **Loading States:**Professional loading UIs
-- **Full-Stack Integration:**Connecting React to backend
+- **API Calls:** Fetching real data from REST APIs
+
+- **React Query:** Advanced data fetching and caching
+
+- **State Management:** Managing server state
+
+- **Error Handling:** Graceful API error handling
+
+- **Loading States:** Professional loading UIs
+
+- **Full-Stack Integration:** Connecting React to backend
 
 **Before starting Lab 3:**
 - [ ] All Lab 2 exercises work correctly
@@ -1036,9 +1047,7 @@ Before moving to Lab 3, you should be able to:
 - [ ] Organize code in logical folders
 - [ ] Separate concerns properly
 - [ ] Follow naming conventions
-- [ ] Keep components focused and small
-
-**If you can confidently do all above, you're ready for Lab 3!**
+- [ ] Keep components focused and small **If you can confidently do all above, you're ready for Lab 3!**
 
 ---
 
@@ -1072,9 +1081,7 @@ Before moving to Lesson 3, verify you can:
 - [ ] Handle form validation and submission
 - [ ] Create theme switching functionality
 - [ ] Build error boundaries
-- [ ] Organize code in scalable structure
-
-**Goal: Check at least 18/20 items before Lesson 3**
+- [ ] Organize code in scalable structure **Goal: Check at least 18/20 items before Lesson 3**
 
 ---
 

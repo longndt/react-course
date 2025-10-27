@@ -8,19 +8,29 @@ In this comprehensive lab, you'll build a **complete full-stack application** wi
 
 A complete Product Management System featuring:
 - **User Authentication** - Register, login with JWT
+
 - **Product CRUD** - Create, Read, Update, Delete products
+
 - **Image Upload** - Upload product images
+
 - **Search & Filter** - Find products by name, category
+
 - **Sort & Pagination** - Organize product listings
+
 - **Real Dashboard** - Display statistics from database
+
 - **Clean UI** - Professional, responsive design
 
 ### Why This Matters
 
 - **Full-Stack Skills** - Learn both frontend and backend development
+
 - **Real-World Application** - Build production-ready features
+
 - **Database Integration** - Work with MongoDB and Mongoose
+
 - **File Handling** - Implement image upload functionality
+
 - **Professional Development** - Follow industry best practices
 
 ---
@@ -57,11 +67,11 @@ By the end of this lab, you will:
 ## Pre-Lab Checklist
 
 ### Required Software
-- [ ] **Node.js** (v18+) installed
-- [ ] **MongoDB** installed locally or MongoDB Atlas account
-- [ ] **VS Code** with recommended extensions
-- [ ] **Postman** or similar API testing tool
-- [ ] **Git** for version control
+- [ ] ** Node.js** (v18+) installed
+- [ ] ** MongoDB** installed locally or MongoDB Atlas account
+- [ ] ** VS Code** with recommended extensions
+- [ ] ** Postman** or similar API testing tool
+- [ ] ** Git** for version control
 
 ### Verification Commands
 ```bash
@@ -146,7 +156,7 @@ lab5-fullstack/
 
 ### Exercise 1: Backend Setup & User Authentication (30%)
 
-**Goal**: Set up Express.js backend with user authentication using JWT.
+** Goal**: Set up Express.js backend with user authentication using JWT.
 
 #### Task 1.1: Create User Model
 
@@ -323,7 +333,7 @@ export const protect = async (req: Request, res: Response, next: NextFunction) =
 
 ### Exercise 2: Product Model & CRUD Operations (40%)
 
-**Goal**: Implement complete CRUD operations for products with image upload.
+** Goal**: Implement complete CRUD operations for products with image upload.
 
 #### Task 2.1: Create Product Model
 
@@ -450,7 +460,7 @@ Create `backend/src/controllers/productController.ts` with:
 
 ### Exercise 3: Frontend - Authentication & Routing (30%)
 
-**Goal**: Create frontend with authentication and protected routes.
+** Goal**: Create frontend with authentication and protected routes.
 
 #### Task 3.1: Create Auth Context
 
@@ -487,7 +497,7 @@ Update `frontend/src/App.tsx`:
 
 ### Exercise 4: Product Management UI (40%)
 
-**Goal**: Build complete product management interface.
+** Goal**: Build complete product management interface.
 
 #### Task 4.1: Create Products Page
 
@@ -526,7 +536,7 @@ Implement modal for add/edit with:
 
 ### Exercise 5: Dashboard with Real Data (30%)
 
-**Goal**: Create dashboard displaying statistics from database.
+** Goal**: Create dashboard displaying statistics from database.
 
 #### Task 5.1: Create Dashboard Controller
 
@@ -611,14 +621,14 @@ Create `frontend/src/pages/Dashboard.tsx` with:
 # Check port 5000 is not in use
 ```
 
-**Image upload fails**
+** Image upload fails**
 ```bash
 # Create uploads/ directory
 mkdir uploads
 # Check file permissions
 ```
 
-**Frontend can't connect to backend**
+** Frontend can't connect to backend**
 ```bash
 # Check CORS configuration
 # Verify API_URL in frontend

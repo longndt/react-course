@@ -64,9 +64,7 @@ solutions/
 **Option 1: Reference Only**
 - Read through solutions to understand the approach
 - Compare with your own implementation
-- Learn from the patterns used
-
-**Option 2: Run Locally**
+- Learn from the patterns used **Option 2: Run Locally**
 ```bash
 # Navigate to any exercise folder
 cd exercise1-arrow-functions
@@ -81,17 +79,17 @@ npm start
 npm test
 ```
 
-**Option 3: Study & Modify**
+** Option 3: Study & Modify**
 - Copy solution code
 - Experiment with modifications
 - Break it and fix it to learn
 
 ### Important Notes
 
-1. **Try First, Then Check:**Attempt the exercises yourself before looking at solutions
-2. **Understand, Don't Copy:**Solutions are for learning, not copy-pasting
-3. **Multiple Approaches:**Solutions show one way - there may be other valid approaches
-4. **Modern JavaScript:**All solutions use ES6+ features and best practices
+1. **Try First, Then Check:** Attempt the exercises yourself before looking at solutions
+2. **Understand, Don't Copy:** Solutions are for learning, not copy-pasting
+3. **Multiple Approaches:** Solutions show one way - there may be other valid approaches
+4. **Modern JavaScript:** All solutions use ES6+ features and best practices
 
 ### What Each Solution Demonstrates
 
@@ -155,10 +153,10 @@ All solutions follow these standards:
 
 ### Learning Tips
 
-1. **Compare Approaches:**Check how your solution differs from the provided one
-2. **Ask Questions:**If you don't understand something, revisit the theory
-3. **Experiment:**Modify the solutions and see what happens
-4. **Build Upon:**Use these as starting points for your own projects
+1. **Compare Approaches:** Check how your solution differs from the provided one
+2. **Ask Questions:** If you don't understand something, revisit the theory
+3. **Experiment:** Modify the solutions and see what happens
+4. **Build Upon:** Use these as starting points for your own projects
 
 ### Next Steps
 
@@ -178,4 +176,4 @@ After completing all exercises and reviewing solutions:
 
 ---
 
-**Note:**Solutions will be added progressively. If a solution folder is empty, check back later or contact your instructor.
+**Note:** Solutions will be added progressively. If a solution folder is empty, check back later or contact your instructor.

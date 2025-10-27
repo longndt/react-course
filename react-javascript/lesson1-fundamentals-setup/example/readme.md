@@ -52,6 +52,7 @@ npm run preview
 ## Example Demonstrated
 
 ### 1. Welcome Component
+
 **File:**`src/components/Welcome.jsx`
 
 - Basic component structure
@@ -76,6 +77,7 @@ function Welcome({ name, age, onGreet }) {
 ```
 
 ### 2. Counter Component
+
 **File:**`src/components/Counter.jsx`
 
 - State management with `useState`
@@ -112,6 +114,7 @@ function Counter() {
 ```
 
 ### 3. User Profile Component
+
 **File:**`src/components/UserProfile.jsx`
 
 - Complex component with multiple props
@@ -191,6 +194,7 @@ function UserProfile({ user, onUpdate }) {
 ```
 
 ### 4. Reusable Button Component
+
 **File:**`src/components/Button.jsx`
 
 - Reusable component with variants

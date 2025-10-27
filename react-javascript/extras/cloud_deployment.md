@@ -4,18 +4,21 @@
 
 Complete step-by-step guide for deploying MERN stack applications to the cloud with MongoDB Atlas, GitHub, Vercel, and Render.
 
-- **MongoDB Atlas Setup**- Cloud database configuration
-- **GitHub Repository**- Code version control and CI/CD
-- **Frontend Deployment**- Vercel deployment for React apps
-- **Backend Deployment**- Render deployment for Node.js/Express
-- **Environment Variables**- Secure configuration management
-- **Domain & SSL**- Custom domains and HTTPS
-- **Monitoring & Logs**- Production monitoring setup
-- **Troubleshooting**- Common deployment issues
+- **MongoDB Atlas Setup** - Cloud database configuration
 
-**Best for** Deploying full-stack applications, production-ready setups, cloud infrastructure
+- **GitHub Repository** - Code version control and CI/CD
 
-**Related Lessons** [Lesson 5 (Full-Stack Deployment)](../lesson5-fullstack-deployment/readme.md)
+- **Frontend Deployment** - Vercel deployment for React apps
+
+- **Backend Deployment** - Render deployment for Node.js/Express
+
+- **Environment Variables** - Secure configuration management
+
+- **Domain & SSL** - Custom domains and HTTPS
+
+- **Monitoring & Logs** - Production monitoring setup
+
+- **Troubleshooting** - Common deployment issues **Best for** Deploying full-stack applications, production-ready setups, cloud infrastructure **Related Lessons** [Lesson 5 (Full-Stack Deployment)](../lesson5-fullstack-deployment/readme.md)
 
 ---
 

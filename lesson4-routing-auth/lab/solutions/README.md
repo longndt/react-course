@@ -28,11 +28,15 @@ npm run dev
 
 ### Key Concepts
 
-- **React Router:**Client-side routing
-- **Protected Routes:**Authentication guards
-- **Context API:**Global state management
-- **JWT:**Token-based authentication
-- **Session Management:**Login/logout flow
+- **React Router:** Client-side routing
+
+- **Protected Routes:** Authentication guards
+
+- **Context API:** Global state management
+
+- **JWT:** Token-based authentication
+
+- **Session Management:** Login/logout flow
 
 ### Security Notes
 

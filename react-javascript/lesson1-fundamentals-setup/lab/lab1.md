@@ -27,7 +27,7 @@ By completing this lab, you will be able to:
 
 ### Concept Review
 
-React is a JavaScript library for building user interfaces using **components**- reusable, self-contained pieces of UI. Vite is a modern build tool that provides fast development experience with hot module replacement (HMR).
+React is a JavaScript library for building user interfaces using **components** - reusable, self-contained pieces of UI. Vite is a modern build tool that provides fast development experience with hot module replacement (HMR).
 
 ### Goals
 
@@ -56,7 +56,7 @@ npm install prop-types
 npm run dev
 ```
 
-**Verify:**Browser should open at `http://localhost:5173` showing default Vite + React page.
+**Verify:** Browser should open at `http://localhost:5173` showing default Vite + React page.
 
 ### Step 2: Understand Project Structure
 
@@ -126,7 +126,7 @@ p {
 }
 ```
 
-**Checkpoint:**Save files and check browser - you should see "My First React App" heading with clean styling.
+**Checkpoint:** Save files and check browser - you should see "My First React App" heading with clean styling.
 
 ### Testing
 
@@ -140,7 +140,7 @@ p {
 
 ### Concept Review
 
-A **React component**is a JavaScript function that returns JSX (HTML-like syntax). Components let you split the UI into independent, reusable pieces. You can embed JavaScript expressions in JSX using curly braces `{}`.
+A **React component** is a JavaScript function that returns JSX (HTML-like syntax). Components let you split the UI into independent, reusable pieces. You can embed JavaScript expressions in JSX using curly braces `{}`.
 
 **Example component structure:**
 ```jsx
@@ -206,7 +206,7 @@ Create a new file `src/components/Welcome.jsx` and implement:
 - JSX displays all variables correctly
 - No syntax errors in VS Code
 
-**Solution:**See `solutions/exercise2-welcome/Welcome.jsx`
+**Solution:** See `solutions/exercise2-welcome/Welcome.jsx`
 
 ### Step 3: Use Component in App (Your Turn)
 
@@ -236,7 +236,7 @@ Update `src/App.jsx`:
 3. Current year should display correctly (e.g., 2024)
 4. Open DevTools Console (F12) - should be no errors
 
-**Solution:**See `solutions/exercise2-welcome/` for complete code
+**Solution:** See `solutions/exercise2-welcome/` for complete code
 
 ---
 
@@ -328,7 +328,7 @@ Update `src/components/Welcome.jsx`:
 3. Hover might show shadow effect
 4. Check DevTools → Elements → Inspect the `.welcome` div to verify CSS is applied
 
-**Solution:**See `solutions/exercise3-styling/`
+**Solution:** See `solutions/exercise3-styling/`
 
 ---
 
@@ -471,9 +471,7 @@ Create `src/components/Footer.jsx` and `src/components/Footer.css`:
 
 5. `.footer a:hover`:
    - Color: #764ba2
-   - Text decoration: underline
-
-**Hints:**
+   - Text decoration: underline **Hints:**
 - Object array: `[{ name: "...", url: "..." }, ...]`
 - Access object properties: `link.name`, `link.url`
 - `target="_blank"` opens link in new tab
@@ -532,7 +530,7 @@ Update `src/App.jsx`:
 2. Check Elements tab - all CSS classes applied correctly
 3. Verify all components are properly imported
 
-**Solution:**See `solutions/exercise4-landing-page/` for complete implementation
+**Solution:** See `solutions/exercise4-landing-page/` for complete implementation
 
 ---
 
@@ -578,9 +576,7 @@ Add interactive elements to your landing page to get a preview of React's event 
    - Background color matching the gradient
    - White text
    - Padding and border radius
-   - Hover effect
-
-**Hints:**
+   - Hover effect **Hints:**
 - Function syntax: `const handleClick = () => { alert('...'); };`
 - Button syntax: `<button onClick={handleClick}>Click Me!</button>`
 - Place function before the return statement
@@ -602,7 +598,7 @@ This is an advanced challenge that previews state management from Lesson 2!
 2. Clicking it should change the page background color
 3. (Note: This will require useState from Lesson 2 to work properly)
 
-**Solutions:**See `solutions/bonus-challenges/` for all challenge solutions
+**Solutions:** See `solutions/bonus-challenges/` for all challenge solutions
 
 ---
 
@@ -645,13 +641,17 @@ You've completed Lab 1. Here's what you've mastered:
 
 You're now ready for more advanced React concepts!
 
-**Continue to [Lab 2 - Component Architecture & React Hooks](../../lesson2-component-hook/lab/lab2.md)**to learn:
+** Continue to [Lab 2 - Component Architecture & React Hooks](../../lesson2-component-hook/lab/lab2.md)** to learn:
 
-- **Props:**Pass data from parent to child components
-- **State:**Manage interactive UI with `useState` hook
-- **Effects:**Handle side effects with `useEffect` hook
-- **Custom Hooks:**Create reusable logic
-- **Component Patterns:**Build professional component libraries
+- **Props:** Pass data from parent to child components
+
+- **State:** Manage interactive UI with `useState` hook
+
+- **Effects:** Handle side effects with `useEffect` hook
+
+- **Custom Hooks:** Create reusable logic
+
+- **Component Patterns:** Build professional component libraries
 
 **Before starting Lab 2:**
 - [ ] Make sure all exercises in this lab work correctly
@@ -725,7 +725,7 @@ rm -rf node_modules/.vite
 npm run dev
 ```
 
-**Still stuck?**
+** Still stuck?**
 - Check the solutions folder: `solutions/`
 - Review the error message carefully
 - Search the error on Google or Stack Overflow
@@ -856,7 +856,7 @@ Create an image gallery with click-to-enlarge functionality.
 - Previous/Next navigation
 - Close button
 
-**Advanced:**Add keyboard navigation (arrow keys, ESC to close)
+**Advanced:** Add keyboard navigation (arrow keys, ESC to close)
 
 ---
 
@@ -913,9 +913,7 @@ Before moving to Lesson 2, verify you can:
 - [ ] Validate user input
 - [ ] Show loading states
 - [ ] Display error messages
-- [ ] Reset forms after submission
-
-**Goal: Check at least 18/24 items before Lesson 2**
+- [ ] Reset forms after submission **Goal: Check at least 18/24 items before Lesson 2**
 
 ---
 

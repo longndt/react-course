@@ -4,11 +4,13 @@ Complete solution demonstrating React performance optimization with React.memo, 
 
 ## Features Implemented
 
-- **React.memo**- Prevent unnecessary component re-renders
-- **useCallback**- Memoize callback functions
-- **useMemo**- Memoize expensive computations
-- **Performance Comparison**- Side-by-side memoized vs non-memoized
-- **Real-world example**- 1000 user list with filtering and sorting
+- **React.memo** - Prevent unnecessary component re-renders
+- **useCallback** - Memoize callback functions
+- **useMemo** - Memoize expensive computations
+
+- **Performance Comparison** - Side-by-side memoized vs non-memoized
+
+- **Real-world example** - 1000 user list with filtering and sorting
 
 ## Project Structure
 
@@ -55,8 +57,8 @@ npm run build
 
 ### Test 1: React.memo with useCallback
 
-1. **Open Console**(F12)
-2. **Click "Increment (Test Re-render)" button**multiple times
+1. **Open Console** (F12)
+2. **Click "Increment (Test Re-render)" button** multiple times
 3. **Observe Console Output**
    - See: `" Rendering UserList (parent component)"`
    - Don't see: `"Rendering UserItem: X"` messages
@@ -68,17 +70,17 @@ npm run build
 
 ### Test 2: useMemo for Expensive Calculations
 
-1. **Type in Search Box**(e.g., "User 5")
+1. **Type in Search Box** (e.g., "User 5")
 2. **Observe Console**
    - See: `" Filtering and sorting users..."`
    - See: `" Calculating stats..."`
 
-3. **Click "Increment" button**(unrelated state)
+3. **Click "Increment" button** (unrelated state)
 4. **Observe Console**
    - Do NOT see filtering/sorting messages
    - useMemo prevents recalculation!
 
-5. **Change Sort Order**(A→Z / Z→A)
+5. **Change Sort Order** (A→Z / Z→A)
 6. **Observe Console**
    - See: `" Filtering and sorting users..."`
    - useMemo recalculates only when dependencies change
@@ -184,45 +186,45 @@ function UsersPage() {
 
 | Action | Without Memo | With Memo | Improvement |
 |--------|--------------|-----------|-------------|
-| Click Increment | ~1000 renders | 1 render | **99.9%**faster |
-| Type in Search | ~1000 renders | ~500 renders (filtered) | **50%**faster |
+| Click Increment | ~1000 renders | 1 render | **99.9%** faster |
+| Type in Search | ~1000 renders | ~500 renders (filtered) | **50%** faster |
 | Change Sort | ~1000 renders | ~1000 renders (all need update) | Same (expected) |
 
 ## When to Use Each Hook
 
 ### React.memo
 
- **Use when:**
+**Use when:**
 - Component renders often with same props
 - Component is expensive to render
 - Component is in a list
 - Parent re-renders frequently
 
- **Don't use when:**
+**Don't use when:**
 - Component is cheap to render
 - Props change on every render
 - Adds unnecessary complexity
 
 ### useCallback
 
- **Use when:**
+**Use when:**
 - Passing callbacks to memoized child components
 - Callbacks are dependencies of useEffect/useMemo
 - Function is expensive to create
 
- **Don't use when:**
+**Don't use when:**
 - Function is not passed as prop
 - Child is not memoized
 - Premature optimization
 
 ### useMemo
 
- **Use when:**
+**Use when:**
 - Calculation is expensive (filtering, sorting, heavy math)
 - Used in render or as dependency
 - Noticeable performance impact
 
- **Don't use when:**
+**Don't use when:**
 - Calculation is simple (`x + y`)
 - Only used once
 - Premature optimization
@@ -344,7 +346,9 @@ After completing this exercise, you understand:
 ## Related Exercises
 
 - **Exercise 1** Code Splitting & Lazy Loading
+
 - **Exercise 3** Virtual Lists for Large Datasets
+
 - **Exercise 4** Production Build & Deployment
 
 ## Additional Resources

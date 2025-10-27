@@ -2,10 +2,9 @@
 
 ## Overview
 
-**Difficulty** Beginner to Intermediate
-**Status** Optional but Recommended
+**Difficulty** Beginner to Intermediate **Status** Optional but Recommended
 
-This course teaches **React with TypeScript** Before starting Lesson 1, you should be comfortable with TypeScript fundamentals. This lesson provides a quick review of essential TypeScript concepts you'll use throughout the course.
+This course teaches **React with TypeScript**. Before starting Lesson 1, you should be comfortable with TypeScript fundamentals. This lesson provides a quick review of essential TypeScript concepts you'll use throughout the course.
 
 ---
 
@@ -51,26 +50,30 @@ tsc --version
 ```
 
 ### Learning Path (Choose Your Style)
-- 📖 **Theory First** Start with [Theory](./theory/theory0.md) → [Example](./example/) → [Lab](./lab/lab0.md)
-- ⚡ **Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory0.md)
-- 🎯 **Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz0.html) → Focus on weak areas
+- 📖 ** Theory First** Start with [Theory](./theory/theory0.md) → [Example](./example/) → [Lab](./lab/lab0.md)
+- ⚡ ** Hands-On** Start with [Reference](./reference/) → [Example](./example/) → [Theory](./theory/theory0.md)
+- 🎯 ** Quick Review** [Reference](./reference/) → [Quiz](./quiz/quiz0.html) → Focus on weak areas
 
 ---
 
 ## What's Next
 
 ### Ready to Continue?
-- **Completed this lesson?**→ Proceed to [Lesson 1: React Fundamentals](../lesson1-fundamentals-setup/)
+- **Completed this lesson?** → Proceed to [Lesson 1: React Fundamentals](../lesson1-fundamentals-setup/)
 
 ### Need More Practice?
-- **Study theory**→ [theory0.md](./theory/theory0.md) - Deep dive into TypeScript concepts
-- **View examples**→ [example/](./example/) - Interactive TypeScript examples
-- **Practice exercises**→ [lab0.md](./lab/lab0.md) - Hands-on TypeScript challenges
+- **Study theory** → [theory0.md](./theory/theory0.md) - Deep dive into TypeScript concepts
+
+- **View examples** → [example/](./example/) - Interactive TypeScript examples
+
+- **Practice exercises** → [lab0.md](./lab/lab0.md) - Hands-on TypeScript challenges
 
 ### Additional Resources
-- **Quiz yourself**→ [quiz0.html](./quiz/quiz0.html) - Test your TypeScript knowledge
-- **General questions?**→ Review the reference guide
-- **Still confused?**→ [Check Troubleshooting Guide](../../extras/troubleshooting_guide.md)
+- **Quiz yourself** → [quiz0.html](./quiz/quiz0.html) - Test your TypeScript knowledge
+
+- **General questions?** → Review the reference guide
+
+- **Still confused?** → [Check Troubleshooting Guide](../../extras/troubleshooting_guide.md)
 
 ---
 

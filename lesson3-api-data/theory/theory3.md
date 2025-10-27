@@ -33,8 +33,11 @@ Your Modern Stack:
 
 **Key Benefits:**
 - **Scalability** Each layer scales independently
+
 - **Maintainability** Clear frontend/backend separation
+
 - **Team Collaboration** Independent development workflows
+
 - **Modern UX** Real-time updates without page refreshes
 
 ---
@@ -536,9 +539,9 @@ const fetchUsers = async (): Promise<User[]> => {
 
 ### What's Coming in Lesson 4
 
-🔜 **Routing**- Multi-page applications with React Router
-🔜 **Authentication**- JWT tokens and protected routes
-🔜 **State Management**- Global state with Context API
-🔜 **Security**- CORS, XSS protection, and best practices
+🔜 ** Routing** - Multi-page applications with React Router
+🔜 ** Authentication** - JWT tokens and protected routes
+🔜 ** State Management** - Global state with Context API
+🔜 ** Security** - CORS, XSS protection, and best practices
 
-> **Advanced Topics** For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)
+> ** Advanced Topics** For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)

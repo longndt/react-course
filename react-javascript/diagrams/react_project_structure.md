@@ -59,9 +59,9 @@ graph TB
 ## File Organization
 
 ### Core Files
-- **`index.html`**- HTML template
-- **`main.tsx`**- Application entry point
-- **`App.tsx`**- Root component
+- **`index.html`** - HTML template
+- **`main.tsx`** - Application entry point
+- **`App.tsx`** - Root component
 
 ### Source Structure
 ```
@@ -151,23 +151,23 @@ graph LR
 
 ## Key Concepts
 
-### 1. **Component-Based Architecture**
+### 1. ** Component-Based Architecture**
 - Reusable, modular components
 - Clear separation of concerns
 - Easy to test and maintain
 
-### 2. **File Organization**
+### 2. ** File Organization**
 - Logical grouping by functionality
 - Consistent naming conventions
 - Clear import/export structure
 
-### 3. **Build Process**
+### 3. ** Build Process**
 - TypeScript compilation
 - Module bundling
 - Asset optimization
 - Development server
 
-### 4. **Development Workflow**
+### 4. ** Development Workflow**
 - Hot module replacement
 - Type checking
 - Linting and formatting
@@ -177,8 +177,11 @@ graph LR
 
 ### File Naming
 - **Components** PascalCase (e.g., `UserProfile.tsx`)
+
 - **Hooks** camelCase with `use` prefix (e.g., `useAuth.ts`)
+
 - **Utils** camelCase (e.g., `apiHelpers.ts`)
+
 - **Types** PascalCase (e.g., `UserTypes.ts`)
 
 ### Import Organization

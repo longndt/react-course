@@ -44,11 +44,15 @@ npm run dev
 
 ### Key Concepts
 
-- **REST API:**CRUD operations with Express
-- **MongoDB:**Database integration
-- **React Query:**Data fetching and caching
-- **Error Handling:**Proper error management
-- **PropTypes:**Runtime validation for data
+- **REST API:** CRUD operations with Express
+
+- **MongoDB:** Database integration
+
+- **React Query:** Data fetching and caching
+
+- **Error Handling:** Proper error management
+
+- **PropTypes:** Runtime validation for data
 
 ### What You'll Learn
 

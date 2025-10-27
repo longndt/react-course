@@ -421,4 +421,4 @@ type UserDisplay = Omit<User, 'password'>;
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/)
 
-Remember: **Strict mode makes your code more robust and catches errors early. The initial effort pays off with better code quality and fewer runtime errors.**
+Remember: ** Strict mode makes your code more robust and catches errors early. The initial effort pays off with better code quality and fewer runtime errors.**

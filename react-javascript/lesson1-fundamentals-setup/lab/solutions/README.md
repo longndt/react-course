@@ -2,7 +2,7 @@
 
 This folder contains complete solution code for all exercises in Lab 1.
 
->  **Important:**Try completing each exercise on your own first before checking solutions. Learning by doing!
+>  **Important:** Try completing each exercise on your own first before checking solutions. Learning by doing!
 
 ---
 
@@ -41,13 +41,13 @@ solutions/
 
 ### When to Check Solutions
 
- **Good reasons to check:**
+**Good reasons to check:**
 - Stuck for an extended period
 - Completed exercise and want to verify approach
 - Got it working but want to see best practices
 - Want to understand a specific technique better
 
- **Avoid checking solutions:**
+**Avoid checking solutions:**
 - Before attempting the exercise
 - At first sign of difficulty
 - To copy-paste without understanding
@@ -227,11 +227,11 @@ import './Component.css';  // Must be at top
 
 ## Tips for Success
 
-1. **Type code manually**- Don't copy-paste. Typing helps you learn
-2. **Read README files**- Each solution has detailed explanations
-3. **Experiment**- Change values, see what happens
-4. **Ask questions**- If confused, ask for help
-5. **Build from scratch**- After seeing solution, recreate without looking
+1. **Type code manually** - Don't copy-paste. Typing helps you learn
+2. **Read README files** - Each solution has detailed explanations
+3. **Experiment** - Change values, see what happens
+4. **Ask questions** - If confused, ask for help
+5. **Build from scratch** - After seeing solution, recreate without looking
 
 ---
 
@@ -304,17 +304,15 @@ Before moving to Lab 2, you should be able to:
 - [ ] Map arrays to JSX elements
 - [ ] Use the `key` prop for lists
 - [ ] Compose multiple components
-- [ ] Style components with modern CSS
-
-**If you can do all of the above, you're ready for Lab 2!**
+- [ ] Style components with modern CSS **If you can do all of the above, you're ready for Lab 2!**
 
 ---
 
-**Need more help?**Each solution folder has its own detailed README with explanations and examples.
+** Need more help?** Each solution folder has its own detailed README with explanations and examples.
 }
 ```
 
- **Mistake 2: Using `class` instead of `className`**
+ ** Mistake 2: Using `class` instead of `className`**
 ```jsx
 //  Wrong
 <div class="App">  // Warning!
@@ -354,10 +352,10 @@ p {
 ### Explanation
 
 **CSS Concepts:**
-- **`.App`**- Class selector (matches `className="App"`)
-- **`margin: 0 auto`**- Center the container
-- **`max-width: 800px`**- Limit width for readability
-- **`rem`**- Relative font size (1rem = 16px default)
+- **`.App`** - Class selector (matches `className="App"`)
+- **`margin: 0 auto`** - Center the container
+- **`max-width: 800px`** - Limit width for readability
+- **`rem`** - Relative font size (1rem = 16px default)
 
 **Result:**
 - Content centered on page
@@ -658,13 +656,11 @@ Add media queries for mobile:
 **Q: Can I use JavaScript (.jsx) instead of TypeScript (.tsx)?**
 A: This course uses JavaScript with PropTypes for type checking! All examples use `.jsx` files.
 
-**Q: My styles aren't applying. Why?**
+** Q: My styles aren't applying. Why?**
 A: Check:
 1. CSS file imported in component
 2. className spelled correctly
-3. CSS selector matches className
-
-**Q: Do I need to understand all CSS?**
+3. CSS selector matches className **Q: Do I need to understand all CSS?**
 A: No! Focus on: flexbox, basic layout, colors. Advanced CSS comes with practice.
 
 ---

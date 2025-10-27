@@ -101,9 +101,13 @@ You can customize the Card by:
 ## Learning Points
 
 - **Compound Components** Components that work together as a system
+
 - **Namespace Pattern** `Card.Header` syntax for related components
+
 - **TypeScript Interfaces** Type definitions for props
+
 - **CSS Transitions** Smooth animations on hover
+
 - **Flexible APIs** Components can be composed in different ways
 
 ## Code Highlights

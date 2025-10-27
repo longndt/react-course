@@ -35,11 +35,11 @@ exercise4-deployment/
 
 After completing this exercise, you will understand:
 
-1. **Environment Variables**- Managing different configs for dev/prod
-2. **Build Optimization**- Minification, code splitting, tree shaking
-3. **Production Deployment**- Deploying to Vercel, Netlify, or other platforms
-4. **SPA Routing**- Configuring servers for client-side routing
-5. **Performance**- Bundle analysis and optimization techniques
+1. **Environment Variables** - Managing different configs for dev/prod
+2. **Build Optimization** - Minification, code splitting, tree shaking
+3. **Production Deployment** - Deploying to Vercel, Netlify, or other platforms
+4. **SPA Routing** - Configuring servers for client-side routing
+5. **Performance** - Bundle analysis and optimization techniques
 
 ## Setup Instructions
 
@@ -54,7 +54,7 @@ npm install
 
 The project includes three environment files:
 
-**`.env.development`**- Used during development (`npm run dev`)
+**`.env.development`** - Used during development (`npm run dev`)
 ```bash
 VITE_API_URL=http://localhost:3000/api
 VITE_APP_NAME=MyApp (Development)
@@ -62,7 +62,7 @@ VITE_ENABLE_ANALYTICS=false
 VITE_ENABLE_LOGGING=true
 ```
 
-**`.env.production`**- Used for production builds (`npm run build`)
+**`.env.production`** - Used for production builds (`npm run build`)
 ```bash
 VITE_API_URL=https://api.myapp.com
 VITE_APP_NAME=MyApp
@@ -70,7 +70,7 @@ VITE_ENABLE_ANALYTICS=true
 VITE_ENABLE_LOGGING=false
 ```
 
-**`.env.example`**- Template for local overrides
+**`.env.example`** - Template for local overrides
 - Copy to `.env.local` for custom local settings
 - `.env.local` is gitignored and overrides other env files
 
@@ -107,7 +107,7 @@ This lets you test the production build before deploying.
 
 ## Build Optimization Features
 
-### 1. **Code Minification**
+### 1. ** Code Minification**
 
 The `vite.config.ts` uses Terser for aggressive minification:
 
@@ -123,7 +123,9 @@ build: {
 }
 ```
 
-### 2. **Manual Chunk Splitting**
+### 2.
+
+**Manual Chunk Splitting**
 
 Vendor libraries are separated from app code:
 
@@ -143,7 +145,7 @@ rollupOptions: {
 - App code can update without re-downloading React
 - Better browser caching and faster subsequent loads
 
-### 3. **Asset Organization**
+### 3. ** Asset Organization**
 
 Assets are organized by type with cache-busting hashes:
 
@@ -161,7 +163,7 @@ dist/
 └── index.html
 ```
 
-### 4. **Bundle Size Tracking**
+### 4. ** Bundle Size Tracking**
 
 After building, check bundle sizes:
 
@@ -178,8 +180,8 @@ dist/assets/main-ghi789.js             12.34 kB │ gzip:   4.56 kB
 
 ### How Vite Environment Variables Work
 
-1. **VITE_ Prefix Required**- Only vars with `VITE_` prefix are exposed to client
-2. **import.meta.env**- Access vars via `import.meta.env.VITE_YOUR_VAR`
+1. **VITE_ Prefix Required** - Only vars with `VITE_` prefix are exposed to client
+2. **import.meta.env** - Access vars via `import.meta.env.VITE_YOUR_VAR`
 3. **Built-in Vars**
    - `import.meta.env.DEV` - `true` in development
    - `import.meta.env.PROD` - `true` in production
@@ -249,7 +251,7 @@ git push -u origin main
 
 1. Go to [vercel.com](https://vercel.com) and sign up
 2. Click **"New Project"**
-3. **Import Git Repository**→ Select your GitHub repo
+3. **Import Git Repository** → Select your GitHub repo
 4. **Configure Project**
    - Framework Preset: `Vite`
    - Build Command: `npm run build`
@@ -303,13 +305,13 @@ This ensures that `/about`, `/dashboard`, etc. all return `index.html`.
 #### Step 2: Deploy to Netlify
 
 1. Go to [netlify.com](https://netlify.com) and sign up
-2. Click **"Add new site"**→ **"Import an existing project"**
-3. **Connect to GitHub**→ Select your repository
+2. Click **"Add new site"** → **"Import an existing project"**
+3. **Connect to GitHub** → Select your repository
 4. **Build settings**
    - Build command: `npm run build`
    - Publish directory: `dist`
 
-5. **Environment Variables**→ Add production environment variables
+5. **Environment Variables** → Add production environment variables
 
 6. Click **Deploy site**
 
@@ -378,7 +380,7 @@ location / {
 
 ## Performance Optimization Tips
 
-### 1. **Lazy Load Routes**
+### 1. ** Lazy Load Routes**
 
 For larger apps, lazy load routes:
 
@@ -390,7 +392,7 @@ const Dashboard = lazy(() => import('./pages/Dashboard'));
 </Suspense>
 ```
 
-### 2. **Code Splitting**
+### 2. ** Code Splitting**
 
 Split large vendor libraries:
 
@@ -401,7 +403,7 @@ manualChunks: {
 }
 ```
 
-### 3. **Image Optimization**
+### 3. ** Image Optimization**
 
 Use WebP format and responsive images:
 
@@ -412,7 +414,7 @@ Use WebP format and responsive images:
 </picture>
 ```
 
-### 4. **Analyze Bundle Size**
+### 4. ** Analyze Bundle Size**
 
 ```bash
 npm install --save-dev rollup-plugin-visualizer
@@ -431,7 +433,7 @@ npm run build
 # Opens interactive bundle visualization
 ```
 
-### 5. **Enable Compression**
+### 5. ** Enable Compression**
 
 Most hosting providers (Vercel, Netlify) automatically enable Brotli/Gzip compression.
 
@@ -467,7 +469,7 @@ python -m http.server 8000
 
 ## Debugging Production Issues
 
-### 1. **Enable Source Maps**
+### 1. ** Enable Source Maps**
 
 In `vite.config.ts`:
 
@@ -477,9 +479,9 @@ build: {
 }
 ```
 
-** Warning:**Source maps expose your source code. Only enable for debugging.
+**Warning:** Source maps expose your source code. Only enable for debugging.
 
-### 2. **Test Environment Variables**
+### 2. ** Test Environment Variables**
 
 Add this to your app:
 
@@ -491,7 +493,7 @@ console.log('ENV Check:', {
 });
 ```
 
-### 3. **Check Network Tab**
+### 3. ** Check Network Tab**
 
 Open DevTools → Network tab:
 - Verify API calls use production URL

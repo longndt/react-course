@@ -35,6 +35,7 @@ npm run dev
 ---
 
 ### Exercise 2: Memoization
+
 **Location:**`exercise2-memoization/`
 
 **What it demonstrates:**
@@ -87,9 +88,7 @@ npm run dev
 - 99.85% reduction in DOM nodes (10,000 → 15)
 - Initial render: 2000ms → 60ms (33x faster)
 - Memory usage: 150MB → 2MB (75x reduction)
-- Smooth 60 FPS scrolling vs 20-40 FPS
-
-**To Run:**
+- Smooth 60 FPS scrolling vs 20-40 FPS **To Run:**
 ```bash
 cd exercise3-virtual-list
 npm install
@@ -99,6 +98,7 @@ npm run dev
 ---
 
 ### Exercise 4: Production Deployment
+
 **Location:**`exercise4-deployment/`
 
 **What it demonstrates:**
@@ -145,24 +145,16 @@ npm run preview
 After completing all exercises, you will understand:
 
 ### Performance Optimization
- **Code Splitting**- Reduce initial bundle size with lazy loading
- **Memoization**- Prevent unnecessary re-renders with React.memo, useCallback, useMemo
- **Virtual Lists**- Handle large datasets efficiently with windowing
- **Bundle Analysis**- Analyze and optimize bundle sizes
+
+**Code Splitting** - Reduce initial bundle size with lazy loading **Memoization** - Prevent unnecessary re-renders with React.memo, useCallback, useMemo **Virtual Lists** - Handle large datasets efficiently with windowing **Bundle Analysis** - Analyze and optimize bundle sizes
 
 ### Production Deployment
- **Environment Config**- Manage different configs for dev/staging/prod
- **Build Optimization**- Minification, tree shaking, chunk splitting
- **Cloud Deployment**- Deploy to Vercel, Netlify, AWS, Azure
- **SPA Routing**- Configure servers for client-side routing
- **CI/CD**- Automatic deployments from Git
+
+**Environment Config** - Manage different configs for dev/staging/prod **Build Optimization** - Minification, tree shaking, chunk splitting **Cloud Deployment** - Deploy to Vercel, Netlify, AWS, Azure **SPA Routing** - Configure servers for client-side routing **CI/CD** - Automatic deployments from Git
 
 ### Best Practices
- **Performance Profiling**- Use Chrome DevTools and React DevTools
- **Type Safety**- TypeScript for better developer experience
- **Error Handling**- Error boundaries and fallback UI
- **Accessibility**- Semantic HTML and ARIA labels
- **Code Quality**- ESLint, Prettier, and TypeScript strict mode
+
+**Performance Profiling** - Use Chrome DevTools and React DevTools **Type Safety** - TypeScript for better developer experience **Error Handling** - Error boundaries and fallback UI **Accessibility** - Semantic HTML and ARIA labels **Code Quality** - ESLint, Prettier, and TypeScript strict mode
 
 ---
 
@@ -171,12 +163,15 @@ After completing all exercises, you will understand:
 All exercises require:
 - **Node.js** 18.x or higher
 - **npm** 9.x or higher
+
 - **Git** For version control and deployment
 
 Recommended tools:
-- **VS Code**with React, TypeScript, and ESLint extensions
-- **Chrome DevTools**for performance profiling
-- **React DevTools**browser extension
+- **VS Code** with React, TypeScript, and ESLint extensions
+
+- **Chrome DevTools** for performance profiling
+
+- **React DevTools** browser extension
 
 ---
 
@@ -184,12 +179,12 @@ Recommended tools:
 
 | Metric | Before Optimization | After Optimization | Improvement |
 |--------|---------------------|-------------------|-------------|
-| **Initial Bundle Size**| 500 KB | 150 KB | 70% smaller |
-| **Re-renders (1000 items)**| 1000 | 1 | 99.9% fewer |
-| **List Render (10k items)**| 2000 ms | 60 ms | 33x faster |
-| **DOM Nodes (10k items)**| 10,000 | 15 | 99.85% fewer |
-| **Memory Usage**| 150 MB | 2 MB | 75x less |
-| **Time to Interactive**| 3.5 s | 1.2 s | 66% faster |
+| ** Initial Bundle Size**| 500 KB | 150 KB | 70% smaller |
+| ** Re-renders (1000 items)**| 1000 | 1 | 99.9% fewer |
+| ** List Render (10k items)**| 2000 ms | 60 ms | 33x faster |
+| ** DOM Nodes (10k items)**| 10,000 | 15 | 99.85% fewer |
+| ** Memory Usage**| 150 MB | 2 MB | 75x less |
+| ** Time to Interactive**| 3.5 s | 1.2 s | 66% faster |
 
 ---
 
@@ -241,12 +236,12 @@ Recommended tools:
 
 ## Next Steps
 
-1. **Combine Techniques**- Use code splitting + memoization + virtual lists together
-2. **Add Testing**- Unit tests with Vitest, E2E tests with Playwright
-3. **Add Monitoring**- Sentry for errors, Google Analytics for users
-4. **Add Database**- Firebase, Supabase, or PostgreSQL
-5. **Add Authentication**- Auth0, Clerk, or Firebase Auth
-6. **Add CI/CD**- GitHub Actions for automated testing and deployment
+1. **Combine Techniques** - Use code splitting + memoization + virtual lists together
+2. **Add Testing** - Unit tests with Vitest, E2E tests with Playwright
+3. **Add Monitoring** - Sentry for errors, Google Analytics for users
+4. **Add Database** - Firebase, Supabase, or PostgreSQL
+5. **Add Authentication** - Auth0, Clerk, or Firebase Auth
+6. **Add CI/CD** - GitHub Actions for automated testing and deployment
 
 ---
 
@@ -279,7 +274,7 @@ Recommended tools:
 
 ### Advanced Challenges
 
-1. **Hybrid Approach**- Combine all 3 optimization techniques:
+1. **Hybrid Approach** - Combine all 3 optimization techniques:
    - Lazy load routes
    - Memoize components
    - Virtual scroll for lists
@@ -307,8 +302,9 @@ Recommended tools:
 ---
 
 You've completed all Lab 5 exercises and learned production-ready React development practices!
-- **Production Build:**Optimization for deployment
-- **Deployment:**Vercel, Netlify, or custom hosting
+- **Production Build:** Optimization for deployment
+
+- **Deployment:** Vercel, Netlify, or custom hosting
 
 ### Production Checklist
 

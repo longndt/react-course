@@ -2,7 +2,7 @@
 
 This folder contains complete solution code for all exercises in Lab 1.
 
->  **Important:**Try completing each exercise on your own first before checking solutions. Learning by doing!
+>  **Important:** Try completing each exercise on your own first before checking solutions. Learning by doing!
 
 ---
 
@@ -41,13 +41,13 @@ solutions/
 
 ### When to Check Solutions
 
- **Good reasons to check:**
+**Good reasons to check:**
 - Stuck for an extended period
 - Completed exercise and want to verify approach
 - Got it working but want to see best practices
 - Want to understand a specific technique better
 
- **Avoid checking solutions:**
+**Avoid checking solutions:**
 - Before attempting the exercise
 - At first sign of difficulty
 - To copy-paste without understanding
@@ -75,7 +75,7 @@ solutions/
 
 ### Exercise 2: Welcome Component
 
-**Location:**`exercise2-welcome/`
+**Location:** `exercise2-welcome/`
 
 **What you'll learn:**
 - Creating functional components
@@ -90,7 +90,7 @@ solutions/
 
 ### Exercise 3: Component Styling
 
-**Location:**`exercise3-styling/`
+**Location:** `exercise3-styling/`
 
 **What you'll learn:**
 - Importing CSS in React components
@@ -105,7 +105,7 @@ solutions/
 
 ### Exercise 4: Landing Page
 
-**Location:**`exercise4-landing-page/`
+**Location:** `exercise4-landing-page/`
 
 **What you'll learn:**
 - Array mapping with `.map()`
@@ -122,7 +122,7 @@ solutions/
 
 ### Bonus Challenges
 
-**Location:**`bonus-challenges/`
+**Location:** `bonus-challenges/`
 
 **What you'll learn:**
 - Creating additional components
@@ -229,11 +229,11 @@ import './Component.css';  // Must be at top
 
 ## Tips for Success
 
-1. **Type code manually**- Don't copy-paste. Typing helps you learn
-2. **Read README files**- Each solution has detailed explanations
-3. **Experiment**- Change values, see what happens
-4. **Ask questions**- If confused, ask for help
-5. **Build from scratch**- After seeing solution, recreate without looking
+1. **Type code manually** - Don't copy-paste. Typing helps you learn
+2. **Read README files** - Each solution has detailed explanations
+3. **Experiment** - Change values, see what happens
+4. **Ask questions** - If confused, ask for help
+5. **Build from scratch** - After seeing solution, recreate without looking
 
 ---
 
@@ -305,17 +305,15 @@ Before moving to Lab 2, you should be able to:
 - [ ] Map arrays to JSX elements
 - [ ] Use the `key` prop for lists
 - [ ] Compose multiple components
-- [ ] Style components with modern CSS
-
-**If you can do all of the above, you're ready for Lab 2!**
+- [ ] Style components with modern CSS **If you can do all of the above, you're ready for Lab 2!**
 
 ---
 
-**Need more help?**Each solution folder has its own detailed README with explanations and examples.
+** Need more help?** Each solution folder has its own detailed README with explanations and examples.
 }
 ```
 
- **Mistake 2: Using `class` instead of `className`**
+ ** Mistake 2: Using `class` instead of `className`**
 ```tsx
 // src/components/Component.tsx
 //  Wrong
@@ -357,10 +355,10 @@ p {
 ### Explanation
 
 **CSS Concepts:**
-- **`.App`**- Class selector (matches `className="App"`)
-- **`margin: 0 auto`**- Center the container
-- **`max-width: 800px`**- Limit width for readability
-- **`rem`**- Relative font size (1rem = 16px default)
+- **`.App`** - Class selector (matches `className="App"`)
+- **`margin: 0 auto`** - Center the container
+- **`max-width: 800px`** - Limit width for readability
+- **`rem`** - Relative font size (1rem = 16px default)
 
 **Result:**
 - Content centered on page
@@ -658,16 +656,14 @@ Add media queries for mobile:
 
 ### Common Questions
 
-**Q: Can I use JavaScript (.jsx) instead of TypeScript (.tsx)?**
+** Q: Can I use JavaScript (.jsx) instead of TypeScript (.tsx)?**
 A: For this course, we require TypeScript for better learning and industry readiness.
 
-**Q: My styles aren't applying. Why?**
+** Q: My styles aren't applying. Why?**
 A: Check:
 1. CSS file imported in component
 2. className spelled correctly
-3. CSS selector matches className
-
-**Q: Do I need to understand all CSS?**
+3. CSS selector matches className **Q: Do I need to understand all CSS?**
 A: No! Focus on: flexbox, basic layout, colors. Advanced CSS comes with practice.
 
 ---

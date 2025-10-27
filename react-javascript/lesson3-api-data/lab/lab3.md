@@ -2,7 +2,7 @@
 
 ## � Overview
 
-Welcome to Lab 3! In this hands-on lab, you'll build a complete full-stack Task Manager application by connecting a React frontend to a Node.js/Express/MongoDB backend. You'll master essential API integration patterns using **Axios**- the most popular HTTP client for React applications.
+Welcome to Lab 3! In this hands-on lab, you'll build a complete full-stack Task Manager application by connecting a React frontend to a Node.js/Express/MongoDB backend. You'll master essential API integration patterns using **Axios** - the most popular HTTP client for React applications.
 
 **What You'll Build:**
 - RESTful API with Node.js and Express
@@ -54,15 +54,15 @@ Before starting, ensure you have:
 
 ### Required Software
 
-- [ ] **Node.js**(v18 or higher) - [Download](https://nodejs.org/)
-- [ ] **MongoDB**- Choose one:
+- [ ] ** Node.js** (v18 or higher) - [Download](https://nodejs.org/)
+- [ ] ** MongoDB** - Choose one:
   - Local MongoDB Community Server, OR
   - MongoDB Atlas account (free cloud database)
-- [ ] **VS Code**with extensions:
+- [ ] ** VS Code** with extensions:
   - ESLint
   - Prettier
   - Thunder Client (or use Postman)
-- [ ] **Git**for version control
+- [ ] ** Git** for version control
 
 ### Verify Installation
 
@@ -110,17 +110,16 @@ _For detailed setup instructions, see [Complete Environment Setup Guide](../../s
 
 ### Concept Review
 
-A **RESTful API**follows REST principles for building web services:
-- **Resources**are accessed via URLs (e.g., `/api/tasks`)
-- **HTTP Methods**indicate actions:
+A **RESTful API** follows REST principles for building web services:
+- **Resources** are accessed via URLs (e.g., `/api/tasks`)
+
+- **HTTP Methods** indicate actions:
   - `GET` - Read/Retrieve data
   - `POST` - Create new data
   - `PUT/PATCH` - Update existing data
   - `DELETE` - Remove data
-- **Stateless**- Each request contains all needed information
-
-**MongoDB**is a NoSQL database that stores data as JSON-like documents.
-**Mongoose**is an ODM (Object Data Modeling) library that provides schema validation and easier interaction with MongoDB.
+- **Stateless** - Each request contains all needed information **MongoDB** is a NoSQL database that stores data as JSON-like documents.
+** Mongoose** is an ODM (Object Data Modeling) library that provides schema validation and easier interaction with MongoDB.
 
 ### Goals
 
@@ -134,7 +133,7 @@ A **RESTful API**follows REST principles for building web services:
 
 ### Task 1.1: Initialize Backend Project (Guided)
 
-**Step 1:**Create backend structure
+**Step 1:** Create backend structure
 ```bash
 cd backend
 mkdir src
@@ -142,7 +141,7 @@ mkdir src/models
 mkdir src/routes
 ```
 
-**Step 2:**Configure TypeScript (`tsconfig.json`)
+**Step 2:** Configure TypeScript (`tsconfig.json`)
 ```json
 {
   "compilerOptions": {
@@ -157,7 +156,7 @@ mkdir src/routes
 }
 ```
 
-**Step 3:**Add scripts to `package.json`
+**Step 3:** Add scripts to `package.json`
 ```json
 {
   "scripts": {
@@ -212,7 +211,7 @@ export default mongoose.model<ITask>('Task', TaskSchema);
 - Mongoose schema with validation
 - Model exported for use in routes
 
-**Solution:**See `solutions/exercise1-backend/models/Task.ts`
+**Solution:** See `solutions/exercise1-backend/models/Task.ts`
 
 ---
 
@@ -267,7 +266,7 @@ app.listen(PORT, () => {
 - CORS enabled for frontend requests
 - Console shows success messages
 
-**Solution:**See `solutions/exercise1-backend/index.ts`
+**Solution:** See `solutions/exercise1-backend/index.ts`
 
 ---
 
@@ -279,26 +278,26 @@ Add routes to `backend/src/index.ts` (after MongoDB connection)
 
 **Requirements:**
 
-**1. GET /api/tasks**- Fetch all tasks
+**1. GET /api/tasks** - Fetch all tasks
 - Use `Task.find()`
 - Return array of tasks
 - Handle errors with 500 status
 
-**2. POST /api/tasks**- Create new task
+**2. POST /api/tasks** - Create new task
 - Extract data from `req.body`
 - Create new Task instance
 - Save to database
 - Return saved task with 201 status
 - Handle errors with 400 status
 
-**3. PUT /api/tasks/:id**- Update task
+**3. PUT /api/tasks/:id** - Update task
 - Extract id from params
 - Use `Task.findByIdAndUpdate()`
 - Set `{ new: true }` to return updated task
 - Return updated task
 - Handle errors with 400 status
 
-**4. DELETE /api/tasks/:id**- Delete task
+**4. DELETE /api/tasks/:id** - Delete task
 - Extract id from params
 - Use `Task.findByIdAndDelete()`
 - Return success message
@@ -401,9 +400,7 @@ npm run dev
 4. **DELETE /api/tasks/:id**
    - Method: DELETE
    - URL: `http://localhost:5000/api/tasks/[TASK_ID]`
-   - Expected: Success message
-
-**Verify in MongoDB:**
+   - Expected: Success message **Verify in MongoDB:**
 ```bash
 # Connect to MongoDB shell
 mongosh
@@ -424,18 +421,25 @@ db.tasks.find().pretty()
 
 ### Concept Review
 
-**React Query (TanStack Query)**is a powerful library for managing server state in React applications:
+**React Query (TanStack Query)** is a powerful library for managing server state in React applications:
 
 - **Automatic Caching** Stores fetched data to avoid redundant requests
+
 - **Background Updates** Refreshes data automatically
+
 - **Optimistic Updates** Updates UI before server confirms
+
 - **Error Handling** Built-in error states and retry logic
+
 - **Loading States** Automatic loading state management
 
 **Key Concepts:**
 - **Query** Read operation (GET) - uses `useQuery`
+
 - **Mutation** Write operation (POST, PUT, DELETE) - uses `useMutation`
+
 - **Query Key** Unique identifier for cached data
+
 - **Query Client** Manages all queries and cache
 
 ### Goals
@@ -450,13 +454,13 @@ db.tasks.find().pretty()
 
 ### Task 2.1: Setup React Query (Guided)
 
-**Step 1:**Install dependencies (already done in setup)
+**Step 1:** Install dependencies (already done in setup)
 ```bash
 cd frontend
 npm install @tanstack/react-query axios
 ```
 
-**Step 2:**Create API service file
+**Step 2:** Create API service file
 
 Create `frontend/src/services/api.ts`:
 ```javascript
@@ -482,7 +486,7 @@ export const taskApi = {
 };
 ```
 
-**Step 3:**Setup QueryClient in `App.jsx`
+**Step 3:** Setup QueryClient in `App.jsx`
 ```jsx
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import TaskManager from './components/TaskManager';
@@ -564,7 +568,7 @@ export default TaskManager;
 - Error state shows if API fails
 - Tasks display in a list
 
-**Solution:**See `solutions/exercise2-frontend/TaskManager-basic.jsx`
+**Solution:** See `solutions/exercise2-frontend/TaskManager-basic.jsx`
 
 ---
 
@@ -649,7 +653,7 @@ function TaskManager() {
 - Input clears after submission
 - Button disabled while creating
 
-**Solution:**See `solutions/exercise2-frontend/TaskManager-create.jsx`
+**Solution:** See `solutions/exercise2-frontend/TaskManager-create.jsx`
 
 ---
 
@@ -743,7 +747,7 @@ function TaskManager() {
 - UI updates automatically
 - Buttons disable during mutations
 
-**Solution:**See `solutions/exercise2-frontend/TaskManager-full.jsx`
+**Solution:** See `solutions/exercise2-frontend/TaskManager-full.jsx`
 
 ---
 
@@ -935,34 +939,49 @@ You've completed Lab 3! Here's what you've mastered:
 
 ### Backend Skills
 - **Express Server** RESTful API with proper routing
+
 - **MongoDB Integration** Mongoose schemas and CRUD operations
+
 - **Error Handling** Try-catch blocks and proper status codes
+
 - **CORS Configuration** Cross-origin request handling
 
 ### Frontend Skills
 - **React Query** useQuery for data fetching
+
 - **Mutations** useMutation for create/update/delete
+
 - **Cache Management** Automatic caching and invalidation
+
 - **Loading States** Built-in pending states
+
 - **Error Handling** Error boundaries and user feedback
 
 ### Full-Stack Patterns
 - **API Design** RESTful endpoints with proper HTTP methods
+
 - **Data Flow** Frontend ↔ Backend communication
+
 - **State Management** Server state vs client state
+
 - **TypeScript** Type-safe API communication
 
 ---
 
 ## Next Steps
 
-**Ready for more?**Continue to [Lab 4 - Routing & Authentication](../../lesson4-routing-auth/lab/lab4.md) to learn:
+**Ready for more?** Continue to [Lab 4 - Routing & Authentication](../../lesson4-routing-auth/lab/lab4.md) to learn:
 
 - **React Router** Client-side routing and navigation
+
 - **Protected Routes** Authentication-based access control
+
 - **Auth Context** Global authentication state
+
 - **Login/Signup** User authentication flow
+
 - **JWT Tokens** Secure API authentication
+
 - **Route Guards** Protecting private routes
 
 **Before starting Lab 4:**
@@ -1098,9 +1117,7 @@ Before moving to Lab 4, you should be able to:
 - [ ] Understand query caching
 - [ ] Know when cache invalidates
 - [ ] Can explain optimistic updates
-- [ ] Understand background refetching
-
-**If you can confidently do all above, you're ready for Lab 4!**
+- [ ] Understand background refetching **If you can confidently do all above, you're ready for Lab 4!**
 
 ---
 
@@ -1141,9 +1158,7 @@ Before moving to Lesson 4, verify you can:
 - [ ] Add pagination to large lists
 - [ ] Handle file uploads with FormData
 - [ ] Manage complex state with useReducer
-- [ ] Debug API calls with DevTools
-
-**Goal: Check at least 16/20 items before Lesson 4**
+- [ ] Debug API calls with DevTools **Goal: Check at least 16/20 items before Lesson 4**
 
 ---
 

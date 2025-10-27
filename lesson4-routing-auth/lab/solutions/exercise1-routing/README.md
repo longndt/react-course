@@ -2,7 +2,7 @@
 
 ## 📋 Overview
 
-Complete solution demonstrating **React Router v6**with basic routing, navigation, route parameters, and programmatic navigation.
+Complete solution demonstrating **React Router v6** with basic routing, navigation, route parameters, and programmatic navigation.
 
 This solution showcases:
 - BrowserRouter setup
@@ -68,7 +68,7 @@ App will start at: `http://localhost:5173`
 
 ### 1. BrowserRouter Setup
 
-**App.tsx**- Wrapping the application with BrowserRouter:
+**App.tsx** - Wrapping the application with BrowserRouter:
 
 ```tsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -105,7 +105,7 @@ function App() {
 
 ### 2. Navigation with Link and NavLink
 
-**Link Component**- Basic navigation without active state:
+**Link Component** - Basic navigation without active state:
 
 ```tsx
 import { Link } from 'react-router-dom';
@@ -115,7 +115,7 @@ import { Link } from 'react-router-dom';
 </Link>
 ```
 
-**NavLink Component**- Navigation with active state tracking:
+** NavLink Component** - Navigation with active state tracking:
 
 ```tsx
 import { NavLink } from 'react-router-dom';
@@ -149,14 +149,14 @@ import { NavLink } from 'react-router-dom';
 
 ### 3. Route Parameters with useParams
 
-**Dynamic Routes**- Define route with parameter:
+**Dynamic Routes** - Define route with parameter:
 
 ```tsx
 // In App.tsx
 <Route path="/products/:id" element={<ProductDetail />} />
 ```
 
-**Extract Parameter**- Use `useParams` hook:
+** Extract Parameter** - Use `useParams` hook:
 
 ```tsx
 import { useParams } from 'react-router-dom';
@@ -175,7 +175,7 @@ function ProductDetail() {
 }
 ```
 
-**Multiple Parameters**- You can have multiple params:
+** Multiple Parameters** - You can have multiple params:
 
 ```tsx
 // Route definition
@@ -189,7 +189,7 @@ const { category, id } = useParams<{ category: string; id: string }>();
 
 ### 4. Programmatic Navigation with useNavigate
 
-**useNavigate Hook**- Navigate programmatically in code:
+**useNavigate Hook** - Navigate programmatically in code:
 
 ```tsx
 import { useNavigate } from 'react-router-dom';
@@ -238,7 +238,7 @@ navigate('/search?q=react');
 
 ### 5. Linking to Dynamic Routes
 
-**Products Page**- Create links to dynamic routes:
+**Products Page** - Create links to dynamic routes:
 
 ```tsx
 const products = [
@@ -274,12 +274,12 @@ function Products() {
 
 ### Page Components
 
-1. **Home**- Hero section with feature cards
-2. **About**- Information about the application
-3. **Contact**- Contact information and form
-4. **Products**- Grid of product cards
-5. **ProductDetail**- Detailed product view with parameters
-6. **NotFound**- 404 error page for invalid routes
+1. **Home** - Hero section with feature cards
+2. **About** - Information about the application
+3. **Contact** - Contact information and form
+4. **Products** - Grid of product cards
+5. **ProductDetail** - Detailed product view with parameters
+6. **NotFound** - 404 error page for invalid routes
 
 ### Navigation Features
 
@@ -349,9 +349,7 @@ function Products() {
 
 ### Issue: Links don't work / page reloads
 
-**Cause:**Using `<a>` tags instead of `<Link>` components
-
-**Solution:**
+**Cause:** Using `<a>` tags instead of `<Link>` components **Solution:**
 ```tsx
 //  Wrong - causes full page reload
 <a href="/about">About</a>
@@ -364,7 +362,7 @@ function Products() {
 
 ### Issue: Active class not applying
 
-**Cause:**Using `Link` instead of `NavLink`
+**Cause:** Using `Link` instead of `NavLink`
 
 **Solution:**
 ```tsx
@@ -384,9 +382,9 @@ function Products() {
 
 ### Issue: Home link always active
 
-**Cause:**Path "/" matches all routes starting with "/"
+**Cause:** Path "/" matches all routes starting with "/"
 
-**Solution:**Add `end` prop to Home NavLink:
+**Solution:** Add `end` prop to Home NavLink:
 ```tsx
 <NavLink to="/" end className={...}>Home</NavLink>
 ```
@@ -395,9 +393,7 @@ function Products() {
 
 ### Issue: useParams returns undefined
 
-**Cause:**Using wrong parameter name or component not in route
-
-**Solution:**
+**Cause:** Using wrong parameter name or component not in route **Solution:**
 ```tsx
 // Route definition
 <Route path="/products/:id" element={<ProductDetail />} />
@@ -425,25 +421,21 @@ const { productId } = useParams();  //  Wrong - mismatch
 
 After reviewing this solution, you should understand:
 
- **Routing Setup**
+ ** Routing Setup**
 - How to configure BrowserRouter
 - How to define routes with `<Route>`
 - How to organize routes in Routes component
-- How to create catch-all 404 routes
-
- **Navigation**
+- How to create catch-all 404 routes **Navigation**
 - Difference between Link and NavLink
 - How to create clickable navigation
 - How to highlight active links
-- How to navigate with buttons
-
- **Dynamic Routing**
+- How to navigate with buttons **Dynamic Routing**
 - How to define route parameters
 - How to extract params with useParams
 - How to create dynamic page content
 - How to handle missing data (404)
 
- **Programmatic Navigation**
+ ** Programmatic Navigation**
 - How to use useNavigate hook
 - How to navigate to specific routes
 - How to go back in history
@@ -504,4 +496,4 @@ After reviewing this solution, you should understand:
 
 ---
 
-** Exercise 1 Complete!**You've mastered React Router basics. Move on to Exercise 2 to learn authentication and protected routes!
+** Exercise 1 Complete!** You've mastered React Router basics. Move on to Exercise 2 to learn authentication and protected routes!

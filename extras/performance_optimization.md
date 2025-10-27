@@ -25,9 +25,13 @@ Performance optimization ensures your React application is fast and responsive. 
 
 **Performance Metrics**
 - **First Contentful Paint (FCP)**: < 1.8s
+
 - **Largest Contentful Paint (LCP)**: < 2.5s
+
 - **Time to Interactive (TTI)**: < 3.8s
+
 - **Cumulative Layout Shift (CLS)**: < 0.1
+
 - **First Input Delay (FID)**: < 100ms
 
 ---
@@ -44,7 +48,7 @@ Performance optimization ensures your React application is fast and responsive. 
 - Profiler data showing bottlenecks
 - Lighthouse score < 90
 
-**Don't optimize when**
+** Don't optimize when**
 - "Just in case"
 - Without measuring first
 - Code works fine
@@ -72,15 +76,13 @@ Performance optimization ensures your React application is fast and responsive. 
 # Firefox: https://addons.mozilla.org/firefox (React Developer Tools)
 ```
 
-**Using Profiler**
+** Using Profiler**
 1. Open React DevTools
 2. Go to "Profiler" tab
 3. Click "Record"
 4. Interact with app
 5. Click "Stop"
-6. Analyze flame graph
-
-**What to Look For**
+6. Analyze flame graph **What to Look For**
 - Components that render too often
 - Components that take too long to render
 - Unnecessary re-renders
@@ -160,12 +162,10 @@ function ExpensiveList({ items, filter }) {
 }
 ```
 
-**Profiler shows**
+** Profiler shows**
 - Component renders on every parent re-render
 - filteredItems calculated unnecessarily
-- 50ms+ render time
-
-**Solution**
+- 50ms+ render time **Solution**
 ```tsx
 import { useMemo } from 'react';
 
@@ -186,7 +186,7 @@ function ExpensiveList({ items, filter }) {
 }
 ```
 
-**Result**: 50ms → 2ms render time
+** Result**: 50ms → 2ms render time
 
 ---
 
@@ -198,7 +198,7 @@ Memoizes expensive calculations.
 
 #### When to Use
 
- **Good Use Cases**
+**Good Use Cases**
 - Expensive calculations (sorting, filtering large arrays)
 - Complex object transformations
 - Derived data that doesn't change often
@@ -225,7 +225,7 @@ function ProductList({ products, sortBy }) {
 }
 ```
 
- **Bad Use Cases**
+ ** Bad Use Cases**
 ```tsx
 // Don't use for simple calculations
 const sum = useMemo(() => a + b, [a, b]); // Overkill!
@@ -271,7 +271,7 @@ const ExpensiveChild = memo(({ onClick }) => {
 });
 ```
 
- **Bad Use Cases**
+ ** Bad Use Cases**
 ```tsx
 // Don't use if not passed to memoized components
 function Component() {
@@ -355,7 +355,7 @@ function Loading() {
 }
 ```
 
-**Result**: Initial bundle 500KB → 150KB (70% reduction!)
+** Result**: Initial bundle 500KB → 150KB (70% reduction!)
 
 #### Component-Level Splitting
 
@@ -465,7 +465,7 @@ function VirtualList({ items }) {
 }
 ```
 
-**Result**: 10,000 items scroll smoothly (only renders visible rows)
+** Result**: 10,000 items scroll smoothly (only renders visible rows)
 
 ### Variable Size Lists
 
@@ -560,14 +560,14 @@ function LazyImage({ src, alt }) {
 npm install --save-dev webpack-bundle-analyzer
 ```
 
-**Create React App**
+** Create React App**
 ```bash
 npm install --save-dev cra-bundle-analyzer
 npm run build
 npx cra-bundle-analyzer
 ```
 
-**Vite**
+** Vite**
 ```bash
 npm install --save-dev rollup-plugin-visualizer
 ```
@@ -589,7 +589,9 @@ export default {
 ### What to Look For
 
 - **Large dependencies** (> 100KB)
+
 - **Duplicate dependencies**
+
 - **Unused code**
 
 ### Common Optimizations
@@ -633,14 +635,10 @@ async function handleExport() {
 **LCP (Largest Contentful Paint)**
 - Measures: Loading performance
 - Good: < 2.5s
-- Tips: Optimize images, reduce JS, use CDN
-
-**FID (First Input Delay)**
+- Tips: Optimize images, reduce JS, use CDN **FID (First Input Delay)**
 - Measures: Interactivity
 - Good: < 100ms
-- Tips: Code splitting, reduce JS execution
-
-**CLS (Cumulative Layout Shift)**
+- Tips: Code splitting, reduce JS execution **CLS (Cumulative Layout Shift)**
 - Measures: Visual stability
 - Good: < 0.1
 - Tips: Reserve space for images, avoid dynamic content
@@ -934,10 +932,15 @@ const fullName = `${firstName} ${lastName}`;
 ### Performance Budget
 
 - **Initial JS**: < 170KB (gzipped)
+
 - **Total JS**: < 350KB (gzipped)
+
 - **Images**: < 500KB total per page
+
 - **FCP**: < 1.8s
+
 - **LCP**: < 2.5s
+
 - **TTI**: < 3.8s
 
 ---
@@ -965,4 +968,4 @@ const fullName = `${firstName} ${lastName}`;
 
 ---
 
-**Remember** Profile first, optimize second. Don't optimize without measuring. Focus on user-perceived performance, not just metrics.
+** Remember** Profile first, optimize second. Don't optimize without measuring. Focus on user-perceived performance, not just metrics.

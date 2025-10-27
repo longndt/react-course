@@ -187,22 +187,22 @@ graph LR
 
 ## Key Concepts
 
-### 1. **Declarative Routing**
+### 1. ** Declarative Routing**
 - Routes defined as components
 - URL-based navigation
 - Automatic re-rendering on route change
 
-### 2. **Nested Routing**
+### 2. ** Nested Routing**
 - Parent-child route relationships
 - Layout components
 - Nested navigation
 
-### 3. **Route Protection**
+### 3. ** Route Protection**
 - Authentication guards
 - Role-based access
 - Redirect handling
 
-### 4. **Dynamic Routing**
+### 4. ** Dynamic Routing**
 - URL parameters
 - Query strings
 - Programmatic navigation

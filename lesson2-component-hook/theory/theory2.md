@@ -28,10 +28,13 @@
 
 Modern applications require modular, reusable UI building blocks. Components enable:
 
-- **Reusability**- Write once, use everywhere
-- **Maintainability**- Isolated, testable code units
-- **Scalability**- Compose complex UIs from simple pieces
-- **Collaboration**- Teams work on independent components
+- **Reusability** - Write once, use everywhere
+
+- **Maintainability** - Isolated, testable code units
+
+- **Scalability** - Compose complex UIs from simple pieces
+
+- **Collaboration** - Teams work on independent components
 
 ### Component Hierarchy Example
 
@@ -56,7 +59,7 @@ E-commerce App
 
 ### Modern React Components
 
-**Function components**are the modern way to write React components. They're simpler, more readable, and work perfectly with hooks.
+**Function components** are the modern way to write React components. They're simpler, more readable, and work perfectly with hooks.
 
 ### Component Design Patterns
 
@@ -77,7 +80,7 @@ function UserList() {
   }, []);
 
   if (loading) return <LoadingSpinner />;
-  
+
   return (
     <div>
       <h2>Users</h2>
@@ -116,7 +119,7 @@ interface ModalProps {
 
 function Modal({ children, isOpen }: ModalProps) {
   if (!isOpen) return null;
-  
+
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -169,11 +172,11 @@ function withLoading<T extends object>(
 ) {
   return function WithLoadingComponent(props: T & { isLoading?: boolean }) {
     const { isLoading, ...restProps } = props;
-    
+
     if (isLoading) {
       return <div className="loading">Loading...</div>;
     }
-    
+
     return <WrappedComponent {...(restProps as T)} />;
   };
 }
@@ -262,7 +265,7 @@ function LifecycleExample() {
   useEffect(() => {
     console.log('Component mounted');
     setMounted(true);
-    
+
     // ComponentWillUnmount equivalent
     return () => {
       console.log('Component will unmount');
@@ -311,11 +314,11 @@ interface UserProfileProps {
   className?: string;
 }
 
-function UserProfile({ 
-  user, 
-  showEmail = true, 
+function UserProfile({
+  user,
+  showEmail = true,
   onEdit,
-  className = '' 
+  className = ''
 }: UserProfileProps) {
   return (
     <div className={`user-profile ${className}`}>
@@ -334,8 +337,8 @@ function UserProfile({
 }
 
 // Usage with different prop combinations
-<UserProfile 
-  user={currentUser} 
+<UserProfile
+  user={currentUser}
   showEmail={false}
   onEdit={handleEdit}
   className="highlighted"
@@ -391,19 +394,19 @@ interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'danger';
 }
 
-function Button({ 
-  children, 
-  onClick, 
+function Button({
+  children,
+  onClick,
   type = 'button',
   disabled = false,
   variant = 'primary'
 }: ButtonProps) {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (disabled) return;
-    
+
     // Custom logic before calling parent handler
     console.log('Button clicked');
-    
+
     // Call parent handler if provided
     onClick?.(event);
   };
@@ -425,25 +428,28 @@ function Button({
 
 ## React Hooks Overview
 
-**Hooks**are functions that let you use state and other React features in function components.
+**Hooks** are functions that let you use state and other React features in function components.
 
 ### Why Hooks?
 
 - **Simpler Logic** No need for class components
+
 - **Reusable State Logic** Custom hooks for shared logic
+
 - **Better Performance** Optimized re-rendering
+
 - **Easier Testing** Function components are easier to test
 
 ### Hook Rules
 
-1. **Only call hooks at the top level**- Don't call hooks inside loops, conditions, or nested functions
-2. **Only call hooks from React functions**- Call hooks from React function components or custom hooks
+1. **Only call hooks at the top level** - Don't call hooks inside loops, conditions, or nested functions
+2. **Only call hooks from React functions** - Call hooks from React function components or custom hooks
 
 ---
 
 ## useState Hook
 
-**useState**lets you add state to function components.
+**useState** lets you add state to function components.
 
 ### Basic Usage
 
@@ -539,7 +545,7 @@ function UserForm() {
 
 ## useEffect Hook
 
-**useEffect**lets you perform side effects in function components.
+**useEffect** lets you perform side effects in function components.
 
 ### Basic Usage
 
@@ -605,7 +611,7 @@ function Timer() {
 
 ## useRef Hook
 
-**useRef**lets you access DOM elements and persist values across renders.
+**useRef** lets you access DOM elements and persist values across renders.
 
 ### DOM Reference
 
@@ -653,7 +659,7 @@ function Counter() {
 
 ## useContext Hook
 
-**useContext**lets you consume context values without prop drilling.
+**useContext** lets you consume context values without prop drilling.
 
 ### Creating Context
 
@@ -715,7 +721,7 @@ function ThemedButton() {
 
 ## useReducer Hook
 
-**useReducer**is an alternative to useState for complex state logic.
+**useReducer** is an alternative to useState for complex state logic.
 
 ### Basic Usage
 
@@ -768,7 +774,7 @@ function Counter() {
 
 ## Custom Hooks
 
-**Custom hooks**let you extract component logic into reusable functions.
+**Custom hooks** let you extract component logic into reusable functions.
 
 ### Basic Custom Hook
 
@@ -1047,9 +1053,9 @@ function GoodComponent() {
 
 ### What's Coming in Lesson 3
 
-🔜 **API Integration**- Fetching data from servers
-🔜 **Data Management**- Handling loading states and errors
-🔜 **React Query**- Advanced data fetching and caching
-🔜 **CRUD Operations**- Create, Read, Update, Delete
+🔜 ** API Integration** - Fetching data from servers
+🔜 ** Data Management** - Handling loading states and errors
+🔜 ** React Query** - Advanced data fetching and caching
+🔜 ** CRUD Operations** - Create, Read, Update, Delete
 
 > **Advanced Topics** For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)

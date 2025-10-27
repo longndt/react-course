@@ -7,9 +7,7 @@ Visual overview of the complete course structure:
 - File structure and naming conventions
 - Learning path visualization
 - Resource organization
-- Quick navigation guide
-
-**Best for** Understanding overall course structure, finding resources quickly, planning learning approach
+- Quick navigation guide **Best for** Understanding overall course structure, finding resources quickly, planning learning approach
 
 ---
 
@@ -25,9 +23,7 @@ Complete visual learning path showing:
 - Learning outcomes timeline (Gantt chart)
 - Component structure per lesson
 - Support resources mindmap
-- Quick start guide flowchart
-
-**Best for** Getting oriented, planning your learning path, understanding course structure
+- Quick start guide flowchart **Best for** Getting oriented, planning your learning path, understanding course structure
 
 ---
 
@@ -47,11 +43,7 @@ Visual diagrams covering:
 - Custom hook lifecycle
 - Class vs Functional component comparison
 - Memory leak prevention
-- React.StrictMode double rendering
-
-**Best for** Understanding React internals, debugging render issues, mastering hooks
-
-**Related Lessons** Lesson 1 (React Fundamentals), Lesson 2 (Components & Hooks)
+- React.StrictMode double rendering **Best for** Understanding React internals, debugging render issues, mastering hooks **Related Lessons** Lesson 1 (React Fundamentals), Lesson 2 (Components & Hooks)
 
 ---
 
@@ -73,11 +65,9 @@ Comprehensive state patterns:
 - State synchronization across tabs
 - Performance optimization (React.memo, useMemo)
 
-**Best for** Choosing the right state solution, implementing global state, optimizing performance
+** Best for** Choosing the right state solution, implementing global state, optimizing performance **Related Lessons** Lesson 2 (Components & Hooks), Lesson 3 (API & Data)
 
-**Related Lessons** Lesson 2 (Components & Hooks), Lesson 3 (API & Data)
-
-**Related Extra Material** [State Management Guide](../extras/state_management.md)
+** Related Extra Material** [State Management Guide](../extras/state_management.md)
 
 ---
 
@@ -98,11 +88,7 @@ Complete API integration patterns:
 - Caching strategy
 - Full-stack data flow (frontend → backend → DB)
 - WebSocket real-time updates
-- File upload flow with progress
-
-**Best for** Implementing data fetching, handling errors, building real-time features
-
-**Related Lessons** Lesson 3 (API & Data), Lesson 5 (Full-Stack)
+- File upload flow with progress **Best for** Implementing data fetching, handling errors, building real-time features **Related Lessons** Lesson 3 (API & Data), Lesson 5 (Full-Stack)
 
 ---
 
@@ -120,11 +106,7 @@ Complete auth system diagrams:
 - Token refresh flow
 - Social OAuth flow (Google/GitHub)
 - Password reset flow
-- Session vs Token comparison
-
-**Best for** Implementing authentication, protecting routes, managing user sessions
-
-**Related Lessons** Lesson 4 (Routing & Auth)
+- Session vs Token comparison **Best for** Implementing authentication, protecting routes, managing user sessions **Related Lessons** Lesson 4 (Routing & Auth)
 
 ---
 
@@ -139,11 +121,7 @@ React Router navigation and routing flow:
 - URL management and parameters
 - Navigation patterns and programmatic navigation
 - Link components and useNavigate hook
-- Route matching and component rendering
-
-**Best for** Understanding routing in React applications
-
-**Related Lessons** Lesson 4 (Routing & Auth)
+- Route matching and component rendering **Best for** Understanding routing in React applications **Related Lessons** Lesson 4 (Routing & Auth)
 
 ---
 
@@ -165,11 +143,7 @@ Complete system architecture:
 - State management integration
 - Real-time features (WebSocket)
 - Caching strategy architecture
-- Security layers
-
-**Best for** Understanding the big picture, planning projects, deployment
-
-**Related Lessons** Lesson 3 (API), Lesson 4 (Auth), Lesson 5 (Deployment)
+- Security layers **Best for** Understanding the big picture, planning projects, deployment **Related Lessons** Lesson 3 (API), Lesson 4 (Auth), Lesson 5 (Deployment)
 
 ---
 
@@ -184,11 +158,7 @@ React project structure and organization:
 - Import/export patterns and module organization
 - Best practices and naming conventions
 - JavaScript-specific project setup
-- Vite configuration and build optimization
-
-**Best for** Understanding how to organize React projects
-
-**Related Lessons** Lesson 1 (React Fundamentals)
+- Vite configuration and build optimization **Best for** Understanding how to organize React projects **Related Lessons** Lesson 1 (React Fundamentals)
 
 ---
 
@@ -203,11 +173,7 @@ Complete deployment process and strategies:
 - Environment configuration and variables
 - Performance optimization and monitoring
 - JavaScript-specific build configurations
-- Production deployment best practices
-
-**Best for** Understanding deployment and production processes
-
-**Related Lessons** Lesson 5 (Full-Stack & Deployment)
+- Production deployment best practices **Best for** Understanding deployment and production processes **Related Lessons** Lesson 5 (Full-Stack & Deployment)
 
 ---
 
@@ -217,7 +183,7 @@ Complete deployment process and strategies:
 All diagrams render automatically when viewing on GitHub. Simply click any diagram file to view.
 
 ### In VS Code
-Install the **Markdown Preview Mermaid Support**extension:
+Install the **Markdown Preview Mermaid Support** extension:
 ```
 code --install-extension bierner.markdown-mermaid
 ```
@@ -234,21 +200,21 @@ Most modern markdown editors support Mermaid. If not, copy the Mermaid code bloc
 
 ### Stage 1: Beginner (Lesson 0-1)
 Start with:
-1. **course_roadmap.md**- Understand the learning path
-2. **component_lifecycle.md**(sections 1-4) - Basic lifecycle
-3. **state_management_flow.md**(sections 1-3) - Local state only
+1. **course_roadmap.md** - Understand the learning path
+2. **component_lifecycle.md** (sections 1-4) - Basic lifecycle
+3. **state_management_flow.md** (sections 1-3) - Local state only
 
 ### Stage 2: Intermediate (Lesson 2-3)
 Progress to:
-1. **component_lifecycle.md**(complete) - All hooks patterns
-2. **state_management_flow.md**(sections 4-8) - Context API, useReducer
-3. **api_data_flow.md**(sections 1-7) - Data fetching patterns
+1. **component_lifecycle.md** (complete) - All hooks patterns
+2. **state_management_flow.md** (sections 4-8) - Context API, useReducer
+3. **api_data_flow.md** (sections 1-7) - Data fetching patterns
 
 ### Stage 3: Advanced (Lesson 4-5)
 Master:
-1. **authentication_flow.md**(complete) - Full auth system
-2. **project_architecture.md**(complete) - System design
-3. **api_data_flow.md**(sections 8-13) - Advanced patterns
+1. **authentication_flow.md** (complete) - Full auth system
+2. **project_architecture.md** (complete) - System design
+3. **api_data_flow.md** (sections 8-13) - Advanced patterns
 
 ---
 
@@ -256,16 +222,20 @@ Master:
 
 ### Common Shapes
 - **Rectangle**`[ ]` - Process or component
+
 - **Rounded Rectangle**`( )` - Start/End point
+
 - **Diamond**`{ }` - Decision point
+
 - **Cylinder**`[( )]` - Database
+
 - **Circle**`(( ))` - Central concept
 
 ### Common Colors
-- 🟢 **Green**- Success, correct path, recommended
-- 🟡 **Yellow**- Warning, optional, in-progress
-- 🔵 **Blue**- Information, reference, standard
-- 🔴 **Red**- Error, incorrect, deprecated
+- 🟢 ** Green** - Success, correct path, recommended
+- 🟡 ** Yellow** - Warning, optional, in-progress
+- 🔵 ** Blue** - Information, reference, standard
+- 🔴 ** Red** - Error, incorrect, deprecated
 
 ### Arrow Types
 - `-->` Solid line - Main flow
@@ -276,10 +246,10 @@ Master:
 
 ## 🎓 Learning Tips
 
-1. **Start with the roadmap**to understand the big picture
-2. **Reference diagrams while coding**to reinforce concepts
-3. **Recreate diagrams from memory**to test understanding
-4. **Modify diagrams**for your own projects
-5. **Use diagrams in documentation**for your portfolio
+1. **Start with the roadmap** to understand the big picture
+2. **Reference diagrams while coding** to reinforce concepts
+3. **Recreate diagrams from memory** to test understanding
+4. **Modify diagrams** for your own projects
+5. **Use diagrams in documentation** for your portfolio
 
 ---

@@ -28,10 +28,13 @@ npm run dev
 
 ### Key Concepts
 
-- **Component Composition:**Building complex UIs from simple components
-- **HOCs:**Reusable component logic
-- **Custom Hooks:**Extracting stateful logic
-- **TypeScript Patterns:**Proper typing for advanced patterns
+- **Component Composition:** Building complex UIs from simple components
+
+- **HOCs:** Reusable component logic
+
+- **Custom Hooks:** Extracting stateful logic
+
+- **TypeScript Patterns:** Proper typing for advanced patterns
 
 ### Learning Focus
 

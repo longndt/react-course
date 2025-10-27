@@ -18,16 +18,22 @@
 ## Why Full-Stack Development?
 
 ### What is Full-Stack?
-- **Frontend**- User interface (React, HTML, CSS, JavaScript)
-- **Backend**- Server logic (Node.js, Express.js, APIs)
-- **Database**- Data storage (MongoDB, PostgreSQL, MySQL)
-- **Deployment**- Production hosting (Vercel, Railway, AWS)
+- **Frontend** - User interface (React, HTML, CSS, JavaScript)
+
+- **Backend** - Server logic (Node.js, Express.js, APIs)
+
+- **Database** - Data storage (MongoDB, PostgreSQL, MySQL)
+
+- **Deployment** - Production hosting (Vercel, Railway, AWS)
 
 ### Benefits
-- **Complete Control**- End-to-end application development
-- **Better Integration**- Seamless frontend-backend communication
-- **Performance**- Optimized for your specific needs
-- **Scalability**- Can handle growth and traffic
+- **Complete Control** - End-to-end application development
+
+- **Better Integration** - Seamless frontend-backend communication
+
+- **Performance** - Optimized for your specific needs
+
+- **Scalability** - Can handle growth and traffic
 
 ---
 
