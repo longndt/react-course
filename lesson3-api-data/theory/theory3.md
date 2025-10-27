@@ -4,18 +4,18 @@
 
 ## Table of Contents
 
-1. [Why API Integration Matters?](#why-api-integration-matters)
-2. [Understanding REST APIs](#understanding-rest-apis)
-3. [HTTP Methods & CRUD Operations](#http-methods--crud-operations)
-4. [Data Fetching with Axios](#data-fetching-with-axios)
-5. [Error Handling & Loading States](#error-handling--loading-states)
-6. [React Query (Advanced)](#react-query-advanced)
-7. [Common Mistakes](#common-mistakes)
-8. [Next Steps](#next-steps)
+**Chapter 1:** [Why API Integration Matters?](#1-why-api-integration-matters)
+**Chapter 2:** [Understanding REST APIs](#2-understanding-rest-apis)
+**Chapter 3:** [HTTP Methods & CRUD Operations](#3-http-methods--crud-operations)
+**Chapter 4:** [Data Fetching with Axios](#4-data-fetching-with-axios)
+**Chapter 5:** [Error Handling & Loading States](#5-error-handling--loading-states)
+**Chapter 6:** [React Query (Advanced)](#6-react-query-advanced)
+**Chapter 7:** [Common Mistakes](#7-common-mistakes)
+**Chapter 8:** [Next Steps](#8-next-steps)
 
 ---
 
-## Why API Integration Matters?
+## 1. Why API Integration Matters?
 
 > 📊 **Visual Learning** For a comprehensive understanding of API data flow, see [API Data Flow Diagram](../../diagrams/api_data_flow.md)
 
@@ -42,7 +42,7 @@ Your Modern Stack:
 
 ---
 
-## Understanding REST APIs
+## 2. Understanding REST APIs
 
 ### What is a REST API?
 
@@ -78,7 +78,7 @@ DELETE /api/users/123   // Delete user with ID 123
 
 ---
 
-## HTTP Methods & CRUD Operations
+## 3. HTTP Methods & CRUD Operations
 
 ### CRUD Operations
 
@@ -162,7 +162,7 @@ export type { User, CreateUserData, UpdateUserData };
 
 ---
 
-## Data Fetching with Axios
+## 4. Data Fetching with Axios
 
 ### Setup Axios
 
@@ -260,7 +260,7 @@ export default UserList;
 
 ---
 
-## Error Handling & Loading States
+## 5. Error Handling & Loading States
 
 ### Comprehensive Error Handling
 
@@ -338,7 +338,7 @@ function useApi<T>(url: string) {
 
 ---
 
-## React Query (Advanced)
+## 6. React Query (Advanced)
 
 ### Setup React Query
 
@@ -415,7 +415,7 @@ function CreateUser() {
 
 ---
 
-## Common Mistakes
+## 7. Common Mistakes
 
 ### Mistake 1: Not handling loading states
 
@@ -518,7 +518,7 @@ const fetchUsers = async (): Promise<User[]> => {
 
 ---
 
-## Next Steps
+## 8. Next Steps
 
 ### What You Should Know After Lesson 3
 

@@ -4,21 +4,21 @@
 
 ## Table of Contents
 
-1. [Why Modern JavaScript for React?](#why-modern-javascript-for-react)
-2. [Arrow Functions](#arrow-functions)
-3. [Destructuring & Spread Operator](#destructuring--spread-operator)
-4. [Template Literals](#template-literals)
-5. [Modules (Import/Export)](#modules-importexport)
-6. [Array Methods](#array-methods)
-7. [Async/Await & Promises](#asyncawait--promises)
-8. [Object Methods](#object-methods)
-9. [JavaScript with React](#javascript-with-react)
-10. [Common Mistakes](#common-mistakes)
-11. [Next Steps](#next-steps)
+**Chapter 1:** [Why Modern JavaScript for React?](#1-why-modern-javascript-for-react)
+**Chapter 2:** [Arrow Functions](#2-arrow-functions)
+**Chapter 3:** [Destructuring & Spread Operator](#3-destructuring--spread-operator)
+**Chapter 4:** [Template Literals](#4-template-literals)
+**Chapter 5:** [Modules (Import/Export)](#5-modules-importexport)
+**Chapter 6:** [Array Methods](#6-array-methods)
+**Chapter 7:** [Async/Await & Promises](#7-asyncawait--promises)
+**Chapter 8:** [Object Methods](#8-object-methods)
+**Chapter 9:** [JavaScript with React](#9-javascript-with-react)
+**Chapter 10:** [Common Mistakes](#10-common-mistakes)
+**Chapter 11:** [Next Steps](#11-next-steps)
 
 ---
 
-## Why Modern JavaScript for React?
+## 1. Why Modern JavaScript for React?
 
 > 🗺️ **Visual Learning** For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
 
@@ -37,7 +37,7 @@
 
 ---
 
-## Arrow Functions
+## 2. Arrow Functions
 
 ### Basic Syntax
 
@@ -90,7 +90,7 @@ const MyComponent = () => {
 
 ---
 
-## Destructuring & Spread Operator
+## 3. Destructuring & Spread Operator
 
 ### Object Destructuring
 
@@ -153,7 +153,7 @@ const updatedUser = { ...user, age: 26 }; // { name: 'John', age: 26 }
 
 ---
 
-## Template Literals
+## 4. Template Literals
 
 ### Basic Usage
 
@@ -194,7 +194,7 @@ const message = `Welcome${isLoggedIn ? ', John' : ''}!`;
 
 ---
 
-## Modules (Import/Export)
+## 5. Modules (Import/Export)
 
 ### Export
 
@@ -269,7 +269,7 @@ function App() {
 
 ---
 
-## Array Methods
+## 6. Array Methods
 
 ### Essential Array Methods
 
@@ -320,7 +320,7 @@ console.log(activeUserNames); // ['Bob', 'John']
 
 ---
 
-## Async/Await & Promises
+## 7. Async/Await & Promises
 
 ### Promises
 
@@ -395,7 +395,7 @@ function UserProfile({ userId }) {
 
 ---
 
-## Object Methods
+## 8. Object Methods
 
 ### Object Property Shorthand
 
@@ -446,7 +446,7 @@ function createUser({ name, age, email = 'no-email@example.com' }) {
 
 ---
 
-## JavaScript with React
+## 9. JavaScript with React
 
 ### Event Handlers
 
@@ -519,7 +519,7 @@ function UserList({ users }) {
 
 ---
 
-## Common Mistakes
+## 10. Common Mistakes
 
 ### Mistake 1: Not using arrow functions for event handlers
 
@@ -594,7 +594,7 @@ useEffect(() => {
 
 ---
 
-## Next Steps
+## 11. Next Steps
 
 ### What You Should Know After Lesson 0
 

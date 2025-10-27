@@ -45,18 +45,6 @@ sequenceDiagram
     DOM-->>User: Show new state
 ```
 
-**Code Example**
-```typescript
-function Counter() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <button onClick={() => setCount(count + 1)}>
-      Count: {count}
-    </button>
-  );
-}
-```
 
 ---
 
@@ -80,32 +68,6 @@ graph TD
     style Child1 fill:#ffe1e1
 ```
 
-** Code Example**
-```typescript
-function GrandParent() {
-  const [user, setUser] = useState({ name: 'Alice' });
-
-  return (
-    <>
-      <ParentA user={user} setUser={setUser} />
-      <ParentB user={user} setUser={setUser} />
-    </>
-  );
-}
-
-function ParentA({ user, setUser }) {
-  return <ChildA1 user={user} setUser={setUser} />;
-}
-
-function ChildA1({ user, setUser }) {
-  return (
-    <input
-      value={user.name}
-      onChange={(e) => setUser({ name: e.target.value })}
-    />
-  );
-}
-```
 
 ** Problems**
 - 🔴 Props drilling through multiple levels
@@ -139,40 +101,6 @@ graph TD
     style Comp3 fill:#d4edda
 ```
 
-** Code Example**
-```typescript
-// 1. Create Context
-const UserContext = createContext<UserContextType | null>(null);
-
-// 2. Provider Component
-function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState({ name: 'Alice' });
-
-  return (
-    <UserContext.Provider value={{ user, setUser }}>
-      {children}
-    </UserContext.Provider>
-  );
-}
-
-// 3. Consumer Component (anywhere in tree)
-function UserProfile() {
-  const { user, setUser } = useContext(UserContext);
-
-  return <h1>{user.name}</h1>;
-}
-
-// 4. App Setup
-function App() {
-  return (
-    <UserProvider>
-      <ComponentA />
-      <ComponentB />
-      <UserProfile /> {/* Can access context */}
-    </UserProvider>
-  );
-}
-```
 
 ---
 
@@ -225,20 +153,6 @@ graph TD
     style DataProvider fill:#cce5ff
 ```
 
-**Code Example**
-```typescript
-function App() {
-  return (
-    <ThemeProvider>
-      <AuthProvider>
-        <DataProvider>
-          <Routes />
-        </DataProvider>
-      </AuthProvider>
-    </ThemeProvider>
-  );
-}
-```
 
 ---
 
@@ -265,34 +179,6 @@ sequenceDiagram
     Component->>DOM: Update UI
 ```
 
-** Code Example**
-```typescript
-type State = { count: number };
-type Action = { type: 'INCREMENT' } | { type: 'DECREMENT' };
-
-function reducer(state: State, action: Action): State {
-  switch (action.type) {
-    case 'INCREMENT':
-      return { count: state.count + 1 };
-    case 'DECREMENT':
-      return { count: state.count - 1 };
-    default:
-      return state;
-  }
-}
-
-function Counter() {
-  const [state, dispatch] = useReducer(reducer, { count: 0 });
-
-  return (
-    <>
-      <p>Count: {state.count}</p>
-      <button onClick={() => dispatch({ type: 'INCREMENT' })}>+</button>
-      <button onClick={() => dispatch({ type: 'DECREMENT' })}>-</button>
-    </>
-  );
-}
-```
 
 ---
 

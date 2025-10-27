@@ -4,23 +4,23 @@
 
 ## Table of Contents
 
-1. [Core Concepts](#core-concepts)
-2. [Function Components](#function-components)
-3. [Component Lifecycle & Props](#component-lifecycle--props)
-4. [React Hooks Overview](#react-hooks-overview)
-5. [useState Hook](#usestate-hook)
-6. [useEffect Hook](#useeffect-hook)
-7. [useRef Hook](#useref-hook)
-8. [useContext Hook](#usecontext-hook)
-9. [useReducer Hook](#usereducer-hook)
-10. [Custom Hooks](#custom-hooks)
-11. [Hook Rules & Best Practices](#hook-rules--best-practices)
-12. [Common Mistakes](#common-mistakes)
-13. [Next Steps](#next-steps)
+**Chapter 1:** [Core Concepts](#1-core-concepts)
+**Chapter 2:** [Function Components](#2-function-components)
+**Chapter 3:** [Component Lifecycle & Props](#3-component-lifecycle--props)
+**Chapter 4:** [React Hooks Overview](#4-react-hooks-overview)
+**Chapter 5:** [useState Hook](#5-usestate-hook)
+**Chapter 6:** [useEffect Hook](#6-useeffect-hook)
+**Chapter 7:** [useRef Hook](#7-useref-hook)
+**Chapter 8:** [useContext Hook](#8-usecontext-hook)
+**Chapter 9:** [useReducer Hook](#9-usereducer-hook)
+**Chapter 10:** [Custom Hooks](#10-custom-hooks)
+**Chapter 11:** [Hook Rules & Best Practices](#11-hook-rules--best-practices)
+**Chapter 12:** [Common Mistakes](#12-common-mistakes)
+**Chapter 13:** [Next Steps](#13-next-steps)
 
 ---
 
-## Core Concepts
+## 1. Core Concepts
 
 > 🔄 **Visual Learning** For a comprehensive understanding of component lifecycle, see [Component Lifecycle Diagram](../../diagrams/component_lifecycle.md)
 
@@ -55,7 +55,7 @@ E-commerce App
 
 ---
 
-## Function Components
+## 2. Function Components
 
 ### Modern React Components
 
@@ -250,7 +250,7 @@ export default App;
 
 ---
 
-## Component Lifecycle & Props
+## 3. Component Lifecycle & Props
 
 ### Component Lifecycle in Function Components
 
@@ -430,7 +430,7 @@ function Button({
 
 ---
 
-## React Hooks Overview
+## 4. React Hooks Overview
 
 **Hooks** are functions that let you use state and other React features in function components.
 
@@ -451,7 +451,7 @@ function Button({
 
 ---
 
-## useState Hook
+## 5. useState Hook
 
 **useState** lets you add state to function components.
 
@@ -508,8 +508,17 @@ function UserProfile() {
 ### State with Objects
 
 ```typescript
+// File: src/components/UserForm.tsx
+import { useState } from 'react';
+
+interface User {
+  name: string;
+  email: string;
+  age: number;
+}
+
 function UserForm() {
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<User>({
     name: '',
     email: '',
     age: 0
@@ -543,21 +552,29 @@ function UserForm() {
     </div>
   );
 }
+
+export default UserForm;
 ```
 
 ---
 
-## useEffect Hook
+## 6. useEffect Hook
 
 **useEffect** lets you perform side effects in function components.
 
 ### Basic Usage
 
 ```typescript
+// File: src/components/DataFetcher.tsx
 import { useState, useEffect } from 'react';
 
+interface Data {
+  id: number;
+  name: string;
+}
+
 function DataFetcher() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<Data | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -573,13 +590,23 @@ function DataFetcher() {
   if (loading) return <div>Loading...</div>;
   return <div>{JSON.stringify(data)}</div>;
 }
+
+export default DataFetcher;
 ```
 
 ### Effect with Dependencies
 
 ```typescript
+// File: src/components/UserProfile.tsx
+import { useState, useEffect } from 'react';
+
+interface User {
+  id: string;
+  name: string;
+}
+
 function UserProfile({ userId }: { userId: string }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     // This runs when userId changes
@@ -590,11 +617,16 @@ function UserProfile({ userId }: { userId: string }) {
 
   return user ? <div>{user.name}</div> : <div>Loading...</div>;
 }
+
+export default UserProfile;
 ```
 
 ### Cleanup Function
 
 ```typescript
+// File: src/components/Timer.tsx
+import { useState, useEffect } from 'react';
+
 function Timer() {
   const [seconds, setSeconds] = useState(0);
 
@@ -609,17 +641,20 @@ function Timer() {
 
   return <div>Timer: {seconds}s</div>;
 }
+
+export default Timer;
 ```
 
 ---
 
-## useRef Hook
+## 7. useRef Hook
 
 **useRef** lets you access DOM elements and persist values across renders.
 
 ### DOM Reference
 
 ```typescript
+// File: src/components/TextInput.tsx
 import { useRef } from 'react';
 
 function TextInput() {
@@ -636,11 +671,16 @@ function TextInput() {
     </div>
   );
 }
+
+export default TextInput;
 ```
 
 ### Persisting Values
 
 ```typescript
+// File: src/components/RenderCounter.tsx
+import { useState, useRef } from 'react';
+
 function Counter() {
   const [count, setCount] = useState(0);
   const renderCount = useRef(0);
@@ -657,11 +697,13 @@ function Counter() {
     </div>
   );
 }
+
+export default Counter;
 ```
 
 ---
 
-## useContext Hook
+## 8. useContext Hook
 
 **useContext** lets you consume context values without prop drilling.
 
@@ -723,7 +765,7 @@ function ThemedButton() {
 
 ---
 
-## useReducer Hook
+## 9. useReducer Hook
 
 **useReducer** is an alternative to useState for complex state logic.
 
@@ -776,7 +818,7 @@ function Counter() {
 
 ---
 
-## Custom Hooks
+## 10. Custom Hooks
 
 **Custom hooks** let you extract component logic into reusable functions.
 
@@ -878,7 +920,7 @@ function UserList() {
 
 ---
 
-## Hook Rules & Best Practices
+## 11. Hook Rules & Best Practices
 
 ### 1. Always Call Hooks at the Top Level
 
@@ -957,7 +999,7 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 
 ---
 
-## Common Mistakes
+## 12. Common Mistakes
 
 ### Mistake 1: Stale Closures
 
@@ -1033,7 +1075,7 @@ function GoodComponent() {
 
 ---
 
-## Next Steps
+## 13. Next Steps
 
 ### What You Should Know After Lesson 2
 

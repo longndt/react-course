@@ -4,20 +4,20 @@
 
 ## Table of Contents
 
-1. [Why Full-Stack Development?](#why-full-stack-development)
-2. [Backend with Express.js](#backend-with-expressjs)
-3. [Database with MongoDB](#database-with-mongodb)
-4. [Authentication & Authorization](#authentication--authorization)
-5. [File Upload & Media Management](#file-upload--media-management)
-6. [Performance Optimization](#performance-optimization)
-7. [Production Deployment](#production-deployment)
-8. [CI/CD Pipeline - Complete Workflow](#cicd-pipeline---complete-workflow)
-9. [Common Mistakes](#common-mistakes)
-10. [Next Steps](#next-steps)
+**Chapter 1:** [Why Full-Stack Development?](#1-why-full-stack-development)
+**Chapter 2:** [Backend with Express.js](#2-backend-with-expressjs)
+**Chapter 3:** [Database with MongoDB](#3-database-with-mongodb)
+**Chapter 4:** [Authentication & Authorization](#4-authentication--authorization)
+**Chapter 5:** [File Upload & Media Management](#5-file-upload--media-management)
+**Chapter 6:** [Performance Optimization](#6-performance-optimization)
+**Chapter 7:** [Production Deployment](#7-production-deployment)
+**Chapter 8:** [CI/CD Pipeline - Complete Workflow](#8-cicd-pipeline---complete-workflow)
+**Chapter 9:** [Common Mistakes](#9-common-mistakes)
+**Chapter 10:** [Next Steps](#10-next-steps)
 
 ---
 
-## Why Full-Stack Development?
+## 1. Why Full-Stack Development?
 
 > 🏗️ **Visual Learning** For a comprehensive understanding of project architecture, see [Project Architecture Diagram](../../diagrams/project_architecture.md)
 
@@ -39,7 +39,7 @@
 
 ---
 
-## Backend with Express.js
+## 2. Backend with Express.js
 
 ### Setup Express Server
 
@@ -226,7 +226,7 @@ export const login = async (req: Request, res: Response) => {
 
 ---
 
-## Database with MongoDB
+## 3. Database with MongoDB
 
 ### User Model
 
@@ -348,7 +348,7 @@ export default mongoose.model<IDashboard>('Dashboard', dashboardSchema);
 
 ---
 
-## Authentication & Authorization
+## 4. Authentication & Authorization
 
 ### Auth Middleware
 
@@ -397,7 +397,7 @@ export const adminOnly = (req: Request, res: Response, next: NextFunction) => {
 
 ---
 
-## File Upload & Media Management
+## 5. File Upload & Media Management
 
 ### Upload Configuration
 
@@ -502,7 +502,7 @@ export const uploadMultipleFiles = async (req: Request, res: Response) => {
 
 ---
 
-## Performance Optimization
+## 6. Performance Optimization
 
 ### Frontend Optimization
 
@@ -621,7 +621,7 @@ const users = await User.find()
 
 ---
 
-## Production Deployment
+## 7. Production Deployment
 
 ### Environment Variables
 
@@ -720,7 +720,7 @@ pm2 startup
 
 ---
 
-## CI/CD Pipeline - Complete Workflow
+## 8. CI/CD Pipeline - Complete Workflow
 
 ### Complete Step-by-Step Guide
 
@@ -1038,7 +1038,7 @@ sudo certbot --nginx -d api.yourdomain.com
 
 ---
 
-## Common Mistakes
+## 9. Common Mistakes
 
 ### Backend Mistakes
 
@@ -1140,7 +1140,7 @@ useEffect(() => {
 
 ---
 
-## Next Steps
+## 10. Next Steps
 
 ### What You've Learned
 

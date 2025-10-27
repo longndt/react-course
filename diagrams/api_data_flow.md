@@ -86,34 +86,7 @@ stateDiagram-v2
     end note
 ```
 
-**Code Example**
-```typescript
-function UserList() {
-  const [data, setData] = useState<User[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchUsers = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await fetch('/api/users');
-      if (!response.ok) throw new Error('Failed to fetch');
-      const users = await response.json();
-      setData(users);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (loading) return <Spinner />;
-  if (error) return <Error message={error} />;
-  return <UserGrid users={data} />;
-}
-```
+_Diagrams should not contain code - removed for cleaner visualization._
 
 ---
 
@@ -150,27 +123,7 @@ flowchart TD
     style Return1 fill:#d4edda
 ```
 
-** Code Example**
-```typescript
-import { useQuery } from '@tanstack/react-query';
-
-function UserList() {
-  const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ['users'],
-    queryFn: async () => {
-      const response = await fetch('/api/users');
-      if (!response.ok) throw new Error('Failed to fetch');
-      return response.json();
-    },
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    refetchOnWindowFocus: true,
-  });
-
-  if (isLoading) return <Spinner />;
-  if (error) return <Error error={error} retry={refetch} />;
-  return <UserGrid users={data} />;
-}
-```
+_Diagrams should not contain code - removed for cleaner visualization._
 
 ---
 
@@ -247,34 +200,6 @@ sequenceDiagram
     end
 ```
 
-**Code Example with React Query**
-```typescript
-const { mutate: likePost } = useMutation({
-  mutationFn: (postId: string) =>
-    fetch(`/api/posts/${postId}/like`, { method: 'POST' }),
-
-  // Optimistic update
-  onMutate: async (postId) => {
-    await queryClient.cancelQueries({ queryKey: ['posts'] });
-    const previous = queryClient.getQueryData(['posts']);
-
-    queryClient.setQueryData(['posts'], (old: Post[]) =>
-      old.map(post =>
-        post.id === postId
-          ? { ...post, likes: post.likes + 1, isLiked: true }
-          : post
-      )
-    );
-
-    return { previous }; // For rollback
-  },
-
-  // Rollback on error
-  onError: (err, postId, context) => {
-    queryClient.setQueryData(['posts'], context.previous);
-  },
-});
-```
 
 ---
 
@@ -310,36 +235,6 @@ stateDiagram-v2
     end note
 ```
 
-**Code Example**
-```typescript
-function PaginatedList() {
-  const [page, setPage] = useState(1);
-  const limit = 10;
-
-  const { data, isLoading } = useQuery({
-    queryKey: ['users', page],
-    queryFn: async () => {
-      const response = await fetch(
-        `/api/users?page=${page}&limit=${limit}`
-      );
-      return response.json();
-    },
-    keepPreviousData: true, // Keep old data while fetching new
-  });
-
-  return (
-    <>
-      <UserList users={data?.users} loading={isLoading} />
-      <Pagination
-        page={page}
-        totalPages={data?.totalPages}
-        onNext={() => setPage(p => p + 1)}
-        onPrevious={() => setPage(p => Math.max(1, p - 1))}
-      />
-    </>
-  );
-}
-```
 
 ---
 
@@ -366,40 +261,6 @@ flowchart TD
     style End fill:#fff3cd
 ```
 
-** Code Example**
-```typescript
-import { useInfiniteQuery } from '@tanstack/react-query';
-
-function InfiniteUserList() {
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useInfiniteQuery({
-    queryKey: ['users-infinite'],
-    queryFn: async ({ pageParam = 1 }) => {
-      const response = await fetch(
-        `/api/users?page=${pageParam}&limit=20`
-      );
-      return response.json();
-    },
-    getNextPageParam: (lastPage) =>
-      lastPage.hasMore ? lastPage.nextPage : undefined,
-  });
-
-  const allUsers = data?.pages.flatMap(page => page.users) ?? [];
-
-  return (
-    <IntersectionObserver
-      onIntersect={() => hasNextPage && fetchNextPage()}
-    >
-      <UserList users={allUsers} />
-      {isFetchingNextPage && <Spinner />}
-    </IntersectionObserver>
-  );
-}
-```
 
 ---
 
@@ -435,43 +296,6 @@ graph TD
     style Network fill:#ffe1e1
 ```
 
-** Code Example**
-```typescript
-async function fetchWithErrorHandling(url: string) {
-  try {
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      switch (response.status) {
-        case 400:
-          throw new Error('Invalid request. Please check your input.');
-        case 401:
-          // Redirect to login
-          window.location.href = '/login';
-          throw new Error('Unauthorized');
-        case 403:
-          throw new Error('Access denied');
-        case 404:
-          throw new Error('Resource not found');
-        case 500:
-        case 502:
-        case 503:
-          throw new Error('Server error. Please try again later.');
-        default:
-          throw new Error(`HTTP Error: ${response.status}`);
-      }
-    }
-
-    return response.json();
-  } catch (error) {
-    if (error instanceof TypeError) {
-      // Network error
-      throw new Error('Network error. Check your internet connection.');
-    }
-    throw error;
-  }
-}
-```
 
 ---
 
@@ -512,38 +336,6 @@ stateDiagram-v2
     end note
 ```
 
-**UI Components**
-```typescript
-function DataView() {
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['data'],
-    queryFn: fetchData,
-  });
-
-  // Initial loading
-  if (isLoading && !data) {
-    return <SkeletonLoader />;
-  }
-
-  // Error state
-  if (isError) {
-    return (
-      <ErrorBoundary>
-        <ErrorMessage error={error} />
-        <RetryButton onClick={refetch} />
-      </ErrorBoundary>
-    );
-  }
-
-  // Success with optional background refresh
-  return (
-    <>
-      {isLoading && <TopProgressBar />}
-      <DataDisplay data={data} />
-    </>
-  );
-}
-```
 
 ---
 
@@ -573,21 +365,6 @@ graph TD
     style Both fill:#fff3cd
 ```
 
-** React Query Cache Configuration**
-```typescript
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes - data considered fresh
-      cacheTime: 10 * 60 * 1000, // 10 minutes - cache lifetime
-      refetchOnWindowFocus: true, // Refetch when window focus
-      refetchOnReconnect: true, // Refetch when reconnect
-      retry: 3, // Retry failed requests 3 times
-      retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
-    },
-  },
-});
-```
 
 ---
 
@@ -660,30 +437,6 @@ sequenceDiagram
     Client2->>Client2: Update UI
 ```
 
-** Code Example**
-```typescript
-function useChatMessages() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const ws = useRef<WebSocket>();
-
-  useEffect(() => {
-    ws.current = new WebSocket('ws://localhost:3001');
-
-    ws.current.onmessage = (event) => {
-      const newMessage = JSON.parse(event.data);
-      setMessages(prev => [...prev, newMessage]);
-    };
-
-    return () => ws.current?.close();
-  }, []);
-
-  const sendMessage = (text: string) => {
-    ws.current?.send(JSON.stringify({ text }));
-  };
-
-  return { messages, sendMessage };
-}
-```
 
 ---
 
@@ -716,42 +469,6 @@ flowchart TD
     style Error2 fill:#ffe1e1
 ```
 
-** Code Example**
-```typescript
-function FileUpload() {
-  const [progress, setProgress] = useState(0);
-
-  const uploadFile = async (file: File) => {
-    const formData = new FormData();
-    formData.append('file', file);
-
-    const xhr = new XMLHttpRequest();
-
-    xhr.upload.onprogress = (e) => {
-      if (e.lengthComputable) {
-        setProgress((e.loaded / e.total) * 100);
-      }
-    };
-
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        console.log('Upload success:', response);
-      }
-    };
-
-    xhr.open('POST', '/api/upload');
-    xhr.send(formData);
-  };
-
-  return (
-    <>
-      <input type="file" onChange={(e) => uploadFile(e.target.files[0])} />
-      {progress > 0 && <ProgressBar value={progress} />}
-    </>
-  );
-}
-```
 
 ---
 

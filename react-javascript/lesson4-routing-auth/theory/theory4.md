@@ -4,20 +4,20 @@
 
 ## Table of Contents
 
-1. [Why Routing & Authentication?](#why-routing--authentication)
-2. [React Router Fundamentals](#react-router-fundamentals)
-3. [Navigation & Links](#navigation--links)
-4. [Route Parameters & Query Strings](#route-parameters--query-strings)
-5. [Authentication Concepts](#authentication-concepts)
-6. [JWT Tokens](#jwt-tokens)
-7. [Protected Routes](#protected-routes)
-8. [Context API for Auth](#context-api-for-auth)
-9. [Common Mistakes](#common-mistakes)
-10. [Next Steps](#next-steps)
+**Chapter 1:** [Why Routing & Authentication?](#1-why-routing--authentication)
+**Chapter 2:** [React Router Fundamentals](#2-react-router-fundamentals)
+**Chapter 3:** [Navigation & Links](#3-navigation--links)
+**Chapter 4:** [Route Parameters & Query Strings](#4-route-parameters--query-strings)
+**Chapter 5:** [Authentication Concepts](#5-authentication-concepts)
+**Chapter 6:** [JWT Tokens](#6-jwt-tokens)
+**Chapter 7:** [Protected Routes](#7-protected-routes)
+**Chapter 8:** [Context API for Auth](#8-context-api-for-auth)
+**Chapter 9:** [Common Mistakes](#9-common-mistakes)
+**Chapter 10:** [Next Steps](#10-next-steps)
 
 ---
 
-## Why Routing & Authentication?
+## 1. Why Routing & Authentication?
 
 > 🔐 **Visual Learning** For a comprehensive understanding of authentication flow, see [Authentication Flow Diagram](../../diagrams/authentication_flow.md)
 
@@ -42,7 +42,7 @@
 
 ---
 
-## React Router Fundamentals
+## 2. React Router Fundamentals
 
 > 🛣️ ** Visual Learning** For a comprehensive understanding of routing flow, see [Routing Flow Diagram](../../diagrams/routing_flow.md)
 
@@ -115,7 +115,7 @@ function Layout({ children }) {
 
 ---
 
-## Navigation & Links
+## 3. Navigation & Links
 
 ### Using Link Component
 
@@ -187,7 +187,7 @@ function Navigation() {
 
 ---
 
-## Route Parameters & Query Strings
+## 4. Route Parameters & Query Strings
 
 ### Route Parameters
 
@@ -278,7 +278,7 @@ function Layout() {
 
 ---
 
-## Authentication Concepts
+## 5. Authentication Concepts
 
 ### What is Authentication?
 
@@ -307,7 +307,7 @@ Authentication is the process of verifying who a user is, while authorization is
 
 ---
 
-## JWT Tokens
+## 6. JWT Tokens
 
 ### What is JWT?
 
@@ -380,11 +380,11 @@ const createTokenWithExpiry = (hours = 24) => {
 useEffect(() => {
   const token = localStorage.getItem("token");
   const tokenExpiry = localStorage.getItem("tokenExpiry");
-  
+
   if (token && tokenExpiry) {
     const now = new Date().getTime();
     const expiry = parseInt(tokenExpiry);
-    
+
     if (now < expiry) {
       fetchUser(token);
     } else {
@@ -450,7 +450,7 @@ api.interceptors.response.use(
 
 ---
 
-## Protected Routes
+## 7. Protected Routes
 
 ### Route Protection Component
 
@@ -510,7 +510,7 @@ function RoleProtectedRoute({ children, user, requiredRole }) {
 
 ---
 
-## Context API for Auth
+## 8. Context API for Auth
 
 ### Auth Context
 
@@ -610,7 +610,7 @@ function LoginForm() {
 
 ---
 
-## Common Mistakes
+## 9. Common Mistakes
 
 ### Mistake 1: Not handling authentication state
 
@@ -692,7 +692,7 @@ useEffect(() => {
 
 ---
 
-## Next Steps
+## 10. Next Steps
 
 ### What You Should Know After Lesson 4
 

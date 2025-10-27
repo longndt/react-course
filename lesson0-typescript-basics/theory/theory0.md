@@ -4,19 +4,19 @@
 
 ## Table of Contents
 
-1. [Why TypeScript for React?](#why-typescript-for-react)
-2. [Basic Types & Type Inference](#basic-types--type-inference)
-3. [Functions](#functions)
-4. [Arrays & Objects](#arrays--objects)
-5. [Union Types & Type Aliases](#union-types--type-aliases)
-6. [Generics](#generics)
-7. [TypeScript with React](#typescript-with-react)
-8. [Common Mistakes](#common-mistakes)
-9. [Next Steps](#next-steps)
+**Chapter 1:** [Why TypeScript for React?](#1-why-typescript-for-react)
+**Chapter 2:** [Basic Types & Type Inference](#2-basic-types--type-inference)
+**Chapter 3:** [Functions](#3-functions)
+**Chapter 4:** [Arrays & Objects](#4-arrays--objects)
+**Chapter 5:** [Union Types & Type Aliases](#5-union-types--type-aliases)
+**Chapter 6:** [Generics](#6-generics)
+**Chapter 7:** [TypeScript with React](#7-typescript-with-react)
+**Chapter 8:** [Common Mistakes](#8-common-mistakes)
+**Chapter 9:** [Next Steps](#9-next-steps)
 
 ---
 
-## Why TypeScript for React?
+## 1. Why TypeScript for React?
 
 > 🗺️ **Visual Learning** For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
 
@@ -46,7 +46,7 @@
 
 ---
 
-## Basic Types & Type Inference
+## 2. Basic Types & Type Inference
 
 ### Primitive Types
 
@@ -122,7 +122,7 @@ let result = greet(user.name); // Correct usage
 
 ---
 
-## Functions
+## 3. Functions
 
 ### JavaScript vs TypeScript Functions
 
@@ -194,7 +194,7 @@ function process(value: string | number): string | number {
 
 ---
 
-## Arrays & Objects
+## 4. Arrays & Objects
 
 ### JavaScript vs TypeScript Arrays
 
@@ -324,7 +324,7 @@ type UserId = string | number;
 
 ---
 
-## Union Types & Type Aliases
+## 5. Union Types & Type Aliases
 
 ### Union Types
 
@@ -365,7 +365,7 @@ function updateUser(id: UserId, theme: Theme, status: Status) {
 
 ---
 
-## Generics
+## 6. Generics
 
 ### Basic Generics
 
@@ -425,7 +425,7 @@ logLength([1, 2, 3]);   // OK - array has length
 
 ---
 
-## TypeScript with React
+## 7. TypeScript with React
 
 ### Component Props
 
@@ -524,7 +524,7 @@ type ComponentType<P = {}> = (props: P) => ReactNode;
 
 ---
 
-## Common Mistakes
+## 8. Common Mistakes
 
 ### Mistake 1: Using `any` too much
 
@@ -586,7 +586,7 @@ function formatId(id: string | number) {
 
 ---
 
-## Next Steps
+## 9. Next Steps
 
 ### What You Should Know After Lesson 0
 

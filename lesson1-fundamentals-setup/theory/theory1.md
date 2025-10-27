@@ -6,19 +6,19 @@
 
 ## Table of Contents
 
-1. [What is React?](#what-is-react)
-2. [TypeScript with React (TSX)](#typescript-with-react-tsx)
-3. [Project Setup with Vite](#project-setup-with-vite)
-4. [Component Basics](#component-basics)
-5. [TSX Syntax Rules](#tsx-syntax-rules)
-6. [Styling Components](#styling-components)
-7. [Event Handling Basics](#event-handling-basics)
-8. [Common Mistakes](#common-mistakes)
-9. [Next Steps](#next-steps)
+**Chapter 1:** [What is React?](#1-what-is-react)
+**Chapter 2:** [TypeScript with React (TSX)](#2-typescript-with-react-tsx)
+**Chapter 3:** [Project Setup with Vite](#3-project-setup-with-vite)
+**Chapter 4:** [Component Basics](#4-component-basics)
+**Chapter 5:** [TSX Syntax Rules](#5-tsx-syntax-rules)
+**Chapter 6:** [Styling Components](#6-styling-components)
+**Chapter 7:** [Event Handling Basics](#7-event-handling-basics)
+**Chapter 8:** [Common Mistakes](#8-common-mistakes)
+**Chapter 9:** [Next Steps](#9-next-steps)
 
 ---
 
-## What is React?
+## 1. What is React?
 
 > 🗺️ **Visual Learning** For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
 
@@ -41,7 +41,7 @@
 
 ---
 
-## TypeScript with React (TSX)
+## 2. TypeScript with React (TSX)
 
 In this course, we use **TypeScript** for all React components (.tsx files).
 
@@ -122,7 +122,7 @@ export default LoginForm;
 
 ---
 
-## Project Setup with Vite
+## 3. Project Setup with Vite
 
 **Vite** is the modern, fast build tool we use for React projects.
 
@@ -198,7 +198,7 @@ export default App;
 
 ---
 
-## Component Basics
+## 4. Component Basics
 
 ### What is a Component?
 
@@ -257,7 +257,7 @@ export default App;
 
 ---
 
-## TSX Syntax Rules
+## 5. TSX Syntax Rules
 
 **TSX** (TypeScript XML) allows you to write HTML-like code in TypeScript.
 
@@ -286,21 +286,34 @@ export default App;
 
 2. **Use `className` instead of `class`**
    ```typescript
-   <div className="container">Content</div>
+   // File: src/components/Container.tsx
+   function Container() {
+     return <div className="container">Content</div>;
+   }
    ```
 
 3. **Close all tags**
    ```typescript
-   <img src="logo.png" alt="Logo" />
-   <input type="text" />
+   // File: src/components/ImageInput.tsx
+   function ImageInput() {
+     return (
+       <>
+         <img src="logo.png" alt="Logo" />
+         <input type="text" />
+       </>
+     );
+   }
    ```
 
 4. **Embed TypeScript with `{}`**
    ```typescript
+   // File: src/components/Greeting.tsx
    function Greeting() {
      const name = "Student";
      return <h1>Hello, {name}!</h1>;
    }
+
+   export default Greeting;
    ```
 
 ### Embedding TypeScript in TSX
@@ -350,7 +363,7 @@ function Profile() {
 
 ---
 
-## Styling Components
+## 6. Styling Components
 
 **Three common approaches:**
 
@@ -402,7 +415,7 @@ function App() {
 
 ---
 
-## Event Handling Basics
+## 7. Event Handling Basics
 
 In Lesson 1, we only cover simple event handling with alerts.
 
@@ -447,7 +460,7 @@ function EventDemo() {
 
 ---
 
-## Common Mistakes
+## 8. Common Mistakes
 
 ### Mistake 1: Lowercase component names
 ```typescript
@@ -509,7 +522,7 @@ function App() {
 
 ---
 
-## Next Steps
+## 9. Next Steps
 
 ### What You Should Know After Lesson 1
 
