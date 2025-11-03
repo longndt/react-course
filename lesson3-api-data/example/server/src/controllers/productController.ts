@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import Product from '../models/Product';
 
 // Get all products
-export const getAllProducts = async (req: Request, res: Response): Promise<void> => {
+export const getAllProducts = async (_req: Request, res: Response): Promise<void> => {
     try {
         const products = await Product.find().sort({ createdAt: -1 });
         res.json(products);
