@@ -1,5 +1,9 @@
 # Theory - JavaScript ES6+ Prerequisites
 
+> **Purpose of this file**: Explains **WHY** modern JavaScript features exist, **HOW** they work, and **WHEN** to use them in React. Code examples include comments to understand concepts.
+>
+> **Use Reference0 when you need**: Quick ES6 syntax lookup, copy-paste ready code patterns.
+
 ---
 
 ## Table of Contents

@@ -1,547 +1,770 @@
 # Theory - API Integration & Data Management
 
+> **🎯 Learning Focus:** Understanding the WHY and HOW behind API integration, data fetching patterns, and state management in modern React applications.
+
 ---
 
 ## Table of Contents
 
-**Chapter 1:** [Why API Integration Matters?](#1-why-api-integration-matters)
-**Chapter 2:** [Understanding REST APIs](#2-understanding-rest-apis)
-**Chapter 3:** [HTTP Methods & CRUD Operations](#3-http-methods--crud-operations)
-**Chapter 4:** [Data Fetching with Axios](#4-data-fetching-with-axios)
-**Chapter 5:** [Error Handling & Loading States](#5-error-handling--loading-states)
-**Chapter 6:** [React Query (Advanced)](#6-react-query-advanced)
-**Chapter 7:** [Common Mistakes](#7-common-mistakes)
-**Chapter 8:** [Next Steps](#8-next-steps)
+1. [The Evolution of Web Applications](#1-the-evolution-of-web-applications)
+2. [REST API Architecture](#2-rest-api-architecture)
+3. [HTTP Protocol Deep Dive](#3-http-protocol-deep-dive)
+4. [Data Fetching Strategies](#4-data-fetching-strategies)
+5. [State Management Patterns](#5-state-management-patterns)
+6. [Error Handling Philosophy](#6-error-handling-philosophy)
+7. [Performance & Optimization](#7-performance--optimization)
+8. [Security Considerations](#8-security-considerations)
+
+> 📖 **For Quick Reference:** See [reference3.md](../reference/reference3.md) for syntax and code examples
 
 ---
 
-## 1. Why API Integration Matters?
+## 1. The Evolution of Web Applications
 
-> 📊 **Visual Learning** For a comprehensive understanding of API data flow, see [API Data Flow Diagram](../../diagrams/api_data_flow.md)
+### Traditional Web (Server-Side Rendering)
 
-**Modern Full-Stack Architecture:**
-
+**How it worked:**
 ```
-Your Modern Stack:
-┌─────────────┐    ┌──────────┐    ┌─────────────┐    ┌─────────┐
-│   React     │    │   HTTP   │    │ Node.js     │    │ MongoDB │
-│ (Frontend)  │◄──►│   API    │◄──►│ Express     │◄──►│         │
-│             │    │          │    │ (Backend)   │    │         │
-└─────────────┘    └──────────┘    └─────────────┘    └─────────┘
-   Clean Separation of Concerns
+User clicks link → Browser requests HTML → Server generates full page → Browser displays
 ```
 
-**Key Benefits:**
-- **Scalability** Each layer scales independently
+**Problems:**
+- 🐌 **Slow:** Every interaction requires full page reload
+- 💰 **Expensive:** Server renders everything
+- 📱 **Poor UX:** No smooth transitions
+- 🔄 **No Real-time:** Can't update dynamically
 
-- **Maintainability** Clear frontend/backend separation
+### Modern Single Page Applications (SPAs)
 
-- **Team Collaboration** Independent development workflows
+**How it works now:**
+```
+User interacts → JS fetches JSON → React updates UI → Fast, smooth experience
+```
 
-- **Modern UX** Real-time updates without page refreshes
+**Benefits:**
+- ⚡ **Fast:** Only data transfers, not full HTML
+- 🎨 **Rich UX:** Smooth transitions and animations
+- 📱 **App-like:** Feels like native mobile app
+- 🔄 **Real-time:** Can update without page refresh
+
+### Why Separation of Concerns Matters
+
+```typescript
+// ❌ Old Way: Mixing everything
+function UserPage() {
+  // HTML generation, database queries, business logic - all in one place!
+}
+
+// ✅ Modern Way: Clear separation
+Frontend (React)      ←→  API (Express)      ←→  Database (MongoDB)
+- UI Logic only          - Business Logic        - Data Storage
+- User interactions      - Validation            - Persistence
+- Presentation           - Authentication        - Queries
+```
+
+**Why this is better:**
+1. **Scalability:** Each layer can scale independently
+2. **Maintenance:** Changes in UI don't affect backend
+3. **Team Efficiency:** Frontend and backend teams work in parallel
+4. **Testing:** Each layer can be tested separately
+5. **Flexibility:** Can swap React for Vue, or MongoDB for PostgreSQL
 
 ---
 
-## 2. Understanding REST APIs
+## 2. REST API Architecture
 
-### What is a REST API?
+### REST Principles Explained
 
-REST (Representational State Transfer) is a way for your React app to communicate with a backend server.
+**REST = Representational State Transfer**
 
-**Simple Example:**
-```
-Frontend (React)  ←→  Backend (Node.js/Express)  ←→  Database (MongoDB)
-     ↓                        ↓                           ↓
-   User Interface         API Endpoints              Data Storage
-```
+Think of it like a library:
+- **Resources** = Books (users, products, posts)
+- **HTTP Methods** = Actions (borrow, return, search)
+- **URLs** = Addresses (where to find books)
 
-### API Endpoints
+### Resource-Based URLs
 
 ```typescript
-// File: services/api.ts
-// Common API endpoints
-const API_BASE_URL = 'http://localhost:3001/api';
+// ❌ RPC-style (Remote Procedure Call)
+GET  /getUserById?id=123
+POST /createNewUser
+POST /updateUserEmail
+GET  /getAllActiveUsers
 
-// GET - Fetch data
-GET /api/users          // Get all users
-GET /api/users/123      // Get user with ID 123
+// ✅ REST-style (Resource-oriented)
+GET    /users/123          // Get user by ID
+POST   /users              // Create new user
+PUT    /users/123          // Update user
+GET    /users?status=active // Get active users
+```
 
-// POST - Create data
-POST /api/users         // Create new user
+**Why REST is better:**
+- 📝 **Predictable:** Consistent patterns
+- 🔍 **Self-documenting:** URLs describe resources
+- 🔒 **Cacheable:** Easy to cache responses
+- 🌐 **Standard:** Everyone understands it
 
-// PUT - Update data
-PUT /api/users/123      // Update user with ID 123
+### Stateless Communication
 
-// DELETE - Remove data
-DELETE /api/users/123   // Delete user with ID 123
+**What does "stateless" mean?**
+
+```typescript
+// ❌ Stateful (Bad)
+// Request 1
+POST /login
+// Server remembers you're logged in
+
+// Request 2
+GET /profile
+// Server knows who you are from previous request
+
+// ❌ Problem: If server restarts, you're logged out!
+
+
+// ✅ Stateless (Good)
+// Every request contains all needed information
+GET /profile
+Headers: {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+}
+
+// ✅ Benefit: Any server can handle any request
+```
+
+### HTTP Methods Semantics
+
+**Understanding Idempotency:**
+
+```typescript
+// Idempotent = Can repeat safely without side effects
+
+GET  /users/123    // Idempotent: Reading doesn't change anything
+PUT  /users/123    // Idempotent: Same result if called multiple times
+DELETE /users/123  // Idempotent: Deleting twice = same as once
+
+POST /users        // NOT Idempotent: Creates new user each time!
+```
+
+**Safe Methods:**
+- `GET` - Safe & Idempotent (only reads)
+- `HEAD` - Safe & Idempotent (like GET but no body)
+- `OPTIONS` - Safe & Idempotent (asks what's allowed)
+
+**Unsafe Methods:**
+- `POST` - Creates (not idempotent)
+- `PUT` - Updates (idempotent)
+- `PATCH` - Partial update (not idempotent)
+- `DELETE` - Removes (idempotent)
+
+---
+
+## 3. HTTP Protocol Deep Dive
+
+### Request-Response Cycle
+
+```typescript
+// What happens when you make an API call:
+
+1. Client (React) creates HTTP request
+   ├─ Method: GET
+   ├─ URL: https://api.example.com/users
+   ├─ Headers: { Authorization: "Bearer token" }
+   └─ Body: (empty for GET)
+
+2. DNS Resolution
+   └─ Converts api.example.com to IP address
+
+3. TCP Connection
+   └─ Three-way handshake to establish connection
+
+4. TLS Handshake (for HTTPS)
+   └─ Encrypts communication
+
+5. Server receives request
+   ├─ Routes to correct handler
+   ├─ Authenticates user
+   ├─ Queries database
+   └─ Prepares response
+
+6. Server sends response
+   ├─ Status: 200 OK
+   ├─ Headers: { Content-Type: "application/json" }
+   └─ Body: { users: [...] }
+
+7. Client receives response
+   └─ React updates UI
+```
+
+### HTTP Headers Explained
+
+**Request Headers:**
+```typescript
+// Authentication
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+// ↑ Who you are
+
+// Content Type
+Content-Type: application/json
+// ↑ What format you're sending
+
+// Accept
+Accept: application/json
+// ↑ What format you want back
+
+// CORS
+Origin: https://myapp.com
+// ↑ Where request is coming from
+
+// Caching
+If-None-Match: "abc123"
+// ↑ "Only send if changed"
+```
+
+**Response Headers:**
+```typescript
+// Status
+HTTP/1.1 200 OK
+// ↑ Request succeeded
+
+// Content
+Content-Type: application/json
+// ↑ Response format
+
+// Caching
+Cache-Control: max-age=3600
+// ↑ "Can cache for 1 hour"
+
+// CORS
+Access-Control-Allow-Origin: *
+// ↑ "Any site can access"
+
+// Security
+X-Content-Type-Options: nosniff
+// ↑ Security headers
+```
+
+### Status Codes Philosophy
+
+```typescript
+// 2xx - Success
+200 OK              // "Here's your data"
+201 Created         // "Resource created successfully"
+204 No Content      // "Success, but nothing to return"
+
+// 3xx - Redirection
+301 Moved Permanently  // "Resource moved, update bookmark"
+304 Not Modified      // "Use your cached version"
+
+// 4xx - Client Error
+400 Bad Request     // "Your request is invalid"
+401 Unauthorized    // "You need to login"
+403 Forbidden       // "You're logged in but not allowed"
+404 Not Found       // "Resource doesn't exist"
+422 Unprocessable   // "Valid format but business logic failed"
+
+// 5xx - Server Error
+500 Internal Error  // "We messed up"
+502 Bad Gateway     // "Upstream server failed"
+503 Service Unavailable // "We're down for maintenance"
 ```
 
 ---
 
-## 3. HTTP Methods & CRUD Operations
+## 4. Data Fetching Strategies
 
-### CRUD Operations
-
-```typescript
-// File: services/api.ts
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
-
-interface CreateUserData {
-  name: string;
-  email: string;
-}
-
-interface UpdateUserData {
-  name?: string;
-  email?: string;
-}
-
-// Create (POST)
-const createUser = async (userData: CreateUserData): Promise<User> => {
-  const response = await fetch('/api/users', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(userData),
-  });
-  return response.json();
-};
-
-// Read (GET)
-const getUsers = async (): Promise<User[]> => {
-  const response = await fetch('/api/users');
-  return response.json();
-};
-
-const getUser = async (id: string): Promise<User> => {
-  const response = await fetch(`/api/users/${id}`);
-  return response.json();
-};
-
-// Update (PUT)
-const updateUser = async (id: string, userData: UpdateUserData): Promise<User> => {
-  const response = await fetch(`/api/users/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(userData),
-  });
-  return response.json();
-};
-
-// Delete (DELETE)
-const deleteUser = async (id: string): Promise<void> => {
-  const response = await fetch(`/api/users/${id}`, {
-    method: 'DELETE',
-  });
-  return response.json();
-};
-
-export { createUser, getUsers, getUser, updateUser, deleteUser };
-export type { User, CreateUserData, UpdateUserData };
-```
-
-### HTTP Status Codes
+### The Problem with useEffect
 
 ```typescript
-// Common status codes
-200 - OK              // Success
-201 - Created         // Resource created
-400 - Bad Request     // Client error
-401 - Unauthorized    // Authentication required
-403 - Forbidden       // Access denied
-404 - Not Found       // Resource not found
-500 - Internal Server Error // Server error
-```
+// ❌ The Classic Mistake
+function UserList() {
+  const [users, setUsers] = useState([]);
 
----
+  useEffect(() => {
+    fetchUsers().then(setUsers);
+  }, []); // 🚨 Empty dependency array
 
-## 4. Data Fetching with Axios
-
-### Setup Axios
-
-```bash
-npm install axios
-```
-
-### Basic Axios Usage
-
-```typescript
-import axios from 'axios';
-
-// Create axios instance
-const api = axios.create({
-  baseURL: 'http://localhost:3001/api',
-  timeout: 5000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-// GET request
-const getUsers = async (): Promise<User[]> => {
-  const response = await api.get('/users');
-  return response.data;
-};
-
-// POST request
-const createUser = async (userData: CreateUserData): Promise<User> => {
-  const response = await api.post('/users', userData);
-  return response.data;
-};
-
-// PUT request
-const updateUser = async (id: string, userData: UpdateUserData): Promise<User> => {
-  const response = await api.put(`/users/${id}`, userData);
-  return response.data;
-};
-
-// DELETE request
-const deleteUser = async (id: string): Promise<void> => {
-  await api.delete(`/users/${id}`);
-};
-```
-
-### Axios with React
-
-```typescript
-// File: components/UserList.tsx
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
+  return <ul>{users.map(...)}</ul>;
 }
 
+// Problems:
+// 1. No loading state
+// 2. No error handling
+// 3. Memory leak if component unmounts during fetch
+// 4. Race condition if triggered multiple times
+// 5. No caching - refetches on every mount
+```
+
+### Proper Implementation
+
+```typescript
+// ✅ Complete Solution
 function UserList() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get<User[]>('/api/users');
-        setUsers(response.data);
-      } catch (err) {
-        setError('Failed to fetch users');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+    let cancelled = false; // Prevent memory leaks
 
-    fetchUsers();
-  }, []);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-
-  return (
-    <ul>
-      {users.map(user => (
-        <li key={user.id}>{user.name} - {user.email}</li>
-      ))}
-    </ul>
-  );
-}
-
-export default UserList;
-```
-
----
-
-## 5. Error Handling & Loading States
-
-### Comprehensive Error Handling
-
-```typescript
-interface ApiError {
-  message: string;
-  status: number;
-  code?: string;
-}
-
-const handleApiError = (error: unknown): ApiError => {
-  if (axios.isAxiosError(error)) {
-    return {
-      message: error.response?.data?.message || error.message,
-      status: error.response?.status || 500,
-      code: error.code,
-    };
-  }
-
-  return {
-    message: 'An unexpected error occurred',
-    status: 500,
-  };
-};
-
-// Using error handling
-const fetchUsers = async () => {
-  try {
-    setLoading(true);
-    setError(null);
-    const response = await axios.get<User[]>('/api/users');
-    setUsers(response.data);
-  } catch (err) {
-    const apiError = handleApiError(err);
-    setError(apiError.message);
-  } finally {
-    setLoading(false);
-  }
-};
-```
-
-### Loading States
-
-```typescript
-interface LoadingState {
-  isLoading: boolean;
-  error: string | null;
-  data: any;
-}
-
-function useApi<T>(url: string) {
-  const [state, setState] = useState<LoadingState>({
-    isLoading: true,
-    error: null,
-    data: null,
-  });
-
-  useEffect(() => {
     const fetchData = async () => {
       try {
-        setState(prev => ({ ...prev, isLoading: true, error: null }));
-        const response = await axios.get<T>(url);
-        setState({ isLoading: false, error: null, data: response.data });
+        setLoading(true);
+        setError(null);
+        const data = await fetchUsers();
+        
+        if (!cancelled) {  // Only update if not unmounted
+          setUsers(data);
+        }
       } catch (err) {
-        setState({ isLoading: false, error: 'Failed to fetch data', data: null });
+        if (!cancelled) {
+          setError(err.message);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     };
 
     fetchData();
-  }, [url]);
 
-  return state;
+    return () => {
+      cancelled = true;  // Cleanup function
+    };
+  }, []);
+
+  if (loading) return <Loading />;
+  if (error) return <Error message={error} />;
+  return <UserListUI users={users} />;
 }
 ```
 
----
+### Why React Query?
 
-## 6. React Query (Advanced)
-
-### Setup React Query
-
-```bash
-npm install @tanstack/react-query
-```
-
-### Basic Usage
-
+**The Problem:**
 ```typescript
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+// Managing server state with useState is hard:
+// - Caching: Where to store cache?
+// - Stale data: When to refetch?
+// - Deduplication: Avoid duplicate requests
+// - Background updates: Keep data fresh
+// - Optimistic updates: Update UI before server responds
+// - Pagination: Handle large datasets
+// - Mutations: Update cache after POST/PUT/DELETE
+```
 
-const queryClient = new QueryClient();
-
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <UserList />
-    </QueryClientProvider>
-  );
-}
-
+**React Query solves this:**
+```typescript
+// Simple, powerful, automatic
 function UserList() {
-  const { data: users, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ['users'],
-    queryFn: () => axios.get<User[]>('/api/users').then(res => res.data),
+    queryFn: fetchUsers,
   });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
-  return (
-    <ul>
-      {users?.map(user => (
-        <li key={user.id}>{user.name}</li>
-      ))}
-    </ul>
-  );
+  // React Query handles:
+  // ✅ Automatic caching
+  // ✅ Background refetching
+  // ✅ Deduplication
+  // ✅ Loading states
+  // ✅ Error handling
+  // ✅ Retry logic
+  // ✅ Garbage collection
 }
 ```
 
-### Mutations with React Query
+### Server State vs Client State
 
 ```typescript
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+// Client State - Lives in browser only
+const [isDarkMode, setIsDarkMode] = useState(false);
+const [sidebarOpen, setSidebarOpen] = useState(true);
+// ↑ UI preferences, temporary data
 
-function CreateUser() {
-  const queryClient = useQueryClient();
+// Server State - Truth lives on server
+const { data: users } = useQuery(['users'], fetchUsers);
+const { data: profile } = useQuery(['profile'], fetchProfile);
+// ↑ Synced with backend, needs refresh
 
-  const createUserMutation = useMutation({
-    mutationFn: (userData: CreateUserData) =>
-      axios.post('/api/users', userData).then(res => res.data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['users'] });
+// Mixing them is a mistake!
+// ❌ Don't use useState for server data
+const [users, setUsers] = useState([]);  // Wrong!
+
+// ✅ Use React Query for server state
+const { data: users } = useQuery(['users'], fetchUsers);  // Right!
+```
+
+---
+
+## 5. State Management Patterns
+
+### Optimistic Updates Explained
+
+**Concept:** Update UI immediately, rollback if fails
+
+```typescript
+// Why optimistic updates?
+// Traditional: Click → Wait → Update (feels slow)
+// Optimistic: Click → Update immediately → Rollback if error (feels instant)
+
+const updateUser = useMutation({
+  mutationFn: api.updateUser,
+  
+  // 1. Before API call - update UI optimistically
+  onMutate: async (newUser) => {
+    // Cancel ongoing queries
+    await queryClient.cancelQueries(['users']);
+    
+    // Snapshot current value (for rollback)
+    const previousUsers = queryClient.getQueryData(['users']);
+    
+    // Optimistically update cache
+    queryClient.setQueryData(['users'], (old) => 
+      old.map(user => user.id === newUser.id ? newUser : user)
+    );
+    
+    return { previousUsers }; // Return snapshot
+  },
+  
+  // 2. If API call fails - rollback
+  onError: (err, newUser, context) => {
+    queryClient.setQueryData(['users'], context.previousUsers);
+    toast.error('Update failed');
+  },
+  
+  // 3. After everything - refetch to be sure
+  onSettled: () => {
+    queryClient.invalidateQueries(['users']);
+  },
+});
+```
+
+### Cache Invalidation Strategy
+
+```typescript
+// When to invalidate cache?
+
+// 1. After mutations
+createUser.mutate(userData, {
+  onSuccess: () => {
+    queryClient.invalidateQueries(['users']); // Refetch users list
+  }
+});
+
+// 2. Time-based (staleTime)
+useQuery({
+  queryKey: ['users'],
+  queryFn: fetchUsers,
+  staleTime: 5 * 60 * 1000, // Consider fresh for 5 minutes
+});
+
+// 3. Manual refetch
+const { refetch } = useQuery(['users'], fetchUsers);
+<button onClick={() => refetch()}>Refresh</button>
+
+// 4. On focus/reconnect
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: true,  // Refetch when tab becomes active
+      refetchOnReconnect: true,    // Refetch when internet reconnects
     },
-  });
-
-  const handleSubmit = (userData: CreateUserData) => {
-    createUserMutation.mutate(userData);
-  };
-
-  return (
-    <form onSubmit={(e) => {
-      e.preventDefault();
-      handleSubmit({ name: 'John', email: 'john@example.com' });
-    }}>
-      <button type="submit" disabled={createUserMutation.isPending}>
-        {createUserMutation.isPending ? 'Creating...' : 'Create User'}
-      </button>
-    </form>
-  );
-}
+  },
+});
 ```
 
 ---
 
-## 7. Common Mistakes
+## 6. Error Handling Philosophy
 
-### Mistake 1: Not handling loading states
+### Error Categories
 
 ```typescript
-// ❌ Wrong - no loading state
-function UserList() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    fetchUsers().then(setUsers);
-  }, []);
-
-  return (
-    <ul>
-      {users.map(user => <li key={user.id}>{user.name}</li>)}
-    </ul>
-  );
+// 1. Network Errors
+try {
+  await fetchData();
+} catch (error) {
+  if (error.code === 'ERR_NETWORK') {
+    // No internet connection
+    showRetryButton();
+  }
 }
 
-// ✅ Correct - with loading state
-function UserList() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+// 2. HTTP Errors
+if (response.status >= 400) {
+  if (response.status === 401) {
+    // Unauthorized - redirect to login
+    redirectToLogin();
+  } else if (response.status === 404) {
+    // Not found - show 404 page
+    show404Page();
+  } else if (response.status >= 500) {
+    // Server error - show error page
+    showServerErrorPage();
+  }
+}
 
-  useEffect(() => {
-    fetchUsers()
-      .then(setUsers)
-      .finally(() => setLoading(false));
-  }, []);
+// 3. Business Logic Errors
+if (response.data.error) {
+  // Server returned error (e.g., "Email already exists")
+  showFieldError(response.data.error);
+}
 
-  if (loading) return <div>Loading...</div>;
-
-  return (
-    <ul>
-      {users.map(user => <li key={user.id}>{user.name}</li>)}
-    </ul>
-  );
+// 4. Validation Errors
+if (!isValidEmail(email)) {
+  // Client-side validation
+  showValidationError("Invalid email");
 }
 ```
 
-### Mistake 2: Not handling errors
+### Error Recovery Strategies
 
 ```typescript
-// ❌ Wrong - no error handling
-useEffect(() => {
-  fetchUsers().then(setUsers);
-}, []);
+// 1. Automatic Retry
+useQuery({
+  queryKey: ['users'],
+  queryFn: fetchUsers,
+  retry: 3,                 // Retry 3 times
+  retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+  // ↑ Exponential backoff: 1s, 2s, 4s, 8s, ...max 30s
+});
 
-// ✅ Correct - with error handling
-useEffect(() => {
-  fetchUsers()
-    .then(setUsers)
-    .catch(error => {
-      console.error('Error fetching users:', error);
-      setError('Failed to fetch users');
-    });
-}, []);
-```
+// 2. Fallback Data
+const { data, error } = useQuery(['users'], fetchUsers);
+const users = data || fallbackUsers;  // Use cached/default data on error
 
-### Mistake 3: Memory leaks with cleanup
-
-```typescript
-// ❌ Wrong - potential memory leak
-useEffect(() => {
-  let isMounted = true;
-
-  fetchUsers().then(data => {
-    if (isMounted) {
-      setUsers(data);
+// 3. Error Boundaries
+class ErrorBoundary extends React.Component {
+  componentDidCatch(error, errorInfo) {
+    logErrorToService(error, errorInfo);
+  }
+  
+  render() {
+    if (this.state.hasError) {
+      return <ErrorFallback />;
     }
-  });
-
-  return () => {
-    isMounted = false;
-  };
-}, []);
-```
-
-### Mistake 4: Not using proper TypeScript types
-
-```typescript
-// ❌ Wrong - using any
-const fetchUsers = async (): Promise<any> => {
-  const response = await axios.get('/api/users');
-  return response.data;
-};
-
-// ✅ Correct - proper typing
-interface User {
-  id: string;
-  name: string;
-  email: string;
+    return this.props.children;
+  }
 }
-
-const fetchUsers = async (): Promise<User[]> => {
-  const response = await axios.get<User[]>('/api/users');
-  return response.data;
-};
 ```
 
 ---
 
-## 8. Next Steps
+## 7. Performance & Optimization
 
-### What You Should Know After Lesson 3
+### Request Deduplication
 
-**API Integration:**
-- Understanding REST APIs and HTTP methods
-- CRUD operations with proper TypeScript typing
-- Axios for HTTP requests
+```typescript
+// Problem: Multiple components request same data
 
-**Data Management:**
-- Loading states and error handling
-- React Query for advanced data fetching
-- Proper error boundaries and user feedback
+function UserProfile() {
+  const { data } = useQuery(['user', userId], () => fetchUser(userId));
+  // ...
+}
 
-**Best Practices:**
-- TypeScript integration with APIs
-- Memory leak prevention
-- Error handling patterns
+function UserAvatar() {
+  const { data } = useQuery(['user', userId], () => fetchUser(userId));
+  // ...
+}
 
-### What's Coming in Lesson 4
+// Without React Query: 2 API calls
+// With React Query: 1 API call (automatically deduplicated!)
+```
 
-🔜 **Routing** - Multi-page applications with React Router
-🔜 **Authentication** - JWT tokens and protected routes
-🔜 **State Management** - Global state with Context API
-🔜 **Security** - CORS, XSS protection, and best practices
+### Pagination Strategies
 
-> **Advanced Topics** For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)
+```typescript
+// 1. Offset-based (Traditional)
+// Page 1: /users?offset=0&limit=10
+// Page 2: /users?offset=10&limit=10
+// ❌ Problems: Items can shift if data changes
+
+// 2. Cursor-based (Better)
+// Page 1: /users?limit=10
+//         Returns: { data: [...], nextCursor: "abc123" }
+// Page 2: /users?cursor=abc123&limit=10
+// ✅ Benefits: Consistent, works with real-time updates
+
+// 3. Infinite Scroll (Best UX)
+const {
+  data,
+  fetchNextPage,
+  hasNextPage,
+} = useInfiniteQuery({
+  queryKey: ['users'],
+  queryFn: ({ pageParam = 0 }) => fetchUsers(pageParam),
+  getNextPageParam: (lastPage) => lastPage.nextCursor,
+});
+```
+
+### Prefetching
+
+```typescript
+// Prefetch data before needed
+
+// 1. On hover
+<Link 
+  to="/user/123"
+  onMouseEnter={() => {
+    queryClient.prefetchQuery({
+      queryKey: ['user', '123'],
+      queryFn: () => fetchUser('123'),
+    });
+  }}
+>
+  View Profile
+</Link>
+
+// 2. On route change
+useEffect(() => {
+  // Prefetch next page data
+  queryClient.prefetchQuery(['users', page + 1], () => fetchUsers(page + 1));
+}, [page]);
+
+// 3. During idle time
+useEffect(() => {
+  const idleCallback = requestIdleCallback(() => {
+    queryClient.prefetchQuery(['reports'], fetchReports);
+  });
+  return () => cancelIdleCallback(idleCallback);
+}, []);
+```
+
+---
+
+## 8. Security Considerations
+
+### Authentication Flow
+
+```typescript
+// 1. User logs in
+POST /auth/login
+Body: { email, password }
+Response: { token: "eyJhbGciOiJIUzI1..." }
+
+// 2. Store token securely
+// ❌ Bad: localStorage (vulnerable to XSS)
+localStorage.setItem('token', token);
+
+// ✅ Better: httpOnly cookie (set by server)
+Set-Cookie: token=...; HttpOnly; Secure; SameSite=Strict
+
+// 3. Include in requests
+api.interceptors.request.use((config) => {
+  const token = getToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// 4. Handle expiration
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token expired - refresh or logout
+      refreshToken() || logout();
+    }
+    return Promise.reject(error);
+  }
+);
+```
+
+### CORS Explained
+
+```typescript
+// Why CORS exists:
+// Without CORS, evil.com could make requests to yourbank.com
+// and steal your data!
+
+// CORS prevents this by:
+// 1. Browser checks if server allows cross-origin requests
+// 2. Server responds with Access-Control headers
+// 3. Only then browser allows the request
+
+// Preflight Request (for non-simple requests)
+OPTIONS /api/users
+Origin: https://myapp.com
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: Authorization
+
+// Server Response
+Access-Control-Allow-Origin: https://myapp.com
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE
+Access-Control-Allow-Headers: Authorization, Content-Type
+Access-Control-Max-Age: 86400  // Cache preflight for 24 hours
+```
+
+### Input Validation
+
+```typescript
+// Validate on BOTH client and server
+
+// Client-side (UX)
+const validate = (data) => {
+  if (!data.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    return 'Invalid email';
+  }
+  if (data.password.length < 8) {
+    return 'Password too short';
+  }
+  // ... more checks
+};
+
+// Server-side (Security)
+// NEVER trust client input!
+app.post('/users', async (req, res) => {
+  const { error, value } = userSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({ error: error.details });
+  }
+  
+  // Sanitize input
+  const cleanData = sanitize(value);
+  
+  // Process...
+});
+```
+
+---
+
+## Key Takeaways
+
+### Conceptual Understanding
+
+1. **Modern Web Architecture**
+   - SPAs separate frontend and backend
+   - APIs enable flexible, scalable architecture
+   - Clear separation of concerns
+
+2. **REST Principles**
+   - Resource-based URLs
+   - Stateless communication
+   - Proper HTTP method semantics
+
+3. **State Management**
+   - Distinguish server state from client state
+   - Use React Query for server state
+   - Implement proper caching strategies
+
+4. **Error Handling**
+   - Categorize errors properly
+   - Implement retry strategies
+   - Provide good user feedback
+
+5. **Performance**
+   - Deduplication and caching
+   - Prefetching and pagination
+   - Optimistic updates for better UX
+
+6. **Security**
+   - Proper authentication flow
+   - CORS understanding
+   - Input validation
+
+### Next Steps
+
+Continue to [Lab 3](../lab/lab3.md) to apply these concepts in practice!
+
+> 📚 **Quick Reference:** For syntax and code snippets, see [reference3.md](../reference/reference3.md)

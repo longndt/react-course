@@ -1,6 +1,6 @@
 # Lab 3 - API Integration & Data Management
 
-## � Overview
+## 📚 Overview
 
 Welcome to Lab 3! In this hands-on lab, you'll build a complete full-stack Task Manager application by connecting a React frontend to a Node.js/Express/MongoDB backend. You'll master essential API integration patterns using **Axios** - the most popular HTTP client for React applications.
 
@@ -54,15 +54,15 @@ Before starting, ensure you have:
 
 ### Required Software
 
-- [ ] ** Node.js** (v18 or higher) - [Download](https://nodejs.org/)
-- [ ] ** MongoDB** - Choose one:
+- [ ] **Node.js** (v18 or higher) - [Download](https://nodejs.org/)
+- [ ] **MongoDB** - Choose one:
   - Local MongoDB Community Server, OR
   - MongoDB Atlas account (free cloud database)
-- [ ] ** VS Code** with extensions:
+- [ ] **VS Code** with extensions:
   - ESLint
   - Prettier
   - Thunder Client (or use Postman)
-- [ ] ** Git** for version control
+- [ ] **Git** for version control
 
 ### Verify Installation
 
@@ -118,8 +118,11 @@ A **RESTful API** follows REST principles for building web services:
   - `POST` - Create new data
   - `PUT/PATCH` - Update existing data
   - `DELETE` - Remove data
-- **Stateless** - Each request contains all needed information **MongoDB** is a NoSQL database that stores data as JSON-like documents.
-** Mongoose** is an ODM (Object Data Modeling) library that provides schema validation and easier interaction with MongoDB.
+- **Stateless** - Each request contains all needed information
+
+**MongoDB** is a NoSQL database that stores data as JSON-like documents.
+
+**Mongoose** is an ODM (Object Data Modeling) library that provides schema validation and easier interaction with MongoDB.
 
 ### Goals
 
@@ -400,7 +403,9 @@ npm run dev
 4. **DELETE /api/tasks/:id**
    - Method: DELETE
    - URL: `http://localhost:5000/api/tasks/[TASK_ID]`
-   - Expected: Success message **Verify in MongoDB:**
+   - Expected: Success message
+
+**Verify in MongoDB:**
 ```bash
 # Connect to MongoDB shell
 mongosh
@@ -462,27 +467,17 @@ npm install @tanstack/react-query axios
 
 **Step 2:** Create API service file
 
-Create `frontend/src/services/api.ts`:
+Create `frontend/src/services/api.js`:
 ```javascript
 import axios from 'axios';
 
 const API_BASE = 'http://localhost:5000/api';
 
-/**
- * @typedef {Object} Task
- * @property {string} _id - Task ID
- * @property {string} title - Task title
- * @property {boolean} completed - Completion status
- * @property {'low'|'medium'|'high'} priority - Task priority
- * @property {string} createdAt - Creation timestamp
- * @property {string} updatedAt - Update timestamp
- */
-
 export const taskApi = {
   getTasks: () => axios.get(`${API_BASE}/tasks`).then(res => res.data),
-  createTask: (data: Partial<Task>) => axios.post<Task>(`${API_BASE}/tasks`, data).then(res => res.data),
-  updateTask: (id: string, data: Partial<Task>) => axios.put<Task>(`${API_BASE}/tasks/${id}`, data).then(res => res.data),
-  deleteTask: (id: string) => axios.delete(`${API_BASE}/tasks/${id}`).then(res => res.data),
+  createTask: (data) => axios.post(`${API_BASE}/tasks`, data).then(res => res.data),
+  updateTask: (id, data) => axios.put(`${API_BASE}/tasks/${id}`, data).then(res => res.data),
+  deleteTask: (id) => axios.delete(`${API_BASE}/tasks/${id}`).then(res => res.data),
 };
 ```
 
@@ -568,7 +563,7 @@ export default TaskManager;
 - Error state shows if API fails
 - Tasks display in a list
 
-**Solution:** See `solutions/exercise2-frontend/TaskManager-basic.jsx`
+**Solution:** See `solutions/exercise2-frontend/TaskManager-basic.js`
 
 ---
 
@@ -653,7 +648,7 @@ function TaskManager() {
 - Input clears after submission
 - Button disabled while creating
 
-**Solution:** See `solutions/exercise2-frontend/TaskManager-create.jsx`
+**Solution:** See `solutions/exercise2-frontend/TaskManager-create.js`
 
 ---
 
@@ -684,7 +679,7 @@ function TaskManager() {
 
   // TODO: Update mutation
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: string; data: Partial<Task> }) =>
+    mutationFn: ({ id, data }) =>
       taskApi.updateTask(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
@@ -747,7 +742,7 @@ function TaskManager() {
 - UI updates automatically
 - Buttons disable during mutations
 
-**Solution:** See `solutions/exercise2-frontend/TaskManager-full.jsx`
+**Solution:** See `solutions/exercise2-frontend/TaskManager-full.js`
 
 ---
 
@@ -874,7 +869,7 @@ Create `frontend/src/components/TaskManager.css`:
 
 **Hint:**
 ```jsx
-const [priorityFilter, setPriorityFilter] = useState<string>('all');
+const [priorityFilter, setPriorityFilter] = useState('all');
 
 const filteredTasks = tasks?.filter(task =>
   priorityFilter === 'all' || task.priority === priorityFilter
@@ -898,7 +893,7 @@ const updateMutation = useMutation({
     const previousTasks = queryClient.getQueryData(['tasks']);
 
     // Optimistically update
-    queryClient.setQueryData(['tasks'], (old: Task[]) =>
+    queryClient.setQueryData(['tasks'], (old) =>
       old.map(task => task._id === newTask.id ? { ...task, ...newTask.data } : task)
     );
 

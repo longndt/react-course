@@ -1,377 +1,411 @@
 # Theory - React Fundamentals & Project Setup
 
-> **Prerequisites** Make sure you've completed the [Environment Setup Guide](../../extras/environment_setup.md) before starting this lesson.
+> **Purpose of this file**: Explains **WHY** React works the way it does, **HOW** components and JSX/TSX function, and **WHEN** to use different patterns. Code examples include explanatory comments.
+>
+> **Use Reference1 when you need**: Quick setup commands, syntax lookup, copy-paste ready code.
 
 ---
 
 ## Table of Contents
 
-**Chapter 1:** [What is React?](#1-what-is-react)
-**Chapter 2:** [TypeScript with React (TSX)](#2-typescript-with-react-tsx)
-**Chapter 3:** [Project Setup with Vite](#3-project-setup-with-vite)
-**Chapter 4:** [Component Basics](#4-component-basics)
-**Chapter 5:** [TSX Syntax Rules](#5-tsx-syntax-rules)
-**Chapter 6:** [Styling Components](#6-styling-components)
-**Chapter 7:** [Event Handling Basics](#7-event-handling-basics)
-**Chapter 8:** [Common Mistakes](#8-common-mistakes)
-**Chapter 9:** [Next Steps](#9-next-steps)
+1. [What is React and Why Use It?](#1-what-is-react-and-why-use-it)
+2. [Understanding TSX](#2-understanding-tsx)
+3. [Project Setup with Vite](#3-project-setup-with-vite)
+4. [Components: The Building Blocks](#4-components-the-building-blocks)
+5. [TSX Rules and Why They Exist](#5-tsx-rules-and-why-they-exist)
+6. [Styling Approaches](#6-styling-approaches)
+7. [Event Handling Basics](#7-event-handling-basics)
+8. [Common Mistakes](#8-common-mistakes)
 
 ---
 
-## 1. What is React?
+## 1. What is React and Why Use It?
 
-> 🗺️ **Visual Learning** For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
+### The Problem React Solves
 
-**React** is a JavaScript library for building user interfaces, created and maintained by Meta (Facebook).
+**Traditional JavaScript:**
 
-### Key Concepts
+```javascript
+// Vanilla JS - Manual DOM manipulation (error-prone and verbose)
+const button = document.getElementById('myButton');
+button.addEventListener('click', () => {
+  const counter = document.getElementById('counter');
+  const currentValue = parseInt(counter.textContent);
+  counter.textContent = currentValue + 1;
+  
+  // What if counter doesn't exist? What if textContent is not a number?
+  // Easy to make mistakes, hard to maintain!
+});
+```
 
-- **Component-Based** Build encapsulated components that manage their own state
+**React Approach:**
 
-- **Declarative** Design views for each state, React efficiently updates the right components
-
-- **Learn Once, Write Anywhere** Can be used for web, mobile (React Native), desktop, and more
+```tsx
+// React - Declarative: describe WHAT you want, React handles HOW
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  // Just describe what the UI should look like
+  // React handles updating the DOM efficiently
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
 
 ### Why React?
 
-- Most popular frontend library (used by Facebook, Instagram, Netflix, Airbnb)
-- Large ecosystem and community support
-- Excellent developer experience with modern tools
-- Perfect for building dynamic, interactive user interfaces
+| Aspect | Traditional JS | React |
+|--------|---------------|-------|
+| **DOM Updates** | Manual (`getElementById`, `innerHTML`) | Automatic (just change state) |
+| **Code Style** | Imperative (tell HOW to do it) | Declarative (describe WHAT you want) |
+| **Reusability** | Hard (copy-paste code) | Easy (reusable components) |
+| **Maintainability** | Difficult (scattered logic) | Better (encapsulated components) |
+| **Performance** | Manual optimization needed | Virtual DOM handles it |
 
----
+**Key Insight**: React lets you focus on *what* the UI should look like for each state, not *how* to transition between states.
 
-## 2. TypeScript with React (TSX)
+### React's Core Philosophy: Components
 
-In this course, we use **TypeScript** for all React components (.tsx files).
+**Think of components as LEGO blocks:**
+- Each block (component) is self-contained
+- You can combine blocks to build complex structures
+- Blocks are reusable across different projects
 
-### What is TSX?
-
-**TSX = TypeScript + JSX**
-
-- **JSX** JavaScript XML - HTML-like syntax in JavaScript
-
-- **TSX** TypeScript XML - HTML-like syntax in TypeScript with type safety
-- File extension: `.tsx` (not `.ts` or `.jsx`)
-
-### Why TSX?
-
-- Type-safe components and props
-- Catch errors during development (not at runtime)
-- Better IDE support (autocomplete, IntelliSense)
-- Self-documenting code
-- Easier refactoring
-
-### Basic TypeScript Patterns
-
-**Component Props with Interface**
-
-```typescript
-// File: components/UserCard.tsx
-import React from 'react';
-
-// Define props type
-interface UserCardProps {
-  name: string;
-  email: string;
-  age?: number;  // Optional prop
+```tsx
+// Small, reusable components
+function Button({ label, onClick }) {
+  return <button onClick={onClick}>{label}</button>;
 }
 
-// Component using the props
-function UserCard({ name, email, age }: UserCardProps) {
+function Card({ title, children }) {
   return (
-    <div className="user-card">
-      <h2>{name}</h2>
-      <p>{email}</p>
-      {age && <p>Age: {age}</p>}
+    <div className="card">
+      <h2>{title}</h2>
+      {children}
     </div>
   );
 }
 
-export default UserCard;
-```
-
-**Event Handlers with Types**
-
-```typescript
-// File: components/auth/LoginForm.tsx
-import React from 'react';
-
-function LoginForm() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log('Form submitted');
-  };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('Input value:', event.target.value);
-  };
-
+// Compose them into larger UIs
+function Dashboard() {
   return (
-    <form onSubmit={handleSubmit}>
-      <input onChange={handleInputChange} />
-      <button type="submit">Submit</button>
-    </form>
+    <div>
+      <Card title="User Profile">
+        <p>Welcome back!</p>
+        <Button label="Logout" onClick={() => {}} />
+      </Card>
+      
+      <Card title="Settings">
+        <Button label="Edit Profile" onClick={() => {}} />
+      </Card>
+    </div>
   );
 }
-
-export default LoginForm;
 ```
 
-> **Complete TypeScript Guide** For comprehensive TypeScript review, see [Lesson 0: TypeScript Prerequisites](../../lesson0-typescript-basics/)
+---
+
+## 2. Understanding TSX
+
+### What is TSX and Why Use It?
+
+**TSX = TypeScript + JSX (JavaScript XML)**
+
+```tsx
+// This looks like HTML, but it's actually TypeScript!
+function Welcome() {
+  return <h1>Hello, World!</h1>;
+}
+
+// Babel/Vite transforms this to:
+function Welcome() {
+  return React.createElement('h1', null, 'Hello, World!');
+}
+```
+
+**Why TSX looks like HTML:**
+- **Readability**: UI code looks like what it produces
+- **Familiarity**: Web developers already know HTML
+- **Type Safety**: TypeScript ensures props are correct
+
+### TSX is NOT HTML
+
+```tsx
+// ❌ HTML - This won't work in React
+<div class="container">
+  <img src="logo.png">
+  <label for="name">Name:</label>
+  <input type="text">
+</div>
+
+// ✅ TSX - React version
+<div className="container">
+  <img src="logo.png" />
+  <label htmlFor="name">Name:</label>
+  <input type="text" />
+</div>
+```
+
+**Why the differences?**
+- `className` instead of `class`: `class` is a reserved keyword in JavaScript
+- Self-closing tags: JSX is JavaScript, needs valid syntax
+- `htmlFor` instead of `for`: `for` is a reserved keyword
 
 ---
 
 ## 3. Project Setup with Vite
 
-**Vite** is the modern, fast build tool we use for React projects.
+### Why Vite (Not Create React App)?
 
-### Create New Project
+**Vite is FASTER:**
+
+| Feature | Create React App | Vite |
+|---------|-----------------|------|
+| **Cold start** | 10-30 seconds | 1-3 seconds |
+| **Hot reload** | 2-5 seconds | Instant (~100ms) |
+| **Build tool** | Webpack | esbuild + Rollup |
+| **Modern?** | Dated (2016) | Modern (2020+) |
+
+**Key Benefit**: Vite uses native ES modules, so it doesn't bundle during development. Only changed files are updated.
+
+### Understanding the Setup
 
 ```bash
-# Create new TypeScript React project
+# This command creates a new React project with TypeScript
 npm create vite@latest my-app -- --template react-ts
 
-# Navigate to project
-cd my-app
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
+# What happens:
+# 1. Downloads Vite project template
+# 2. Sets up TypeScript configuration
+# 3. Installs React + React DOM
+# 4. Configures development server
 ```
 
-### Project Structure
-
-> 📁 **Visual Learning** For a comprehensive understanding of React project structure, see [React Project Structure Diagram](../../diagrams/react_project_structure.md)
+### Project Structure Explained
 
 ```
 my-app/
-├── node_modules/      # Dependencies
-├── public/            # Static assets
-├── src/
-│   ├── App.tsx        # Main component
-│   ├── main.tsx       # Entry point
-│   ├── App.css        # Styles
-│   └── index.css      # Global styles
-├── index.html         # HTML template
-├── package.json       # Project config
-├── tsconfig.json      # TypeScript config
-└── vite.config.ts     # Vite config
+├── node_modules/          # Third-party packages (don't edit)
+├── public/                # Static files (copied as-is)
+│   └── vite.svg
+├── src/                   # 👈 Your code lives here
+│   ├── main.tsx          # Entry point (React mounts here)
+│   ├── App.tsx           # Root component
+│   ├── App.css           # Component styles
+│   └── index.css         # Global styles
+├── index.html            # HTML template (has <div id="root">)
+├── package.json          # Dependencies and scripts
+├── tsconfig.json         # TypeScript rules
+└── vite.config.ts        # Vite configuration
 ```
 
-### Understanding Key Files
+**The Flow:**
+1. Browser loads `index.html` (has `<div id="root">`)
+2. HTML loads `src/main.tsx` (entry point)
+3. `main.tsx` renders `<App />` into `#root`
+4. Your React app is running!
 
-**`main.tsx` - Application Entry Point**
+---
 
-```typescript
-// File: src/main.tsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+## 4. Components: The Building Blocks
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+### What Makes a Component?
+
+**A component is just a function that returns TSX:**
+
+```tsx
+// This is a valid React component!
+function Greeting() {
+  return <h1>Hello!</h1>;
+}
 ```
 
-**`App.tsx` - Main Component**
+**Component Rules:**
+1. **Name MUST start with capital letter** (so React knows it's a component, not HTML tag)
+2. **Must return TSX** (or `null`)
+3. **Can accept props** (inputs)
 
-```typescript
-// File: src/App.tsx
-import React from 'react';
+### Why Capital Letters Matter
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Hello React!</h1>
-    </div>
-  );
+```tsx
+// ✅ Component - Capital letter
+function Button() {
+  return <button>Click me</button>;
 }
 
-export default App;
+// Usage:
+<Button />  // React knows this is YOUR component
+
+// ❌ lowercase - React thinks it's HTML!
+function button() {
+  return <button>Click me</button>;
+}
+
+// Usage:
+<button />  // React looks for HTML <button> tag, not your function!
+```
+
+### Props: Component Inputs
+
+**Problem: Hard-coded components aren't reusable**
+
+```tsx
+// ❌ Not reusable - always says "John"
+function Greeting() {
+  return <h1>Hello, John!</h1>;
+}
+
+<Greeting />  // Always "Hello, John!"
+```
+
+**Solution: Use props to make components dynamic**
+
+```tsx
+// ✅ Reusable - name can change
+interface GreetingProps {
+  name: string;
+}
+
+function Greeting({ name }: GreetingProps) {
+  return <h1>Hello, {name}!</h1>;
+}
+
+<Greeting name="John" />   // "Hello, John!"
+<Greeting name="Alice" />  // "Hello, Alice!"
+```
+
+**Props are like function parameters:**
+
+```tsx
+// Regular TypeScript function
+function add(a: number, b: number): number {
+  return a + b;
+}
+add(2, 3);  // 5
+
+// React component (also a function!)
+interface AddDisplayProps {
+  a: number;
+  b: number;
+}
+
+function AddDisplay({ a, b }: AddDisplayProps) {
+  return <p>{a} + {b} = {a + b}</p>;
+}
+<AddDisplay a={2} b={3} />  // "2 + 3 = 5"
 ```
 
 ---
 
-## 4. Component Basics
+## 5. TSX Rules and Why They Exist
 
-### What is a Component?
+### Rule 1: Single Root Element
 
-A component is a reusable piece of UI. Think of it as a function that returns HTML.
-
-**Functional Component (Modern React):**
-
-```typescript
-// File: components/Greeting.tsx
-function Greeting() {
-  return <h1>Hello, World!</h1>;
+```tsx
+// ❌ ERROR: Can't return multiple elements
+function App() {
+  return (
+    <h1>Title</h1>
+    <p>Paragraph</p>
+  );
 }
-```
 
-### Key Points
-
-- Components are TypeScript functions
-- Component names must start with a capital letter
-- Components return TSX (looks like HTML)
-- Can be reused multiple times in your app
-
-### Creating Custom Components
-
-**Step 1:** Create a new file `src/components/Welcome.tsx`
-
-```typescript
-// src/components/Welcome.tsx
-function Welcome() {
+// ✅ Solution 1: Wrap in div
+function App() {
   return (
     <div>
-      <h1>Welcome to React!</h1>
-      <p>This is your first custom component.</p>
+      <h1>Title</h1>
+      <p>Paragraph</p>
     </div>
   );
 }
 
-export default Welcome;
-```
-
-**Step 2:** Use it in `src/App.tsx`
-
-```typescript
-// File: src/App.tsx
-import Welcome from './components/Welcome';
-
+// ✅ Solution 2: Use Fragment (no extra DOM node)
 function App() {
   return (
-    <div className="App">
-      <Welcome />
-    </div>
+    <>
+      <h1>Title</h1>
+      <p>Paragraph</p>
+    </>
   );
 }
-
-export default App;
 ```
 
----
+**Why this rule?** A function can only return ONE value. TSX is transformed to function calls:
 
-## 5. TSX Syntax Rules
+```tsx
+// TSX
+<div><h1>Hi</h1></div>
 
-**TSX** (TypeScript XML) allows you to write HTML-like code in TypeScript.
+// Transforms to
+React.createElement('div', null, React.createElement('h1', null, 'Hi'))
 
-### Basic Rules
+// Multiple elements would be:
+<h1>Hi</h1>
+<p>Text</p>
 
-1. **Must return a single parent element**
-   ```typescript
-   // ✅ Good - wrapped in div
-   function App() {
-     return (
-       <div>
-         <h1>Title</h1>
-         <p>Paragraph</p>
-       </div>
-     );
-   }
+// Invalid JavaScript - can't return two things!
+return React.createElement('h1', null, 'Hi'), React.createElement('p', null, 'Text')
+```
 
-   // ❌ Bad - multiple root elements
-   function App() {
-     return (
-       <h1>Title</h1>
-       <p>Paragraph</p>
-     );
-   }
-   ```
+### Rule 2: Embed JavaScript with `{}`
 
-2. **Use `className` instead of `class`**
-   ```typescript
-   // File: src/components/Container.tsx
-   function Container() {
-     return <div className="container">Content</div>;
-   }
-   ```
-
-3. **Close all tags**
-   ```typescript
-   // File: src/components/ImageInput.tsx
-   function ImageInput() {
-     return (
-       <>
-         <img src="logo.png" alt="Logo" />
-         <input type="text" />
-       </>
-     );
-   }
-   ```
-
-4. **Embed TypeScript with `{}`**
-   ```typescript
-   // File: src/components/Greeting.tsx
-   function Greeting() {
-     const name = "Student";
-     return <h1>Hello, {name}!</h1>;
-   }
-
-   export default Greeting;
-   ```
-
-### Embedding TypeScript in TSX
-
-You can embed any TypeScript expression inside TSX using curly braces `{}`.
-
-**Example:**
-
-```typescript
-// File: components/Profile.tsx
+```tsx
 function Profile() {
-  const name = "John Doe";
-  const age = 20;
-  const hobbies = ["Reading", "Gaming", "Coding"];
-
+  const name = "Alice";
+  const age = 25;
+  
   return (
-    <div className="profile">
-      {/* Variables */}
+    <div>
+      {/* ✅ Embed variables */}
       <h1>{name}</h1>
+      
+      {/* ✅ Embed expressions */}
       <p>Age: {age}</p>
-
-      {/* Expressions */}
       <p>Next year: {age + 1}</p>
-
-      {/* Method calls */}
-      <p>Uppercase: {name.toUpperCase()}</p>
-
-      {/* Arrays with map */}
-      <ul>
-        {hobbies.map((hobby, index) => (
-          <li key={index}>{hobby}</li>
-        ))}
-      </ul>
-
-      {/* Conditional rendering */}
-      {age >= 18 ? <p>Adult</p> : <p>Minor</p>}
+      
+      {/* ✅ Ternary operator */}
+      <p>{age >= 18 ? "Adult" : "Minor"}</p>
+      
+      {/* ✅ Method calls */}
+      <p>{name.toUpperCase()}</p>
+      
+      {/* ❌ Can't use statements (if/for/while) */}
+      {/* { if (age > 18) { return "Adult" } } */}
     </div>
   );
 }
 ```
 
-**Key Rules:**
-- Use `{}` for TypeScript expressions
-- Can use variables, calculations, function calls
-- Cannot use statements (if/else, for loops) - use expressions instead
-- Always add `key` prop when rendering lists
+**Why `{}`?** TSX needs to know when you're switching from "template" mode to "JavaScript" mode.
+
+### Rule 3: `className` not `class`
+
+```tsx
+// ❌ Wrong - 'class' is JavaScript keyword
+<div class="container">
+
+// ✅ Correct - use className
+<div className="container">
+```
+
+**Why?** `class` is reserved in JavaScript for defining classes. React uses `className` to avoid conflicts.
 
 ---
 
-## 6. Styling Components
+## 6. Styling Approaches
 
-**Three common approaches:**
+### Three Common Methods
 
-### 1. CSS Files (Recommended for beginners)
+**1. CSS Files (Recommended for beginners)**
 
-```typescript
-// File: src/App.tsx
-import './App.css';
+```tsx
+// App.tsx
+import './App.css';  // Import CSS file
 
 function App() {
   return <div className="container">Content</div>;
@@ -379,31 +413,35 @@ function App() {
 ```
 
 ```css
-/* File: src/App.css */
+/* App.css */
 .container {
   padding: 20px;
-  background-color: #f0f0f0;
+  background: #f0f0f0;
 }
 ```
 
-### 2. Inline Styles
+**Pros**: Familiar, separate concerns, good for larger projects
+**Cons**: Global scope (can have naming conflicts)
 
-```typescript
-// File: src/App.tsx
+**2. Inline Styles**
+
+```tsx
 function App() {
-  const style = {
-    padding: '20px',
+  const containerStyle = {
+    padding: '20px',      // Note: string values, camelCase properties
     backgroundColor: '#f0f0f0'
   };
-
-  return <div style={style}>Content</div>;
+  
+  return <div style={containerStyle}>Content</div>;
 }
 ```
 
-### 3. Direct Inline (for quick styling)
+**Pros**: Scoped to component, dynamic based on props/state
+**Cons**: No pseudo-classes (:hover), no media queries, harder to maintain
 
-```typescript
-// File: src/App.tsx
+**3. Direct Inline**
+
+```tsx
 function App() {
   return (
     <div style={{ padding: '20px', backgroundColor: '#f0f0f0' }}>
@@ -413,42 +451,68 @@ function App() {
 }
 ```
 
+**Pros**: Quick for simple styles
+**Cons**: Double curly braces confusing, not reusable
+
+### CSS Property Names in JSX
+
+```tsx
+// ❌ CSS property names - DON'T work in JSX
+{ 'background-color': 'red', 'font-size': '16px' }
+
+// ✅ camelCase - CORRECT for JSX
+{ backgroundColor: 'red', fontSize: '16px' }
+
+// Why? JSX style is a JavaScript object, not CSS
+```
+
 ---
 
 ## 7. Event Handling Basics
 
-In Lesson 1, we only cover simple event handling with alerts.
+### How Events Work in React
 
-**Common Events:**
+```tsx
+// Vanilla JS - imperative
+const button = document.getElementById('btn');
+button.addEventListener('click', () => alert('Clicked!'));
 
-```typescript
-// File: components/EventDemo.tsx
+// React - declarative
+function App() {
+  return <button onClick={() => alert('Clicked!')}>Click Me</button>;
+}
+```
+
+**Key Differences:**
+- React: `onClick` (camelCase), not `onclick`
+- React: Pass function reference, not string
+- React: Synthetic events (cross-browser compatible)
+
+### Event Types
+
+```tsx
 function EventDemo() {
-  // Event handler functions
+  // onClick - button clicks
   const handleClick = () => {
     alert('Button clicked!');
   };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert('Form submitted!');
-  };
-
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  
+  // onChange - input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log('Input value:', e.target.value);
   };
-
+  
+  // onSubmit - form submission
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();  // Prevent page reload
+    alert('Form submitted!');
+  };
+  
   return (
     <div>
-      {/* onClick */}
       <button onClick={handleClick}>Click Me</button>
-
-      {/* Inline handler */}
-      <button onClick={() => alert('Hello!')}>Say Hello</button>
-
-      {/* Form submit */}
+      <input onChange={handleChange} />
       <form onSubmit={handleSubmit}>
-        <input type="text" onChange={handleInput} />
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -456,30 +520,86 @@ function EventDemo() {
 }
 ```
 
-> **Note** Advanced event handling with state will be covered in Lesson 2
+**Why TypeScript event types?**
+- `React.FormEvent`: TypeScript knows it's a form event
+- `React.ChangeEvent<HTMLInputElement>`: Knows `e.target.value` exists
+- Autocomplete helps you access the right properties!
 
 ---
 
 ## 8. Common Mistakes
 
-### Mistake 1: Lowercase component names
-```typescript
-// File: components/MyComponent.tsx
-// ❌ Wrong
-function myComponent() {
-  return <div>Hello</div>;
+### Mistake 1: Forgetting to Export Component
+
+```tsx
+// ❌ Component defined but not exported
+function Welcome() {
+  return <h1>Hello</h1>;
 }
 
-// ✅ Correct
-function MyComponent() {
-  return <div>Hello</div>;
-}
+// Other files can't import it!
 ```
 
-### Mistake 2: Multiple root elements
-```typescript
-// File: src/App.tsx
-// ❌ Wrong
+```tsx
+// ✅ Export so other files can use it
+function Welcome() {
+  return <h1>Hello</h1>;
+}
+
+export default Welcome;  // Default export
+
+// Or
+export { Welcome };  // Named export
+```
+
+### Mistake 2: Calling Functions in TSX Instead of Passing Them
+
+```tsx
+// ❌ BAD: Calls function immediately (infinite loop!)
+<button onClick={handleClick()}>Click</button>
+
+// ✅ GOOD: Pass function reference
+<button onClick={handleClick}>Click</button>
+
+// ✅ GOOD: Wrap in arrow function if you need parameters
+<button onClick={() => handleClick(123)}>Click</button>
+```
+
+**Why it matters:**
+```tsx
+// onClick={handleClick()} → Executes immediately during render!
+// onClick={handleClick}   → Executes when user clicks
+```
+
+### Mistake 3: Using `class` Instead of `className`
+
+```tsx
+// ❌ Won't work - 'class' is reserved
+<div class="container">
+
+// ✅ Use className
+<div className="container">
+```
+
+### Mistake 4: Forgetting Keys in Lists
+
+```tsx
+// ❌ No key - React can't track items efficiently
+{items.map((item) => <li>{item}</li>)}
+
+// ✅ With key - React knows which items changed
+{items.map((item, index) => <li key={index}>{item}</li>)}
+
+// ✅ Better - use unique ID if available
+{items.map((item) => <li key={item.id}>{item.name}</li>)}
+```
+
+**Why keys?** React uses keys to identify which items changed/added/removed. Without keys, React re-renders everything (slow!).
+
+### Mistake 5: Multiple Root Elements
+
+```tsx
+// ❌ Can't return multiple roots
 function App() {
   return (
     <h1>Title</h1>
@@ -487,71 +607,27 @@ function App() {
   );
 }
 
-// ✅ Correct
+// ✅ Use Fragment
 function App() {
   return (
-    <div>
+    <>
       <h1>Title</h1>
       <p>Text</p>
-    </div>
+    </>
   );
 }
 ```
 
-### Mistake 3: Using `class` instead of `className`
-```typescript
-// File: components/Container.tsx
-// ❌ Wrong
-<div class="container">Content</div>
-
-// ✅ Correct
-<div className="container">Content</div>
-```
-
-### Mistake 4: Forgetting to close tags
-```typescript
-// File: components/ImageInput.tsx
-// ❌ Wrong
-<img src="logo.png">
-<input type="text">
-
-// ✅ Correct
-<img src="logo.png" />
-<input type="text" />
-```
-
 ---
 
-## 9. Next Steps
+## Next Steps
 
-### What You Should Know After Lesson 1
+You now understand:
+- ✅ **Why** React exists and what problems it solves
+- ✅ **How** components work (functions that return TSX)
+- ✅ **Why** TSX has specific rules (single root, className, etc.)
+- ✅ **When** to use different styling approaches
 
-**Fundamentals:**
-- What React is and why we use it
-- How to create a React project with Vite
-- Basic TSX syntax and rules
+**Practice**: Head to `lab1.md` for hands-on exercises!
 
-**Components:**
-- Creating functional components
-- Exporting and importing components
-- Component file organization
-
-**Styling:**
-- Using CSS files with className
-- Inline styles
-- Basic styling approaches
-
-**Events (Basic):**
-- onClick, onSubmit, onChange
-- Alert-based event handling
-- preventDefault for forms
-
-### What's Coming in Lesson 2
-
-🔜 **Props** - Passing data between components
-🔜 **State** - Managing dynamic data with useState
-🔜 **Hooks** - useEffect, custom hooks
-🔜 **Forms** - Controlled components and validation
-🔜 **Component Patterns** - Composition and reusability
-
-> **Advanced Topics** For advanced TypeScript patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)
+**Quick Reference**: See `reference1.md` for setup commands and syntax.

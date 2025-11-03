@@ -1,417 +1,656 @@
-# Reference - React Fundamentals & Project Setup
+# Reference - React Fundamentals Quick Lookup
 
-> **Quick reference guide for React fundamentals**
-
-## Table of Contents
-1. [Project Setup](#part-1-project-setup)
-2. [Understanding Project Structure](#part-2-understanding-project-structure)
-3. [Your First Component](#part-3-your-first-component)
-4. [Basic TSX Syntax](#part-4-basic-tsx-syntax)
-5. [Adding Styles](#part-5-adding-styles)
-6. [Simple Interactive Example](#part-6-simple-interactive-example)
-7. [Complete Starter Example](#part-7-complete-starter-example)
+> **Purpose of this file**: Quick setup commands, syntax patterns, copy-paste ready code. NO concept explanations.
+>
+> **Use Theory1 when you need**: Understanding WHY and HOW React works.
 
 ---
 
-## Part 1: Project Setup
+## Table of Contents
 
-### Create New React + TypeScript Project
+1. [Project Setup Commands](#project-setup-commands)
+2. [Component Syntax](#component-syntax)
+3. [TSX Rules Cheat Sheet](#tsx-rules-cheat-sheet)
+4. [Props Patterns](#props-patterns)
+5. [Styling Methods](#styling-methods)
+6. [Event Handlers](#event-handlers)
+7. [Common Patterns](#common-patterns)
+
+---
+
+## Project Setup Commands
+
+### Create New Project
 
 ```bash
-# Create new project with TypeScript template
-npm create vite@latest my-first-react-app -- --template react-ts
+# Create React + TypeScript project
+npm create vite@latest my-app -- --template react-ts
 
-# Navigate to project
-cd my-first-react-app
+# Navigate
+cd my-app
 
 # Install dependencies
 npm install
 
-# Start development server
+# Start dev server
 npm run dev
 ```
 
-**Your app will open at:**`http://localhost:5173`
+### Package Scripts
+
+```bash
+npm run dev        # Start development server
+npm run build      # Build for production
+npm run preview    # Preview production build
+npm run lint       # Run linter
+```
 
 ### Verify Installation
 
 ```bash
-# Check versions (make sure these work)
 node --version    # Should be v18.0.0+
 npm --version     # Should be v9.0.0+
 ```
 
- If you see the default Vite + React page, you're ready!
-
 ---
 
-## Part 2: Understanding Project Structure
+## Component Syntax
 
-```
-my-first-react-app/
-├── node_modules/     # Dependencies (auto-generated)
-├── public/           # Static files
-├── src/              # 👈 Your code goes here
-│   ├── App.tsx       # Main component
-│   ├── App.css       # Styles for App
-│   ├── main.tsx      # Entry point
-│   └── index.css     # Global styles
-├── package.json      # Project config
-├── tsconfig.json     # TypeScript config
-└── vite.config.ts    # Vite config
-```
-
-**Focus on `src/` folder** - this is where you'll write your code
-
----
-
-## Part 3: Your First Component
-
-### Understanding the Default App
-
-Open `src/App.tsx`:
+### Basic Component
 
 ```tsx
-function App() {
-  return (
-    <div className="App">
-      <h1>Hello React!</h1>
-    </div>
-  );
+function ComponentName() {
+  return <div>Content</div>;
 }
 
-export default App;
+export default ComponentName;
 ```
 
-**Key concepts:**
-- `function App()` - This is a component (like a TypeScript function)
-- `return (...)` - Returns TSX (looks like HTML)
-- `<div>`, `<h1>` - TSX elements (similar to HTML tags)
-- `export default App` - Makes component available for import
-
-### Create Your First Custom Component
-
-**Step 1:** Create a new file `src/components/Welcome.tsx`
+### Component with Props
 
 ```tsx
-// src/components/Welcome.tsx
-function Welcome() {
+interface Props {
+  name: string;
+  age: number;
+  email?: string;  // Optional
+}
+
+function UserCard({ name, age, email }: Props) {
   return (
     <div>
-      <h1>Welcome to React!</h1>
-      <p>This is your first custom component.</p>
+      <h2>{name}</h2>
+      <p>Age: {age}</p>
+      {email && <p>Email: {email}</p>}
     </div>
   );
 }
 
-export default Welcome;
+export default UserCard;
 ```
 
-**Step 2:** Use it in `src/App.tsx`
+### Component with Children
 
 ```tsx
-import Welcome from './components/Welcome';
+interface Props {
+  title: string;
+  children: React.ReactNode;
+}
 
-function App() {
+function Card({ title, children }: Props) {
   return (
-    <div className="App">
-      <Welcome />
+    <div className="card">
+      <h2>{title}</h2>
+      {children}
     </div>
   );
 }
 
-export default App;
+export default Card;
 ```
 
-**Step 3:** Save and check your browser - you should see your Welcome component!
+### Component with Default Props
+
+```tsx
+interface Props {
+  title: string;
+  subtitle?: string;
+  showIcon?: boolean;
+}
+
+function Header({ title, subtitle = "Default subtitle", showIcon = true }: Props) {
+  return (
+    <header>
+      {showIcon && <span>🏠</span>}
+      <h1>{title}</h1>
+      <p>{subtitle}</p>
+    </header>
+  );
+}
+
+export default Header;
+```
 
 ---
 
-## Part 4: Basic TSX Syntax
+## TSX Rules Cheat Sheet
 
-### TSX Rules
+### Single Root Element
 
 ```tsx
-import React from 'react';
-
-function MyComponent() {
+// ❌ Wrong
+function App() {
   return (
-    //  Correct - wrapped in one parent element
+    <h1>Title</h1>
+    <p>Text</p>
+  );
+}
+
+// ✅ With div
+function App() {
+  return (
     <div>
       <h1>Title</h1>
-      <p>Paragraph</p>
+      <p>Text</p>
     </div>
-
-    //  Wrong - multiple elements without parent
-    // <h1>Title</h1>
-    // <p>Paragraph</p>
   );
 }
 
-export default MyComponent;
+// ✅ With Fragment
+function App() {
+  return (
+    <>
+      <h1>Title</h1>
+      <p>Text</p>
+    </>
+  );
+}
+```
+
+### Embedding JavaScript
+
+```tsx
+function Profile() {
+  const name = "Alice";
+  const age = 25;
+  const hobbies = ["Reading", "Gaming"];
+  
+  return (
+    <div>
+      {/* Variables */}
+      <h1>{name}</h1>
+      
+      {/* Expressions */}
+      <p>Age: {age + 1}</p>
+      
+      {/* Ternary */}
+      <p>{age >= 18 ? "Adult" : "Minor"}</p>
+      
+      {/* Method calls */}
+      <p>{name.toUpperCase()}</p>
+      
+      {/* Conditional rendering */}
+      {age > 18 && <button>Access Granted</button>}
+      
+      {/* Lists */}
+      <ul>
+        {hobbies.map((hobby, index) => (
+          <li key={index}>{hobby}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 ```
 
 ### TSX vs HTML Differences
 
 ```tsx
-//  HTML attribute
-<div class="container">
-
-//  TSX attribute
+// className (not class)
 <div className="container">
 
-//  Not closed
-<img src="photo.jpg">
+// htmlFor (not for)
+<label htmlFor="name">Name:</label>
 
-//  Self-closing
+// Self-closing tags
 <img src="photo.jpg" />
+<input type="text" />
+<br />
 
-//  Inline style as string
-<div style="color: red">
+// Inline styles (object, not string)
+<div style={{ color: 'red', fontSize: '16px' }}>
 
-//  Inline style as object
-<div style={{ color: 'red' }}>
+// Comments
+{/* This is a comment */}
+
+// camelCase event handlers
+<button onClick={handleClick}>Click</button>
 ```
 
-### Embedding TypeScript in TSX
+---
+
+## Props Patterns
+
+### Basic Props
 
 ```tsx
-import React from 'react';
+interface ButtonProps {
+  label: string;
+  onClick: () => void;
+}
 
-function Greeting() {
-  const name = "John";
-  const age = 25;
+function Button({ label, onClick }: ButtonProps) {
+  return <button onClick={onClick}>{label}</button>;
+}
 
+// Usage
+<Button label="Click Me" onClick={() => alert('Hi')} />
+```
+
+### Optional Props
+
+```tsx
+interface Props {
+  name: string;
+  age?: number;
+}
+
+function User({ name, age }: Props) {
   return (
     <div>
-      <h1>Hello, {name}!</h1>
-      <p>You are {age} years old.</p>
-      <p>Next year you'll be {age + 1}.</p>
+      <p>{name}</p>
+      {age && <p>Age: {age}</p>}
     </div>
   );
 }
 
-export default Greeting;
+// Usage
+<User name="John" />
+<User name="Jane" age={25} />
 ```
 
-**Key:** Use `{}` to embed TypeScript expressions in TSX.
+### Props with Default Values
+
+```tsx
+interface Props {
+  title: string;
+  color?: string;
+  size?: number;
+}
+
+function Badge({ title, color = "blue", size = 16 }: Props) {
+  return <span style={{ color, fontSize: size }}>{title}</span>;
+}
+
+// Usage
+<Badge title="New" />
+<Badge title="Sale" color="red" size={20} />
+```
+
+### Children Props
+
+```tsx
+interface Props {
+  children: React.ReactNode;
+}
+
+function Container({ children }: Props) {
+  return <div className="container">{children}</div>;
+}
+
+// Usage
+<Container>
+  <h1>Title</h1>
+  <p>Text</p>
+</Container>
+```
+
+### Spread Props
+
+```tsx
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  title: string;
+}
+
+function Card({ title, ...rest }: Props) {
+  return (
+    <div {...rest}>
+      <h2>{title}</h2>
+    </div>
+  );
+}
+
+// Usage
+<Card title="Hello" className="custom" onClick={() => {}} />
+```
 
 ---
 
-## Part 5: Adding Styles
+## Styling Methods
 
-### Option 1: CSS File (Recommended for beginners)
+### CSS File
 
-**Create `src/components/Welcome.css`:**
+```tsx
+// Component.tsx
+import './Component.css';
+
+function Component() {
+  return <div className="container">Content</div>;
+}
+```
+
 ```css
-.welcome-container {
-  text-align: center;
+/* Component.css */
+.container {
   padding: 20px;
   background-color: #f0f0f0;
 }
+```
 
-.welcome-title {
-  color: #333;
-  font-size: 2rem;
+### Inline Styles (Object)
+
+```tsx
+function Component() {
+  const style = {
+    padding: '20px',
+    backgroundColor: '#f0f0f0',
+    fontSize: '16px'
+  };
+  
+  return <div style={style}>Content</div>;
 }
 ```
 
-**Use in `src/components/Welcome.tsx`:**
-```tsx
-import './Welcome.css';
-
-function Welcome() {
-  return (
-    <div className="welcome-container">
-      <h1 className="welcome-title">Welcome to React!</h1>
-      <p>This is styled with CSS.</p>
-    </div>
-  );
-}
-
-export default Welcome;
-```
-
-### Option 2: Inline Styles
+### Inline Styles (Direct)
 
 ```tsx
-import React from 'react';
-
-function Welcome() {
+function Component() {
   return (
     <div style={{
-      textAlign: 'center',
       padding: '20px',
-      backgroundColor: '#f0f0f0'
+      backgroundColor: '#f0f0f0',
+      fontSize: '16px'
     }}>
-      <h1 style={{ color: '#333', fontSize: '2rem' }}>
-        Welcome to React!
-      </h1>
+      Content
     </div>
   );
 }
+```
 
-export default Welcome;
+### Dynamic Styles
+
+```tsx
+interface Props {
+  isActive: boolean;
+}
+
+function Button({ isActive }: Props) {
+  return (
+    <button
+      className={isActive ? 'active' : 'inactive'}
+      style={{
+        backgroundColor: isActive ? 'green' : 'gray',
+        color: 'white'
+      }}
+    >
+      {isActive ? 'Active' : 'Inactive'}
+    </button>
+  );
+}
+```
+
+### Multiple CSS Classes
+
+```tsx
+function Component() {
+  const isActive = true;
+  const hasError = false;
+  
+  return (
+    <div className={`
+      base-class 
+      ${isActive ? 'active' : ''} 
+      ${hasError ? 'error' : ''}
+    `}>
+      Content
+    </div>
+  );
+}
 ```
 
 ---
 
-## Part 6: Simple Interactive Example
+## Event Handlers
+
+### Click Events
 
 ```tsx
-import React from 'react';
-
 function ClickDemo() {
-  function handleClick() {
-    alert('Button clicked!');
-  }
-
+  const handleClick = () => {
+    alert('Clicked!');
+  };
+  
+  const handleClickWithData = (id: number) => {
+    console.log('Clicked item:', id);
+  };
+  
   return (
     <div>
-      <h2>Click Demo</h2>
-      <button onClick={handleClick}>
-        Click Me!
-      </button>
+      {/* Function reference */}
+      <button onClick={handleClick}>Click Me</button>
+      
+      {/* Inline arrow function */}
+      <button onClick={() => alert('Hi!')}>Say Hi</button>
+      
+      {/* With parameters */}
+      <button onClick={() => handleClickWithData(123)}>Click Item</button>
+    </div>
+  );
+}
+```
+
+### Form Events
+
+```tsx
+function FormDemo() {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('Form submitted');
+  };
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('Input value:', e.target.value);
+  };
+  
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" onChange={handleChange} />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+### Common Event Types
+
+```tsx
+// Click events
+onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+
+// Form events
+onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+
+// Input events
+onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+
+// Keyboard events
+onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void
+onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void
+
+// Focus events
+onFocus: (e: React.FocusEvent<HTMLInputElement>) => void
+onBlur: (e: React.FocusEvent<HTMLInputElement>) => void
+
+// Mouse events
+onMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => void
+onMouseLeave: (e: React.MouseEvent<HTMLDivElement>) => void
+```
+
+---
+
+## Common Patterns
+
+### Conditional Rendering
+
+```tsx
+function User({ isLoggedIn }: { isLoggedIn: boolean }) {
+  // If-else with ternary
+  return (
+    <div>
+      {isLoggedIn ? <p>Welcome back!</p> : <p>Please log in</p>}
     </div>
   );
 }
 
-export default ClickDemo;
+function Notification({ message }: { message?: string }) {
+  // Render only if condition is true
+  return (
+    <div>
+      {message && <div className="alert">{message}</div>}
+    </div>
+  );
+}
 ```
 
->  **Note:** State management (making the UI update) is covered in Lesson 2 with `useState` hook.
-
----
-
-## Part 7: Complete Starter Example
-
-**src/App.tsx** - A simple landing page:
+### List Rendering
 
 ```tsx
-import './App.css';
+function List() {
+  const items = ['Apple', 'Banana', 'Cherry'];
+  
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  );
+}
+
+// With objects
+interface User {
+  id: number;
+  name: string;
+}
+
+function UserList() {
+  const users: User[] = [
+    { id: 1, name: 'John' },
+    { id: 2, name: 'Jane' }
+  ];
+  
+  return (
+    <ul>
+      {users.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### Component Composition
+
+```tsx
+function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="layout">
+      <header>Header</header>
+      <main>{children}</main>
+      <footer>Footer</footer>
+    </div>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      {/* Header */}
-      <header>
-        <h1>My First React App</h1>
-        <p>Built with React + TypeScript + Vite</p>
-      </header>
-
-      {/* Main Content */}
-      <main>
-        <section>
-          <h2>About This Project</h2>
-          <p>
-            This is a simple React application created with Vite.
-            It demonstrates basic component structure and TSX syntax.
-          </p>
-        </section>
-
-        <section>
-          <h2>Technologies Used</h2>
-          <ul>
-            <li>React 18</li>
-            <li>TypeScript</li>
-            <li>Vite</li>
-          </ul>
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer>
-        <p>© 2025 My React App</p>
-      </footer>
-    </div>
+    <Layout>
+      <h1>Welcome</h1>
+      <p>Content goes here</p>
+    </Layout>
   );
 }
-
-export default App;
 ```
 
-**src/App.css** - Basic styles:
+### Fragments
 
-```css
-.App {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
+```tsx
+// Long form
+<React.Fragment>
+  <h1>Title</h1>
+  <p>Text</p>
+</React.Fragment>
 
-header {
-  text-align: center;
-  padding: 40px 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-radius: 10px;
-  margin-bottom: 30px;
-}
+// Short form
+<>
+  <h1>Title</h1>
+  <p>Text</p>
+</>
 
-main {
-  line-height: 1.6;
-}
-
-section {
-  margin-bottom: 30px;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-}
-
-footer {
-  text-align: center;
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid #ddd;
-  color: #666;
-}
-
-ul {
-  list-style-position: inside;
-}
+// With key (for lists)
+items.map((item) => (
+  <React.Fragment key={item.id}>
+    <dt>{item.term}</dt>
+    <dd>{item.definition}</dd>
+  </React.Fragment>
+))
 ```
 
 ---
 
-## Common Issues & Solutions
+## Project Structure Template
 
-### Issue: Port 5173 is already in use
-```bash
-# Kill the process using port 5173
-# Windows: Open Task Manager and end Node.js process
-# Mac/Linux:
-lsof -ti:5173 | xargs kill
 ```
-
-### Issue: Module not found
-```bash
-# Reinstall dependencies
-rm -rf node_modules
-npm install
+my-app/
+├── public/
+│   └── assets/              # Images, fonts, etc.
+├── src/
+│   ├── components/          # Reusable components
+│   │   ├── Button.tsx
+│   │   ├── Button.css
+│   │   ├── Card.tsx
+│   │   └── Card.css
+│   ├── pages/              # Page components
+│   │   ├── Home.tsx
+│   │   └── About.tsx
+│   ├── App.tsx             # Root component
+│   ├── App.css
+│   ├── main.tsx            # Entry point
+│   └── index.css           # Global styles
+├── index.html
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
 ```
-
-### Issue: Changes not showing
-- Make sure dev server is running (`npm run dev`)
-- Hard refresh browser: `Ctrl+Shift+R` (Windows) or `Cmd+Shift+R` (Mac)
-- Check browser console for errors (F12)
 
 ---
 
-## Next Steps
+## Quick Syntax Table
 
-**Completed setup?** Great! You now have:
-- A working React development environment
-- Understanding of basic TSX syntax
-- Your first custom component **Want deeper understanding?** Read [theory1.md](./theory/theory1.md)
-
-**Ready to practice?** Try [lab1.md](./lab/lab1.md) exercises
-
-**Ready for more features?** Continue to [Lesson 2: Components & Hooks](../lesson2-component-hook/) to learn:
-- Props and component communication
-- State management with hooks
-- Building reusable component libraries
-- Event handling patterns
+| Pattern | Syntax |
+|---------|--------|
+| **Component** | `function Name() { return <div />; }` |
+| **Props** | `function Name({ prop }: Props) {}` |
+| **Fragment** | `<>...</>` or `<React.Fragment>` |
+| **Embed JS** | `{expression}` |
+| **Conditional** | `{condition && <Component />}` |
+| **Ternary** | `{condition ? <A /> : <B />}` |
+| **List** | `{arr.map(item => <li key={item.id} />)}` |
+| **Event** | `onClick={() => {}}` |
+| **Style (object)** | `style={{ color: 'red' }}` |
+| **CSS class** | `className="container"` |
+| **Comment** | `{/* comment */}` |
 
 ---
+
+**For concepts and explanations**: See `theory1.md`  
+**For practice**: See `lab1.md`

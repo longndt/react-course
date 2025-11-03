@@ -1,6 +1,6 @@
 # Lab 3 - API Integration & Data Management
 
-## � Overview
+## 📚 Overview
 
 Welcome to Lab 3! In this hands-on lab, you'll build a complete full-stack Task Manager application by connecting a React frontend to a Node.js/Express/MongoDB backend. You'll master essential API integration patterns using **Axios** - the most popular HTTP client for React applications.
 
@@ -54,15 +54,15 @@ Before starting, ensure you have:
 
 ### Required Software
 
-- [ ] ** Node.js** (v18 or higher) - [Download](https://nodejs.org/)
-- [ ] ** MongoDB** - Choose one:
+- [ ] **Node.js** (v18 or higher) - [Download](https://nodejs.org/)
+- [ ] **MongoDB** - Choose one:
   - Local MongoDB Community Server, OR
   - MongoDB Atlas account (free cloud database)
-- [ ] ** VS Code** with extensions:
+- [ ] **VS Code** with extensions:
   - ESLint
   - Prettier
   - Thunder Client (or use Postman)
-- [ ] ** Git** for version control
+- [ ] **Git** for version control
 
 ### Verify Installation
 
@@ -118,8 +118,11 @@ A **RESTful API** follows REST principles for building web services:
   - `POST` - Create new data
   - `PUT/PATCH` - Update existing data
   - `DELETE` - Remove data
-- **Stateless** - Each request contains all needed information **MongoDB** is a NoSQL database that stores data as JSON-like documents.
-** Mongoose** is an ODM (Object Data Modeling) library that provides schema validation and easier interaction with MongoDB.
+- **Stateless** - Each request contains all needed information
+
+**MongoDB** is a NoSQL database that stores data as JSON-like documents.
+
+**Mongoose** is an ODM (Object Data Modeling) library that provides schema validation and easier interaction with MongoDB.
 
 ### Goals
 
@@ -178,7 +181,7 @@ Create file: `backend/src/models/Task.ts`
 **Requirements:**
 - Define `ITask` interface with fields:
   - `title`: string, required
-  - `status`: string, enum ['pending', 'completed'], default 'pending'
+  - `completed`: boolean, default false
   - `priority`: string enum ('low', 'medium', 'high'), default 'medium'
   - `createdAt`: Date
   - `updatedAt`: Date
@@ -400,7 +403,9 @@ npm run dev
 4. **DELETE /api/tasks/:id**
    - Method: DELETE
    - URL: `http://localhost:5000/api/tasks/[TASK_ID]`
-   - Expected: Success message **Verify in MongoDB:**
+   - Expected: Success message
+
+**Verify in MongoDB:**
 ```bash
 # Connect to MongoDB shell
 mongosh
@@ -479,8 +484,8 @@ export interface Task {
 
 export const taskApi = {
   getTasks: () => axios.get<Task[]>(`${API_BASE}/tasks`).then(res => res.data),
-  createTask: (data: Partial<Task>) => axios.post<Task>(`${API_BASE}/tasks`, data).then(res => res.data),
-  updateTask: (id: string, data: Partial<Task>) => axios.put<Task>(`${API_BASE}/tasks/${id}`, data).then(res => res.data),
+  createTask: (data: Partial<Task>) => axios.post(`${API_BASE}/tasks`, data).then(res => res.data),
+  updateTask: (id: string, data: Partial<Task>) => axios.put(`${API_BASE}/tasks/${id}`, data).then(res => res.data),
   deleteTask: (id: string) => axios.delete(`${API_BASE}/tasks/${id}`).then(res => res.data),
 };
 ```
@@ -612,7 +617,7 @@ function TaskManager() {
   });
 
   // TODO: Handle form submit
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (newTaskTitle.trim()) {
       createMutation.mutate({ title: newTaskTitle });

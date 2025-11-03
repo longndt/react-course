@@ -1,121 +1,90 @@
-# Reference - TypeScript for React
+# Reference - TypeScript Quick Lookup
 
-> **Quick reference guide for TypeScript essentials in React development**
+> **Purpose of this file**: Quick syntax lookup, patterns, copy-paste ready code. NO concept explanations.
+>
+> **Use Theory0 when you need**: Understanding WHY and HOW of TypeScript.
+
+---
 
 ## Table of Contents
-1. [Why TypeScript for React?](#why-typescript-for-react)
-2. [Basic Types & Type Inference](#basic-types--type-inference)
-3. [Functions](#functions)
-4. [Arrays & Objects](#arrays--objects)
-5. [Union Types & Type Aliases](#union-types--type-aliases)
-6. [Generics](#generics)
-7. [TypeScript with React (TSX)](#typescript-with-react-tsx)
-8. [Quick Reference](#quick-reference)
+
+1. [Basic Types Cheat Sheet](#basic-types-cheat-sheet)
+2. [Function Syntax](#function-syntax)
+3. [Arrays & Objects](#arrays--objects)
+4. [Union & Type Aliases](#union--type-aliases)
+5. [Generics Patterns](#generics-patterns)
+6. [React + TypeScript Patterns](#react--typescript-patterns)
+7. [Common Type Utilities](#common-type-utilities)
 
 ---
 
-## Why TypeScript for React?
+## Basic Types Cheat Sheet
 
-### Benefits
-- **Type Safety** Catch errors at compile time
+```typescript
+// Primitives
+let str: string = "hello";
+let num: number = 42;
+let bool: boolean = true;
+let nothing: null = null;
+let undef: undefined = undefined;
 
-- **Better IDE Support** Autocomplete, refactoring, navigation
+// Type inference (let TypeScript figure it out)
+let str = "hello";        // string
+let num = 42;             // number
+let bool = true;          // boolean
 
-- **Self-Documenting Code** Types serve as documentation
+// Arrays
+let nums: number[] = [1, 2, 3];
+let strs: Array<string> = ["a", "b"];
 
-- **Easier Refactoring** Safe code changes across large codebases
+// Objects
+let obj: { x: number; y: string } = { x: 1, y: "hi" };
 
-### React + TypeScript = TSX
-```tsx
-// TypeScript + JSX = TSX
-interface Props {
-  name: string;
-  age?: number;
-}
-
-function Welcome({ name, age }: Props) {
-  return <h1>Hello, {name}!</h1>;
-}
-```
-
----
-
-## Basic Types & Type Inference
-
-### Primitive Types
-```tsx
-// Explicit typing
-let name: string = "John";
-let age: number = 25;
-let isActive: boolean = true;
-
-// Type inference (recommended)
-let name = "John";        // string
-let age = 25;             // number
-let isActive = true;      // boolean
-```
-
-### Arrays
-```tsx
-// Array of strings
-let names: string[] = ["John", "Jane"];
-// or
-let names: Array<string> = ["John", "Jane"];
-
-// Mixed arrays (avoid when possible)
-let mixed: (string | number)[] = ["John", 25];
-```
-
-### Objects
-```tsx
-// Object type
-let user: { name: string; age: number } = {
-  name: "John",
-  age: 25
-};
-
-// Interface (preferred)
-interface User {
-  name: string;
-  age: number;
-  email?: string; // optional
-}
-
-let user: User = { name: "John", age: 25 };
+// Any (avoid!) and unknown
+let anything: any = "can be anything";
+let safe: unknown = "must check before use";
 ```
 
 ---
 
-## Functions
+## Function Syntax
 
-### Function Types
-```tsx
-// Function with explicit types
-function greet(name: string): string {
-  return `Hello, ${name}!`;
+```typescript
+// Basic function
+function add(a: number, b: number): number {
+  return a + b;
 }
 
 // Arrow function
-const greet = (name: string): string => `Hello, ${name}!`;
+const add = (a: number, b: number): number => a + b;
+
+// Optional parameters
+function greet(name: string, age?: number): string {
+  return age ? `${name}, ${age}` : name;
+}
+
+// Default parameters
+function greet(name: string, greeting = "Hello"): string {
+  return `${greeting}, ${name}`;
+}
+
+// Rest parameters
+function sum(...nums: number[]): number {
+  return nums.reduce((a, b) => a + b, 0);
+}
 
 // Function type
-type GreetFunction = (name: string) => string;
-```
+type MathOp = (a: number, b: number) => number;
+const multiply: MathOp = (a, b) => a * b;
 
-### Optional Parameters
-```tsx
-function greet(name: string, age?: number): string {
-  if (age) {
-    return `Hello, ${name}! You are ${age} years old.`;
-  }
-  return `Hello, ${name}!`;
+// Void return (no return value)
+function log(msg: string): void {
+  console.log(msg);
 }
-```
 
-### Default Parameters
-```tsx
-function greet(name: string, greeting: string = "Hello"): string {
-  return `${greeting}, ${name}!`;
+// Never return (throws or infinite loop)
+function throwError(msg: string): never {
+  throw new Error(msg);
 }
 ```
 
@@ -123,129 +92,162 @@ function greet(name: string, greeting: string = "Hello"): string {
 
 ## Arrays & Objects
 
-### Tuples
-```tsx
-// Fixed-length arrays with specific types
-let coordinates: [number, number] = [10, 20];
-let person: [string, number, boolean] = ["John", 25, true];
+### Arrays
+
+```typescript
+// Typed arrays
+let numbers: number[] = [1, 2, 3];
+let strings: Array<string> = ["a", "b"];
+
+// Mixed types (use union)
+let mixed: (string | number)[] = [1, "a", 2];
+
+// Tuples (fixed length, specific types)
+let tuple: [string, number] = ["age", 25];
+let coords: [number, number, number] = [10, 20, 30];
+
+// Readonly arrays
+let readonly: readonly number[] = [1, 2, 3];
+// readonly.push(4);  // Error
 ```
 
-### Enums
-```tsx
-// String enum (preferred)
-enum Status {
-  PENDING = "pending",
-  APPROVED = "approved",
-  REJECTED = "rejected"
+### Objects
+
+```typescript
+// Inline object type
+let user: { name: string; age: number } = { name: "John", age: 25 };
+
+// Interface (preferred)
+interface User {
+  name: string;
+  age: number;
+  email?: string;  // Optional
 }
 
-// Numeric enum
-enum Direction {
-  Up,    // 0
-  Down,  // 1
-  Left,  // 2
-  Right  // 3
-}
-```
+let user: User = { name: "John", age: 25 };
 
-### Object Types
-```tsx
+// Readonly properties
+interface User {
+  readonly id: number;
+  name: string;
+}
+
 // Index signatures
-interface StringDictionary {
+interface StringMap {
   [key: string]: string;
 }
 
-// Readonly properties
-interface ReadonlyUser {
-  readonly id: number;
+let map: StringMap = { a: "1", b: "2" };
+
+// Nested objects
+interface Address {
+  street: string;
+  city: string;
+}
+
+interface User {
   name: string;
+  address: Address;
 }
 ```
 
 ---
 
-## Union Types & Type Aliases
+## Union & Type Aliases
 
 ### Union Types
-```tsx
-// Union of string literals
+
+```typescript
+// Basic union
+let id: string | number;
+id = "abc";  // OK
+id = 123;    // OK
+
+// Literal unions
 type Status = "loading" | "success" | "error";
+let status: Status = "loading";
 
-// Union of types
-type ID = string | number;
+// Union of objects
+type Shape = Circle | Square;
 
-// Function with union return
-function getValue(): string | null {
-  return Math.random() > 0.5 ? "success" : null;
+// Type guards
+function process(value: string | number) {
+  if (typeof value === "string") {
+    return value.toUpperCase();
+  }
+  return value.toFixed(2);
 }
 ```
 
 ### Type Aliases
-```tsx
-// Simple type alias
-type UserID = string;
-type UserName = string;
 
-// Complex type alias
+```typescript
+// Simple alias
+type ID = string | number;
+type Status = "pending" | "approved" | "rejected";
+
+// Object alias
 type User = {
-  id: UserID;
-  name: UserName;
-  email: string;
-  isActive: boolean;
+  id: ID;
+  name: string;
+  status: Status;
 };
+
+// Function alias
+type Callback = (data: string) => void;
+
+// Combined types
+type Success = { status: "success"; data: string };
+type Error = { status: "error"; error: string };
+type Result = Success | Error;
 ```
 
-### Discriminated Unions
-```tsx
-type LoadingState = {
-  status: "loading";
-};
+### Interface vs Type
 
-type SuccessState = {
-  status: "success";
-  data: any;
-};
+```typescript
+// Interface - for objects, can extend
+interface User {
+  name: string;
+}
 
-type ErrorState = {
-  status: "error";
-  error: string;
-};
+interface Admin extends User {
+  role: string;
+}
 
-type AppState = LoadingState | SuccessState | ErrorState;
+// Type - for unions, computed types
+type Status = "on" | "off";
+type ID = string | number;
 ```
 
 ---
 
-## Generics
+## Generics Patterns
 
-### Basic Generics
-```tsx
+```typescript
 // Generic function
 function identity<T>(arg: T): T {
   return arg;
 }
 
-// Usage
-let result = identity<string>("hello");
-let number = identity<number>(42);
-let inferred = identity("hello"); // TypeScript infers string
-```
+let str = identity("hello");      // string
+let num = identity(42);           // number
 
-### Generic Interfaces
-```tsx
-interface ApiResponse<T> {
-  data: T;
-  status: number;
-  message: string;
+// Generic interface
+interface Box<T> {
+  value: T;
 }
 
-// Usage
-type UserResponse = ApiResponse<User>;
-type ProductResponse = ApiResponse<Product[]>;
-```
+let stringBox: Box<string> = { value: "hello" };
+let numberBox: Box<number> = { value: 42 };
 
-### Generic Constraints
-```tsx
+// Multiple generics
+function pair<A, B>(a: A, b: B): [A, B] {
+  return [a, b];
+}
+
+let p = pair("hello", 42);  // [string, number]
+
+// Generic constraints
 interface HasLength {
   length: number;
 }
@@ -255,158 +257,331 @@ function logLength<T extends HasLength>(arg: T): T {
   return arg;
 }
 
-// Works with arrays, strings, etc.
-logLength([1, 2, 3]);
-logLength("hello");
+logLength("hello");      // string has length
+logLength([1, 2, 3]);    // array has length
+// logLength(42);        // Error: number has no length
+
+// Generic React component
+interface Props<T> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+}
+
+function List<T>({ items, renderItem }: Props<T>) {
+  return <ul>{items.map(renderItem)}</ul>;
+}
 ```
 
 ---
 
-## TypeScript with React (TSX)
+## React + TypeScript Patterns
 
 ### Component Props
+
 ```tsx
 // Basic props
 interface ButtonProps {
-  children: React.ReactNode;
+  label: string;
   onClick: () => void;
   disabled?: boolean;
 }
 
-function Button({ children, onClick, disabled = false }: ButtonProps) {
-  return (
-    <button onClick={onClick} disabled={disabled}>
-      {children}
-    </button>
-  );
-}
-```
-
-### Event Handlers
-```tsx
-// Form events
-const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  // Handle form submission
-};
-
-// Input events
-const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  setValue(e.target.value);
-};
-
-// Button events
-const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-  console.log("Button clicked");
-};
-```
-
-### State with TypeScript
-```tsx
-import { useState } from 'react';
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
+function Button({ label, onClick, disabled = false }: ButtonProps) {
+  return <button onClick={onClick} disabled={disabled}>{label}</button>;
 }
 
-function UserProfile() {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  // TypeScript knows user could be null
-  if (!user) return <div>No user data</div>;
-
-  return <div>Welcome, {user.name}!</div>;
+// With children
+interface CardProps {
+  title: string;
+  children: React.ReactNode;
 }
-```
 
-### Ref Types
-```tsx
-import { useRef } from 'react';
+function Card({ title, children }: CardProps) {
+  return <div><h2>{title}</h2>{children}</div>;
+}
 
-function TextInput() {
-  const inputRef = useRef<HTMLInputElement>(null);
+// Extending HTML props
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+}
 
-  const focusInput = () => {
-    inputRef.current?.focus();
-  };
-
+function Input({ label, ...props }: InputProps) {
   return (
     <div>
-      <input ref={inputRef} type="text" />
-      <button onClick={focusInput}>Focus Input</button>
+      <label>{label}</label>
+      <input {...props} />
     </div>
   );
 }
 ```
 
+### Event Handlers
+
+```tsx
+// Form events
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+};
+
+// Input events
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  console.log(e.target.value);
+};
+
+// Button/click events
+const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  console.log("clicked");
+};
+
+// Keyboard events
+const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  if (e.key === "Enter") { }
+};
+
+// Select events
+const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  console.log(e.target.value);
+};
+```
+
+### Hooks
+
+```tsx
+import { useState, useEffect, useRef, useCallback } from 'react';
+
+// useState
+const [count, setCount] = useState(0);                    // number
+const [name, setName] = useState("");                     // string
+const [user, setUser] = useState<User | null>(null);      // User or null
+
+// useState with interface
+interface User {
+  id: number;
+  name: string;
+}
+const [user, setUser] = useState<User | null>(null);
+
+// useRef
+const inputRef = useRef<HTMLInputElement>(null);
+const divRef = useRef<HTMLDivElement>(null);
+
+// useRef for mutable value
+const countRef = useRef<number>(0);
+
+// useEffect (types inferred)
+useEffect(() => {
+  // effect
+  return () => {
+    // cleanup
+  };
+}, [deps]);
+
+// useCallback
+const handleClick = useCallback((id: number) => {
+  console.log(id);
+}, []);
+
+// Custom hook
+function useCounter(initial: number) {
+  const [count, setCount] = useState(initial);
+  const increment = () => setCount(c => c + 1);
+  return { count, increment };
+}
+```
+
+### Context
+
+```tsx
+import { createContext, useContext } from 'react';
+
+// Define context type
+interface AuthContextType {
+  user: User | null;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
+}
+
+// Create context
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+// Provider
+function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
+  
+  const login = async (email: string, password: string) => {
+    // login logic
+  };
+  
+  const logout = () => setUser(null);
+  
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+// Hook to use context
+function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) throw new Error("useAuth must be inside AuthProvider");
+  return context;
+}
+```
+
 ---
 
-## Quick Reference
+## Common Type Utilities
 
-### Common TypeScript Types
+```typescript
+// Partial - all properties optional
+interface User {
+  name: string;
+  age: number;
+  email: string;
+}
+
+type PartialUser = Partial<User>;
+// { name?: string; age?: number; email?: string; }
+
+// Required - all properties required
+type RequiredUser = Required<PartialUser>;
+
+// Pick - select specific properties
+type UserName = Pick<User, "name">;
+// { name: string; }
+
+type UserInfo = Pick<User, "name" | "email">;
+// { name: string; email: string; }
+
+// Omit - exclude specific properties
+type UserWithoutEmail = Omit<User, "email">;
+// { name: string; age: number; }
+
+// Record - create object type with specific keys
+type Roles = "admin" | "user" | "guest";
+type Permissions = Record<Roles, boolean>;
+// { admin: boolean; user: boolean; guest: boolean; }
+
+type StringMap = Record<string, string>;
+// { [key: string]: string; }
+
+// Readonly - all properties readonly
+type ReadonlyUser = Readonly<User>;
+
+// ReturnType - extract return type of function
+function getUser() {
+  return { name: "John", age: 25 };
+}
+type User = ReturnType<typeof getUser>;
+// { name: string; age: number; }
+
+// Parameters - extract parameter types
+function greet(name: string, age: number) {}
+type GreetParams = Parameters<typeof greet>;
+// [string, number]
+
+// Awaited - unwrap Promise type
+type Response = Promise<{ data: string }>;
+type Data = Awaited<Response>;
+// { data: string; }
+
+// NonNullable - remove null and undefined
+type MaybeString = string | null | undefined;
+type DefiniteString = NonNullable<MaybeString>;
+// string
+```
+
+---
+
+## Quick Syntax Table
+
+| Pattern | Syntax |
+|---------|--------|
+| **Optional property** | `age?: number` |
+| **Optional parameter** | `function(age?: number)` |
+| **Default parameter** | `function(age = 18)` |
+| **Union type** | `string \| number` |
+| **Intersection** | `A & B` |
+| **Literal type** | `"yes" \| "no"` |
+| **Array** | `string[]` or `Array<string>` |
+| **Tuple** | `[string, number]` |
+| **Function type** | `(a: number) => string` |
+| **Generic** | `Array<T>`, `Promise<T>` |
+| **Readonly** | `readonly number[]` |
+| **Type assertion** | `value as Type` |
+| **Non-null assertion** | `value!` |
+| **Optional chaining** | `obj?.prop?.nested` |
+| **Nullish coalescing** | `value ?? defaultValue` |
+
+---
+
+## Type Guards Reference
+
+```typescript
+// typeof guard
+if (typeof value === "string") { }
+if (typeof value === "number") { }
+if (typeof value === "boolean") { }
+
+// instanceof guard
+if (value instanceof Date) { }
+if (value instanceof Error) { }
+
+// in operator
+if ("property" in object) { }
+
+// Array check
+if (Array.isArray(value)) { }
+
+// Custom type guard
+function isUser(obj: any): obj is User {
+  return obj && typeof obj.name === "string";
+}
+
+// Discriminated union
+type Shape = 
+  | { kind: "circle"; radius: number }
+  | { kind: "square"; size: number };
+
+function area(shape: Shape) {
+  if (shape.kind === "circle") {
+    return Math.PI * shape.radius ** 2;
+  }
+  return shape.size ** 2;
+}
+```
+
+---
+
+## Common React Types
+
 ```tsx
-// React types
 React.ReactNode          // Any renderable content
 React.ReactElement       // JSX element
+React.FC<Props>          // Function component (not recommended)
 React.ComponentType<P>   // Component type
-React.FC<P>              // Function component type
+React.CSSProperties      // Style object
+
+// HTML element types
+React.InputHTMLAttributes<HTMLInputElement>
+React.ButtonHTMLAttributes<HTMLButtonElement>
+React.FormHTMLAttributes<HTMLFormElement>
+React.HTMLAttributes<HTMLDivElement>
 
 // Event types
 React.ChangeEvent<HTMLInputElement>
-React.MouseEvent<HTMLButtonElement>
 React.FormEvent<HTMLFormElement>
+React.MouseEvent<HTMLButtonElement>
 React.KeyboardEvent<HTMLInputElement>
+React.FocusEvent<HTMLInputElement>
 
-// Hook types
-useState<string>(initialValue)
-useRef<HTMLInputElement>(null)
-useEffect(() => {}, [dependencies])
-```
-
-### Type Guards
-```tsx
-// Type guard function
-function isString(value: unknown): value is string {
-  return typeof value === 'string';
-}
-
-// Usage
-function processValue(value: string | number) {
-  if (isString(value)) {
-    // TypeScript knows value is string here
-    console.log(value.toUpperCase());
-  } else {
-    // TypeScript knows value is number here
-    console.log(value.toFixed(2));
-  }
-}
-```
-
-### Utility Types
-```tsx
-// Partial - makes all properties optional
-type PartialUser = Partial<User>;
-
-// Pick - select specific properties
-type UserName = Pick<User, 'name'>;
-
-// Omit - exclude specific properties
-type UserWithoutId = Omit<User, 'id'>;
-
-// Record - create object type
-type UserRoles = Record<string, string[]>;
+// Ref types
+React.RefObject<HTMLInputElement>
+React.MutableRefObject<number>
 ```
 
 ---
 
-## Next Steps
-
-1. **Practice** Build small React components with TypeScript
-2. **Learn More** Advanced TypeScript patterns and utility types
-3. **Continue** Move to [Lesson 1](../lesson1-fundamentals-setup/) for React fundamentals
-4. **Resources** Check [Theory Guide](./theory/theory0.md) for detailed explanations
-
-> **💡 Tip** Start with simple types and gradually add complexity. TypeScript is most valuable when it catches real bugs!
+**For concepts and explanations**: See `theory0.md`
+**For practice**: See `lab0.md`

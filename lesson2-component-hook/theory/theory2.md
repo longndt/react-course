@@ -1,893 +1,603 @@
 # Theory - Component Architecture & React Hooks
 
+> **Purpose of this file**: Explains **WHY** hooks exist, **HOW** component state and lifecycle work, and **WHEN** to use each hook. Code examples include explanatory comments.
+>
+> **Use Reference2 when you need**: Quick hook syntax, patterns, copy-paste ready code.
+
 ---
 
 ## Table of Contents
 
-**Chapter 1:** [Core Concepts](#1-core-concepts)
-**Chapter 2:** [Function Components](#2-function-components)
-**Chapter 3:** [Component Lifecycle & Props](#3-component-lifecycle--props)
-**Chapter 4:** [React Hooks Overview](#4-react-hooks-overview)
-**Chapter 5:** [useState Hook](#5-usestate-hook)
-**Chapter 6:** [useEffect Hook](#6-useeffect-hook)
-**Chapter 7:** [useRef Hook](#7-useref-hook)
-**Chapter 8:** [useContext Hook](#8-usecontext-hook)
-**Chapter 9:** [useReducer Hook](#9-usereducer-hook)
-**Chapter 10:** [Custom Hooks](#10-custom-hooks)
-**Chapter 11:** [Hook Rules & Best Practices](#11-hook-rules--best-practices)
-**Chapter 12:** [Common Mistakes](#12-common-mistakes)
-**Chapter 13:** [Next Steps](#13-next-steps)
+1. [Why Component Architecture?](#1-why-component-architecture)
+2. [Understanding State: The Core Problem](#2-understanding-state-the-core-problem)
+3. [useState: Managing Component State](#3-usestate-managing-component-state)
+4. [useEffect: Side Effects and Lifecycle](#4-useeffect-side-effects-and-lifecycle)
+5. [useRef: Direct DOM Access and Persistent Values](#5-useref-direct-dom-access-and-persistent-values)
+6. [useContext: Avoiding Prop Drilling](#6-usecontext-avoiding-prop-drilling)
+7. [useReducer: Complex State Logic](#7-usereducer-complex-state-logic)
+8. [Custom Hooks: Reusable Logic](#8-custom-hooks-reusable-logic)
+9. [Hook Rules and Why They Exist](#9-hook-rules-and-why-they-exist)
+10. [Common Mistakes](#10-common-mistakes)
 
 ---
 
-## 1. Core Concepts
+## 1. Why Component Architecture?
 
-> 🔄 **Visual Learning** For a comprehensive understanding of component lifecycle, see [Component Lifecycle Diagram](../../diagrams/component_lifecycle.md)
+### The Problem: Monolithic UI
 
-### Why Component Architecture?
-
-Modern applications require modular, reusable UI building blocks. Components enable:
-
-- **Reusability** - Write once, use everywhere
-
-- **Maintainability** - Isolated, testable code units
-
-- **Scalability** - Compose complex UIs from simple pieces
-
-- **Collaboration** - Teams work on independent components
-
-### Component Hierarchy Example
-
-```
-E-commerce App
-├── Header
-│   ├── Logo
-│   ├── SearchBar
-│   └── UserMenu
-├── ProductList
-│   └── ProductCard (× many)
-│       ├── Image
-│       ├── Title
-│       ├── Price
-│       └── AddToCartButton
-└── Footer
-```
-
----
-
-## 2. Function Components
-
-### Modern React Components
-
-**Function components** are the modern way to write React components. They're simpler, more readable, and work perfectly with hooks.
-
-### Component Design Patterns
-
-**1. Container vs Presentational Components**
-
-```typescript
-// File: components/UserList.tsx
-// Container Component - handles data and logic
-function UserList() {
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchUsers().then(data => {
-      setUsers(data);
-      setLoading(false);
-    });
-  }, []);
-
-  if (loading) return <LoadingSpinner />;
-
-  return (
-    <div>
-      <h2>Users</h2>
-      {users.map(user => (
-        <UserCard key={user.id} user={user} />
-      ))}
-    </div>
-  );
-}
-
-// File: components/UserCard.tsx
-// Presentational Component - handles display only
-interface UserCardProps {
-  user: User;
-}
-
-function UserCard({ user }: UserCardProps) {
-  return (
-    <div className="user-card">
-      <h3>{user.name}</h3>
-      <p>{user.email}</p>
-    </div>
-  );
+```tsx
+// ❌ All logic in one massive component - hard to maintain!
+function EntireApp() {
+  // 500 lines of mixed concerns:
+  // - User authentication
+  // - Product list
+  // - Shopping cart
+  // - Checkout form
+  // - Navigation
+  // ...impossible to test, reuse, or understand!
 }
 ```
 
-**2. Compound Components Pattern**
+### The Solution: Component Composition
 
-> ⚠️ **Advanced Topic** Compound Components provide flexible composition but have a steeper learning curve. This section is optional for beginners - you can skip it and come back later.
-
-```typescript
-// File: components/Modal.tsx
-// Compound Component - multiple related components
-interface ModalProps {
-  children: React.ReactNode;
-  isOpen: boolean;
-}
-
-function Modal({ children, isOpen }: ModalProps) {
-  if (!isOpen) return null;
-
-  return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-// Sub-components
-function ModalHeader({ children }: { children: React.ReactNode }) {
-  return <div className="modal-header">{children}</div>;
-}
-
-function ModalBody({ children }: { children: React.ReactNode }) {
-  return <div className="modal-body">{children}</div>;
-}
-
-function ModalFooter({ children }: { children: React.ReactNode }) {
-  return <div className="modal-footer">{children}</div>;
-}
-
-// Usage
-Modal.Header = ModalHeader;
-Modal.Body = ModalBody;
-Modal.Footer = ModalFooter;
-
-// In your app
-<Modal isOpen={showModal}>
-  <Modal.Header>
-    <h2>Confirm Action</h2>
-  </Modal.Header>
-  <Modal.Body>
-    <p>Are you sure you want to delete this item?</p>
-  </Modal.Body>
-  <Modal.Footer>
-    <button onClick={onCancel}>Cancel</button>
-    <button onClick={onConfirm}>Delete</button>
-  </Modal.Footer>
-</Modal>
-```
-
-**3. Higher-Order Components (HOCs)**
-
-> ⚠️ **Advanced Topic** HOCs are powerful but can be complex. This section is optional - you can skip it and come back later if you're just starting with React.
-
-```typescript
-// File: components/withLoading.tsx
-// HOC - adds loading functionality to any component
-function withLoading<T extends object>(
-  WrappedComponent: React.ComponentType<T>
-) {
-  return function WithLoadingComponent(props: T & { isLoading?: boolean }) {
-    const { isLoading, ...restProps } = props;
-
-    if (isLoading) {
-      return <div className="loading">Loading...</div>;
-    }
-
-    return <WrappedComponent {...(restProps as T)} />;
-  };
-}
-
-// Usage
-const UserListWithLoading = withLoading(UserList);
-
-// In your app
-<UserListWithLoading isLoading={loading} />
-```
-
-```typescript
-// File: components/SimpleComponent.tsx
-// Simple function component
-function Welcome({ name }: { name: string }) {
-  return <h1>Hello, {name}!</h1>;
-}
-
-// With TypeScript interface
-interface WelcomeProps {
-  name: string;
-  age?: number;
-}
-
-function Welcome({ name, age }: WelcomeProps) {
-  return (
-    <div>
-      <h1>Hello, {name}!</h1>
-      {age && <p>You are {age} years old</p>}
-    </div>
-  );
-}
-```
-
-### Component Composition
-
-```typescript
-// File: components/App.tsx
-import React from 'react';
-
-// Parent component
+```tsx
+// ✅ Break down into focused, reusable pieces
 function App() {
   return (
-    <div className="app">
-      <Header />
-      <MainContent />
+    <div>
+      <Navigation />
+      <ProductList />
+      <ShoppingCart />
       <Footer />
     </div>
   );
 }
 
-// Child components
-function Header() {
-  return <header>My App</header>;
+// Each component handles ONE responsibility
+function ProductList() {
+  const [products, setProducts] = useState([]);
+  // Only product-related logic here
 }
-
-function MainContent() {
-  return <main>Content goes here</main>;
-}
-
-function Footer() {
-  return <footer>© 2025 My App</footer>;
-}
-
-export default App;
 ```
+
+**Key Benefits:**
+- **Testable**: Test one component at a time
+- **Reusable**: Use `<Button />` everywhere
+- **Maintainable**: Bug in cart? Only check `ShoppingCart.tsx`
+- **Collaborative**: Team members work on different components
 
 ---
 
-## 3. Component Lifecycle & Props
+## 2. Understanding State: The Core Problem
 
-### Component Lifecycle in Function Components
+### What is State?
 
-**Function components don't have traditional lifecycle methods, but we can achieve the same functionality with hooks:**
+**State = Data that changes over time and triggers re-renders**
 
-```typescript
-// File: components/LifecycleExample.tsx
-import React, { useState, useEffect, useRef } from 'react';
+```tsx
+// NOT state - never changes
+const APP_NAME = "My App";
 
-function LifecycleExample() {
+// IS state - changes and updates UI
   const [count, setCount] = useState(0);
-  const [mounted, setMounted] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+```
 
-  // ComponentDidMount equivalent
-  useEffect(() => {
-    console.log('Component mounted');
-    setMounted(true);
+### Why Can't We Use Regular Variables?
 
-    // ComponentWillUnmount equivalent
-    return () => {
-      console.log('Component will unmount');
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, []);
-
-  // ComponentDidUpdate equivalent
-  useEffect(() => {
-    if (mounted) {
-      console.log('Component updated, count is:', count);
-    }
-  }, [count, mounted]);
+```tsx
+// ❌ This WON'T work - UI won't update!
+function BrokenCounter() {
+  let count = 0;  // Regular variable
+  
+  function increment() {
+    count = count + 1;  // Changes variable
+    console.log(count); // Logs correctly
+    // But UI still shows 0! React doesn't know to re-render
+  }
 
   return (
     <div>
-      <h2>Lifecycle Example</h2>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>
-        Increment
-      </button>
+      <p>Count: {count}</p>  {/* Always shows 0 */}
+      <button onClick={increment}>+</button>
     </div>
   );
 }
-
-export default LifecycleExample;
 ```
 
-### Props and Prop Types
-
-**Props are the primary way to pass data between components:**
-
-```typescript
-// File: components/UserProfile.tsx
-interface UserProfileProps {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    avatar?: string;
-  };
-  showEmail?: boolean;
-  onEdit?: (userId: string) => void;
-  className?: string;
-}
-
-function UserProfile({
-  user,
-  showEmail = true,
-  onEdit,
-  className = ''
-}: UserProfileProps) {
+```tsx
+// ✅ This WORKS - UI updates!
+function WorkingCounter() {
+  const [count, setCount] = useState(0);  // React state
+  
+  function increment() {
+    setCount(count + 1);  // Tells React to re-render
+  }
+  
   return (
-    <div className={`user-profile ${className}`}>
-      {user.avatar && (
-        <img src={user.avatar} alt={user.name} />
-      )}
-      <h3>{user.name}</h3>
-      {showEmail && <p>{user.email}</p>}
-      {onEdit && (
-        <button onClick={() => onEdit(user.id)}>
-          Edit Profile
-        </button>
-      )}
+    <div>
+      <p>Count: {count}</p>  {/* Updates when state changes */}
+      <button onClick={increment}>+</button>
     </div>
   );
 }
-
-// Usage with different prop combinations
-<UserProfile
-  user={currentUser}
-  showEmail={false}
-  onEdit={handleEdit}
-  className="highlighted"
-/>
 ```
 
-### Children Props and Composition
-
-**Children props allow for flexible component composition:**
-
-```typescript
-// File: components/Card.tsx
-interface CardProps {
-  title?: string;
-  children: React.ReactNode;
-  className?: string;
-}
-
-function Card({ title, children, className }: CardProps) {
-  return (
-    <div className={`card ${className || ''}`}>
-      {title && <h3 className="card-title">{title}</h3>}
-      <div className="card-content">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-// Usage with different content
-<Card title="User Information">
-  <UserProfile user={user} />
-  <button>Edit</button>
-</Card>
-
-<Card>
-  <h4>Custom Content</h4>
-  <p>Any content can go here</p>
-</Card>
-```
-
-### Event Handling in Components
-
-**Proper event handling patterns for components:**
-
-```typescript
-// File: components/Button.tsx
-interface ButtonProps {
-  children: React.ReactNode;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  type?: 'button' | 'submit' | 'reset';
-  disabled?: boolean;
-  variant?: 'primary' | 'secondary' | 'danger';
-}
-
-function Button({
-  children,
-  onClick,
-  type = 'button',
-  disabled = false,
-  variant = 'primary'
-}: ButtonProps) {
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (disabled) return;
-
-    // Custom logic before calling parent handler
-    console.log('Button clicked');
-
-    // Call parent handler if provided
-    onClick?.(event);
-  };
-
-  return (
-    <button
-      type={type}
-      onClick={handleClick}
-      disabled={disabled}
-      className={`btn btn-${variant}`}
-    >
-      {children}
-    </button>
-  );
-}
-```
+**Key Insight**: React components re-render when state changes. Regular variables don't trigger re-renders.
 
 ---
 
-## 4. React Hooks Overview
+## 3. useState: Managing Component State
 
-**Hooks** are functions that let you use state and other React features in function components.
+### How useState Works
 
-### Why Hooks?
+```tsx
+const [value, setValue] = useState(initialValue);
+//     ^       ^           ^
+//     |       |           └── Initial value (only used on first render)
+//     |       └── Function to update value (triggers re-render)
+//     └── Current value
+```
 
-- **Simpler Logic** No need for class components
+### State is Asynchronous
 
-- **Reusable State Logic** Custom hooks for shared logic
-
-- **Better Performance** Optimized re-rendering
-
-- **Easier Testing** Function components are easier to test
-
-### Hook Rules
-
-1. **Only call hooks at the top level** - Don't call hooks inside loops, conditions, or nested functions
-2. **Only call hooks from React functions** - Call hooks from React function components or custom hooks
-
----
-
-## 5. useState Hook
-
-**useState** lets you add state to function components.
-
-### Basic Usage
-
-```typescript
-import { useState } from 'react';
-
+```tsx
 function Counter() {
   const [count, setCount] = useState(0);
 
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-    </div>
-  );
+  function handleClick() {
+    // ❌ This doesn't work as expected!
+    setCount(count + 1);  // count is still 0 here
+    setCount(count + 1);  // count is still 0 here
+    setCount(count + 1);  // count is still 0 here
+    // Result: count becomes 1 (not 3!)
+  }
+  
+  function handleClickCorrect() {
+    // ✅ Use updater function for sequential updates
+    setCount(prev => prev + 1);  // prev is 0, sets to 1
+    setCount(prev => prev + 1);  // prev is 1, sets to 2
+    setCount(prev => prev + 1);  // prev is 2, sets to 3
+    // Result: count becomes 3 ✓
+  }
+  
+  return <button onClick={handleClickCorrect}>+3</button>;
 }
 ```
 
-### Multiple State Variables
+**Why?** React batches state updates for performance. Multiple `setState` calls = one re-render.
 
-```typescript
-function UserProfile() {
-  const [name, setName] = useState('');
-  const [age, setAge] = useState(0);
-  const [email, setEmail] = useState('');
+### Object State: Immutability is Key
 
-  return (
-    <div>
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Name"
-      />
-      <input
-        value={age}
-        onChange={(e) => setAge(Number(e.target.value))}
-        placeholder="Age"
-        type="number"
-      />
-      <input
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
-    </div>
-  );
-}
-```
-
-### State with Objects
-
-```typescript
-// File: src/components/UserForm.tsx
-import { useState } from 'react';
-
+```tsx
 interface User {
   name: string;
-  email: string;
   age: number;
+  email: string;
 }
 
-function UserForm() {
+function UserProfile() {
   const [user, setUser] = useState<User>({
-    name: '',
-    email: '',
-    age: 0
+    name: 'John',
+    age: 25,
+    email: 'john@example.com'
   });
-
-  const handleChange = (field: string, value: string | number) => {
+  
+  // ❌ WRONG: Mutating state directly
+  function updateNameWrong() {
+    user.name = 'Jane';  // Modifies object in place
+    setUser(user);       // React doesn't detect change! (same object reference)
+  }
+  
+  // ✅ CORRECT: Create new object
+  function updateNameCorrect() {
+    setUser({
+      ...user,           // Copy all existing properties
+      name: 'Jane'       // Override just name
+    });
+  }
+  
+  // ✅ BETTER: Functional update (safer)
+  function updateAge() {
     setUser(prev => ({
       ...prev,
-      [field]: value
+      age: prev.age + 1
     }));
-  };
+  }
 
   return (
     <div>
-      <input
-        value={user.name}
-        onChange={(e) => handleChange('name', e.target.value)}
-        placeholder="Name"
-      />
-      <input
-        value={user.email}
-        onChange={(e) => handleChange('email', e.target.value)}
-        placeholder="Email"
-      />
-      <input
-        value={user.age}
-        onChange={(e) => handleChange('age', Number(e.target.value))}
-        placeholder="Age"
-        type="number"
-      />
+      <p>{user.name} - {user.age}</p>
+      <button onClick={updateNameCorrect}>Change Name</button>
+      <button onClick={updateAge}>Birthday</button>
     </div>
   );
 }
-
-export default UserForm;
 ```
+
+**Key Rule**: Never mutate state. Always create new objects/arrays.
 
 ---
 
-## 6. useEffect Hook
+## 4. useEffect: Side Effects and Lifecycle
 
-**useEffect** lets you perform side effects in function components.
+### What are Side Effects?
 
-### Basic Usage
+**Side Effect = Code that interacts with the outside world**
 
-```typescript
-// File: src/components/DataFetcher.tsx
-import { useState, useEffect } from 'react';
+Examples:
+- Fetching data from API
+- Setting up timers/intervals
+- Subscribing to events
+- Manually changing DOM
+- Logging to console
 
-interface Data {
-  id: number;
-  name: string;
+```tsx
+// Without useEffect - runs on EVERY render (bad!)
+function BadExample() {
+  fetch('/api/data');  // 💥 Infinite loop! Fetch triggers re-render → fetch again → ...
+  return <div>Data</div>;
 }
 
-function DataFetcher() {
-  const [data, setData] = useState<Data | null>(null);
-  const [loading, setLoading] = useState(true);
+// With useEffect - controlled execution
+function GoodExample() {
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    // This runs after every render
     fetch('/api/data')
-      .then(response => response.json())
-      .then(data => {
-        setData(data);
-        setLoading(false);
-      });
-  }, []); // Empty dependency array = run once
-
-  if (loading) return <div>Loading...</div>;
-  return <div>{JSON.stringify(data)}</div>;
+      .then(res => res.json())
+      .then(setData);
+  }, []);  // Empty array = run once on mount
+  
+  return <div>{data}</div>;
 }
-
-export default DataFetcher;
 ```
 
-### Effect with Dependencies
+### Dependency Array: The Most Important Part
 
-```typescript
-// File: src/components/UserProfile.tsx
-import { useState, useEffect } from 'react';
-
-interface User {
-  id: string;
-  name: string;
-}
-
-function UserProfile({ userId }: { userId: string }) {
-  const [user, setUser] = useState<User | null>(null);
-
+```tsx
+function EffectDemo({ userId }: { userId: number }) {
+  const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
+  
+  // No dependencies - runs after EVERY render (rare!)
   useEffect(() => {
-    // This runs when userId changes
+    console.log('Rendered');
+  });
+  
+  // Empty dependencies - runs ONCE on mount
+  useEffect(() => {
+    console.log('Component mounted');
+  }, []);
+  
+  // With dependencies - runs when userId changes
+  useEffect(() => {
     fetch(`/api/users/${userId}`)
-      .then(response => response.json())
+      .then(res => res.json())
       .then(setUser);
-  }, [userId]); // Runs when userId changes
-
-  return user ? <div>{user.name}</div> : <div>Loading...</div>;
+  }, [userId]);  // Re-run when userId changes
+  
+  // Multiple dependencies - runs when ANY change
+  useEffect(() => {
+    if (user) {
+      fetch(`/api/users/${user.id}/posts`)
+        .then(res => res.json())
+        .then(setPosts);
+    }
+  }, [user]);  // Re-run when user changes
 }
-
-export default UserProfile;
 ```
 
-### Cleanup Function
+**Critical Rule**: Include ALL values from component scope that the effect uses. ESLint will warn you!
 
-```typescript
-// File: src/components/Timer.tsx
-import { useState, useEffect } from 'react';
+### Cleanup: Preventing Memory Leaks
 
+```tsx
 function Timer() {
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    // Start interval
+    const intervalId = setInterval(() => {
       setSeconds(prev => prev + 1);
     }, 1000);
 
-    // Cleanup function
-    return () => clearInterval(interval);
+    // ✅ Cleanup function - runs when component unmounts
+    return () => {
+      clearInterval(intervalId);  // Stop interval
+      console.log('Timer cleanup');
+    };
   }, []);
 
   return <div>Timer: {seconds}s</div>;
 }
 
-export default Timer;
+// When Timer is removed from DOM:
+// 1. Cleanup function runs
+// 2. Interval is cleared
+// 3. No memory leak!
 ```
+
+**When cleanup runs:**
+- Component unmounts (removed from DOM)
+- Before effect runs again (if dependencies changed)
 
 ---
 
-## 7. useRef Hook
+## 5. useRef: Direct DOM Access and Persistent Values
 
-**useRef** lets you access DOM elements and persist values across renders.
+### Two Use Cases for useRef
 
-### DOM Reference
+**1. Accessing DOM Elements**
 
-```typescript
-// File: src/components/TextInput.tsx
-import { useRef } from 'react';
-
+```tsx
 function TextInput() {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const focusInput = () => {
-    inputRef.current?.focus();
-  };
+  function focusInput() {
+    inputRef.current?.focus();  // Direct DOM access
+  }
 
   return (
     <div>
       <input ref={inputRef} type="text" />
-      <button onClick={focusInput}>Focus Input</button>
+      <button onClick={focusInput}>Focus</button>
     </div>
   );
 }
-
-export default TextInput;
 ```
 
-### Persisting Values
+**2. Persisting Values Without Re-rendering**
 
-```typescript
-// File: src/components/RenderCounter.tsx
-import { useState, useRef } from 'react';
-
-function Counter() {
-  const [count, setCount] = useState(0);
-  const renderCount = useRef(0);
-
-  renderCount.current += 1;
+```tsx
+// useState vs useRef comparison
+function StateVsRef() {
+  const [stateCount, setStateCount] = useState(0);  // Re-renders
+  const refCount = useRef(0);                        // No re-render
+  
+  function incrementState() {
+    setStateCount(stateCount + 1);  // Triggers re-render
+  }
+  
+  function incrementRef() {
+    refCount.current = refCount.current + 1;  // NO re-render
+    console.log('Ref count:', refCount.current);  // Updates, but UI doesn't
+  }
 
   return (
     <div>
-      <p>Count: {count}</p>
-      <p>Renders: {renderCount.current}</p>
-      <button onClick={() => setCount(count + 1)}>
-        Increment
-      </button>
+      <p>State: {stateCount}</p>  {/* Shows updates */}
+      <p>Ref: {refCount.current}</p>  {/* Doesn't update on screen! */}
+      <button onClick={incrementState}>State +1</button>
+      <button onClick={incrementRef}>Ref +1 (silent)</button>
     </div>
   );
 }
-
-export default Counter;
 ```
+
+**When to use useRef:**
+- ✅ Accessing DOM elements (focus, scroll, measure)
+- ✅ Storing values that don't affect UI (previous value, timers, external library instances)
+- ❌ Don't use for values that should trigger re-renders (use `useState` instead)
 
 ---
 
-## 8. useContext Hook
+## 6. useContext: Avoiding Prop Drilling
 
-**useContext** lets you consume context values without prop drilling.
+### The Prop Drilling Problem
 
-### Creating Context
-
-```typescript
-import { createContext, useContext, useState } from 'react';
-
-interface ThemeContextType {
-  theme: 'light' | 'dark';
-  toggleTheme: () => void;
+```tsx
+// ❌ Props passed through 5 levels!
+function App() {
+  const user = { name: 'John', role: 'admin' };
+  return <Dashboard user={user} />;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+function Dashboard({ user }) {
+  return <Sidebar user={user} />;
+}
 
-// Custom hook for using context
-function useTheme() {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+function Sidebar({ user }) {
+  return <Menu user={user} />;
+}
+
+function Menu({ user }) {
+  return <MenuItem user={user} />;
+}
+
+function MenuItem({ user }) {
+  return <span>{user.name}</span>;  // Finally used here!
+}
+```
+
+### Context: Global State
+
+```tsx
+// ✅ Create context once
+interface User {
+  name: string;
+  role: string;
+}
+
+const UserContext = createContext<User | undefined>(undefined);
+
+// Provider at top level
+function App() {
+  const user = { name: 'John', role: 'admin' };
+
+  return (
+    <UserContext.Provider value={user}>
+      <Dashboard />
+    </UserContext.Provider>
+  );
+}
+
+// Consume anywhere in tree (no prop passing!)
+function MenuItem() {
+  const user = useContext(UserContext);
+  
+  if (!user) return null;
+  
+  return <span>{user.name}</span>;  // Direct access!
+}
+```
+
+**When to use Context:**
+- ✅ Theme (dark/light mode)
+- ✅ Authentication (current user)
+- ✅ Language/i18n
+- ✅ Global settings
+- ❌ Don't overuse! Frequent updates = all consumers re-render
+
+---
+
+## 7. useReducer: Complex State Logic
+
+### When useState Gets Messy
+
+```tsx
+// ❌ Multiple related state updates - hard to manage!
+function ShoppingCart() {
+  const [items, setItems] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  
+  function addItem(item) {
+    setItems([...items, item]);
+    setTotal(total + item.price);
+    // Easy to forget to update related state!
   }
-  return context;
 }
 ```
 
-### Using Context
+### useReducer: Centralized State Logic
 
-```typescript
-function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
-  };
-
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-}
-
-function ThemedButton() {
-  const { theme, toggleTheme } = useTheme();
-
-  return (
-    <button
-      onClick={toggleTheme}
-      style={{
-        backgroundColor: theme === 'light' ? '#fff' : '#333',
-        color: theme === 'light' ? '#333' : '#fff'
-      }}
-    >
-      Toggle Theme
-    </button>
-  );
-}
-```
-
----
-
-## 9. useReducer Hook
-
-**useReducer** is an alternative to useState for complex state logic.
-
-### Basic Usage
-
-```typescript
-import { useReducer } from 'react';
-
+```tsx
+// ✅ All state updates in one place
 interface State {
-  count: number;
+  items: Item[];
+  total: number;
+  discount: number;
+  loading: boolean;
+  error: string | null;
 }
 
 type Action =
-  | { type: 'increment' }
-  | { type: 'decrement' }
-  | { type: 'reset' };
+  | { type: 'ADD_ITEM'; item: Item }
+  | { type: 'REMOVE_ITEM'; id: number }
+  | { type: 'APPLY_DISCOUNT'; percent: number }
+  | { type: 'SET_ERROR'; error: string };
 
-function reducer(state: State, action: Action): State {
+function cartReducer(state: State, action: Action): State {
   switch (action.type) {
-    case 'increment':
-      return { count: state.count + 1 };
-    case 'decrement':
-      return { count: state.count - 1 };
-    case 'reset':
-      return { count: 0 };
+    case 'ADD_ITEM':
+      return {
+        ...state,
+        items: [...state.items, action.item],
+        total: state.total + action.item.price
+      };
+    
+    case 'REMOVE_ITEM':
+      const item = state.items.find(i => i.id === action.id);
+      return {
+        ...state,
+        items: state.items.filter(i => i.id !== action.id),
+        total: state.total - (item?.price || 0)
+      };
+    
+    case 'APPLY_DISCOUNT':
+      return {
+        ...state,
+        discount: action.percent,
+        total: state.total * (1 - action.percent / 100)
+      };
+    
+    case 'SET_ERROR':
+      return { ...state, error: action.error };
+    
     default:
       return state;
   }
 }
 
-function Counter() {
-  const [state, dispatch] = useReducer(reducer, { count: 0 });
+function ShoppingCart() {
+  const [state, dispatch] = useReducer(cartReducer, {
+    items: [],
+    total: 0,
+    discount: 0,
+    loading: false,
+    error: null
+  });
+  
+  function addItem(item: Item) {
+    dispatch({ type: 'ADD_ITEM', item });  // One action updates multiple fields!
+  }
 
   return (
     <div>
-      <p>Count: {state.count}</p>
-      <button onClick={() => dispatch({ type: 'increment' })}>
-        +
-      </button>
-      <button onClick={() => dispatch({ type: 'decrement' })}>
-        -
-      </button>
-      <button onClick={() => dispatch({ type: 'reset' })}>
-        Reset
-      </button>
+      <p>Total: ${state.total}</p>
+      <button onClick={() => addItem(newItem)}>Add Item</button>
     </div>
   );
 }
 ```
 
+**When to use useReducer:**
+- ✅ Multiple state values that change together
+- ✅ Complex state transitions
+- ✅ Next state depends on previous state
+- ❌ Simple counter? Use `useState`
+
 ---
 
-## 10. Custom Hooks
+## 8. Custom Hooks: Reusable Logic
 
-**Custom hooks** let you extract component logic into reusable functions.
+### Why Custom Hooks?
 
-### Basic Custom Hook
-
-```typescript
-// Custom hook for form handling
-function useForm(initialValues: Record<string, string>) {
-  const [values, setValues] = useState(initialValues);
-
-  const handleChange = (field: string, value: string) => {
-    setValues(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
-
-  const reset = () => {
-    setValues(initialValues);
-  };
-
-  return { values, handleChange, reset };
+```tsx
+// ❌ Duplicated logic in multiple components
+function ComponentA() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+    setLoading(true);
+    fetch('/api/data').then(res => {
+      setData(res);
+      setLoading(false);
+    });
+  }, []);
 }
 
-// Using the custom hook
-function LoginForm() {
-  const { values, handleChange, reset } = useForm({
-    email: '',
-    password: ''
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Login:', values);
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        value={values.email}
-        onChange={(e) => handleChange('email', e.target.value)}
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        value={values.password}
-        onChange={(e) => handleChange('password', e.target.value)}
-        placeholder="Password"
-      />
-      <button type="submit">Login</button>
-      <button type="button" onClick={reset}>Reset</button>
-    </form>
-  );
+function ComponentB() {
+  // Same logic repeated! 😢
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+    setLoading(true);
+    fetch('/api/other').then(res => {
+      setData(res);
+      setLoading(false);
+    });
+  }, []);
 }
 ```
 
-### Custom Hook with useEffect
+### Extract to Custom Hook
 
-```typescript
-// Custom hook for data fetching
-function useApi<T>(url: string) {
+```tsx
+// ✅ Reusable custom hook
+function useFetch<T>(url: string) {
   const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    setLoading(true);
     fetch(url)
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => {
         setData(data);
         setLoading(false);
@@ -901,207 +611,177 @@ function useApi<T>(url: string) {
   return { data, loading, error };
 }
 
-// Using the custom hook
-function UserList() {
-  const { data: users, loading, error } = useApi<User[]>('/api/users');
-
+// Use everywhere!
+function ComponentA() {
+  const { data, loading } = useFetch('/api/data');
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  return <div>{data}</div>;
+}
 
-  return (
-    <ul>
-      {users?.map(user => (
-        <li key={user.id}>{user.name}</li>
-      ))}
-    </ul>
-  );
+function ComponentB() {
+  const { data, loading } = useFetch('/api/other');
+  if (loading) return <div>Loading...</div>;
+  return <div>{data}</div>;
 }
 ```
 
+**Custom Hook Rules:**
+- ✅ Name MUST start with `use`
+- ✅ Can use other hooks inside
+- ✅ Returns anything you want (values, functions, etc.)
+- ✅ Share stateful logic, NOT state itself (each component gets independent state)
+
 ---
 
-## 11. Hook Rules & Best Practices
+## 9. Hook Rules and Why They Exist
 
-### 1. Always Call Hooks at the Top Level
+### Rule 1: Only Call Hooks at Top Level
 
-```typescript
-// ❌ Wrong - conditional hook call
-function BadComponent({ shouldUseEffect }: { shouldUseEffect: boolean }) {
-  if (shouldUseEffect) {
-    useEffect(() => {
-      // This is wrong!
-    }, []);
+```tsx
+// ❌ WRONG: Conditional hook
+function Bad({ show }) {
+  if (show) {
+    const [count, setCount] = useState(0);  // 💥 Error!
   }
 }
 
-// ✅ Correct - always call hooks
-function GoodComponent({ shouldUseEffect }: { shouldUseEffect: boolean }) {
-  useEffect(() => {
-    if (shouldUseEffect) {
-      // Do something
-    }
-  }, [shouldUseEffect]);
+// ❌ WRONG: Hook in loop
+function Bad() {
+  for (let i = 0; i < 3; i++) {
+    const [count, setCount] = useState(0);  // 💥 Error!
+  }
+}
+
+// ✅ CORRECT: Always at top level
+function Good({ show }) {
+  const [count, setCount] = useState(0);  // Always called
+  
+  if (!show) return null;
+  
+  return <div>{count}</div>;
 }
 ```
 
-### 2. Use Dependency Arrays Correctly
+**Why?** React relies on hook call order to track state. Conditional hooks break this order.
 
-```typescript
-// ❌ Wrong - missing dependencies
-function BadComponent({ userId }: { userId: string }) {
-  const [user, setUser] = useState(null);
+```tsx
+// React tracks hooks by order:
+// Render 1:         Render 2:
+useState('name')    useState('name')    // ✅ Same order
+useState(0)         useState(0)         // ✅ Same order
+useState(false)     useState(false)     // ✅ Same order
 
-  useEffect(() => {
-    fetch(`/api/users/${userId}`).then(setUser);
-  }, []); // Missing userId dependency
-
-  return <div>{user?.name}</div>;
+// With conditional:
+// Render 1:         Render 2:
+useState('name')    useState('name')    // ✅
+if (show) {         // show is false!
+  useState(0)       // 💥 SKIPPED!
 }
-
-// ✅ Correct - include all dependencies
-function GoodComponent({ userId }: { userId: string }) {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    fetch(`/api/users/${userId}`).then(setUser);
-  }, [userId]); // Include userId
-
-  return <div>{user?.name}</div>;
-}
+useState(false)     useState(false)     // 💥 Now in position 2, was position 3!
 ```
 
-### 3. Use Custom Hooks for Reusable Logic
+### Rule 2: Only Call Hooks from React Functions
 
-```typescript
-// ✅ Good - extract reusable logic
-function useLocalStorage<T>(key: string, initialValue: T) {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      return initialValue;
-    }
-  });
+```tsx
+// ❌ WRONG: Regular JavaScript function
+function regularFunction() {
+  const [count, setCount] = useState(0);  // 💥 Error!
+}
 
-  const setValue = (value: T) => {
-    try {
-      setStoredValue(value);
-      window.localStorage.setItem(key, JSON.stringify(value));
-    } catch (error) {
-      console.error(error);
-    }
-  };
+// ✅ CORRECT: React component
+function MyComponent() {
+  const [count, setCount] = useState(0);  // ✅
+}
 
-  return [storedValue, setValue] as const;
+// ✅ CORRECT: Custom hook
+function useCustomHook() {
+  const [count, setCount] = useState(0);  // ✅
 }
 ```
 
 ---
 
-## 12. Common Mistakes
+## 10. Common Mistakes
 
-### Mistake 1: Stale Closures
+### Mistake 1: Forgetting Dependencies in useEffect
 
-```typescript
-// ❌ Wrong - stale closure
-function BadCounter() {
-  const [count, setCount] = useState(0);
+```tsx
+// ❌ BAD: Missing dependency
+function Bad({ userId }) {
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCount(count + 1); // Always uses initial count value
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return <div>{count}</div>;
+    fetch(`/api/users/${userId}`)  // Uses userId
+      .then(res => setUser(res));
+  }, []);  // 💥 Empty array! Won't update when userId changes
 }
 
-// ✅ Correct - use functional update
-function GoodCounter() {
-  const [count, setCount] = useState(0);
-
+// ✅ GOOD: Include all dependencies
+function Good({ userId }) {
+  const [user, setUser] = useState(null);
+  
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCount(prev => prev + 1); // Uses current count value
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return <div>{count}</div>;
+    fetch(`/api/users/${userId}`)
+      .then(res => setUser(res));
+  }, [userId]);  // ✅ Re-runs when userId changes
 }
 ```
 
-### Mistake 2: Missing Dependencies
+### Mistake 2: Mutating State
 
-```typescript
-// ❌ Wrong - missing dependencies
-function BadComponent() {
-  const [count, setCount] = useState(0);
-  const [name, setName] = useState('');
-
-  useEffect(() => {
-    document.title = `${name} clicked ${count} times`;
-  }, []); // Missing count and name
-
-  return (
-    <div>
-      <input value={name} onChange={(e) => setName(e.target.value)} />
-      <button onClick={() => setCount(count + 1)}>Click</button>
-    </div>
-  );
+```tsx
+// ❌ BAD: Mutating array
+function Bad() {
+  const [items, setItems] = useState([1, 2, 3]);
+  
+  function addItem() {
+    items.push(4);  // Mutates array!
+    setItems(items);  // React doesn't detect change
+  }
 }
 
-// ✅ Correct - include all dependencies
-function GoodComponent() {
+// ✅ GOOD: Create new array
+function Good() {
+  const [items, setItems] = useState([1, 2, 3]);
+  
+  function addItem() {
+    setItems([...items, 4]);  // New array
+  }
+}
+```
+
+### Mistake 3: Using State Value Immediately After Setting
+
+```tsx
+function Bad() {
   const [count, setCount] = useState(0);
-  const [name, setName] = useState('');
+  
+  function handleClick() {
+    setCount(count + 1);
+    console.log(count);  // 💥 Still 0! State updates are async
+  }
+}
+
+// ✅ Use useEffect to react to state changes
+function Good() {
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    document.title = `${name} clicked ${count} times`;
-  }, [count, name]); // Include all dependencies
-
-  return (
-    <div>
-      <input value={name} onChange={(e) => setName(e.target.value)} />
-      <button onClick={() => setCount(count + 1)}>Click</button>
-    </div>
-  );
+    console.log('Count updated:', count);  // Runs after state updates
+  }, [count]);
 }
 ```
 
 ---
 
-## 13. Next Steps
+## Next Steps
 
-### What You Should Know After Lesson 2
+You now understand:
+- ✅ **Why** hooks exist (state management without classes)
+- ✅ **How** each hook works (useState, useEffect, useRef, useContext, useReducer)
+- ✅ **When** to use each hook (state, side effects, DOM access, global data, complex logic)
+- ✅ **How** to create custom hooks (reusable logic)
 
-**Components:**
-- Function components with TypeScript
-- Component composition and reusability
-- Props and prop types
+**Practice**: Head to `lab2.md` for hands-on exercises!
 
-**Hooks:**
-- useState for state management
-- useEffect for side effects
-- useRef for DOM references
-- useContext for global state
-- useReducer for complex state
-- Custom hooks for reusable logic
-
-**Best Practices:**
-- Hook rules and dependency arrays
-- Avoiding common mistakes
-- Performance considerations
-
-### What's Coming in Lesson 3
-
-🔜 **API Integration** - Fetching data from servers
-🔜 **Data Management** - Handling loading states and errors
-🔜 **React Query** - Advanced data fetching and caching
-🔜 **CRUD Operations** - Create, Read, Update, Delete
-
-> **Advanced Topics** For advanced patterns, performance optimization, and complex examples, see [Advanced Patterns](../../extras/advanced_patterns.md) and [Performance Optimization](../../extras/performance_optimization.md)
+**Quick Reference**: See `reference2.md` for hook syntax and patterns.

@@ -1,6 +1,10 @@
-# Reference - JavaScript ES6+ for React
+# Reference - JavaScript ES6+ Quick Lookup
 
-> **Quick reference guide for modern JavaScript essentials in React development**
+> **Purpose of this file**: Quick ES6 syntax lookup, patterns, copy-paste ready code. NO concept explanations.
+>
+> **Use Theory0 when you need**: Understanding WHY and HOW ES6 features work.
+
+---
 
 ## Table of Contents
 1. [Why Modern JavaScript for React?](#why-modern-javascript-for-react)

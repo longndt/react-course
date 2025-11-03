@@ -1,448 +1,498 @@
-# Reference - React Fundamentals & Project Setup
+# Reference - React Fundamentals Quick Lookup
 
-> **Quick reference guide for React fundamentals**
+> **Purpose of this file**: Quick setup commands, syntax patterns, copy-paste ready code. NO concept explanations.
+>
+> **Use Theory1 when you need**: Understanding WHY and HOW React works.
+
+---
 
 ## Table of Contents
-1. [What is React?](#what-is-react)
-2. [JavaScript with React (JSX)](#javascript-with-react-jsx)
-3. [Project Setup with Vite](#project-setup-with-vite)
-4. [Component Basics](#component-basics)
-5. [JSX Syntax Rules](#jsx-syntax-rules)
-6. [Styling Components](#styling-components)
-7. [Event Handling Basics](#event-handling-basics)
-8. [Common Patterns](#common-patterns)
+
+1. [Project Setup Commands](#project-setup-commands)
+2. [Component Syntax](#component-syntax)
+3. [TSX Rules Cheat Sheet](#tsx-rules-cheat-sheet)
+4. [Props Patterns](#props-patterns)
+5. [Styling Methods](#styling-methods)
+6. [Event Handlers](#event-handlers)
+7. [Common Patterns](#common-patterns)
 
 ---
 
-## What is React?
-
-### Key Concepts
-- **Component-based** - Build UI with reusable components
-
-- **Declarative** - Describe what you want, not how to get it
-
-- **Virtual DOM** - Efficient updates and rendering
-
-- **Unidirectional Data Flow** - Data flows down, events flow up
-
-### Why React?
-- **Reusable Components** - Build once, use anywhere
-
-- **Efficient Updates** - Only re-render what changed
-
-- **Rich Ecosystem** - Huge community and tooling
-
-- **Industry Standard** - Used by major companies
-
----
-
-## JavaScript with React (JSX)
-
-### JSX Fundamentals
-```jsx
-// Basic JSX
-function Welcome() {
-  return <h1>Hello, World!</h1>;
-}
-
-// JSX with expressions
-function Greeting({ name }) {
-  return <h1>Hello, {name}!</h1>;
-}
-
-// JSX with attributes
-function Button({ onClick, children }) {
-  return (
-    <button onClick={onClick} className="btn">
-      {children}
-    </button>
-  );
-}
-```
-
-### JSX vs HTML
-```jsx
-// HTML
-<div class="container">
-  <h1>Hello World</h1>
-  <button onclick="handleClick()">Click me</button>
-</div>
-
-// JSX
-<div className="container">
-  <h1>Hello World</h1>
-  <button onClick={handleClick}>Click me</button>
-</div>
-```
-
-### Embedding JavaScript in JSX
-```jsx
-function UserProfile({ user, isLoggedIn }) {
-  const currentTime = new Date().toLocaleTimeString();
-
-  return (
-    <div>
-      <h2>Welcome, {user.name}!</h2>
-      <p>Current time: {currentTime}</p>
-      {isLoggedIn && <p>You are logged in</p>}
-      {user.age >= 18 ? <p>Adult user</p> : <p>Minor user</p>}
-    </div>
-  );
-}
-```
-
----
-
-## Project Setup with Vite
+## Project Setup Commands
 
 ### Create New Project
-```bash
-# Create new React project
-npm create vite@latest my-react-app -- --template react
 
-# Navigate to project
-cd my-react-app
+```bash
+# Create React + TypeScript project
+npm create vite@latest my-app -- --template react-ts
+
+# Navigate
+cd my-app
 
 # Install dependencies
 npm install
 
-# Start development server
+# Start dev server
 npm run dev
 ```
 
-### Project Structure
-```
-my-react-app/
-├── public/
-│   └── vite.svg
-├── src/
-│   ├── components/
-│   │   └── Button.jsx
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
-├── package.json
-├── vite.config.js
-└── index.html
+### Package Scripts
+
+```bash
+npm run dev        # Start development server
+npm run build      # Build for production
+npm run preview    # Preview production build
+npm run lint       # Run linter
 ```
 
-### Vite Configuration
-```javascript
-// vite.config.js
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+### Verify Installation
 
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 5173,
-    host: true,
-  },
-  build: {
-    target: 'esnext',
-    minify: 'esbuild',
-  },
-})
+```bash
+node --version    # Should be v18.0.0+
+npm --version     # Should be v9.0.0+
 ```
 
 ---
 
-## Component Basics
+## Component Syntax
 
-### Function Components
-```jsx
-// Simple component
-function Welcome() {
-  return <h1>Hello, World!</h1>;
+### Basic Component
+
+```tsx
+function ComponentName() {
+  return <div>Content</div>;
 }
 
-// Component with props
-function Greeting({ name, age }) {
+export default ComponentName;
+```
+
+### Component with Props
+
+```tsx
+interface Props {
+  name: string;
+  age: number;
+  email?: string;  // Optional
+}
+
+function UserCard({ name, age, email }: Props) {
   return (
     <div>
-      <h1>Hello, {name}!</h1>
-      {age && <p>You are {age} years old</p>}
+      <h2>{name}</h2>
+      <p>Age: {age}</p>
+      {email && <p>Email: {email}</p>}
     </div>
   );
 }
 
-// Component with children
-function Card({ title, children }) {
+export default UserCard;
+```
+
+### Component with Children
+
+```tsx
+interface Props {
+  title: string;
+  children: React.ReactNode;
+}
+
+function Card({ title, children }: Props) {
   return (
     <div className="card">
-      <h3>{title}</h3>
+      <h2>{title}</h2>
       {children}
     </div>
   );
 }
+
+export default Card;
 ```
 
-### Component Usage
-```jsx
+### Component with Default Props
+
+```tsx
+interface Props {
+  title: string;
+  subtitle?: string;
+  showIcon?: boolean;
+}
+
+function Header({ title, subtitle = "Default subtitle", showIcon = true }: Props) {
+  return (
+    <header>
+      {showIcon && <span>🏠</span>}
+      <h1>{title}</h1>
+      <p>{subtitle}</p>
+    </header>
+  );
+}
+
+export default Header;
+```
+
+---
+
+## TSX Rules Cheat Sheet
+
+### Single Root Element
+
+```tsx
+// ❌ Wrong
+function App() {
+  return (
+    <h1>Title</h1>
+    <p>Text</p>
+  );
+}
+
+// ✅ With div
 function App() {
   return (
     <div>
-      <Welcome />
-      <Greeting name="John" age={25} />
-      <Card title="User Info">
-        <p>This is the card content</p>
-        <button>Click me</button>
-      </Card>
-    </div>
-  );
-}
-```
-
-### Props
-```jsx
-// Props destructuring
-function UserCard({ name, email, age, isActive }) {
-  return (
-    <div className={`user-card ${isActive ? 'active' : 'inactive'}`}>
-      <h3>{name}</h3>
-      <p>Email: {email}</p>
-      <p>Age: {age}</p>
-      <p>Status: {isActive ? 'Active' : 'Inactive'}</p>
-    </div>
-  );
-}
-
-// Default props
-function Button({ children, variant = 'primary', size = 'md' }) {
-  return (
-    <button className={`btn btn-${variant} btn-${size}`}>
-      {children}
-    </button>
-  );
-}
-```
-
----
-
-## JSX Syntax Rules
-
-### Single Root Element
-```jsx
-// ❌ Wrong - Multiple root elements
-function Component() {
-  return (
-    <h1>Title</h1>
-    <p>Content</p>
-  );
-}
-
-// ✅ Correct - Single root element
-function Component() {
-  return (
-    <div>
       <h1>Title</h1>
-      <p>Content</p>
+      <p>Text</p>
     </div>
   );
 }
 
-// ✅ Correct - React Fragment
-function Component() {
+// ✅ With Fragment
+function App() {
   return (
     <>
       <h1>Title</h1>
-      <p>Content</p>
+      <p>Text</p>
     </>
   );
 }
 ```
 
-### Self-Closing Tags
-```jsx
-// ❌ Wrong - Not self-closing
-function Component() {
-  return <img src="image.jpg" alt="Image"></img>;
-}
+### Embedding JavaScript
 
-// ✅ Correct - Self-closing
-function Component() {
-  return <img src="image.jpg" alt="Image" />;
-}
-
-// Other self-closing tags
-function Component() {
+```tsx
+function Profile() {
+  const name = "Alice";
+  const age = 25;
+  const hobbies = ["Reading", "Gaming"];
+  
   return (
     <div>
-      <img src="image.jpg" alt="Image" />
-      <br />
-      <hr />
-      <input type="text" />
+      {/* Variables */}
+      <h1>{name}</h1>
+      
+      {/* Expressions */}
+      <p>Age: {age + 1}</p>
+      
+      {/* Ternary */}
+      <p>{age >= 18 ? "Adult" : "Minor"}</p>
+      
+      {/* Method calls */}
+      <p>{name.toUpperCase()}</p>
+      
+      {/* Conditional rendering */}
+      {age > 18 && <button>Access Granted</button>}
+      
+      {/* Lists */}
+      <ul>
+        {hobbies.map((hobby, index) => (
+          <li key={index}>{hobby}</li>
+        ))}
+      </ul>
     </div>
   );
 }
 ```
 
-### JavaScript Expressions
-```jsx
-function Calculator({ a, b }) {
-  const sum = a + b;
-  const product = a * b;
+### TSX vs HTML Differences
 
-  return (
-    <div>
-      <p>Sum: {sum}</p>
-      <p>Product: {product}</p>
-      <p>Is sum even? {sum % 2 === 0 ? 'Yes' : 'No'}</p>
-    </div>
-  );
-}
+```tsx
+// className (not class)
+<div className="container">
+
+// htmlFor (not for)
+<label htmlFor="name">Name:</label>
+
+// Self-closing tags
+<img src="photo.jpg" />
+<input type="text" />
+<br />
+
+// Inline styles (object, not string)
+<div style={{ color: 'red', fontSize: '16px' }}>
+
+// Comments
+{/* This is a comment */}
+
+// camelCase event handlers
+<button onClick={handleClick}>Click</button>
 ```
 
 ---
 
-## Styling Components
+## Props Patterns
 
-### CSS Classes
-```jsx
-// CSS file
-// styles.css
-.button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+### Basic Props
+
+```tsx
+interface ButtonProps {
+  label: string;
+  onClick: () => void;
 }
 
-.primary {
-  background-color: #007bff;
-  color: white;
+function Button({ label, onClick }: ButtonProps) {
+  return <button onClick={onClick}>{label}</button>;
 }
 
-.secondary {
-  background-color: #6c757d;
-  color: white;
+// Usage
+<Button label="Click Me" onClick={() => alert('Hi')} />
+```
+
+### Optional Props
+
+```tsx
+interface Props {
+  name: string;
+  age?: number;
 }
 
-// Component
-function Button({ children, variant = 'primary' }) {
+function User({ name, age }: Props) {
   return (
-    <button className={`button ${variant}`}>
-      {children}
-    </button>
+    <div>
+      <p>{name}</p>
+      {age && <p>Age: {age}</p>}
+    </div>
   );
+}
+
+// Usage
+<User name="John" />
+<User name="Jane" age={25} />
+```
+
+### Props with Default Values
+
+```tsx
+interface Props {
+  title: string;
+  color?: string;
+  size?: number;
+}
+
+function Badge({ title, color = "blue", size = 16 }: Props) {
+  return <span style={{ color, fontSize: size }}>{title}</span>;
+}
+
+// Usage
+<Badge title="New" />
+<Badge title="Sale" color="red" size={20} />
+```
+
+### Children Props
+
+```tsx
+interface Props {
+  children: React.ReactNode;
+}
+
+function Container({ children }: Props) {
+  return <div className="container">{children}</div>;
+}
+
+// Usage
+<Container>
+  <h1>Title</h1>
+  <p>Text</p>
+</Container>
+```
+
+### Spread Props
+
+```tsx
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  title: string;
+}
+
+function Card({ title, ...rest }: Props) {
+  return (
+    <div {...rest}>
+      <h2>{title}</h2>
+    </div>
+  );
+}
+
+// Usage
+<Card title="Hello" className="custom" onClick={() => {}} />
+```
+
+---
+
+## Styling Methods
+
+### CSS File
+
+```tsx
+// Component.tsx
+import './Component.css';
+
+function Component() {
+  return <div className="container">Content</div>;
 }
 ```
 
-### Inline Styles
-```jsx
-function ColoredBox({ color, children }) {
+```css
+/* Component.css */
+.container {
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+```
+
+### Inline Styles (Object)
+
+```tsx
+function Component() {
   const style = {
-    backgroundColor: color,
     padding: '20px',
-    borderRadius: '8px',
-    color: 'white'
+    backgroundColor: '#f0f0f0',
+    fontSize: '16px'
   };
+  
+  return <div style={style}>Content</div>;
+}
+```
 
+### Inline Styles (Direct)
+
+```tsx
+function Component() {
   return (
-    <div style={style}>
-      {children}
+    <div style={{
+      padding: '20px',
+      backgroundColor: '#f0f0f0',
+      fontSize: '16px'
+    }}>
+      Content
     </div>
   );
 }
 ```
 
-### CSS Modules
-```jsx
-// Button.module.css
-.button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+### Dynamic Styles
+
+```tsx
+interface Props {
+  isActive: boolean;
 }
 
-.primary {
-  background-color: #007bff;
-  color: white;
-}
-
-// Component
-import styles from './Button.module.css';
-
-function Button({ children, variant = 'primary' }) {
+function Button({ isActive }: Props) {
   return (
-    <button className={`${styles.button} ${styles[variant]}`}>
-      {children}
+    <button
+      className={isActive ? 'active' : 'inactive'}
+      style={{
+        backgroundColor: isActive ? 'green' : 'gray',
+        color: 'white'
+      }}
+    >
+      {isActive ? 'Active' : 'Inactive'}
     </button>
+  );
+}
+```
+
+### Multiple CSS Classes
+
+```tsx
+function Component() {
+  const isActive = true;
+  const hasError = false;
+  
+  return (
+    <div className={`
+      base-class 
+      ${isActive ? 'active' : ''} 
+      ${hasError ? 'error' : ''}
+    `}>
+      Content
+    </div>
   );
 }
 ```
 
 ---
 
-## Event Handling Basics
+## Event Handlers
 
 ### Click Events
-```jsx
-function Counter() {
-  const [count, setCount] = useState(0);
 
-  const handleIncrement = () => {
-    setCount(count + 1);
+```tsx
+function ClickDemo() {
+  const handleClick = () => {
+    alert('Clicked!');
   };
-
-  const handleDecrement = () => {
-    setCount(count - 1);
+  
+  const handleClickWithData = (id: number) => {
+    console.log('Clicked item:', id);
   };
-
+  
   return (
     <div>
-      <p>Count: {count}</p>
-      <button onClick={handleIncrement}>+</button>
-      <button onClick={handleDecrement}>-</button>
+      {/* Function reference */}
+      <button onClick={handleClick}>Click Me</button>
+      
+      {/* Inline arrow function */}
+      <button onClick={() => alert('Hi!')}>Say Hi</button>
+      
+      {/* With parameters */}
+      <button onClick={() => handleClickWithData(123)}>Click Item</button>
     </div>
   );
 }
 ```
 
 ### Form Events
-```jsx
-function ContactForm() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
 
-  const handleSubmit = (e) => {
+```tsx
+function FormDemo() {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Form submitted:', { name, email });
+    console.log('Form submitted');
   };
-
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('Input value:', e.target.value);
+  };
+  
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Name"
-      />
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
+      <input type="text" onChange={handleChange} />
       <button type="submit">Submit</button>
     </form>
   );
 }
 ```
 
-### Event Object
-```jsx
-function Button() {
-  const handleClick = (e) => {
-    console.log('Button clicked');
-    console.log('Event:', e);
-    console.log('Target:', e.target);
-    console.log('Current target:', e.currentTarget);
-  };
+### Common Event Types
 
-  return <button onClick={handleClick}>Click me</button>;
-}
+```tsx
+// Click events
+onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+
+// Form events
+onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+
+// Input events
+onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+
+// Keyboard events
+onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void
+onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void
+
+// Focus events
+onFocus: (e: React.FocusEvent<HTMLInputElement>) => void
+onBlur: (e: React.FocusEvent<HTMLInputElement>) => void
+
+// Mouse events
+onMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => void
+onMouseLeave: (e: React.MouseEvent<HTMLDivElement>) => void
 ```
 
 ---
@@ -450,104 +500,157 @@ function Button() {
 ## Common Patterns
 
 ### Conditional Rendering
-```jsx
-function UserProfile({ user, isLoggedIn }) {
-  if (!isLoggedIn) {
-    return <div>Please log in to view your profile.</div>;
-  }
 
+```tsx
+function User({ isLoggedIn }: { isLoggedIn: boolean }) {
+  // If-else with ternary
   return (
     <div>
-      <h2>Welcome, {user.name}!</h2>
-      <p>Email: {user.email}</p>
-      {user.isAdmin && <p>Admin privileges</p>}
+      {isLoggedIn ? <p>Welcome back!</p> : <p>Please log in</p>}
     </div>
   );
 }
 
-// Ternary operator
-function Message({ isError, message }) {
+function Notification({ message }: { message?: string }) {
+  // Render only if condition is true
   return (
-    <div className={isError ? 'error' : 'success'}>
-      {isError ? 'Error: ' : 'Success: '}{message}
+    <div>
+      {message && <div className="alert">{message}</div>}
     </div>
   );
 }
 ```
 
 ### List Rendering
-```jsx
-function UserList({ users }) {
+
+```tsx
+function List() {
+  const items = ['Apple', 'Banana', 'Cherry'];
+  
   return (
     <ul>
-      {users.map(user => (
-        <li key={user.id}>
-          {user.name} - {user.email}
-        </li>
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
       ))}
     </ul>
   );
 }
 
-// With conditional rendering
-function TodoList({ todos }) {
+// With objects
+interface User {
+  id: number;
+  name: string;
+}
+
+function UserList() {
+  const users: User[] = [
+    { id: 1, name: 'John' },
+    { id: 2, name: 'Jane' }
+  ];
+  
   return (
-    <div>
-      {todos.length === 0 ? (
-        <p>No todos yet!</p>
-      ) : (
-        <ul>
-          {todos.map(todo => (
-            <li key={todo.id} className={todo.completed ? 'completed' : ''}>
-              {todo.text}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <ul>
+      {users.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
   );
 }
 ```
 
 ### Component Composition
-```jsx
-function Card({ title, children }) {
+
+```tsx
+function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="card">
-      <div className="card-header">
-        <h3>{title}</h3>
-      </div>
-      <div className="card-body">
-        {children}
-      </div>
+    <div className="layout">
+      <header>Header</header>
+      <main>{children}</main>
+      <footer>Footer</footer>
     </div>
   );
 }
 
 function App() {
   return (
-    <div>
-      <Card title="User Info">
-        <p>Name: John Doe</p>
-        <p>Email: john@example.com</p>
-      </Card>
-
-      <Card title="Actions">
-        <button>Edit</button>
-        <button>Delete</button>
-      </Card>
-    </div>
+    <Layout>
+      <h1>Welcome</h1>
+      <p>Content goes here</p>
+    </Layout>
   );
 }
 ```
 
+### Fragments
+
+```tsx
+// Long form
+<React.Fragment>
+  <h1>Title</h1>
+  <p>Text</p>
+</React.Fragment>
+
+// Short form
+<>
+  <h1>Title</h1>
+  <p>Text</p>
+</>
+
+// With key (for lists)
+items.map((item) => (
+  <React.Fragment key={item.id}>
+    <dt>{item.term}</dt>
+    <dd>{item.definition}</dd>
+  </React.Fragment>
+))
+```
+
 ---
 
-## Next Steps
+## Project Structure Template
 
-1. **Practice** Build simple React components
-2. **Learn More** Check [Theory Guide](./theory/theory1.md) for detailed explanations
-3. **Continue** Move to [Lesson 2](../lesson2-component-hook/) for advanced components and hooks
-4. **Resources** Explore [Advanced Patterns](../../extras/advanced_patterns.md) for complex patterns
+```
+my-app/
+├── public/
+│   └── assets/              # Images, fonts, etc.
+├── src/
+│   ├── components/          # Reusable components
+│   │   ├── Button.tsx
+│   │   ├── Button.css
+│   │   ├── Card.tsx
+│   │   └── Card.css
+│   ├── pages/              # Page components
+│   │   ├── Home.tsx
+│   │   └── About.tsx
+│   ├── App.tsx             # Root component
+│   ├── App.css
+│   ├── main.tsx            # Entry point
+│   └── index.css           # Global styles
+├── index.html
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
+```
 
-> **💡 Tip** Start with simple components, then gradually add interactivity. JSX is just JavaScript, so you can use all your JavaScript knowledge!
+---
+
+## Quick Syntax Table
+
+| Pattern | Syntax |
+|---------|--------|
+| **Component** | `function Name() { return <div />; }` |
+| **Props** | `function Name({ prop }: Props) {}` |
+| **Fragment** | `<>...</>` or `<React.Fragment>` |
+| **Embed JS** | `{expression}` |
+| **Conditional** | `{condition && <Component />}` |
+| **Ternary** | `{condition ? <A /> : <B />}` |
+| **List** | `{arr.map(item => <li key={item.id} />)}` |
+| **Event** | `onClick={() => {}}` |
+| **Style (object)** | `style={{ color: 'red' }}` |
+| **CSS class** | `className="container"` |
+| **Comment** | `{/* comment */}` |
+
+---
+
+**For concepts and explanations**: See `theory1.md`  
+**For practice**: See `lab1.md`
