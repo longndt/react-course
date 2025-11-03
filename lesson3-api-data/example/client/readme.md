@@ -64,8 +64,8 @@ npm run dev
 - **React** - UI library
 - **TypeScript** - Type-safe JavaScript
 - **Vite** - Fast build tool and dev server
+- **Axios** - HTTP client for API calls
 - **ESLint** - Code linting
-- **CSS** - Styling
 
 ## 📚 Learning Objectives
 

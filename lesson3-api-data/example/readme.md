@@ -3,14 +3,16 @@
 This demo shows how to integrate a React frontend with a Node.js/Express backend and MongoDB database using **Axios** - the most popular HTTP client for React applications.
 
 **Learning Focus:**
+- TypeScript for type-safe backend development
 - Axios for HTTP requests
 - Error handling and loading states
 - CRUD operations (Create, Read, Update, Delete)
 - Professional API integration patterns
+- MVC architecture with TypeScript
 
 ## 📁 Project Structure
 
-This project is now organized into separate `client` and `server` folders:
+This project is now organized into separate `client` and `server` folders with full TypeScript support:
 
 ```
 example/
@@ -19,14 +21,18 @@ example/
 │   │   ├── components/
 │   │   ├── App.tsx
 │   │   └── main.tsx
+│   ├── tsconfig.json
 │   └── package.json
 │
-└── server/          # Express backend (ES6 + MongoDB)
-    ├── api/
-    │   ├── controllers/    # Business logic
-    │   ├── models/         # Database schemas
-    │   └── routes/         # API endpoints
-    ├── index.js
+└── server/          # Express backend (TypeScript + MongoDB)
+    ├── src/
+    │   ├── types/         # TypeScript type definitions
+    │   ├── models/        # Database schemas (TS)
+    │   ├── controllers/   # Business logic (TS)
+    │   ├── routes/        # API endpoints (TS)
+    │   └── index.ts       # Server entry
+    ├── dist/              # Compiled JavaScript
+    ├── tsconfig.json
     └── package.json
 ```
 
@@ -121,37 +127,60 @@ client/
 └── package.json
 ```
 
-### Server (Backend) - MVC Architecture
+### Server (Backend) - MVC Architecture with TypeScript
 ```
 server/
-├── api/
-│   ├── controllers/
-│   │   └── productController.js  # Business logic (CRUD operations)
+├── src/
+│   ├── types/
+│   │   └── product.types.ts      # TypeScript interfaces
 │   ├── models/
-│   │   └── Product.js            # MongoDB schema
-│   └── routes/
-│       └── products.js           # API endpoint definitions
-├── index.js                      # Server entry point
+│   │   └── Product.ts            # MongoDB schema (TypeScript)
+│   ├── controllers/
+│   │   └── productController.ts  # Business logic (TypeScript)
+│   ├── routes/
+│   │   └── products.ts           # API endpoints (TypeScript)
+│   └── index.ts                  # Server entry point
+├── dist/                         # Compiled JavaScript
+├── tsconfig.json                 # TypeScript config
 └── package.json
 ```
 
-**MVC Pattern:**
-- **Model** (Product.js) - Defines data structure and validation
-- **Controller** (productController.js) - Handles business logic
-- **Route** (products.js) - Maps URLs to controller functions
+**MVC Pattern with TypeScript:**
+- **Types** (product.types.ts) - TypeScript interfaces and type definitions
+- **Model** (Product.ts) - Defines data structure with type safety
+- **Controller** (productController.ts) - Handles business logic with typed requests/responses
+- **Route** (products.ts) - Maps URLs to controller functions
 
 ## Key Concepts Demonstrated
 
-### 1. ** Axios Configuration**
+### 1. ** TypeScript Backend**
 ```typescript
-// src/services/api.ts
+// server/src/types/product.types.ts
+export interface IProduct extends Document {
+    name: string;
+    description: string;
+    price: number;
+    category: 'electronics' | 'clothing' | 'books' | 'home' | 'sports' | 'other';
+    inStock: boolean;
+}
+
+// server/src/controllers/productController.ts
+export const getAllProducts = async (req: Request, res: Response): Promise<void> => {
+    const products = await Product.find().sort({ createdAt: -1 });
+    res.json(products);
+};
+```
+
+### 2. ** Axios Configuration**
+```typescript
+// client/src/services/api.ts
 const API_BASE_URL = "http://localhost:3001/api";
 const response = await axios.get<Product[]>(`${API_BASE_URL}/products`);
 ```
 
-### 2. ** Error Handling**
+### 3. ** Error Handling**
 ```typescript
-// src/components/ProductList.tsx
+// client/src/components/ProductList.tsx
 try {
   const response = await axios.get(`${API_BASE_URL}/products`);
   setProducts(response.data);
@@ -162,16 +191,16 @@ try {
 }
 ```
 
-### 3. ** Loading States**
+### 4. ** Loading States**
 ```typescript
-// src/components/ProductList.tsx
+// client/src/components/ProductList.tsx
 const [loading, setLoading] = useState(true);
 // Show loading spinner while fetching data
 ```
 
-### 4. ** Form Validation**
+### 5. ** Form Validation**
 ```typescript
-// src/components/ProductForm.tsx
+// client/src/components/ProductForm.tsx
 if (!formData.name.trim() || formData.price <= 0) {
   setError("Please fill in all fields with valid values.");
   return;

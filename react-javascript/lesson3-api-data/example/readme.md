@@ -8,24 +8,57 @@ This demo shows how to integrate a React frontend with a Node.js/Express backend
 - CRUD operations (Create, Read, Update, Delete)
 - Professional API integration patterns
 
+## 📁 Project Structure
+
+This project is now organized into separate `client` and `server` folders:
+
+```
+example/
+├── client/          # React frontend (JavaScript + Vite)
+│   ├── src/
+│   │   ├── components/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   └── package.json
+│
+└── server/          # Express backend (ES6 + MongoDB)
+    ├── api/
+    │   ├── controllers/    # Business logic
+    │   ├── models/         # Database schemas
+    │   └── routes/         # API endpoints
+    ├── index.js
+    └── package.json
+```
+
 ## Setup Instructions
 
 ### 1. Install Dependencies
+
+**For the Server:**
 ```bash
+cd server
+npm install
+```
+
+**For the Client:**
+```bash
+cd client
 npm install
 ```
 
 ### 2. Start the Backend Server
 ```bash
-# Start the backend server (required)
-npm run server
+cd server
+npm run dev
 ```
+Server will run on `http://localhost:3001`
 
 ### 3. Start the Frontend (in another terminal)
 ```bash
-# Start the React development server
+cd client
 npm run dev
 ```
+Client will run on `http://localhost:5173`
 
 ### 4. Open in Browser
 Navigate to `http://localhost:5173` (or the port shown in terminal)
@@ -73,17 +106,39 @@ Navigate to `http://localhost:5173` (or the port shown in terminal)
 - `PUT /api/products/:id` - Update product
 - `DELETE /api/products/:id` - Delete product
 
-## Project Structure
+## Detailed Project Structure
 
+### Client (Frontend)
 ```
-src/
-├── components/
-│   ├── ProductList.jsx      # Product display and management
-│   └── ProductForm.jsx      # Product creation form
-├── App.jsx                  # Main application component
-├── App.css                  # Styling
-└── main.jsx                 # Application entry point
+client/
+├── src/
+│   ├── components/
+│   │   ├── ProductList.jsx      # Product display and management
+│   │   └── ProductForm.jsx      # Product creation form
+│   ├── App.jsx                  # Main application component
+│   ├── App.css                  # Styling
+│   └── main.jsx                 # Application entry point
+└── package.json
 ```
+
+### Server (Backend) - MVC Architecture
+```
+server/
+├── api/
+│   ├── controllers/
+│   │   └── productController.js  # Business logic (CRUD operations)
+│   ├── models/
+│   │   └── Product.js            # MongoDB schema
+│   └── routes/
+│       └── products.js           # API endpoint definitions
+├── index.js                      # Server entry point
+└── package.json
+```
+
+**MVC Pattern:**
+- **Model** (Product.js) - Defines data structure and validation
+- **Controller** (productController.js) - Handles business logic
+- **Route** (products.js) - Maps URLs to controller functions
 
 ## Key Concepts Demonstrated
 

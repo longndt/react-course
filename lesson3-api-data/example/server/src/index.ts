@@ -1,8 +1,8 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import productRoutes from './api/routes/products.js';
-import Product from './api/models/Product.js';
+import productRoutes from './routes/products';
+import Product from './models/Product';
 
 const app = express();
 const PORT = 3001;
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use('/api/products', productRoutes);
 
 // Error handling middleware
-app.use((err, req, res, next) => {
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
    console.error(err.stack);
    res.status(500).json({ message: 'Something went wrong!' });
 });
@@ -35,21 +35,21 @@ mongoose.connect('mongodb://localhost:27017/react-lesson3')
                name: 'iPhone 15 Pro',
                description: 'Latest iPhone with advanced camera system and A17 Pro chip',
                price: 999.99,
-               category: 'electronics',
+               category: 'electronics' as const,
                inStock: true
             },
             {
                name: 'MacBook Air M2',
                description: 'Ultra-thin laptop with M2 chip and all-day battery life',
                price: 1199.99,
-               category: 'electronics',
+               category: 'electronics' as const,
                inStock: true
             },
             {
                name: 'Nike Air Max 270',
                description: 'Comfortable and stylish athletic shoes',
                price: 150.00,
-               category: 'sports',
+               category: 'sports' as const,
                inStock: false
             }
          ];
@@ -63,6 +63,9 @@ mongoose.connect('mongodb://localhost:27017/react-lesson3')
          console.log(`Products API available at http://localhost:${PORT}/api/products`);
       });
    })
-   .catch((error) => {
+   .catch((error: Error) => {
       console.error('MongoDB connection error:', error);
    });
+
+export default app;
+
