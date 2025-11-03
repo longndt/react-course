@@ -392,29 +392,9 @@ Containerization is beyond this lesson's core scope. See `extras/advanced_patter
 
 ---
 
-## Monitoring & Error Tracking
+## Monitoring & Error Tracking (Advanced)
 
-### Sentry Setup
-
-```bash
-npm install @sentry/react
-```
-
-```tsx
-import * as Sentry from '@sentry/react';
-
-Sentry.init({
-  dsn: import.meta.env.VITE_SENTRY_DSN,
-  environment: import.meta.env.MODE,
-  tracesSampleRate: 1.0,
-});
-
-function App() {
-  return <Sentry.ErrorBoundary fallback={<ErrorFallback />}>
-    {/* Your app */}
-  </Sentry.ErrorBoundary>;
-}
-```
+Set up production error monitoring (e.g., Sentry) after you deploy and stabilize core features. See `extras/troubleshooting_guide.md` for ready-to-use examples.
 
 ---
 

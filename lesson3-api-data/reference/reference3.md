@@ -8,11 +8,10 @@
 
 1. [HTTP Methods Cheat Sheet](#http-methods-cheat-sheet)
 2. [Axios API Reference](#axios-api-reference)
-3. [React Query Reference](#react-query-reference)
-4. [Common Patterns](#common-patterns)
-5. [Error Codes Reference](#error-codes-reference)
-6. [TypeScript Types](#typescript-types)
-7. [Troubleshooting Guide](#troubleshooting-guide)
+3. [Common Patterns](#common-patterns)
+4. [Error Codes Reference](#error-codes-reference)
+5. [TypeScript Types](#typescript-types)
+6. [Troubleshooting Guide](#troubleshooting-guide)
 
 > 💡 **For Concepts:** See [theory3.md](../theory/theory3.md) for detailed explanations
 

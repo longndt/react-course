@@ -13,9 +13,8 @@
 3. [Functions](#3-functions)
 4. [Arrays & Objects](#4-arrays--objects)
 5. [Union Types & Type Aliases](#5-union-types--type-aliases)
-6. [Generics](#6-generics)
-7. [TypeScript with React](#7-typescript-with-react)
-8. [Common Mistakes](#8-common-mistakes)
+6. [TypeScript with React](#6-typescript-with-react)
+7. [Common Mistakes](#7-common-mistakes)
 
 ---
 
@@ -322,85 +321,7 @@ function getStatusTyped(): Status { return 'loading'; }
 
 ---
 
-## 6. Generics
-
-### Why Generics? Avoid Type Duplication
-
-**The Problem:**
-
-```typescript
-// Without generics - Need separate functions for each type!
-function getFirstString(arr: string[]): string {
-  return arr[0];
-}
-
-function getFirstNumber(arr: number[]): number {
-  return arr[0];
-}
-
-function getFirstUser(arr: User[]): User {
-  return arr[0];
-}
-// ... need infinite functions for every type! 😱
-```
-
-**The Solution - Generics:**
-
-```typescript
-// One function that works for ANY type!
-function getFirst<T>(arr: T[]): T {
-  return arr[0];
-}
-
-let firstString = getFirst(["a", "b"]);     // Type: string (inferred!)
-let firstNumber = getFirst([1, 2, 3]);      // Type: number (inferred!)
-let firstUser = getFirst([user1, user2]);   // Type: User (inferred!)
-```
-
-**How to Read Generics:**
-- `<T>` = "This function works with a type I'll call T"
-- `T[]` = "An array of T"
-- `: T` = "Returns a T"
-
-### Real-World Example: API Responses
-
-```typescript
-// Generic interface for API responses
-interface ApiResponse<T> {
-  data: T;           // The actual data (type varies!)
-  status: number;
-  message: string;
-}
-
-// Now works for any data type!
-interface User {
-  id: number;
-  name: string;
-}
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-}
-
-// Type-safe responses for different data
-type UserResponse = ApiResponse<User>;       // data is User
-type ProductResponse = ApiResponse<Product>; // data is Product
-type UsersResponse = ApiResponse<User[]>;    // data is User[]
-
-// Usage
-async function fetchUser(): Promise<UserResponse> {
-  const response = await fetch('/api/user');
-  return response.json();  // TypeScript knows this should match UserResponse
-}
-```
-
-**Why This Matters**: Write once, use everywhere. Type safety + reusability.
-
----
-
-## 7. TypeScript with React
+## 6. TypeScript with React
 
 ### Props: The Component Contract
 
@@ -501,7 +422,7 @@ function Counter() {
 
 ---
 
-## 8. Common Mistakes
+## 7. Common Mistakes
 
 ### Mistake 1: Using `any` (Defeating TypeScript)
 
@@ -583,7 +504,7 @@ if (isUser(data)) {
 
 You now understand:
 - ✅ **Why** TypeScript prevents bugs
-- ✅ **How** types work (inference, unions, generics)
+- ✅ **How** types work (inference, unions, interfaces)
 - ✅ **When** to use explicit types vs inference
 - ✅ **How** to use TypeScript with React
 

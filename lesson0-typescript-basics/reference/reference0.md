@@ -12,9 +12,8 @@
 2. [Function Syntax](#function-syntax)
 3. [Arrays & Objects](#arrays--objects)
 4. [Union & Type Aliases](#union--type-aliases)
-5. [Generics Patterns](#generics-patterns)
-6. [React + TypeScript Patterns](#react--typescript-patterns)
-7. [Common Type Utilities](#common-type-utilities)
+5. [React + TypeScript Patterns](#react--typescript-patterns)
+6. [Common Type Utilities](#common-type-utilities)
 
 ---
 
@@ -217,59 +216,6 @@ interface Admin extends User {
 // Type - for unions, computed types
 type Status = "on" | "off";
 type ID = string | number;
-```
-
----
-
-## Generics Patterns
-
-```typescript
-// Generic function
-function identity<T>(arg: T): T {
-  return arg;
-}
-
-let str = identity("hello");      // string
-let num = identity(42);           // number
-
-// Generic interface
-interface Box<T> {
-  value: T;
-}
-
-let stringBox: Box<string> = { value: "hello" };
-let numberBox: Box<number> = { value: 42 };
-
-// Multiple generics
-function pair<A, B>(a: A, b: B): [A, B] {
-  return [a, b];
-}
-
-let p = pair("hello", 42);  // [string, number]
-
-// Generic constraints
-interface HasLength {
-  length: number;
-}
-
-function logLength<T extends HasLength>(arg: T): T {
-  console.log(arg.length);
-  return arg;
-}
-
-logLength("hello");      // string has length
-logLength([1, 2, 3]);    // array has length
-// logLength(42);        // Error: number has no length
-
-// Generic React component
-interface Props<T> {
-  items: T[];
-  renderItem: (item: T) => React.ReactNode;
-}
-
-function List<T>({ items, renderItem }: Props<T>) {
-  return <ul>{items.map(renderItem)}</ul>;
-}
 ```
 
 ---
