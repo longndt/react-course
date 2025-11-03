@@ -25,7 +25,7 @@
 
 ### The Problem: Monolithic UI
 
-```tsx
+```jsx
 // ❌ All logic in one massive component - hard to maintain!
 function EntireApp() {
   // 500 lines of mixed concerns:
@@ -40,7 +40,7 @@ function EntireApp() {
 
 ### The Solution: Component Composition
 
-```tsx
+```jsx
 // ✅ Break down into focused, reusable pieces
 function App() {
   return (
@@ -63,7 +63,7 @@ function ProductList() {
 **Key Benefits:**
 - **Testable**: Test one component at a time
 - **Reusable**: Use `<Button />` everywhere
-- **Maintainable**: Bug in cart? Only check `ShoppingCart.tsx`
+- **Maintainable**: Bug in cart? Only check `ShoppingCart.jsx`
 - **Collaborative**: Team members work on different components
 
 ---
@@ -74,7 +74,7 @@ function ProductList() {
 
 **State = Data that changes over time and triggers re-renders**
 
-```tsx
+```jsx
 // NOT state - never changes
 const APP_NAME = "My App";
 
@@ -84,7 +84,7 @@ const APP_NAME = "My App";
 
 ### Why Can't We Use Regular Variables?
 
-```tsx
+```jsx
 // ❌ This WON'T work - UI won't update!
 function BrokenCounter() {
   let count = 0;  // Regular variable
@@ -104,7 +104,7 @@ function BrokenCounter() {
 }
 ```
 
-```tsx
+```jsx
 // ✅ This WORKS - UI updates!
 function WorkingCounter() {
   const [count, setCount] = useState(0);  // React state
@@ -130,7 +130,7 @@ function WorkingCounter() {
 
 ### How useState Works
 
-```tsx
+```jsx
 const [value, setValue] = useState(initialValue);
 //     ^       ^           ^
 //     |       |           └── Initial value (only used on first render)
@@ -140,7 +140,7 @@ const [value, setValue] = useState(initialValue);
 
 ### State is Asynchronous
 
-```tsx
+```jsx
 function Counter() {
   const [count, setCount] = useState(0);
 
@@ -168,15 +168,9 @@ function Counter() {
 
 ### Object State: Immutability is Key
 
-```tsx
-interface User {
-  name: string;
-  age: number;
-  email: string;
-}
-
+```jsx
 function UserProfile() {
-  const [user, setUser] = useState<User>({
+  const [user, setUser] = useState({
     name: 'John',
     age: 25,
     email: 'john@example.com'
@@ -231,7 +225,7 @@ Examples:
 - Manually changing DOM
 - Logging to console
 
-```tsx
+```jsx
 // Without useEffect - runs on EVERY render (bad!)
 function BadExample() {
   fetch('/api/data');  // 💥 Infinite loop! Fetch triggers re-render → fetch again → ...
@@ -254,8 +248,8 @@ function GoodExample() {
 
 ### Dependency Array: The Most Important Part
 
-```tsx
-function EffectDemo({ userId }: { userId: number }) {
+```jsx
+function EffectDemo({ userId }) {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
   
@@ -291,7 +285,7 @@ function EffectDemo({ userId }: { userId: number }) {
 
 ### Cleanup: Preventing Memory Leaks
 
-```tsx
+```jsx
 function Timer() {
   const [seconds, setSeconds] = useState(0);
 
@@ -329,7 +323,7 @@ function Timer() {
 
 **1. Accessing DOM Elements**
 
-```tsx
+```jsx
 function TextInput() {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -348,7 +342,7 @@ function TextInput() {
 
 **2. Persisting Values Without Re-rendering**
 
-```tsx
+```jsx
 // useState vs useRef comparison
 function StateVsRef() {
   const [stateCount, setStateCount] = useState(0);  // Re-renders
@@ -385,7 +379,7 @@ function StateVsRef() {
 
 ### The Prop Drilling Problem
 
-```tsx
+```jsx
 // ❌ Props passed through 5 levels!
 function App() {
   const user = { name: 'John', role: 'admin' };
@@ -411,14 +405,9 @@ function MenuItem({ user }) {
 
 ### Context: Global State
 
-```tsx
+```jsx
 // ✅ Create context once
-interface User {
-  name: string;
-  role: string;
-}
-
-const UserContext = createContext<User | undefined>(undefined);
+const UserContext = createContext(undefined);
 
 // Provider at top level
 function App() {
@@ -454,7 +443,7 @@ function MenuItem() {
 
 ### When useState Gets Messy
 
-```tsx
+```jsx
 // ❌ Multiple related state updates - hard to manage!
 function ShoppingCart() {
   const [items, setItems] = useState([]);
@@ -473,7 +462,7 @@ function ShoppingCart() {
 
 ### useReducer: Centralized State Logic
 
-```tsx
+```jsx
 // ✅ All state updates in one place
 interface State {
   items: Item[];
@@ -555,7 +544,7 @@ function ShoppingCart() {
 
 ### Why Custom Hooks?
 
-```tsx
+```jsx
 // ❌ Duplicated logic in multiple components
 function ComponentA() {
   const [data, setData] = useState(null);
@@ -587,7 +576,7 @@ function ComponentB() {
 
 ### Extract to Custom Hook
 
-```tsx
+```jsx
 // ✅ Reusable custom hook
 function useFetch<T>(url: string) {
   const [data, setData] = useState<T | null>(null);
@@ -637,7 +626,7 @@ function ComponentB() {
 
 ### Rule 1: Only Call Hooks at Top Level
 
-```tsx
+```jsx
 // ❌ WRONG: Conditional hook
 function Bad({ show }) {
   if (show) {
@@ -664,7 +653,7 @@ function Good({ show }) {
 
 **Why?** React relies on hook call order to track state. Conditional hooks break this order.
 
-```tsx
+```jsx
 // React tracks hooks by order:
 // Render 1:         Render 2:
 useState('name')    useState('name')    // ✅ Same order
@@ -682,7 +671,7 @@ useState(false)     useState(false)     // 💥 Now in position 2, was position 
 
 ### Rule 2: Only Call Hooks from React Functions
 
-```tsx
+```jsx
 // ❌ WRONG: Regular JavaScript function
 function regularFunction() {
   const [count, setCount] = useState(0);  // 💥 Error!
@@ -705,7 +694,7 @@ function useCustomHook() {
 
 ### Mistake 1: Forgetting Dependencies in useEffect
 
-```tsx
+```jsx
 // ❌ BAD: Missing dependency
 function Bad({ userId }) {
   const [user, setUser] = useState(null);
@@ -729,7 +718,7 @@ function Good({ userId }) {
 
 ### Mistake 2: Mutating State
 
-```tsx
+```jsx
 // ❌ BAD: Mutating array
 function Bad() {
   const [items, setItems] = useState([1, 2, 3]);
@@ -752,7 +741,7 @@ function Good() {
 
 ### Mistake 3: Using State Value Immediately After Setting
 
-```tsx
+```jsx
 function Bad() {
   const [count, setCount] = useState(0);
   
@@ -785,3 +774,4 @@ You now understand:
 **Practice**: Head to `lab2.md` for hands-on exercises!
 
 **Quick Reference**: See `reference2.md` for hook syntax and patterns.
+

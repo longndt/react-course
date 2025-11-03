@@ -29,8 +29,8 @@ npm install react-router-dom
 
 ### Basic Setup
 
-```tsx
-// src/main.tsx or src/index.tsx
+```jsx
+// src/main.jsx or src/index.jsx
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
@@ -47,7 +47,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 ### Simple Routes
 
-```tsx
+```jsx
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -66,7 +66,7 @@ function App() {
 
 ### Nested Routes with Layout
 
-```tsx
+```jsx
 import { Routes, Route, Outlet } from 'react-router-dom';
 
 function App() {
@@ -96,7 +96,7 @@ function Layout() {
 
 ### Multiple Nested Levels
 
-```tsx
+```jsx
 <Routes>
   <Route path="/" element={<Layout />}>
     <Route index element={<Home />} />
@@ -116,7 +116,7 @@ function Layout() {
 
 ### Link Component
 
-```tsx
+```jsx
 import { Link } from 'react-router-dom';
 
 function Navigation() {
@@ -132,7 +132,7 @@ function Navigation() {
 
 ### NavLink (Active Styling)
 
-```tsx
+```jsx
 import { NavLink } from 'react-router-dom';
 
 function Navigation() {
@@ -160,7 +160,7 @@ function Navigation() {
 
 ### Programmatic Navigation
 
-```tsx
+```jsx
 import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
@@ -193,7 +193,7 @@ function LoginForm() {
 
 ### URL Parameters
 
-```tsx
+```jsx
 // Route definition
 <Route path="/users/:id" element={<UserProfile />} />
 <Route path="/posts/:postId/comments/:commentId" element={<Comment />} />
@@ -216,7 +216,7 @@ function Comment() {
 
 ### Query Parameters
 
-```tsx
+```jsx
 import { useSearchParams } from 'react-router-dom';
 
 function ProductList() {
@@ -254,7 +254,7 @@ function ProductList() {
 
 ### Location State
 
-```tsx
+```jsx
 import { useNavigate, useLocation } from 'react-router-dom';
 
 // Pass state during navigation
@@ -283,7 +283,7 @@ function ProductDetail() {
 
 ### Basic Protected Route
 
-```tsx
+```jsx
 import { Navigate } from 'react-router-dom';
 
 interface ProtectedRouteProps {
@@ -310,7 +310,7 @@ function ProtectedRoute({ children }: ProtectedRouteProps) {
 
 ### With Auth Context
 
-```tsx
+```jsx
 function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { isAuthenticated, loading } = useAuth();
   
@@ -328,7 +328,7 @@ function ProtectedRoute({ children }: ProtectedRouteProps) {
 
 ### Role-Based Protection
 
-```tsx
+```jsx
 interface RoleProtectedRouteProps {
   children: React.ReactNode;
   allowedRoles: string[];
@@ -358,7 +358,7 @@ function RoleProtectedRoute({ children, allowedRoles }: RoleProtectedRouteProps)
 
 ### Remember Original Destination
 
-```tsx
+```jsx
 function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { isAuthenticated } = useAuth();
   const location = useLocation();
@@ -389,7 +389,7 @@ function Login() {
 
 ### Auth Context Setup
 
-```tsx
+```jsx
 import { createContext, useContext, useState, useEffect } from 'react';
 
 interface User {
@@ -460,8 +460,8 @@ export function useAuth() {
 
 ### Using Auth Context
 
-```tsx
-// In App.tsx
+```jsx
+// In App.jsx
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -493,7 +493,7 @@ function Dashboard() {
 
 ### Login with JWT
 
-```tsx
+```jsx
 async function login(credentials: { email: string; password: string }) {
   const response = await fetch('/api/login', {
     method: 'POST',
@@ -512,7 +512,7 @@ async function login(credentials: { email: string; password: string }) {
 
 ### Axios Interceptor for JWT
 
-```tsx
+```jsx
 import axios from 'axios';
 
 const api = axios.create({
@@ -549,7 +549,7 @@ export default api;
 npm install jwt-decode
 ```
 
-```tsx
+```jsx
 import { jwtDecode } from 'jwt-decode';
 
 interface TokenPayload {
@@ -587,7 +587,7 @@ function checkTokenExpiration() {
 
 ### Loading State
 
-```tsx
+```jsx
 function App() {
   const { loading } = useAuth();
   
@@ -601,7 +601,7 @@ function App() {
 
 ### Redirect After Login
 
-```tsx
+```jsx
 function Login() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -616,7 +616,7 @@ function Login() {
 
 ### Logout Confirmation
 
-```tsx
+```jsx
 function LogoutButton() {
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -634,7 +634,7 @@ function LogoutButton() {
 
 ### Active Link Styling
 
-```tsx
+```jsx
 <NavLink
   to="/dashboard"
   className={({ isActive }) => 
@@ -647,7 +647,7 @@ function LogoutButton() {
 
 ### 404 Not Found
 
-```tsx
+```jsx
 <Routes>
   <Route path="/" element={<Home />} />
   <Route path="/about" element={<About />} />
@@ -688,3 +688,4 @@ function NotFound() {
 
 **For concepts and explanations**: See `theory4.md`  
 **For practice**: See `lab4.md`
+

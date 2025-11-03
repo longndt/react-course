@@ -223,7 +223,7 @@ node_modules/
 
 ### Code Splitting
 
-```tsx
+```jsx
 import { lazy, Suspense } from 'react';
 
 // Lazy load components
@@ -244,7 +244,7 @@ function App() {
 
 ### useMemo
 
-```tsx
+```jsx
 import { useMemo } from 'react';
 
 function ProductList({ products }) {
@@ -258,7 +258,7 @@ function ProductList({ products }) {
 
 ### useCallback
 
-```tsx
+```jsx
 import { useCallback } from 'react';
 
 function Parent() {
@@ -272,7 +272,7 @@ function Parent() {
 
 ### React.memo
 
-```tsx
+```jsx
 const ExpensiveComponent = React.memo(({ data }) => {
   // Only re-renders if data changes
   return <div>{data}</div>;
@@ -423,3 +423,4 @@ Set up production error monitoring (e.g., Sentry) after you deploy and stabilize
 
 **For concepts and explanations**: See `theory5.md`  
 **For practice**: See `lab5.md`
+

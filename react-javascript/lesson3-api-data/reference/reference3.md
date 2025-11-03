@@ -2,19 +2,16 @@
 
 > **⚡ Quick Lookup:** Syntax, patterns, and code snippets for API integration
 
-> **📝 Note:** Examples use TypeScript syntax for type safety demonstration. For JavaScript versions, simply remove type annotations. See [Lab 3](../lab/lab3.md) for pure JavaScript examples.
-
 ---
 
 ## Table of Contents
 
 1. [HTTP Methods Cheat Sheet](#http-methods-cheat-sheet)
 2. [Axios API Reference](#axios-api-reference)
-3. [React Query Reference](#react-query-reference)
-4. [Common Patterns](#common-patterns)
-5. [Error Codes Reference](#error-codes-reference)
-6. [TypeScript Types](#typescript-types)
-7. [Troubleshooting Guide](#troubleshooting-guide)
+3. [Common Patterns](#common-patterns)
+4. [Error Codes Reference](#error-codes-reference)
+5. [TypeScript Types](#typescript-types)
+6. [Troubleshooting Guide](#troubleshooting-guide)
 
 > 💡 **For Concepts:** See [theory3.md](../theory/theory3.md) for detailed explanations
 
@@ -160,143 +157,15 @@ try {
 
 ---
 
-## React Query Reference
+## Advanced: React Query & Redux (Moved to Extras)
 
-### Installation
+**React Query** (TanStack Query) and **Redux** are powerful but beyond core API basics:
+- **React Query**: Advanced server state management (caching, refetching)
+- **Redux**: Global client state management (complex UI state)
 
-```bash
-npm install @tanstack/react-query
-```
+**For now, focus on**: `fetch`/`axios` + `useState` + `useEffect`
 
-### Setup
-
-```typescript
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000,      // 5 minutes
-      cacheTime: 10 * 60 * 1000,     // 10 minutes
-      retry: 3,                       // Retry 3 times
-      refetchOnWindowFocus: false,    // Don't refetch on focus
-    },
-  },
-});
-
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <YourApp />
-    </QueryClientProvider>
-  );
-}
-```
-
-### useQuery Hook
-
-```typescript
-import { useQuery } from '@tanstack/react-query';
-
-function UserList() {
-  const {
-    data,           // Response data
-    isLoading,      // Initial loading
-    isFetching,     // Any loading (including background)
-    error,          // Error object
-    refetch,        // Manual refetch function
-    isError,        // Boolean error state
-    isSuccess,      // Boolean success state
-  } = useQuery({
-    queryKey: ['users'],                      // Unique key
-    queryFn: () => api.get('/users').then(res => res.data),
-    enabled: true,                            // Enable/disable query
-    staleTime: 5000,                          // Consider fresh for 5s
-    retry: 2,                                 // Retry failed requests
-    onSuccess: (data) => console.log(data),   // Success callback
-    onError: (error) => console.error(error), // Error callback
-  });
-
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error: {error.message}</div>;
-
-  return (
-    <div>
-      <button onClick={() => refetch()}>Refresh</button>
-      <ul>
-        {data?.map(user => (
-          <li key={user.id}>{user.name}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-```
-
-### useMutation Hook
-
-```typescript
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-
-function CreateUser() {
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation({
-    mutationFn: (userData) => api.post('/users', userData),
-    onSuccess: () => {
-      // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ['users'] });
-    },
-    onError: (error) => {
-      console.error('Error:', error);
-    },
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    mutation.mutate({ name: 'John', email: 'john@example.com' });
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <button type="submit" disabled={mutation.isPending}>
-        {mutation.isPending ? 'Creating...' : 'Create User'}
-      </button>
-      {mutation.isError && <div>Error: {mutation.error.message}</div>}
-      {mutation.isSuccess && <div>User created!</div>}
-    </form>
-  );
-}
-```
-
-### Query Client Methods
-
-```typescript
-import { useQueryClient } from '@tanstack/react-query';
-
-const queryClient = useQueryClient();
-
-// Invalidate queries (trigger refetch)
-queryClient.invalidateQueries({ queryKey: ['users'] });
-
-// Set query data manually
-queryClient.setQueryData(['users'], newData);
-
-// Get query data
-const users = queryClient.getQueryData(['users']);
-
-// Remove query from cache
-queryClient.removeQueries({ queryKey: ['users'] });
-
-// Cancel queries
-await queryClient.cancelQueries({ queryKey: ['users'] });
-
-// Prefetch data
-await queryClient.prefetchQuery({
-  queryKey: ['users'],
-  queryFn: fetchUsers,
-});
-```
+**When ready**: See `extras/state_management.md` for React Query, Redux, Zustand patterns
 
 ---
 
@@ -326,86 +195,59 @@ export const userApi = {
 
 ```typescript
 // hooks/useUsers.ts
+import { useState, useEffect } from 'react';
+
 export function useUsers() {
-  return useQuery({
-    queryKey: ['users'],
-    queryFn: userApi.getAll,
-  });
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    api.get('/users')
+      .then(res => setUsers(res.data))
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { users, loading, error };
 }
 
 export function useUser(id: string) {
-  return useQuery({
-    queryKey: ['users', id],
-    queryFn: () => userApi.getById(id),
-    enabled: !!id, // Only fetch if id exists
-  });
-}
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-export function useCreateUser() {
-  const queryClient = useQueryClient();
+  useEffect(() => {
+    if (!id) return;
+    
+    api.get(`/users/${id}`)
+      .then(res => setUser(res.data))
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
+  }, [id]);
 
-  return useMutation({
-    mutationFn: userApi.create,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['users'] });
-    },
-  });
-}
-
-export function useUpdateUser() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: UpdateUserData }) =>
-      userApi.update(id, data),
-    onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({ queryKey: ['users'] });
-      queryClient.invalidateQueries({ queryKey: ['users', variables.id] });
-    },
-  });
-}
-
-export function useDeleteUser() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: userApi.delete,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['users'] });
-    },
-  });
+  return { user, loading, error };
 }
 ```
 
 ### Component Usage
 
 ```typescript
-// components/UserManagement.tsx
-import { useUsers, useCreateUser, useDeleteUser } from '../hooks/useUsers';
+// components/UserList.jsx
+import { useUsers } from '../hooks/useUsers';
 
-function UserManagement() {
-  const { data: users, isLoading, error } = useUsers();
-  const createUser = useCreateUser();
-  const deleteUser = useDeleteUser();
+function UserList() {
+  const { users, loading, error } = useUsers();
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
-    <div>
-      <button onClick={() => createUser.mutate({ name: 'John', email: 'john@example.com' })}>
-        Add User
-      </button>
-
-      <ul>
-        {users?.map(user => (
-          <li key={user.id}>
-            {user.name}
-            <button onClick={() => deleteUser.mutate(user.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {users.map(user => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
   );
 }
 ```
@@ -608,21 +450,15 @@ useEffect(() => {
 #### Stale Data
 
 ```typescript
-// Problem: Data doesn't update
+// Problem: Data doesn't update after changes
 
-// Solution 1: Lower staleTime
-useQuery({
-  queryKey: ['users'],
-  queryFn: fetchUsers,
-  staleTime: 0, // Always consider stale
-});
-
-// Solution 2: Invalidate on mutation
-mutation.mutate(data, {
-  onSuccess: () => {
-    queryClient.invalidateQueries({ queryKey: ['users'] });
-  },
-});
+// Solution: Refetch after mutations
+async function updateUser(id, data) {
+  await api.put(`/users/${id}`, data);
+  // Refetch to get fresh data
+  const users = await api.get('/users');
+  setUsers(users.data);
+}
 ```
 
 #### Type Errors
@@ -647,21 +483,19 @@ const fetchUsers = async (): Promise<User[]> => {
 
 ```bash
 # Install dependencies
-npm install axios @tanstack/react-query
+npm install axios
 
 # Type definitions (if needed)
 npm install -D @types/axios
-
-# DevTools for React Query
-npm install @tanstack/react-query-devtools
 ```
 
 ## Resources
 
 - **Axios Docs:** https://axios-http.com/docs/intro
-- **React Query Docs:** https://tanstack.com/query/latest
 - **MDN HTTP:** https://developer.mozilla.org/en-US/docs/Web/HTTP
+- **fetch API:** https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 
 ---
 
 > 💡 **Need deeper understanding?** See [theory3.md](../theory/theory3.md) for concepts and explanations
+

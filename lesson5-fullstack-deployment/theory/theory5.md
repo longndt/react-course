@@ -419,15 +419,12 @@ function badCode() {
   // Crashes, but you never know!
 }
 
-// ✅ Use error monitoring (Sentry, LogRocket)
-import * as Sentry from '@sentry/react';
+// ✅ Use error monitoring in production
+// Simple console logging for now
+console.error('Error:', error);
 
-Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-  environment: process.env.NODE_ENV
-});
-
-// Now you get alerts when users hit errors!
+// Advanced: Error monitoring services (Sentry, LogRocket) 
+// See extras/monitoring.md when ready
 ```
 
 ### Mistake 5: Not Optimizing Images

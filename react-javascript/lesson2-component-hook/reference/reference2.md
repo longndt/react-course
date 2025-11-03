@@ -21,7 +21,7 @@
 
 ## Hook Imports
 
-```tsx
+```jsx
 import { 
   useState, 
   useEffect, 
@@ -40,7 +40,7 @@ import {
 
 ### Basic State
 
-```tsx
+```jsx
 // Single value
 const [count, setCount] = useState(0);
 const [name, setName] = useState('');
@@ -53,7 +53,7 @@ const [user, setUser] = useState<User | null>(null);
 
 ### Object State
 
-```tsx
+```jsx
 interface User {
   name: string;
   age: number;
@@ -75,7 +75,7 @@ setUser(prev => ({ ...prev, age: prev.age + 1 }));
 
 ### Array State
 
-```tsx
+```jsx
 const [items, setItems] = useState<string[]>([]);
 
 // Add item
@@ -95,7 +95,7 @@ setItems([]);
 
 ### Multiple States
 
-```tsx
+```jsx
 function Form() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -118,7 +118,7 @@ function Form() {
 
 ### Run Once on Mount
 
-```tsx
+```jsx
 useEffect(() => {
   console.log('Component mounted');
   
@@ -131,7 +131,7 @@ useEffect(() => {
 
 ### Run on Dependency Change
 
-```tsx
+```jsx
 useEffect(() => {
   console.log('userId changed:', userId);
 }, [userId]);
@@ -144,7 +144,7 @@ useEffect(() => {
 
 ### Data Fetching
 
-```tsx
+```jsx
 useEffect(() => {
   let cancelled = false;
   
@@ -173,7 +173,7 @@ useEffect(() => {
 
 ### Timer/Interval
 
-```tsx
+```jsx
 // Timer
 useEffect(() => {
   const timer = setTimeout(() => {
@@ -195,7 +195,7 @@ useEffect(() => {
 
 ### Event Listeners
 
-```tsx
+```jsx
 useEffect(() => {
   function handleResize() {
     setWidth(window.innerWidth);
@@ -215,7 +215,7 @@ useEffect(() => {
 
 ### DOM Reference
 
-```tsx
+```jsx
 // Input
 const inputRef = useRef<HTMLInputElement>(null);
 inputRef.current?.focus();
@@ -231,7 +231,7 @@ buttonRef.current?.click();
 
 ### Persisting Values
 
-```tsx
+```jsx
 // Previous value
 const prevValue = useRef<number>();
 
@@ -263,7 +263,7 @@ renderCount.current += 1;
 
 ### Create Context
 
-```tsx
+```jsx
 interface ThemeContextType {
   theme: 'light' | 'dark';
   toggleTheme: () => void;
@@ -274,7 +274,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 ### Provider
 
-```tsx
+```jsx
 function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   
@@ -292,7 +292,7 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 ### Consumer
 
-```tsx
+```jsx
 function ThemedButton() {
   const context = useContext(ThemeContext);
   
@@ -315,7 +315,7 @@ function ThemedButton() {
 
 ### Custom Hook for Context
 
-```tsx
+```jsx
 function useTheme() {
   const context = useContext(ThemeContext);
   if (!context) {
@@ -336,7 +336,7 @@ function Component() {
 
 ### Basic Reducer
 
-```tsx
+```jsx
 interface State {
   count: number;
 }
@@ -375,7 +375,7 @@ function Counter() {
 
 ### Complex Reducer
 
-```tsx
+```jsx
 interface State {
   items: Item[];
   total: number;
@@ -435,7 +435,7 @@ function ShoppingCart() {
 
 ### useFetch
 
-```tsx
+```jsx
 function useFetch<T>(url: string) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(false);
@@ -481,7 +481,7 @@ function Component() {
 
 ### useLocalStorage
 
-```tsx
+```jsx
 function useLocalStorage<T>(key: string, initialValue: T) {
   const [value, setValue] = useState<T>(() => {
     const stored = localStorage.getItem(key);
@@ -505,7 +505,7 @@ function Component() {
 
 ### useToggle
 
-```tsx
+```jsx
 function useToggle(initialValue = false) {
   const [value, setValue] = useState(initialValue);
   
@@ -531,7 +531,7 @@ function Component() {
 
 ### useDebounce
 
-```tsx
+```jsx
 function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState(value);
   
@@ -568,7 +568,7 @@ function SearchComponent() {
 
 ### Toggle Boolean
 
-```tsx
+```jsx
 const [isOpen, setIsOpen] = useState(false);
 
 // Toggle
@@ -582,7 +582,7 @@ setIsOpen(false);
 
 ### Form Handling
 
-```tsx
+```jsx
 function Form() {
   const [formData, setFormData] = useState({
     name: '',
@@ -614,7 +614,7 @@ function Form() {
 
 ### List Operations
 
-```tsx
+```jsx
 const [items, setItems] = useState<Item[]>([]);
 
 // Add
@@ -645,7 +645,7 @@ const activeItems = items.filter(item => item.active);
 
 ### Conditional Rendering
 
-```tsx
+```jsx
 function Component() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -661,7 +661,7 @@ function Component() {
 
 ### Previous Value
 
-```tsx
+```jsx
 function Component() {
   const [count, setCount] = useState(0);
   const prevCount = useRef(0);
@@ -706,3 +706,4 @@ function Component() {
 
 **For concepts and explanations**: See `theory2.md`  
 **For practice**: See `lab2.md`
+

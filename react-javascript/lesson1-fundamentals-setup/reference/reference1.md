@@ -58,7 +58,7 @@ npm --version     # Should be v9.0.0+
 
 ### Basic Component
 
-```tsx
+```jsx
 function ComponentName() {
   return <div>Content</div>;
 }
@@ -68,7 +68,7 @@ export default ComponentName;
 
 ### Component with Props
 
-```tsx
+```jsx
 interface Props {
   name: string;
   age: number;
@@ -90,7 +90,7 @@ export default UserCard;
 
 ### Component with Children
 
-```tsx
+```jsx
 interface Props {
   title: string;
   children: React.ReactNode;
@@ -110,7 +110,7 @@ export default Card;
 
 ### Component with Default Props
 
-```tsx
+```jsx
 interface Props {
   title: string;
   subtitle?: string;
@@ -136,7 +136,7 @@ export default Header;
 
 ### Single Root Element
 
-```tsx
+```jsx
 // ❌ Wrong
 function App() {
   return (
@@ -168,7 +168,7 @@ function App() {
 
 ### Embedding JavaScript
 
-```tsx
+```jsx
 function Profile() {
   const name = "Alice";
   const age = 25;
@@ -204,7 +204,7 @@ function Profile() {
 
 ### TSX vs HTML Differences
 
-```tsx
+```jsx
 // className (not class)
 <div className="container">
 
@@ -232,7 +232,7 @@ function Profile() {
 
 ### Basic Props
 
-```tsx
+```jsx
 interface ButtonProps {
   label: string;
   onClick: () => void;
@@ -248,7 +248,7 @@ function Button({ label, onClick }: ButtonProps) {
 
 ### Optional Props
 
-```tsx
+```jsx
 interface Props {
   name: string;
   age?: number;
@@ -270,7 +270,7 @@ function User({ name, age }: Props) {
 
 ### Props with Default Values
 
-```tsx
+```jsx
 interface Props {
   title: string;
   color?: string;
@@ -288,7 +288,7 @@ function Badge({ title, color = "blue", size = 16 }: Props) {
 
 ### Children Props
 
-```tsx
+```jsx
 interface Props {
   children: React.ReactNode;
 }
@@ -306,7 +306,7 @@ function Container({ children }: Props) {
 
 ### Spread Props
 
-```tsx
+```jsx
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
 }
@@ -329,8 +329,8 @@ function Card({ title, ...rest }: Props) {
 
 ### CSS File
 
-```tsx
-// Component.tsx
+```jsx
+// Component.jsx
 import './Component.css';
 
 function Component() {
@@ -348,7 +348,7 @@ function Component() {
 
 ### Inline Styles (Object)
 
-```tsx
+```jsx
 function Component() {
   const style = {
     padding: '20px',
@@ -362,7 +362,7 @@ function Component() {
 
 ### Inline Styles (Direct)
 
-```tsx
+```jsx
 function Component() {
   return (
     <div style={{
@@ -378,7 +378,7 @@ function Component() {
 
 ### Dynamic Styles
 
-```tsx
+```jsx
 interface Props {
   isActive: boolean;
 }
@@ -400,7 +400,7 @@ function Button({ isActive }: Props) {
 
 ### Multiple CSS Classes
 
-```tsx
+```jsx
 function Component() {
   const isActive = true;
   const hasError = false;
@@ -423,7 +423,7 @@ function Component() {
 
 ### Click Events
 
-```tsx
+```jsx
 function ClickDemo() {
   const handleClick = () => {
     alert('Clicked!');
@@ -450,7 +450,7 @@ function ClickDemo() {
 
 ### Form Events
 
-```tsx
+```jsx
 function FormDemo() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -472,7 +472,7 @@ function FormDemo() {
 
 ### Common Event Types
 
-```tsx
+```jsx
 // Click events
 onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
 
@@ -501,7 +501,7 @@ onMouseLeave: (e: React.MouseEvent<HTMLDivElement>) => void
 
 ### Conditional Rendering
 
-```tsx
+```jsx
 function User({ isLoggedIn }: { isLoggedIn: boolean }) {
   // If-else with ternary
   return (
@@ -523,7 +523,7 @@ function Notification({ message }: { message?: string }) {
 
 ### List Rendering
 
-```tsx
+```jsx
 function List() {
   const items = ['Apple', 'Banana', 'Cherry'];
   
@@ -560,7 +560,7 @@ function UserList() {
 
 ### Component Composition
 
-```tsx
+```jsx
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="layout">
@@ -583,7 +583,7 @@ function App() {
 
 ### Fragments
 
-```tsx
+```jsx
 // Long form
 <React.Fragment>
   <h1>Title</h1>
@@ -615,16 +615,16 @@ my-app/
 │   └── assets/              # Images, fonts, etc.
 ├── src/
 │   ├── components/          # Reusable components
-│   │   ├── Button.tsx
+│   │   ├── Button.jsx
 │   │   ├── Button.css
-│   │   ├── Card.tsx
+│   │   ├── Card.jsx
 │   │   └── Card.css
 │   ├── pages/              # Page components
-│   │   ├── Home.tsx
-│   │   └── About.tsx
-│   ├── App.tsx             # Root component
+│   │   ├── Home.jsx
+│   │   └── About.jsx
+│   ├── App.jsx             # Root component
 │   ├── App.css
-│   ├── main.tsx            # Entry point
+│   ├── main.jsx            # Entry point
 │   └── index.css           # Global styles
 ├── index.html
 ├── package.json
@@ -654,3 +654,4 @@ my-app/
 
 **For concepts and explanations**: See `theory1.md`  
 **For practice**: See `lab1.md`
+

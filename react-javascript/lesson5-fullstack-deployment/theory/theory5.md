@@ -120,10 +120,10 @@ npm run build
 
 ```bash
 # Development: Files served as-is
-src/App.tsx → Browser reads TypeScript?!
+src/App.jsx → Browser reads TypeScript?!
 
 # Production: Files transformed
-src/App.tsx → TypeScript compiler → JavaScript → Minifier → app.min.js
+src/App.jsx → TypeScript compiler → JavaScript → Minifier → app.min.js
 ```
 
 **Why?**
@@ -137,7 +137,7 @@ src/App.tsx → TypeScript compiler → JavaScript → Minifier → app.min.js
 
 ### Code Splitting: Load What You Need
 
-```tsx
+```jsx
 // ❌ BAD: Load entire app upfront
 import Dashboard from './pages/Dashboard';
 import AdminPanel from './pages/AdminPanel';
@@ -169,7 +169,7 @@ With code splitting:
 
 ### Memoization: Avoid Unnecessary Re-renders
 
-```tsx
+```jsx
 // ❌ BAD: Recalculates on every render
 function ProductList({ products }) {
   const total = products.reduce((sum, p) => sum + p.price, 0);
@@ -284,7 +284,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 // .env
 VITE_STRIPE_SECRET_KEY=sk_live_abc123
 
-// src/App.tsx
+// src/App.jsx
 const key = import.meta.env.VITE_STRIPE_SECRET_KEY;
 // Users can see this in browser DevTools!
 
@@ -419,20 +419,17 @@ function badCode() {
   // Crashes, but you never know!
 }
 
-// ✅ Use error monitoring (Sentry, LogRocket)
-import * as Sentry from '@sentry/react';
+// ✅ Use error monitoring in production
+// Simple console logging for now
+console.error('Error:', error);
 
-Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-  environment: process.env.NODE_ENV
-});
-
-// Now you get alerts when users hit errors!
+// Advanced: Error monitoring services (Sentry, LogRocket) 
+// See extras/monitoring.md when ready
 ```
 
 ### Mistake 5: Not Optimizing Images
 
-```tsx
+```jsx
 // ❌ 10MB image → Slow load!
 <img src="/giant-image.jpg" />
 
@@ -463,3 +460,4 @@ You now understand:
 **Practice**: Head to `lab5.md` for deployment exercises!
 
 **Quick Reference**: See `reference5.md` for deployment commands and configurations.
+

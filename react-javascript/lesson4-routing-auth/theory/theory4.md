@@ -46,7 +46,7 @@ User clicks link → JavaScript updates URL → React renders new component → 
 - 💾 Less bandwidth (only data transfers)
 - 📱 App-like experience
 
-```tsx
+```jsx
 // ❌ Traditional: Full page reload
 <a href="/about">About</a>
 
@@ -76,7 +76,7 @@ window.addEventListener('popstate', () => {
 
 ### URL vs UI State
 
-```tsx
+```jsx
 // URL changes = UI updates
 // /users        → Shows UserList component
 // /users/123    → Shows UserProfile component
@@ -93,7 +93,7 @@ window.addEventListener('popstate', () => {
 
 ### What is Declarative Routing?
 
-```tsx
+```jsx
 // ❌ Imperative (manual DOM manipulation)
 if (url === '/') {
   document.getElementById('root').innerHTML = '<Home />';
@@ -112,7 +112,7 @@ if (url === '/') {
 
 ### Route Matching
 
-```tsx
+```jsx
 <Routes>
   {/* Exact match */}
   <Route path="/" element={<Home />} />
@@ -135,7 +135,7 @@ if (url === '/') {
 
 ### Link vs Anchor Tag
 
-```tsx
+```jsx
 // ❌ Regular anchor - FULL PAGE RELOAD
 <a href="/about">About</a>
 
@@ -147,7 +147,7 @@ if (url === '/') {
 
 ### When to Use Programmatic Navigation
 
-```tsx
+```jsx
 // ❌ Don't force programmatic navigation for simple links
 function BadButton() {
   const navigate = useNavigate();
@@ -292,7 +292,7 @@ localStorage.setItem('token', token);
 
 ### Why Protected Routes?
 
-```tsx
+```jsx
 // ❌ Without protection: Anyone can access admin panel!
 <Route path="/admin" element={<AdminPanel />} />
 
@@ -301,9 +301,9 @@ localStorage.setItem('token', token);
 
 ### How Protected Routes Work
 
-```tsx
+```jsx
 // ✅ Protected Route wrapper
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
+function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuth();
   
   // If not authenticated, redirect to login
@@ -334,9 +334,9 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
 ### Role-Based Protection
 
-```tsx
+```jsx
 // Check both authentication AND authorization
-function AdminRoute({ children }: { children: React.ReactNode }) {
+function AdminRoute({ children }) {
   const { user } = useAuth();
   
   // Not logged in
@@ -360,7 +360,7 @@ function AdminRoute({ children }: { children: React.ReactNode }) {
 
 ### The Prop Drilling Problem
 
-```tsx
+```jsx
 // ❌ Passing user through every component!
 function App() {
   const [user, setUser] = useState(null);
@@ -382,7 +382,7 @@ function UserMenu({ user }) {
 
 ### Context API Solution
 
-```tsx
+```jsx
 // ✅ Create context once
 const AuthContext = createContext();
 
@@ -406,19 +406,14 @@ function UserMenu() {
 
 ### Auth Context Pattern
 
-```tsx
+```jsx
 // Complete auth context with login/logout
-interface AuthContextType {
-  user: User | null;
-  login: (credentials: Credentials) => Promise<void>;
-  logout: () => void;
-  isAuthenticated: boolean;
-}
+const AuthContext = createContext(null);
 
-function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
   
-  const login = async (credentials: Credentials) => {
+  const login = async (credentials) => {
     const response = await fetch('/api/login', {
       method: 'POST',
       body: JSON.stringify(credentials)
@@ -457,7 +452,7 @@ function useAuth() {
 
 ### Mistake 1: Using `<a>` Instead of `<Link>`
 
-```tsx
+```jsx
 // ❌ Full page reload!
 <a href="/about">About</a>
 
@@ -467,7 +462,7 @@ function useAuth() {
 
 ### Mistake 2: Not Handling Token Expiration
 
-```tsx
+```jsx
 // ❌ Token expires, user sees errors
 function BadComponent() {
   const token = localStorage.getItem('token');
@@ -490,7 +485,7 @@ function GoodComponent() {
 
 ### Mistake 3: Storing Sensitive Data in JWT
 
-```tsx
+```jsx
 // ❌ BAD: JWT payload is visible to anyone!
 const token = {
   userId: 123,
@@ -510,7 +505,7 @@ const token = {
 
 ### Mistake 4: Not Handling Navigation State
 
-```tsx
+```jsx
 // ❌ User redirected to login, then back to home (lost original destination)
 function Bad() {
   if (!isAuthenticated) {
@@ -553,3 +548,4 @@ You now understand:
 **Practice**: Head to `lab4.md` for hands-on exercises!
 
 **Quick Reference**: See `reference4.md` for routing/auth syntax and patterns.
+

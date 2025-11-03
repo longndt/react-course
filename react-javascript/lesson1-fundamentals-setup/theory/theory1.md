@@ -40,7 +40,7 @@ button.addEventListener('click', () => {
 
 **React Approach:**
 
-```tsx
+```jsx
 // React - Declarative: describe WHAT you want, React handles HOW
 function Counter() {
   const [count, setCount] = useState(0);
@@ -75,7 +75,7 @@ function Counter() {
 - You can combine blocks to build complex structures
 - Blocks are reusable across different projects
 
-```tsx
+```jsx
 // Small, reusable components
 function Button({ label, onClick }) {
   return <button onClick={onClick}>{label}</button>;
@@ -115,7 +115,7 @@ function Dashboard() {
 
 **TSX = TypeScript + JSX (JavaScript XML)**
 
-```tsx
+```jsx
 // This looks like HTML, but it's actually TypeScript!
 function Welcome() {
   return <h1>Hello, World!</h1>;
@@ -134,7 +134,7 @@ function Welcome() {
 
 ### TSX is NOT HTML
 
-```tsx
+```jsx
 // ❌ HTML - This won't work in React
 <div class="container">
   <img src="logo.png">
@@ -193,8 +193,8 @@ my-app/
 ├── public/                # Static files (copied as-is)
 │   └── vite.svg
 ├── src/                   # 👈 Your code lives here
-│   ├── main.tsx          # Entry point (React mounts here)
-│   ├── App.tsx           # Root component
+│   ├── main.jsx          # Entry point (React mounts here)
+│   ├── App.jsx           # Root component
 │   ├── App.css           # Component styles
 │   └── index.css         # Global styles
 ├── index.html            # HTML template (has <div id="root">)
@@ -205,8 +205,8 @@ my-app/
 
 **The Flow:**
 1. Browser loads `index.html` (has `<div id="root">`)
-2. HTML loads `src/main.tsx` (entry point)
-3. `main.tsx` renders `<App />` into `#root`
+2. HTML loads `src/main.jsx` (entry point)
+3. `main.jsx` renders `<App />` into `#root`
 4. Your React app is running!
 
 ---
@@ -217,7 +217,7 @@ my-app/
 
 **A component is just a function that returns TSX:**
 
-```tsx
+```jsx
 // This is a valid React component!
 function Greeting() {
   return <h1>Hello!</h1>;
@@ -231,7 +231,7 @@ function Greeting() {
 
 ### Why Capital Letters Matter
 
-```tsx
+```jsx
 // ✅ Component - Capital letter
 function Button() {
   return <button>Click me</button>;
@@ -253,7 +253,7 @@ function button() {
 
 **Problem: Hard-coded components aren't reusable**
 
-```tsx
+```jsx
 // ❌ Not reusable - always says "John"
 function Greeting() {
   return <h1>Hello, John!</h1>;
@@ -264,7 +264,7 @@ function Greeting() {
 
 **Solution: Use props to make components dynamic**
 
-```tsx
+```jsx
 // ✅ Reusable - name can change
 interface GreetingProps {
   name: string;
@@ -280,7 +280,7 @@ function Greeting({ name }: GreetingProps) {
 
 **Props are like function parameters:**
 
-```tsx
+```jsx
 // Regular TypeScript function
 function add(a: number, b: number): number {
   return a + b;
@@ -305,7 +305,7 @@ function AddDisplay({ a, b }: AddDisplayProps) {
 
 ### Rule 1: Single Root Element
 
-```tsx
+```jsx
 // ❌ ERROR: Can't return multiple elements
 function App() {
   return (
@@ -337,7 +337,7 @@ function App() {
 
 **Why this rule?** A function can only return ONE value. TSX is transformed to function calls:
 
-```tsx
+```jsx
 // TSX
 <div><h1>Hi</h1></div>
 
@@ -354,7 +354,7 @@ return React.createElement('h1', null, 'Hi'), React.createElement('p', null, 'Te
 
 ### Rule 2: Embed JavaScript with `{}`
 
-```tsx
+```jsx
 function Profile() {
   const name = "Alice";
   const age = 25;
@@ -385,7 +385,7 @@ function Profile() {
 
 ### Rule 3: `className` not `class`
 
-```tsx
+```jsx
 // ❌ Wrong - 'class' is JavaScript keyword
 <div class="container">
 
@@ -403,8 +403,8 @@ function Profile() {
 
 **1. CSS Files (Recommended for beginners)**
 
-```tsx
-// App.tsx
+```jsx
+// App.jsx
 import './App.css';  // Import CSS file
 
 function App() {
@@ -425,7 +425,7 @@ function App() {
 
 **2. Inline Styles**
 
-```tsx
+```jsx
 function App() {
   const containerStyle = {
     padding: '20px',      // Note: string values, camelCase properties
@@ -441,7 +441,7 @@ function App() {
 
 **3. Direct Inline**
 
-```tsx
+```jsx
 function App() {
   return (
     <div style={{ padding: '20px', backgroundColor: '#f0f0f0' }}>
@@ -456,7 +456,7 @@ function App() {
 
 ### CSS Property Names in JSX
 
-```tsx
+```jsx
 // ❌ CSS property names - DON'T work in JSX
 { 'background-color': 'red', 'font-size': '16px' }
 
@@ -472,7 +472,7 @@ function App() {
 
 ### How Events Work in React
 
-```tsx
+```jsx
 // Vanilla JS - imperative
 const button = document.getElementById('btn');
 button.addEventListener('click', () => alert('Clicked!'));
@@ -490,7 +490,7 @@ function App() {
 
 ### Event Types
 
-```tsx
+```jsx
 function EventDemo() {
   // onClick - button clicks
   const handleClick = () => {
@@ -531,7 +531,7 @@ function EventDemo() {
 
 ### Mistake 1: Forgetting to Export Component
 
-```tsx
+```jsx
 // ❌ Component defined but not exported
 function Welcome() {
   return <h1>Hello</h1>;
@@ -540,7 +540,7 @@ function Welcome() {
 // Other files can't import it!
 ```
 
-```tsx
+```jsx
 // ✅ Export so other files can use it
 function Welcome() {
   return <h1>Hello</h1>;
@@ -554,7 +554,7 @@ export { Welcome };  // Named export
 
 ### Mistake 2: Calling Functions in TSX Instead of Passing Them
 
-```tsx
+```jsx
 // ❌ BAD: Calls function immediately (infinite loop!)
 <button onClick={handleClick()}>Click</button>
 
@@ -566,14 +566,14 @@ export { Welcome };  // Named export
 ```
 
 **Why it matters:**
-```tsx
+```jsx
 // onClick={handleClick()} → Executes immediately during render!
 // onClick={handleClick}   → Executes when user clicks
 ```
 
 ### Mistake 3: Using `class` Instead of `className`
 
-```tsx
+```jsx
 // ❌ Won't work - 'class' is reserved
 <div class="container">
 
@@ -583,7 +583,7 @@ export { Welcome };  // Named export
 
 ### Mistake 4: Forgetting Keys in Lists
 
-```tsx
+```jsx
 // ❌ No key - React can't track items efficiently
 {items.map((item) => <li>{item}</li>)}
 
@@ -598,7 +598,7 @@ export { Welcome };  // Named export
 
 ### Mistake 5: Multiple Root Elements
 
-```tsx
+```jsx
 // ❌ Can't return multiple roots
 function App() {
   return (
@@ -631,3 +631,4 @@ You now understand:
 **Practice**: Head to `lab1.md` for hands-on exercises!
 
 **Quick Reference**: See `reference1.md` for setup commands and syntax.
+

@@ -2,8 +2,6 @@
 
 > **🎯 Learning Focus:** Understanding the WHY and HOW behind API integration, data fetching patterns, and state management in modern React applications.
 
-> **📝 Note:** Code examples use TypeScript syntax for clarity, but all concepts apply equally to JavaScript. See [Lab 3](../lab/lab3.md) and [Examples](../example/) for JavaScript implementations.
-
 ---
 
 ## Table of Contents
@@ -341,143 +339,20 @@ function UserList() {
 }
 ```
 
-### Why React Query?
+### Advanced: React Query (TanStack Query)
 
-**The Problem:**
-```typescript
-// Managing server state with useState is hard:
-// - Caching: Where to store cache?
-// - Stale data: When to refetch?
-// - Deduplication: Avoid duplicate requests
-// - Background updates: Keep data fresh
-// - Optimistic updates: Update UI before server responds
-// - Pagination: Handle large datasets
-// - Mutations: Update cache after POST/PUT/DELETE
-```
+React Query is a powerful library for managing server state with automatic caching, refetching, and more. However, it's beyond the scope of this core lesson.
 
-**React Query solves this:**
-```typescript
-// Simple, powerful, automatic
-function UserList() {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['users'],
-    queryFn: fetchUsers,
-  });
+**For now, focus on mastering:**
+- ✅ `fetch` / `axios` for API calls
+- ✅ `useState` for loading/error states
+- ✅ `useEffect` for data fetching
 
-  // React Query handles:
-  // ✅ Automatic caching
-  // ✅ Background refetching
-  // ✅ Deduplication
-  // ✅ Loading states
-  // ✅ Error handling
-  // ✅ Retry logic
-  // ✅ Garbage collection
-}
-```
-
-### Server State vs Client State
-
-```typescript
-// Client State - Lives in browser only
-const [isDarkMode, setIsDarkMode] = useState(false);
-const [sidebarOpen, setSidebarOpen] = useState(true);
-// ↑ UI preferences, temporary data
-
-// Server State - Truth lives on server
-const { data: users } = useQuery(['users'], fetchUsers);
-const { data: profile } = useQuery(['profile'], fetchProfile);
-// ↑ Synced with backend, needs refresh
-
-// Mixing them is a mistake!
-// ❌ Don't use useState for server data
-const [users, setUsers] = useState([]);  // Wrong!
-
-// ✅ Use React Query for server state
-const { data: users } = useQuery(['users'], fetchUsers);  // Right!
-```
+**When ready for advanced patterns**, see `extras/state_management.md` for React Query examples.
 
 ---
 
-## 5. State Management Patterns
-
-### Optimistic Updates Explained
-
-**Concept:** Update UI immediately, rollback if fails
-
-```typescript
-// Why optimistic updates?
-// Traditional: Click → Wait → Update (feels slow)
-// Optimistic: Click → Update immediately → Rollback if error (feels instant)
-
-const updateUser = useMutation({
-  mutationFn: api.updateUser,
-  
-  // 1. Before API call - update UI optimistically
-  onMutate: async (newUser) => {
-    // Cancel ongoing queries
-    await queryClient.cancelQueries(['users']);
-    
-    // Snapshot current value (for rollback)
-    const previousUsers = queryClient.getQueryData(['users']);
-    
-    // Optimistically update cache
-    queryClient.setQueryData(['users'], (old) => 
-      old.map(user => user.id === newUser.id ? newUser : user)
-    );
-    
-    return { previousUsers }; // Return snapshot
-  },
-  
-  // 2. If API call fails - rollback
-  onError: (err, newUser, context) => {
-    queryClient.setQueryData(['users'], context.previousUsers);
-    toast.error('Update failed');
-  },
-  
-  // 3. After everything - refetch to be sure
-  onSettled: () => {
-    queryClient.invalidateQueries(['users']);
-  },
-});
-```
-
-### Cache Invalidation Strategy
-
-```typescript
-// When to invalidate cache?
-
-// 1. After mutations
-createUser.mutate(userData, {
-  onSuccess: () => {
-    queryClient.invalidateQueries(['users']); // Refetch users list
-  }
-});
-
-// 2. Time-based (staleTime)
-useQuery({
-  queryKey: ['users'],
-  queryFn: fetchUsers,
-  staleTime: 5 * 60 * 1000, // Consider fresh for 5 minutes
-});
-
-// 3. Manual refetch
-const { refetch } = useQuery(['users'], fetchUsers);
-<button onClick={() => refetch()}>Refresh</button>
-
-// 4. On focus/reconnect
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: true,  // Refetch when tab becomes active
-      refetchOnReconnect: true,    // Refetch when internet reconnects
-    },
-  },
-});
-```
-
----
-
-## 6. Error Handling Philosophy
+## 5. Error Handling
 
 ### Error Categories
 
@@ -522,211 +397,89 @@ if (!isValidEmail(email)) {
 ### Error Recovery Strategies
 
 ```typescript
-// 1. Automatic Retry
-useQuery({
-  queryKey: ['users'],
-  queryFn: fetchUsers,
-  retry: 3,                 // Retry 3 times
-  retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
-  // ↑ Exponential backoff: 1s, 2s, 4s, 8s, ...max 30s
-});
+// 1. Show error message to user
+const [error, setError] = useState<string | null>(null);
 
-// 2. Fallback Data
-const { data, error } = useQuery(['users'], fetchUsers);
-const users = data || fallbackUsers;  // Use cached/default data on error
-
-// 3. Error Boundaries
-class ErrorBoundary extends React.Component {
-  componentDidCatch(error, errorInfo) {
-    logErrorToService(error, errorInfo);
-  }
-  
-  render() {
-    if (this.state.hasError) {
-      return <ErrorFallback />;
-    }
-    return this.props.children;
-  }
+try {
+  await fetchData();
+} catch (err) {
+  setError('Failed to load data. Please try again.');
 }
+
+// 2. Provide retry button
+{error && (
+  <div className="error">
+    {error}
+    <button onClick={() => refetch()}>Retry</button>
+  </div>
+)}
+
+// 3. Fallback to cached data
+const users = data || [];  // Show empty array instead of crashing
 ```
 
 ---
 
-## 7. Performance & Optimization
-
-### Request Deduplication
-
-```typescript
-// Problem: Multiple components request same data
-
-function UserProfile() {
-  const { data } = useQuery(['user', userId], () => fetchUser(userId));
-  // ...
-}
-
-function UserAvatar() {
-  const { data } = useQuery(['user', userId], () => fetchUser(userId));
-  // ...
-}
-
-// Without React Query: 2 API calls
-// With React Query: 1 API call (automatically deduplicated!)
-```
-
-### Pagination Strategies
-
-```typescript
-// 1. Offset-based (Traditional)
-// Page 1: /users?offset=0&limit=10
-// Page 2: /users?offset=10&limit=10
-// ❌ Problems: Items can shift if data changes
-
-// 2. Cursor-based (Better)
-// Page 1: /users?limit=10
-//         Returns: { data: [...], nextCursor: "abc123" }
-// Page 2: /users?cursor=abc123&limit=10
-// ✅ Benefits: Consistent, works with real-time updates
-
-// 3. Infinite Scroll (Best UX)
-const {
-  data,
-  fetchNextPage,
-  hasNextPage,
-} = useInfiniteQuery({
-  queryKey: ['users'],
-  queryFn: ({ pageParam = 0 }) => fetchUsers(pageParam),
-  getNextPageParam: (lastPage) => lastPage.nextCursor,
-});
-```
-
-### Prefetching
-
-```typescript
-// Prefetch data before needed
-
-// 1. On hover
-<Link 
-  to="/user/123"
-  onMouseEnter={() => {
-    queryClient.prefetchQuery({
-      queryKey: ['user', '123'],
-      queryFn: () => fetchUser('123'),
-    });
-  }}
->
-  View Profile
-</Link>
-
-// 2. On route change
-useEffect(() => {
-  // Prefetch next page data
-  queryClient.prefetchQuery(['users', page + 1], () => fetchUsers(page + 1));
-}, [page]);
-
-// 3. During idle time
-useEffect(() => {
-  const idleCallback = requestIdleCallback(() => {
-    queryClient.prefetchQuery(['reports'], fetchReports);
-  });
-  return () => cancelIdleCallback(idleCallback);
-}, []);
-```
-
----
-
-## 8. Security Considerations
+## 6. Security Basics
 
 ### Authentication Flow
 
 ```typescript
-// 1. User logs in
-POST /auth/login
-Body: { email, password }
-Response: { token: "eyJhbGciOiJIUzI1..." }
+// 1. User logs in → Server returns token
+const response = await fetch('/api/login', {
+  method: 'POST',
+  body: JSON.stringify({ email, password })
+});
+const { token } = await response.json();
 
-// 2. Store token securely
-// ❌ Bad: localStorage (vulnerable to XSS)
+// 2. Store token
 localStorage.setItem('token', token);
 
-// ✅ Better: httpOnly cookie (set by server)
-Set-Cookie: token=...; HttpOnly; Secure; SameSite=Strict
-
-// 3. Include in requests
-api.interceptors.request.use((config) => {
-  const token = getToken();
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+// 3. Include token in requests
+const response = await fetch('/api/users', {
+  headers: {
+    'Authorization': `Bearer ${token}`
   }
-  return config;
 });
 
-// 4. Handle expiration
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      // Token expired - refresh or logout
-      refreshToken() || logout();
-    }
-    return Promise.reject(error);
-  }
-);
+// 4. Handle auth errors
+if (response.status === 401) {
+  // Token expired - redirect to login
+  localStorage.removeItem('token');
+  window.location.href = '/login';
+}
 ```
 
-### CORS Explained
+### CORS Basics
+
+**What is CORS?** Cross-Origin Resource Sharing - security feature that controls which websites can access your API.
 
 ```typescript
-// Why CORS exists:
-// Without CORS, evil.com could make requests to yourbank.com
-// and steal your data!
-
-// CORS prevents this by:
-// 1. Browser checks if server allows cross-origin requests
-// 2. Server responds with Access-Control headers
-// 3. Only then browser allows the request
-
-// Preflight Request (for non-simple requests)
-OPTIONS /api/users
-Origin: https://myapp.com
-Access-Control-Request-Method: POST
-Access-Control-Request-Headers: Authorization
-
-// Server Response
-Access-Control-Allow-Origin: https://myapp.com
-Access-Control-Allow-Methods: GET, POST, PUT, DELETE
-Access-Control-Allow-Headers: Authorization, Content-Type
-Access-Control-Max-Age: 86400  // Cache preflight for 24 hours
+// Backend (Express) - Allow your frontend to access API
+app.use(cors({
+  origin: 'http://localhost:5173',  // Your Vite dev server
+  credentials: true
+}));
 ```
+
+**Why?** Prevents malicious websites from stealing your data.
 
 ### Input Validation
 
 ```typescript
-// Validate on BOTH client and server
+// Always validate on BOTH client and server!
 
-// Client-side (UX)
-const validate = (data) => {
-  if (!data.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-    return 'Invalid email';
-  }
-  if (data.password.length < 8) {
-    return 'Password too short';
-  }
-  // ... more checks
-};
+// Client-side (Better UX)
+if (!email.includes('@')) {
+  setError('Invalid email');
+  return;
+}
 
 // Server-side (Security)
 // NEVER trust client input!
-app.post('/users', async (req, res) => {
-  const { error, value } = userSchema.validate(req.body);
-  if (error) {
-    return res.status(400).json({ error: error.details });
-  }
-  
-  // Sanitize input
-  const cleanData = sanitize(value);
-  
-  // Process...
-});
+if (!req.body.email || !req.body.password) {
+  return res.status(400).json({ error: 'Missing fields' });
+}
 ```
 
 ---
@@ -746,9 +499,9 @@ app.post('/users', async (req, res) => {
    - Proper HTTP method semantics
 
 3. **State Management**
-   - Distinguish server state from client state
-   - Use React Query for server state
-   - Implement proper caching strategies
+   - Use useState for loading/error states
+   - Use useEffect for data fetching
+   - Handle loading, success, and error cases
 
 4. **Error Handling**
    - Categorize errors properly
@@ -770,3 +523,4 @@ app.post('/users', async (req, res) => {
 Continue to [Lab 3](../lab/lab3.md) to apply these concepts in practice!
 
 > 📚 **Quick Reference:** For syntax and code snippets, see [reference3.md](../reference/reference3.md)
+
