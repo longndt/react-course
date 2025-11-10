@@ -8,7 +8,7 @@ This course teaches **React with Typescript** development using industry-standar
 
 > **If you are not familiar with TypeScript or prefer to learn React with JavaScript**
 >
-> ➡️ **[Switch to JavaScript](./react-javascript/)**⬅️
+> ➡️ **[Switch to JavaScript](./react-javascript/)** ⬅️
 
 ---
 
