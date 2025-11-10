@@ -110,7 +110,7 @@ lesson-topic/
 
 - **[Visual Learning Diagrams](./diagrams/readme.md)** - Complete guide to visual learning
 
-Quick links to key diagrams:
+**Quick links to key diagrams:**
 - 📊 [Course Structure](./diagrams/course_structure_diagram.md) - Complete JavaScript course organization and navigation
 - 🗺️ [Course Roadmap](./diagrams/course_roadmap.md) - Complete JavaScript learning path visualization
 - 🔄 [Component Lifecycle](./diagrams/component_lifecycle.md) - How React components work with JavaScript
