@@ -17,8 +17,8 @@ export function Products() {
 
    const fetchProducts = async () => {
       try {
-         // Simulate slow network (3 seconds delay)
-         await new Promise(resolve => setTimeout(resolve, 3000));
+         // Simulate slow network (2 seconds delay)
+         await new Promise(resolve => setTimeout(resolve, 2000));
 
          // Mock data for demo purposes
          // In a real app, this would be: const response = await fetch('/api/products');
