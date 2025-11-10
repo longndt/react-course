@@ -60,7 +60,7 @@ User clicks link → JavaScript updates URL → React renders new component → 
 
 ### The Browser History API
 
-```typescript
+```javascript
 // What React Router uses under the hood:
 
 // Push new URL to history
@@ -185,7 +185,7 @@ function CheckAuthButton() {
 
 ### Authentication vs Authorization
 
-```typescript
+```javascript
 // Authentication: "WHO are you?"
 // User proves identity with credentials (email/password)
 
@@ -252,7 +252,7 @@ HMACSHA256(header + payload, SECRET_KEY)
 
 ### Why JWT is Secure
 
-```typescript
+```javascript
 // ❌ User tries to tamper with token
 const token = "header.payload.signature";
 const [header, payload, sig] = token.split('.');
@@ -272,7 +272,7 @@ if (expectedSig !== sig) {
 
 ### JWT Storage: localStorage vs Cookie
 
-```typescript
+```javascript
 // Option 1: localStorage (common in SPAs)
 localStorage.setItem('token', token);
 // ✅ Simple, works with CORS

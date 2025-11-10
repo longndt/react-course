@@ -325,7 +325,7 @@ function Timer() {
 
 ```jsx
 function TextInput() {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef(null);
 
   function focusInput() {
     inputRef.current?.focus();  // Direct DOM access
@@ -464,21 +464,15 @@ function ShoppingCart() {
 
 ```jsx
 // ✅ All state updates in one place
-interface State {
-  items: Item[];
-  total: number;
-  discount: number;
-  loading: boolean;
-  error: string | null;
-}
+const initialState = {
+  items: [],
+  total: 0,
+  discount: 0,
+  loading: false,
+  error: null
+};
 
-type Action =
-  | { type: 'ADD_ITEM'; item: Item }
-  | { type: 'REMOVE_ITEM'; id: number }
-  | { type: 'APPLY_DISCOUNT'; percent: number }
-  | { type: 'SET_ERROR'; error: string };
-
-function cartReducer(state: State, action: Action): State {
+function cartReducer(state, action) {
   switch (action.type) {
     case 'ADD_ITEM':
       return {
@@ -511,22 +505,16 @@ function cartReducer(state: State, action: Action): State {
 }
 
 function ShoppingCart() {
-  const [state, dispatch] = useReducer(cartReducer, {
-    items: [],
-    total: 0,
-    discount: 0,
-    loading: false,
-    error: null
-  });
+  const [state, dispatch] = useReducer(cartReducer, initialState);
   
-  function addItem(item: Item) {
+  function addItem(item) {
     dispatch({ type: 'ADD_ITEM', item });  // One action updates multiple fields!
   }
 
   return (
     <div>
       <p>Total: ${state.total}</p>
-      <button onClick={() => addItem(newItem)}>Add Item</button>
+      <button onClick={() => addItem({ id: Date.now(), price: 19.99 })}>Add Item</button>
     </div>
   );
 }
@@ -578,10 +566,10 @@ function ComponentB() {
 
 ```jsx
 // ✅ Reusable custom hook
-function useFetch<T>(url: string) {
-  const [data, setData] = useState<T | null>(null);
+function useFetch(url) {
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setLoading(true);

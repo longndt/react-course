@@ -55,7 +55,7 @@ Result: Each layer scales independently based on demand
 
 ### Development → Staging → Production
 
-```typescript
+```javascript
 // ❌ Same code everywhere = disasters in production!
 
 // ✅ Environment-specific configuration
@@ -94,7 +94,7 @@ const config = {
 
 ### What Changes in Production?
 
-```typescript
+```javascript
 // Development build
 npm run dev
 
@@ -119,15 +119,15 @@ npm run build
 ### Build Process Explained
 
 ```bash
-# Development: Files served as-is
-src/App.jsx → Browser reads TypeScript?!
+# Development: Vite serves files with on-the-fly transforms
+src/App.jsx → Vite dev server → Browser (with helpful warnings)
 
 # Production: Files transformed
-src/App.jsx → TypeScript compiler → JavaScript → Minifier → app.min.js
+src/App.jsx → JSX compiler (Babel/ESBuild) → JavaScript → Minifier → app.min.js
 ```
 
 **Why?**
-- Browsers don't understand TypeScript
+- Browsers don't understand JSX or advanced syntax out of the box
 - Smaller files = faster load times
 - Minified code harder to reverse-engineer
 
@@ -257,7 +257,7 @@ How? Files replicated to servers worldwide
 
 ### Why Environment Variables?
 
-```typescript
+```javascript
 // ❌ NEVER DO THIS: Secrets in code!
 const API_KEY = 'sk_live_abc123';
 const DB_PASSWORD = 'mypassword123';
@@ -279,7 +279,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 
 ### Client vs Server Secrets
 
-```typescript
+```javascript
 // ❌ DANGEROUS: API key exposed to browser!
 // .env
 VITE_STRIPE_SECRET_KEY=sk_live_abc123
@@ -374,7 +374,7 @@ jobs:
 
 ### Mistake 1: Hardcoding URLs
 
-```typescript
+```javascript
 // ❌ BAD: Breaks in production!
 fetch('http://localhost:3001/api/users')
 
@@ -398,7 +398,7 @@ npm run preview
 
 ### Mistake 3: Exposing Secrets
 
-```typescript
+```javascript
 // ❌ API key in Git history
 const API_KEY = 'sk_live_abc123';
 
@@ -413,7 +413,7 @@ const API_KEY = process.env.API_KEY;
 
 ### Mistake 4: No Error Monitoring
 
-```typescript
+```javascript
 // ❌ Production errors disappear silently
 function badCode() {
   // Crashes, but you never know!

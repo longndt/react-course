@@ -49,7 +49,7 @@ User interacts → JS fetches JSON → React updates UI → Fast, smooth experie
 
 ### Why Separation of Concerns Matters
 
-```typescript
+```javascript
 // ❌ Old Way: Mixing everything
 function UserPage() {
   // HTML generation, database queries, business logic - all in one place!
@@ -84,7 +84,7 @@ Think of it like a library:
 
 ### Resource-Based URLs
 
-```typescript
+```javascript
 // ❌ RPC-style (Remote Procedure Call)
 GET  /getUserById?id=123
 POST /createNewUser
@@ -108,7 +108,7 @@ GET    /users?status=active // Get active users
 
 **What does "stateless" mean?**
 
-```typescript
+```javascript
 // ❌ Stateful (Bad)
 // Request 1
 POST /login
@@ -135,7 +135,7 @@ Headers: {
 
 **Understanding Idempotency:**
 
-```typescript
+```javascript
 // Idempotent = Can repeat safely without side effects
 
 GET  /users/123    // Idempotent: Reading doesn't change anything
@@ -162,7 +162,7 @@ POST /users        // NOT Idempotent: Creates new user each time!
 
 ### Request-Response Cycle
 
-```typescript
+```javascript
 // What happens when you make an API call:
 
 1. Client (React) creates HTTP request
@@ -198,7 +198,7 @@ POST /users        // NOT Idempotent: Creates new user each time!
 ### HTTP Headers Explained
 
 **Request Headers:**
-```typescript
+```javascript
 // Authentication
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 // ↑ Who you are
@@ -221,7 +221,7 @@ If-None-Match: "abc123"
 ```
 
 **Response Headers:**
-```typescript
+```javascript
 // Status
 HTTP/1.1 200 OK
 // ↑ Request succeeded
@@ -245,7 +245,7 @@ X-Content-Type-Options: nosniff
 
 ### Status Codes Philosophy
 
-```typescript
+```javascript
 // 2xx - Success
 200 OK              // "Here's your data"
 201 Created         // "Resource created successfully"
@@ -274,7 +274,7 @@ X-Content-Type-Options: nosniff
 
 ### The Problem with useEffect
 
-```typescript
+```javascript
 // ❌ The Classic Mistake
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -296,12 +296,12 @@ function UserList() {
 
 ### Proper Implementation
 
-```typescript
+```javascript
 // ✅ Complete Solution
 function UserList() {
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     let cancelled = false; // Prevent memory leaks
@@ -356,7 +356,7 @@ React Query is a powerful library for managing server state with automatic cachi
 
 ### Error Categories
 
-```typescript
+```javascript
 // 1. Network Errors
 try {
   await fetchData();
@@ -396,9 +396,9 @@ if (!isValidEmail(email)) {
 
 ### Error Recovery Strategies
 
-```typescript
+```javascript
 // 1. Show error message to user
-const [error, setError] = useState<string | null>(null);
+const [error, setError] = useState(null);
 
 try {
   await fetchData();
@@ -424,7 +424,7 @@ const users = data || [];  // Show empty array instead of crashing
 
 ### Authentication Flow
 
-```typescript
+```javascript
 // 1. User logs in → Server returns token
 const response = await fetch('/api/login', {
   method: 'POST',
@@ -454,7 +454,7 @@ if (response.status === 401) {
 
 **What is CORS?** Cross-Origin Resource Sharing - security feature that controls which websites can access your API.
 
-```typescript
+```javascript
 // Backend (Express) - Allow your frontend to access API
 app.use(cors({
   origin: 'http://localhost:5173',  // Your Vite dev server
@@ -466,7 +466,7 @@ app.use(cors({
 
 ### Input Validation
 
-```typescript
+```javascript
 // Always validate on BOTH client and server!
 
 // Client-side (Better UX)

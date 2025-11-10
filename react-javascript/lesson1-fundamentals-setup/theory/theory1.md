@@ -1,6 +1,6 @@
 # Theory - React Fundamentals & Project Setup
 
-> **Purpose of this file**: Explains **WHY** React works the way it does, **HOW** components and JSX/TSX function, and **WHEN** to use different patterns. Code examples include explanatory comments.
+> **Purpose of this file**: Explains **WHY** React works the way it does, **HOW** components and JSX function, and **WHEN** to use different patterns. Code examples include explanatory comments.
 >
 > **Use Reference1 when you need**: Quick setup commands, syntax lookup, copy-paste ready code.
 
@@ -9,10 +9,10 @@
 ## Table of Contents
 
 1. [What is React and Why Use It?](#1-what-is-react-and-why-use-it)
-2. [Understanding TSX](#2-understanding-tsx)
+2. [Understanding JSX](#2-understanding-jsx)
 3. [Project Setup with Vite](#3-project-setup-with-vite)
 4. [Components: The Building Blocks](#4-components-the-building-blocks)
-5. [TSX Rules and Why They Exist](#5-tsx-rules-and-why-they-exist)
+5. [JSX Rules and Why They Exist](#5-jsx-rules-and-why-they-exist)
 6. [Styling Approaches](#6-styling-approaches)
 7. [Event Handling Basics](#7-event-handling-basics)
 8. [Common Mistakes](#8-common-mistakes)
@@ -109,14 +109,14 @@ function Dashboard() {
 
 ---
 
-## 2. Understanding TSX
+## 2. Understanding JSX
 
-### What is TSX and Why Use It?
+### What is JSX and Why Use It?
 
-**TSX = TypeScript + JSX (JavaScript XML)**
+**JSX = JavaScript + XML (JavaScript XML)**
 
 ```jsx
-// This looks like HTML, but it's actually TypeScript!
+// This looks like HTML, but it's actually JavaScript!
 function Welcome() {
   return <h1>Hello, World!</h1>;
 }
@@ -127,12 +127,12 @@ function Welcome() {
 }
 ```
 
-**Why TSX looks like HTML:**
+**Why JSX looks like HTML:**
 - **Readability**: UI code looks like what it produces
 - **Familiarity**: Web developers already know HTML
-- **Type Safety**: TypeScript ensures props are correct
+- **Expressiveness**: Write UI declaratively instead of imperatively
 
-### TSX is NOT HTML
+### JSX is NOT HTML
 
 ```jsx
 // ❌ HTML - This won't work in React
@@ -142,7 +142,7 @@ function Welcome() {
   <input type="text">
 </div>
 
-// ✅ TSX - React version
+// ✅ JSX - React version
 <div className="container">
   <img src="logo.png" />
   <label htmlFor="name">Name:</label>
@@ -175,12 +175,12 @@ function Welcome() {
 ### Understanding the Setup
 
 ```bash
-# This command creates a new React project with TypeScript
-npm create vite@latest my-app -- --template react-ts
+# This command creates a new React project with JavaScript
+npm create vite@latest my-app -- --template react
 
 # What happens:
 # 1. Downloads Vite project template
-# 2. Sets up TypeScript configuration
+# 2. Sets up JavaScript configuration
 # 3. Installs React + React DOM
 # 4. Configures development server
 ```
@@ -199,8 +199,7 @@ my-app/
 │   └── index.css         # Global styles
 ├── index.html            # HTML template (has <div id="root">)
 ├── package.json          # Dependencies and scripts
-├── tsconfig.json         # TypeScript rules
-└── vite.config.ts        # Vite configuration
+└── vite.config.js        # Vite configuration
 ```
 
 **The Flow:**
@@ -215,7 +214,7 @@ my-app/
 
 ### What Makes a Component?
 
-**A component is just a function that returns TSX:**
+**A component is just a function that returns JSX:**
 
 ```jsx
 // This is a valid React component!
@@ -226,7 +225,7 @@ function Greeting() {
 
 **Component Rules:**
 1. **Name MUST start with capital letter** (so React knows it's a component, not HTML tag)
-2. **Must return TSX** (or `null`)
+2. **Must return JSX** (or `null`)
 3. **Can accept props** (inputs)
 
 ### Why Capital Letters Matter
@@ -266,11 +265,7 @@ function Greeting() {
 
 ```jsx
 // ✅ Reusable - name can change
-interface GreetingProps {
-  name: string;
-}
-
-function Greeting({ name }: GreetingProps) {
+function Greeting({ name }) {
   return <h1>Hello, {name}!</h1>;
 }
 
@@ -281,19 +276,14 @@ function Greeting({ name }: GreetingProps) {
 **Props are like function parameters:**
 
 ```jsx
-// Regular TypeScript function
-function add(a: number, b: number): number {
+// Regular JavaScript function
+function add(a, b) {
   return a + b;
 }
 add(2, 3);  // 5
 
 // React component (also a function!)
-interface AddDisplayProps {
-  a: number;
-  b: number;
-}
-
-function AddDisplay({ a, b }: AddDisplayProps) {
+function AddDisplay({ a, b }) {
   return <p>{a} + {b} = {a + b}</p>;
 }
 <AddDisplay a={2} b={3} />  // "2 + 3 = 5"
@@ -301,7 +291,7 @@ function AddDisplay({ a, b }: AddDisplayProps) {
 
 ---
 
-## 5. TSX Rules and Why They Exist
+## 5. JSX Rules and Why They Exist
 
 ### Rule 1: Single Root Element
 
@@ -335,10 +325,10 @@ function App() {
 }
 ```
 
-**Why this rule?** A function can only return ONE value. TSX is transformed to function calls:
+**Why this rule?** A function can only return ONE value. JSX is transformed to function calls:
 
 ```jsx
-// TSX
+// JSX
 <div><h1>Hi</h1></div>
 
 // Transforms to
@@ -381,7 +371,7 @@ function Profile() {
 }
 ```
 
-**Why `{}`?** TSX needs to know when you're switching from "template" mode to "JavaScript" mode.
+**Why `{}`?** JSX needs to know when you're switching from "template" mode to "JavaScript" mode.
 
 ### Rule 3: `className` not `class`
 
@@ -498,12 +488,12 @@ function EventDemo() {
   };
   
   // onChange - input changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     console.log('Input value:', e.target.value);
   };
   
   // onSubmit - form submission
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();  // Prevent page reload
     alert('Form submitted!');
   };
@@ -520,10 +510,10 @@ function EventDemo() {
 }
 ```
 
-**Why TypeScript event types?**
-- `React.FormEvent`: TypeScript knows it's a form event
-- `React.ChangeEvent<HTMLInputElement>`: Knows `e.target.value` exists
-- Autocomplete helps you access the right properties!
+**Why event handlers?**
+- React provides synthetic events (cross-browser compatible)
+- Event object has standard properties like `target.value`
+- Always call `e.preventDefault()` for form submissions to prevent page reload
 
 ---
 
@@ -552,7 +542,7 @@ export default Welcome;  // Default export
 export { Welcome };  // Named export
 ```
 
-### Mistake 2: Calling Functions in TSX Instead of Passing Them
+### Mistake 2: Calling Functions in JSX Instead of Passing Them
 
 ```jsx
 // ❌ BAD: Calls function immediately (infinite loop!)
@@ -624,8 +614,8 @@ function App() {
 
 You now understand:
 - ✅ **Why** React exists and what problems it solves
-- ✅ **How** components work (functions that return TSX)
-- ✅ **Why** TSX has specific rules (single root, className, etc.)
+- ✅ **How** components work (functions that return JSX)
+- ✅ **Why** JSX has specific rules (single root, className, etc.)
 - ✅ **When** to use different styling approaches
 
 **Practice**: Head to `lab1.md` for hands-on exercises!

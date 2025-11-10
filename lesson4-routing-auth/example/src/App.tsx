@@ -11,55 +11,67 @@ import { Profile } from './pages/Profile';
 import { Cart } from './pages/Cart';
 import { MyOrders } from './pages/MyOrders';
 import { ChangePassword } from './pages/ChangePassword';
+import { AdminDashboard } from './pages/AdminDashboard';
+import { Unauthorized } from './pages/Unauthorized';
+import { NotFound } from './pages/NotFound';
 
 export function App() {
    return (
-      <BrowserRouter>
-         <AuthProvider>
-            <CartProvider>
-               <Layout>
-                  <Routes>
-                     <Route path="/" element={<Home />} />
-                     <Route path="/login" element={<Login />} />
-                     <Route path="/register" element={<Register />} />
-                     <Route path="/products" element={<Products />} />
-                     <Route
-                        path="/profile"
-                        element={
-                           <ProtectedRoute>
-                              <Profile />
-                           </ProtectedRoute>
-                        }
-                     />
-                     <Route
-                        path="/cart"
-                        element={
-                           <ProtectedRoute>
-                              <Cart />
-                           </ProtectedRoute>
-                        }
-                     />
-                     <Route
-                        path="/my-orders"
-                        element={
-                           <ProtectedRoute>
-                              <MyOrders />
-                           </ProtectedRoute>
-                        }
-                     />
-                     <Route
-                        path="/change-password"
-                        element={
-                           <ProtectedRoute>
-                              <ChangePassword />
-                           </ProtectedRoute>
-                        }
-                     />
-                     <Route path="*" element={<Navigate to="/" replace />} />
-                  </Routes>
-               </Layout>
-            </CartProvider>
-         </AuthProvider>
-      </BrowserRouter>
+     <BrowserRouter>
+       <AuthProvider>
+         <CartProvider>
+           <Layout>
+             <Routes>
+               <Route path="/" element={<Home />} />
+               <Route path="/login" element={<Login />} />
+               <Route path="/register" element={<Register />} />
+               <Route path="/products" element={<Products />} />
+               <Route
+                 path="/profile"
+                 element={
+                   <ProtectedRoute>
+                     <Profile />
+                   </ProtectedRoute>
+                 }
+               />
+               <Route
+                 path="/cart"
+                 element={
+                   <ProtectedRoute>
+                     <Cart />
+                   </ProtectedRoute>
+                 }
+               />
+               <Route
+                 path="/my-orders"
+                 element={
+                   <ProtectedRoute>
+                     <MyOrders />
+                   </ProtectedRoute>
+                 }
+               />
+               <Route
+                 path="/change-password"
+                 element={
+                   <ProtectedRoute>
+                     <ChangePassword />
+                   </ProtectedRoute>
+                 }
+               />
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedRoute requiredRole="admin">
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/unauthorized" element={<Unauthorized />} />
+              <Route path="*" element={<NotFound />} />
+             </Routes>
+           </Layout>
+         </CartProvider>
+       </AuthProvider>
+     </BrowserRouter>
    );
 }

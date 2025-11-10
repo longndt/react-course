@@ -1,84 +1,115 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, ReactNode } from "react";
 
-interface User {
+export interface User {
    id: string;
    email: string;
    name: string;
-   role?: string;
+   role: "user" | "admin";
 }
+
+type StoredUser = User & { password: string };
 
 interface AuthContextType {
    user: User | null;
+   users: User[];
    loading: boolean;
    error: Error | null;
    login: (email: string, password: string) => Promise<void>;
    logout: () => void;
    register: (email: string, password: string, name: string) => Promise<void>;
+   deleteUser: (userId: string) => void;
 }
 
 interface AuthProviderProps {
    children: ReactNode;
 }
 
+const USERS_STORAGE_KEY = "auth:users";
+
+const INITIAL_USERS: StoredUser[] = [
+   {
+      id: "user-1",
+      email: "user@gmail.com",
+      name: "Demo User",
+      password: "user",
+      role: "user"
+   },
+   {
+      id: "admin-1",
+      email: "admin@gmail.com",
+      name: "Admin User",
+      password: "admin",
+      role: "admin"
+   }
+];
+
+const toPublicUser = (storedUser: StoredUser): User => ({
+   id: storedUser.id,
+   email: storedUser.email,
+   name: storedUser.name,
+   role: storedUser.role
+});
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: AuthProviderProps) {
+   const [storedUsers, setStoredUsers] = useState<StoredUser[]>(() => {
+      const savedUsers = localStorage.getItem(USERS_STORAGE_KEY);
+
+      if (savedUsers) {
+         try {
+            const parsed: StoredUser[] = JSON.parse(savedUsers);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+               return parsed;
+            }
+         } catch {
+            // fall back to initial users when parsing fails
+         }
+      }
+
+      return INITIAL_USERS;
+   });
    const [user, setUser] = useState<User | null>(null);
    const [loading, setLoading] = useState<boolean>(true);
    const [error, setError] = useState<Error | null>(null);
 
    useEffect(() => {
-      // Check for existing session
+      localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(storedUsers));
+   }, [storedUsers]);
+
+   useEffect(() => {
       const token = localStorage.getItem("token");
       const tokenExpiry = localStorage.getItem("tokenExpiry");
+      const storedUserId = localStorage.getItem("userId");
 
-      if (token && tokenExpiry) {
-         const now = new Date().getTime();
-         const expiry = parseInt(tokenExpiry);
+      if (token && tokenExpiry && storedUserId) {
+         const now = Date.now();
+         const expiry = parseInt(tokenExpiry, 10);
 
-         if (now < expiry) {
-            fetchUser(token);
-         } else {
-            // Token expired, clear it
-            localStorage.removeItem("token");
-            localStorage.removeItem("tokenExpiry");
-            setLoading(false);
+         if (!Number.isNaN(expiry) && now < expiry) {
+            const existingUser = storedUsers.find(item => item.id === storedUserId);
+
+            if (existingUser) {
+               setUser(toPublicUser(existingUser));
+               setLoading(false);
+               return;
+            }
          }
-      } else {
-         setLoading(false);
       }
-   }, []);
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("tokenExpiry");
+      localStorage.removeItem("userId");
+      setLoading(false);
+   }, [storedUsers]);
 
    const createTokenWithExpiry = (hours: number = 24) => {
-      const now = new Date().getTime();
-      const expiry = now + (hours * 60 * 60 * 1000); // Convert hours to milliseconds
+      const now = Date.now();
+      const expiry = now + hours * 60 * 60 * 1000;
       return {
-         token: "mock-jwt-token-" + now,
+         token: `greenwich-token-${now}`,
          expiry: expiry.toString()
       };
-   };
-
-   const fetchUser = async (_token: string) => {
-      // token parameter is for future API integration
-      try {
-         // Mock user data for demo purposes
-         // In a real app, this would be: const response = await fetch("/api/user", {...});
-         const mockUser: User = {
-            id: "1",
-            email: "demo@gmail.com",
-            name: "Demo User"
-         };
-
-         // Simulate API delay
-         await new Promise(resolve => setTimeout(resolve, 500));
-         setUser(mockUser);
-      } catch (err) {
-         setError(err instanceof Error ? err : new Error("An error occurred"));
-         localStorage.removeItem("token");
-         localStorage.removeItem("tokenExpiry");
-      } finally {
-         setLoading(false);
-      }
    };
 
    const login = async (email: string, password: string) => {
@@ -86,28 +117,25 @@ export function AuthProvider({ children }: AuthProviderProps) {
          setLoading(true);
          setError(null);
 
-         // Mock authentication for demo purposes
-         // In a real app, this would be: const response = await fetch("/api/login", {...});
-         if (email === "demo@gmail.com" && password === "demo") {
-            const { token, expiry } = createTokenWithExpiry(24); // 24 hours expiration
-            const mockUser: User = {
-               id: "1",
-               email: email,
-               name: "Demo User"
-            };
+         const normalizedEmail = email.trim().toLowerCase();
+         const existingUser = storedUsers.find(item => item.email === normalizedEmail);
 
-            // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 1000));
+         await new Promise(resolve => setTimeout(resolve, 600));
 
-            localStorage.setItem("token", token);
-            localStorage.setItem("tokenExpiry", expiry);
-            setUser(mockUser);
-         } else {
-            throw new Error("Invalid credentials. Use demo@gmail.com / demo");
+         if (!existingUser || existingUser.password !== password) {
+            throw new Error("Invalid credentials. Try user@gmail.com / user or admin@gmail.com / admin");
          }
+
+         const { token, expiry } = createTokenWithExpiry(24);
+
+         localStorage.setItem("token", token);
+         localStorage.setItem("tokenExpiry", expiry);
+         localStorage.setItem("userId", existingUser.id);
+         setUser(toPublicUser(existingUser));
       } catch (err) {
-         setError(err instanceof Error ? err : new Error("Login failed"));
-         throw err;
+         const loginError = err instanceof Error ? err : new Error("Login failed");
+         setError(loginError);
+         throw loginError;
       } finally {
          setLoading(false);
       }
@@ -116,6 +144,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
    const logout = () => {
       localStorage.removeItem("token");
       localStorage.removeItem("tokenExpiry");
+      localStorage.removeItem("userId");
       setUser(null);
    };
 
@@ -124,36 +153,55 @@ export function AuthProvider({ children }: AuthProviderProps) {
          setLoading(true);
          setError(null);
 
-         // Mock registration for demo purposes
-         // In a real app, this would be: const response = await fetch("/api/register", {...});
-         if (email && password && name) {
-            const { token, expiry } = createTokenWithExpiry(24); // 24 hours expiration
-            const mockUser: User = {
-               id: Date.now().toString(),
-               email: email,
-               name: name
-            };
+         const normalizedEmail = email.trim().toLowerCase();
 
-            // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
-            localStorage.setItem("token", token);
-            localStorage.setItem("tokenExpiry", expiry);
-            setUser(mockUser);
-         } else {
+         if (!normalizedEmail || !password || !name.trim()) {
             throw new Error("All fields are required");
          }
+
+         if (storedUsers.some(existing => existing.email === normalizedEmail)) {
+            throw new Error("Email is already registered");
+         }
+
+         await new Promise(resolve => setTimeout(resolve, 800));
+
+         const newUser: StoredUser = {
+            id: `user-${Date.now()}`,
+            email: normalizedEmail,
+            name: name.trim(),
+            password,
+            role: "user"
+         };
+
+         const { token, expiry } = createTokenWithExpiry(24);
+
+         setStoredUsers(prev => [...prev, newUser]);
+         localStorage.setItem("token", token);
+         localStorage.setItem("tokenExpiry", expiry);
+         localStorage.setItem("userId", newUser.id);
+         setUser(toPublicUser(newUser));
       } catch (err) {
-         setError(err instanceof Error ? err : new Error("Registration failed"));
-         throw err;
+         const registerError = err instanceof Error ? err : new Error("Registration failed");
+         setError(registerError);
+         throw registerError;
       } finally {
          setLoading(false);
       }
    };
 
+   const deleteUser = (userId: string) => {
+      setStoredUsers(prev => prev.filter(existing => existing.id !== userId));
+
+      if (user?.id === userId) {
+         logout();
+      }
+   };
+
+   const users = useMemo(() => storedUsers.map(toPublicUser), [storedUsers]);
+
    return (
       <AuthContext.Provider
-         value={{ user, loading, error, login, logout, register }}
+         value={{ user, users, loading, error, login, logout, register, deleteUser }}
       >
          {children}
       </AuthContext.Provider>

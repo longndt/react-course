@@ -29,12 +29,20 @@ export function Layout({ children }) {
                         <Link to="/profile" className="nav-link">
                            Profile
                         </Link>
-                        <Link to="/my-orders" className="nav-link">
-                           My Orders
-                        </Link>
-                        <Link to="/cart" className="nav-link">
-                           Cart
-                        </Link>
+                        {user?.role === 'admin' ? (
+                           <Link to="/admin" className="nav-link">
+                              Admin
+                           </Link>
+                        ) : (
+                           <>
+                              <Link to="/my-orders" className="nav-link">
+                                 My Orders
+                              </Link>
+                              <Link to="/cart" className="nav-link">
+                                 Cart
+                              </Link>
+                           </>
+                        )}
                         <button onClick={handleLogout} className="nav-button">
                            Logout
                         </button>

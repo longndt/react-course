@@ -11,6 +11,9 @@ import { Profile } from './pages/Profile';
 import { Cart } from './pages/Cart';
 import { MyOrders } from './pages/MyOrders';
 import { ChangePassword } from './pages/ChangePassword';
+import { AdminDashboard } from './pages/AdminDashboard';
+import { Unauthorized } from './pages/Unauthorized';
+import { NotFound } from './pages/NotFound';
 
 export function App() {
    return (
@@ -55,7 +58,16 @@ export function App() {
                            </ProtectedRoute>
                         }
                      />
-                     <Route path="*" element={<Navigate to="/" replace />} />
+                     <Route
+                        path="/admin"
+                        element={
+                           <ProtectedRoute requiredRole="admin">
+                              <AdminDashboard />
+                           </ProtectedRoute>
+                        }
+                     />
+                     <Route path="/unauthorized" element={<Unauthorized />} />
+                     <Route path="*" element={<NotFound />} />
                   </Routes>
                </Layout>
             </CartProvider>

@@ -1,0 +1,123 @@
+.admin-dashboard {
+  display: grid;
+  gap: 2rem;
+}
+
+.admin-section {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+  padding: 2rem;
+}
+
+.admin-section h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #111827;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table thead {
+  background-color: #f9fafb;
+  text-align: left;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: top;
+}
+
+.admin-table tbody tr:hover {
+  background-color: #f3f4f6;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.admin-action-button {
+  background-color: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background 0.2s ease;
+}
+
+.admin-action-button:hover {
+  background-color: #dc2626;
+}
+
+.admin-action-button.secondary {
+  background-color: #2563eb;
+}
+
+.admin-action-button.secondary:hover {
+  background-color: #1d4ed8;
+}
+
+.admin-action-button:disabled,
+.admin-action-button:disabled:hover {
+  background-color: #d1d5db;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+.admin-empty-state {
+  padding: 2rem;
+  text-align: center;
+  color: #6b7280;
+  background: #f9fafb;
+  border-radius: 12px;
+  border: 1px dashed #d1d5db;
+}
+
+.order-items-list {
+  margin: 0.25rem 0 0;
+  padding-left: 1.1rem;
+  color: #4b5563;
+  font-size: 0.875rem;
+}
+
+.order-items-list li {
+  margin-bottom: 0.25rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: #e0e7ff;
+  color: #4338ca;
+  padding: 0.35rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.admin-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.admin-section-header p {
+  margin: 0;
+  color: #4b5563;
+}
+

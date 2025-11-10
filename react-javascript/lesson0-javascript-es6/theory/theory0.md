@@ -1,187 +1,305 @@
 # Theory - JavaScript ES6+ Prerequisites
 
 > **Purpose of this file**: Explains **WHY** modern JavaScript features exist, **HOW** they work, and **WHEN** to use them in React. Code examples include comments to understand concepts.
->
+> 
 > **Use Reference0 when you need**: Quick ES6 syntax lookup, copy-paste ready code patterns.
 
 ---
 
 ## Table of Contents
 
-**Chapter 1:** [Why Modern JavaScript for React?](#1-why-modern-javascript-for-react)
-**Chapter 2:** [Arrow Functions](#2-arrow-functions)
-**Chapter 3:** [Destructuring & Spread Operator](#3-destructuring--spread-operator)
-**Chapter 4:** [Template Literals](#4-template-literals)
-**Chapter 5:** [Modules (Import/Export)](#5-modules-importexport)
-**Chapter 6:** [Array Methods](#6-array-methods)
-**Chapter 7:** [Async/Await & Promises](#7-asyncawait--promises)
-**Chapter 8:** [Object Methods](#8-object-methods)
-**Chapter 9:** [JavaScript with React](#9-javascript-with-react)
-**Chapter 10:** [Common Mistakes](#10-common-mistakes)
-**Chapter 11:** [Next Steps](#11-next-steps)
+1. [Why Modern JavaScript for React?](#1-why-modern-javascript-for-react)
+2. [Arrow Functions & `this` Binding](#2-arrow-functions--this-binding)
+3. [Destructuring & Spread Operator](#3-destructuring--spread-operator)
+4. [Template Literals](#4-template-literals)
+5. [Modules (Import/Export)](#5-modules-importexport)
+6. [Array Methods & Functional Programming](#6-array-methods--functional-programming)
+7. [Async/Await & Promises](#7-asyncawait--promises)
+8. [JavaScript with React](#8-javascript-with-react)
+9. [Common Mistakes](#9-common-mistakes)
 
 ---
 
 ## 1. Why Modern JavaScript for React?
 
-> 🗺️ **Visual Learning** For a comprehensive understanding of the course roadmap, see [Course Roadmap Diagram](../../diagrams/course_roadmap.md)
+### The Problem Old JavaScript Had
 
-**Building Better React Applications:**
+**Traditional JavaScript - Verbose and Error-Prone:**
 
-- Modern JavaScript features make React code cleaner and more readable
-- ES6+ features are essential for React development
-- Better performance with modern JavaScript engines
-- Industry standard for professional development
-- Easier to maintain and debug
+```javascript
+// Old JavaScript - Verbose and hard to read
+function greetUser(user) {
+  var greeting = 'Hello, ' + user.firstName + ' ' + user.lastName + '!';
+  return greeting;
+}
 
-**Key Facts:**
-- React heavily relies on ES6+ features
-- Essential skill for professional development
-- Makes React code more concise and powerful
+// Manual array operations
+var numbers = [1, 2, 3, 4, 5];
+var doubled = [];
+for (var i = 0; i < numbers.length; i++) {
+  doubled.push(numbers[i] * 2);
+}
+
+// Callback hell with nested functions
+getUserData(function(user) {
+  getPosts(user.id, function(posts) {
+    getComments(posts[0].id, function(comments) {
+      // Nested callbacks - hard to read and maintain! 💥
+    });
+  });
+});
+```
+
+**Modern JavaScript (ES6+) - Clean and Readable:**
+
+```javascript
+// ES6+ - Concise and expressive
+const greetUser = ({ firstName, lastName }) => {
+  return `Hello, ${firstName} ${lastName}!`;
+};
+
+// Array methods - declarative
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(n => n * 2);
+
+// Async/await - linear code flow
+async function loadUserData() {
+  const user = await getUserData();
+  const posts = await getPosts(user.id);
+  const comments = await getComments(posts[0].id);
+  // Clean and readable! ✅
+}
+```
+
+**Key Insight**: Modern JavaScript features make code more readable, maintainable, and less error-prone - essential for React development.
+
+### Why React + Modern JavaScript?
+
+| Aspect | Old JavaScript | ES6+ JavaScript |
+|--------|---------------|-----------------|
+| **Code readability** | Verbose, hard to follow | Concise, expressive |
+| **Array operations** | Manual loops | Functional methods (map, filter) |
+| **Async code** | Callback hell | Async/await |
+| **Object handling** | Manual property access | Destructuring |
+| **String formatting** | Concatenation | Template literals |
+| **Module system** | Global variables | Import/export |
+
+**Industry Reality**: React heavily relies on ES6+ features. Modern JavaScript is essential for professional React development.
 
 ---
 
-## 2. Arrow Functions
+## 2. Arrow Functions & `this` Binding
 
-### Basic Syntax
+### The Problem with Traditional Functions
 
-```javascript
-// Traditional function
-function greet(name) {
-  return `Hello, ${name}!`;
-}
-
-// Arrow function
-const greet = (name) => {
-  return `Hello, ${name}!`;
-};
-
-// Arrow function with implicit return
-const greet = (name) => `Hello, ${name}!`;
-
-// Arrow function with single parameter (no parentheses needed)
-const greet = name => `Hello, ${name}!`;
-```
-
-### `this` Binding
+**Traditional Functions - `this` Binding Issues:**
 
 ```javascript
-// Traditional function - `this` is dynamic
+// Traditional function - `this` is confusing
 const obj = {
   name: 'John',
   greet: function() {
-    console.log(`Hello, ${this.name}!`);  // `this` refers to obj
+    // `this` depends on HOW the function is called
+    setTimeout(function() {
+      console.log(`Hello, ${this.name}!`);  // 💥 `this` is undefined or window
+    }, 1000);
   }
 };
 
-// Arrow function - `this` is lexical (inherited from parent scope)
+obj.greet();  // "Hello, undefined!" - Wrong!
+
+// Workaround needed
 const obj2 = {
   name: 'John',
-  greet: () => {
-    console.log(`Hello, ${this.name}!`);  // `this` refers to global scope
+  greet: function() {
+    const self = this;  // Save reference
+    setTimeout(function() {
+      console.log(`Hello, ${self.name}!`);  // Works but verbose
+    }, 1000);
+  }
+};
+```
+
+**Arrow Functions - Lexical `this`:**
+
+```javascript
+// Arrow function - `this` is inherited from parent scope
+const obj = {
+  name: 'John',
+  greet: function() {
+    // Arrow function inherits `this` from `greet`
+    setTimeout(() => {
+      console.log(`Hello, ${this.name}!`);  // ✅ "Hello, John!"
+    }, 1000);
   }
 };
 
-// Arrow function in React (common pattern)
-const MyComponent = () => {
+obj.greet();  // ✅ Works correctly!
+
+// Arrow functions in React (common pattern)
+function MyComponent() {
   const handleClick = () => {
-    console.log('Button clicked');  // `this` is not needed
+    // `this` is not needed - arrow function handles it
+    console.log('Button clicked');
   };
 
   return <button onClick={handleClick}>Click me</button>;
+}
+```
+
+### When to Use Arrow Functions
+
+```javascript
+// ✅ Use arrow functions for:
+// 1. Event handlers
+const handleClick = () => console.log('Clicked');
+
+// 2. Array methods
+const doubled = numbers.map(n => n * 2);
+
+// 3. Callbacks
+setTimeout(() => console.log('Done'), 1000);
+
+// 4. Short functions
+const add = (a, b) => a + b;
+
+// ⚠️ Be careful with object methods
+const obj = {
+  name: 'John',
+  // ❌ BAD: Arrow function here loses `this` context
+  greet: () => console.log(this.name),  // `this` is window/undefined
+  
+  // ✅ GOOD: Regular function for object methods
+  greetProper: function() {
+    console.log(this.name);  // Works correctly
+  }
 };
 ```
+
+**Rule of Thumb**: Use arrow functions for callbacks and short functions. Use regular functions for object methods that need `this`.
 
 ---
 
 ## 3. Destructuring & Spread Operator
 
-### Object Destructuring
+### The Problem: Verbose Property Access
+
+**Traditional Way - Repetitive:**
 
 ```javascript
-// Basic destructuring
-const user = { name: 'John', age: 25, email: 'john@example.com' };
-const { name, age } = user;
-console.log(name); // 'John'
-console.log(age);  // 25
-
-// Destructuring with renaming
-const { name: userName, age: userAge } = user;
-
-// Destructuring with default values
-const { name, age, city = 'Unknown' } = user;
-
-// Destructuring in function parameters
-function greetUser({ name, age }) {
-  return `Hello, ${name}! You are ${age} years old.`;
+// Traditional - Repetitive and error-prone
+function processUser(user) {
+  const name = user.name;
+  const age = user.age;
+  const email = user.email;
+  const city = user.city || 'Unknown';
+  
+  // What if user is undefined? 💥
+  return `${name} is ${age} years old`;
 }
-```
 
-### Array Destructuring
-
-```javascript
-// Basic array destructuring
+// Array access - verbose
 const colors = ['red', 'green', 'blue'];
-const [first, second, third] = colors;
-console.log(first);  // 'red'
-console.log(second); // 'green'
-
-// Destructuring with rest operator
-const [first, ...rest] = colors;
-console.log(first); // 'red'
-console.log(rest);  // ['green', 'blue']
-
-// Swapping variables
-let a = 1, b = 2;
-[a, b] = [b, a];
-console.log(a, b); // 2, 1
+const first = colors[0];
+const second = colors[1];
+const rest = colors.slice(2);
 ```
 
-### Spread Operator
+**Destructuring - Clean and Safe:**
 
 ```javascript
-// Array spreading
+// Object destructuring - Clean and safe
+function processUser({ name, age, email, city = 'Unknown' }) {
+  // Direct access to properties
+  // Default value for city if missing
+  return `${name} is ${age} years old`;
+}
+
+// Array destructuring - Elegant
+const colors = ['red', 'green', 'blue'];
+const [first, second, ...rest] = colors;
+// first = 'red', second = 'green', rest = ['blue']
+
+// Swapping variables - One line!
+let a = 1, b = 2;
+[a, b] = [b, a];  // ✅ a = 2, b = 1
+```
+
+### Spread Operator: Copying and Merging
+
+**The Problem: Mutating Objects/Arrays:**
+
+```javascript
+// ❌ BAD: Mutating original object
+const user = { name: 'John', age: 25 };
+const updatedUser = user;
+updatedUser.age = 26;  // 💥 Also changes `user`!
+
+// ❌ BAD: Manual array copying
 const arr1 = [1, 2, 3];
 const arr2 = [4, 5, 6];
-const combined = [...arr1, ...arr2]; // [1, 2, 3, 4, 5, 6]
-
-// Object spreading
-const obj1 = { a: 1, b: 2 };
-const obj2 = { c: 3, d: 4 };
-const combined = { ...obj1, ...obj2 }; // { a: 1, b: 2, c: 3, d: 4 }
-
-// Overriding properties
-const user = { name: 'John', age: 25 };
-const updatedUser = { ...user, age: 26 }; // { name: 'John', age: 26 }
+const combined = arr1.concat(arr2);  // Works but verbose
 ```
+
+**Spread Operator - Immutable Updates:**
+
+```javascript
+// ✅ GOOD: Creating new object (immutable)
+const user = { name: 'John', age: 25 };
+const updatedUser = { ...user, age: 26 };  // New object, user unchanged
+
+// ✅ GOOD: Spreading arrays
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const combined = [...arr1, ...arr2];  // [1, 2, 3, 4, 5, 6]
+
+// ✅ GOOD: Merging objects
+const defaults = { theme: 'light', lang: 'en' };
+const userPrefs = { lang: 'vi' };
+const settings = { ...defaults, ...userPrefs };  // { theme: 'light', lang: 'vi' }
+```
+
+**Why This Matters**: React requires immutable updates. Spread operator makes this easy and safe.
 
 ---
 
 ## 4. Template Literals
 
-### Basic Usage
+### The Problem: String Concatenation
+
+**Traditional Way - Hard to Read:**
 
 ```javascript
-// Traditional string concatenation
+// Traditional - Hard to read and error-prone
 const name = 'John';
 const age = 25;
-const message = 'Hello, ' + name + '! You are ' + age + ' years old.';
+const city = 'Hanoi';
+const message = 'Hello, ' + name + '! You are ' + age + ' years old and live in ' + city + '.';
 
-// Template literals
-const message = `Hello, ${name}! You are ${age} years old.`;
+// Multi-line strings - Awkward
+const html = '<div>\n' +
+  '  <h1>Welcome, ' + name + '!</h1>\n' +
+  '  <p>You are ' + age + ' years old.</p>\n' +
+  '</div>';
+```
 
-// Multi-line strings
+**Template Literals - Clean and Readable:**
+
+```javascript
+// Template literals - Clean and readable
+const name = 'John';
+const age = 25;
+const city = 'Hanoi';
+const message = `Hello, ${name}! You are ${age} years old and live in ${city}.`;
+
+// Multi-line strings - Natural
 const html = `
   <div>
     <h1>Welcome, ${name}!</h1>
     <p>You are ${age} years old.</p>
   </div>
 `;
-```
 
-### Advanced Features
-
-```javascript
 // Expressions in template literals
 const price = 19.99;
 const tax = 0.08;
@@ -190,67 +308,63 @@ const total = `Total: $${(price * (1 + tax)).toFixed(2)}`;
 // Function calls
 const user = { name: 'John', age: 25 };
 const message = `Hello, ${user.name.toUpperCase()}! You are ${user.age} years old.`;
-
-// Conditional expressions
-const isLoggedIn = true;
-const message = `Welcome${isLoggedIn ? ', John' : ''}!`;
 ```
+
+**Key Insight**: Template literals make string formatting readable and maintainable - essential for JSX and dynamic content.
 
 ---
 
 ## 5. Modules (Import/Export)
 
-### Export
+### The Problem: Global Variables
+
+**Traditional Way - Global Namespace Pollution:**
 
 ```javascript
-// Named exports
+// ❌ BAD: Global variables - conflicts and bugs
+var utils = {
+  add: function(a, b) { return a + b; },
+  subtract: function(a, b) { return a - b; }
+};
+
+// What if another script also defines `utils`? 💥
+```
+
+**ES6 Modules - Encapsulated Code:**
+
+```javascript
+// ✅ GOOD: Named exports
+// math.js
 export const PI = 3.14159;
 export function add(a, b) {
   return a + b;
 }
+export function subtract(a, b) {
+  return a - b;
+}
 
-// Default export
+// ✅ GOOD: Default export
+// Calculator.js
 const Calculator = {
   add: (a, b) => a + b,
   subtract: (a, b) => a - b
 };
 export default Calculator;
 
-// Mixed exports
-export const VERSION = '1.0.0';
-export default class User {
-  constructor(name) {
-    this.name = name;
-  }
-}
-```
-
-### Import
-
-```javascript
-// Named imports
+// ✅ GOOD: Importing
+// app.js
 import { PI, add } from './math.js';
+import Calculator from './Calculator.js';
 
-// Default import
-import Calculator from './calculator.js';
-
-// Mixed imports
-import User, { VERSION } from './user.js';
-
-// Import everything
-import * as math from './math.js';
-console.log(math.PI, math.add(1, 2));
-
-// Renaming imports
-import { add as addNumbers } from './math.js';
+console.log(PI);  // 3.14159
+console.log(add(1, 2));  // 3
+console.log(Calculator.add(5, 3));  // 8
 ```
 
 ### React Component Example
 
-```javascript
+```jsx
 // Button.jsx
-import React from 'react';
-
 export function Button({ children, onClick }) {
   return <button onClick={onClick}>{children}</button>;
 }
@@ -259,129 +373,171 @@ export default Button;
 
 // App.jsx
 import React from 'react';
-import Button, { Button as NamedButton } from './Button';
+import Button from './Button';
 
 function App() {
   return (
     <div>
-      <Button onClick={() => alert('Default')}>Default Button</Button>
-      <NamedButton onClick={() => alert('Named')}>Named Button</NamedButton>
+      <Button onClick={() => alert('Clicked')}>Click me</Button>
     </div>
   );
 }
+
+export default App;
 ```
+
+**Why This Matters**: Modules keep code organized, prevent conflicts, and enable tree-shaking for smaller bundles.
 
 ---
 
-## 6. Array Methods
+## 6. Array Methods & Functional Programming
 
-### Essential Array Methods
+### The Problem: Manual Loops
+
+**Traditional Way - Imperative and Error-Prone:**
 
 ```javascript
+// Traditional - Manual loops, easy to make mistakes
 const numbers = [1, 2, 3, 4, 5];
+const doubled = [];
+for (let i = 0; i < numbers.length; i++) {
+  doubled.push(numbers[i] * 2);
+}
+
+// Filtering - verbose
 const users = [
   { id: 1, name: 'John', age: 25 },
   { id: 2, name: 'Jane', age: 30 },
-  { id: 3, name: 'Bob', age: 35 }
+  { id: 3, name: 'Bob', age: 17 }
 ];
+const adults = [];
+for (let i = 0; i < users.length; i++) {
+  if (users[i].age >= 18) {
+    adults.push(users[i]);
+  }
+}
+```
 
-// map - transform each element
-const doubled = numbers.map(n => n * 2);
-const userNames = users.map(user => user.name);
+**Array Methods - Declarative and Safe:**
 
-// filter - keep elements that match condition
-const evenNumbers = numbers.filter(n => n % 2 === 0);
+```javascript
+// ✅ GOOD: map - transform each element
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(n => n * 2);  // [2, 4, 6, 8, 10]
+
+// ✅ GOOD: filter - keep elements that match condition
+const users = [
+  { id: 1, name: 'John', age: 25 },
+  { id: 2, name: 'Jane', age: 30 },
+  { id: 3, name: 'Bob', age: 17 }
+];
 const adults = users.filter(user => user.age >= 18);
 
-// find - find first element that matches
+// ✅ GOOD: find - find first matching element
 const john = users.find(user => user.name === 'John');
 
-// reduce - reduce array to single value
-const sum = numbers.reduce((acc, n) => acc + n, 0);
-const totalAge = users.reduce((acc, user) => acc + user.age, 0);
+// ✅ GOOD: reduce - reduce array to single value
+const sum = numbers.reduce((acc, n) => acc + n, 0);  // 15
+const totalAge = users.reduce((acc, user) => acc + user.age, 0);  // 72
 
-// forEach - execute function for each element
+// ✅ GOOD: forEach - execute function for each element
 users.forEach(user => console.log(user.name));
 ```
 
-### Chaining Array Methods
+### Method Chaining
 
 ```javascript
+// Chain multiple methods for powerful transformations
 const users = [
   { id: 1, name: 'John', age: 25, active: true },
   { id: 2, name: 'Jane', age: 30, active: false },
   { id: 3, name: 'Bob', age: 35, active: true }
 ];
 
-// Chain multiple methods
+// Get sorted names of active users
 const activeUserNames = users
-  .filter(user => user.active)
-  .map(user => user.name)
-  .sort();
+  .filter(user => user.active)      // Keep only active users
+  .map(user => user.name)            // Extract names
+  .sort();                           // Sort alphabetically
 
-console.log(activeUserNames); // ['Bob', 'John']
+console.log(activeUserNames);  // ['Bob', 'John']
 ```
+
+**Why This Matters**: Array methods are the foundation of React - you'll use `map` constantly to render lists of components.
 
 ---
 
 ## 7. Async/Await & Promises
 
-### Promises
+### The Problem: Callback Hell
+
+**Traditional Way - Callback Hell:**
 
 ```javascript
-// Creating a promise
-const fetchData = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve('Data fetched successfully');
-    }, 1000);
+// ❌ BAD: Callback hell - hard to read and maintain
+getUserData(function(user) {
+  getPosts(user.id, function(posts) {
+    getComments(posts[0].id, function(comments) {
+      getReplies(comments[0].id, function(replies) {
+        // Nested callbacks - nightmare! 💥
+        console.log(replies);
+      });
+    });
   });
-};
+});
+```
 
-// Using promises
-fetchData()
-  .then(data => console.log(data))
+**Promises - Better, But Still Verbose:**
+
+```javascript
+// ✅ BETTER: Promises - cleaner but still verbose
+getUserData()
+  .then(user => getPosts(user.id))
+  .then(posts => getComments(posts[0].id))
+  .then(comments => getReplies(comments[0].id))
+  .then(replies => console.log(replies))
   .catch(error => console.error(error));
 ```
 
-### Async/Await
+**Async/Await - Clean and Readable:**
 
 ```javascript
-// Async function
-async function fetchUserData() {
+// ✅ BEST: Async/await - clean and readable
+async function loadUserData() {
   try {
-    const response = await fetch('/api/user');
-    const user = await response.json();
-    return user;
+    const user = await getUserData();
+    const posts = await getPosts(user.id);
+    const comments = await getComments(posts[0].id);
+    const replies = await getReplies(comments[0].id);
+    console.log(replies);
   } catch (error) {
-    console.error('Error fetching user:', error);
-    throw error;
+    console.error('Error:', error);
   }
 }
-
-// Using async function
-fetchUserData()
-  .then(user => console.log(user))
-  .catch(error => console.error(error));
 ```
 
-### React Example
+### React Example with Async/Await
 
-```javascript
+```jsx
 import { useState, useEffect } from 'react';
 
 function UserProfile({ userId }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchUser() {
       try {
+        setLoading(true);
         const response = await fetch(`/api/users/${userId}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch user');
+        }
         const userData = await response.json();
         setUser(userData);
-      } catch (error) {
-        console.error('Error fetching user:', error);
+      } catch (err) {
+        setError(err.message);
       } finally {
         setLoading(false);
       }
@@ -391,123 +547,114 @@ function UserProfile({ userId }) {
   }, [userId]);
 
   if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
   if (!user) return <div>User not found</div>;
 
   return <div>{user.name}</div>;
 }
 ```
 
----
-
-## 8. Object Methods
-
-### Object Property Shorthand
-
-```javascript
-// Traditional way
-const name = 'John';
-const age = 25;
-const user = {
-  name: name,
-  age: age,
-  greet: function() {
-    return `Hello, ${this.name}!`;
-  }
-};
-
-// ES6 shorthand
-const user = {
-  name,
-  age,
-  greet() {
-    return `Hello, ${this.name}!`;
-  }
-};
-```
-
-### Object Destructuring in Functions
-
-```javascript
-// Traditional way
-function createUser(userData) {
-  const name = userData.name;
-  const age = userData.age;
-  const email = userData.email;
-  // ...
-}
-
-// ES6 way
-function createUser({ name, age, email }) {
-  // Direct access to properties
-  console.log(name, age, email);
-}
-
-// With default values
-function createUser({ name, age, email = 'no-email@example.com' }) {
-  // email defaults to 'no-email@example.com' if not provided
-}
-```
+**Key Insight**: Async/await makes asynchronous code look synchronous - essential for API calls in React.
 
 ---
 
-## 9. JavaScript with React
+## 8. JavaScript with React
 
-### Event Handlers
+### Props: Destructuring in Components
 
-```javascript
-// Traditional function
-function handleClick() {
-  console.log('Button clicked');
-}
+**Without Destructuring:**
 
-// Arrow function (common in React)
-const handleClick = () => {
-  console.log('Button clicked');
-};
-
-// Inline arrow function
-<button onClick={() => console.log('Button clicked')}>
-  Click me
-</button>
-```
-
-### State Updates
-
-```javascript
-import { useState } from 'react';
-
-function Counter() {
-  const [count, setCount] = useState(0);
-
-  // Traditional function
-  const increment = () => {
-    setCount(count + 1);
-  };
-
-  // Arrow function
-  const decrement = () => {
-    setCount(count - 1);
-  };
-
-  // Inline arrow function
-  const reset = () => {
-    setCount(0);
-  };
-
+```jsx
+// ❌ Verbose - accessing props manually
+function Button(props) {
   return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={increment}>+</button>
-      <button onClick={decrement}>-</button>
-      <button onClick={reset}>Reset</button>
-    </div>
+    <button onClick={props.onClick} disabled={props.disabled}>
+      {props.label}
+    </button>
   );
 }
 ```
 
-### Array Rendering
+**With Destructuring:**
 
-```javascript
+```jsx
+// ✅ Clean - destructure props directly
+function Button({ label, onClick, disabled = false }) {
+  return (
+    <button onClick={onClick} disabled={disabled}>
+      {label}
+    </button>
+  );
+}
+
+// Usage
+<Button label="Click" onClick={() => {}} />                    // ✅
+<Button label="Click" onClick={() => {}} disabled={true} />     // ✅
+```
+
+### Event Handlers: Arrow Functions
+
+```jsx
+function Form() {
+  // ✅ Arrow function - clean event handler
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form submitted');
+  };
+
+  const handleChange = (e) => {
+    console.log(e.target.value);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input onChange={handleChange} />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+### State: Immutable Updates with Spread
+
+```jsx
+import { useState } from 'react';
+
+function UserProfile() {
+  const [user, setUser] = useState({ name: 'John', age: 25 });
+  
+  // ✅ GOOD: Immutable update with spread
+  const updateAge = () => {
+    setUser({ ...user, age: user.age + 1 });  // New object
+  };
+  
+  // ❌ BAD: Mutating state directly
+  // const updateAge = () => {
+  //   user.age = user.age + 1;  // 💥 Don't do this!
+  //   setUser(user);
+  // };
+  
+  return (
+    <div>
+      <p>{user.name} is {user.age} years old</p>
+      <button onClick={updateAge}>Age +1</button>
+    </div>
+  );
+}
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  // ✅ GOOD: Simple state update
+  const increment = () => setCount(count + 1);
+  
+  return <div>{count}</div>;
+}
+```
+
+### Array Rendering: Using `map`
+
+```jsx
 function UserList({ users }) {
   return (
     <ul>
@@ -521,109 +668,102 @@ function UserList({ users }) {
 }
 ```
 
+**Key Pattern**: React requires immutable updates. Always use spread operator and array methods that return new arrays.
+
 ---
 
-## 10. Common Mistakes
+## 9. Common Mistakes
 
-### Mistake 1: Not using arrow functions for event handlers
-
-```javascript
-// ❌ Wrong - `this` binding issues
-class MyComponent extends React.Component {
-  handleClick() {
-    console.log(this); // `this` might be undefined
-  }
-
-  render() {
-    return <button onClick={this.handleClick}>Click me</button>;
-  }
-}
-
-// ✅ Correct - arrow function or bind
-class MyComponent extends React.Component {
-  handleClick = () => {
-    console.log(this); // `this` refers to component
-  }
-
-  render() {
-    return <button onClick={this.handleClick}>Click me</button>;
-  }
-}
-```
-
-### Mistake 2: Mutating state directly
+### Mistake 1: Mutating State Directly
 
 ```javascript
-// ❌ Wrong - mutating state
+// ❌ BAD: Mutating state directly
 const [users, setUsers] = useState([]);
 
 const addUser = (newUser) => {
-  users.push(newUser); // Mutating original array
-  setUsers(users);
+  users.push(newUser);  // 💥 Mutating original array
+  setUsers(users);      // React won't detect the change!
 };
 
-// ✅ Correct - creating new array
+// ✅ GOOD: Creating new array
 const addUser = (newUser) => {
-  setUsers([...users, newUser]); // New array with spread operator
+  setUsers([...users, newUser]);  // New array with spread operator
+};
+
+// ✅ GOOD: Updating object in array
+const updateUser = (userId, updates) => {
+  setUsers(users.map(user => 
+    user.id === userId ? { ...user, ...updates } : user
+  ));
 };
 ```
 
-### Mistake 3: Missing dependencies in useEffect
+### Mistake 2: Missing Dependencies in useEffect
 
 ```javascript
-// ❌ Wrong - missing dependencies
+// ❌ BAD: Missing dependencies
 useEffect(() => {
   fetchUser(userId);
-}, []); // Missing userId dependency
+}, []);  // Missing userId dependency - won't update when userId changes!
 
-// ✅ Correct - include all dependencies
+// ✅ GOOD: Include all dependencies
 useEffect(() => {
   fetchUser(userId);
-}, [userId]); // Include userId
+}, [userId]);  // Correct - includes userId
 ```
 
-### Mistake 4: Not using key prop in lists
+### Mistake 3: Not Using Key Prop in Lists
+
+```jsx
+// ❌ BAD: Missing key prop
+{users.map(user => (
+  <li>{user.name}</li>  // 💥 React warning, performance issues
+))}
+
+// ✅ GOOD: Include key prop
+{users.map(user => (
+  <li key={user.id}>{user.name}</li>  // ✅ Unique key
+))}
+```
+
+### Mistake 4: Using Arrow Functions Incorrectly in Objects
 
 ```javascript
-// ❌ Wrong - missing key prop
-{users.map(user => (
-  <li>{user.name}</li>
-))}
+// ❌ BAD: Arrow function loses `this` context
+const obj = {
+  name: 'John',
+  greet: () => {
+    console.log(this.name);  // `this` is window/undefined
+  }
+};
 
-// ✅ Correct - include key prop
-{users.map(user => (
-  <li key={user.id}>{user.name}</li>
-))}
+// ✅ GOOD: Regular function for object methods
+const obj = {
+  name: 'John',
+  greet: function() {
+    console.log(this.name);  // Works correctly
+  }
+};
+
+// ✅ GOOD: Arrow function for React event handlers (no `this` needed)
+function MyComponent() {
+  const handleClick = () => {
+    console.log('Clicked');  // No `this` needed
+  };
+  return <button onClick={handleClick}>Click</button>;
+}
 ```
 
 ---
 
-## 11. Next Steps
+## Next Steps
 
-### What You Should Know After Lesson 0
+You now understand:
+- ✅ **Why** modern JavaScript features exist (readability, maintainability)
+- ✅ **How** ES6+ features work (arrow functions, destructuring, async/await)
+- ✅ **When** to use different patterns in React
+- ✅ **How** to use modern JavaScript with React
 
-**JavaScript ES6+ Features:**
-- Arrow functions and `this` binding
-- Destructuring and spread operator
-- Template literals
-- Modules (import/export)
+**Practice**: Head to `lab0.md` for hands-on exercises!
 
-**Array Methods:**
-- map, filter, find, reduce, forEach
-- Method chaining
-
-**Async Programming:**
-- Promises and async/await
-- Error handling with try/catch
-
-**React Integration:**
-- Event handlers with arrow functions
-- State updates with spread operator
-- Array rendering with map
-
-### What's Coming in Lesson 1
-
-🔜 ** React Fundamentals** - Components, JSX, and basic patterns
-🔜 ** JSX Syntax** - JavaScript with JSX
-🔜 ** Component Architecture** - Building reusable components
-🔜 ** Styling** - CSS integration with React
+**Quick Reference**: See `reference0.md` for syntax cheat sheets.

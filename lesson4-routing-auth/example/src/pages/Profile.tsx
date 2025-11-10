@@ -12,6 +12,7 @@ export function Profile() {
             <h3>Personal Information</h3>
             <p><strong>Name:</strong> {user?.name}</p>
             <p><strong>Email:</strong> {user?.email}</p>
+            <p><strong>Role:</strong> {user?.role}</p>
             <div className="profile-actions">
                <Link to="/change-password" className="action-button">
                   Change Password
