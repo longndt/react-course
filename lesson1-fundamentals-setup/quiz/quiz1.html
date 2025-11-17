@@ -851,7 +851,44 @@
             div.classList.add("selected");
           }
 
-          div.innerHTML = `<label><input type="radio" name="answer" value="${i}" ${userAnswers[index] === i ? "checked" : ""} ${answerChecked[index] ? "disabled" : ""}><span>${option}</span>${answerChecked[index] && i === question.correct ? '<span class="feedback-icon">✓</span>' : ''}${answerChecked[index] && userAnswers[index] === i && i !== question.correct ? '<span class="feedback-icon">✗</span>' : ''}</label>`;
+          // Create label element
+          const label = document.createElement("label");
+          
+          // Create radio input
+          const input = document.createElement("input");
+          input.type = "radio";
+          input.name = "answer";
+          input.value = i;
+          if (userAnswers[index] === i) {
+            input.checked = true;
+          }
+          if (answerChecked[index]) {
+            input.disabled = true;
+          }
+          
+          // Create span for option text
+          const span = document.createElement("span");
+          span.textContent = option;
+          
+          // Append input and span to label
+          label.appendChild(input);
+          label.appendChild(span);
+          
+          // Add feedback icon if answer was checked
+          if (answerChecked[index]) {
+            const feedbackIcon = document.createElement("span");
+            feedbackIcon.className = "feedback-icon";
+            if (i === question.correct) {
+              feedbackIcon.textContent = "✓";
+              label.appendChild(feedbackIcon);
+            } else if (userAnswers[index] === i && i !== question.correct) {
+              feedbackIcon.textContent = "✗";
+              label.appendChild(feedbackIcon);
+            }
+          }
+          
+          // Append label to div
+          div.appendChild(label);
 
           if (!answerChecked[index]) {
             div.addEventListener("click", () => {
