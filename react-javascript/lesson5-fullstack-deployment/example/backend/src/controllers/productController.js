@@ -98,6 +98,15 @@ export const createProduct = async (req, res) => {
         if (req.file) {
             image = `/uploads/${req.file.filename}`;
             console.log('Image uploaded:', image);
+            console.log('File details:', {
+                filename: req.file.filename,
+                originalname: req.file.originalname,
+                mimetype: req.file.mimetype,
+                size: req.file.size,
+                path: req.file.path
+            });
+        } else {
+            console.log('No file uploaded');
         }
 
         const productData = {

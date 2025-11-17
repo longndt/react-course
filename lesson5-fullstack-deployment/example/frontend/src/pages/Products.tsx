@@ -63,6 +63,7 @@ const Products = () => {
             if (!response.ok) throw new Error('Failed to fetch products');
 
             const data = await response.json();
+            console.log('Fetched products:', data.data.products);
             setProducts(data.data.products);
         } catch (error) {
             console.error('Error fetching products:', error);
@@ -264,7 +265,45 @@ const Products = () => {
                             <div key={product._id} className="product-card">
                                 <div className="product-image">
                                     {product.image ? (
-                                        <img src={`${API_URL}${product.image}`} alt={product.name} />
+                                        <img 
+                                            src={(() => {
+                                                // Ensure proper URL format
+                                                const imagePath = product.image.startsWith('/') ? product.image : `/${product.image}`;
+                                                const apiUrl = API_URL.endsWith('/') ? API_URL.slice(0, -1) : API_URL;
+                                                const imageUrl = `${apiUrl}${imagePath}`;
+                                                console.log('Image URL:', {
+                                                    productId: product._id,
+                                                    productName: product.name,
+                                                    imagePath: product.image,
+                                                    finalUrl: imageUrl
+                                                });
+                                                return imageUrl;
+                                            })()}
+                                            alt={product.name}
+                                            onError={(e) => {
+                                                const target = e.target as HTMLImageElement;
+                                                console.error('Image load error:', {
+                                                    src: target.src,
+                                                    productId: product._id,
+                                                    productName: product.name,
+                                                    imagePath: product.image,
+                                                    apiUrl: API_URL
+                                                });
+                                                target.style.display = 'none';
+                                                if (target.parentElement && !target.parentElement.querySelector('.no-image')) {
+                                                    const fallback = document.createElement('div');
+                                                    fallback.className = 'no-image';
+                                                    fallback.textContent = 'Image not found';
+                                                    target.parentElement.appendChild(fallback);
+                                                }
+                                            }}
+                                            onLoad={() => {
+                                                console.log('Image loaded successfully:', {
+                                                    src: (e.target as HTMLImageElement).src,
+                                                    productId: product._id
+                                                });
+                                            }}
+                                        />
                                     ) : (
                                         <div className="no-image">No Image</div>
                                     )}

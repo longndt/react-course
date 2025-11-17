@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Product from '../models/Product';
+import Product from '../models/Product.js';
 
 // @desc    Get all products with search, filter, sort
 // @route   GET /api/products
@@ -99,6 +99,15 @@ export const createProduct = async (req: Request, res: Response) => {
         if (req.file) {
             image = `/uploads/${req.file.filename}`;
             console.log('Image uploaded:', image);
+            console.log('File details:', {
+                filename: req.file.filename,
+                originalname: req.file.originalname,
+                mimetype: req.file.mimetype,
+                size: req.file.size,
+                path: req.file.path
+            });
+        } else {
+            console.log('No file uploaded');
         }
 
         const productData = {

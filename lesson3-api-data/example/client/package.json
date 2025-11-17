@@ -7,8 +7,6 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "server": "nodemon server/index.js",
-    "dev:full": "concurrently \"npm run server\" \"npm run dev\"",
     "test": "vitest",
     "test:ui": "vitest --ui"
   },

@@ -2,10 +2,13 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 
-// Ensure uploads directory exists
-const uploadDir = 'uploads';
+// Ensure uploads directory exists - use absolute path from project root
+// This ensures it works both in dev (src/) and production (dist/)
+const uploadDir = path.join(process.cwd(), 'uploads');
+console.log('📁 Multer upload directory:', uploadDir);
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
+    console.log('✅ Created multer upload directory:', uploadDir);
 }
 
 const storage = multer.diskStorage({

@@ -1,18 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import LoadingSpinner from '../components/LoadingSpinner';
 import './Dashboard.css';
-
-/**
- * @typedef {Object} DashboardData
- * @property {number} totalUsers
- * @property {number} totalProducts
- * @property {number} totalRevenue
- * @property {number} monthlyGrowth
- * @property {Array<{name: string, sales: number, revenue: number}>} topProducts
- * @property {Array<{type: string, description: string, timestamp: string}>} recentActivity
- */
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
@@ -20,13 +10,26 @@ const Dashboard = () => {
   const { user, logout, success, clearSuccess } = useAuth();
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
     fetchDashboardData();
+    
+    // Set up realtime polling every 30 seconds
+    intervalRef.current = setInterval(() => {
+      fetchDashboardData(false); // Don't show loading on refresh
+    }, 30000);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, []);
 
-  const fetchDashboardData = async () => {
+  const fetchDashboardData = async (showLoading = true) => {
     try {
+      if (showLoading) setLoading(true);
       const token = localStorage.getItem('token');
       const response = await fetch(`${API_URL}/api/dashboard`, {
         headers: {
@@ -41,7 +44,7 @@ const Dashboard = () => {
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
     } finally {
-      setLoading(false);
+      if (showLoading) setLoading(false);
     }
   };
 
@@ -62,6 +65,7 @@ const Dashboard = () => {
           <div>
             <h1>Dashboard</h1>
             <p>Welcome back, <strong>{user?.name}</strong>!</p>
+            <span className="realtime-indicator">🟢 Live Data</span>
           </div>
           <button onClick={logout} className="btn btn-secondary">
             Logout
@@ -86,19 +90,6 @@ const Dashboard = () => {
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon stat-icon-revenue">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <div className="stat-content">
-              <h3>Total Revenue</h3>
-              <p className="stat-value">${dashboardData?.totalRevenue.toLocaleString()}</p>
-            </div>
-          </div>
-
-          <div className="stat-card">
             <div className="stat-icon stat-icon-orders">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
@@ -109,19 +100,6 @@ const Dashboard = () => {
             <div className="stat-content">
               <h3>Total Products</h3>
               <p className="stat-value">{dashboardData?.totalProducts}</p>
-            </div>
-          </div>
-
-          <div className="stat-card">
-            <div className="stat-icon stat-icon-growth">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                <polyline points="17 6 23 6 23 12"></polyline>
-              </svg>
-            </div>
-            <div className="stat-content">
-              <h3>Monthly Growth</h3>
-              <p className="stat-value stat-value-positive">+{dashboardData?.monthlyGrowth}%</p>
             </div>
           </div>
         </div>
@@ -144,53 +122,24 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Two Column Layout */}
-        <div className="dashboard-grid">
-          {/* Top Products */}
-          <div className="dashboard-section">
-            <h2>Top Products</h2>
-            <div className="table-responsive">
-              <table className="data-table">
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Sales</th>
-                    <th>Revenue</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {dashboardData?.topProducts.map((product, index) => (
-                    <tr key={index}>
-                      <td>{product.name}</td>
-                      <td>{product.sales}</td>
-                      <td>${product.revenue.toLocaleString()}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Recent Activity */}
-          <div className="dashboard-section">
-            <h2>Recent Activity</h2>
-            <div className="activity-list">
-              {dashboardData?.recentActivity.map((activity, index) => (
-                <div key={index} className="activity-item">
-                  <div className="activity-icon">
-                    {activity.type === 'user_registration' && '👤'}
-                    {activity.type === 'order_placed' && '🛒'}
-                    {activity.type === 'payment_received' && '💰'}
-                  </div>
-                  <div className="activity-content">
-                    <p>{activity.description}</p>
-                    <span className="activity-time">
-                      {new Date(activity.timestamp).toLocaleTimeString()}
-                    </span>
-                  </div>
+        {/* Recent Activity */}
+        <div className="dashboard-section">
+          <h2>Recent Activity</h2>
+          <div className="activity-list">
+            {dashboardData?.recentActivity.map((activity, index) => (
+              <div key={index} className="activity-item">
+                <div className="activity-icon">
+                  {activity.type === 'user_registration' && '👤'}
+                  {activity.type === 'product_added' && '🛒'}
                 </div>
-              ))}
-            </div>
+                <div className="activity-content">
+                  <p>{activity.description}</p>
+                  <span className="activity-time">
+                    {new Date(activity.timestamp).toLocaleTimeString()}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

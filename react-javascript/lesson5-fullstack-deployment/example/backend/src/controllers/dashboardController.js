@@ -12,61 +12,39 @@ export const getDashboard = async (req, res) => {
         // Total products
         const totalProducts = await Product.countDocuments();
 
-        // Total inventory value
-        const inventoryResult = await Product.aggregate([
-            {
-                $group: {
-                    _id: null,
-                    totalValue: { $sum: { $multiply: ['$price', '$stock'] } }
-                }
-            }
-        ]);
-        const totalRevenue = inventoryResult[0]?.totalValue || 0;
-
-        // Calculate monthly growth (mock for now, need order history for real calculation)
-        const monthlyGrowth = 12.5;
-
-        // Top products by value
-        const topProducts = await Product.aggregate([
-            {
-                $project: {
-                    name: 1,
-                    price: 1,
-                    stock: 1,
-                    totalValue: { $multiply: ['$price', '$stock'] }
-                }
-            },
-            { $sort: { totalValue: -1 } },
-            { $limit: 5 },
-            {
-                $project: {
-                    name: 1,
-                    sales: '$stock',
-                    revenue: '$totalValue'
-                }
-            }
-        ]);
-
-        // Recent activity (last 10 products)
+        // Recent activity (last 10 products and users)
         const recentProducts = await Product.find()
             .sort({ createdAt: -1 })
-            .limit(10)
-            .select('name createdAt');
+            .limit(5)
+            .select('name createdAt')
+            .lean();
 
-        const recentActivity = recentProducts.map(product => ({
-            type: 'product_added',
-            description: `Product "${product.name}" was added`,
-            timestamp: product.createdAt
-        }));
+        const recentUsers = await User.find()
+            .sort({ createdAt: -1 })
+            .limit(5)
+            .select('name createdAt')
+            .lean();
+
+        const recentActivity = [
+            ...recentProducts.map(product => ({
+                type: 'product_added',
+                description: `Product "${product.name}" was added`,
+                timestamp: product.createdAt
+            })),
+            ...recentUsers.map(user => ({
+                type: 'user_registration',
+                description: `User "${user.name}" registered`,
+                timestamp: user.createdAt
+            }))
+        ]
+            .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+            .slice(0, 10);
 
         res.json({
             success: true,
             data: {
                 totalUsers,
                 totalProducts,
-                totalRevenue: Math.round(totalRevenue),
-                monthlyGrowth,
-                topProducts,
                 recentActivity
             }
         });

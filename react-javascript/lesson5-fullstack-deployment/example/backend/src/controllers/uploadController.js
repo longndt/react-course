@@ -70,7 +70,8 @@ export const uploadMultiple = async (req, res) => {
 // @access  Private
 export const getFiles = async (req, res) => {
     try {
-        const uploadsDir = path.join(__dirname, '../../uploads');
+        // Use absolute path from project root
+        const uploadsDir = path.join(process.cwd(), 'uploads');
 
         // Check if uploads directory exists
         if (!fs.existsSync(uploadsDir)) {
@@ -112,7 +113,8 @@ export const getFiles = async (req, res) => {
 export const deleteFile = async (req, res) => {
     try {
         const { filename } = req.params;
-        const filePath = path.join(__dirname, '../../uploads', filename);
+        // Use absolute path from project root
+        const filePath = path.join(process.cwd(), 'uploads', filename);
 
         // Check if file exists
         if (!fs.existsSync(filePath)) {
