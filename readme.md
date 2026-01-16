@@ -1,5 +1,8 @@
 # React Course - LongNDT
 
+# bills cannot be that high bruh - hungnguyen
+# im carrying yo ahh, sybau      -vietlinh
+
 ## Course Overview
 
 This course teaches **React with Typescript** development using industry-standard practices through hands-on examples.
