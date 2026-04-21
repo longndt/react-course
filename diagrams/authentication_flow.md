@@ -410,5 +410,7 @@ graph LR
 
 ---
 
-** Created** October 6, 2025
-** For** React Course - LongNDT **Topic** Authentication & Authorization **Related Lessons** Lesson 4
+**Created** October 6, 2025
+**For** React Course - LongNDT
+**Topic** Authentication & Authorization
+**Related Lessons** Lesson 4

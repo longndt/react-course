@@ -58,20 +58,24 @@ flowchart TD
     style E fill:#ffe1e1
 ```
 
-** Key Topics**
+**Key Topics**
 - TypeScript fundamentals
 - Type annotations and inference
 - Interfaces and type aliases
 - Generics and utility types
 - Modules and namespaces
 - Classes and inheritance
-- Strict type checking **TypeScript Features**
+- Strict type checking
+
+**TypeScript Features**
 - Static type checking
 - Interface definitions
 - Generic programming
 - Advanced type system
 - Compile-time error detection
-- IntelliSense support **Lab Project** TypeScript Practice Exercises
+- IntelliSense support
+
+**Lab Project** TypeScript Practice Exercises
 
 ---
 
@@ -97,18 +101,22 @@ flowchart TD
     style E fill:#ffe1e1
 ```
 
-** Key Topics**
+**Key Topics**
 - TSX (TypeScript JSX)
 - Typed functional components
 - Props and state typing
 - Event handling with types
 - Virtual DOM concepts
-- Vite setup with TypeScript **TypeScript Features**
+- Vite setup with TypeScript
+
+**TypeScript Features**
 - Component type definitions
 - Props interface design
 - State type management
 - Event type handling
-- Generic components **Lab Project** Welcome Page Application (TypeScript)
+- Generic components
+
+**Lab Project** Welcome Page Application (TypeScript)
 
 ---
 
@@ -134,19 +142,23 @@ flowchart TD
     style F fill:#ffe1e1
 ```
 
-** Key Topics**
+**Key Topics**
 - useState with TypeScript
 - useEffect for side effects
 - useRef and useContext
 - Custom hooks with types
 - Component composition patterns
 - Higher-Order Components (HOC)
-- Render props pattern **TypeScript Features**
+- Render props pattern
+
+**TypeScript Features**
 - Hook type definitions
 - Custom hook typing
 - Component pattern types
 - Context type safety
-- Ref type management **Lab Project** Reusable Component Library (TypeScript)
+- Ref type management
+
+**Lab Project** Reusable Component Library (TypeScript)
 
 ---
 
@@ -173,19 +185,23 @@ flowchart TD
     style F fill:#ffe1e1
 ```
 
-** Key Topics**
+**Key Topics**
 - REST API with TypeScript
 - HTTP methods and responses
 - React Query for data fetching
 - Loading and error states
 - Backend with Express + TypeScript
 - MongoDB with Mongoose
-- CORS configuration **TypeScript Features**
+- CORS configuration
+
+**TypeScript Features**
 - API type definitions
 - Data fetching types
 - Error handling types
 - Backend type safety
-- Database schema types **Lab Project** Full-Stack Task Manager (TypeScript)
+- Database schema types
+
+**Lab Project** Full-Stack Task Manager (TypeScript)
 
 ---
 
@@ -212,19 +228,23 @@ flowchart TD
     style F fill:#ffe1e1
 ```
 
-** Key Topics**
+**Key Topics**
 - React Router v6 with TypeScript
 - Navigation and routing
 - URL parameters and query strings
 - JWT authentication
 - Login/Register forms
 - Protected routes
-- Auth context management **TypeScript Features**
+- Auth context management
+
+**TypeScript Features**
 - Route type definitions
 - Authentication types
 - Context type safety
 - Form validation types
-- Route protection types **Lab Project** Authentication System (TypeScript)
+- Route protection types
+
+**Lab Project** Authentication System (TypeScript)
 
 ---
 
@@ -252,7 +272,7 @@ flowchart TD
     style G fill:#ffe1e1
 ```
 
-** Key Topics**
+**Key Topics**
 - Performance optimization
 - React.memo, useMemo, useCallback
 - Code splitting with lazy loading
@@ -260,12 +280,16 @@ flowchart TD
 - Environment variables
 - Deployment (Vercel, Netlify, Railway)
 - Docker configuration
-- CI/CD with GitHub Actions **TypeScript Features**
+- CI/CD with GitHub Actions
+
+**TypeScript Features**
 - Performance type optimization
 - Build type checking
 - Deployment type safety
 - Environment type management
-- CI/CD type workflows **Lab Project** Production Deployment (TypeScript)
+- CI/CD type workflows
+
+**Lab Project** Production Deployment (TypeScript)
 
 ---
 

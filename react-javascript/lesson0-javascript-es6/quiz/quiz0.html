@@ -1060,7 +1060,7 @@
             });
 
             const skipped = quizData.length - answered;
-            const percentage = answered > 0 ? (correct / answered) * 100 : 0;
+            const percentage = (correct / quizData.length) * 100;
 
             // Update results
             document.getElementById("scoreNumber").textContent =

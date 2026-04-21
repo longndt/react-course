@@ -16,40 +16,40 @@ graph TB
         C --> F[Hooks/]
         C --> G[Context/]
         C --> H[Utils/]
-        
+
         D --> D1[Button.tsx]
         D --> D2[Modal.tsx]
         D --> D3[Header.tsx]
-        
+
         E --> E1[Home.tsx]
         E --> E2[About.tsx]
         E --> E3[Contact.tsx]
-        
+
         F --> F1[useAuth.ts]
         F --> F2[useApi.ts]
         F --> F3[useLocalStorage.ts]
-        
+
         G --> G1[AuthContext.tsx]
         G --> G2[ThemeContext.tsx]
-        
+
         H --> H1[api.ts]
         H --> H2[helpers.ts]
         H --> H3[constants.ts]
     end
-    
+
     subgraph "Build Process"
         I[Vite] --> J[TypeScript Compiler]
         J --> K[Bundler]
         K --> L[Output Files]
     end
-    
+
     subgraph "Dependencies"
         M[node_modules/] --> N[React]
         M --> O[React DOM]
         M --> P[React Router]
         M --> Q[Axios]
     end
-    
+
     B --> I
     M --> I
 ```
@@ -101,7 +101,7 @@ graph LR
     B --> C[State Update]
     C --> D[Re-render]
     D --> E[UI Update]
-    
+
     B --> F[API Call]
     F --> G[Server Response]
     G --> H[State Update]
@@ -115,19 +115,19 @@ graph TD
     A[App] --> B[Header]
     A --> C[Main Content]
     A --> D[Footer]
-    
+
     B --> B1[Logo]
     B --> B2[Navigation]
     B --> B3[User Menu]
-    
+
     C --> C1[Home Page]
     C --> C2[About Page]
     C --> C3[Contact Page]
-    
+
     C1 --> C1A[Hero Section]
     C1 --> C1B[Features]
     C1 --> C1C[Testimonials]
-    
+
     D --> D1[Copyright]
     D --> D2[Links]
     D --> D3[Social Media]
@@ -141,7 +141,7 @@ graph LR
     B --> C[Vite Bundler]
     C --> D[Optimized Bundle]
     D --> E[Browser]
-    
+
     F[Static Assets] --> C
     G[CSS Files] --> C
     H[HTML Template] --> C
@@ -149,23 +149,23 @@ graph LR
 
 ## Key Concepts
 
-### 1. ** Component-Based Architecture**
+### 1. **Component-Based Architecture**
 - Reusable, modular components
 - Clear separation of concerns
 - Easy to test and maintain
 
-### 2. ** File Organization**
+### 2. **File Organization**
 - Logical grouping by functionality
 - Consistent naming conventions
 - Clear import/export structure
 
-### 3. ** Build Process**
+### 3. **Build Process**
 - TypeScript compilation
 - Module bundling
 - Asset optimization
 - Development server
 
-### 4. ** Development Workflow**
+### 4. **Development Workflow**
 - Hot module replacement
 - Type checking
 - Linting and formatting

@@ -12,25 +12,25 @@ graph TB
         A[User clicks link] --> B[Navigate to URL]
         B --> C[URL changes]
     end
-    
+
     subgraph "Router Processing"
         C --> D[BrowserRouter detects change]
         D --> E[Routes component matches path]
         E --> F[Route component renders]
     end
-    
+
     subgraph "Component Rendering"
         F --> G[Target component mounts]
         G --> H[Component state initializes]
         H --> I[Component renders UI]
     end
-    
+
     subgraph "Navigation Methods"
         J[Link component] --> K[Programmatic navigation]
         K --> L[useNavigate hook]
         L --> M[History API]
     end
-    
+
     A --> J
     J --> D
 ```
@@ -46,13 +46,13 @@ graph TD
     C --> F[Route: /contact]
     C --> G[Route: /profile]
     C --> H[Route: /login]
-    
+
     D --> D1[Home Component]
     E --> E1[About Component]
     F --> F1[Contact Component]
     G --> G1[Profile Component]
     H --> H1[Login Component]
-    
+
     subgraph "Nested Routes"
         I[Route: /dashboard] --> I1[Dashboard Layout]
         I1 --> I2[Route: /dashboard/settings]
@@ -60,7 +60,7 @@ graph TD
         I2 --> I2A[Settings Component]
         I3 --> I3A[Profile Component]
     end
-    
+
     C --> I
 ```
 
@@ -73,7 +73,7 @@ sequenceDiagram
     participant R as Router
     participant C as Component
     participant S as State
-    
+
     U->>L: Click link
     L->>R: Navigate to URL
     R->>R: Match route
@@ -92,7 +92,7 @@ graph TB
         B -->|Yes| C[Render protected component]
         B -->|No| D[Redirect to login]
     end
-    
+
     subgraph "Login Process"
         D --> E[Login component]
         E --> F[User submits credentials]
@@ -103,7 +103,7 @@ graph TB
         I --> K[Redirect to original route]
         J --> E
     end
-    
+
     subgraph "Protected Route Access"
         C --> L[Load user data]
         L --> M[Render protected content]
@@ -150,22 +150,22 @@ graph TD
     B --> C[Navigation]
     B --> D[Main Content]
     B --> E[Footer]
-    
+
     C --> C1[Logo]
     C --> C2[Menu Items]
     C --> C3[User Menu]
-    
+
     D --> D1[Home Page]
     D --> D2[About Page]
     D --> D3[Contact Page]
     D --> D4[Profile Page]
-    
+
     subgraph "Protected Routes"
         F[Dashboard] --> F1[Settings]
         F --> F2[Analytics]
         F --> F3[Reports]
     end
-    
+
     D --> F
 ```
 
@@ -176,7 +176,7 @@ graph LR
     A[URL State] --> B[Router State]
     B --> C[Component State]
     C --> D[UI State]
-    
+
     E[User Action] --> F[Navigation]
     F --> G[URL Update]
     G --> H[State Update]
@@ -185,24 +185,22 @@ graph LR
 
 ## Key Concepts
 
-### 1.
-
-**Declarative Routing**
+### 1. **Declarative Routing**
 - Routes defined as components
 - URL-based navigation
 - Automatic re-rendering on route change
 
-### 2. ** Nested Routing**
+### 2. **Nested Routing**
 - Parent-child route relationships
 - Layout components
 - Nested navigation
 
-### 3. ** Route Protection**
+### 3. **Route Protection**
 - Authentication guards
 - Role-based access
 - Redirect handling
 
-### 4. ** Dynamic Routing**
+### 4. **Dynamic Routing**
 - URL parameters
 - Query strings
 - Programmatic navigation
